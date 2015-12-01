@@ -38,7 +38,7 @@ private static int idCntato;
         return indice;
     }
     
-    public boolean CodigoCliente(){
+    public boolean CodigoCliente() {
         boolean valida = false;
         
         if(jTableListarClientes.getSelectedRow() != -1){

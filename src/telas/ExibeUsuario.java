@@ -82,7 +82,7 @@ private static int indice;
         jScrollPane2 = new javax.swing.JScrollPane();
         jTableListarUsuarios = new javax.swing.JTable();
         jButton3 = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
+        jBtnEditarUsuario = new javax.swing.JButton();
         jButton6 = new javax.swing.JButton();
         jButton7 = new javax.swing.JButton();
 
@@ -111,10 +111,10 @@ private static int indice;
             }
         });
 
-        jButton5.setText("Editar");
-        jButton5.addActionListener(new java.awt.event.ActionListener() {
+        jBtnEditarUsuario.setText("Editar");
+        jBtnEditarUsuario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton5ActionPerformed(evt);
+                jBtnEditarUsuarioActionPerformed(evt);
             }
         });
 
@@ -140,7 +140,7 @@ private static int indice;
                 .addGap(35, 35, 35)
                 .addComponent(jButton3)
                 .addGap(57, 57, 57)
-                .addComponent(jButton5)
+                .addComponent(jBtnEditarUsuario)
                 .addGap(67, 67, 67)
                 .addComponent(jButton6)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -166,7 +166,7 @@ private static int indice;
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 16, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton3)
-                    .addComponent(jButton5)
+                    .addComponent(jBtnEditarUsuario)
                     .addComponent(jButton6)
                     .addComponent(jButton7))
                 .addContainerGap())
@@ -200,16 +200,16 @@ private static int indice;
         TabelaUsuario("select  * from tabusuario;");
     }//GEN-LAST:event_jButton6ActionPerformed
 
-    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-          if(jTableListarUsuarios.getSelectedRow() != -1){
+    private void jBtnEditarUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnEditarUsuarioActionPerformed
+        if(jTableListarUsuarios.getSelectedRow() != -1){
             this.dispose();
             int linha = jTableListarUsuarios.getSelectedRow();        
-            indice = (Integer.parseInt(jTableListarUsuarios.getValueAt(linha, 0).toString())); 
+            indice = (Integer.parseInt(jTableListarUsuarios.getValueAt(linha, 0).toString()));
             new AlterarUsuario().setVisible(true);
         }else{
             JOptionPane.showMessageDialog(null, "Primeiro selecione um registro.");
         }  
-    }//GEN-LAST:event_jButton5ActionPerformed
+    }//GEN-LAST:event_jBtnEditarUsuarioActionPerformed
 
     /**
      * @param args the command line arguments
@@ -217,8 +217,8 @@ private static int indice;
    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jBtnEditarUsuario;
     private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton7;
     private javax.swing.JLabel jLabel1;

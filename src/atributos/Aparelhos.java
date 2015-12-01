@@ -4,7 +4,7 @@ package atributos;
 public class Aparelhos {
     String aparelho;
     String marca, so, queixa;
-    int id_aparelho;
+    int idAparelho;
 
     /**
      * @return the aparelho
@@ -65,14 +65,14 @@ public class Aparelhos {
     /**
      * @return the id_aparelho
      */
-    public int getId_aparelho() {
-        return id_aparelho;
+    public int getIdAparelho() {
+        return idAparelho;
     }
 
     /**
-     * @param id_aparelho the id_aparelho to set
+     * @param idAparelho the id_aparelho to set
      */
-    public void setId_aparelho(int id_aparelho) {
-        this.id_aparelho = id_aparelho;
+    public void setIdAparelho(int idAparelho) {
+        this.idAparelho = idAparelho;
     }
 }

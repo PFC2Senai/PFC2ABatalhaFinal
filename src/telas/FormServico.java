@@ -44,7 +44,6 @@ private int codig;
         jPanel3 = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel2.setBackground(new java.awt.Color(230, 252, 252));
         jPanel2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(11, 101, 132), 2));
@@ -219,10 +218,7 @@ private int codig;
                 .addContainerGap(13, Short.MAX_VALUE))
         );
 
-        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, 700, 300));
-
         jLabel10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/ICT1 - Cópia3.jpg"))); // NOI18N
-        getContentPane().add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 740, 340));
 
         jPanel3.setBackground(new java.awt.Color(230, 252, 252));
 
@@ -237,30 +233,51 @@ private int codig;
             .addGap(0, 30, Short.MAX_VALUE)
         );
 
-        getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 300, 740, 30));
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(10, 10, 10)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 740, javax.swing.GroupLayout.PREFERRED_SIZE)
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(300, 300, 300)
+                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(20, 20, 20)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(10, 10, 10)
+                .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 330, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        try{
-            Servico s = new Servico();
-
-            s.setTipoReparo(tipoReparo.getText());
-            s.setValor(Float.parseFloat(valor.getText()));
-            s.setFormaPag(String.valueOf(formPag.getSelectedItem()));
-            descontos();
-            s.setDesconto(Float.parseFloat(desconto.getText()));
-            s.setTotal(Float.parseFloat(total.getText()));
-            
-            CadServ(codig, s.getTipoReparo(),s.getValor(),s.getFormaPag(),s.getDesconto(),s.getTotal());
-            FormServico.this.dispose();
-            //new OrdemServ(codig).setVisible(true);
-        }catch(NumberFormatException ex){
-            JOptionPane.showMessageDialog(null, "Esse Campo só aceita números" ,"Erro",JOptionPane.INFORMATION_MESSAGE);
-            valor.setBackground(Color.yellow);
-            valor.setText(null);
-        } 
+//        try{
+//            Servico s = new Servico();
+//
+//            s.setTipoReparo(tipoReparo.getText());
+//            s.setValor(Float.parseFloat(valor.getText()));
+//            s.setFormaPag(String.valueOf(formPag.getSelectedItem()));
+//            descontos();
+//            s.setDesconto(Float.parseFloat(desconto.getText()));
+//            s.setTotal(Float.parseFloat(total.getText()));
+//            
+//            CadServ(codig, s.getTipoReparo(),s.getValor(),s.getFormaPag(),s.getDesconto(),s.getTotal());
+//            FormServico.this.dispose();
+//            //new OrdemServ(codig).setVisible(true);
+//        }catch(NumberFormatException ex){
+//            JOptionPane.showMessageDialog(null, "Esse Campo só aceita números" ,"Erro",JOptionPane.INFORMATION_MESSAGE);
+//            valor.setBackground(Color.yellow);
+//            valor.setText(null);
+//        } 
         
     }//GEN-LAST:event_jButton1ActionPerformed
    

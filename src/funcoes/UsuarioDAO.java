@@ -59,7 +59,6 @@ public class UsuarioDAO {
                 u.setTipo(rs.getString("tipo_usuario"));
                 u.setNome(rs.getString("usuario"));
                 u.setSenha(rs.getString("senha"));
-                u.setIdUser(id);
                 usuario.add(u);                
             }            
             rs.close();
@@ -67,7 +66,7 @@ public class UsuarioDAO {
             
         } catch (SQLException ex) {      
             Logger.getLogger(UsuarioDAO.class.getName()).log(Level.SEVERE, null, ex);
-            throw new RuntimeException("Erro ao excluir os dados do Usuario: ", ex);    
+            throw new RuntimeException("Erro ao exibir os dados do usuario: ", ex);    
         }    
         return usuario;
     }
@@ -121,11 +120,12 @@ public class UsuarioDAO {
         
         try {   
             String sql = ("UPDATE tabusuario SET tipo_usuario='" + user.getTipo()+
-                    "', usuario='" + user.getNome() + 
-                    "', senha='" + user.getSenha() +
-                    "' where id_usuario = '" + id + "';");
-            stmt = Conexao.getConnection().prepareStatement(sql);
-                              
+                                                               "', usuario='" + user.getNome() + 
+                                                               "', senha='" + user.getSenha() + 
+                                                               "' where id_usuario = '" + id + "';");
+            
+            stmt = Conexao.getConnection().prepareStatement(sql);                              
+                                         
             stmt.executeUpdate();
             stmt.close();
 
