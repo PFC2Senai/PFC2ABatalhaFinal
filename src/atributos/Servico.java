@@ -1,95 +1,174 @@
 package atributos;
 
+import java.util.Date;
+
 
 public class Servico {
-    float valor;
-    String tipoReparo;
-    String formaPag;
-    float total;
-    float desconto;
-    String status;
+    
+    private int idServico;
+    private int codUsuario;
+    private int codCliente;
+    private String descricaoServico;
+    private float preco;
+    private Date dataServico;
+    
+    private int idDetServico;
+    private int codServico;
+    private int codProduto;
+    private int codOrdemServico;
+    private int quantidade;
 
     /**
-     * @return the valor
+     * @return the idServico
      */
-    public float getValor() {
-        return valor;
+    public int getIdServico() {
+        return idServico;
     }
 
     /**
-     * @param valor the valor to set
+     * @param idServico the idServico to set
      */
-    public void setValor(float valor) {
-        this.valor = valor;
+    public void setIdServico(int idServico) {
+        this.idServico = idServico;
     }
 
     /**
-     * @return the tipoReparo
+     * @return the codUsuario
      */
-    public String getTipoReparo() {
-        return tipoReparo;
+    public int getCodUsuario() {
+        return codUsuario;
     }
 
     /**
-     * @param tipoReparo the tipoReparo to set
+     * @param codUsuario the codUsuario to set
      */
-    public void setTipoReparo(String tipoReparo) {
-        this.tipoReparo = tipoReparo;
+    public void setCodUsuario(int codUsuario) {
+        this.codUsuario = codUsuario;
     }
 
     /**
-     * @return the formaPag
+     * @return the codCliente
      */
-    public String getFormaPag() {
-        return formaPag;
+    public int getCodCliente() {
+        return codCliente;
     }
 
     /**
-     * @param formaPag the formaPag to set
+     * @param codCliente the codCliente to set
      */
-    public void setFormaPag(String formaPag) {
-        this.formaPag = formaPag;
+    public void setCodCliente(int codCliente) {
+        this.codCliente = codCliente;
     }
 
     /**
-     * @return the total
+     * @return the descricaoServico
      */
-    public float getTotal() {
-        return total;
+    public String getDescricaoServico() {
+        return descricaoServico;
     }
 
     /**
-     * @param total the total to set
+     * @param descricaoServico the descricaoServico to set
      */
-    public void setTotal(float total) {
-        this.total = total;
+    public void setDescricaoServico(String descricaoServico) {
+        this.descricaoServico = descricaoServico;
     }
 
     /**
-     * @return the desconto
+     * @return the preco
      */
-    public float getDesconto() {
-        return desconto;
+    public float getPreco() {
+        return preco;
     }
 
     /**
-     * @param desconto the desconto to set
+     * @param preco the preco to set
      */
-    public void setDesconto(float desconto) {
-        this.desconto = desconto;
+    public void setPreco(float preco) {
+        this.preco = preco;
     }
 
     /**
-     * @return the status
+     * @return the dataServico
      */
-    public String getStatus() {
-        return status;
+    public Date getDataServico() {
+        return dataServico;
     }
 
     /**
-     * @param status the status to set
+     * @param dataServico the dataServico to set
      */
-    public void setStatus(String status) {
-        this.status = status;
+    public void setDataServico(Date dataServico) {
+        this.dataServico = dataServico;
     }
+
+    /**
+     * @return the idDetServico
+     */
+    public int getIdDetServico() {
+        return idDetServico;
+    }
+
+    /**
+     * @param idDetServico the idDetServico to set
+     */
+    public void setIdDetServico(int idDetServico) {
+        this.idDetServico = idDetServico;
+    }
+
+    /**
+     * @return the codServico
+     */
+    public int getCodServico() {
+        return codServico;
+    }
+
+    /**
+     * @param codServico the codServico to set
+     */
+    public void setCodServico(int codServico) {
+        this.codServico = codServico;
+    }
+
+    /**
+     * @return the codProduto
+     */
+    public int getCodProduto() {
+        return codProduto;
+    }
+
+    /**
+     * @param codProduto the codProduto to set
+     */
+    public void setCodProduto(int codProduto) {
+        this.codProduto = codProduto;
+    }
+
+    /**
+     * @return the codOrdemServico
+     */
+    public int getCodOrdemServico() {
+        return codOrdemServico;
+    }
+
+    /**
+     * @param codOrdemServico the codOrdemServico to set
+     */
+    public void setCodOrdemServico(int codOrdemServico) {
+        this.codOrdemServico = codOrdemServico;
+    }
+
+    /**
+     * @return the quantidade
+     */
+    public int getQuantidade() {
+        return quantidade;
+    }
+
+    /**
+     * @param quantidade the quantidade to set
+     */
+    public void setQuantidade(int quantidade) {
+        this.quantidade = quantidade;
+    }    
 }

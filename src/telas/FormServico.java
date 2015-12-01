@@ -243,24 +243,24 @@ private int codig;
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        try{
-            Servico s = new Servico();
-
-            s.setTipoReparo(tipoReparo.getText());
-            s.setValor(Float.parseFloat(valor.getText()));
-            s.setFormaPag(String.valueOf(formPag.getSelectedItem()));
-            descontos();
-            s.setDesconto(Float.parseFloat(desconto.getText()));
-            s.setTotal(Float.parseFloat(total.getText()));
-            
-            CadServ(codig, s.getTipoReparo(),s.getValor(),s.getFormaPag(),s.getDesconto(),s.getTotal());
-            FormServico.this.dispose();
-            //new OrdemServ(codig).setVisible(true);
-        }catch(NumberFormatException ex){
-            JOptionPane.showMessageDialog(null, "Esse Campo só aceita números" ,"Erro",JOptionPane.INFORMATION_MESSAGE);
-            valor.setBackground(Color.yellow);
-            valor.setText(null);
-        } 
+//        try{
+//            Servico s = new Servico();
+//
+//            s.setTipoReparo(tipoReparo.getText());
+//            s.setValor(Float.parseFloat(valor.getText()));
+//            s.setFormaPag(String.valueOf(formPag.getSelectedItem()));
+//            descontos();
+//            s.setDesconto(Float.parseFloat(desconto.getText()));
+//            s.setTotal(Float.parseFloat(total.getText()));
+//            
+//            CadServ(codig, s.getTipoReparo(),s.getValor(),s.getFormaPag(),s.getDesconto(),s.getTotal());
+//            FormServico.this.dispose();
+//            //new OrdemServ(codig).setVisible(true);
+//        }catch(NumberFormatException ex){
+//            JOptionPane.showMessageDialog(null, "Esse Campo só aceita números" ,"Erro",JOptionPane.INFORMATION_MESSAGE);
+//            valor.setBackground(Color.yellow);
+//            valor.setText(null);
+//        } 
         
     }//GEN-LAST:event_jButton1ActionPerformed
    
