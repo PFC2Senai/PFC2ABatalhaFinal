@@ -7,7 +7,7 @@ package atributos;
 public class Equipamento {
     
     private int idEquipamento;
-    private int tabusuario_id_usuario;
+    private int tabusuarioIdUsuario;
     private String equipamento;
 
     /**
@@ -25,17 +25,17 @@ public class Equipamento {
     }
 
     /**
-     * @return the tabusuario_id_usuario
+     * @return the tabusuarioIdUsuario
      */
-    public int getTabusuario_id_usuario() {
-        return tabusuario_id_usuario;
+    public int getTabusuarioIdUsuario() {
+        return tabusuarioIdUsuario;
     }
 
     /**
-     * @param tabusuario_id_usuario the tabusuario_id_usuario to set
+     * @param tabusuarioIdUsuario the tabusuarioIdUsuario to set
      */
-    public void setTabusuario_id_usuario(int tabusuario_id_usuario) {
-        this.tabusuario_id_usuario = tabusuario_id_usuario;
+    public void setTabusuarioIdUsuario(int tabusuarioIdUsuario) {
+        this.tabusuarioIdUsuario = tabusuarioIdUsuario;
     }
 
     /**

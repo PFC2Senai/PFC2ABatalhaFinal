@@ -9,8 +9,8 @@ import java.util.Date;
  */
 public class Vendas {
     private int idtabVendas;
-    private int cliente_idcliente;
-    private int tabusuario_id_usuario;
+    private int clienteIdcliente;
+    private int tabusuarioIdUsuario;
     private String produto;
     private Date dataVenda;
     private Time hora;
@@ -30,31 +30,31 @@ public class Vendas {
     }
 
     /**
-     * @return the cliente_idcliente
+     * @return the clienteIdcliente
      */
-    public int getCliente_idcliente() {
-        return cliente_idcliente;
+    public int getClienteIdcliente() {
+        return clienteIdcliente;
     }
 
     /**
-     * @param cliente_idcliente the cliente_idcliente to set
+     * @param clienteIdcliente the clienteIdcliente to set
      */
-    public void setCliente_idcliente(int cliente_idcliente) {
-        this.cliente_idcliente = cliente_idcliente;
+    public void setClienteIdcliente(int clienteIdcliente) {
+        this.clienteIdcliente = clienteIdcliente;
     }
 
     /**
-     * @return the tabusuario_id_usuario
+     * @return the tabusuarioIdUsuario
      */
-    public int getTabusuario_id_usuario() {
-        return tabusuario_id_usuario;
+    public int getTabusuarioIdUsuario() {
+        return tabusuarioIdUsuario;
     }
 
     /**
-     * @param tabusuario_id_usuario the tabusuario_id_usuario to set
+     * @param tabusuarioIdUsuario the tabusuarioIdUsuario to set
      */
-    public void setTabusuario_id_usuario(int tabusuario_id_usuario) {
-        this.tabusuario_id_usuario = tabusuario_id_usuario;
+    public void setTabusuarioIdUsuario(int tabusuarioIdUsuario) {
+        this.tabusuarioIdUsuario = tabusuarioIdUsuario;
     }
 
     /**

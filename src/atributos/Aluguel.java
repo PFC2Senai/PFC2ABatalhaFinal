@@ -7,8 +7,8 @@ package atributos;
 public class Aluguel {
     
     private int idtabDetLocacao;
-    private int tabusuario_id_usuario;
-    private int tabcliente_idcliente;
+    private int tabusuarioIdUsuario;
+    private int tabclienteIdcliente;
     private String tabDetLocacaocol;
 
     /**
@@ -26,31 +26,31 @@ public class Aluguel {
     }
 
     /**
-     * @return the tabusuario_id_usuario
+     * @return the tabusuarioIdUsuario
      */
-    public int getTabusuario_id_usuario() {
-        return tabusuario_id_usuario;
+    public int getTabusuarioIdUsuario() {
+        return tabusuarioIdUsuario;
     }
 
     /**
-     * @param tabusuario_id_usuario the tabusuario_id_usuario to set
+     * @param tabusuarioIdUsuario the tabusuarioIdUsuario to set
      */
-    public void setTabusuario_id_usuario(int tabusuario_id_usuario) {
-        this.tabusuario_id_usuario = tabusuario_id_usuario;
+    public void setTabusuarioIdUsuario(int tabusuarioIdUsuario) {
+        this.tabusuarioIdUsuario = tabusuarioIdUsuario;
     }
 
     /**
-     * @return the tabcliente_idcliente
+     * @return the tabclienteIdcliente
      */
-    public int getTabcliente_idcliente() {
-        return tabcliente_idcliente;
+    public int getTabclienteIdcliente() {
+        return tabclienteIdcliente;
     }
 
     /**
-     * @param tabcliente_idcliente the tabcliente_idcliente to set
+     * @param tabclienteIdcliente the tabclienteIdcliente to set
      */
-    public void setTabcliente_idcliente(int tabcliente_idcliente) {
-        this.tabcliente_idcliente = tabcliente_idcliente;
+    public void setTabclienteIdcliente(int tabclienteIdcliente) {
+        this.tabclienteIdcliente = tabclienteIdcliente;
     }
 
     /**
