@@ -5,10 +5,10 @@
  */
 package telas;
 
+import atributos.Fabricante;
 import static funcoes.Conexao.getConnection;
+import funcoes.FabricanteDAO;
 import funcoes.ModeloTabela;
-import atributos.Usuario;
-import funcoes.UsuarioDAO;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -20,54 +20,55 @@ import javax.swing.ListSelectionModel;
 
 /**
  *
- * @author WilhamJr
+ * @author graciele
  */
-public class ExibeUsuario extends javax.swing.JFrame {
-        
-Statement stmt ;
-Usuario usuario = new Usuario();
-private static int indice;
+public class ExibeFabricante extends javax.swing.JFrame {
+    Statement stmt ;
+    Fabricante fab = new Fabricante();
+    private static int indice;
+
     /**
-     * Creates new form CadastroDeFuncionarios
+     * Creates new form ExibeFabricante
      */
-    public ExibeUsuario() {        
+    public ExibeFabricante() {
         initComponents();
-        TabelaUsuario("select * from tabUsuario;");      
+        TabelaFabricante("select * from tabfabricante;");
     }
     
     public static int GetIndice() {         
         return indice;
     }
     
-    public void TabelaUsuario(String Sql){
+    public void TabelaFabricante(String Sql){
         
         try {
             stmt = getConnection().createStatement();
             ArrayList dados = new ArrayList();               
-            String [] Colunas = {"Código do Usuário","Tipo de Usuário", "Usuario", "Senha"};
+            String [] Colunas = {"Código do Fabricante","Fabricante"};
                
             ResultSet rs;
             rs = stmt.executeQuery(Sql);            
-            rs.first();
+          //  rs.first();
             
-            do{
-               dados.add(new Object[]{rs.getObject("id_usuario"),rs.getObject("tipo_usuario"),rs.getObject("usuario"),rs.getObject("senha")});            
-            }while(rs.next());
+            while(rs.next()){
+               dados.add(new Object[]{rs.getObject("idtabFabricante"),rs.getObject("fabricante")});            
+            }
                         
-            for (int i = 0; i < 4; i++){
+            for (int i = 0; i < 2; i++){
                 ModeloTabela modelo = new ModeloTabela(dados, Colunas);
-                jTableListarUsuarios.setModel(modelo);
-                jTableListarUsuarios.getColumnModel().getColumn(i).setPreferredWidth(150);
-                jTableListarUsuarios.getColumnModel().getColumn(i).setResizable(false);
-                jTableListarUsuarios.getTableHeader().setReorderingAllowed(false);
-                jTableListarUsuarios.setAutoResizeMode(jTableListarUsuarios.AUTO_RESIZE_OFF);
-                jTableListarUsuarios.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+                jTableListarFabricantes.setModel(modelo);
+                jTableListarFabricantes.getColumnModel().getColumn(i).setPreferredWidth(150);
+                jTableListarFabricantes.getColumnModel().getColumn(i).setResizable(false);
+                jTableListarFabricantes.getTableHeader().setReorderingAllowed(false);
+                jTableListarFabricantes.setAutoResizeMode(jTableListarFabricantes.AUTO_RESIZE_OFF);
+                jTableListarFabricantes.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
             }
             
         } catch (SQLException ex) {
-            Logger.getLogger(ExibeUsuario.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ExibeModelo.class.getName()).log(Level.SEVERE, null, ex);
         }             
     }
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -80,18 +81,18 @@ private static int indice;
 
         jLabel1 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTableListarUsuarios = new javax.swing.JTable();
-        jButton3 = new javax.swing.JButton();
+        jTableListarFabricantes = new javax.swing.JTable();
         jButton5 = new javax.swing.JButton();
         jButton6 = new javax.swing.JButton();
         jButton7 = new javax.swing.JButton();
+        jButton8 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        jLabel1.setText("Cadastro de Usuários");
+        jLabel1.setText("Cadastro de Fabricantes");
 
-        jTableListarUsuarios.setModel(new javax.swing.table.DefaultTableModel(
+        jTableListarFabricantes.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -102,33 +103,33 @@ private static int indice;
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane2.setViewportView(jTableListarUsuarios);
+        jScrollPane2.setViewportView(jTableListarFabricantes);
 
-        jButton3.setText("Novo");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
-            }
-        });
-
-        jButton5.setText("Editar");
+        jButton5.setText("Novo");
         jButton5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton5ActionPerformed(evt);
             }
         });
 
-        jButton6.setText("Excluir");
+        jButton6.setText("Editar");
         jButton6.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton6ActionPerformed(evt);
             }
         });
 
-        jButton7.setText("Voltar");
+        jButton7.setText("Excluir");
         jButton7.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton7ActionPerformed(evt);
+            }
+        });
+
+        jButton8.setText("Cancelar");
+        jButton8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton8ActionPerformed(evt);
             }
         });
 
@@ -138,13 +139,13 @@ private static int indice;
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(35, 35, 35)
-                .addComponent(jButton3)
-                .addGap(57, 57, 57)
                 .addComponent(jButton5)
-                .addGap(67, 67, 67)
+                .addGap(57, 57, 57)
                 .addComponent(jButton6)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(67, 67, 67)
                 .addComponent(jButton7)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButton8)
                 .addGap(55, 55, 55))
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -154,7 +155,7 @@ private static int indice;
                     .addGroup(layout.createSequentialGroup()
                         .addGap(153, 153, 153)
                         .addComponent(jLabel1)))
-                .addContainerGap(27, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -163,66 +164,63 @@ private static int indice;
                 .addComponent(jLabel1)
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 16, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton3)
                     .addComponent(jButton5)
                     .addComponent(jButton6)
-                    .addComponent(jButton7))
+                    .addComponent(jButton7)
+                    .addComponent(jButton8))
                 .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        new CadastrarUsuario().setVisible(true);
-    }//GEN-LAST:event_jButton3ActionPerformed
-
-    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
-        this.dispose();
-    }//GEN-LAST:event_jButton7ActionPerformed
-
-    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
-        if(jTableListarUsuarios.getSelectedRow() != -1) {
-            
-            int linha = jTableListarUsuarios.getSelectedRow();
-            usuario.setIdUser(Integer.parseInt(jTableListarUsuarios.getValueAt(linha, 0).toString()));
-            
-            int cod = UsuarioDAO.idUsuario(usuario.getIdUser());
-            UsuarioDAO.ExcluirUsuario(cod);
-//            ContatosDAO.ExcluirEndereco(codContato);
-//            ContatosDAO.ExcluirTel(codContato);
-//            ContatosDAO.ExcluirEmail(codContato);           
-        } else { 
-            JOptionPane.showMessageDialog(null, "Primeiro selecione um registro.");
-        }    
-        TabelaUsuario("select  * from tabusuario;");
-    }//GEN-LAST:event_jButton6ActionPerformed
-
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-          if(jTableListarUsuarios.getSelectedRow() != -1){
-            this.dispose();
-            int linha = jTableListarUsuarios.getSelectedRow();        
-            indice = (Integer.parseInt(jTableListarUsuarios.getValueAt(linha, 0).toString())); 
-            new AlterarUsuario().setVisible(true);
-        }else{
-            JOptionPane.showMessageDialog(null, "Primeiro selecione um registro.");
-        }  
+        new CadastrarFabricante().setVisible(true);
     }//GEN-LAST:event_jButton5ActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
-   
+    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+        if(jTableListarFabricantes.getSelectedRow() != -1){
+            this.dispose();
+            int linha = jTableListarFabricantes.getSelectedRow();
+            indice = (Integer.parseInt(jTableListarFabricantes.getValueAt(linha, 0).toString()));
+            new AlterarFabricante().setVisible(true);
+        }else{
+            JOptionPane.showMessageDialog(null, "Primeiro selecione um registro.");
+        }
+    }//GEN-LAST:event_jButton6ActionPerformed
+
+    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
+        if(jTableListarFabricantes.getSelectedRow() != -1) {
+
+            int linha = jTableListarFabricantes.getSelectedRow();
+            fab.setIdFabricante(Integer.parseInt(jTableListarFabricantes.getValueAt(linha, 0).toString()));
+
+            int cod = FabricanteDAO.idFabricante(fab.getIdFabricante());
+            FabricanteDAO.ExcluirFabricante(cod);
+            //            ContatosDAO.ExcluirEndereco(codContato);
+            //            ContatosDAO.ExcluirTel(codContato);
+            //            ContatosDAO.ExcluirEmail(codContato);
+        } else {
+            JOptionPane.showMessageDialog(null, "Primeiro selecione um registro.");
+        }
+        TabelaFabricante("select  * from tabfabricante;");
+    }//GEN-LAST:event_jButton7ActionPerformed
+
+    private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_jButton8ActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton7;
+    private javax.swing.JButton jButton8;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTable jTableListarUsuarios;
+    private javax.swing.JTable jTableListarFabricantes;
     // End of variables declaration//GEN-END:variables
 }

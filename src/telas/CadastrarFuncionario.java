@@ -20,6 +20,17 @@ public class CadastrarFuncionario extends javax.swing.JFrame {
     public CadastrarFuncionario() {
         initComponents();
     }
+    
+    private void limparCampos(){
+        jTextNome.setText("");
+        jTextRg.setText("");
+        jTextCpf.setText("");
+        jTextCargo.setText("");
+        jTextSalario.setText("");
+        jTextCodContato.setText("");
+        jTextCodUsuario.setText("");
+        jTextDataAdmicao.setText("");
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -44,9 +55,9 @@ public class CadastrarFuncionario extends javax.swing.JFrame {
         jTextRg = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
         jTextSalario = new javax.swing.JTextField();
-        jTextIdContato = new javax.swing.JTextField();
-        jTextIdUsuario = new javax.swing.JTextField();
-        jTextAdmicao = new javax.swing.JTextField();
+        jTextCodContato = new javax.swing.JTextField();
+        jTextCodUsuario = new javax.swing.JTextField();
+        jTextDataAdmicao = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
@@ -125,9 +136,9 @@ public class CadastrarFuncionario extends javax.swing.JFrame {
                             .addComponent(jTextRg)
                             .addComponent(jTextCpf)
                             .addComponent(jTextSalario)
-                            .addComponent(jTextIdContato)
-                            .addComponent(jTextIdUsuario)
-                            .addComponent(jTextAdmicao))))
+                            .addComponent(jTextCodContato)
+                            .addComponent(jTextCodUsuario)
+                            .addComponent(jTextDataAdmicao))))
                 .addContainerGap(85, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
@@ -163,14 +174,14 @@ public class CadastrarFuncionario extends javax.swing.JFrame {
                             .addComponent(jLabel7))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jTextIdContato, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jTextCodContato, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel8))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jTextIdUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jTextCodUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel9))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jTextAdmicao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jTextDataAdmicao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jLabel10))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 87, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -192,11 +203,12 @@ public class CadastrarFuncionario extends javax.swing.JFrame {
         func.setCargo(jTextCargo.getText());
         func.setSalario(Double.parseDouble(jTextSalario.getText()));
         
-        func.setIdContato(Integer.parseInt(jTextIdContato.getText()));
-        func.setIdUsuario(Integer.parseInt(jTextIdUsuario.getText()));
-        func.setDataAdmicao(jTextAdmicao.getText());
+        func.setIdContato(Integer.parseInt(jTextCodContato.getText()));
+        func.setIdUsuario(Integer.parseInt(jTextCodUsuario.getText()));
+        func.setDataAdmicao(jTextDataAdmicao.getText());
         
         FuncionarioDAO.CadFuncionario(func);
+        limparCampos();
         
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -219,11 +231,11 @@ public class CadastrarFuncionario extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
-    private javax.swing.JTextField jTextAdmicao;
     private javax.swing.JTextField jTextCargo;
+    private javax.swing.JTextField jTextCodContato;
+    private javax.swing.JTextField jTextCodUsuario;
     private javax.swing.JTextField jTextCpf;
-    private javax.swing.JTextField jTextIdContato;
-    private javax.swing.JTextField jTextIdUsuario;
+    private javax.swing.JTextField jTextDataAdmicao;
     private javax.swing.JTextField jTextNome;
     private javax.swing.JTextField jTextRg;
     private javax.swing.JTextField jTextSalario;

@@ -36,7 +36,7 @@ public class UsuarioDAO {
 
             } catch (SQLException ex) {      
                 Logger.getLogger(ClienteDAO.class.getName()).log(Level.SEVERE, null, ex);
-                throw new RuntimeException("Erro ao Cadastrar Cliente: ",ex);       
+                throw new RuntimeException("Erro ao Cadastrar Usuário: ",ex);       
             }
     }
     
@@ -46,7 +46,7 @@ public class UsuarioDAO {
         ArrayList<Usuario> usuario = new ArrayList<Usuario>();
         
         try {            
-            String Sql = "SELECT * FROM tabusuario";
+            String Sql = "SELECT * FROM tabusuario where id_usuario = " + id + ";";
             
             ResultSet rs;            
             stmt = Conexao.getConnection().createStatement();            
@@ -55,10 +55,11 @@ public class UsuarioDAO {
             while(rs.next()){
                 Usuario u = new Usuario();
                 
-                u.setIdUser(Integer.parseInt("id_usuario"));
-                u.setTipo("tipo_usuario");
-                u.setNome("usuario");
-                u.setSenha("senha");
+                u.setIdUser(rs.getInt("id_usuario"));
+                u.setTipo(rs.getString("tipo_usuario"));
+                u.setNome(rs.getString("usuario"));
+                u.setSenha(rs.getString("senha"));
+                u.setIdUser(id);
                 usuario.add(u);                
             }            
             rs.close();
@@ -66,7 +67,7 @@ public class UsuarioDAO {
             
         } catch (SQLException ex) {      
             Logger.getLogger(UsuarioDAO.class.getName()).log(Level.SEVERE, null, ex);
-            throw new RuntimeException("Erro ao excluir os dados do Cliente: ", ex);    
+            throw new RuntimeException("Erro ao excluir os dados do Usuario: ", ex);    
         }    
         return usuario;
     }
@@ -91,7 +92,7 @@ public class UsuarioDAO {
             
         } catch (SQLException ex) {      
             Logger.getLogger(UsuarioDAO.class.getName()).log(Level.SEVERE, null, ex);
-            throw new RuntimeException("Erro ao excluir os dados do Cliente: ", ex);    
+            throw new RuntimeException("Erro ao excluir os dados do Usuário: ", ex);    
         }    
         return u.getIdUser();
     }
@@ -110,7 +111,7 @@ public class UsuarioDAO {
 
         } catch (SQLException ex) {      
             Logger.getLogger(UsuarioDAO.class.getName()).log(Level.SEVERE, null, ex);
-            throw new RuntimeException("Erro ao excluir os dados do Cliente: ",ex);    
+            throw new RuntimeException("Erro ao excluir os dados do Usuário: ",ex);    
         }
     }
     
@@ -119,13 +120,11 @@ public class UsuarioDAO {
         PreparedStatement stmt;
         
         try {   
-            String sql = ("UPDATE tabusuario SET id_usuario=?, tipo_usuario=? , usuario=?, senha=?;");
+            String sql = ("UPDATE tabusuario SET tipo_usuario='" + user.getTipo()+
+                    "', usuario='" + user.getNome() + 
+                    "', senha='" + user.getSenha() +
+                    "' where id_usuario = '" + id + "';");
             stmt = Conexao.getConnection().prepareStatement(sql);
-            
-                stmt.setInt(1, user.getIdUser());
-                stmt.setString(2, user.getTipo());
-                stmt.setString(3, user.getNome());
-                stmt.setString(4, user.getSenha());
                               
             stmt.executeUpdate();
             stmt.close();
@@ -152,10 +151,10 @@ public class UsuarioDAO {
             while(rs.next()){
                 Usuario u = new Usuario();
                 
-                u.setTipo("id_usuario");
-                u.setTipo("tipo_usuario");
-                u.setNome("usuario");
-                u.setSenha("senha");
+                u.setIdUser(rs.getInt("id_usuario"));
+                u.setTipo(rs.getString("tipo_usuario"));
+                u.setNome(rs.getString("usuario"));
+                u.setSenha(rs.getString("senha"));
                 usuarios.add(u);
                 
             }

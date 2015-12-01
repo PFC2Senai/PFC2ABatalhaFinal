@@ -62,9 +62,9 @@
                           <Component id="jTextRg" alignment="0" max="32767" attributes="0"/>
                           <Component id="jTextCpf" alignment="0" max="32767" attributes="0"/>
                           <Component id="jTextSalario" alignment="0" max="32767" attributes="0"/>
-                          <Component id="jTextIdContato" alignment="0" max="32767" attributes="0"/>
-                          <Component id="jTextIdUsuario" alignment="0" max="32767" attributes="0"/>
-                          <Component id="jTextAdmicao" alignment="0" max="32767" attributes="0"/>
+                          <Component id="jTextCodContato" alignment="0" max="32767" attributes="0"/>
+                          <Component id="jTextCodUsuario" alignment="0" max="32767" attributes="0"/>
+                          <Component id="jTextDataAdmicao" alignment="0" max="32767" attributes="0"/>
                       </Group>
                   </Group>
               </Group>
@@ -111,16 +111,16 @@
                       </Group>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="jTextIdContato" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jTextCodContato" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jLabel8" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="jTextIdUsuario" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jTextCodUsuario" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jLabel9" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Component id="jTextAdmicao" min="-2" max="-2" attributes="0"/>
+                      <Component id="jTextDataAdmicao" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <Component id="jLabel10" min="-2" max="-2" attributes="0"/>
               </Group>
@@ -200,11 +200,11 @@
     </Component>
     <Component class="javax.swing.JTextField" name="jTextSalario">
     </Component>
-    <Component class="javax.swing.JTextField" name="jTextIdContato">
+    <Component class="javax.swing.JTextField" name="jTextCodContato">
     </Component>
-    <Component class="javax.swing.JTextField" name="jTextIdUsuario">
+    <Component class="javax.swing.JTextField" name="jTextCodUsuario">
     </Component>
-    <Component class="javax.swing.JTextField" name="jTextAdmicao">
+    <Component class="javax.swing.JTextField" name="jTextDataAdmicao">
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel8">
       <Properties>

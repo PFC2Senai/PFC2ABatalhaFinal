@@ -76,7 +76,7 @@ public class FuncionarioDAO {
         ArrayList<Funcionario> funcionario = new ArrayList<Funcionario>();
         
         try {            
-            String Sql = "SELECT * FROM tabfuncionario ";
+            String Sql = "SELECT * FROM tabfuncionario where idfuncionario = " + id + ";";
             
             ResultSet rs;            
             stmt = Conexao.getConnection().createStatement();            
@@ -129,11 +129,15 @@ public class FuncionarioDAO {
         PreparedStatement stmt;
         
         try {   
-            String sql = ("UPDATE tabfuncionario SET funcionario='"+func.getFuncionario()
-                    + "' , rg='"+func.getRg()+ "' , cpf='"+func.getCpf()+"' , cargo='"+func.getCargo()
-                    + "' , salario='"+func.getSalario()+"' , tabContato_id_contato'"+func.getIdContato()
-                    +"' , tabUsuario_id_Usuario'"+func.getIdUsuario()+"' , data_admicao'"+func.getDataAdmicao()
-                    +"where idfuncionario = '"+ id + "';");
+            String sql = ("UPDATE tabfuncionario SET funcionario='"+func.getFuncionario()+ 
+                    "', rg='" + func.getRg()+
+                    "', cpf='"+func.getCpf()+
+                    "', cargo='"+func.getCargo()+
+                    "', salario='"+func.getSalario()+
+                    "', tabContato_id_contato'"+func.getIdContato()+
+                    "', tabUsuario_id_Usuario'"+func.getIdUsuario()+
+                    "', data_admicao'"+func.getDataAdmicao()+
+                    "' where idfuncionario = '"+ id + "';");
             stmt = Conexao.getConnection().prepareStatement(sql);                              
             stmt.executeUpdate();
             stmt.close();

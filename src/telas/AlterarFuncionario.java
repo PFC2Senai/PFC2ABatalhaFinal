@@ -8,7 +8,7 @@ package telas;
 import atributos.Funcionario;
 import funcoes.FuncionarioDAO;
 import java.util.ArrayList;
-import static telas.ExibeCliente.GetIndice;
+import static telas.ExibeFuncionario.GetIndice;
 
 /**
  *
@@ -22,6 +22,7 @@ public class AlterarFuncionario extends javax.swing.JFrame {
      */
     public AlterarFuncionario() {
         initComponents();
+        CarregaFuncionario();
     }
 
     private void CarregaFuncionario() {
@@ -30,7 +31,7 @@ public class AlterarFuncionario extends javax.swing.JFrame {
         funcionario = FuncionarioDAO.CarregaFuncionario(GetIndice());
         
         for (Funcionario func : funcionario){
-            jLabelCod.setText(String.valueOf(func.getId()));
+            id.setText(String.valueOf(func.getId()));
             jTextNome.setText(func.getFuncionario());
             jTextRg.setText(func.getRg());
             jTextCpf.setText(func.getCpf());
@@ -40,6 +41,7 @@ public class AlterarFuncionario extends javax.swing.JFrame {
             jTextCodUsuario.setText(String.valueOf(func.getIdUsuario()));
             jTextDataAdmicao.setText(func.getDataAdmicao());
             idContato = func.getId();
+            id.setText(String.valueOf(func.getId()));
         }
     }
     /**
@@ -71,7 +73,7 @@ public class AlterarFuncionario extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
-        jLabelCod = new javax.swing.JLabel();
+        id = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -143,6 +145,11 @@ public class AlterarFuncionario extends javax.swing.JFrame {
         jLabel9.setText("Editar Funcionário");
 
         jButton1.setText("Cancelar");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jButton2.setText("Limpar");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -158,7 +165,7 @@ public class AlterarFuncionario extends javax.swing.JFrame {
             }
         });
 
-        jLabelCod.setText("jLabel10");
+        id.setText("jLabel10");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -168,7 +175,7 @@ public class AlterarFuncionario extends javax.swing.JFrame {
                 .addGap(24, 24, 24)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabelCod)
+                        .addComponent(id)
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel9)
@@ -222,7 +229,7 @@ public class AlterarFuncionario extends javax.swing.JFrame {
                 .addGap(19, 19, 19)
                 .addComponent(jLabel9)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabelCod)
+                .addComponent(id)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 9, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jTextNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -323,7 +330,13 @@ public class AlterarFuncionario extends javax.swing.JFrame {
         this.dispose();
         new ExibeFuncionario().setVisible(true);
     }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_jButton1ActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel id;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
@@ -336,7 +349,6 @@ public class AlterarFuncionario extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
-    private javax.swing.JLabel jLabelCod;
     private javax.swing.JTextField jTextCargo;
     private javax.swing.JTextField jTextCodContato;
     private javax.swing.JTextField jTextCodUsuario;

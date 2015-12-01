@@ -32,7 +32,7 @@ public class AlterarUsuario extends javax.swing.JFrame {
         for (Usuario user : usuario){
             jTextNome.setText(user.getNome());
             jTextSenha.setText(user.getSenha());
-            jComboTipoUser.setToolTipText(user.getTipo());
+            jComboTipoUser.setSelectedItem(user.getTipo());
             id.setText(String.valueOf(user.getIdUser()));
         }
     }

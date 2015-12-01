@@ -51,13 +51,13 @@ public class ExibeFuncionario extends javax.swing.JFrame {
                
             ResultSet rs;
             rs = stmt.executeQuery(Sql);            
-            rs.first();
+            //rs.first();
             
-            do{
+            while(rs.next()){
                dados.add(new Object[]{rs.getObject("idfuncionario"),rs.getObject("funcionario"),rs.getObject("rg"),rs.getObject("cpf")
                ,rs.getObject("cargo"),rs.getObject("salario"),rs.getObject("tabContato_id_contato")
                ,rs.getObject("tabUsuario_id_usuario"),rs.getObject("data_admicao")});            
-            }while(rs.next());
+            }
                         
             for (int i = 0; i < dados.size(); i++){
                 ModeloTabela modelo = new ModeloTabela(dados, Colunas);
@@ -205,7 +205,14 @@ public class ExibeFuncionario extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        new AlterarFuncionario().setVisible(true);
+        if(jTableListarFuncionarios.getSelectedRow() != -1){
+            this.dispose();
+            int linha = jTableListarFuncionarios.getSelectedRow();
+            indice = (Integer.parseInt(jTableListarFuncionarios.getValueAt(linha, 0).toString()));
+            new AlterarFuncionario().setVisible(true);
+        }else{
+            JOptionPane.showMessageDialog(null, "Primeiro selecione um registro.");
+        }
     }//GEN-LAST:event_jButton2ActionPerformed
 
 

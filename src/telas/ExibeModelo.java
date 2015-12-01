@@ -5,10 +5,10 @@
  */
 package telas;
 
+import atributos.Modelo;
 import static funcoes.Conexao.getConnection;
+import funcoes.ModeloDAO;
 import funcoes.ModeloTabela;
-import atributos.Usuario;
-import funcoes.UsuarioDAO;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -20,19 +20,19 @@ import javax.swing.ListSelectionModel;
 
 /**
  *
- * @author WilhamJr
+ * @author graciele
  */
-public class ExibeUsuario extends javax.swing.JFrame {
-        
-Statement stmt ;
-Usuario usuario = new Usuario();
+public class ExibeModelo extends javax.swing.JFrame {
+    Statement stmt ;
+    Modelo modelo = new Modelo();
 private static int indice;
+
     /**
-     * Creates new form CadastroDeFuncionarios
+     * Creates new form ExibeModelo
      */
-    public ExibeUsuario() {        
+    public ExibeModelo() {
         initComponents();
-        TabelaUsuario("select * from tabUsuario;");      
+        TabelaUsuario("select * from tabmodelo;");  
     }
     
     public static int GetIndice() {         
@@ -44,17 +44,17 @@ private static int indice;
         try {
             stmt = getConnection().createStatement();
             ArrayList dados = new ArrayList();               
-            String [] Colunas = {"Código do Usuário","Tipo de Usuário", "Usuario", "Senha"};
+            String [] Colunas = {"Código do Modelo","Modelo"};
                
             ResultSet rs;
             rs = stmt.executeQuery(Sql);            
-            rs.first();
+            //rs.first();
             
-            do{
-               dados.add(new Object[]{rs.getObject("id_usuario"),rs.getObject("tipo_usuario"),rs.getObject("usuario"),rs.getObject("senha")});            
-            }while(rs.next());
+            while(rs.next()){
+               dados.add(new Object[]{rs.getObject("idtabModelo"),rs.getObject("modelo")});            
+            }
                         
-            for (int i = 0; i < 4; i++){
+            for (int i = 0; i < 2; i++){
                 ModeloTabela modelo = new ModeloTabela(dados, Colunas);
                 jTableListarUsuarios.setModel(modelo);
                 jTableListarUsuarios.getColumnModel().getColumn(i).setPreferredWidth(150);
@@ -65,7 +65,7 @@ private static int indice;
             }
             
         } catch (SQLException ex) {
-            Logger.getLogger(ExibeUsuario.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ExibeModelo.class.getName()).log(Level.SEVERE, null, ex);
         }             
     }
 
@@ -89,7 +89,7 @@ private static int indice;
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        jLabel1.setText("Cadastro de Usuários");
+        jLabel1.setText("Cadastro de Modelos");
 
         jTableListarUsuarios.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -125,7 +125,7 @@ private static int indice;
             }
         });
 
-        jButton7.setText("Voltar");
+        jButton7.setText("Cancelar");
         jButton7.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton7ActionPerformed(evt);
@@ -154,7 +154,7 @@ private static int indice;
                     .addGroup(layout.createSequentialGroup()
                         .addGap(153, 153, 153)
                         .addComponent(jLabel1)))
-                .addContainerGap(27, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -163,7 +163,7 @@ private static int indice;
                 .addComponent(jLabel1)
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 16, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton3)
                     .addComponent(jButton5)
@@ -176,46 +176,40 @@ private static int indice;
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        new CadastrarUsuario().setVisible(true);
+        new CadastrarModelo().setVisible(true);
     }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        if(jTableListarUsuarios.getSelectedRow() != -1){
+            this.dispose();
+            int linha = jTableListarUsuarios.getSelectedRow();
+            indice = (Integer.parseInt(jTableListarUsuarios.getValueAt(linha, 0).toString()));
+            new AlterarModelo().setVisible(true);
+        }else{
+            JOptionPane.showMessageDialog(null, "Primeiro selecione um registro.");
+        }
+    }//GEN-LAST:event_jButton5ActionPerformed
+
+    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+        if(jTableListarUsuarios.getSelectedRow() != -1) {
+
+            int linha = jTableListarUsuarios.getSelectedRow();
+            modelo.setIdModelo(Integer.parseInt(jTableListarUsuarios.getValueAt(linha, 0).toString()));
+
+            int cod = ModeloDAO.idModelo(modelo.getIdModelo());
+            ModeloDAO.ExcluirModelo(cod);
+            //            ContatosDAO.ExcluirEndereco(codContato);
+            //            ContatosDAO.ExcluirTel(codContato);
+            //            ContatosDAO.ExcluirEmail(codContato);
+        } else {
+            JOptionPane.showMessageDialog(null, "Primeiro selecione um registro.");
+        }
+        TabelaUsuario("select  * from tabmodelo;");
+    }//GEN-LAST:event_jButton6ActionPerformed
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
         this.dispose();
     }//GEN-LAST:event_jButton7ActionPerformed
-
-    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
-        if(jTableListarUsuarios.getSelectedRow() != -1) {
-            
-            int linha = jTableListarUsuarios.getSelectedRow();
-            usuario.setIdUser(Integer.parseInt(jTableListarUsuarios.getValueAt(linha, 0).toString()));
-            
-            int cod = UsuarioDAO.idUsuario(usuario.getIdUser());
-            UsuarioDAO.ExcluirUsuario(cod);
-//            ContatosDAO.ExcluirEndereco(codContato);
-//            ContatosDAO.ExcluirTel(codContato);
-//            ContatosDAO.ExcluirEmail(codContato);           
-        } else { 
-            JOptionPane.showMessageDialog(null, "Primeiro selecione um registro.");
-        }    
-        TabelaUsuario("select  * from tabusuario;");
-    }//GEN-LAST:event_jButton6ActionPerformed
-
-    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-          if(jTableListarUsuarios.getSelectedRow() != -1){
-            this.dispose();
-            int linha = jTableListarUsuarios.getSelectedRow();        
-            indice = (Integer.parseInt(jTableListarUsuarios.getValueAt(linha, 0).toString())); 
-            new AlterarUsuario().setVisible(true);
-        }else{
-            JOptionPane.showMessageDialog(null, "Primeiro selecione um registro.");
-        }  
-    }//GEN-LAST:event_jButton5ActionPerformed
-
-    /**
-     * @param args the command line arguments
-     */
-   
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton5;

@@ -8,6 +8,7 @@ package telas;
 import atributos.Usuario;
 import funcoes.UsuarioDAO;
 import funcoes.ContatosDAO;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -37,12 +38,12 @@ public class CadastrarUsuario extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         jTextNome = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox();
+        jComboTipoUser = new javax.swing.JComboBox();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
-        jPassword = new javax.swing.JPasswordField();
-        jPasswordField2 = new javax.swing.JPasswordField();
+        jPasswordSenha = new javax.swing.JPasswordField();
+        jPasswordConfirmaSenha = new javax.swing.JPasswordField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -56,10 +57,10 @@ public class CadastrarUsuario extends javax.swing.JFrame {
 
         jLabel6.setText("Tipo de Usuário:");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "A", "F" }));
-        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
+        jComboTipoUser.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "A", "F" }));
+        jComboTipoUser.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox1ActionPerformed(evt);
+                jComboTipoUserActionPerformed(evt);
             }
         });
 
@@ -101,13 +102,13 @@ public class CadastrarUsuario extends javax.swing.JFrame {
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(layout.createSequentialGroup()
                                         .addGap(20, 20, 20)
-                                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(jComboTipoUser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(0, 0, Short.MAX_VALUE))
                                     .addGroup(layout.createSequentialGroup()
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jPassword)
-                                            .addComponent(jPasswordField2)))))))
+                                            .addComponent(jPasswordSenha)
+                                            .addComponent(jPasswordConfirmaSenha)))))))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jButton2)
@@ -133,15 +134,15 @@ public class CadastrarUsuario extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
-                    .addComponent(jPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jPasswordSenha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
-                    .addComponent(jPasswordField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jPasswordConfirmaSenha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(37, 37, 37)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jComboTipoUser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 70, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
@@ -153,18 +154,31 @@ public class CadastrarUsuario extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
+    private void jComboTipoUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboTipoUserActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBox1ActionPerformed
+    }//GEN-LAST:event_jComboTipoUserActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
        Usuario user = new Usuario();     
         user.setNome(jTextNome.getText());
-        user.setSenha(jPassword.getText());
-        user.setTipo((String) jComboBox1.getSelectedItem());
+        user.setSenha(jPasswordSenha.getText());
+        user.setTipo((String) jComboTipoUser.getSelectedItem());        
         
-        
-        UsuarioDAO.CadUsuario(user);
+        if(jPasswordSenha.getText().equals(jPasswordConfirmaSenha.getText())){
+            if(!jPasswordConfirmaSenha.getText().trim().equals("") ){
+         UsuarioDAO.CadUsuario(user);
+         
+        JOptionPane.showMessageDialog(this, "Cadastrado com Sucesso! Agora você tem permissões para "
+                + "acessar o sistema!");
+        Menu m = new Menu();
+        m.setVisible(true);
+        this.dispose();
+         }else{
+             JOptionPane.showMessageDialog(null,"Campo(s) Vazio(s)!");
+         }
+        }else{
+             JOptionPane.showMessageDialog(null,"Não foi possivel confirmar a senha!");
+         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -177,14 +191,14 @@ public class CadastrarUsuario extends javax.swing.JFrame {
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
-    private javax.swing.JComboBox jComboBox1;
+    private javax.swing.JComboBox jComboTipoUser;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JPasswordField jPassword;
-    private javax.swing.JPasswordField jPasswordField2;
+    private javax.swing.JPasswordField jPasswordConfirmaSenha;
+    private javax.swing.JPasswordField jPasswordSenha;
     private javax.swing.JTextField jTextNome;
     // End of variables declaration//GEN-END:variables
 }
