@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package telas;
 
 import atributos.Usuario;
@@ -201,6 +196,7 @@ public class AlterarUsuario extends javax.swing.JFrame {
         user.setTipo(String.valueOf(jComboTipoUser.getSelectedItem()));
         user.setSenha(jTextSenha.getText());
         UsuarioDAO.UpdateUsuario(user, GetIndice());
+        System.out.println("Aqui 2: " + GetIndice());
         this.dispose();
         new ExibeUsuario().setVisible(true);
     }//GEN-LAST:event_jButtonSalvarActionPerformed
