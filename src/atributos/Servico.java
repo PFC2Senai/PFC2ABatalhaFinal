@@ -13,9 +13,9 @@ public class Servico {
     private Date dataServico;
     
     private int idDetServico;
-    private int codServico;
-    private int codProduto;
-    private int codOrdemServico;
+    private int codServico; //chave estrangeira tab servico
+    private int codProduto; //chave estrangeira
+    private int codOrdemServico; //chave estrangeira
     private int quantidade;
 
     /**
