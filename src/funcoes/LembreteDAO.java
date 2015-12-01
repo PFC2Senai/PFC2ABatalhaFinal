@@ -35,7 +35,7 @@ public class LembreteDAO {
                 stmt.close();  
 
             } catch (SQLException ex) {      
-                Logger.getLogger(ClienteDAO.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(LembreteDAO.class.getName()).log(Level.SEVERE, null, ex);
                 throw new RuntimeException("Erro ao Cadastrar Lembrete: ",ex);       
             }
     }
@@ -69,7 +69,7 @@ public class LembreteDAO {
             stmt.close();
             
         } catch (SQLException ex) {      
-            Logger.getLogger(ClienteDAO.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(LembreteDAO.class.getName()).log(Level.SEVERE, null, ex);
             throw new RuntimeException("Erro ao excluir os dados do Cliente: ", ex);    
         }    
         return lembretes;
@@ -88,7 +88,7 @@ public class LembreteDAO {
             stmt.close();
 
         } catch (SQLException ex) {      
-            Logger.getLogger(ClienteDAO.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(LembreteDAO.class.getName()).log(Level.SEVERE, null, ex);
             throw new RuntimeException("Erro ao excluir os dados do Cliente: ",ex);    
         }
     }
@@ -107,7 +107,7 @@ public class LembreteDAO {
             stmt.close();
 
         } catch (SQLException ex) {      
-            Logger.getLogger(ClienteDAO.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(LembreteDAO.class.getName()).log(Level.SEVERE, null, ex);
             throw new RuntimeException("Erro ao excluir os dados do Cliente: ",ex);    
         }
     }
@@ -143,7 +143,7 @@ public class LembreteDAO {
             stmt.close();
             
         } catch (SQLException ex) {
-            Logger.getLogger(SetorDAO.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(LembreteDAO.class.getName()).log(Level.SEVERE, null, ex);
             throw new RuntimeException("Erro ao Listar os lembretes: ",ex);
         }
         return lembretes;
