@@ -111,7 +111,7 @@ public class AuditoriaDAO {
     public static ArrayList<Auditoria> ListarSetor(){
         
         Statement stmt;
-        ArrayList<Auditoria> auditoria = new ArrayList<Auditoria>();
+        ArrayList<Auditoria> auditorias = new ArrayList<Auditoria>();
         
         try {            
             String Sql = "SELECT * FROM tabauditoria " +
@@ -132,7 +132,7 @@ public class AuditoriaDAO {
                 a.setDataModificacao(rs.getDate("dataModificacao"));
                 a.setDescricao(rs.getString("descricao"));
                 a.setCodAuditoria(rs.getInt("tabAuditoria_idtabAuditoria"));
-                auditoria.add(a);                
+                auditorias.add(a);                
             }            
             rs.close();
             stmt.close();
@@ -141,6 +141,6 @@ public class AuditoriaDAO {
             Logger.getLogger(AuditoriaDAO.class.getName()).log(Level.SEVERE, null, ex);
             throw new RuntimeException("Erro ao carregar a auditoria: ", ex);    
         }    
-        return auditoria;
+        return auditorias;
     }
 }
