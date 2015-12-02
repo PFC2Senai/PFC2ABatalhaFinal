@@ -159,7 +159,7 @@ public class AlterarProduto extends javax.swing.JFrame {
         Produto prod = new Produto();
         prod.setIdUsuario(Integer.parseInt(jTextCodUsuario.getText()));
         prod.setProduto(jTextProduto.getText());
-        ProdutoDAO.UpdateModelo(prod, GetIndice());
+        ProdutoDAO.UpdateProduto(prod, GetIndice());
         this.dispose();
         new ExibeProduto().setVisible(true);
     }//GEN-LAST:event_jButtonSalvarActionPerformed
