@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package funcoes;
 
 import atributos.Produto;
@@ -72,7 +67,6 @@ public class ProdutoDAO {
                 p.setIdProduto(rs.getInt("id_prod"));
                 p.setIdUsuario(rs.getInt("tabusuario_id_usuario"));
                 p.setProduto(rs.getString("produto"));
-                p.setIdDetProduto(rs.getInt("id_det_produto"));
                 p.setCodFornecedor(rs.getInt("tabFornecedor_id_forn1"));
                 p.setQuantidade(rs.getInt("quant"));
                 p.setPrecoEntrada(rs.getFloat("precoEntrada"));
@@ -163,7 +157,8 @@ public class ProdutoDAO {
         Statement stmt;
         ArrayList<Produto> produto = new ArrayList<Produto>();
         
-        try {            
+        try {
+            
             String Sql = "SELECT * FROM tabproduto;";
             
             ResultSet rs;            
@@ -176,7 +171,6 @@ public class ProdutoDAO {
                 p.setIdProduto(rs.getInt("id_prod"));
                 p.setIdUsuario(rs.getInt("tabusuario_id_usuario"));
                 p.setProduto(rs.getString("produto"));
-                p.setIdDetProduto(rs.getInt("id_det_produto"));
                 p.setCodFornecedor(rs.getInt("tabFornecedor_id_forn1"));
                 p.setQuantidade(rs.getInt("quant"));
                 p.setPrecoEntrada(rs.getFloat("precoEntrada"));
@@ -193,6 +187,5 @@ public class ProdutoDAO {
             throw new RuntimeException("Erro ao listar os Produto: ", ex);    
         }    
         return produto;
-    } 
-    
+    }    
 }

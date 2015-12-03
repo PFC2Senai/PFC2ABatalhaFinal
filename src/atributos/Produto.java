@@ -5,10 +5,10 @@ package atributos;
  * @author WilhamJr
  */
 public class Produto {
+    
     private int idProduto;
     private int idUsuario;
-    private String produto;     
-    private int idDetProduto;
+    private String produto;
     private int codFornecedor;
     private int codModelo;
     private int codFabricante;
@@ -38,20 +38,6 @@ public class Produto {
 
     public void setProduto(String produto) {
         this.produto = produto;
-    }
-
-    /**
-     * @return the idDetProduto
-     */
-    public int getIdDetProduto() {
-        return idDetProduto;
-    }
-
-    /**
-     * @param idDetProduto the idDetProduto to set
-     */
-    public void setIdDetProduto(int idDetProduto) {
-        this.idDetProduto = idDetProduto;
     }
 
     /**

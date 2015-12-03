@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package telas;
 
 import atributos.Produto;
@@ -30,11 +25,20 @@ public class CadastrarProduto extends javax.swing.JFrame {
      */
     public CadastrarProduto() {
         initComponents();
+        populaComboBoxFornecedor();
+        populaComboBoxFabricante();
+        populaComboBoxModelo();
     }
     
-     private void limparCampos(){
+    private void limparCampos() {
         //jTextCodUsuario.setText("");
         jTextProduto.setText("");
+        txtPrecoEntrada.setText("");
+        txtPrecoSaida.setText("");
+        txtQuantidade.setText("");
+        jComboBoxFabricante.setSelectedIndex(0);
+        jComboBoxFornecedor.setSelectedIndex(0);
+        jComboBoxModelo.setSelectedIndex(0);
     }
 
     /**
@@ -49,7 +53,7 @@ public class CadastrarProduto extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jTextProduto = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        jBtnCadastrarProduto = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
@@ -72,10 +76,10 @@ public class CadastrarProduto extends javax.swing.JFrame {
 
         jLabel4.setText("Produto:");
 
-        jButton1.setText("Cadastrar");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        jBtnCadastrarProduto.setText("Cadastrar");
+        jBtnCadastrarProduto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                jBtnCadastrarProdutoActionPerformed(evt);
             }
         });
 
@@ -96,16 +100,31 @@ public class CadastrarProduto extends javax.swing.JFrame {
         jLabel2.setText("Fornecedor:");
 
         jComboBoxFornecedor.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Selecione o fornecedor" }));
+        jComboBoxFornecedor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBoxFornecedorActionPerformed(evt);
+            }
+        });
 
         jLabel3.setText("Quantidade:");
 
         jLabel5.setText("Modelo:");
 
         jComboBoxModelo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Selecione o modelo" }));
+        jComboBoxModelo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBoxModeloActionPerformed(evt);
+            }
+        });
 
         jLabel6.setText("Fabricante:");
 
         jComboBoxFabricante.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Selecione o fabricante" }));
+        jComboBoxFabricante.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBoxFabricanteActionPerformed(evt);
+            }
+        });
 
         jLabel7.setText("Preço de Entrada:");
 
@@ -152,7 +171,7 @@ public class CadastrarProduto extends javax.swing.JFrame {
                                 .addComponent(jLabel8)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(txtPrecoSaida))
-                            .addComponent(jButton1, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jBtnCadastrarProduto, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel2)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -192,10 +211,10 @@ public class CadastrarProduto extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(txtQuantidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 24, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 36, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton3)
-                    .addComponent(jButton1)
+                    .addComponent(jBtnCadastrarProduto)
                     .addComponent(jButton2))
                 .addGap(21, 21, 21))
         );
@@ -203,16 +222,20 @@ public class CadastrarProduto extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void jBtnCadastrarProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnCadastrarProdutoActionPerformed
         Produto prod = new Produto();
         
         prod.setIdUsuario(1);
         prod.setProduto(jTextProduto.getText());
-        prod.setCodFornecedor(FRAMEBITS);
-        
+        prod.setCodFornecedor(codFornecedor);
+        prod.setCodModelo(codModelo);
+        prod.setCodFabricante(codFabricante);
+        prod.setQuantidade(Integer.parseInt(txtQuantidade.getText()));
+        prod.setPrecoEntrada(Float.parseFloat(txtPrecoEntrada.getText()));
+        prod.setPrecoSaida(Float.parseFloat(txtPrecoSaida.getText()));                
         ProdutoDAO.Cadroduto(prod);
         limparCampos(); 
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_jBtnCadastrarProdutoActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         limparCampos();
@@ -221,6 +244,18 @@ public class CadastrarProduto extends javax.swing.JFrame {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         this.dispose();
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jComboBoxFornecedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxFornecedorActionPerformed
+        idFornecedorComboBox();
+    }//GEN-LAST:event_jComboBoxFornecedorActionPerformed
+
+    private void jComboBoxFabricanteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxFabricanteActionPerformed
+        idFabricanteComboBox();
+    }//GEN-LAST:event_jComboBoxFabricanteActionPerformed
+
+    private void jComboBoxModeloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxModeloActionPerformed
+        idModeloComboBox();
+    }//GEN-LAST:event_jComboBoxModeloActionPerformed
 
     
     private void populaComboBoxFornecedor() {
@@ -267,7 +302,7 @@ public class CadastrarProduto extends javax.swing.JFrame {
         
         Connection conexao = Conexao.getConnection();
         ResultSet rs;
-        String sql = "select * from tabfornecedor";
+        String sql = "select * from tabfabricante";
         
         try{
             pst = conexao.prepareStatement(sql);
@@ -275,7 +310,7 @@ public class CadastrarProduto extends javax.swing.JFrame {
             
             while(rs.next())
             {
-                jComboBoxFornecedor.addItem(rs.getString("fornecedor"));
+                jComboBoxFabricante.addItem(rs.getString("fabricante"));
             }
         }catch(SQLException ex)
         {
@@ -287,7 +322,7 @@ public class CadastrarProduto extends javax.swing.JFrame {
         
         Connection conexao = Conexao.getConnection();
         ResultSet rs;
-        String sql = "select * from tabfornecedor where fornecedor = '" + jComboBoxFornecedor.getSelectedItem()+ "';";
+        String sql = "select * from tabfabricante where fabricante = '" + jComboBoxFabricante.getSelectedItem()+ "';";
         
         try{
             pst = conexao.prepareStatement(sql);
@@ -295,7 +330,47 @@ public class CadastrarProduto extends javax.swing.JFrame {
             
             while(rs.next())
             {
-                codFornecedor = (rs.getInt("id_forn"));
+                codFabricante = (rs.getInt("idtabFabricante"));
+            }
+        }catch(SQLException ex)
+        {
+            JOptionPane.showMessageDialog(null, ex);
+        }
+    }
+    
+    private void populaComboBoxModelo() {
+        
+        Connection conexao = Conexao.getConnection();
+        ResultSet rs;
+        String sql = "select * from tabmodelo";
+        
+        try{
+            pst = conexao.prepareStatement(sql);
+            rs = pst.executeQuery();
+            
+            while(rs.next())
+            {
+                jComboBoxModelo.addItem(rs.getString("modelo"));
+            }
+        }catch(SQLException ex)
+        {
+            JOptionPane.showMessageDialog(null, ex);
+        }
+    }
+    
+    private void idModeloComboBox() {
+        
+        Connection conexao = Conexao.getConnection();
+        ResultSet rs;
+        String sql = "select * from tabmodelo where modelo = '" + jComboBoxModelo.getSelectedItem()+ "';";
+        
+        try{
+            pst = conexao.prepareStatement(sql);
+            rs = pst.executeQuery();
+            
+            while(rs.next())
+            {
+                codModelo = (rs.getInt("idtabModelo"));
             }
         }catch(SQLException ex)
         {
@@ -304,7 +379,7 @@ public class CadastrarProduto extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jBtnCadastrarProduto;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JComboBox jComboBoxFabricante;

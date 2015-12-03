@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package telas;
 
 import atributos.Produto;
@@ -21,6 +16,7 @@ import javax.swing.ListSelectionModel;
 /**
  *
  * @author graciele
+ * http://www.informaticon.com.br/j/index.php/java-se-i-estoque.html
  */
 public class ExibeProduto extends javax.swing.JFrame {
     
@@ -33,7 +29,7 @@ public class ExibeProduto extends javax.swing.JFrame {
      */
     public ExibeProduto() {
         initComponents();
-        TabelaProduto("select * from tabproduto;");
+        TabelaProduto("SELECT * FROM vw_produtos;");
     }
     
     public static int GetIndice() {         
@@ -45,17 +41,24 @@ public class ExibeProduto extends javax.swing.JFrame {
         try {
             stmt = getConnection().createStatement();
             ArrayList dados = new ArrayList();               
-            String [] Colunas = {"Código do Produto","Código do Usuário", "Produto"};
+            String [] Colunas = {"Código", "Produto", "Fornecedor", "Fabricante",
+                                 "Modelo", "Preço Entrada", "Preço Saída"};
                
             ResultSet rs;
             rs = stmt.executeQuery(Sql);            
             //rs.first();
             
             while(rs.next()){
-               dados.add(new Object[]{rs.getObject("id_prod"),rs.getObject("tabusuario_id_usuario"),rs.getObject("produto")});            
+               dados.add(new Object[]{rs.getObject("id_prod"),
+                                      rs.getObject("produto"),
+                                      rs.getObject("fornecedor"),
+                                      rs.getObject("fabricante"),
+                                      rs.getObject("modelo"),
+                                      rs.getObject("precoEntrada"),
+                                      rs.getObject("precoSaida")});            
             }
                         
-            for (int i = 0; i < 3; i++){
+            for (int i = 0; i < 7; i++){
                 ModeloTabela modelo = new ModeloTabela(dados, Colunas);
                 jTableListarProdutos.setModel(modelo);
                 jTableListarProdutos.getColumnModel().getColumn(i).setPreferredWidth(150);
@@ -122,13 +125,10 @@ public class ExibeProduto extends javax.swing.JFrame {
 
         jTableListarProdutos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+
             }
         ));
         jScrollPane2.setViewportView(jTableListarProdutos);
@@ -144,16 +144,16 @@ public class ExibeProduto extends javax.swing.JFrame {
                 .addComponent(jButton5)
                 .addGap(67, 67, 67)
                 .addComponent(jButton6)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 220, Short.MAX_VALUE)
                 .addComponent(jButton7)
                 .addGap(55, 55, 55))
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(26, 26, 26)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 479, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 622, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(153, 153, 153)
+                        .addGap(221, 221, 221)
                         .addComponent(jLabel1)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -163,8 +163,8 @@ public class ExibeProduto extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jLabel1)
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 240, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton3)
                     .addComponent(jButton5)
@@ -199,13 +199,10 @@ public class ExibeProduto extends javax.swing.JFrame {
 
             int cod = ProdutoDAO.idProduto(produto.getIdProduto());
             ProdutoDAO.ExcluirProduto(cod);
-            //            ContatosDAO.ExcluirEndereco(codContato);
-            //            ContatosDAO.ExcluirTel(codContato);
-            //            ContatosDAO.ExcluirEmail(codContato);
         } else {
             JOptionPane.showMessageDialog(null, "Primeiro selecione um registro.");
         }
-        TabelaProduto("select  * from tabproduto;");
+        TabelaProduto("SELECT * FROM vw_produtos;");
     }//GEN-LAST:event_jButton6ActionPerformed
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
