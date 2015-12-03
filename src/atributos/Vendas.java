@@ -9,6 +9,7 @@ import java.util.Date;
  * @author S015365
  */
 public class Vendas {
+    
     private int idtabVendas;
     private int clienteIdcliente;
     private int tabusuarioIdUsuario;

@@ -8,6 +8,8 @@ public class Produto {
     
     private int idProduto;
     private int idUsuario;
+    
+    
     private String produto;
     private int codFornecedor;
     private int codModelo;

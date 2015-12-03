@@ -19,6 +19,7 @@ public class CadastrarCliente extends javax.swing.JFrame {
     private PreparedStatement pst;
     int posicao = 10;
     ArrayList<String> telefones = new ArrayList<String>();
+    private int codSetor;
     
     public CadastrarCliente() {
         initComponents();
@@ -335,7 +336,7 @@ public class CadastrarCliente extends javax.swing.JFrame {
         cli.setEmpresa(txtEmpresa.getText());
         cli.setCnpj(txtCnpj.getText());
         cli.setContato(txtContato.getText());
-        cli.setCodSetor(Integer.parseInt(labelCodSetor.getText()));
+        cli.setCodSetor(codSetor);
         cli.setEmail(txtEmail.getText());
 
         telefones.add(txtTel01.getText());
@@ -389,6 +390,7 @@ public class CadastrarCliente extends javax.swing.JFrame {
     }
     
     private void idSetorComboBox() {
+        
         Connection conexao = Conexao.getConnection();
         ResultSet rs;
         String sql = "select * from tabSetor where setor = '" + jComboBoxSetores.getSelectedItem()+ "';";
@@ -399,7 +401,7 @@ public class CadastrarCliente extends javax.swing.JFrame {
             
             while(rs.next())
             {
-                labelCodSetor.setText(String.valueOf(rs.getInt("idtabSetor")));
+                codSetor = (rs.getInt("idtabSetor"));
             }
         }catch(SQLException ex)
         {
