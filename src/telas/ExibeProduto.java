@@ -41,8 +41,7 @@ public class ExibeProduto extends javax.swing.JFrame {
         try {
             stmt = getConnection().createStatement();
             ArrayList dados = new ArrayList();               
-            String [] Colunas = {"Código", "Produto", "Fornecedor", "Fabricante",
-                                 "Modelo", "Preço Entrada", "Preço Saída"};
+            String [] Colunas = {"Código", "Produto"};
                
             ResultSet rs;
             rs = stmt.executeQuery(Sql);            
@@ -50,15 +49,10 @@ public class ExibeProduto extends javax.swing.JFrame {
             
             while(rs.next()){
                dados.add(new Object[]{rs.getObject("id_prod"),
-                                      rs.getObject("produto"),
-                                      rs.getObject("fornecedor"),
-                                      rs.getObject("fabricante"),
-                                      rs.getObject("modelo"),
-                                      rs.getObject("precoEntrada"),
-                                      rs.getObject("precoSaida")});            
+                                      rs.getObject("produto")});            
             }
                         
-            for (int i = 0; i < 7; i++){
+            for (int i = 0; i < 2; i++){
                 ModeloTabela modelo = new ModeloTabela(dados, Colunas);
                 jTableListarProdutos.setModel(modelo);
                 jTableListarProdutos.getColumnModel().getColumn(i).setPreferredWidth(150);
@@ -131,6 +125,11 @@ public class ExibeProduto extends javax.swing.JFrame {
 
             }
         ));
+        jTableListarProdutos.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTableListarProdutosMouseClicked(evt);
+            }
+        });
         jScrollPane2.setViewportView(jTableListarProdutos);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -138,23 +137,23 @@ public class ExibeProduto extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(35, 35, 35)
-                .addComponent(jButton3)
-                .addGap(57, 57, 57)
-                .addComponent(jButton5)
-                .addGap(67, 67, 67)
-                .addComponent(jButton6)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 220, Short.MAX_VALUE)
-                .addComponent(jButton7)
-                .addGap(55, 55, 55))
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(26, 26, 26)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 622, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(221, 221, 221)
-                        .addComponent(jLabel1)))
+                        .addGap(35, 35, 35)
+                        .addComponent(jButton3)
+                        .addGap(57, 57, 57)
+                        .addComponent(jButton5)
+                        .addGap(67, 67, 67)
+                        .addComponent(jButton6)
+                        .addGap(247, 247, 247)
+                        .addComponent(jButton7))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createSequentialGroup()
+                            .addGap(26, 26, 26)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 622, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(layout.createSequentialGroup()
+                            .addGap(221, 221, 221)
+                            .addComponent(jLabel1))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -208,6 +207,18 @@ public class ExibeProduto extends javax.swing.JFrame {
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
         this.dispose();
     }//GEN-LAST:event_jButton7ActionPerformed
+
+    private void jTableListarProdutosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableListarProdutosMouseClicked
+        if(jTableListarProdutos.getSelectedRow() != -1){
+          //  this.dispose();
+            int linha = jTableListarProdutos.getSelectedRow();
+            indice = (Integer.parseInt(jTableListarProdutos.getValueAt(linha, 0).toString()));
+            new ExibeProdutos().setVisible(true);
+        }else{
+            JOptionPane.showMessageDialog(null, "Primeiro selecione um registro.");
+        }
+    }//GEN-LAST:event_jTableListarProdutosMouseClicked
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton5;

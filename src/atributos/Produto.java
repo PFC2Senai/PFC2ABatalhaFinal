@@ -8,15 +8,19 @@ public class Produto {
     
     private int idProduto;
     private int idUsuario;
-    
-    
     private String produto;
+
+    
+    //det produto
+    private int idDetProduto;
+    private int codProduto;
     private int codFornecedor;
     private int codModelo;
     private int codFabricante;
     private int quantidade;
-    private float precoEntrada;
-    private float precoSaida;
+    private double precoEntrada;
+    private double precoSaida;
+    private int quantidadeMinima;
 
     public int getIdProduto() {
         return idProduto;
@@ -108,7 +112,7 @@ public class Produto {
     /**
      * @param precoEntrada the precoEntrada to set
      */
-    public void setPrecoEntrada(float precoEntrada) {
+    public void setPrecoEntrada(double precoEntrada) {
         this.precoEntrada = precoEntrada;
     }
 
@@ -122,8 +126,50 @@ public class Produto {
     /**
      * @param precoSaida the precoSaida to set
      */
-    public void setPrecoSaida(float precoSaida) {
+    public void setPrecoSaida(double precoSaida) {
         this.precoSaida = precoSaida;
+    }
+
+    /**
+     * @return the idDetProduto
+     */
+    public int getIdDetProduto() {
+        return idDetProduto;
+    }
+
+    /**
+     * @param idDetProduto the idDetProduto to set
+     */
+    public void setIdDetProduto(int idDetProduto) {
+        this.idDetProduto = idDetProduto;
+    }
+
+    /**
+     * @return the codProduto
+     */
+    public int getCodProduto() {
+        return codProduto;
+    }
+
+    /**
+     * @param codProduto the codProduto to set
+     */
+    public void setCodProduto(int codProduto) {
+        this.codProduto = codProduto;
+    }
+
+    /**
+     * @return the quantidadeMinima
+     */
+    public int getQuantidadeMinima() {
+        return quantidadeMinima;
+    }
+
+    /**
+     * @param quantidadeMinima the quantidadeMinima to set
+     */
+    public void setQuantidadeMinima(int quantidadeMinima) {
+        this.quantidadeMinima = quantidadeMinima;
     }
     
 }
