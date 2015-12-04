@@ -113,5 +113,8 @@ public class Auditoria {
      */
     public void setCodAuditoria(int codAuditoria) {
         this.codAuditoria = codAuditoria;
-    }           
+    }
+    
+    
+    
 }

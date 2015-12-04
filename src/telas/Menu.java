@@ -42,7 +42,6 @@ public class Menu extends javax.swing.JFrame {
         jMenuItem15 = new javax.swing.JMenuItem();
         jMenuItem17 = new javax.swing.JMenuItem();
         jMenuItem26 = new javax.swing.JMenuItem();
-        jMenuItem29 = new javax.swing.JMenuItem();
         jMenu10 = new javax.swing.JMenu();
         jMenuItem7 = new javax.swing.JMenuItem();
         jMenuItem9 = new javax.swing.JMenuItem();
@@ -54,7 +53,6 @@ public class Menu extends javax.swing.JFrame {
         jMenuItem16 = new javax.swing.JMenuItem();
         jMenuItem20 = new javax.swing.JMenuItem();
         jMenuItem23 = new javax.swing.JMenuItem();
-        jMenuItem30 = new javax.swing.JMenuItem();
         jMenu15 = new javax.swing.JMenu();
         jMenuItem11 = new javax.swing.JMenuItem();
         jMenuItem25 = new javax.swing.JMenuItem();
@@ -159,14 +157,6 @@ public class Menu extends javax.swing.JFrame {
         });
         jMenu14.add(jMenuItem26);
 
-        jMenuItem29.setText("Equipamento");
-        jMenuItem29.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem29ActionPerformed(evt);
-            }
-        });
-        jMenu14.add(jMenuItem29);
-
         jMenu4.add(jMenu14);
 
         jMenu10.setText("Consultar");
@@ -240,14 +230,6 @@ public class Menu extends javax.swing.JFrame {
             }
         });
         jMenu10.add(jMenuItem23);
-
-        jMenuItem30.setText("Equipamento");
-        jMenuItem30.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem30ActionPerformed(evt);
-            }
-        });
-        jMenu10.add(jMenuItem30);
 
         jMenu4.add(jMenu10);
 
@@ -389,14 +371,6 @@ public class Menu extends javax.swing.JFrame {
         new CadastrarFabricante().setVisible(true);
     }//GEN-LAST:event_jMenuItem26ActionPerformed
 
-    private void jMenuItem29ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem29ActionPerformed
-        new CadastrarEquipamento().setVisible(true);
-    }//GEN-LAST:event_jMenuItem29ActionPerformed
-
-    private void jMenuItem30ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem30ActionPerformed
-        new ExibeEquipamento().setVisible(true);
-    }//GEN-LAST:event_jMenuItem30ActionPerformed
-
     /**
      * @param args the command line arguments
      */
@@ -463,9 +437,7 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem26;
     private javax.swing.JMenuItem jMenuItem27;
     private javax.swing.JMenuItem jMenuItem28;
-    private javax.swing.JMenuItem jMenuItem29;
     private javax.swing.JMenuItem jMenuItem3;
-    private javax.swing.JMenuItem jMenuItem30;
     private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JMenuItem jMenuItem6;

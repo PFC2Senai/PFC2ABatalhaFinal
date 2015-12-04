@@ -15,7 +15,7 @@ import java.util.logging.Logger;
 public class ClienteDAO {
     
     public static void CadCliente(Cliente cli){
-               
+        
         PreparedStatement stmt;
         try {   
             String sql = ("INSERT INTO tabcliente(tabusuario_id_usuario, tabContato_id_contato,empresa,cnpj,tabSetor_idtabSetor,contato)  VALUES(?,?,?,?,?,?)");
@@ -27,7 +27,7 @@ public class ClienteDAO {
                 stmt.setString(4, cli.getCnpj());
                 stmt.setInt(5, cli.getCodSetor());
                 stmt.setString(6, cli.getContato());
-                             
+                              
                 stmt.executeUpdate();
                 stmt.close();  
 

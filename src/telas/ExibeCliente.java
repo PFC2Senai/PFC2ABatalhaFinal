@@ -58,7 +58,7 @@ private static int idCntato;
             
             stmt = getConnection().createStatement();
             ArrayList dados = new ArrayList();               
-            String [] Colunas = {"Código","Empresa", "CNPJ", "Setor", "Estado","Telefone","Email"};
+            String [] Colunas = {"Código","Empresa", "CNPJ", "Setor", "Estado", "CEP"};
                
             ResultSet rs;
             rs = stmt.executeQuery(Sql);            
@@ -67,10 +67,10 @@ private static int idCntato;
                 while(rs.next()){
                     dados.add(new Object[]{ rs.getObject("idCliente"),rs.getObject("empresa"),
                                             rs.getObject("cnpj"),rs.getObject("setor"), 
-                                            rs.getObject("estado"),rs.getObject("telefone"),rs.getObject("email")});            
+                                            rs.getObject("estado"),rs.getObject("cep")});            
                 }
 
-                    for (int i = 0; i < 7; i++){
+                    for (int i = 0; i < 6; i++){
                         ModeloTabela modelo = new ModeloTabela(dados, Colunas);
                         jTableListarClientes.setModel(modelo);
                         jTableListarClientes.getColumnModel().getColumn(i).setPreferredWidth(150);

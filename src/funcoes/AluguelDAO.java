@@ -1,7 +1,6 @@
 package funcoes;
 
 import atributos.Aluguel;
-import java.sql.CallableStatement;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -75,8 +74,8 @@ public class AluguelDAO {
         
         try {            
             String Sql = "SELECT * FROM tablocacao INNER JOIN tabdetlocacao "
-                      +  "ON idtabDetLocacao = tabLocacao_idtabDetLocacao "
-                       + "WHERE idtabDetLocacao = '" + id + "';";
+                      +  "ON idLocacao = tabLocacao_idtabDetLocacao "
+                       + "WHERE idLocacao = '" + id + "';";
                        
             
             ResultSet rs;            
@@ -87,110 +86,84 @@ public class AluguelDAO {
                 
                 Aluguel a = new Aluguel();
                 
-                a.setCodAluguel(rs.getInt("idtabDetLocacao"));
-                a.setTabusuarioIdUsuario(rs.getInt("tabusuario_id_usuario"));
-                a.setTabclienteIdcliente(rs.getInt("tabcliente_idcliente"));
-                a.setTabDetLocacaocol(rs.getString("tabDetLocacaocol"));
-                a.setIdDetAluguel(rs.getInt("idLocacao"));
-                a.setDataAluguel((rs.getDate("dataLocacao")));    
-                a.setHora(rs.getTime("hora"));
-                a.setValorHora(rs.getFloat("valorHora"));
-                a.setDataDevolucao(rs.getDate("dataDevolucao"));
-                a.setCodAluguel(rs.getInt("tabLocacao_idtabDetLocacao"));
-                a.setCodEquipamento(rs.getInt("tabEquipamento_idEquipamento"));
-                a.setCodOrdemServico(rs.getInt("tabordemserv_idtabOrdemServ"));
+                a.setCodAluguel(rs.getInt("idLocacao"));
+                a.setDataAluguel((rs.getDate("equipamento")));                
                 aluguel.add(a);                
             }            
             rs.close();
             stmt.close();
             
         } catch (SQLException ex) {      
-            Logger.getLogger(AluguelDAO.class.getName()).log(Level.SEVERE, null, ex);
-            throw new RuntimeException("Erro ao Carregar os dados do aluguel: ",ex);   
+            Logger.getLogger(EquipamentoDAO.class.getName()).log(Level.SEVERE, null, ex);
+            throw new RuntimeException("Erro ao Carregar os dados do equipamento: ",ex);   
         }    
         return aluguel;
     }        
     
-    public static void ExcluirAluguel(int id){
+    public static void ExcluirEquipamento(int id){
         
-        CallableStatement stmt;
-        try {   
-            stmt = Conexao.getConnection().prepareCall("{call ExcluirAluguel(?)}");
+        PreparedStatement stmt;
+        try {
             
+            String sql = ("DELETE FROM tabequipamento WHERE idEquipamento = ?; ");
+            
+            stmt = Conexao.getConnection().prepareStatement(sql);
             stmt.setInt(1, id);
-            
             stmt.execute();
             stmt.close();
 
         } catch (SQLException ex) {      
-            Logger.getLogger(AluguelDAO.class.getName()).log(Level.SEVERE, null, ex);
-            throw new RuntimeException("Erro ao excluir os dados do aluguel: ",ex);    
+            Logger.getLogger(EquipamentoDAO.class.getName()).log(Level.SEVERE, null, ex);
+            throw new RuntimeException("Erro ao excluir o equipamento: ",ex);    
         }
     }
     
-    public static void UpdateAluguel(Aluguel al, int id) {
-        
-         CallableStatement stmt;
-        try {   
-            stmt = Conexao.getConnection().prepareCall("{call UpdateAluguel(?,?,?,?,?,?,?,?)}");
-            
-            stmt.setInt(1, id);
-            stmt.setInt(2, al.getTabclienteIdcliente());
-            stmt.setString(3, al.getTabDetLocacaocol());
-            stmt.setObject(4, al.getDataAluguel());
-            stmt.setTime(5, al.getHora());
-            stmt.setFloat(6, al.getValorHora());
-            stmt.setObject(7, al.getDataDevolucao());
-            stmt.setInt(8, al.getCodEquipamento());
-            
-            stmt.execute();
-            stmt.close();
-
-        } catch (SQLException ex) {      
-            Logger.getLogger(AluguelDAO.class.getName()).log(Level.SEVERE, null, ex);
-            throw new RuntimeException("Erro ao alterar os dados do aluguel: ",ex);    
-        }
-    }
-           
-    public static ArrayList<Aluguel> ListarAlugueis() {
-        
-        Statement stmt;
-        ArrayList<Aluguel> aluguel = new ArrayList<Aluguel>();
-        
-        try {            
-            String Sql = "SELECT * FROM tablocacao INNER JOIN tabdetlocacao "
-                      +  "ON idtabDetLocacao = tabLocacao_idtabDetLocacao;";
-                       
-            
-            ResultSet rs;            
-            stmt = Conexao.getConnection().createStatement();            
-            rs = stmt.executeQuery(Sql); 
-            
-            while(rs.next()){
-                
-                Aluguel a = new Aluguel();
-                
-                a.setCodAluguel(rs.getInt("idtabDetLocacao"));
-                a.setTabusuarioIdUsuario(rs.getInt("tabusuario_id_usuario"));
-                a.setTabclienteIdcliente(rs.getInt("tabcliente_idcliente"));
-                a.setTabDetLocacaocol(rs.getString("tabDetLocacaocol"));
-                a.setIdDetAluguel(rs.getInt("idLocacao"));
-                a.setDataAluguel((rs.getDate("dataLocacao")));    
-                a.setHora(rs.getTime("hora"));
-                a.setValorHora(rs.getFloat("valorHora"));
-                a.setDataDevolucao(rs.getDate("dataDevolucao"));
-                a.setCodAluguel(rs.getInt("tabLocacao_idtabDetLocacao"));
-                a.setCodEquipamento(rs.getInt("tabEquipamento_idEquipamento"));
-                a.setCodOrdemServico(rs.getInt("tabordemserv_idtabOrdemServ"));
-                aluguel.add(a);                
-            }            
-            rs.close();
-            stmt.close();
-            
-        } catch (SQLException ex) {      
-            Logger.getLogger(AluguelDAO.class.getName()).log(Level.SEVERE, null, ex);
-            throw new RuntimeException("Erro ao listar os dados do aluguel: ",ex);   
-        }    
-        return aluguel;                    
-    } 
+//    public static void UpdateEquipamento(Equipamento equi, int id) {
+//        
+//        PreparedStatement stmt;
+//        
+//        try {   
+//            String sql = ("UPDATE tabequipamento SET equipamento = '" + equi.getEquipamento() +
+//                                                "' WHERE idEquipamento = " + id + ";");
+//            
+//            stmt = Conexao.getConnection().prepareStatement(sql);                             
+//            stmt.executeUpdate();
+//            stmt.close();
+//
+//        } catch (SQLException ex) {      
+//            Logger.getLogger(EquipamentoDAO.class.getName()).log(Level.SEVERE, null, ex);
+//            throw new RuntimeException("Erro ao alterar o equipamento: ",ex);     
+//        }
+//    }
+//    
+//    public static ArrayList<Equipamento> ListarEquipamentos(){
+//        
+//        Statement stmt;
+//        ArrayList<Equipamento> equipamento = new ArrayList<Equipamento>();
+//        
+//        try {            
+//            String Sql = "SELECT * FROM tabequipamento;";
+//                       
+//            
+//            ResultSet rs;            
+//            stmt = Conexao.getConnection().createStatement();            
+//            rs = stmt.executeQuery(Sql); 
+//            
+//            while(rs.next()){
+//                
+//                Equipamento e = new Equipamento();
+//                
+//                e.setIdEquipamento(rs.getInt("idEquipamento"));
+//                e.setEquipamento((rs.getString("equipamento")));                
+//                equipamento.add(e);                
+//            }            
+//            rs.close();
+//            stmt.close();
+//            
+//        } catch (SQLException ex) {      
+//            Logger.getLogger(EquipamentoDAO.class.getName()).log(Level.SEVERE, null, ex);
+//            throw new RuntimeException("Erro ao listar os dados do equipamento: ",ex);   
+//        }    
+//        return equipamento;                    
+//    } 
 }

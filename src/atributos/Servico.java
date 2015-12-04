@@ -11,8 +11,7 @@ public class Servico {
     private String descricaoServico;
     private float preco;
     private Date dataServico;
-   
-    //tab det Servico
+    
     private int idDetServico;
     private int codServico; //chave estrangeira tab servico
     private int codProduto; //chave estrangeira

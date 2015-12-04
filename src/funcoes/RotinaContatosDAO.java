@@ -25,8 +25,8 @@ public class RotinaContatosDAO {
   
                 stmt.setInt(1, rot.getIdCliente());
                 stmt.setInt(2, rot.getIdUsuario());
-                stmt.setString(3, rot.getDataRotinaContato());
-                stmt.setString(4, rot.getHoraRotinaContato());
+                stmt.setObject(3, rot.getDataRotinaContato());
+                stmt.setTime(4, rot.getHoraRotinaContato());
                 stmt.setString(5, rot.getDescricaoRotina());
                               
                 stmt.executeUpdate();
@@ -62,8 +62,8 @@ public class RotinaContatosDAO {
                 r.setIdRotinaContato(rs.getInt("idRotinaContato"));
                 r.setIdCliente(rs.getInt("cliente_idciente"));
                 r.setIdUsuario(rs.getInt("tabusuario_id_usuario"));
-                r.setDataRotinaContato(rs.getString("dataRotina"));
-                r.setHoraRotinaContato(rs.getString("horaRotina"));
+                r.setDataRotinaContato(rs.getDate("dataRotina"));
+                r.setHoraRotinaContato(rs.getTime("horaRotina"));
                 r.setIdCliente(rs.getInt("cliente_idcliente"));
                 r.setDescricaoRotina(rs.getString("descricaoRotina"));
                 

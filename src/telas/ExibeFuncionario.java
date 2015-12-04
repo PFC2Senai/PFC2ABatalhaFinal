@@ -46,20 +46,17 @@ public class ExibeFuncionario extends javax.swing.JFrame {
         try {
             stmt = getConnection().createStatement();
             ArrayList dados = new ArrayList();               
-            String [] Colunas = {"Código", "Funcionário", "RG", "CPF", "Cargo", "Salario", "Cód do Contato", 
-                "Cód do Usuário", "Data de Admição"};
+            String [] Colunas = {"Matrícula", "Funcionário"};
                
             ResultSet rs;
             rs = stmt.executeQuery(Sql);            
             //rs.first();
             
             while(rs.next()){
-               dados.add(new Object[]{rs.getObject("idfuncionario"),rs.getObject("funcionario"),rs.getObject("rg"),rs.getObject("cpf")
-               ,rs.getObject("cargo"),rs.getObject("salario"),rs.getObject("tabContato_id_contato")
-               ,rs.getObject("tabUsuario_id_usuario"),rs.getObject("data_admicao")});            
+               dados.add(new Object[]{rs.getObject("idfuncionario"),rs.getObject("funcionario")});            
             }
                         
-            for (int i = 0; i < dados.size(); i++){
+            for (int i = 0; i < 2; i++){
                 ModeloTabela modelo = new ModeloTabela(dados, Colunas);
                 jTableListarFuncionarios.setModel(modelo);
                 jTableListarFuncionarios.getColumnModel().getColumn(i).setPreferredWidth(150);
@@ -70,7 +67,7 @@ public class ExibeFuncionario extends javax.swing.JFrame {
             }
             
         } catch (SQLException ex) {
-            Logger.getLogger(ExibeCliente.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ExibeFuncionario.class.getName()).log(Level.SEVERE, null, ex);
         }             
     }
 
@@ -98,13 +95,13 @@ public class ExibeFuncionario extends javax.swing.JFrame {
 
         jTableListarFuncionarios.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null}
+                {},
+                {},
+                {},
+                {}
             },
             new String [] {
-                "Matrícula", "Nome"
+
             }
         ));
         jScrollPane1.setViewportView(jTableListarFuncionarios);
@@ -180,7 +177,7 @@ public class ExibeFuncionario extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        //new CadastrarFuncionario().setVisible(true);
+        new CadastrarFuncionario().setVisible(true);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
