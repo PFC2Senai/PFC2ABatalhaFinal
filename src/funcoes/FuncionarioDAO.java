@@ -19,7 +19,7 @@ public class FuncionarioDAO {
         
         PreparedStatement stmt;
         try {   
-            String sql = ("INSERT INTO tabfuncionario(funcionario, rg, cpf, cargo, salario, tabContato_id_contato, tabUsuario_id_Usuario, data_admicao, ctps, serie, numeroCtps, uf) VALUES(?,?,?,?,?,?,?,?,?,?,?,?)");
+            String sql = ("INSERT INTO tabfuncionario(funcionario, rg, cpf, cargo, salario, tabContato_id_contato, tabUsuario_id_Usuario, data_admicao) VALUES(?,?,?,?,?,?,?,?)");
             stmt = Conexao.getConnection().prepareStatement(sql);      
   
                 stmt.setString(1, func.getFuncionario());  
@@ -30,16 +30,12 @@ public class FuncionarioDAO {
                 stmt.setString(6, (String.valueOf(func.getIdContato())));
                 stmt.setString(7, (String.valueOf(func.getIdUsuario())));
                 stmt.setString(8, func.getDataAdmicao());
-                stmt.setString(9, func.getCtps());
-                stmt.setString(10, func.getSerieCtps());
-                stmt.setString(11, func.getNumCtps());
-                stmt.setString(12, func.getUfCtps());
                               
                 stmt.executeUpdate();
                 stmt.close();  
 
             } catch (SQLException ex) {      
-                Logger.getLogger(FuncionarioDAO.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(ClienteDAO.class.getName()).log(Level.SEVERE, null, ex);
                 throw new RuntimeException("Erro ao Cadastrar Cliente: ",ex);       
             }
     }
@@ -63,7 +59,7 @@ public class FuncionarioDAO {
             stmt.close();
             
         } catch (SQLException ex) {      
-            Logger.getLogger(FuncionarioDAO.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ClienteDAO.class.getName()).log(Level.SEVERE, null, ex);
             throw new RuntimeException("Erro ao excluir os dados do Cliente: ", ex);    
         }    
         return f.getIdContato();
@@ -93,10 +89,6 @@ public class FuncionarioDAO {
                 f.setIdContato(Integer.parseInt(rs.getString("tabContato_id_contato")));
                 f.setIdUsuario(Integer.parseInt(rs.getString("tabUsuario_id_usuario")));
                 f.setDataAdmicao(rs.getString("data_admicao"));
-                f.setCtps(rs.getString("ctps"));
-                f.setSerieCtps(rs.getString("serie"));
-                f.setNumCtps(rs.getString("numeroCtps"));
-                f.setUfCtps(rs.getString("uf"));
                 f.setId(id);
                 funcionario.add(f);                
             }            
@@ -137,20 +129,16 @@ public class FuncionarioDAO {
                     "', cpf='"+func.getCpf()+
                     "', cargo='"+func.getCargo()+
                     "', salario='"+func.getSalario()+
-                    "', tabContato_id_contato='"+func.getIdContato()+
-                    "', tabUsuario_id_Usuario='"+func.getIdUsuario()+
-                    "', data_admicao='"+func.getDataAdmicao()+
-                    "', ctps='"+func.getCtps()+
-                    "', serie='"+func.getSerieCtps()+
-                    "', numeroCtps='"+func.getNumCtps()+
-                    "', uf='"+func.getUfCtps()+
+                    "', tabContato_id_contato'"+func.getIdContato()+
+                    "', tabUsuario_id_Usuario'"+func.getIdUsuario()+
+                    "', data_admicao'"+func.getDataAdmicao()+
                     "' where idfuncionario = '"+ id + "';");
             stmt = Conexao.getConnection().prepareStatement(sql);                              
             stmt.executeUpdate();
             stmt.close();
 
         } catch (SQLException ex) {      
-            Logger.getLogger(FuncionarioDAO.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ClienteDAO.class.getName()).log(Level.SEVERE, null, ex);
             throw new RuntimeException("Erro ao Alterar os dados do Fucionario: ",ex);    
         }
     }
@@ -171,8 +159,7 @@ public class FuncionarioDAO {
             while(rs.next()){
                 Funcionario f = new Funcionario();
                 
-                f.setId(rs.getInt("idfuncionario"));
-                f.setFuncionario(rs.getString("funcionario"));
+                f.setFuncionario(String.valueOf(rs.getInt("funcionario")));
                 f.setRg((rs.getString("rg")));
                 f.setCpf(rs.getString("cpf"));
                 f.setCargo(rs.getString("cargo"));
@@ -180,10 +167,6 @@ public class FuncionarioDAO {
                 f.setIdContato(Integer.parseInt(rs.getString("tabContato_id_contato")));
                 f.setIdUsuario(Integer.parseInt(rs.getString("tabUsuario_id_usuario")));
                 f.setDataAdmicao(String.valueOf(rs.getString("data_admicao")));
-                f.setCtps(String.valueOf(rs.getString("ctps")));
-                f.setSerieCtps(String.valueOf(rs.getString("serie")));
-                f.setNumCtps(String.valueOf(rs.getString("numeroCtps")));
-                f.setUfCtps(String.valueOf(rs.getString("uf")));
                 
                 //c.setTel(rs.getString("telefone"));
                 //c.setEmail(rs.getString("email"));

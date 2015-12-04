@@ -5,9 +5,6 @@
  */
 package atributos;
 
-import java.sql.Time;
-import java.util.Date;
-
 /**
  *
  * @author Vinicius
@@ -16,9 +13,9 @@ public class RotinaContatos {
     int idRotinaContato;
     int idCliente;
     int idUsuario;
-    Date dataRotinaContato;
+    String dataRotinaContato;
     String Cliente;
-    Time horaRotinaContato;
+    String horaRotinaContato;
     String descricaoRotina;
 
     public int getIdUsuario() {
@@ -53,19 +50,19 @@ public class RotinaContatos {
         this.idRotinaContato = idRotinaContato;
     }
 
-    public Date getDataRotinaContato() {
+    public String getDataRotinaContato() {
         return dataRotinaContato;
     }
 
-    public void setDataRotinaContato(Date dataRotinaContato) {
+    public void setDataRotinaContato(String dataRotinaContato) {
         this.dataRotinaContato = dataRotinaContato;
     }
 
-    public Time getHoraRotinaContato() {
+    public String getHoraRotinaContato() {
         return horaRotinaContato;
     }
 
-    public void setHoraRotinaContato(Time horaRotinaContato) {
+    public void setHoraRotinaContato(String horaRotinaContato) {
         this.horaRotinaContato = horaRotinaContato;
     }
 

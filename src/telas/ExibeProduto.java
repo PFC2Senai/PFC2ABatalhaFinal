@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package telas;
 
 import atributos.Produto;
@@ -17,11 +12,11 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.ListSelectionModel;
-import javax.swing.table.DefaultTableModel;
 
 /**
  *
  * @author graciele
+ * http://www.informaticon.com.br/j/index.php/java-se-i-estoque.html
  */
 public class ExibeProduto extends javax.swing.JFrame {
     
@@ -34,10 +29,10 @@ public class ExibeProduto extends javax.swing.JFrame {
      */
     public ExibeProduto() {
         initComponents();
-        TabelaProduto("select * from tabproduto;");
+        TabelaProduto("SELECT * FROM tabproduto;");
     }
     
-    public static int GetIndice() {         
+    public static int GetIndiceProduto() {         
         return indice;
     }
     
@@ -46,17 +41,18 @@ public class ExibeProduto extends javax.swing.JFrame {
         try {
             stmt = getConnection().createStatement();
             ArrayList dados = new ArrayList();               
-            String [] Colunas = {"Código do Produto","Código do Usuário", "Produto"};
+            String [] Colunas = {"Código", "Produto"};
                
             ResultSet rs;
             rs = stmt.executeQuery(Sql);            
             //rs.first();
             
             while(rs.next()){
-               dados.add(new Object[]{rs.getObject("id_prod"),rs.getObject("tabusuario_id_usuario"),rs.getObject("produto")});            
+               dados.add(new Object[]{rs.getObject("id_prod"),
+                                      rs.getObject("produto")});            
             }
                         
-            for (int i = 0; i < 3; i++){
+            for (int i = 0; i < 2; i++){
                 ModeloTabela modelo = new ModeloTabela(dados, Colunas);
                 jTableListarProdutos.setModel(modelo);
                 jTableListarProdutos.getColumnModel().getColumn(i).setPreferredWidth(150);
@@ -87,9 +83,6 @@ public class ExibeProduto extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTableListarProdutos = new javax.swing.JTable();
-        jLabel2 = new javax.swing.JLabel();
-        jTextBuscaNome = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -126,55 +119,41 @@ public class ExibeProduto extends javax.swing.JFrame {
 
         jTableListarProdutos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {},
-                {},
-                {},
-                {}
+
             },
             new String [] {
 
             }
         ));
-        jScrollPane2.setViewportView(jTableListarProdutos);
-
-        jLabel2.setText("Buscar pelo nome:");
-
-        jButton1.setText("Buscar");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+        jTableListarProdutos.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTableListarProdutosMouseClicked(evt);
             }
         });
+        jScrollPane2.setViewportView(jTableListarProdutos);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(35, 35, 35)
-                .addComponent(jButton3)
-                .addGap(57, 57, 57)
-                .addComponent(jButton5)
-                .addGap(67, 67, 67)
-                .addComponent(jButton6)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton7)
-                .addGap(55, 55, 55))
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(153, 153, 153)
-                        .addComponent(jLabel1))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(26, 26, 26)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel2)
-                                .addGap(18, 18, 18)
-                                .addComponent(jTextBuscaNome, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jButton1))
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 479, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGap(35, 35, 35)
+                        .addComponent(jButton3)
+                        .addGap(57, 57, 57)
+                        .addComponent(jButton5)
+                        .addGap(67, 67, 67)
+                        .addComponent(jButton6)
+                        .addGap(247, 247, 247)
+                        .addComponent(jButton7))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createSequentialGroup()
+                            .addGap(26, 26, 26)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 622, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(layout.createSequentialGroup()
+                            .addGap(221, 221, 221)
+                            .addComponent(jLabel1))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -182,13 +161,8 @@ public class ExibeProduto extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1)
-                .addGap(19, 19, 19)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(jTextBuscaNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 240, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton3)
@@ -224,45 +198,30 @@ public class ExibeProduto extends javax.swing.JFrame {
 
             int cod = ProdutoDAO.idProduto(produto.getIdProduto());
             ProdutoDAO.ExcluirProduto(cod);
-            //            ContatosDAO.ExcluirEndereco(codContato);
-            //            ContatosDAO.ExcluirTel(codContato);
-            //            ContatosDAO.ExcluirEmail(codContato);
         } else {
             JOptionPane.showMessageDialog(null, "Primeiro selecione um registro.");
         }
-        TabelaProduto("select  * from tabproduto;");
+        TabelaProduto("SELECT * FROM vw_produtos;");
     }//GEN-LAST:event_jButton6ActionPerformed
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
         this.dispose();
     }//GEN-LAST:event_jButton7ActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        String nome = this.jTextBuscaNome.getText().toString();
-        ProdutoDAO prod = new ProdutoDAO();
-        ResultSet rs = prod.SelecionarProduto(nome);
-        DefaultTableModel dfmbuscar = new DefaultTableModel();
-        this.jTableListarProdutos.setModel(dfmbuscar);
-        dfmbuscar.setColumnIdentifiers(new Object[]{"Código do Produto", "Código do Usuário", "Produto"});
-        try{
-            while(rs.next()){
-                dfmbuscar.addRow(new Object[]{rs.getObject("id_prod"),rs.getObject("tabusuario_id_usuario"),rs.getObject("produto")});
-            }
-        }catch(Exception ex){
-            
-        }
-    }//GEN-LAST:event_jButton1ActionPerformed
+    private void jTableListarProdutosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableListarProdutosMouseClicked
+
+        int linha = jTableListarProdutos.getSelectedRow();
+        indice = (Integer.parseInt(jTableListarProdutos.getValueAt(linha, 0).toString()));
+        new ExibeProdutos().setVisible(true);
+    }//GEN-LAST:event_jTableListarProdutosMouseClicked
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton7;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTableListarProdutos;
-    private javax.swing.JTextField jTextBuscaNome;
     // End of variables declaration//GEN-END:variables
 }
