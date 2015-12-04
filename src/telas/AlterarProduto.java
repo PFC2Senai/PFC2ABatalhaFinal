@@ -9,7 +9,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
-import static telas.ExibeProduto.GetIndice;
+import static telas.ExibeProduto.GetIndiceProduto;
 
 /**
  *
@@ -35,7 +35,7 @@ public class AlterarProduto extends javax.swing.JFrame {
     private void CarregaProduto() {
         
         ArrayList<Produto> produto = new ArrayList<Produto>();
-        produto = ProdutoDAO.CarregaProduto(GetIndice());
+        produto = ProdutoDAO.CarregaProduto(GetIndiceProduto());
         
         for (Produto prod : produto) {
             jTextProduto.setText(prod.getProduto());
@@ -280,7 +280,7 @@ public class AlterarProduto extends javax.swing.JFrame {
         prod.setQuantidade(Integer.parseInt(txtQuantidade.getText()));
         prod.setPrecoEntrada(Float.parseFloat(txtPrecoEntrada.getText()));
         prod.setPrecoSaida(Float.parseFloat(txtPrecoSaida.getText()));
-        ProdutoDAO.UpdateProduto(prod, GetIndice());
+        ProdutoDAO.UpdateProduto(prod, GetIndiceProduto());
         this.dispose();
         new ExibeProduto().setVisible(true);
     }//GEN-LAST:event_jBtnAlterarProdutoActionPerformed

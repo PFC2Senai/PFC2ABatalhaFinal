@@ -29,10 +29,10 @@ public class ExibeProduto extends javax.swing.JFrame {
      */
     public ExibeProduto() {
         initComponents();
-        TabelaProduto("SELECT * FROM vw_produtos;");
+        TabelaProduto("SELECT * FROM tabproduto;");
     }
     
-    public static int GetIndice() {         
+    public static int GetIndiceProduto() {         
         return indice;
     }
     
@@ -209,14 +209,10 @@ public class ExibeProduto extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton7ActionPerformed
 
     private void jTableListarProdutosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableListarProdutosMouseClicked
-        if(jTableListarProdutos.getSelectedRow() != -1){
-          //  this.dispose();
-            int linha = jTableListarProdutos.getSelectedRow();
-            indice = (Integer.parseInt(jTableListarProdutos.getValueAt(linha, 0).toString()));
-            new ExibeProdutos().setVisible(true);
-        }else{
-            JOptionPane.showMessageDialog(null, "Primeiro selecione um registro.");
-        }
+
+        int linha = jTableListarProdutos.getSelectedRow();
+        indice = (Integer.parseInt(jTableListarProdutos.getValueAt(linha, 0).toString()));
+        new ExibeProdutos().setVisible(true);
     }//GEN-LAST:event_jTableListarProdutosMouseClicked
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

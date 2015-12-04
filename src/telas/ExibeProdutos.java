@@ -1,16 +1,18 @@
 package telas;
 
 import atributos.Produto;
+import funcoes.Conexao;
 import static funcoes.Conexao.getConnection;
 import funcoes.ModeloTabela;
+import funcoes.ProdutoDAO;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JOptionPane;
 import javax.swing.ListSelectionModel;
+import static telas.ExibeProduto.GetIndiceProduto;
 
 /**
  *
@@ -29,7 +31,7 @@ public class ExibeProdutos extends javax.swing.JFrame {
      */
     public ExibeProdutos() {
         initComponents();
-        TabelaProduto("SELECT * FROM vw_produtos WHERE = id_prod = " + indice + ";");
+        TabelaProduto("SELECT * FROM vw_produtos WHERE id_prod = " + GetIndiceProduto() + ";");
     }
 
     
@@ -75,6 +77,8 @@ public class ExibeProdutos extends javax.swing.JFrame {
         jBtnCalcular = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
+        jLabel13 = new javax.swing.JLabel();
+        codigoProdutoTabela = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -127,13 +131,24 @@ public class ExibeProdutos extends javax.swing.JFrame {
 
         jLabel10.setText("Estoque Atual:");
 
+        txtQuantEstoque.setEnabled(false);
+
         jLabel12.setText("Buscar:");
 
         jBtnCalcular.setText("Calcular");
+        jBtnCalcular.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnCalcularActionPerformed(evt);
+            }
+        });
 
         jButton2.setText("Atualizar");
 
         jButton3.setText("Cancelar");
+
+        jLabel13.setText("Código:");
+
+        codigoProdutoTabela.setText("codigo");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -165,7 +180,13 @@ public class ExibeProdutos extends javax.swing.JFrame {
                         .addComponent(jButton1)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jScrollPane2)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jLabel13)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(codigoProdutoTabela, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(16, 16, 16))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(jPanel1Layout.createSequentialGroup()
@@ -204,13 +225,16 @@ public class ExibeProdutos extends javax.swing.JFrame {
                                 .addComponent(jLabel12)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addGap(34, 34, 34))
+                .addGap(85, 85, 85))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(jLabel13)
+                    .addComponent(codigoProdutoTabela))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
@@ -247,7 +271,7 @@ public class ExibeProdutos extends javax.swing.JFrame {
                         .addComponent(txtQuantMinima, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jLabel10)
                         .addComponent(txtQuantEstoque, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton2)
                     .addComponent(jButton3))
@@ -255,14 +279,14 @@ public class ExibeProdutos extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel12)
                     .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(30, 30, 30)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 316, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 336, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton1)
-                .addContainerGap())
+                .addGap(52, 52, 52))
         );
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 790, 650));
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 810, 670));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -271,11 +295,18 @@ public class ExibeProdutos extends javax.swing.JFrame {
 
         int linha = jTableListarProdutos.getSelectedRow();
         indice = (Integer.parseInt(jTableListarProdutos.getValueAt(linha, 0).toString()));
-        CarregarDadosProduto("SELECT * FROM vw_produtos WHERE = id_prod = " + indice + ";");
+        CarregarDadosProduto();
     }//GEN-LAST:event_jTableListarProdutosMouseClicked
 
-    
-    public void TabelaProduto(String Sql){
+    private void jBtnCalcularActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnCalcularActionPerformed
+        float percentual = Float.parseFloat(txtPercentual.getText());
+        double precoEntrada = Double.parseDouble(txtPrecoEntrada.getText());
+        double resultado = (precoEntrada*percentual)/100;
+        
+        txtPrecoSaida.setText(String.valueOf(precoEntrada + resultado));
+    }//GEN-LAST:event_jBtnCalcularActionPerformed
+   
+    public void TabelaProduto(String Sql) {
         
         try {
             stmt = getConnection().createStatement();
@@ -314,33 +345,41 @@ public class ExibeProdutos extends javax.swing.JFrame {
         }
     }
 
-    public void CarregarDadosProduto(String Sql){
+    public void CarregarDadosProduto(){
         
-        try {
-            stmt = getConnection().createStatement();
-          //  ArrayList dados = new ArrayList();               
-           
-            ResultSet rs;
-            rs = stmt.executeQuery(Sql);            
-            //rs.first();
+        Statement stmt;
+        ArrayList<Produto> produto = new ArrayList<Produto>();
+        
+        try {            
+            String Sql = "SELECT * FROM vw_produtos WHERE tabproduto_id_prod = " + indice + ";";
+            
+            ResultSet rs;            
+            stmt = Conexao.getConnection().createStatement();            
+            rs = stmt.executeQuery(Sql); 
             
             while(rs.next()){
-               txtFornecedor.setText(String.valueOf(new Object[]{rs.getString("fornecedor")}));
-               txtModelo.setText(String.valueOf(new Object[]{rs.getString("modelo")}));
-               txtPrecoEntrada.setText(String.valueOf(new Object[]{rs.getDouble("precoEntrada")}));
-               txtPrecoSaida.setText(String.valueOf(new Object[]{rs.getDouble("precoSaida")}));
-               txtProduto.setText(String.valueOf(new Object[]{rs.getString("produto")}));
-               txtFabricante.setText(String.valueOf(new Object[]{rs.getString("fabricante")}));
-               txtQuantEstoque.setText(String.valueOf(new Object[]{rs.getString("quantidade")}));
-               txtQuantMinima.setText(String.valueOf(new Object[]{rs.getString("quantidadeMinima")}));        
-            }
-           
-        } catch (SQLException ex) {
-            Logger.getLogger(ExibeProduto.class.getName()).log(Level.SEVERE, null, ex);
-        }
+                
+                codigoProdutoTabela.setText(String.valueOf(rs.getInt("id_prod")));
+                txtProduto.setText(rs.getString("produto"));
+                txtFornecedor.setText(rs.getString("fornecedor"));
+                txtQuantidade.setText(String.valueOf(rs.getInt("quantidade")));
+                txtPrecoEntrada.setText(String.valueOf(rs.getDouble("precoEntrada")));
+                txtPrecoSaida.setText(String.valueOf(rs.getDouble("precoSaida")));
+                txtQuantMinima.setText(String.valueOf(rs.getInt("quantidadeMinima")));
+                txtModelo.setText(rs.getString("modelo"));
+                txtFabricante.setText(rs.getString("fabricante"));              
+            }            
+            rs.close();
+            stmt.close();
+            
+        } catch (SQLException ex) {      
+            Logger.getLogger(ProdutoDAO.class.getName()).log(Level.SEVERE, null, ex);
+            throw new RuntimeException("Erro ao carregar os dados do Produto: ", ex);    
+        }        
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel codigoProdutoTabela;
     private javax.swing.JButton jBtnCalcular;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
@@ -349,6 +388,7 @@ public class ExibeProdutos extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
