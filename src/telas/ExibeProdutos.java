@@ -345,7 +345,7 @@ public class ExibeProdutos extends javax.swing.JFrame {
         }
     }
 
-    public void CarregarDadosProduto(){
+    public void CarregarDadosProduto() {
         
         Statement stmt;
         ArrayList<Produto> produto = new ArrayList<Produto>();
