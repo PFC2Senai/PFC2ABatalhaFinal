@@ -17,7 +17,6 @@ import javax.swing.JOptionPane;
 public class CadastrarCliente extends javax.swing.JFrame {
 
     private PreparedStatement pst;
-    int posicao = 10;
     ArrayList<String> telefones = new ArrayList<String>();
     private int codSetor;
     
@@ -50,7 +49,6 @@ public class CadastrarCliente extends javax.swing.JFrame {
         txtContato = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
         txtEmail = new javax.swing.JTextField();
-        lblCodigo = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         txtBairro = new javax.swing.JTextField();
@@ -224,11 +222,8 @@ public class CadastrarCliente extends javax.swing.JFrame {
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel1)
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addGap(116, 116, 116)
-                                        .addComponent(lblCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addComponent(jLabel8))
-                                .addGap(0, 0, Short.MAX_VALUE))
+                                .addGap(0, 354, Short.MAX_VALUE))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel14)
                                 .addGap(33, 33, 33)
@@ -244,9 +239,7 @@ public class CadastrarCliente extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(24, 24, 24)
                 .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lblCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(34, 34, 34)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(txtEmpresa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -335,7 +328,6 @@ public class CadastrarCliente extends javax.swing.JFrame {
 
         cli.setEmpresa(txtEmpresa.getText());
         cli.setCnpj(txtCnpj.getText());
-        cli.setContato(txtContato.getText());
         cli.setCodSetor(codSetor);
         cli.setEmail(txtEmail.getText());
 
@@ -414,8 +406,8 @@ public class CadastrarCliente extends javax.swing.JFrame {
         txtCnpj.setText("");
         txtContato.setText("");
         jComboBoxSetores.setSelectedIndex(0);
-        txtTel01.setText("");
-        txtTelCel.setText("");
+        txtTel01.setText(null);
+        txtTelCel.setText(null);
         txtEmail.setText("");
         txtPais.setText("");
         txtCidade.setText("");
@@ -450,7 +442,6 @@ public class CadastrarCliente extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel labelCodSetor;
-    private javax.swing.JLabel lblCodigo;
     private javax.swing.JTextField txtBairro;
     private javax.swing.JFormattedTextField txtCep;
     private javax.swing.JTextField txtCidade;

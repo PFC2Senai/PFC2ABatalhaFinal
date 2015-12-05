@@ -18,7 +18,7 @@ public class ClienteDAO {
                
         PreparedStatement stmt;
         try {   
-            String sql = ("INSERT INTO tabcliente(tabusuario_id_usuario, tabContato_id_contato,empresa,cnpj,tabSetor_idtabSetor,contato)  VALUES(?,?,?,?,?,?)");
+            String sql = ("INSERT INTO tabcliente(tabusuario_id_usuario, tabContato_id_contato,empresa,cnpj,tabSetor_idtabSetor)  VALUES(?,?,?,?,?)");
             stmt = Conexao.getConnection().prepareStatement(sql);      
   
                 stmt.setInt(1, 1);
@@ -26,7 +26,6 @@ public class ClienteDAO {
                 stmt.setString(3, cli.getEmpresa());
                 stmt.setString(4, cli.getCnpj());
                 stmt.setInt(5, cli.getCodSetor());
-                stmt.setString(6, cli.getContato());
                              
                 stmt.executeUpdate();
                 stmt.close();  
@@ -64,7 +63,6 @@ public class ClienteDAO {
                 c.setId(rs.getInt("idcliente"));
                 c.setEmpresa((rs.getString("empresa")));
                 c.setCnpj(rs.getString("cnpj"));
-                c.setContato(rs.getString("contato"));
                 c.setCodSetor(rs.getInt("tabSetor_idtabSetor"));  
                 c.setSetor(rs.getString("setor"));
                 c.setEmail(rs.getString("email"));
@@ -131,7 +129,7 @@ public class ClienteDAO {
         try {   
             String sql = ("UPDATE tabcliente SET empresa='" + cli.getEmpresa() 
                         + "' , cnpj='"+ cli.getCnpj() +"', tabSetor_idtabSetor='"+cli.getCodSetor()
-                        +"', contato='"+cli.getContato()+"' where idCliente = '" + id + "';");
+                        +"' where idCliente = '" + id + "';");
             
             stmt = Conexao.getConnection().prepareStatement(sql);                             
             stmt.executeUpdate();
@@ -169,9 +167,7 @@ public class ClienteDAO {
                 c.setId(rs.getInt("idcliente"));
                 c.setEmpresa((rs.getString("empresa")));
                 c.setCnpj(rs.getString("cnpj"));
-                c.setContato(rs.getString("contato"));
-                c.setCodSetor(rs.getInt("setor"));                 
-             //   c.setTel(rs.getString("telefone"));
+                c.setCodSetor(rs.getInt("setor"));
                 c.setEmail(rs.getString("email"));               
                 clientes.add(c);                
             }

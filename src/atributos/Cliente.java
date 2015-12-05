@@ -10,7 +10,6 @@ public class Cliente {
     private int idContato;
     private String empresa;
     private String cnpj;
-    private String contato;
     private String email;
     private int codSetor;
     private String setor;
@@ -72,19 +71,6 @@ public class Cliente {
         String format = format(this.cnpj = cnpj);
     }
 
-    /**
-     * @return the contato
-     */
-    public String getContato() {
-        return contato;
-    }
-
-    /**
-     * @param contato the contato to set
-     */
-    public void setContato(String contato) {
-        this.contato = contato;
-    }
 
     /**
      * @return the email

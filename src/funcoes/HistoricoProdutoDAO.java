@@ -89,7 +89,7 @@ public class HistoricoProdutoDAO {
             stmt.close();
 
         } catch (SQLException ex) {      
-            Logger.getLogger(PessoaContatoDAO.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(HistoricoProdutoDAO.class.getName()).log(Level.SEVERE, null, ex);
             throw new RuntimeException("Erro ao excluir o historico de produto: ",ex);    
         }
     }
@@ -108,12 +108,12 @@ public class HistoricoProdutoDAO {
             stmt.close();
 
         } catch (SQLException ex) {      
-            Logger.getLogger(PessoaContatoDAO.class.getName()).log(Level.SEVERE, null, ex);
-            throw new RuntimeException("Erro ao Alterar o setor: ",ex);    
+            Logger.getLogger(HistoricoProdutoDAO.class.getName()).log(Level.SEVERE, null, ex);
+            throw new RuntimeException("Erro ao Alterar o historico do produto: ",ex);    
         }
     }
     
-    public static ArrayList<HistoricoProduto> ListarSetor(){
+    public static ArrayList<HistoricoProduto> ListarHistProduto(){
         
         Statement stmt;
         ArrayList<HistoricoProduto> historicoProd = new ArrayList<HistoricoProduto>();
@@ -141,7 +141,7 @@ public class HistoricoProdutoDAO {
             
         } catch (SQLException ex) {      
             Logger.getLogger(HistoricoProdutoDAO.class.getName()).log(Level.SEVERE, null, ex);
-            throw new RuntimeException("Erro ao carregar o historico do produto: ", ex);    
+            throw new RuntimeException("Erro ao listar os historicos do produto: ", ex);    
         }    
         return historicoProd;
     }

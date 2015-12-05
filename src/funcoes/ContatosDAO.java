@@ -273,8 +273,7 @@ public class ContatosDAO {
             stmt = Conexao.getConnection().createStatement();            
             rs = stmt.executeQuery(Sql); 
             
-            while(rs.next()){
-                
+            while(rs.next()) {                
                 telefones.add(rs.getString("telefone"));                               
             }
             

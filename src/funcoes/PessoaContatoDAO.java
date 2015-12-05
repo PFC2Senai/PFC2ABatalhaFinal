@@ -100,7 +100,7 @@ public class PessoaContatoDAO {
 
         } catch (SQLException ex) {      
             Logger.getLogger(PessoaContatoDAO.class.getName()).log(Level.SEVERE, null, ex);
-            throw new RuntimeException("Erro ao Alterar o setor: ",ex);    
+            throw new RuntimeException("Erro ao Alterar a pessoa contato: ",ex);    
         }
     }
     

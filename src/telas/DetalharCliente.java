@@ -59,16 +59,15 @@ public class DetalharCliente extends javax.swing.JFrame {
         telefone = ContatosDAO.CarregaTelefones(idContato);
 
         for (int i = 0; i < telefone.size(); i++) {
-            
-            txtTel.setText(telefone.get(0));
-            txtTelCel.setText(telefone.get(1));
+            txtTel.setText(telefone.get(0));  
+            txtTelCel.setText(telefone.get(1));            
         }
                
         for (Cliente cli : cliente) {
             lblCodigo.setText(String.valueOf(cli.getId()));
             txtEmpresa.setText(cli.getEmpresa());
             txtCnpj.setText(cli.getCnpj());
-            txtContato.setText(cli.getContato());
+          //  txtContato.setText(cli.getContato());
             txtSetor.setText(cli.getSetor());
             txtEmail.setText(cli.getEmail());
             idContato = cli.getIdContato();
@@ -555,7 +554,7 @@ public class DetalharCliente extends javax.swing.JFrame {
         Cliente cli = new Cliente();
         cli.setEmpresa(txtEmpresa.getText());
         cli.setCnpj(txtCnpj.getText());
-        cli.setContato(txtContato.getText());
+//        cli.setContato(txtContato.getText());
         cli.setCodSetor(Integer.parseInt(labelCodSetor.getText()));
         cli.setEmail(txtEmail.getText());
         cli.setIdContato(idContato);
