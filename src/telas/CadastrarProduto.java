@@ -62,7 +62,6 @@ public class CadastrarProduto extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         jLabel9 = new javax.swing.JLabel();
         txtPrecoSaida = new javax.swing.JTextField();
@@ -100,16 +99,13 @@ public class CadastrarProduto extends javax.swing.JFrame {
         jLabel1.setText("Cadastrar Produto");
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(25, 27, -1, -1));
 
-        jLabel4.setText("Produto:");
-        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(25, 79, -1, -1));
-
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel9.setText("Percentual:");
         jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 264, -1, 20));
         jPanel1.add(txtPrecoSaida, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 260, 110, -1));
 
-        jLabel8.setText("Preço de Saída:");
+        jLabel8.setText("Valor de Saída:");
         jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 260, -1, 20));
         jPanel1.add(txtPercentual, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 260, 120, 20));
 
@@ -208,7 +204,7 @@ public class CadastrarProduto extends javax.swing.JFrame {
         });
         jPanel1.add(jBtnCancelarCadProduto, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 110, -1, -1));
 
-        jLabel7.setText("Preço de Entrada:");
+        jLabel7.setText("Valor de Entrada:");
         jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 270, -1, -1));
         jPanel1.add(txtPrecoEntrada, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 260, 130, -1));
 
@@ -223,7 +219,7 @@ public class CadastrarProduto extends javax.swing.JFrame {
         });
         jPanel1.add(jComboBoxFabricante, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 170, 260, 20));
 
-        jLabel10.setText("Produto:");
+        jLabel10.setText("Peça:");
         jPanel1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 80, -1, -1));
 
         jLabel12.setText("Data:");
@@ -339,12 +335,11 @@ public class CadastrarProduto extends javax.swing.JFrame {
             pst = conexao.prepareStatement(sql);
             rs = pst.executeQuery();
             
-            while(rs.next())
-            {
+            while(rs.next()) {
                 jComboBoxProdutos.addItem(rs.getString("produto"));
             }
-        }catch(SQLException ex)
-        {
+            
+        }catch(SQLException ex) {
             JOptionPane.showMessageDialog(null, ex);
         }
     }
@@ -359,12 +354,11 @@ public class CadastrarProduto extends javax.swing.JFrame {
             pst = conexao.prepareStatement(sql);
             rs = pst.executeQuery();
             
-            while(rs.next())
-            {
+            while(rs.next()) {
                 codProduto = (rs.getInt("id_prod"));
             }
-        }catch(SQLException ex)
-        {
+            
+        }catch(SQLException ex) {
             JOptionPane.showMessageDialog(null, ex);
         }
     }
@@ -379,12 +373,11 @@ public class CadastrarProduto extends javax.swing.JFrame {
             pst = conexao.prepareStatement(sql);
             rs = pst.executeQuery();
             
-            while(rs.next())
-            {
+            while(rs.next()) {
                 jComboBoxFornecedor.addItem(rs.getString("fornecedor"));
             }
-        }catch(SQLException ex)
-        {
+            
+        }catch(SQLException ex) {
             JOptionPane.showMessageDialog(null, ex);
         }
     }
@@ -399,12 +392,11 @@ public class CadastrarProduto extends javax.swing.JFrame {
             pst = conexao.prepareStatement(sql);
             rs = pst.executeQuery();
             
-            while(rs.next())
-            {
+            while(rs.next()) {
                 codFornecedor = (rs.getInt("id_forn"));
             }
-        }catch(SQLException ex)
-        {
+            
+        }catch(SQLException ex) {
             JOptionPane.showMessageDialog(null, ex);
         }
     }
@@ -419,12 +411,11 @@ public class CadastrarProduto extends javax.swing.JFrame {
             pst = conexao.prepareStatement(sql);
             rs = pst.executeQuery();
             
-            while(rs.next())
-            {
+            while(rs.next()) {
                 jComboBoxFabricante.addItem(rs.getString("fabricante"));
             }
-        }catch(SQLException ex)
-        {
+            
+        }catch(SQLException ex) {
             JOptionPane.showMessageDialog(null, ex);
         }
     }
@@ -439,12 +430,11 @@ public class CadastrarProduto extends javax.swing.JFrame {
             pst = conexao.prepareStatement(sql);
             rs = pst.executeQuery();
             
-            while(rs.next())
-            {
+            while(rs.next()) {
                 codFabricante = (rs.getInt("idtabFabricante"));
             }
-        }catch(SQLException ex)
-        {
+            
+        }catch(SQLException ex) {
             JOptionPane.showMessageDialog(null, ex);
         }
     }
@@ -459,12 +449,11 @@ public class CadastrarProduto extends javax.swing.JFrame {
             pst = conexao.prepareStatement(sql);
             rs = pst.executeQuery();
             
-            while(rs.next())
-            {
+            while(rs.next()) {
                 jComboBoxModelo.addItem(rs.getString("modelo"));
             }
-        }catch(SQLException ex)
-        {
+            
+        }catch(SQLException ex) {
             JOptionPane.showMessageDialog(null, ex);
         }
     }
@@ -479,12 +468,11 @@ public class CadastrarProduto extends javax.swing.JFrame {
             pst = conexao.prepareStatement(sql);
             rs = pst.executeQuery();
             
-            while(rs.next())
-            {
+            while(rs.next()) {
                 codModelo = (rs.getInt("idtabModelo"));
             }
-        }catch(SQLException ex)
-        {
+            
+        }catch(SQLException ex) {
             JOptionPane.showMessageDialog(null, ex);
         }
     }
@@ -507,7 +495,6 @@ public class CadastrarProduto extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;

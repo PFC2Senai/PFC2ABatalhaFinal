@@ -1,11 +1,16 @@
 package telas;
 
 import atributos.Equipamento;
+import static funcoes.Conexao.getConnection;
 import funcoes.EquipamentoDAO;
+import funcoes.ModeloTabela;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -23,10 +28,8 @@ public class ExibeEquipamento extends javax.swing.JFrame {
      */
     public ExibeEquipamento() {
         initComponents();
-        TabelaEquipamento();
+        TabelaEquipamento("SELECT * FROM vw_equipamentos; ");
         DesabilitaCampos();
-        jBtnCancelarCadastro.setVisible(false);
-        jBtnCadEquipamento.setVisible(false);
         jBtnEditar.setEnabled(false);       
     }
 
@@ -45,12 +48,10 @@ public class ExibeEquipamento extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         txtEquipamento = new javax.swing.JTextField();
         jBtnNovo = new javax.swing.JButton();
-        jBtnCadEquipamento = new javax.swing.JButton();
         jBtnEditar = new javax.swing.JButton();
         jBtnExcluirEquipamento = new javax.swing.JButton();
         jBtnSalvar = new javax.swing.JButton();
         jBtnCancelar = new javax.swing.JButton();
-        jBtnCancelarCadastro = new javax.swing.JButton();
         jBtnSair = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -90,14 +91,7 @@ public class ExibeEquipamento extends javax.swing.JFrame {
             }
         });
 
-        jBtnCadEquipamento.setText("Cadastrar");
-        jBtnCadEquipamento.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jBtnCadEquipamentoActionPerformed(evt);
-            }
-        });
-
-        jBtnEditar.setText("Editar");
+        jBtnEditar.setText("Detalhar Equipamento");
         jBtnEditar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jBtnEditarActionPerformed(evt);
@@ -125,13 +119,6 @@ public class ExibeEquipamento extends javax.swing.JFrame {
             }
         });
 
-        jBtnCancelarCadastro.setText("Cancelar");
-        jBtnCancelarCadastro.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jBtnCancelarCadastroActionPerformed(evt);
-            }
-        });
-
         jBtnSair.setText("Sair");
         jBtnSair.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -144,97 +131,121 @@ public class ExibeEquipamento extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
+                .addContainerGap(20, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jBtnEditar)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jBtnSalvar)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jBtnCancelar)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jBtnExcluirEquipamento))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                .addGap(5, 5, 5)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel1)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabel3)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(txtEquipamento)))))
+                        .addGap(341, 341, 341))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jBtnNovo)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jBtnCadEquipamento))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jBtnEditar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jBtnSalvar)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 8, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jBtnCancelarCadastro)
-                        .addGap(245, 245, 245))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jBtnCancelar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jBtnExcluirEquipamento)
-                        .addContainerGap())))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jBtnSair)
-                .addContainerGap())
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addContainerGap()
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 466, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(jLabel3)
-                            .addGap(18, 18, 18)
-                            .addComponent(txtEquipamento))
-                        .addComponent(jLabel1))
-                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addContainerGap())
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jBtnSair)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 693, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(84, 84, 84)
+                .addGap(23, 23, 23)
+                .addComponent(jLabel1)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jBtnNovo)
-                    .addComponent(jBtnCadEquipamento)
-                    .addComponent(jBtnCancelarCadastro))
+                    .addComponent(jLabel3)
+                    .addComponent(txtEquipamento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(jBtnNovo)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jBtnEditar)
                     .addComponent(jBtnSalvar)
                     .addComponent(jBtnCancelar)
                     .addComponent(jBtnExcluirEquipamento))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 290, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 261, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jBtnSair)
                 .addContainerGap())
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addContainerGap()
-                    .addComponent(jLabel1)
-                    .addGap(18, 18, 18)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel3)
-                        .addComponent(txtEquipamento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 103, Short.MAX_VALUE)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(56, 56, 56)))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     
-    public void TabelaEquipamento(){
-        
-        ((DefaultTableModel) jTableListarEquipamento.getModel()).setNumRows(0);
-        jTableListarEquipamento.updateUI();
-        ArrayList<Equipamento> equipamentos = new ArrayList<Equipamento>();
-        equipamentos = EquipamentoDAO.ListarEquipamentos();
+    public void TabelaEquipamento(String Sql){
         
         try { 
             
-            DefaultTableModel dtm = (DefaultTableModel) jTableListarEquipamento.getModel();
-                   
-            for(Equipamento equipamento : equipamentos){
-                dtm.addRow(new Object[] {String.valueOf(equipamento.getIdEquipamento()),equipamento.getEquipamento()});
-            }
-                             
+            stmt = getConnection().createStatement();
+            ArrayList dados = new ArrayList();               
+            String [] Colunas = {"Código","Equipamento", "Fornecedor", "Fabricante", "Modelo"};
+               
+            ResultSet rs;
+            rs = stmt.executeQuery(Sql);            
+            //rs.first();
+            
+                while(rs.next()){
+                    dados.add(new Object[]{ rs.getObject("idDetEquipamento"),rs.getObject("equipamento"),
+                                            rs.getObject("fornecedor"),rs.getObject("fabricante"), 
+                                            rs.getObject("modelo")});            
+                }
+
+                    for (int i = 0; i < 5; i++){
+                        ModeloTabela modelo = new ModeloTabela(dados, Colunas);
+                        jTableListarEquipamento.setModel(modelo);
+                        jTableListarEquipamento.getColumnModel().getColumn(i).setPreferredWidth(150);
+                        jTableListarEquipamento.getColumnModel().getColumn(i).setResizable(false);
+                        jTableListarEquipamento.getTableHeader().setReorderingAllowed(false);
+                        jTableListarEquipamento.setAutoResizeMode(jTableListarEquipamento.AUTO_RESIZE_OFF);
+                        jTableListarEquipamento.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+                    }
+                    
+        } catch (SQLException ex) {
+            Logger.getLogger(ExibeCliente.class.getName()).log(Level.SEVERE, null, ex);
+            
         } catch (Exception erro){
-            Logger.getLogger(ExibeEquipamento.class.getName()).log(Level.SEVERE, null, erro);
-            System.out.println("erro" + erro);
-        }          
+            Logger.getLogger(ExibeCliente.class.getName()).log(Level.SEVERE, null, erro);
+        }         
     }
     
+    
+//    public void TabelaEquipamento(){
+//        
+//        ((DefaultTableModel) jTableListarEquipamento.getModel()).setNumRows(0);
+//        jTableListarEquipamento.updateUI();
+//        ArrayList<Equipamento> equipamentos = new ArrayList<Equipamento>();
+//        equipamentos = EquipamentoDAO.ListarEquipamentos();
+//        
+//        try { 
+//            
+//            DefaultTableModel dtm = (DefaultTableModel) jTableListarEquipamento.getModel();
+//                   
+//            for(Equipamento equipamento : equipamentos){
+//                dtm.addRow(new Object[] {String.valueOf(equipamento.getIdEquipamento()),equipamento.getEquipamento()});
+//            }
+//                             
+//        } catch (Exception erro){
+//            Logger.getLogger(ExibeEquipamento.class.getName()).log(Level.SEVERE, null, erro);
+//            System.out.println("erro" + erro);
+//        }          
+//    }
     
     private void jTableListarEquipamentoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableListarEquipamentoMouseClicked
                     
@@ -247,38 +258,18 @@ public class ExibeEquipamento extends javax.swing.JFrame {
     }//GEN-LAST:event_jTableListarEquipamentoMouseClicked
 
     private void jBtnNovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnNovoActionPerformed
-        jBtnEditar.setEnabled(false);
-        jTableListarEquipamento.clearSelection();
-        jTableListarEquipamento.setEnabled(false);
-        txtEquipamento.setEnabled(true);
-        txtEquipamento.setText("");
-        jBtnCadEquipamento.setVisible(true);
-        jBtnCancelarCadastro.setVisible(true);
-        jBtnNovo.setVisible(false);
+        new CadastrarEquipamento().setVisible(true);
     }//GEN-LAST:event_jBtnNovoActionPerformed
 
-    private void jBtnCadEquipamentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnCadEquipamentoActionPerformed
-
-        Equipamento equi = new Equipamento();
-        equi.setTabusuarioIdUsuario(1);
-        equi.setEquipamento(txtEquipamento.getText());
-        EquipamentoDAO.CadEquipamento(equi);
-        limparCampos();
-        TabelaEquipamento();
-        jBtnCadEquipamento.setVisible(false);
-        jBtnNovo.setVisible(true);            
-        txtEquipamento.setEnabled(false);
-        jBtnCancelarCadastro.setVisible(false);
-        jBtnEditar.setEnabled(false);
-        jTableListarEquipamento.setEnabled(true);
-    }//GEN-LAST:event_jBtnCadEquipamentoActionPerformed
-
     private void jBtnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnEditarActionPerformed
-   // if (jTableListarEquipamento.getSelectedRow() != -1) {
-        jBtnCancelar.setVisible(true);
-        jBtnSalvar.setVisible(true);
-        jBtnEditar.setVisible(false);
-        txtEquipamento.setEnabled(true);
+        
+        new DetalharEquipamento(indice,this).setVisible(true);
+        
+// if (jTableListarEquipamento.getSelectedRow() != -1) {
+//        jBtnCancelar.setVisible(true);
+//        jBtnSalvar.setVisible(true);
+//        jBtnEditar.setVisible(false);
+//        txtEquipamento.setEnabled(true);
  //   }else{
        // JOptionPane.showMessageDialog(null, "Primeiro selecione um registro na tabela.");
  //   }
@@ -287,7 +278,7 @@ public class ExibeEquipamento extends javax.swing.JFrame {
     private void jBtnExcluirEquipamentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnExcluirEquipamentoActionPerformed
 
         EquipamentoDAO.ExcluirEquipamento(indice);
-        TabelaEquipamento();
+        TabelaEquipamento("SELECT * FROM vw_equipamentos; ");
         limparCampos();
     }//GEN-LAST:event_jBtnExcluirEquipamentoActionPerformed
 
@@ -295,10 +286,10 @@ public class ExibeEquipamento extends javax.swing.JFrame {
         Equipamento equi = new Equipamento();
         equi.setTabusuarioIdUsuario(1);
         equi.setEquipamento(txtEquipamento.getText());
-        EquipamentoDAO.UpdateEquipamento(equi, indice);
+       // EquipamentoDAO.UpdateEquipamento(equi, indice);
         DesabilitaCampos();
         jBtnEditar.setVisible(true);
-        TabelaEquipamento();
+        TabelaEquipamento("SELECT * FROM vw_equipamentos; ");
         limparCampos();
     }//GEN-LAST:event_jBtnSalvarActionPerformed
 
@@ -312,15 +303,6 @@ public class ExibeEquipamento extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_jBtnSairActionPerformed
 
-    private void jBtnCancelarCadastroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnCancelarCadastroActionPerformed
-        limparCampos();
-        jBtnNovo.setVisible(true);
-        txtEquipamento.setEnabled(false);
-        jBtnCancelarCadastro.setVisible(false);
-        jBtnCadEquipamento.setVisible(false); 
-        jTableListarEquipamento.setEnabled(true);
-    }//GEN-LAST:event_jBtnCancelarCadastroActionPerformed
-
     private void limparCampos() {       
         txtEquipamento.setText("");
     }
@@ -332,9 +314,7 @@ public class ExibeEquipamento extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jBtnCadEquipamento;
     private javax.swing.JButton jBtnCancelar;
-    private javax.swing.JButton jBtnCancelarCadastro;
     private javax.swing.JButton jBtnEditar;
     private javax.swing.JButton jBtnExcluirEquipamento;
     private javax.swing.JButton jBtnNovo;
