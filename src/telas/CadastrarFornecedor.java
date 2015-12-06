@@ -2,15 +2,14 @@ package telas;
 
 import atributos.Endereco;
 import atributos.Fornecedor;
+import atributos.Telefone;
 import funcoes.ContatosDAO;
 import funcoes.FornecedorDAO;
-import java.util.ArrayList;
 
 
 public class CadastrarFornecedor extends javax.swing.JFrame {
 
-    
-    ArrayList<String> telefones = new ArrayList<String>();
+        
     /**
      * Creates new form CadastrarFornecedor
      */
@@ -254,22 +253,17 @@ public class CadastrarFornecedor extends javax.swing.JFrame {
     private void btnCadFornecedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadFornecedorActionPerformed
 
         Fornecedor forn = new Fornecedor();
+        Telefone tel = new Telefone();
         Endereco endereco = new Endereco();
 
         forn.setFornecedor(txtFornecedor.getText());
 
-        telefones.add(txtTel01.getText());
-        telefones.add(txtTelCel.getText());
+        tel.setTel(txtTel01.getText());
+        tel.setCel(txtTelCel.getText());
 
         int i = ContatosDAO.CadContato();
 
-        for (String telefone : telefones) {
-            if (telefone.isEmpty()){
-                break;
-            }else{
-                ContatosDAO.CadTel(i, telefone);
-            }
-        }
+        ContatosDAO.CadTel(i, tel);
         
         ContatosDAO.CadEmail(i, txtEmail.getText());
 
@@ -310,8 +304,7 @@ public class CadastrarFornecedor extends javax.swing.JFrame {
         txtNumero.setText("");
         txtBairro.setText("");
         txtEstado.setText("");
-        txtRua.setText("");
-        telefones.clear();       
+        txtRua.setText("");  
     }
     
     

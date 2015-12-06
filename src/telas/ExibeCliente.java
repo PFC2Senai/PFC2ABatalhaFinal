@@ -41,7 +41,7 @@ private static int idCntato;
     public boolean CodigoCliente() {
         boolean valida = false;
         
-        if(jTableListarClientes.getSelectedRow() != -1){
+        if(jTableListarClientes.getSelectedRow() != -1) {
             valida = true;
             this.dispose();
             int linha = jTableListarClientes.getSelectedRow();        

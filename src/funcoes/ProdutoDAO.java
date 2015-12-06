@@ -43,9 +43,10 @@ public class ProdutoDAO {
         return id;
     }
     
-    public static void CadDetProduto(Produto prod){
+    public static int CadDetProduto(Produto prod){
         
         PreparedStatement stmt;
+        int id = 0;
         try {   
             String sql = ("INSERT INTO tabdetproduto(tabfornecedor_id_forn, " +
                                                 " tabproduto_id_prod, " +
@@ -54,8 +55,9 @@ public class ProdutoDAO {
                                                 " precoSaida, " +
                                                 " quantidadeMinima, " +
                                                 " tabModelo_idtabModelo, " +
+                                                " dataCadastro, " +
                                                 " tabFabricante_idtabFabricante) " +
-                                                " VALUES(?,?,?,?,?,?,?,?);");
+                                                " VALUES(?,?,?,?,?,?,?,?,?);");
             
             stmt = Conexao.getConnection().prepareStatement(sql);      
                   
@@ -66,15 +68,22 @@ public class ProdutoDAO {
                 stmt.setDouble(5, prod.getPrecoSaida());
                 stmt.setInt(6, prod.getQuantidadeMinima());
                 stmt.setInt(7, prod.getCodModelo());
-                stmt.setInt(8, prod.getCodFabricante());
+                stmt.setObject(8, prod.getDataCadProduto());
+                stmt.setInt(9, prod.getCodFabricante());
                               
                 stmt.executeUpdate();
+                
+                ResultSet rs = stmt.getGeneratedKeys();
+                    if (rs.next()) {
+                        id = rs.getInt(1);
+                    } 
                 stmt.close();  
 
             } catch (SQLException ex) {      
                 Logger.getLogger(ProdutoDAO.class.getName()).log(Level.SEVERE, null, ex);
                 throw new RuntimeException("Erro ao Cadastrar detalhe do Produto: ",ex);       
             }
+        return id;
     }
     
     public static ArrayList CarregaProduto(int id) {
@@ -106,6 +115,7 @@ public class ProdutoDAO {
                 p.setPrecoSaida(rs.getDouble("precoSaida"));
                 p.setQuantidadeMinima(rs.getInt("quantidadeMinima"));
                 p.setCodModelo(rs.getInt("tabModelo_idtabModelo"));
+                p.setDataCadProduto(rs.getDate("dataCadastro"));
                 p.setCodFabricante(rs.getInt("tabFabricante_idtabFabricante"));
                 p.setIdProduto(id);
                 produto.add(p);                
@@ -184,6 +194,46 @@ public class ProdutoDAO {
         } catch (SQLException ex) {      
             Logger.getLogger(ProdutoDAO.class.getName()).log(Level.SEVERE, null, ex);
             throw new RuntimeException("Erro ao excluir os dados do Produto: ",ex);    
+        }
+    }
+    
+    public static void AlterarEstoque(Produto prod, int id) {
+                
+        CallableStatement stmt;
+        
+        try {   
+            stmt = Conexao.getConnection().prepareCall("{call AdicionaEstoque(?,?,?,?,?)}");
+            
+            stmt.setInt(1, id);
+            stmt.setInt(2, prod.getQuantidade());
+            stmt.setDouble(3 , prod.getPrecoEntrada());
+            stmt.setDouble(4, prod.getPrecoSaida());
+            stmt.setObject(5, prod.getDataCadProduto());
+            
+            stmt.execute();
+            stmt.close();
+
+        } catch (SQLException ex) {      
+            Logger.getLogger(ProdutoDAO.class.getName()).log(Level.SEVERE, null, ex);
+            throw new RuntimeException("Erro ao adicionar produto no estoque: ",ex);    
+        }
+    }
+    
+    public static void BaixaEstoque(int quant, int id) {
+                
+        PreparedStatement stmt;
+
+        try {
+            String sql = ("UPDATE tabdetproduto SET quantidade = '" + quant
+                        + "' where idDetProduto = '" + id + "';"); 
+
+            stmt = Conexao.getConnection().prepareStatement(sql);
+            stmt.executeUpdate();
+            stmt.close();
+
+        } catch (SQLException ex) {
+            Logger.getLogger(ProdutoDAO.class.getName()).log(Level.SEVERE, null, ex);
+            throw new RuntimeException("Erro ao dar baixa no estoque: ", ex);
         }
     }
     

@@ -1,7 +1,10 @@
 package telas;
 
+import atributos.HistoricoProduto;
 import atributos.Produto;
 import funcoes.Conexao;
+import static funcoes.FuncoesDiversas.FormataData;
+import funcoes.HistoricoProdutoDAO;
 import funcoes.ProdutoDAO;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -86,6 +89,9 @@ public class CadastrarProduto extends javax.swing.JFrame {
         txtPrecoEntrada = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
         jComboBoxFabricante = new javax.swing.JComboBox();
+        jLabel10 = new javax.swing.JLabel();
+        jLabel12 = new javax.swing.JLabel();
+        txtDataCadProduto = new com.toedter.calendar.JDateChooser();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -130,7 +136,7 @@ public class CadastrarProduto extends javax.swing.JFrame {
             }
         });
         jPanel1.add(jBtnCadastrarProduto, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 380, -1, -1));
-        jPanel1.add(txtQuantMinima, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 330, 99, -1));
+        jPanel1.add(txtQuantMinima, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 330, 99, -1));
 
         jLabel11.setText("Quantidade Mínima:");
         jPanel1.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 330, -1, -1));
@@ -184,7 +190,7 @@ public class CadastrarProduto extends javax.swing.JFrame {
                 jBtnCadProdutoActionPerformed(evt);
             }
         });
-        jPanel1.add(jBtnCadProduto, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 80, -1, -1));
+        jPanel1.add(jBtnCadProduto, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 80, -1, -1));
 
         jBtbNovoProduto.setText("Novo produto");
         jBtbNovoProduto.addActionListener(new java.awt.event.ActionListener() {
@@ -200,7 +206,7 @@ public class CadastrarProduto extends javax.swing.JFrame {
                 jBtnCancelarCadProdutoActionPerformed(evt);
             }
         });
-        jPanel1.add(jBtnCancelarCadProduto, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 110, -1, -1));
+        jPanel1.add(jBtnCancelarCadProduto, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 110, -1, -1));
 
         jLabel7.setText("Preço de Entrada:");
         jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 270, -1, -1));
@@ -217,30 +223,47 @@ public class CadastrarProduto extends javax.swing.JFrame {
         });
         jPanel1.add(jComboBoxFabricante, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 170, 260, 20));
 
+        jLabel10.setText("Produto:");
+        jPanel1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 80, -1, -1));
+
+        jLabel12.setText("Data:");
+        jPanel1.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 330, -1, -1));
+        jPanel1.add(txtDataCadProduto, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 330, 140, -1));
+
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 800, 420));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void jBtnCadastrarProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnCadastrarProdutoActionPerformed
-                        
+
+        HistoricoProduto histProduto = new HistoricoProduto();
+        
         prod.setCodFornecedor(codFornecedor);
         prod.setCodModelo(codModelo);
         prod.setCodFabricante(codFabricante);
+        prod.setDataCadProduto(FormataData(txtDataCadProduto.getDate()));
         prod.setQuantidade(Integer.parseInt(txtQuantidade.getText()));
-        prod.setPrecoEntrada(Float.parseFloat(txtPrecoEntrada.getText()));
-        prod.setPrecoSaida(Float.parseFloat(txtPrecoSaida.getText())); 
+        prod.setPrecoEntrada(Double.parseDouble(txtPrecoEntrada.getText()));
+        prod.setPrecoSaida(Double.parseDouble(txtPrecoSaida.getText())); 
         prod.setCodProduto(codProduto);
         prod.setQuantidadeMinima(Integer.parseInt(txtQuantMinima.getText()));
-        ProdutoDAO.CadDetProduto(prod);
+        
+        int codDet = ProdutoDAO.CadDetProduto(prod);
+        
+        histProduto.setCodDetProduto(codDet);
+        histProduto.setQuantidade(Integer.parseInt(txtQuantidade.getText()));
+        histProduto.setValor(Double.parseDouble(txtPrecoEntrada.getText()));
+        histProduto.setDataCadProduto(FormataData(txtDataCadProduto.getDate()));
+        HistoricoProdutoDAO.CadHistoricoProd(histProduto);
+             
         txtProduto.setVisible(false);
         jComboBoxProdutos.setVisible(true);
         
         limparCampos(); 
         jComboBoxProdutos.removeAllItems();
         populaComboBoxProduto();
-        jBtbNovoProduto.setVisible(true);
-        
+        jBtbNovoProduto.setVisible(true);        
     }//GEN-LAST:event_jBtnCadastrarProdutoActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
@@ -284,12 +307,12 @@ public class CadastrarProduto extends javax.swing.JFrame {
         
         float percentual = Float.parseFloat(txtPercentual.getText());
         double precoEntrada = Double.parseDouble(txtPrecoEntrada.getText());
-        double resultado = (precoEntrada*percentual)/100;
-        
+        double resultado = (precoEntrada*percentual)/100;        
         txtPrecoSaida.setText(String.valueOf(precoEntrada + resultado));        
     }//GEN-LAST:event_jBtnCalcularPercentualActionPerformed
 
     private void jBtbNovoProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtbNovoProdutoActionPerformed
+        
         txtProduto.setVisible(true);
         jComboBoxProdutos.setVisible(false);
         jBtnCadProduto.setVisible(true);
@@ -479,7 +502,9 @@ public class CadastrarProduto extends javax.swing.JFrame {
     private javax.swing.JComboBox jComboBoxModelo;
     private javax.swing.JComboBox jComboBoxProdutos;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -489,6 +514,7 @@ public class CadastrarProduto extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
+    private com.toedter.calendar.JDateChooser txtDataCadProduto;
     private javax.swing.JTextField txtPercentual;
     private javax.swing.JTextField txtPrecoEntrada;
     private javax.swing.JTextField txtPrecoSaida;

@@ -1,5 +1,7 @@
 package atributos;
 
+import java.util.Date;
+
 /**
  *
  * @author WilhamJr
@@ -21,6 +23,7 @@ public class Produto {
     private double precoEntrada;
     private double precoSaida;
     private int quantidadeMinima;
+    private Date dataCadProduto;
 
     public int getIdProduto() {
         return idProduto;
@@ -170,6 +173,20 @@ public class Produto {
      */
     public void setQuantidadeMinima(int quantidadeMinima) {
         this.quantidadeMinima = quantidadeMinima;
+    }
+
+    /**
+     * @return the dataCadProduto
+     */
+    public Date getDataCadProduto() {
+        return dataCadProduto;
+    }
+
+    /**
+     * @param dataCadProduto the dataCadProduto to set
+     */
+    public void setDataCadProduto(Date dataCadProduto) {
+        this.dataCadProduto = dataCadProduto;
     }
     
 }

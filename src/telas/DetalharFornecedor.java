@@ -3,6 +3,7 @@ package telas;
 
 import atributos.Endereco;
 import atributos.Fornecedor;
+import atributos.Telefone;
 import funcoes.ContatosDAO;
 import static funcoes.ContatosDAO.CodTel;
 import funcoes.FornecedorDAO;
@@ -410,20 +411,20 @@ public class DetalharFornecedor extends javax.swing.JFrame {
         ArrayList<Fornecedor> fornecedor = new ArrayList<Fornecedor>();
         fornecedor = FornecedorDAO.CarregaFornecedor(GetIndiceForn());
         
-        ArrayList<String> telefone = new ArrayList<String>();
+        ArrayList<Telefone> telefone = new ArrayList<Telefone>();
         telefone = ContatosDAO.CarregaTelefones(idContato);
-
-        for (int i = 0; i < telefone.size(); i++) {
-            
-            txtTel.setText(telefone.get(0));
-            txtTelCel.setText(telefone.get(1));
-        }       
+      
 
         for (Fornecedor forn : fornecedor) {
             lblCodigo.setText(String.valueOf(forn.getIdForn()));
             txtFornecedor.setText(forn.getFornecedor());
             idContato = forn.getCodContato();
             txtEmail.setText(forn.getEmail());
+        }
+        
+        for (Telefone tel : telefone) {
+            txtTel.setText(tel.getTel());
+            txtTelCel.setText(tel.getCel());
         }
         
         for (Endereco end : endereco) {
@@ -509,8 +510,10 @@ public class DetalharFornecedor extends javax.swing.JFrame {
 
     private void jBtnSalvarContatoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnSalvarContatoActionPerformed
         
-        ContatosDAO.UpdateTel(codTel, txtTel.getText());
-        ContatosDAO.UpdateTel(codCel, txtTelCel.getText());        
+        Telefone tel = new Telefone();
+        tel.setTel(txtTel.getText());
+        tel.setCel(txtTelCel.getText()); 
+        ContatosDAO.UpdateTel(codTel, tel); 
         ContatosDAO.UpdateEmail(idContato, txtEmail.getText()); 
         desabilitarContato();
         jBtnAltContato.setVisible(true);

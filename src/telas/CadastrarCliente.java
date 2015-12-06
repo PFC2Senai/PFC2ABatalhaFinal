@@ -3,27 +3,27 @@ package telas;
 
 import atributos.Cliente;
 import atributos.Endereco;
+import atributos.PessoaContato;
+import atributos.Telefone;
 import funcoes.ClienteDAO;
 import funcoes.Conexao;
 import funcoes.ContatosDAO;
+import funcoes.PessoaContatoDAO;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
 
 public class CadastrarCliente extends javax.swing.JFrame {
 
     private PreparedStatement pst;
-    ArrayList<String> telefones = new ArrayList<String>();
     private int codSetor;
     
     public CadastrarCliente() {
         initComponents();
         this.populaComboBox();
-        labelCodSetor.setVisible(false);
     }
 
     /**
@@ -66,9 +66,10 @@ public class CadastrarCliente extends javax.swing.JFrame {
         jLabel13 = new javax.swing.JLabel();
         txtTel01 = new javax.swing.JFormattedTextField();
         txtCep = new javax.swing.JFormattedTextField();
-        labelCodSetor = new javax.swing.JLabel();
         jComboBoxSetores = new javax.swing.JComboBox();
         txtTelCel = new javax.swing.JTextField();
+        jBtnOutroContato = new javax.swing.JButton();
+        jLabel16 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -146,25 +147,28 @@ public class CadastrarCliente extends javax.swing.JFrame {
             ex.printStackTrace();
         }
 
-        labelCodSetor.setText("Codigo do Setor");
-
         jComboBoxSetores.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jComboBoxSetoresActionPerformed(evt);
             }
         });
 
+        jBtnOutroContato.setText("Outro contato");
+
+        jLabel16.setForeground(new java.awt.Color(255, 0, 0));
+        jLabel16.setText("Como cadastrar outro contato? Salvar e continuar aí chama a próxima tela para cadastrar os contatos?");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(28, 28, 28)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(labelCodSetor))
+                        .addComponent(jLabel16)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(28, 28, 28)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(btnCancelar)
@@ -218,12 +222,7 @@ public class CadastrarCliente extends javax.swing.JFrame {
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                         .addComponent(jLabel12)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(txtNumero, javax.swing.GroupLayout.DEFAULT_SIZE, 104, Short.MAX_VALUE))))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel1)
-                                    .addComponent(jLabel8))
-                                .addGap(0, 354, Short.MAX_VALUE))
+                                        .addComponent(txtNumero))))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel14)
                                 .addGap(33, 33, 33)
@@ -231,8 +230,15 @@ public class CadastrarCliente extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(jLabel15)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtEstado)))))
-                .addGap(30, 30, 30))
+                                .addComponent(txtEstado))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel8)
+                                    .addComponent(jLabel1))
+                                .addGap(0, 338, Short.MAX_VALUE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jBtnOutroContato)
+                        .addGap(34, 34, 34))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -249,12 +255,13 @@ public class CadastrarCliente extends javax.swing.JFrame {
                     .addComponent(txtCnpj, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel6)
                     .addComponent(jComboBoxSetores, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(labelCodSetor)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel16)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
-                    .addComponent(txtContato, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtContato, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jBtnOutroContato))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
@@ -299,7 +306,9 @@ public class CadastrarCliente extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -324,31 +333,34 @@ public class CadastrarCliente extends javax.swing.JFrame {
     private void btnCadClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadClienteActionPerformed
 
         Cliente cli = new Cliente();
+        Telefone tel = new Telefone();
+        PessoaContato pContato = new PessoaContato();
+                
         Endereco endereco = new Endereco();
 
         cli.setEmpresa(txtEmpresa.getText());
         cli.setCnpj(txtCnpj.getText());
         cli.setCodSetor(codSetor);
         cli.setEmail(txtEmail.getText());
-
-        telefones.add(txtTel01.getText());
-        telefones.add(txtTelCel.getText());
+        
+        tel.setTel(txtTel01.getText());
+        tel.setCel(txtTelCel.getText());
 
         int i = ContatosDAO.CadContato();
-
-        for (String telefone : telefones) {
-            if (telefone.isEmpty()){
-                break;
-            }else{
-                ContatosDAO.CadTel(i, telefone);
-            }
-        }
-
+                
+        ContatosDAO.CadTel(i, tel);
+        
         ContatosDAO.CadEmail(i, txtEmail.getText());
-
+              
         cli.setIdContato(i);
-        ClienteDAO.CadCliente(cli);
+        int codCli = ClienteDAO.CadCliente(cli);
+        
+        pContato.setCodCliente(codCli);
+        pContato.setCodContato(i);
+        pContato.setNomeContato(txtContato.getText());
 
+        PessoaContatoDAO.CadPessoaContato(pContato);
+        
         endereco.setPais(txtPais.getText());
         endereco.setCep(txtCep.getText());
         endereco.setRua(txtRua.getText());
@@ -371,12 +383,11 @@ public class CadastrarCliente extends javax.swing.JFrame {
             pst = conexao.prepareStatement(sql);
             rs = pst.executeQuery();
             
-            while(rs.next())
-            {
+            while(rs.next()) {
                 jComboBoxSetores.addItem(rs.getString("setor"));
             }
-        }catch(SQLException ex)
-        {
+            
+        }catch(SQLException ex) {
             JOptionPane.showMessageDialog(null, ex);
         }
     }
@@ -415,8 +426,7 @@ public class CadastrarCliente extends javax.swing.JFrame {
         txtNumero.setText("");
         txtBairro.setText("");
         txtEstado.setText("");
-        txtRua.setText("");
-        telefones.clear();       
+        txtRua.setText("");     
     }
 
 
@@ -424,6 +434,7 @@ public class CadastrarCliente extends javax.swing.JFrame {
     private javax.swing.JButton btnCadCliente;
     private javax.swing.JButton btnCancelar;
     private javax.swing.JButton btnLimpar;
+    private javax.swing.JButton jBtnOutroContato;
     private javax.swing.JComboBox jComboBoxSetores;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
@@ -432,6 +443,7 @@ public class CadastrarCliente extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -441,7 +453,6 @@ public class CadastrarCliente extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JLabel labelCodSetor;
     private javax.swing.JTextField txtBairro;
     private javax.swing.JFormattedTextField txtCep;
     private javax.swing.JTextField txtCidade;

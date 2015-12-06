@@ -62,7 +62,5 @@ public class PessoaContato {
      */
     public void setCodContato(int codContato) {
         this.codContato = codContato;
-    }
-    
-    
+    }    
 }

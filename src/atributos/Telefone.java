@@ -5,6 +5,7 @@ public class Telefone {
     
     private int idTel;
     private String tel;
+    private String cel;
     private int codContato;
 
     /**
@@ -47,6 +48,20 @@ public class Telefone {
      */
     public void setCodContato(int codContato) {
         this.codContato = codContato;
+    }
+
+    /**
+     * @return the cel
+     */
+    public String getCel() {
+        return cel;
+    }
+
+    /**
+     * @param cel the cel to set
+     */
+    public void setCel(String cel) {
+        this.cel = cel;
     }
 
 }

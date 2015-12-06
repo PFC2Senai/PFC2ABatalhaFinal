@@ -30,7 +30,7 @@ public class HistoricoProdutoDAO {
                 stmt.setDouble(1, hProd.getValor());
                 stmt.setObject(2, hProd.getDataCadProduto());
                 stmt.setInt(3, hProd.getQuantidade());
-                stmt.setInt(5, hProd.getCodDetProduto());
+                stmt.setInt(4, hProd.getCodDetProduto());
                               
                 stmt.executeUpdate();
                 stmt.close();  

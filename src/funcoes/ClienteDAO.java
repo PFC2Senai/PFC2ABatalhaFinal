@@ -14,9 +14,11 @@ import java.util.logging.Logger;
 
 public class ClienteDAO {
     
-    public static void CadCliente(Cliente cli){
+    public static int CadCliente(Cliente cli){
                
-        PreparedStatement stmt;
+        PreparedStatement stmt;        
+        int id = 0;
+        
         try {   
             String sql = ("INSERT INTO tabcliente(tabusuario_id_usuario, tabContato_id_contato,empresa,cnpj,tabSetor_idtabSetor)  VALUES(?,?,?,?,?)");
             stmt = Conexao.getConnection().prepareStatement(sql);      
@@ -28,12 +30,18 @@ public class ClienteDAO {
                 stmt.setInt(5, cli.getCodSetor());
                              
                 stmt.executeUpdate();
+                
+                ResultSet rs = stmt.getGeneratedKeys();
+                if (rs.next()) {
+                    id = rs.getInt(1);
+                }
                 stmt.close();  
 
             } catch (SQLException ex) {      
                 Logger.getLogger(ClienteDAO.class.getName()).log(Level.SEVERE, null, ex);
                 throw new RuntimeException("Erro ao Cadastrar Cliente: ",ex);       
             }
+        return id;
     }
     
     public static ArrayList CarregaCliente(int id) {

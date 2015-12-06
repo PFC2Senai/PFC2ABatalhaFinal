@@ -19,7 +19,7 @@ public class PessoaContatoDAO {
         
         PreparedStatement stmt;
         try {   
-            String sql = ("INSERT INTO tabpessoacontato(contato, tabcliente_idcliente, tabcontato_id_contato) VALUES(?,?,?);");
+            String sql = ("INSERT INTO tabpessoacontato(contato, tabcliente_idcliente, cod_contato) VALUES(?,?,?);");
             stmt = Conexao.getConnection().prepareStatement(sql);      
                   
                 stmt.setString(1, pContato.getNomeContato());
@@ -53,7 +53,7 @@ public class PessoaContatoDAO {
                 p.setIdPessoaContato(rs.getInt("idPessoaContato"));
                 p.setNomeContato((rs.getString("contato")));
                 p.setCodCliente(rs.getInt("tabcliente_idcliente"));
-                p.setCodContato(rs.getInt("tabcontato_id_contato"));
+                p.setCodContato(rs.getInt("cod_contato"));
                 pessoaContato.add(p);                
             }            
             rs.close();
@@ -104,13 +104,13 @@ public class PessoaContatoDAO {
         }
     }
     
-    public static ArrayList<PessoaContato> ListarSetor(){
+    public static ArrayList<PessoaContato> ListarContatos(int id) {
         
         Statement stmt;
         ArrayList<PessoaContato> pessoaContato = new ArrayList<PessoaContato>();
         
         try {            
-            String Sql = "SELECT * FROM tabpessoacontato ;";
+            String Sql = "SELECT * FROM tabpessoacontato where tabcliente_idcliente = " + id + " ;";
             
             ResultSet rs;            
             stmt = Conexao.getConnection().createStatement();            
@@ -122,7 +122,7 @@ public class PessoaContatoDAO {
                 p.setIdPessoaContato(rs.getInt("idPessoaContato"));
                 p.setNomeContato((rs.getString("contato")));
                 p.setCodCliente(rs.getInt("tabcliente_idcliente"));
-                p.setCodContato(rs.getInt("tabcontato_id_contato"));
+                p.setCodContato(rs.getInt("cod_contato"));
                 pessoaContato.add(p);                
             }            
             rs.close();

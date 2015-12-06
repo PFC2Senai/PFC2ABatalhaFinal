@@ -2,6 +2,7 @@ package funcoes;
 
 
 import atributos.Endereco;
+import atributos.Telefone;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -35,17 +36,17 @@ public class ContatosDAO {
         return id;
     }
 
-    public static void CadTel(int id, String tel) {
+    public static void CadTel(int id, Telefone tel) {
         
         PreparedStatement stmt;
 
         try {
-            String sql = ("INSERT INTO tabtel(contato_id, telefone) VALUES(?,?)");
+            String sql = ("INSERT INTO tabtel(contato_id, telefone, celular) VALUES(?,?,?)");
             stmt = Conexao.getConnection().prepareStatement(sql);
 
             stmt.setInt(1, id);
-            stmt.setString(2, tel);
-            System.out.println(tel);
+            stmt.setString(2, tel.getTel());
+            stmt.setString(3, tel.getCel());
 
             stmt.executeUpdate();
             stmt.close();
@@ -165,12 +166,13 @@ public class ContatosDAO {
         }
     }
 
-    public static void UpdateTel(int id, String tel) {
+    public static void UpdateTel(int id, Telefone tel) {
 
         PreparedStatement stmt;
 
         try {
-            String sql = ("UPDATE tabTel SET telefone='" + tel
+            String sql = ("UPDATE tabTel SET telefone='" + tel.getTel()
+                    + "' , celular = '" + tel.getCel()
                     + "' where id_telefone = '" + id + "';"); //precisa alterar: caso mais de um telefone cadastrado desse mesmo contato, dessa forma vai alterar todos os tels. criar metodo para verificar qual tel é pra alterar. teremos um and na condicao para o update
 
             stmt = Conexao.getConnection().prepareStatement(sql);
@@ -188,8 +190,8 @@ public class ContatosDAO {
         PreparedStatement stmt;
 
         try {
-            String sql = ("UPDATE tabEmail SET email='" + email
-                    + "' where contato_id_contato = '" + id + "';");//mesma coisa aqui
+            String sql = ("UPDATE tabemail SET email = '" + email 
+                        + "' WHERE contato_id_contato = "+ id +";");//mesma coisa aqui
 
             stmt = Conexao.getConnection().prepareStatement(sql);
             stmt.executeUpdate();
@@ -225,7 +227,6 @@ public class ContatosDAO {
         }
     }
     
-    //Felipe 16/11
     public static ArrayList CarregaEndereco(int id) {
         
         Statement stmt;
@@ -259,22 +260,25 @@ public class ContatosDAO {
         }    
         return endereco;
     }
-    //Felipe 16/11
     
     public static ArrayList CarregaTelefones(int id) {
         
         Statement stmt;
-        ArrayList<String> telefones = new ArrayList<String>();
+        ArrayList<Telefone> telefones = new ArrayList<Telefone>();
         
         try {            
-            String Sql = "SELECT * FROM tabtel where contato_id = '"+ id +"';";
+            String Sql = "SELECT * FROM tabtel where Contato_id = " + id + ";";
             
             ResultSet rs;            
             stmt = Conexao.getConnection().createStatement();            
             rs = stmt.executeQuery(Sql); 
             
             while(rs.next()) {                
-                telefones.add(rs.getString("telefone"));                               
+                Telefone tel = new Telefone();
+                
+                tel.setTel(rs.getString("telefone"));
+                tel.setCel(rs.getString("celular"));
+                telefones.add(tel);
             }
             
             rs.close();
@@ -282,7 +286,7 @@ public class ContatosDAO {
             
         } catch (SQLException ex) {      
             Logger.getLogger(ContatosDAO.class.getName()).log(Level.SEVERE, null, ex);
-            throw new RuntimeException("Erro ao carregar endereço: ", ex);    
+            throw new RuntimeException("Erro ao carregar telefones: ", ex);    
         }    
         return telefones;
     }
@@ -293,7 +297,7 @@ public class ContatosDAO {
         int codTel = 0;
         
         try {            
-            String Sql = "SELECT * FROM tabtel where telefone = '"+ tel +"';";
+            String Sql = "SELECT * FROM tabtel where telefone = '" + tel + "';";
             
             ResultSet rs;            
             stmt = Conexao.getConnection().createStatement();            

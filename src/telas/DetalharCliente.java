@@ -4,20 +4,25 @@ package telas;
 import atributos.Cliente;
 import atributos.Endereco;
 import atributos.Lembrete;
+import atributos.Telefone;
 import funcoes.ClienteDAO;
 import funcoes.Conexao;
+import static funcoes.Conexao.getConnection;
 import funcoes.ContatosDAO;
 import static funcoes.ContatosDAO.CodTel;
 import funcoes.LembreteDAO;
+import funcoes.ModeloTabela;
 import java.awt.Color;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
 import static telas.ExibeCliente.GetIndice;
 
@@ -28,8 +33,9 @@ public class DetalharCliente extends javax.swing.JFrame {
     public static int codLembrete;
     int codTel;
     int codCel;
+    private int codSetor;
     private PreparedStatement pst;
-    ArrayList<String> telefones = new ArrayList<String>();
+    Statement stmt ;
     
     /**
      * Creates new form CadastrarCliente
@@ -39,7 +45,8 @@ public class DetalharCliente extends javax.swing.JFrame {
         initComponents();
         CarregaCliente();
         populaComboBox();
-        TabelaLembrete2(GetIndice());       
+        TabelaLembrete2(GetIndice()); 
+        TabelaContatos("SELECT * FROM vw_contatos where id_contato = " + idContato + ";");
     }
     
     private void CarregaCliente() {
@@ -55,22 +62,21 @@ public class DetalharCliente extends javax.swing.JFrame {
         ArrayList<Cliente> cliente = new ArrayList<Cliente>();
         cliente = ClienteDAO.CarregaCliente(GetIndice());
         
-        ArrayList<String> telefone = new ArrayList<String>();
-        telefone = ContatosDAO.CarregaTelefones(idContato);
-
-        for (int i = 0; i < telefone.size(); i++) {
-            txtTel.setText(telefone.get(0));  
-            txtTelCel.setText(telefone.get(1));            
-        }
+        ArrayList<Telefone> telefone = new ArrayList<Telefone>();
+        telefone = ContatosDAO.CarregaTelefones(idContato);            
                
         for (Cliente cli : cliente) {
             lblCodigo.setText(String.valueOf(cli.getId()));
             txtEmpresa.setText(cli.getEmpresa());
             txtCnpj.setText(cli.getCnpj());
-          //  txtContato.setText(cli.getContato());
             txtSetor.setText(cli.getSetor());
             txtEmail.setText(cli.getEmail());
             idContato = cli.getIdContato();
+        }
+        
+        for (Telefone tel : telefone) {
+            txtTel.setText(tel.getTel());
+            txtTelCel.setText(tel.getCel());
         }
         
         for (Endereco end : endereco) {
@@ -92,7 +98,6 @@ public class DetalharCliente extends javax.swing.JFrame {
        jBtnAltContato.setVisible(false);
        jBtnAltDadosP.setVisible(false);
        jBtnAltEndereco.setVisible(false);
-       labelCodSetor.setVisible(false);
        jComboBoxSetores.setVisible(false);
     }
     
@@ -187,6 +192,41 @@ public class DetalharCliente extends javax.swing.JFrame {
         }          
     } 
     
+    public void TabelaContatos(String sql) {
+        
+        try { 
+            
+            stmt = getConnection().createStatement();
+            ArrayList dados = new ArrayList();               
+            String [] Colunas = {"Código", "Contato", "Telefone", "Celular", "Email"};
+               
+            ResultSet rs;
+            rs = stmt.executeQuery(sql);            
+            //rs.first();
+            
+                while(rs.next()){
+                    dados.add(new Object[]{ rs.getObject("idPessoaContato"),rs.getObject("contato"),
+                                            rs.getObject("telefone"),rs.getObject("celular"), 
+                                            rs.getObject("email")});            
+                }
+
+                    for (int i = 0; i < 5; i++){
+                        ModeloTabela modelo = new ModeloTabela(dados, Colunas);
+                        jTableContatos.setModel(modelo);
+                        jTableContatos.getColumnModel().getColumn(i).setPreferredWidth(150);
+                        jTableContatos.getColumnModel().getColumn(i).setResizable(false);
+                        jTableContatos.getTableHeader().setReorderingAllowed(false);
+                        jTableContatos.setAutoResizeMode(jTableContatos.AUTO_RESIZE_OFF);
+                        jTableContatos.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+                    }
+                    
+        } catch (SQLException ex) {
+            Logger.getLogger(DetalharCliente.class.getName()).log(Level.SEVERE, null, ex);
+            
+        } catch (Exception erro){
+            Logger.getLogger(DetalharCliente.class.getName()).log(Level.SEVERE, null, erro);
+        }          
+    } 
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -238,7 +278,6 @@ public class DetalharCliente extends javax.swing.JFrame {
         jTableLembretes = new javax.swing.JTable();
         jLabel18 = new javax.swing.JLabel();
         jComboBoxSetores = new javax.swing.JComboBox();
-        labelCodSetor = new javax.swing.JLabel();
         jBtnAltDadosP = new javax.swing.JButton();
         jBtbCancelDadosP = new javax.swing.JButton();
         jBtnAltContato = new javax.swing.JButton();
@@ -248,6 +287,8 @@ public class DetalharCliente extends javax.swing.JFrame {
         jLabel19 = new javax.swing.JLabel();
         txtTel = new javax.swing.JFormattedTextField();
         jBtnNovoLembrete = new javax.swing.JButton();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTableContatos = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -289,10 +330,10 @@ public class DetalharCliente extends javax.swing.JFrame {
         jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(26, 143, -1, -1));
 
         jLabel5.setText("Contato:");
-        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 220, -1, -1));
+        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 230, -1, -1));
         jPanel1.add(txtEmpresa, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 100, 245, -1));
         jPanel1.add(txtCnpj, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 140, 250, -1));
-        jPanel1.add(txtContato, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 230, 245, -1));
+        jPanel1.add(txtContato, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 220, 260, -1));
 
         jLabel9.setText("Email:");
         jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 380, -1, -1));
@@ -388,9 +429,6 @@ public class DetalharCliente extends javax.swing.JFrame {
         });
         jPanel1.add(jComboBoxSetores, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 180, 260, -1));
 
-        labelCodSetor.setText("Codigo do Setor");
-        jPanel1.add(labelCodSetor, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 210, -1, -1));
-
         jBtnAltDadosP.setText("Salvar");
         jBtnAltDadosP.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -456,6 +494,18 @@ public class DetalharCliente extends javax.swing.JFrame {
             }
         });
         jPanel1.add(jBtnNovoLembrete, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 220, -1, -1));
+
+        jTableContatos.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+
+            }
+        ));
+        jScrollPane2.setViewportView(jTableContatos);
+
+        jPanel1.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 270, 430, 140));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -539,14 +589,12 @@ public class DetalharCliente extends javax.swing.JFrame {
         this.setEnabled(false);
         int linha = jTableLembretes.getSelectedRow();
         codLembrete = (Integer.parseInt(jTableLembretes.getValueAt(linha, 0).toString()));
-       // this.dispose();
         new DetalharLembrete(this).setVisible(true);        
     }//GEN-LAST:event_jTableLembretesMouseClicked
 
     private void jComboBoxSetoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxSetoresActionPerformed
         
-        idSetorComboBox();
-        System.out.println(labelCodSetor.getText());
+        idSetorComboBox();       
     }//GEN-LAST:event_jComboBoxSetoresActionPerformed
 
     private void jBtnAltDadosPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnAltDadosPActionPerformed
@@ -554,8 +602,7 @@ public class DetalharCliente extends javax.swing.JFrame {
         Cliente cli = new Cliente();
         cli.setEmpresa(txtEmpresa.getText());
         cli.setCnpj(txtCnpj.getText());
-//        cli.setContato(txtContato.getText());
-        cli.setCodSetor(Integer.parseInt(labelCodSetor.getText()));
+        cli.setCodSetor(codSetor);
         cli.setEmail(txtEmail.getText());
         cli.setIdContato(idContato);
         ClienteDAO.UpdateCliente(cli, GetIndice());
@@ -577,9 +624,10 @@ public class DetalharCliente extends javax.swing.JFrame {
     }//GEN-LAST:event_jBtbCancelDadosPActionPerformed
 
     private void jBtnAltContatoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnAltContatoActionPerformed
-
-        ContatosDAO.UpdateTel(codTel, txtTel.getText());
-        ContatosDAO.UpdateTel(codCel, txtTelCel.getText());        
+        Telefone tel = new Telefone();
+        tel.setTel(txtTel.getText());
+        tel.setCel(txtTelCel.getText());
+        ContatosDAO.UpdateTel(codTel, tel);       
         ContatosDAO.UpdateEmail(idContato, txtEmail.getText()); 
         desabilitarContato();
         jButtonAr2.setVisible(true);
@@ -653,7 +701,7 @@ public class DetalharCliente extends javax.swing.JFrame {
             
             while(rs.next())
             {
-                labelCodSetor.setText(String.valueOf(rs.getInt("idtabSetor")));
+                codSetor = (rs.getInt("idtabSetor"));
             }
         }catch(SQLException ex)
         {
@@ -700,8 +748,9 @@ public class DetalharCliente extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTable jTableContatos;
     private javax.swing.JTable jTableLembretes;
-    private javax.swing.JLabel labelCodSetor;
     private javax.swing.JLabel lblCodigo;
     private javax.swing.JTextField txtCnpj;
     private javax.swing.JTextField txtContato;
