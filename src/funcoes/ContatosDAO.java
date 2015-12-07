@@ -316,4 +316,8 @@ public class ContatosDAO {
         }    
         return codTel;
     }
+
+    public static void CadTel(int i, String telefone) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }
