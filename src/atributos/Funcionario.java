@@ -19,6 +19,43 @@ public class Funcionario {
     private int idContato;
     private int idUsuario;
     private String dataAdmicao;
+    private String ctps;
+    private String numCtps;
+    private String serieCtps;
+    private String UfCtps;
+
+    public String getCtps() {
+        return ctps;
+    }
+
+    public void setCtps(String ctps) {
+        this.ctps = ctps;
+    }
+
+    public String getNumCtps() {
+        return numCtps;
+    }
+
+    public void setNumCtps(String numCtps) {
+        this.numCtps = numCtps;
+    }
+
+    public String getSerieCtps() {
+        return serieCtps;
+    }
+
+    public void setSerieCtps(String serieCtps) {
+        this.serieCtps = serieCtps;
+    }
+
+    public String getUfCtps() {
+        return UfCtps;
+    }
+
+    public void setUfCtps(String UfCtps) {
+        this.UfCtps = UfCtps;
+    }
+    
 
     public int getId() {
         return id;
