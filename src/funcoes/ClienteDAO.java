@@ -23,7 +23,7 @@ public class ClienteDAO {
             String sql = ("INSERT INTO tabcliente(tabusuario_id_usuario, tabContato_id_contato,empresa,cnpj,tabSetor_idtabSetor)  VALUES(?,?,?,?,?)");
             stmt = Conexao.getConnection().prepareStatement(sql);      
   
-                stmt.setInt(1, 1);
+                stmt.setInt(1, cli.getCodUser());
                 stmt.setInt(2, cli.getIdContato());
                 stmt.setString(3, cli.getEmpresa());
                 stmt.setString(4, cli.getCnpj());

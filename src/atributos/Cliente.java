@@ -7,6 +7,7 @@ import static java.lang.String.format;
 public class Cliente {
     
     private int id;
+    private int codUser;
     private int idContato;
     private String empresa;
     private String cnpj;
@@ -126,5 +127,19 @@ public class Cliente {
      */
     public void setSetor(String setor) {
         this.setor = setor;
+    }
+
+    /**
+     * @return the codUser
+     */
+    public int getCodUser() {
+        return codUser;
+    }
+
+    /**
+     * @param codUser the codUser to set
+     */
+    public void setCodUser(int codUser) {
+        this.codUser = codUser;
     }
 }

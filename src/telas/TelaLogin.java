@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package telas;
 
 
@@ -46,6 +41,7 @@ public class TelaLogin extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
         getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 260, -1, -1));
 
@@ -148,10 +144,20 @@ public class TelaLogin extends javax.swing.JFrame {
   
         user.setNome(login.getText());
         user.setSenha(txtSenha.getText());
-        user.setTipo(String.valueOf(jComBTipoUser.getSelectedIndex()));
-
+        String comboTipo = jComBTipoUser.getSelectedItem().toString();
+        String tipo = null;
         
-        if (user.validaSenha(user)){
+        switch (comboTipo) {
+            case "Administrador":
+                tipo = "A";
+                break;
+            case "Funcionário":
+                tipo = "F";
+                break;
+        }
+        user.setTipo((tipo));
+       
+        if (user.validaSenha(user)) {
             java.awt.EventQueue.invokeLater(new Runnable() {
                 @Override
                 public void run() {

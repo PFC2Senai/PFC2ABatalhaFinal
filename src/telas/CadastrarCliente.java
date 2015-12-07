@@ -5,6 +5,7 @@ import atributos.Cliente;
 import atributos.Endereco;
 import atributos.PessoaContato;
 import atributos.Telefone;
+import static atributos.Usuario.idUsuario;
 import funcoes.ClienteDAO;
 import funcoes.Conexao;
 import funcoes.ContatosDAO;
@@ -338,6 +339,7 @@ public class CadastrarCliente extends javax.swing.JFrame {
                 
         Endereco endereco = new Endereco();
 
+        cli.setCodUser(idUsuario());
         cli.setEmpresa(txtEmpresa.getText());
         cli.setCnpj(txtCnpj.getText());
         cli.setCodSetor(codSetor);

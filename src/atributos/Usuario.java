@@ -12,6 +12,7 @@ public class Usuario {
     private String nome;
     private String tipo;
     private String senha;
+    private static int CodUsuario;
 
     /**
      * @return the idUser
@@ -83,6 +84,7 @@ public class Usuario {
             s.executeQuery (sql);
             rs = s.getResultSet();
                 while (rs.next ()){
+                    CodUsuario = rs.getInt("id_usuario");
                     user = rs.getString("USUARIO");
                     senhaUser = rs.getString("SENHA");
                     tipoUser = rs.getString("TIPO_USUARIO");
@@ -96,5 +98,9 @@ public class Usuario {
             throw new RuntimeException(ex);
         }
         return false;
+    }
+    
+    public static int idUsuario(){       
+        return CodUsuario = 1;        
     }
 }
