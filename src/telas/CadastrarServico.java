@@ -22,43 +22,272 @@ public class CadastrarServico extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
+        jPanel1 = new javax.swing.JPanel();
+        jButton2 = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
+        jBtnCadastrarProduto = new javax.swing.JButton();
+        txtQuantidade = new javax.swing.JTextField();
+        jLabel3 = new javax.swing.JLabel();
+        txtProduto = new javax.swing.JTextField();
+        jComboBoxProdutos = new javax.swing.JComboBox();
+        jComboBoxFornecedor = new javax.swing.JComboBox();
         jLabel2 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jComboBoxModelo = new javax.swing.JComboBox();
+        jBtnCadProduto = new javax.swing.JButton();
+        jBtbNovoProduto = new javax.swing.JButton();
+        jBtnCancelarCadProduto = new javax.swing.JButton();
+        jLabel6 = new javax.swing.JLabel();
+        jComboBoxCliente = new javax.swing.JComboBox();
+        jLabel10 = new javax.swing.JLabel();
+        jLabel12 = new javax.swing.JLabel();
+        txtDataCadProduto = new com.toedter.calendar.JDateChooser();
+        jLabel4 = new javax.swing.JLabel();
+        jBtbNovoProduto1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel1.setText("Cadastro de Serviço");
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel2.setText("Serviço:");
+        jButton2.setText("Cancelar");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 380, -1, -1));
+
+        jButton3.setText("Limpar");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 380, -1, -1));
+
+        jBtnCadastrarProduto.setText("Cadastrar");
+        jBtnCadastrarProduto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnCadastrarProdutoActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jBtnCadastrarProduto, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 380, -1, -1));
+        jPanel1.add(txtQuantidade, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 240, 40, -1));
+
+        jLabel3.setText("Quantidade:");
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 240, -1, -1));
+        jPanel1.add(txtProduto, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 190, 240, -1));
+
+        jComboBoxProdutos.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Selecione o produto" }));
+        jComboBoxProdutos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBoxProdutosActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jComboBoxProdutos, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 190, 260, -1));
+
+        jComboBoxFornecedor.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Selecione a Peça" }));
+        jComboBoxFornecedor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBoxFornecedorActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jComboBoxFornecedor, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 240, 200, -1));
+
+        jLabel2.setText("Peça:");
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 240, -1, -1));
+
+        jLabel5.setText("Modelo:");
+        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 330, -1, -1));
+
+        jComboBoxModelo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Selecione o modelo" }));
+        jComboBoxModelo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBoxModeloActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jComboBoxModelo, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 330, 200, -1));
+
+        jBtnCadProduto.setText("Salvar");
+        jBtnCadProduto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnCadProdutoActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jBtnCadProduto, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 190, 70, -1));
+
+        jBtbNovoProduto.setText("Incluir Peça");
+        jBtbNovoProduto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtbNovoProdutoActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jBtbNovoProduto, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 240, -1, -1));
+
+        jBtnCancelarCadProduto.setText("Cancelar");
+        jBtnCancelarCadProduto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnCancelarCadProdutoActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jBtnCancelarCadProduto, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 190, -1, -1));
+
+        jLabel6.setText("Cliente:");
+        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 80, -1, -1));
+
+        jComboBoxCliente.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Selecione o Cliente" }));
+        jComboBoxCliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBoxClienteActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jComboBoxCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 80, 150, 20));
+
+        jLabel10.setText("Tipo:");
+        jPanel1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 200, -1, -1));
+
+        jLabel12.setText("Data:");
+        jPanel1.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 140, -1, -1));
+        jPanel1.add(txtDataCadProduto, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 140, 140, -1));
+
+        jLabel4.setText("Cadastrar Serviço");
+        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, -1, -1));
+
+        jBtbNovoProduto1.setText("Novo Serviço");
+        jBtbNovoProduto1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtbNovoProduto1ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jBtbNovoProduto1, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 190, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1)
-                    .addComponent(jLabel2))
-                .addContainerGap(605, Short.MAX_VALUE))
+            .addGap(0, 800, Short.MAX_VALUE)
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 800, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 0, Short.MAX_VALUE)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(23, 23, 23)
-                .addComponent(jLabel1)
-                .addGap(18, 18, 18)
-                .addComponent(jLabel2)
-                .addContainerGap(261, Short.MAX_VALUE))
+            .addGap(0, 420, Short.MAX_VALUE)
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 420, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 0, Short.MAX_VALUE)))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+      //  limparCampos();
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jBtnCadastrarProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnCadastrarProdutoActionPerformed
+
+     //   prod.setQuantidadeMinima(Integer.parseInt(txtQuantMinima.getText()));
+
+      //  int codDet = ProdutoDAO.CadDetProduto(prod);
+
+      //  histProduto.setCodDetProduto(codDet);
+      //  histProduto.setQuantidade(Integer.parseInt(txtQuantidade.getText()));
+      //  histProduto.setValor(Double.parseDouble(txtPrecoEntrada.getText()));
+       // histProduto.setDataCadProduto(FormataData(txtDataCadProduto.getDate()));
+      //  HistoricoProdutoDAO.CadHistoricoProd(histProduto);
+
+        txtProduto.setVisible(false);
+        jComboBoxProdutos.setVisible(true);
+
+       // limparCampos();
+        jComboBoxProdutos.removeAllItems();
+      //  populaComboBoxProduto();
+        jBtbNovoProduto.setVisible(true);
+    }//GEN-LAST:event_jBtnCadastrarProdutoActionPerformed
+
+    private void jComboBoxFornecedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxFornecedorActionPerformed
+       // idFornecedorComboBox();
+    }//GEN-LAST:event_jComboBoxFornecedorActionPerformed
+
+    private void jComboBoxModeloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxModeloActionPerformed
+       // idModeloComboBox();
+    }//GEN-LAST:event_jComboBoxModeloActionPerformed
+
+    private void jBtnCadProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnCadProdutoActionPerformed
+
+//        prod.setIdUsuario(1);
+//        prod.setProduto(txtProduto.getText());
+//        codProduto = ProdutoDAO.Cadroduto(prod);
+//        jBtnCadProduto.setVisible(false);
+//        jBtnCancelarCadProduto.setVisible(false);
+//        jBtbNovoProduto.setVisible(false);
+//        txtProduto.setEnabled(false);
+//        // jComboBoxProdutos.setVisible(true);
+
+    }//GEN-LAST:event_jBtnCadProdutoActionPerformed
+
+    private void jBtbNovoProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtbNovoProdutoActionPerformed
+
+        txtProduto.setVisible(true);
+        jComboBoxProdutos.setVisible(false);
+        jBtnCadProduto.setVisible(true);
+        jBtnCancelarCadProduto.setVisible(true);
+        jBtbNovoProduto.setVisible(false);
+        txtProduto.setEnabled(true);
+    }//GEN-LAST:event_jBtbNovoProdutoActionPerformed
+
+    private void jBtnCancelarCadProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnCancelarCadProdutoActionPerformed
+        jBtnCadProduto.setVisible(false);
+        jBtnCancelarCadProduto.setVisible(false);
+        jBtbNovoProduto.setVisible(true);
+        txtProduto.setVisible(false);
+        jComboBoxProdutos.setVisible(true);
+    }//GEN-LAST:event_jBtnCancelarCadProdutoActionPerformed
+
+    private void jComboBoxClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxClienteActionPerformed
+       // idFabricanteComboBox();
+    }//GEN-LAST:event_jComboBoxClienteActionPerformed
+
+    private void jComboBoxProdutosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxProdutosActionPerformed
+       // idProdutoComboBox();
+    }//GEN-LAST:event_jComboBoxProdutosActionPerformed
+
+    private void jBtbNovoProduto1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtbNovoProduto1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jBtbNovoProduto1ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JButton jBtbNovoProduto;
+    private javax.swing.JButton jBtbNovoProduto1;
+    private javax.swing.JButton jBtnCadProduto;
+    private javax.swing.JButton jBtnCadastrarProduto;
+    private javax.swing.JButton jBtnCancelarCadProduto;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
+    private javax.swing.JComboBox jComboBoxCliente;
+    private javax.swing.JComboBox jComboBoxFornecedor;
+    private javax.swing.JComboBox jComboBoxModelo;
+    private javax.swing.JComboBox jComboBoxProdutos;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JPanel jPanel1;
+    private com.toedter.calendar.JDateChooser txtDataCadProduto;
+    private javax.swing.JTextField txtProduto;
+    private javax.swing.JTextField txtQuantidade;
     // End of variables declaration//GEN-END:variables
 }

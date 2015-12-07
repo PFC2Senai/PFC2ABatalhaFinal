@@ -186,7 +186,7 @@ public class CadastrarProduto extends javax.swing.JFrame {
                 jBtnCadProdutoActionPerformed(evt);
             }
         });
-        jPanel1.add(jBtnCadProduto, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 80, -1, -1));
+        jPanel1.add(jBtnCadProduto, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 110, -1, -1));
 
         jBtbNovoProduto.setText("Novo produto");
         jBtbNovoProduto.addActionListener(new java.awt.event.ActionListener() {
@@ -202,7 +202,7 @@ public class CadastrarProduto extends javax.swing.JFrame {
                 jBtnCancelarCadProdutoActionPerformed(evt);
             }
         });
-        jPanel1.add(jBtnCancelarCadProduto, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 110, -1, -1));
+        jPanel1.add(jBtnCancelarCadProduto, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 110, -1, -1));
 
         jLabel7.setText("Valor de Entrada:");
         jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 270, -1, -1));

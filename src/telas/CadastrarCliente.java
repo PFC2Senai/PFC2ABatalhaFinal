@@ -155,6 +155,11 @@ public class CadastrarCliente extends javax.swing.JFrame {
         });
 
         jBtnOutroContato.setText("Outro contato");
+        jBtnOutroContato.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnOutroContatoActionPerformed(evt);
+            }
+        });
 
         jLabel16.setForeground(new java.awt.Color(255, 0, 0));
         jLabel16.setText("Como cadastrar outro contato? Salvar e continuar aí chama a próxima tela para cadastrar os contatos?");
@@ -375,6 +380,10 @@ public class CadastrarCliente extends javax.swing.JFrame {
         ContatosDAO.CadEndereco(endereco);
         limparCampos();
     }//GEN-LAST:event_btnCadClienteActionPerformed
+
+    private void jBtnOutroContatoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnOutroContatoActionPerformed
+        new CadastrarContato().setVisible(true);
+    }//GEN-LAST:event_jBtnOutroContatoActionPerformed
     
     private void populaComboBox() {
         Connection conexao = Conexao.getConnection();
