@@ -14,7 +14,14 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.Vector;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.event.TableModelEvent;
+import javax.swing.table.DefaultTableModel;
 
 
 public class CadastrarCliente extends javax.swing.JFrame {
@@ -24,7 +31,7 @@ public class CadastrarCliente extends javax.swing.JFrame {
     
     public CadastrarCliente() {
         initComponents();
-        this.populaComboBox();
+        this.populaComboBox();        
     }
 
     /**
@@ -52,8 +59,8 @@ public class CadastrarCliente extends javax.swing.JFrame {
         jLabel9 = new javax.swing.JLabel();
         txtEmail = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
-        jButton1 = new javax.swing.JButton();
+        jTableContatos = new javax.swing.JTable();
+        jBtnRemoverContato = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jLabel10 = new javax.swing.JLabel();
         txtPais = new javax.swing.JTextField();
@@ -129,7 +136,7 @@ public class CadastrarCliente extends javax.swing.JFrame {
 
         jLabel9.setText("Email:");
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        jTableContatos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -137,9 +144,14 @@ public class CadastrarCliente extends javax.swing.JFrame {
                 "Contato", "Telefone", "Celular", "Email"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(jTableContatos);
 
-        jButton1.setText("Remover contato");
+        jBtnRemoverContato.setText("Remover contato");
+        jBtnRemoverContato.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnRemoverContatoActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -148,35 +160,34 @@ public class CadastrarCliente extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 619, Short.MAX_VALUE)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel5)
-                                    .addComponent(jLabel9))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(txtEmail, javax.swing.GroupLayout.DEFAULT_SIZE, 219, Short.MAX_VALUE)
-                                    .addComponent(txtContato)))
-                            .addComponent(jBtnOutroContato))
+                            .addComponent(jLabel5)
+                            .addComponent(jLabel9))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(txtEmail, javax.swing.GroupLayout.DEFAULT_SIZE, 219, Short.MAX_VALUE)
+                            .addComponent(txtContato))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jButton1)
-                                .addGap(197, 197, 197))
+                                .addComponent(jLabel7)
+                                .addGap(18, 18, 18))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                                .addComponent(jLabel13)
+                                .addGap(27, 27, 27)))
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addGap(4, 4, 4)
-                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addGroup(jPanel2Layout.createSequentialGroup()
-                                        .addComponent(jLabel7)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(txtTel01, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(jPanel2Layout.createSequentialGroup()
-                                        .addComponent(jLabel13)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(txtTelCel, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addGap(0, 0, Short.MAX_VALUE)))))
+                                .addComponent(txtTel01, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(txtTelCel, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(154, 154, 154))))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(jBtnOutroContato)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jBtnRemoverContato)))
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
@@ -196,7 +207,7 @@ public class CadastrarCliente extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jBtnOutroContato)
-                    .addComponent(jButton1))
+                    .addComponent(jBtnRemoverContato))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 11, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -245,9 +256,9 @@ public class CadastrarCliente extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel2)
-                    .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel12))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                    .addComponent(jLabel12)
+                    .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addComponent(txtCep, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -286,7 +297,7 @@ public class CadastrarCliente extends javax.swing.JFrame {
         );
 
         jPanel4.setBackground(new java.awt.Color(223, 237, 253));
-        jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Empresa", javax.swing.border.TitledBorder.LEFT, javax.swing.border.TitledBorder.DEFAULT_POSITION));
+        jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createTitledBorder(""), "Empresa", javax.swing.border.TitledBorder.LEFT, javax.swing.border.TitledBorder.DEFAULT_POSITION));
 
         jLabel3.setText("Empresa:");
 
@@ -372,12 +383,12 @@ public class CadastrarCliente extends javax.swing.JFrame {
                 .addGap(12, 12, 12)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(4, 4, 4)
+                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 11, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnCadCliente)
                     .addComponent(btnCancelar)
@@ -418,7 +429,7 @@ public class CadastrarCliente extends javax.swing.JFrame {
         Cliente cli = new Cliente();
         Telefone tel = new Telefone();
         PessoaContato pContato = new PessoaContato();
-                
+        String email;        
         Endereco endereco = new Endereco();
 
         cli.setCodUser(idUsuario());
@@ -427,23 +438,19 @@ public class CadastrarCliente extends javax.swing.JFrame {
         cli.setCodSetor(codSetor);
         cli.setEmail(txtEmail.getText());
         
-        tel.setTel(txtTel01.getText());
-        tel.setCel(txtTelCel.getText());
+       // tel.setTel(txtTel01.getText());
+       // tel.setCel(txtTelCel.getText());
 
         int i = ContatosDAO.CadContato();
                 
-        ContatosDAO.CadTel(i, tel);
+       // ContatosDAO.CadTel(i, tel);
         
-        ContatosDAO.CadEmail(i, txtEmail.getText());
+     //   ContatosDAO.CadEmail(i, txtEmail.getText());
               
         cli.setIdContato(i);
         int codCli = ClienteDAO.CadCliente(cli);
         
-        pContato.setCodCliente(codCli);
-        pContato.setCodContato(i);
-        pContato.setNomeContato(txtContato.getText());
-
-        PessoaContatoDAO.CadPessoaContato(pContato);
+        
         
         endereco.setPais(txtPais.getText());
         endereco.setCep(txtCep.getText());
@@ -456,11 +463,57 @@ public class CadastrarCliente extends javax.swing.JFrame {
 
         ContatosDAO.CadEndereco(endereco);
         limparCampos();
+        
+        for(int j=0; j < jTableContatos.getRowCount(); j++) { 
+            System.out.println(jTableContatos.getRowCount());
+                 
+            pContato.setNomeContato(jTableContatos.getValueAt(j, 0).toString());    
+            tel.setTel(jTableContatos.getValueAt(j, 1).toString());        
+            tel.setCel(jTableContatos.getValueAt(j, 2).toString());          
+            email = jTableContatos.getValueAt(j, 3).toString(); 
+           
+            ContatosDAO.CadTel(i, tel);
+            ContatosDAO.CadEmail(i, email);
+            pContato.setCodCliente(codCli);
+            pContato.setCodContato(i);
+            
+            PessoaContatoDAO.CadPessoaContato(pContato);
+        }
     }//GEN-LAST:event_btnCadClienteActionPerformed
 
     private void jBtnOutroContatoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnOutroContatoActionPerformed
-        new CadastrarContato().setVisible(true);
+        
+        TabelaContatos();                           
     }//GEN-LAST:event_jBtnOutroContatoActionPerformed
+
+    private void jBtnRemoverContatoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnRemoverContatoActionPerformed
+        
+        DefaultTableModel dtm = (DefaultTableModel) jTableContatos.getModel();
+        int linha = jTableContatos.getSelectedRow();
+ 
+        if( linha != -1){
+            dtm.removeRow( linha );
+        }
+    }//GEN-LAST:event_jBtnRemoverContatoActionPerformed
+    
+    public void TabelaContatos() {
+        
+        try { 
+            
+            DefaultTableModel dtm = (DefaultTableModel) jTableContatos.getModel();
+                   
+                dtm.addRow(new Object[] {txtContato.getText(),txtTel01.getText(),txtTelCel.getText(),txtEmail.getText()});
+                
+                txtContato.setText("");
+                txtTel01.setText(null);
+                txtTelCel.setText(null);
+                txtEmail.setText("");
+                txtContato.requestFocus();    
+                
+        } catch (Exception erro) {
+            Logger.getLogger(CadastrarCliente.class.getName()).log(Level.SEVERE, null, erro);
+        }          
+    }
     
     private void populaComboBox() {
         Connection conexao = Conexao.getConnection();
@@ -523,7 +576,7 @@ public class CadastrarCliente extends javax.swing.JFrame {
     private javax.swing.JButton btnCancelar;
     private javax.swing.JButton btnLimpar;
     private javax.swing.JButton jBtnOutroContato;
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jBtnRemoverContato;
     private javax.swing.JComboBox jComboBoxSetores;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
@@ -545,7 +598,7 @@ public class CadastrarCliente extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JTable jTableContatos;
     private javax.swing.JTextField txtBairro;
     private javax.swing.JFormattedTextField txtCep;
     private javax.swing.JTextField txtCidade;

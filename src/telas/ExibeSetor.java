@@ -35,7 +35,7 @@ public class ExibeSetor extends javax.swing.JFrame {
     }
     
      
-    public void TabelaSetor(){
+    public void TabelaSetor() {
         
         ((DefaultTableModel) jTableListarSetores.getModel()).setNumRows(0);
         jTableListarSetores.updateUI();

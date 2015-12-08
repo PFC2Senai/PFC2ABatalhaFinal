@@ -202,7 +202,6 @@ public class DetalharCliente extends javax.swing.JFrame {
                
             ResultSet rs;
             rs = stmt.executeQuery(sql);            
-            //rs.first();
             
                 while(rs.next()){
                     dados.add(new Object[]{ rs.getObject("idPessoaContato"),rs.getObject("contato"),
@@ -505,7 +504,7 @@ public class DetalharCliente extends javax.swing.JFrame {
         ));
         jScrollPane2.setViewportView(jTableContatos);
 
-        jPanel1.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 270, 430, 140));
+        jPanel1.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 270, 420, 140));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
