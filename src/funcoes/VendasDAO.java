@@ -30,12 +30,12 @@ public class VendasDAO {
                     + "produto, dataVenda, hora, tabordemserv_idtabOrdemServ) VALUES(?,?,?,?,?,?)");
             stmt = Conexao.getConnection().prepareStatement(sql);      
   
-                stmt.setString(1, String.valueOf(venda.getTabusuarioIdUsuario()));
-                stmt.setString(2, String.valueOf(venda.getClienteIdcliente()));
+                stmt.setInt(1, venda.getClienteIdcliente());
+                stmt.setInt(2, venda.getTabusuarioIdUsuario());
                 stmt.setString(3, venda.getProduto());
                 stmt.setObject(4, venda.getDataVenda());
                 stmt.setTime(5, venda.getHora());
-                stmt.setString(6, String.valueOf(venda.getIdOrdemServico()));
+                stmt.setInt(6, venda.getIdOrdemServico());
                               
                 stmt.executeUpdate();
                 

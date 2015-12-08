@@ -65,7 +65,7 @@ public class CadastrarVenda extends javax.swing.JFrame {
     }
     
     
-    private void idSetorComboBox() {
+    private void idTipoServComboBox() {
         
         Connection conexao = Conexao.getConnection();
         ResultSet rs;
@@ -162,6 +162,11 @@ public class CadastrarVenda extends javax.swing.JFrame {
         });
 
         jComboBoxTipoServ.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Selecione" }));
+        jComboBoxTipoServ.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBoxTipoServActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -288,6 +293,11 @@ public class CadastrarVenda extends javax.swing.JFrame {
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         limparCampos();
     }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jComboBoxTipoServActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxTipoServActionPerformed
+        idTipoServComboBox();
+    }//GEN-LAST:event_jComboBoxTipoServActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private com.toedter.calendar.JDateChooser JDataVenda;
     private javax.swing.JButton jButton1;
