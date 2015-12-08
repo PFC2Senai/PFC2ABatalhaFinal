@@ -13,6 +13,7 @@ import java.util.logging.Logger;
 
 public class ContatosDAO {
 
+    
     public static int CadContato() {
         int id = 0;
         PreparedStatement stmt;
@@ -316,8 +317,112 @@ public class ContatosDAO {
         }    
         return codTel;
     }
+    
+    public static int CodEmail(String email) {
+        
+        Statement stmt;
+        int codTel = 0;
+        
+        try {            
+            String Sql = "SELECT id_email FROM tabemail where email = '" + email + "';";
+            
+            ResultSet rs;            
+            stmt = Conexao.getConnection().createStatement();            
+            rs = stmt.executeQuery(Sql); 
+            
+            while(rs.next()){                
+               codTel = rs.getInt("id_email");
+            }
+            
+            rs.close();
+            stmt.close();
+            
+        } catch (SQLException ex) {      
+            Logger.getLogger(ContatosDAO.class.getName()).log(Level.SEVERE, null, ex);
+            throw new RuntimeException("Erro ao carregar o codigo do email: ", ex);    
+        }    
+        return codTel;
+    }
 
     public static void CadTel(int i, String telefone) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+    
+    public static ArrayList Telefones(int id) {
+        
+        Statement stmt;
+        ArrayList<String> telefones = new ArrayList<String>();
+        
+        try {            
+            String Sql = "SELECT * FROM tabtel where Contato_id = " + id + ";";
+            
+            ResultSet rs;            
+            stmt = Conexao.getConnection().createStatement();            
+            rs = stmt.executeQuery(Sql); 
+            
+            while(rs.next()) {
+                telefones.add(rs.getString("telefone"));
+            }
+            
+            rs.close();
+            stmt.close();
+            
+        } catch (SQLException ex) {      
+            Logger.getLogger(ContatosDAO.class.getName()).log(Level.SEVERE, null, ex);
+            throw new RuntimeException("Erro ao carregar telefones: ", ex);    
+        }    
+        return telefones;
+    }
+    
+    public static ArrayList Celular(int id) {
+        
+        Statement stmt;
+        ArrayList<String> celular = new ArrayList<String>();
+        
+        try {            
+            String Sql = "SELECT * FROM tabtel where Contato_id = " + id + ";";
+            
+            ResultSet rs;            
+            stmt = Conexao.getConnection().createStatement();            
+            rs = stmt.executeQuery(Sql); 
+            
+            while(rs.next()) {                
+                celular.add(rs.getString("celular"));
+            }
+            
+            rs.close();
+            stmt.close();
+            
+        } catch (SQLException ex) {      
+            Logger.getLogger(ContatosDAO.class.getName()).log(Level.SEVERE, null, ex);
+            throw new RuntimeException("Erro ao carregar telefones: ", ex);    
+        }    
+        return celular;
+    }
+    
+    public static ArrayList Email(int id) {
+        
+        Statement stmt;
+        ArrayList<String> email = new ArrayList<String>();
+        
+        try {            
+            String Sql = "SELECT * FROM tabemail where contato_id_contato = " + id + ";";
+            
+            ResultSet rs;            
+            stmt = Conexao.getConnection().createStatement();            
+            rs = stmt.executeQuery(Sql); 
+            
+            while(rs.next()) {                
+                email.add(rs.getString("email"));
+            }
+            
+            rs.close();
+            stmt.close();
+            
+        } catch (SQLException ex) {      
+            Logger.getLogger(ContatosDAO.class.getName()).log(Level.SEVERE, null, ex);
+            throw new RuntimeException("Erro ao carregar telefones: ", ex);    
+        }    
+        return email;
     }
 }

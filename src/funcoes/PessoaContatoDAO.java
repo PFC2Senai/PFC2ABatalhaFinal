@@ -41,7 +41,7 @@ public class PessoaContatoDAO {
         ArrayList<PessoaContato> pessoaContato = new ArrayList<PessoaContato>();
         
         try {            
-            String Sql = "SELECT * FROM tabpessoacontato WHERE idPessoaContato = '"+ id +"';";
+            String Sql = "SELECT * FROM tabpessoacontato WHERE cod_contato = '"+ id +"';";
             
             ResultSet rs;            
             stmt = Conexao.getConnection().createStatement();            
@@ -104,7 +104,7 @@ public class PessoaContatoDAO {
         }
     }
     
-    public static ArrayList<PessoaContato> ListarContatos(int id) {
+    public static ArrayList ListarContatos(int id) {
         
         Statement stmt;
         ArrayList<PessoaContato> pessoaContato = new ArrayList<PessoaContato>();
@@ -133,5 +133,31 @@ public class PessoaContatoDAO {
             throw new RuntimeException("Erro ao listar as pessoa contato: ", ex);    
         }    
         return pessoaContato;
-    }    
+    }  
+    
+    public static ArrayList Contatos(int id) {
+        
+        Statement stmt;
+        
+        ArrayList<String> pessoaContato = new ArrayList<String>();
+        
+        try {            
+            String Sql = "SELECT * FROM tabpessoacontato where tabcliente_idcliente = " + id + " ;";
+            
+            ResultSet rs;            
+            stmt = Conexao.getConnection().createStatement();            
+            rs = stmt.executeQuery(Sql); 
+            
+            while(rs.next()){               
+                pessoaContato.add((rs.getString("contato")));                
+            }            
+            rs.close();
+            stmt.close();
+            
+        } catch (SQLException ex) {      
+            Logger.getLogger(PessoaContatoDAO.class.getName()).log(Level.SEVERE, null, ex);
+            throw new RuntimeException("Erro ao listar contato: ", ex);    
+        }    
+        return pessoaContato;
+    } 
 }

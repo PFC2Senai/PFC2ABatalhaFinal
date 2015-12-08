@@ -461,7 +461,6 @@ public class DetalharFornecedor extends javax.swing.JFrame {
     private void jBtnAltContatoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnAltContatoActionPerformed
 
         codTel = CodTel(txtTel.getText().trim());
-        codCel = CodTel(txtTelCel.getText());
         
         txtTel.setEnabled(true);
         txtTelCel.setEnabled(true);

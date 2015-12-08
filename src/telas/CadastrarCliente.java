@@ -76,7 +76,7 @@ public class CadastrarCliente extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         txtEmpresa = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
-        txtCnpj = new javax.swing.JFormattedTextField();
+        txtEndCep = new javax.swing.JFormattedTextField();
         jLabel6 = new javax.swing.JLabel();
         jComboBoxSetores = new javax.swing.JComboBox();
 
@@ -181,9 +181,9 @@ public class CadastrarCliente extends javax.swing.JFrame {
                                 .addComponent(txtTelCel, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(154, 154, 154))))
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jBtnOutroContato)
+                        .addComponent(jBtnRemoverContato)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jBtnRemoverContato)))
+                        .addComponent(jBtnOutroContato)))
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
@@ -300,7 +300,7 @@ public class CadastrarCliente extends javax.swing.JFrame {
         jLabel4.setText("CNPJ:");
 
         try {
-            txtCnpj.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##.###.###/####-##")));
+            txtEndCep.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##.###.###/####-##")));
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
@@ -329,8 +329,8 @@ public class CadastrarCliente extends javax.swing.JFrame {
                         .addComponent(txtEmpresa, javax.swing.GroupLayout.PREFERRED_SIZE, 229, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jLabel4)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(txtCnpj)))
+                        .addGap(30, 30, 30)
+                        .addComponent(txtEndCep)))
                 .addGap(168, 168, 168))
         );
         jPanel4Layout.setVerticalGroup(
@@ -341,7 +341,7 @@ public class CadastrarCliente extends javax.swing.JFrame {
                     .addComponent(jLabel3)
                     .addComponent(txtEmpresa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel4)
-                    .addComponent(txtCnpj, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtEndCep, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
@@ -364,14 +364,15 @@ public class CadastrarCliente extends javax.swing.JFrame {
                         .addGap(0, 25, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel1)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(btnLimpar)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnCancelar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnCadCliente)
-                        .addGap(42, 42, 42))))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(23, 23, 23)
+                .addComponent(btnCancelar)
+                .addGap(18, 18, 18)
+                .addComponent(btnLimpar)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnCadCliente)
+                .addGap(42, 42, 42))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -430,7 +431,7 @@ public class CadastrarCliente extends javax.swing.JFrame {
 
         cli.setCodUser(idUsuario());
         cli.setEmpresa(txtEmpresa.getText());
-        cli.setCnpj(txtCnpj.getText());
+        cli.setCnpj(txtEndCep.getText());
         cli.setCodSetor(codSetor);
         cli.setEmail(txtEmail.getText());
 
@@ -546,7 +547,7 @@ public class CadastrarCliente extends javax.swing.JFrame {
     
     private void limparCampos(){
         txtEmpresa.setText("");
-        txtCnpj.setText("");
+        txtEndCep.setText("");
         txtContato.setText("");
         jComboBoxSetores.setSelectedIndex(0);
         txtTel01.setText(null);
@@ -593,10 +594,10 @@ public class CadastrarCliente extends javax.swing.JFrame {
     private javax.swing.JTextField txtBairro;
     private javax.swing.JFormattedTextField txtCep;
     private javax.swing.JTextField txtCidade;
-    private javax.swing.JFormattedTextField txtCnpj;
     private javax.swing.JTextField txtContato;
     private javax.swing.JTextField txtEmail;
     private javax.swing.JTextField txtEmpresa;
+    private javax.swing.JFormattedTextField txtEndCep;
     private javax.swing.JTextField txtEstado;
     private javax.swing.JTextField txtNumero;
     private javax.swing.JTextField txtPais;
