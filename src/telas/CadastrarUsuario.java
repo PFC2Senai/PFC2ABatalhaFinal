@@ -171,7 +171,7 @@ public class CadastrarUsuario extends javax.swing.JFrame {
         JOptionPane.showMessageDialog(this, "Cadastrado com Sucesso! Agora você tem permissões para "
                 + "acessar o sistema!");
         Menu m = new Menu();
-        m.setVisible(true);
+        //m.setVisible(true);
         this.dispose();
          }else{
              JOptionPane.showMessageDialog(null,"Campo(s) Vazio(s)!");

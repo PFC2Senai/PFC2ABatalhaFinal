@@ -16,6 +16,15 @@ public class Vendas {
     private String produto;
     private Date dataVenda;
     private Time hora;
+    private int idOrdemServico;
+
+    public int getIdOrdemServico() {
+        return idOrdemServico;
+    }
+
+    public void setIdOrdemServico(int idOrdemServico) {
+        this.idOrdemServico = idOrdemServico;
+    }
 
     /**
      * @return the idtabVendas

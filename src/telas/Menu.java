@@ -43,6 +43,7 @@ public class Menu extends javax.swing.JFrame {
         jMenuItem17 = new javax.swing.JMenuItem();
         jMenuItem26 = new javax.swing.JMenuItem();
         jMenuItem29 = new javax.swing.JMenuItem();
+        jMenuItem31 = new javax.swing.JMenuItem();
         jMenu10 = new javax.swing.JMenu();
         jMenuItem7 = new javax.swing.JMenuItem();
         jMenuItem9 = new javax.swing.JMenuItem();
@@ -166,6 +167,14 @@ public class Menu extends javax.swing.JFrame {
             }
         });
         jMenu14.add(jMenuItem29);
+
+        jMenuItem31.setText("Vendas");
+        jMenuItem31.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem31ActionPerformed(evt);
+            }
+        });
+        jMenu14.add(jMenuItem31);
 
         jMenu4.add(jMenu14);
 
@@ -406,6 +415,10 @@ public class Menu extends javax.swing.JFrame {
         //new ExibeServico().setVisible(true);
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
+    private void jMenuItem31ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem31ActionPerformed
+        new CadastrarVenda().setVisible(true);
+    }//GEN-LAST:event_jMenuItem31ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -475,6 +488,7 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem29;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem30;
+    private javax.swing.JMenuItem jMenuItem31;
     private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JMenuItem jMenuItem6;

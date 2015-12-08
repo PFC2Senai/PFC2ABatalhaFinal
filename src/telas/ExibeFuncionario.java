@@ -98,13 +98,13 @@ public class ExibeFuncionario extends javax.swing.JFrame {
 
         jTableListarFuncionarios.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null}
+                {},
+                {},
+                {},
+                {}
             },
             new String [] {
-                "Matrícula", "Nome"
+
             }
         ));
         jScrollPane1.setViewportView(jTableListarFuncionarios);
