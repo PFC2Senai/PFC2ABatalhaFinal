@@ -203,13 +203,13 @@ public class DetalharCliente extends javax.swing.JFrame {
             ResultSet rs;
             rs = stmt.executeQuery(sql);            
             
-                while(rs.next()){
+                while(rs.next()) {
                     dados.add(new Object[]{ rs.getObject("idPessoaContato"),rs.getObject("contato"),
                                             rs.getObject("telefone"),rs.getObject("celular"), 
                                             rs.getObject("email")});            
                 }
 
-                    for (int i = 0; i < 5; i++){
+                    for (int i = 0; i < 5; i++) {
                         ModeloTabela modelo = new ModeloTabela(dados, Colunas);
                         jTableContatos.setModel(modelo);
                         jTableContatos.getColumnModel().getColumn(i).setPreferredWidth(150);

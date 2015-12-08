@@ -14,13 +14,9 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
-import javax.swing.event.TableModelEvent;
 import javax.swing.table.DefaultTableModel;
 
 
@@ -437,21 +433,12 @@ public class CadastrarCliente extends javax.swing.JFrame {
         cli.setCnpj(txtCnpj.getText());
         cli.setCodSetor(codSetor);
         cli.setEmail(txtEmail.getText());
-        
-       // tel.setTel(txtTel01.getText());
-       // tel.setCel(txtTelCel.getText());
 
         int i = ContatosDAO.CadContato();
-                
-       // ContatosDAO.CadTel(i, tel);
-        
-     //   ContatosDAO.CadEmail(i, txtEmail.getText());
               
         cli.setIdContato(i);
         int codCli = ClienteDAO.CadCliente(cli);
-        
-        
-        
+               
         endereco.setPais(txtPais.getText());
         endereco.setCep(txtCep.getText());
         endereco.setRua(txtRua.getText());
@@ -462,10 +449,9 @@ public class CadastrarCliente extends javax.swing.JFrame {
         endereco.setIdContato(i);
 
         ContatosDAO.CadEndereco(endereco);
-        limparCampos();
         
-        for(int j=0; j < jTableContatos.getRowCount(); j++) { 
-            System.out.println(jTableContatos.getRowCount());
+        
+        for(int j=0; j < jTableContatos.getRowCount(); j++) {
                  
             pContato.setNomeContato(jTableContatos.getValueAt(j, 0).toString());    
             tel.setTel(jTableContatos.getValueAt(j, 1).toString());        
@@ -479,6 +465,10 @@ public class CadastrarCliente extends javax.swing.JFrame {
             
             PessoaContatoDAO.CadPessoaContato(pContato);
         }
+        
+        limparCampos();
+        ((DefaultTableModel) jTableContatos.getModel()).setNumRows(0);
+        jTableContatos.updateUI();
     }//GEN-LAST:event_btnCadClienteActionPerformed
 
     private void jBtnOutroContatoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnOutroContatoActionPerformed
@@ -516,6 +506,7 @@ public class CadastrarCliente extends javax.swing.JFrame {
     }
     
     private void populaComboBox() {
+        
         Connection conexao = Conexao.getConnection();
         ResultSet rs;
         String sql = "select * from tabSetor";
