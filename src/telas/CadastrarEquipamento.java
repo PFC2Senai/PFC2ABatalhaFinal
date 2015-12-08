@@ -94,7 +94,7 @@ public class CadastrarEquipamento extends javax.swing.JFrame {
                 jBtnCadEquipamentoActionPerformed(evt);
             }
         });
-        jPanel1.add(jBtnCadEquipamento, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 100, -1, -1));
+        jPanel1.add(jBtnCadEquipamento, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 70, -1, -1));
 
         jBtbNovoEquipamento.setText("Novo Equipamento");
         jBtbNovoEquipamento.addActionListener(new java.awt.event.ActionListener() {
@@ -110,7 +110,7 @@ public class CadastrarEquipamento extends javax.swing.JFrame {
                 jBtnCancelarCadEquipamentoActionPerformed(evt);
             }
         });
-        jPanel1.add(jBtnCancelarCadEquipamento, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 70, -1, -1));
+        jPanel1.add(jBtnCancelarCadEquipamento, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 70, -1, -1));
 
         jLabel8.setText("Fornecedor:");
         jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 140, -1, -1));
