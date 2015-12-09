@@ -26,7 +26,7 @@ public class ServicoDAO {
                 stmt.setInt(1, 1);
                 stmt.setInt(2, serv.getCodCliente());
                 stmt.setString(3, serv.getDescricaoServico());
-                stmt.setFloat(4, serv.getPreco());
+                stmt.setDouble(4, serv.getPreco());
                 stmt.setObject(5, serv.getDataServico());
                               
                 stmt.executeUpdate();
@@ -80,7 +80,7 @@ public class ServicoDAO {
                 s.setCodUsuario((rs.getInt("tabUsuario_id_usuario")));
                 s.setCodCliente(rs.getInt("tabCliente_idcliente"));
                 s.setDescricaoServico(rs.getString("infoServico"));
-                s.setPreco(rs.getFloat("preco"));  
+                s.setPreco(rs.getDouble("preco"));  
                 s.setDataServico(rs.getDate("dataServico"));
                 s.setIdDetServico(rs.getInt("id_det_servico"));
                 s.setCodServico(rs.getInt("servico_idservico"));
@@ -99,7 +99,7 @@ public class ServicoDAO {
         return servico;
     }        
     
-    public static void ExcluirServico(int id){
+    public static void ExcluirServico(int id) {
         
         CallableStatement stmt;
         try {   

@@ -5,10 +5,11 @@ import java.util.Date;
 
 public class Servico {
     
+    
     private int idServico;
     private int codUsuario;
     private int codCliente;    
-    private float preco;
+    private double preco;
     private Date dataServico;
     private int codOrdemServico; //chave estrangeira
     //tab det Servico
@@ -80,14 +81,14 @@ public class Servico {
     /**
      * @return the preco
      */
-    public float getPreco() {
+    public double getPreco() {
         return preco;
     }
 
     /**
      * @param preco the preco to set
      */
-    public void setPreco(float preco) {
+    public void setPreco(double preco) {
         this.preco = preco;
     }
 

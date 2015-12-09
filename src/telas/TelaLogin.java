@@ -59,6 +59,7 @@ public class TelaLogin extends javax.swing.JFrame {
         jLabel1.setForeground(new java.awt.Color(192, 246, 233));
         jLabel1.setText("Usuário:");
 
+        txtSenha.setToolTipText("");
         txtSenha.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, null, new java.awt.Color(0, 204, 153), null, null));
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N

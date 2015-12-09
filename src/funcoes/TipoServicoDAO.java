@@ -15,9 +15,11 @@ import java.util.logging.Logger;
  */
 public class TipoServicoDAO {
     
-    public static void CadTipoServico(TipoServico tServ){
+    public static int CadTipoServico(TipoServico tServ) {
         
         PreparedStatement stmt;
+        
+        int id = 0;
         try {   
             String sql = ("INSERT INTO tabtipo_serv(Tipo_serv) VALUES (?);");
             stmt = Conexao.getConnection().prepareStatement(sql);      
@@ -25,12 +27,19 @@ public class TipoServicoDAO {
                 stmt.setString(1, tServ.getTipo());
                               
                 stmt.executeUpdate();
+                
+                ResultSet rs = stmt.getGeneratedKeys();
+                if (rs.next()) {
+                    id = rs.getInt(1);
+                }
+                
                 stmt.close();  
 
             } catch (SQLException ex) {      
                 Logger.getLogger(TipoServicoDAO.class.getName()).log(Level.SEVERE, null, ex);
                 throw new RuntimeException("Erro ao Cadastrar tipo de servico: ",ex);       
             }
+        return id;
     }
     
     public static ArrayList CarregaTipoServico(int id) {
@@ -100,7 +109,7 @@ public class TipoServicoDAO {
         }
     }
     
-    public static ArrayList ListarSetor(){
+    public static ArrayList ListarSetor() {
         
         Statement stmt;
         ArrayList<TipoServico> tServico = new ArrayList<TipoServico>();
@@ -112,7 +121,7 @@ public class TipoServicoDAO {
             stmt = Conexao.getConnection().createStatement();            
             rs = stmt.executeQuery(Sql); 
             
-            while(rs.next()){
+            while(rs.next()) {
                 TipoServico t = new TipoServico();
                 
                 t.setIdTipoServico(rs.getInt("idtabTipo_serv"));
