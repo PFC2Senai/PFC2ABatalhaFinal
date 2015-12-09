@@ -11,6 +11,8 @@ public class HistoricoProduto {
     private Date dataCadProduto;
     private int quantidade;
     private int codDetProduto;
+    
+    private int codFornecedor;
 
     /**
      * @return the idHistProduto
@@ -80,6 +82,20 @@ public class HistoricoProduto {
      */
     public void setCodDetProduto(int codDetProduto) {
         this.codDetProduto = codDetProduto;
+    }
+
+    /**
+     * @return the codFornecedor
+     */
+    public int getCodFornecedor() {
+        return codFornecedor;
+    }
+
+    /**
+     * @param codFornecedor the codFornecedor to set
+     */
+    public void setCodFornecedor(int codFornecedor) {
+        this.codFornecedor = codFornecedor;
     }
     
 }

@@ -40,7 +40,6 @@ public class CadastrarProduto extends javax.swing.JFrame {
     }
     
     private void limparCampos() {
-        //jTextCodUsuario.setText("");
         txtProduto.setText("");
         txtPrecoEntrada.setText("");
         txtPrecoSaida.setText("");
@@ -235,7 +234,6 @@ public class CadastrarProduto extends javax.swing.JFrame {
 
         HistoricoProduto histProduto = new HistoricoProduto();
         
-        prod.setCodFornecedor(codFornecedor);
         prod.setCodModelo(codModelo);
         prod.setCodFabricante(codFabricante);
         prod.setDataCadProduto(FormataData(txtDataCadProduto.getDate()));
@@ -251,6 +249,7 @@ public class CadastrarProduto extends javax.swing.JFrame {
         histProduto.setQuantidade(Integer.parseInt(txtQuantidade.getText()));
         histProduto.setValor(Double.parseDouble(txtPrecoEntrada.getText()));
         histProduto.setDataCadProduto(FormataData(txtDataCadProduto.getDate()));
+        histProduto.setCodFornecedor(codFornecedor);
         HistoricoProdutoDAO.CadHistoricoProd(histProduto);
              
         txtProduto.setVisible(false);
@@ -294,9 +293,11 @@ public class CadastrarProduto extends javax.swing.JFrame {
         jBtnCadProduto.setVisible(false);
         jBtnCancelarCadProduto.setVisible(false);
         jBtbNovoProduto.setVisible(false);
-        txtProduto.setEnabled(false);
-       // jComboBoxProdutos.setVisible(true);
-        
+        txtProduto.setVisible(false);
+        jComboBoxProdutos.setVisible(true);
+        jComboBoxProdutos.removeAllItems();
+        populaComboBoxProduto();
+
     }//GEN-LAST:event_jBtnCadProdutoActionPerformed
 
     private void jBtnCalcularPercentualActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnCalcularPercentualActionPerformed

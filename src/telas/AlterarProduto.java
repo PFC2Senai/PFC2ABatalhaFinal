@@ -274,7 +274,7 @@ public class AlterarProduto extends javax.swing.JFrame {
         Produto prod = new Produto();
 
         prod.setProduto(jTextProduto.getText());
-        prod.setCodFornecedor(codFornecedor);
+        //prod.setCodFornecedor(codFornecedor);
         prod.setCodModelo(codModelo);
         prod.setCodFabricante(codFabricante);
         prod.setQuantidade(Integer.parseInt(txtQuantidade.getText()));

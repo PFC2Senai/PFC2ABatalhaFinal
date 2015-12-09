@@ -48,8 +48,7 @@ public class ProdutoDAO {
         PreparedStatement stmt;
         int id = 0;
         try {   
-            String sql = ("INSERT INTO tabdetproduto(tabfornecedor_id_forn, " +
-                                                " tabproduto_id_prod, " +
+            String sql = ("INSERT INTO tabdetproduto(tabproduto_id_prod, " +
                                                 " quantidade, " +
                                                 " precoEntrada, " +
                                                 " precoSaida, " +
@@ -57,19 +56,18 @@ public class ProdutoDAO {
                                                 " tabModelo_idtabModelo, " +
                                                 " dataCadastro, " +
                                                 " tabFabricante_idtabFabricante) " +
-                                                " VALUES(?,?,?,?,?,?,?,?,?);");
+                                                " VALUES(?,?,?,?,?,?,?,?);");
             
             stmt = Conexao.getConnection().prepareStatement(sql);      
                   
-                stmt.setInt(1, prod.getCodFornecedor());
-                stmt.setInt(2, prod.getCodProduto());
-                stmt.setInt(3, prod.getQuantidade());
-                stmt.setDouble(4 , prod.getPrecoEntrada());
-                stmt.setDouble(5, prod.getPrecoSaida());
-                stmt.setInt(6, prod.getQuantidadeMinima());
-                stmt.setInt(7, prod.getCodModelo());
-                stmt.setObject(8, prod.getDataCadProduto());
-                stmt.setInt(9, prod.getCodFabricante());
+                stmt.setInt(1, prod.getCodProduto());
+                stmt.setInt(2, prod.getQuantidade());
+                stmt.setDouble(3 , prod.getPrecoEntrada());
+                stmt.setDouble(4, prod.getPrecoSaida());
+                stmt.setInt(5, prod.getQuantidadeMinima());
+                stmt.setInt(6, prod.getCodModelo());
+                stmt.setObject(7, prod.getDataCadProduto());
+                stmt.setInt(8, prod.getCodFabricante());
                               
                 stmt.executeUpdate();
                 
@@ -109,7 +107,6 @@ public class ProdutoDAO {
                 p.setProduto(rs.getString("produto"));
                 p.setCodProduto(rs.getInt("tabproduto_id_prod"));
                 p.setIdDetProduto(rs.getInt("idDetProduto"));
-                p.setCodFornecedor(rs.getInt("tabfornecedor_id_forn"));
                 p.setQuantidade(rs.getInt("quantidade"));
                 p.setPrecoEntrada(rs.getDouble("precoEntrada"));
                 p.setPrecoSaida(rs.getDouble("precoSaida"));
@@ -177,16 +174,15 @@ public class ProdutoDAO {
         CallableStatement stmt;
         
         try {   
-            stmt = Conexao.getConnection().prepareCall("{call UpdateProduto(?,?,?,?,?,?,?,?)}");
+            stmt = Conexao.getConnection().prepareCall("{call UpdateProduto(?,?,?,?,?,?,?)}");
             
             stmt.setInt(1, id);
             stmt.setString(2, prod.getProduto());
-            stmt.setInt(3, prod.getCodFornecedor());
-            stmt.setInt(4, prod.getQuantidade());
-            stmt.setDouble(5 , prod.getPrecoEntrada());
-            stmt.setDouble(6, prod.getPrecoSaida());
-            stmt.setInt(7, prod.getCodModelo());
-            stmt.setInt(8, prod.getCodFabricante());
+            stmt.setInt(3, prod.getQuantidade());
+            stmt.setDouble(4 , prod.getPrecoEntrada());
+            stmt.setDouble(5, prod.getPrecoSaida());
+            stmt.setInt(6, prod.getCodModelo());
+            stmt.setInt(7, prod.getCodFabricante());
             
             stmt.execute();
             stmt.close();
@@ -258,7 +254,6 @@ public class ProdutoDAO {
                 p.setProduto(rs.getString("produto"));
                 p.setCodProduto(rs.getInt("tabproduto_id_prod"));
                 p.setIdDetProduto(rs.getInt("idDetProduto"));
-                p.setCodFornecedor(rs.getInt("tabfornecedor_id_forn"));
                 p.setQuantidade(rs.getInt("quantidade"));
                 p.setPrecoEntrada(rs.getDouble("precoEntrada"));
                 p.setPrecoSaida(rs.getDouble("precoSaida"));

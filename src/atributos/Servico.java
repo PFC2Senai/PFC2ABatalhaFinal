@@ -7,16 +7,18 @@ public class Servico {
     
     private int idServico;
     private int codUsuario;
-    private int codCliente;
-    private String descricaoServico;
+    private int codCliente;    
     private float preco;
     private Date dataServico;
-   
+    private int codOrdemServico; //chave estrangeira
     //tab det Servico
     private int idDetServico;
+    private String descricaoServico;
     private int codServico; //chave estrangeira tab servico
-    private int codProduto; //chave estrangeira
-    private int codOrdemServico; //chave estrangeira
+    private int codDetProduto; //chave estrangeira
+    private int codTipoServico;
+    private int codEquipamento; //chave estrangeira
+    private int codFuncionario;
     private int quantidade;
 
     /**
@@ -132,17 +134,17 @@ public class Servico {
     }
 
     /**
-     * @return the codProduto
+     * @return the codDetProduto
      */
-    public int getCodProduto() {
-        return codProduto;
+    public int getCodDetProduto() {
+        return codDetProduto;
     }
 
     /**
-     * @param codProduto the codProduto to set
+     * @param codDetProduto the codDetProduto to set
      */
-    public void setCodProduto(int codProduto) {
-        this.codProduto = codProduto;
+    public void setCodDetProduto(int codDetProduto) {
+        this.codDetProduto = codDetProduto;
     }
 
     /**
@@ -172,4 +174,46 @@ public class Servico {
     public void setQuantidade(int quantidade) {
         this.quantidade = quantidade;
     }    
+
+    /**
+     * @return the codEquipamento
+     */
+    public int getCodEquipamento() {
+        return codEquipamento;
+    }
+
+    /**
+     * @param codEquipamento the codEquipamento to set
+     */
+    public void setCodEquipamento(int codEquipamento) {
+        this.codEquipamento = codEquipamento;
+    }
+
+    /**
+     * @return the codFuncionario
+     */
+    public int getCodFuncionario() {
+        return codFuncionario;
+    }
+
+    /**
+     * @param codFuncionario the codFuncionario to set
+     */
+    public void setCodFuncionario(int codFuncionario) {
+        this.codFuncionario = codFuncionario;
+    }
+
+    /**
+     * @return the codTipoServico
+     */
+    public int getCodTipoServico() {
+        return codTipoServico;
+    }
+
+    /**
+     * @param codTipoServico the codTipoServico to set
+     */
+    public void setCodTipoServico(int codTipoServico) {
+        this.codTipoServico = codTipoServico;
+    }
 }

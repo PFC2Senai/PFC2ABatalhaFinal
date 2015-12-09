@@ -46,7 +46,7 @@ public class ServicoDAO {
             stmt = Conexao.getConnection().prepareStatement(sql);      
   
                 stmt.setInt(1, serv.getCodServico());
-                stmt.setInt(2, serv.getCodProduto());
+                stmt.setInt(2, serv.getCodDetProduto());
                 stmt.setInt(3, serv.getQuantidade());
                 stmt.setInt(4, serv.getCodOrdemServico());
                               
@@ -84,7 +84,7 @@ public class ServicoDAO {
                 s.setDataServico(rs.getDate("dataServico"));
                 s.setIdDetServico(rs.getInt("id_det_servico"));
                 s.setCodServico(rs.getInt("servico_idservico"));
-                s.setCodProduto(rs.getInt("tabProduto_id_prod"));
+                s.setCodDetProduto(rs.getInt("tabProduto_id_prod"));
                 s.setCodOrdemServico(rs.getInt("tabordemserv_idtabOrdemServ"));
                 s.setQuantidade(rs.getInt("quantidadeproduto"));
                 servico.add(s);                
@@ -141,7 +141,7 @@ public class ServicoDAO {
         PreparedStatement stmt;
         
         try {   
-            String sql = ("UPDATE det_servico SET tabProduto_id_prod = " + serv.getCodProduto() + 
+            String sql = ("UPDATE det_servico SET tabProduto_id_prod = " + serv.getCodDetProduto() + 
                                                ", quantidadeproduto = " + serv.getQuantidade() + 
                                                 " WHERE servico_idservico = " + id + ";");
             
@@ -180,7 +180,7 @@ public class ServicoDAO {
                 s.setDataServico(rs.getDate("dataServico"));
                 s.setIdDetServico(rs.getInt("id_det_servico"));
                 s.setCodServico(rs.getInt("servico_idservico"));
-                s.setCodProduto(rs.getInt("tabProduto_id_prod"));
+                s.setCodDetProduto(rs.getInt("tabProduto_id_prod"));
                 s.setCodOrdemServico(rs.getInt("tabordemserv_idtabOrdemServ"));
                 s.setQuantidade(rs.getInt("quantidadeproduto"));
                 servicos.add(s);

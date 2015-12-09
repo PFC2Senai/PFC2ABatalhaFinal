@@ -16,7 +16,6 @@ public class Produto {
     //det produto
     private int idDetProduto;
     private int codProduto;
-    private int codFornecedor;
     private int codModelo;
     private int codFabricante;
     private int quantidade;
@@ -47,20 +46,6 @@ public class Produto {
 
     public void setProduto(String produto) {
         this.produto = produto;
-    }
-
-    /**
-     * @return the codFornecedor
-     */
-    public int getCodFornecedor() {
-        return codFornecedor;
-    }
-
-    /**
-     * @param codFornecedor the codFornecedor to set
-     */
-    public void setCodFornecedor(int codFornecedor) {
-        this.codFornecedor = codFornecedor;
     }
 
     /**

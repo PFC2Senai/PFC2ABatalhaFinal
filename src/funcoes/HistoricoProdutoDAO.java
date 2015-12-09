@@ -22,8 +22,9 @@ public class HistoricoProdutoDAO {
             String sql = ("INSERT INTO tabhistoricodeproduto(valor,"
                                                          + " dataCadastro,"
                                                          + " quantidade,"
-                                                         + " tabDetProduto_idDetProduto) "
-                                                         + " VALUES(?,?,?,?);");
+                                                         + " tabDetProduto_idDetProduto, "
+                                                         + " tabfornecedor_id_forn)"
+                                                         + " VALUES(?,?,?,?,?);");
             
             stmt = Conexao.getConnection().prepareStatement(sql);      
                   
@@ -31,6 +32,7 @@ public class HistoricoProdutoDAO {
                 stmt.setObject(2, hProd.getDataCadProduto());
                 stmt.setInt(3, hProd.getQuantidade());
                 stmt.setInt(4, hProd.getCodDetProduto());
+                stmt.setInt(5, hProd.getCodFornecedor());
                               
                 stmt.executeUpdate();
                 stmt.close();  
@@ -61,6 +63,7 @@ public class HistoricoProdutoDAO {
                 h.setDataCadProduto(rs.getDate("dataCadastro"));
                 h.setQuantidade(rs.getInt("quantidade"));
                 h.setCodDetProduto(rs.getInt("tabDetProduto_idDetProduto"));
+                h.setCodFornecedor(rs.getInt("tabfornecedor_id_forn"));
                 historicoProd.add(h);                
             }
             
@@ -101,7 +104,8 @@ public class HistoricoProdutoDAO {
         try {   
             String sql = ("UPDATE tabhistoricodeproduto SET valor = " + hProd.getValor() 
                         + ", quantidade = " + hProd.getQuantidade() 
-                        + " WHERE idVariacaoDePreco = " + id + ";");
+                        + ", tabfornecedor_id_forn = '" + hProd.getCodFornecedor()
+                        + "' WHERE idVariacaoDePreco = " + id + ";");
             
             stmt = Conexao.getConnection().prepareStatement(sql);                             
             stmt.executeUpdate();
@@ -133,6 +137,7 @@ public class HistoricoProdutoDAO {
                 h.setDataCadProduto(rs.getDate("dataCadastro"));
                 h.setQuantidade(rs.getInt("quantidade"));
                 h.setCodDetProduto(rs.getInt("tabDetProduto_idDetProduto"));
+                h.setCodFornecedor(rs.getInt("tabfornecedor_id_forn"));
                 historicoProd.add(h);                
             }
             

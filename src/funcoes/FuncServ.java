@@ -2,8 +2,8 @@ package funcoes;
 
 
 import static funcoes.FuncAparelho.idMaq;
-import static funcoes.TipoServico.idTipoSv;
-import static funcoes.TipoServico.tipoServ;
+//import static funcoes.TipoServico.idTipoSv;
+//import static funcoes.TipoServico.tipoServ;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -32,7 +32,7 @@ public class FuncServ {
                 
                 stmt.executeUpdate();  
             
-            tipoServ(tipoRep,valor);
+           // tipoServ(tipoRep,valor);
             
             ResultSet rs = stmt.getGeneratedKeys();
                 if(rs.next()) {
@@ -43,7 +43,7 @@ public class FuncServ {
                     stmt = Conexao.getConnection().prepareStatement(sql);
                     stmt.setInt(1, idServ);
                     stmt.setInt(2, idMaq);
-                    stmt.setInt(3, idTipoSv);
+                  //  stmt.setInt(3, idTipoSv);
                     stmt.setString(4, formPag);
                     stmt.setFloat(5, desconto);
                     stmt.setFloat(6, total);
