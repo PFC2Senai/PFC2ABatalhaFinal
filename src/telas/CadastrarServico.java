@@ -195,8 +195,8 @@ public class CadastrarServico extends javax.swing.JFrame {
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel6.setText("Cliente:");
-        jPanel3.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 30, -1, -1));
-        jPanel3.add(txtProduto, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 60, 240, -1));
+        jPanel3.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, -1, -1));
+        jPanel3.add(txtProduto, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 60, 240, -1));
 
         jComboBoxCliente.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Selecione o Cliente" }));
         jComboBoxCliente.addActionListener(new java.awt.event.ActionListener() {
@@ -204,10 +204,10 @@ public class CadastrarServico extends javax.swing.JFrame {
                 jComboBoxClienteActionPerformed(evt);
             }
         });
-        jPanel3.add(jComboBoxCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 30, 260, 20));
+        jPanel3.add(jComboBoxCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 30, 260, 20));
 
         jLabel10.setText("Tipo:");
-        jPanel3.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 60, -1, -1));
+        jPanel3.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 60, -1, -1));
 
         jComboBoxProdutos.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Selecione o produto" }));
         jComboBoxProdutos.addActionListener(new java.awt.event.ActionListener() {
@@ -215,11 +215,11 @@ public class CadastrarServico extends javax.swing.JFrame {
                 jComboBoxProdutosActionPerformed(evt);
             }
         });
-        jPanel3.add(jComboBoxProdutos, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 60, 260, -1));
+        jPanel3.add(jComboBoxProdutos, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 60, 260, -1));
 
         jLabel12.setText("Data:");
-        jPanel3.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 30, -1, -1));
-        jPanel3.add(txtDataCadProduto, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 30, 140, -1));
+        jPanel3.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 30, -1, -1));
+        jPanel3.add(txtDataCadProduto, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 30, 140, -1));
 
         jBtbNovoProduto1.setText("Novo Serviço");
         jBtbNovoProduto1.addActionListener(new java.awt.event.ActionListener() {
@@ -227,7 +227,7 @@ public class CadastrarServico extends javax.swing.JFrame {
                 jBtbNovoProduto1ActionPerformed(evt);
             }
         });
-        jPanel3.add(jBtbNovoProduto1, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 60, -1, -1));
+        jPanel3.add(jBtbNovoProduto1, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 60, -1, -1));
 
         jBtnCadProduto.setText("Salvar");
         jBtnCadProduto.addActionListener(new java.awt.event.ActionListener() {
@@ -235,7 +235,7 @@ public class CadastrarServico extends javax.swing.JFrame {
                 jBtnCadProdutoActionPerformed(evt);
             }
         });
-        jPanel3.add(jBtnCadProduto, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 60, 70, -1));
+        jPanel3.add(jBtnCadProduto, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 60, 70, -1));
 
         jBtnCancelarCadProduto.setText("Cancelar");
         jBtnCancelarCadProduto.addActionListener(new java.awt.event.ActionListener() {
@@ -243,7 +243,7 @@ public class CadastrarServico extends javax.swing.JFrame {
                 jBtnCancelarCadProdutoActionPerformed(evt);
             }
         });
-        jPanel3.add(jBtnCancelarCadProduto, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 60, -1, -1));
+        jPanel3.add(jBtnCancelarCadProduto, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 60, -1, -1));
 
         jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder("Equipamentos"));
 
@@ -388,7 +388,7 @@ public class CadastrarServico extends javax.swing.JFrame {
                             .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(16, 16, 16)
                         .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addContainerGap(41, Short.MAX_VALUE))
+                .addContainerGap(22, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -408,14 +408,16 @@ public class CadastrarServico extends javax.swing.JFrame {
                     .addComponent(jButton2)
                     .addComponent(jButton3)
                     .addComponent(jBtnCadastrarProduto))
-                .addContainerGap(48, Short.MAX_VALUE))
+                .addContainerGap(27, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(1, 1, 1))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
