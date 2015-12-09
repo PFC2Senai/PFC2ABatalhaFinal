@@ -10,8 +10,7 @@ public class Cliente {
     private int codUser;
     private int idContato;
     private String empresa;
-    private String cnpj;
-    private String email;
+    private String cnpj;   
     private int codSetor;
     private String setor;
 
@@ -70,21 +69,6 @@ public class Cliente {
     public void setCnpj(String cnpj) {
         format("#####-###", "81580200");
         String format = format(this.cnpj = cnpj);
-    }
-
-
-    /**
-     * @return the email
-     */
-    public String getEmail() {
-        return email;
-    }
-
-    /**
-     * @param email the email to set
-     */
-    public void setEmail(String email) {
-        this.email = email;
     }
 
     /**

@@ -433,7 +433,6 @@ public class CadastrarCliente extends javax.swing.JFrame {
         cli.setEmpresa(txtEmpresa.getText());
         cli.setCnpj(txtEndCep.getText());
         cli.setCodSetor(codSetor);
-        cli.setEmail(txtEmail.getText());
 
         int i = ContatosDAO.CadContato();
               

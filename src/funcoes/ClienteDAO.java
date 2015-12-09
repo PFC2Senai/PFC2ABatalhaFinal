@@ -73,7 +73,6 @@ public class ClienteDAO {
                 c.setCnpj(rs.getString("cnpj"));
                 c.setCodSetor(rs.getInt("tabSetor_idtabSetor"));  
                 c.setSetor(rs.getString("setor"));
-                c.setEmail(rs.getString("email"));
                 c.setIdContato(rs.getInt("tabContato_id_contato"));
                 c.setId(id); 
                 cliente.add(c);                
@@ -175,8 +174,7 @@ public class ClienteDAO {
                 c.setId(rs.getInt("idcliente"));
                 c.setEmpresa((rs.getString("empresa")));
                 c.setCnpj(rs.getString("cnpj"));
-                c.setCodSetor(rs.getInt("setor"));
-                c.setEmail(rs.getString("email"));               
+                c.setCodSetor(rs.getInt("setor"));              
                 clientes.add(c);                
             }
             

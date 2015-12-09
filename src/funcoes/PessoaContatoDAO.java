@@ -35,36 +35,33 @@ public class PessoaContatoDAO {
             }
     }
     
-    public static ArrayList CarregaPessoaContato(int id) {
-        
-        Statement stmt;
-        ArrayList<PessoaContato> pessoaContato = new ArrayList<PessoaContato>();
-        
-        try {            
-            String Sql = "SELECT * FROM tabpessoacontato WHERE cod_contato = '"+ id +"';";
-            
-            ResultSet rs;            
-            stmt = Conexao.getConnection().createStatement();            
-            rs = stmt.executeQuery(Sql); 
-            
-            while(rs.next()){
-                PessoaContato p = new PessoaContato();
-                
-                p.setIdPessoaContato(rs.getInt("idPessoaContato"));
-                p.setNomeContato((rs.getString("contato")));
-                p.setCodCliente(rs.getInt("tabcliente_idcliente"));
-                p.setCodContato(rs.getInt("cod_contato"));
-                pessoaContato.add(p);                
-            }            
-            rs.close();
-            stmt.close();
-            
-        } catch (SQLException ex) {      
-            Logger.getLogger(PessoaContatoDAO.class.getName()).log(Level.SEVERE, null, ex);
-            throw new RuntimeException("Erro ao carregar a pessoa contato: ", ex);    
-        }    
-        return pessoaContato;
-    }
+//    public static int codContato(int id) {
+//        
+//        Statement stmt;
+//        int codConta = 0;
+//        
+//        try {            
+//            String Sql = "SELECT idPessoaContato FROM tabpessoacontato WHERE contato = '"+ id +"';";
+//            
+//            ResultSet rs;            
+//            stmt = Conexao.getConnection().createStatement();            
+//            rs = stmt.executeQuery(Sql); 
+//            
+//            while(rs.next()) {
+//                PessoaContato p = new PessoaContato();
+//                
+//                p.setIdPessoaContato(rs.getInt("idPessoaContato"));
+//                pessoaContato.add(p);                
+//            }            
+//            rs.close();
+//            stmt.close();
+//            
+//        } catch (SQLException ex) {      
+//            Logger.getLogger(PessoaContatoDAO.class.getName()).log(Level.SEVERE, null, ex);
+//            throw new RuntimeException("Erro ao carregar a pessoa contato: ", ex);    
+//        }    
+//        return pessoaContato;
+//    }
     
    
     public static void ExcluirPessoaContato(int id){
@@ -139,7 +136,7 @@ public class PessoaContatoDAO {
         
         Statement stmt;
         
-        ArrayList<String> pessoaContato = new ArrayList<String>();
+        ArrayList<PessoaContato> pessoaContato = new ArrayList<PessoaContato>();
         
         try {            
             String Sql = "SELECT * FROM tabpessoacontato where tabcliente_idcliente = " + id + " ;";
@@ -148,8 +145,12 @@ public class PessoaContatoDAO {
             stmt = Conexao.getConnection().createStatement();            
             rs = stmt.executeQuery(Sql); 
             
-            while(rs.next()){               
-                pessoaContato.add((rs.getString("contato")));                
+            while(rs.next()){  
+                PessoaContato p = new PessoaContato();
+                
+                p.setIdPessoaContato(rs.getInt("idPessoaContato"));  
+                p.setNomeContato(rs.getString("contato"));
+                pessoaContato.add(p);
             }            
             rs.close();
             stmt.close();

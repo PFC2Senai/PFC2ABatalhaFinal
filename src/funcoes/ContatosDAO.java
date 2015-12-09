@@ -192,7 +192,7 @@ public class ContatosDAO {
 
         try {
             String sql = ("UPDATE tabemail SET email = '" + email 
-                        + "' WHERE contato_id_contato = "+ id +";");//mesma coisa aqui
+                        + "' WHERE id_email = "+ id +";");//mesma coisa aqui
 
             stmt = Conexao.getConnection().prepareStatement(sql);
             stmt.executeUpdate();
