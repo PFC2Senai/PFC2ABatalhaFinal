@@ -21,7 +21,7 @@ public class FornecedorDAO {
             String sql = ("INSERT INTO tabfornecedor(tabusuario_id_usuario, tabContato_id_contato,fornecedor) VALUES(?,?,?)");
             stmt = Conexao.getConnection().prepareStatement(sql);      
   
-                stmt.setInt(1, 1);
+                stmt.setInt(1, fornecedor.getCodUsuario());
                 stmt.setInt(2, fornecedor.getCodContato());
                 stmt.setString(3, fornecedor.getFornecedor());
                               

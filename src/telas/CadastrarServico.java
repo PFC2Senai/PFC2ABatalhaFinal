@@ -1,12 +1,22 @@
 package telas;
 
+import atributos.DetServicoEquipamento;
+import atributos.DetServicoFuncionario;
+import atributos.DetServicoProduto;
+import atributos.DetServicoTipoServ;
 import atributos.OrdemServico;
 import atributos.Servico;
 import atributos.TipoServico;
 import atributos.Usuario;
 import funcoes.Conexao;
+import funcoes.ContatosDAO;
+import funcoes.DetServicoEquipamentoDAO;
+import funcoes.DetServicoFuncionarioDAO;
+import funcoes.DetServicoProdutoDAO;
+import funcoes.DetServicoTipoDAO;
 import static funcoes.FuncoesDiversas.FormataData;
 import funcoes.OrdemServicoDAO;
+import funcoes.PessoaContatoDAO;
 import funcoes.ProdutoDAO;
 import funcoes.ServicoDAO;
 import funcoes.TipoServicoDAO;
@@ -14,6 +24,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -204,11 +215,11 @@ public class CadastrarServico extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Codigo Peca", "CódigoModelo", "Cod Fabricante", "Peça", "Modelo", "Fabricante", "Quantidade", "Valor Unit.", "Total"
+                "Codigo Peca", "CódigoModelo", "cod fabricante", "Peça", "Modelo", "Fabricante", "Quantidade", "Valor Unit.", "Total"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false, false, true
+                false, false, true, false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -240,32 +251,33 @@ public class CadastrarServico extends javax.swing.JFrame {
             .addGroup(jPanel14Layout.createSequentialGroup()
                 .addGap(16, 16, 16)
                 .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel14Layout.createSequentialGroup()
-                        .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(jPanel14Layout.createSequentialGroup()
-                                .addComponent(jLabel33)
-                                .addGap(24, 24, 24)
-                                .addComponent(jComboBoxProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 259, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel14Layout.createSequentialGroup()
-                                .addComponent(jLabel35)
-                                .addGap(12, 12, 12)
-                                .addComponent(jComboBoxModelo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel14Layout.createSequentialGroup()
-                                .addComponent(jLabel36)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jComboBoxFabricante, javax.swing.GroupLayout.PREFERRED_SIZE, 281, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel14Layout.createSequentialGroup()
-                                .addComponent(jLabel34)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtQuantidade, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                         .addGroup(jPanel14Layout.createSequentialGroup()
                             .addComponent(jBtnRemoverPeca)
-                            .addGap(520, 520, 520)
-                            .addComponent(jBtbIncluirPeca))
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 682, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGap(607, 607, 607))
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 682, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(jBtbIncluirPeca)
+                        .addGroup(jPanel14Layout.createSequentialGroup()
+                            .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addGroup(jPanel14Layout.createSequentialGroup()
+                                    .addComponent(jLabel33)
+                                    .addGap(24, 24, 24)
+                                    .addComponent(jComboBoxProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 259, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(jPanel14Layout.createSequentialGroup()
+                                    .addComponent(jLabel35)
+                                    .addGap(12, 12, 12)
+                                    .addComponent(jComboBoxModelo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                            .addGap(18, 18, 18)
+                            .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(jPanel14Layout.createSequentialGroup()
+                                    .addComponent(jLabel36)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addComponent(jComboBoxFabricante, javax.swing.GroupLayout.PREFERRED_SIZE, 281, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(jPanel14Layout.createSequentialGroup()
+                                    .addComponent(jLabel34)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(txtQuantidade, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE))))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel14Layout.setVerticalGroup(
@@ -284,7 +296,7 @@ public class CadastrarServico extends javax.swing.JFrame {
                         .addComponent(jComboBoxModelo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jLabel34)
                         .addComponent(txtQuantidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jBtnRemoverPeca)
                     .addComponent(jBtbIncluirPeca))
@@ -648,12 +660,18 @@ public class CadastrarServico extends javax.swing.JFrame {
     private void jBtnCadastrarServico3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnCadastrarServico3ActionPerformed
 
         OrdemServico oS = new OrdemServico();
+        DetServicoProduto dtServ = new DetServicoProduto();
+        DetServicoEquipamento dtServEqui = new DetServicoEquipamento();
+        DetServicoFuncionario dtServFunc = new DetServicoFuncionario();
+        DetServicoTipoServ ServTipo = new DetServicoTipoServ();
+        
         double preco = totalPeca + Double.parseDouble(txtMaoObra.getText());
         
         servico.setCodUsuario(Usuario.idUsuario());
         servico.setCodCliente(codCliente);
         servico.setPreco(preco);
         servico.setDataServico(FormataData(txtDataCadProduto.getDate()));
+        servico.setDescricaoServico(txtDescricao.getText());
         
         oS.setTipo("Manutenção");
       
@@ -662,10 +680,39 @@ public class CadastrarServico extends javax.swing.JFrame {
         servico.setCodOrdemServico(codOrdemS);
         
         int codServico = ServicoDAO.CadServico(servico);
-                
-        servico.setDescricaoServico(txtDescricao.getText());
         
-        servico.setCodServico(codServico);
+        
+        
+        for(int j=0; j < jTablePecas.getRowCount(); j++) {
+                 
+            dtServ.setCodServico(codServico); 
+            dtServ.setCodDetProduto(Integer.parseInt(jTablePecas.getValueAt(j, 0).toString()));
+            dtServ.setQuantidade(Integer.parseInt(jTablePecas.getValueAt(j, 6).toString()));
+           
+            DetServicoProdutoDAO.CadDetServProduto(dtServ);
+        }
+        
+        for(int j=0; j < jTableEquipamento.getRowCount(); j++) {
+                 
+            dtServEqui.setCodServico(codServico); 
+            dtServEqui.setCodDetEquipamento(Integer.parseInt(jTableEquipamento.getValueAt(j, 0).toString()));
+           
+            DetServicoEquipamentoDAO.CadDetServEquipamento(dtServEqui);
+        }
+        
+        for(int j=0; j < jTableFuncionario.getRowCount(); j++) {
+                 
+            dtServFunc.setCodServico(codServico); 
+            dtServFunc.setCodFuncionario(Integer.parseInt(jTableFuncionario.getValueAt(j, 0).toString()));
+           
+            DetServicoFuncionarioDAO.CadDetServFuncionario(dtServFunc);
+        }
+        
+        ServTipo.setCodServico(codServico);
+        ServTipo.setCodTipo(codTipoServico);
+        System.out.println(codTipoServico);
+        
+        DetServicoTipoDAO.CadDetServTipoServ(ServTipo);
         
         
         
@@ -754,6 +801,7 @@ public class CadastrarServico extends javax.swing.JFrame {
         TipoServico tServ = new TipoServico();
 
         tServ.setTipo(txtTipoServico.getText());
+        
         codTipoServico = TipoServicoDAO.CadTipoServico(tServ);
 
         txtTipoServico.setVisible(false);
@@ -826,6 +874,25 @@ public class CadastrarServico extends javax.swing.JFrame {
     private void limparCampos() {
         
     }
+    
+    private int tamanhoTabela() {
+       
+        ArrayList<Integer> tamanho = new ArrayList<Integer>();
+        
+        tamanho.add(jTableEquipamento.getModel().getRowCount());
+        tamanho.add(jTableFuncionario.getModel().getRowCount());
+        tamanho.add(jTablePecas.getModel().getRowCount());
+        
+        int max = tamanho.get(0);
+        
+        for(int i = 1; i < tamanho.size(); i++){
+            if(tamanho.get(i) > max){
+                max = tamanho.get(i);
+            }
+        }        
+        return max;        
+    }
+    
     
     public void TabelaProduto() {
         
@@ -1110,7 +1177,7 @@ public class CadastrarServico extends javax.swing.JFrame {
         
         Connection conexao = Conexao.getConnection();
         ResultSet rs;
-        String sql = "select * from tabtipo_serv where Tipo_serv = '" + jComboBoxModelo.getSelectedItem()+ "';";
+        String sql = "select * from tabtipo_serv where Tipo_serv = '" + jComboBoxTipoServico.getSelectedItem()+ "';";
         
         try{
             pst = conexao.prepareStatement(sql);

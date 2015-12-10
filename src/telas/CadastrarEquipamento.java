@@ -6,6 +6,7 @@
 package telas;
 
 import atributos.Equipamento;
+import static atributos.Usuario.idUsuario;
 import funcoes.Conexao;
 import funcoes.EquipamentoDAO;
 import java.sql.Connection;
@@ -176,7 +177,7 @@ public class CadastrarEquipamento extends javax.swing.JFrame {
 
     private void jBtnCadEquipamentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnCadEquipamentoActionPerformed
 
-        equi.setTabusuarioIdUsuario(1);
+        equi.setTabusuarioIdUsuario(idUsuario());
         equi.setEquipamento(txtEquipamento.getText());
         codEquipamento = EquipamentoDAO.CadEquipamento(equi);
         jBtnCadEquipamento.setVisible(false);
@@ -221,6 +222,7 @@ public class CadastrarEquipamento extends javax.swing.JFrame {
         
        // HistoricoProduto histProduto = new HistoricoProduto();
 
+        equi.setTabusuarioIdUsuario(idUsuario());
         equi.setCodFornecedor(codFornecedor);
         equi.setCodModelo(codModelo);
         equi.setCodFabricante(codFabricante);                

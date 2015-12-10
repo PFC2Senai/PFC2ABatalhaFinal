@@ -21,14 +21,15 @@ public class ServicoDAO {
         PreparedStatement stmt;
         int id = 0;
         try {   
-            String sql = ("INSERT INTO tabservico(tabUsuario_id_usuario,tabCliente_idcliente,infoServico,preco,dataServico) VALUES (?,?,?,?,?);");
+            String sql = ("INSERT INTO tabservico(tabUsuario_id_usuario,tabCliente_idcliente,preco,dataServico,tabordemserv_idtabOrdemServ,descricao_servico) VALUES (?,?,?,?,?,?);");
             stmt = Conexao.getConnection().prepareStatement(sql);      
   
-                stmt.setInt(1, 1);
-                stmt.setInt(2, serv.getCodCliente());
-                stmt.setString(3, serv.getDescricaoServico());
-                stmt.setDouble(4, serv.getPreco());
-                stmt.setObject(5, serv.getDataServico());
+                stmt.setInt(1, serv.getCodUsuario());
+                stmt.setInt(2, serv.getCodCliente());              
+                stmt.setDouble(3, serv.getPreco());
+                stmt.setObject(4, serv.getDataServico());
+                stmt.setDouble(5, serv.getCodOrdemServico());
+                stmt.setString(6, serv.getDescricaoServico());
                               
                 stmt.executeUpdate();
                 
@@ -45,26 +46,33 @@ public class ServicoDAO {
         return id;
     }
     
-    public static void CadDetServico(Servico serv){
-        
-        PreparedStatement stmt;
-        try {   
-            String sql = ("INSERT INTO det_servico(servico_idservico,tabProduto_id_prod,quantidadeproduto,tabordemserv) VALUES(?,?,?,?);");
-            stmt = Conexao.getConnection().prepareStatement(sql);      
-  
-                stmt.setInt(1, serv.getCodServico());
-                stmt.setInt(2, serv.getCodDetProduto());
-                stmt.setInt(3, serv.getQuantidade());
-                stmt.setInt(4, serv.getCodOrdemServico());
-                              
-                stmt.executeUpdate();
-                stmt.close();  
-
-        } catch (SQLException ex) {      
-            Logger.getLogger(ServicoDAO.class.getName()).log(Level.SEVERE, null, ex);
-            throw new RuntimeException("Erro ao Cadastrar Detalhe de servico: ",ex);       
-        }
-    }
+//    public static void CadDetServico(Servico serv) {
+//        
+//        PreparedStatement stmt;
+//        try {   
+//            String sql = ("INSERT INTO det_servico(servico_idservico,"
+//                                                + "tabdetproduto_idDetProduto,"
+//                                                + "quantidadeproduto,"
+//                                                + "tabfuncionario_idfuncionario,"
+//                                                + "tabdetequipamento_idDetEquipamento,"
+//                                                + "tabTipo_serv_idtabTipo_serv) VALUES(?,?,?,?,?,?);");
+//            
+//            stmt = Conexao.getConnection().prepareStatement(sql);      
+//  
+//            stmt.setInt(1, serv.getCodServico());
+//            stmt.setInt(2, serv.getCodDetProduto());
+//            stmt.setInt(3, serv.getQuantidade());
+//            stmt.setInt(4, serv.getCodOrdemServico());
+//            stmt.setString(5, serv.getDescricaoServico());
+//                              
+//            stmt.executeUpdate();
+//            stmt.close();  
+//
+//        } catch (SQLException ex) {      
+//            Logger.getLogger(ServicoDAO.class.getName()).log(Level.SEVERE, null, ex);
+//            throw new RuntimeException("Erro ao Cadastrar Detalhe de servico: ",ex);       
+//        }
+//    }
     
     public static ArrayList CarregaServico(int id) {
         
@@ -80,20 +88,16 @@ public class ServicoDAO {
             stmt = Conexao.getConnection().createStatement();            
             rs = stmt.executeQuery(Sql); 
             
-            while(rs.next()){
+            while(rs.next()) {
                 Servico s = new Servico();
                 
                 s.setIdServico(rs.getInt("idservico"));
                 s.setCodUsuario((rs.getInt("tabUsuario_id_usuario")));
                 s.setCodCliente(rs.getInt("tabCliente_idcliente"));
-                s.setDescricaoServico(rs.getString("infoServico"));
+                s.setDescricaoServico(rs.getString("descricao_servico"));
                 s.setPreco(rs.getDouble("preco"));  
                 s.setDataServico(rs.getDate("dataServico"));
-                s.setIdDetServico(rs.getInt("id_det_servico"));
-                s.setCodServico(rs.getInt("servico_idservico"));
-                s.setCodDetProduto(rs.getInt("tabProduto_id_prod"));
                 s.setCodOrdemServico(rs.getInt("tabordemserv_idtabOrdemServ"));
-                s.setQuantidade(rs.getInt("quantidadeproduto"));
                 servico.add(s);                
             }            
             rs.close();
@@ -143,31 +147,32 @@ public class ServicoDAO {
         }
     }
     
-    public static void UpdateDetServico(Servico serv, int id) {
-        
-        PreparedStatement stmt;
-        
-        try {   
-            String sql = ("UPDATE det_servico SET tabProduto_id_prod = " + serv.getCodDetProduto() + 
-                                               ", quantidadeproduto = " + serv.getQuantidade() + 
-                                                " WHERE servico_idservico = " + id + ";");
-            
-            stmt = Conexao.getConnection().prepareStatement(sql);                             
-            stmt.executeUpdate();
-            stmt.close();
-
-        } catch (SQLException ex) {      
-            Logger.getLogger(ServicoDAO.class.getName()).log(Level.SEVERE, null, ex);
-            throw new RuntimeException("Erro ao alterar dados Detalhe de servico: ",ex);     
-        }
-    }
+//    public static void UpdateDetServico(Servico serv, int id) {
+//        
+//        PreparedStatement stmt;
+//        
+//        try {   
+//            String sql = ("UPDATE det_servico SET tabProduto_id_prod = " + serv.getCodDetProduto() + 
+//                                               ", quantidadeproduto = " + serv.getQuantidade() + 
+//                                                " WHERE servico_idservico = " + id + ";");
+//            
+//            stmt = Conexao.getConnection().prepareStatement(sql);                             
+//            stmt.executeUpdate();
+//            stmt.close();
+//
+//        } catch (SQLException ex) {      
+//            Logger.getLogger(ServicoDAO.class.getName()).log(Level.SEVERE, null, ex);
+//            throw new RuntimeException("Erro ao alterar dados Detalhe de servico: ",ex);     
+//        }
+//    }
     
     public static ArrayList<Servico> ListarServicos(){
         
         Statement stmt;
         ArrayList<Servico> servicos = new ArrayList<Servico>();
         
-        try {            
+        try {
+            
             String Sql = "SELECT * FROM tabservico INNER JOIN det_servico ON idservico = servico_idservico;";
 
             ResultSet rs;
@@ -185,11 +190,7 @@ public class ServicoDAO {
                 s.setDescricaoServico(rs.getString("infoServico"));
                 s.setPreco(rs.getFloat("preco"));  
                 s.setDataServico(rs.getDate("dataServico"));
-                s.setIdDetServico(rs.getInt("id_det_servico"));
-                s.setCodServico(rs.getInt("servico_idservico"));
-                s.setCodDetProduto(rs.getInt("tabProduto_id_prod"));
                 s.setCodOrdemServico(rs.getInt("tabordemserv_idtabOrdemServ"));
-                s.setQuantidade(rs.getInt("quantidadeproduto"));
                 servicos.add(s);
             }
             

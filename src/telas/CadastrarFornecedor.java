@@ -3,6 +3,7 @@ package telas;
 import atributos.Endereco;
 import atributos.Fornecedor;
 import atributos.Telefone;
+import static atributos.Usuario.idUsuario;
 import funcoes.ContatosDAO;
 import funcoes.FornecedorDAO;
 
@@ -257,7 +258,7 @@ public class CadastrarFornecedor extends javax.swing.JFrame {
         Endereco endereco = new Endereco();
 
         forn.setFornecedor(txtFornecedor.getText());
-
+        forn.setCodUsuario(idUsuario());
         tel.setTel(txtTel01.getText());
         tel.setCel(txtTelCel.getText());
 

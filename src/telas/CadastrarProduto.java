@@ -2,6 +2,7 @@ package telas;
 
 import atributos.HistoricoProduto;
 import atributos.Produto;
+import static atributos.Usuario.idUsuario;
 import funcoes.Conexao;
 import static funcoes.FuncoesDiversas.FormataData;
 import funcoes.HistoricoProdutoDAO;
@@ -287,7 +288,7 @@ public class CadastrarProduto extends javax.swing.JFrame {
 
     private void jBtnCadProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnCadProdutoActionPerformed
         
-        prod.setIdUsuario(1);
+        prod.setIdUsuario(idUsuario());
         prod.setProduto(txtProduto.getText());
         codProduto = ProdutoDAO.Cadroduto(prod);
         jBtnCadProduto.setVisible(false);

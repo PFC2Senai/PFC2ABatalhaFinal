@@ -22,7 +22,7 @@ public class EquipamentoDAO {
             String sql = ("INSERT INTO tabequipamento(tabUsuario_id_usuario, equipamento) VALUES(?,?);");
             stmt = Conexao.getConnection().prepareStatement(sql);      
   
-                stmt.setInt(1, 1);
+                stmt.setInt(1, equi.getTabusuarioIdUsuario());
                 stmt.setString(2, equi.getEquipamento());
                               
                 stmt.executeUpdate();
