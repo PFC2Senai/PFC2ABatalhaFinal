@@ -16,9 +16,10 @@ import java.util.logging.Logger;
  */
 public class ServicoDAO {
     
-    public static void CadServico(Servico serv){
+    public static int CadServico(Servico serv){
         
         PreparedStatement stmt;
+        int id = 0;
         try {   
             String sql = ("INSERT INTO tabservico(tabUsuario_id_usuario,tabCliente_idcliente,infoServico,preco,dataServico) VALUES (?,?,?,?,?);");
             stmt = Conexao.getConnection().prepareStatement(sql);      
@@ -30,12 +31,18 @@ public class ServicoDAO {
                 stmt.setObject(5, serv.getDataServico());
                               
                 stmt.executeUpdate();
+                
+                ResultSet rs = stmt.getGeneratedKeys();
+                if (rs.next()) {
+                    id = rs.getInt(1);
+                }
                 stmt.close();  
 
         } catch (SQLException ex) {      
             Logger.getLogger(ServicoDAO.class.getName()).log(Level.SEVERE, null, ex);
             throw new RuntimeException("Erro ao Cadastrar servico: ",ex);       
         }
+        return id;
     }
     
     public static void CadDetServico(Servico serv){
@@ -194,6 +201,5 @@ public class ServicoDAO {
             throw new RuntimeException("Erro ao Listar servico: ",ex); 
         }
         return servicos;
-    }  
-               
+    }     
 }

@@ -16,9 +16,10 @@ import java.util.logging.Logger;
  */
 public class OrdemServicoDAO {
     
-    public static void CadOrdemServico(OrdemServico os) {
+    public static int CadOrdemServico(OrdemServico os) {
         
         PreparedStatement stmt;
+        int id = 0;
         try {   
             String sql = ("INSERT INTO tabordemserv(tipoServico) VALUES (?);");
             stmt = Conexao.getConnection().prepareStatement(sql);      
@@ -26,12 +27,18 @@ public class OrdemServicoDAO {
                 stmt.setString(1, os.getTipo());
                               
                 stmt.executeUpdate();
+                
+                ResultSet rs = stmt.getGeneratedKeys();
+                if (rs.next()) {
+                    id = rs.getInt(1);
+                }
                 stmt.close();  
 
             } catch (SQLException ex) {      
                 Logger.getLogger(OrdemServicoDAO.class.getName()).log(Level.SEVERE, null, ex);
                 throw new RuntimeException("Erro ao Cadastrar ordem de servico: ",ex);       
             }
+        return id;
     }
         
     public static ArrayList CarregaOrdemServico(int id) {

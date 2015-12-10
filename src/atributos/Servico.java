@@ -4,8 +4,7 @@ import java.util.Date;
 
 
 public class Servico {
-    
-    
+        
     private int idServico;
     private int codUsuario;
     private int codCliente;    

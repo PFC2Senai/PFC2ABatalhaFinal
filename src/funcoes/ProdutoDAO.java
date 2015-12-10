@@ -270,5 +270,34 @@ public class ProdutoDAO {
             throw new RuntimeException("Erro ao carregar os dados do Produto: ", ex);    
         }    
         return produto;
-    }    
+    } 
+    
+    public static double ExisteProduto(int idProduto, int idModelo, int idFabricante) {
+        
+        Statement stmt;
+        double valor = 0;
+        
+        try {            
+            String Sql = "SELECT * FROM vw_combofabricanteproduto "
+                       + " WHERE id_prod = " + idProduto 
+                       + " AND tabmodelo_idtabModelo = " + idModelo 
+                       + " AND idtabFabricante = " + idFabricante +";";
+                       
+            
+            ResultSet rs;            
+            stmt = Conexao.getConnection().createStatement();            
+            rs = stmt.executeQuery(Sql); 
+            
+            while(rs.next()) {
+                valor = rs.getDouble("precoSaida");
+            }            
+            rs.close();
+            stmt.close();
+            
+        } catch (SQLException ex) {      
+            Logger.getLogger(ServicoDAO.class.getName()).log(Level.SEVERE, null, ex);
+            throw new RuntimeException("Erro ao Carregar os dados do servico: ",ex);   
+        }    
+        return valor;
+    }
 }
