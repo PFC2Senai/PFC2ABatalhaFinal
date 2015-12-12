@@ -9,14 +9,12 @@ import atributos.Servico;
 import atributos.TipoServico;
 import atributos.Usuario;
 import funcoes.Conexao;
-import funcoes.ContatosDAO;
 import funcoes.DetServicoEquipamentoDAO;
 import funcoes.DetServicoFuncionarioDAO;
 import funcoes.DetServicoProdutoDAO;
 import funcoes.DetServicoTipoDAO;
 import static funcoes.FuncoesDiversas.FormataData;
 import funcoes.OrdemServicoDAO;
-import funcoes.PessoaContatoDAO;
 import funcoes.ProdutoDAO;
 import funcoes.ServicoDAO;
 import funcoes.TipoServicoDAO;
@@ -24,7 +22,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -43,6 +40,7 @@ public class CadastrarServico extends javax.swing.JFrame {
 
     private int codModelo;
     private int codProduto;
+    private int codDetProduto;
     private int codFuncionario;
     private int codEquipamento;
     private int codFabricante;
@@ -57,6 +55,7 @@ public class CadastrarServico extends javax.swing.JFrame {
     private String equipamento;
     private String funcionario;
     private String fabricante;
+    private String tipoServico;
     
     /**
      * Creates new form CadastrarServico
@@ -85,6 +84,8 @@ public class CadastrarServico extends javax.swing.JFrame {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
+        java.awt.GridBagConstraints gridBagConstraints;
+        bindingGroup = new org.jdesktop.beansbinding.BindingGroup();
 
         jScrollPane5 = new javax.swing.JScrollPane();
         jPanel6 = new javax.swing.JPanel();
@@ -120,6 +121,10 @@ public class CadastrarServico extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         jScrollPane4 = new javax.swing.JScrollPane();
         txtDescricao = new javax.swing.JTextArea();
+        jScrollPane6 = new javax.swing.JScrollPane();
+        jTableTipodeServico = new javax.swing.JTable();
+        jBtnRemoverTipo = new javax.swing.JButton();
+        jBtnAdicionarTipo = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
         jComboBoxEquipamentos = new javax.swing.JComboBox();
         jLabel1 = new javax.swing.JLabel();
@@ -145,7 +150,17 @@ public class CadastrarServico extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
+        jScrollPane5.setToolTipText("");
+        jScrollPane5.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        jScrollPane5.setMinimumSize(new java.awt.Dimension(13, 23));
+        jScrollPane5.setPreferredSize(new java.awt.Dimension(100, 100));
+        jScrollPane5.setRequestFocusEnabled(false);
+
         jPanel6.setBackground(new java.awt.Color(153, 255, 255));
+        jPanel6.setPreferredSize(new java.awt.Dimension(860, 930));
+        jPanel6.setLayout(new java.awt.GridBagLayout());
+
+        jPanel13.setPreferredSize(new java.awt.Dimension(860, 920));
 
         jBtnCancelarCadServico3.setText("Cancelar");
         jBtnCancelarCadServico3.addActionListener(new java.awt.event.ActionListener() {
@@ -226,9 +241,14 @@ public class CadastrarServico extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        jTablePecas.getTableHeader().setReorderingAllowed(false);
         jScrollPane1.setViewportView(jTablePecas);
 
         jBtnRemoverPeca.setText("Remover");
+
+        org.jdesktop.beansbinding.Binding binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, jTablePecas, org.jdesktop.beansbinding.ELProperty.create("${selectedElement != null}"), jBtnRemoverPeca, org.jdesktop.beansbinding.BeanProperty.create("enabled"));
+        bindingGroup.addBinding(binding);
+
         jBtnRemoverPeca.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jBtnRemoverPecaActionPerformed(evt);
@@ -248,54 +268,58 @@ public class CadastrarServico extends javax.swing.JFrame {
         jPanel14.setLayout(jPanel14Layout);
         jPanel14Layout.setHorizontalGroup(
             jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel14Layout.createSequentialGroup()
-                .addGap(16, 16, 16)
-                .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addGroup(jPanel14Layout.createSequentialGroup()
-                            .addComponent(jBtnRemoverPeca)
-                            .addGap(607, 607, 607))
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 682, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(jBtbIncluirPeca)
-                        .addGroup(jPanel14Layout.createSequentialGroup()
-                            .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addGroup(jPanel14Layout.createSequentialGroup()
-                                    .addComponent(jLabel33)
-                                    .addGap(24, 24, 24)
-                                    .addComponent(jComboBoxProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 259, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(jPanel14Layout.createSequentialGroup()
-                                    .addComponent(jLabel35)
-                                    .addGap(12, 12, 12)
-                                    .addComponent(jComboBoxModelo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                            .addGap(18, 18, 18)
-                            .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(jPanel14Layout.createSequentialGroup()
-                                    .addComponent(jLabel36)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                    .addComponent(jComboBoxFabricante, javax.swing.GroupLayout.PREFERRED_SIZE, 281, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(jPanel14Layout.createSequentialGroup()
-                                    .addComponent(jLabel34)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(txtQuantidade, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE))))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel14Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 744, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel14Layout.createSequentialGroup()
+                        .addComponent(jBtnRemoverPeca)
+                        .addGap(582, 582, 582)
+                        .addComponent(jBtbIncluirPeca))
+                    .addGroup(jPanel14Layout.createSequentialGroup()
+                        .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(jPanel14Layout.createSequentialGroup()
+                                .addComponent(jLabel35)
+                                .addGap(12, 12, 12)
+                                .addComponent(jComboBoxModelo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(jPanel14Layout.createSequentialGroup()
+                                .addComponent(jLabel33)
+                                .addGap(24, 24, 24)
+                                .addComponent(jComboBoxProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel14Layout.createSequentialGroup()
+                                .addGap(29, 29, 29)
+                                .addComponent(jLabel34)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(txtQuantidade, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel14Layout.createSequentialGroup()
+                                .addGap(27, 27, 27)
+                                .addComponent(jLabel36)
+                                .addGap(18, 18, 18)
+                                .addComponent(jComboBoxFabricante, javax.swing.GroupLayout.PREFERRED_SIZE, 310, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addGap(26, 26, 26))
         );
         jPanel14Layout.setVerticalGroup(
             jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel14Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel33)
-                    .addComponent(jComboBoxProduto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel36)
-                    .addComponent(jComboBoxFabricante, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel35)
-                    .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jComboBoxModelo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel34)
-                        .addComponent(txtQuantidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel14Layout.createSequentialGroup()
+                        .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel33)
+                            .addComponent(jComboBoxProduto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel35)
+                            .addComponent(jComboBoxModelo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel14Layout.createSequentialGroup()
+                        .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel36)
+                            .addComponent(jComboBoxFabricante, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel34)
+                            .addComponent(txtQuantidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jBtnRemoverPeca)
@@ -310,7 +334,7 @@ public class CadastrarServico extends javax.swing.JFrame {
 
         jLabel6.setText("Cliente:");
         jPanel3.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, -1, -1));
-        jPanel3.add(txtTipoServico, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 70, 240, -1));
+        jPanel3.add(txtTipoServico, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 50, 240, -1));
 
         jComboBoxCliente.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Selecione o Cliente" }));
         jComboBoxCliente.addActionListener(new java.awt.event.ActionListener() {
@@ -318,10 +342,10 @@ public class CadastrarServico extends javax.swing.JFrame {
                 jComboBoxClienteActionPerformed(evt);
             }
         });
-        jPanel3.add(jComboBoxCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 30, 260, 20));
+        jPanel3.add(jComboBoxCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 20, 280, 25));
 
         jLabel10.setText("Tipo:");
-        jPanel3.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, -1, -1));
+        jPanel3.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 30, -1, -1));
 
         jComboBoxTipoServico.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Selecione o Tipo de Serviço" }));
         jComboBoxTipoServico.addActionListener(new java.awt.event.ActionListener() {
@@ -329,11 +353,11 @@ public class CadastrarServico extends javax.swing.JFrame {
                 jComboBoxTipoServicoActionPerformed(evt);
             }
         });
-        jPanel3.add(jComboBoxTipoServico, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 70, 260, -1));
+        jPanel3.add(jComboBoxTipoServico, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 50, 260, -1));
 
         jLabel12.setText("Data:");
-        jPanel3.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 110, 40, 20));
-        jPanel3.add(txtDataCadProduto, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 110, 140, -1));
+        jPanel3.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, 30, 20));
+        jPanel3.add(txtDataCadProduto, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 70, 140, -1));
 
         jBtbNovoTipoServico.setText("Novo");
         jBtbNovoTipoServico.addActionListener(new java.awt.event.ActionListener() {
@@ -341,7 +365,7 @@ public class CadastrarServico extends javax.swing.JFrame {
                 jBtbNovoTipoServicoActionPerformed(evt);
             }
         });
-        jPanel3.add(jBtbNovoTipoServico, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 70, -1, -1));
+        jPanel3.add(jBtbNovoTipoServico, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 50, -1, -1));
 
         jBtnCadTipoServico.setText("Salvar");
         jBtnCadTipoServico.addActionListener(new java.awt.event.ActionListener() {
@@ -349,7 +373,7 @@ public class CadastrarServico extends javax.swing.JFrame {
                 jBtnCadTipoServicoActionPerformed(evt);
             }
         });
-        jPanel3.add(jBtnCadTipoServico, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 100, 70, -1));
+        jPanel3.add(jBtnCadTipoServico, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 50, 70, -1));
 
         jBtnCancelarCadTipoServico.setText("Cancelar");
         jBtnCancelarCadTipoServico.addActionListener(new java.awt.event.ActionListener() {
@@ -357,16 +381,45 @@ public class CadastrarServico extends javax.swing.JFrame {
                 jBtnCancelarCadTipoServicoActionPerformed(evt);
             }
         });
-        jPanel3.add(jBtnCancelarCadTipoServico, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 130, -1, -1));
+        jPanel3.add(jBtnCancelarCadTipoServico, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 50, -1, -1));
 
         jLabel5.setText("Descrição:");
-        jPanel3.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 30, -1, 20));
+        jPanel3.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 100, -1, 20));
 
         txtDescricao.setColumns(20);
         txtDescricao.setRows(5);
         jScrollPane4.setViewportView(txtDescricao);
 
-        jPanel3.add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 30, 290, 110));
+        jPanel3.add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 120, 330, 130));
+
+        jTableTipodeServico.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Código", "Tipo Serviço"
+            }
+        ));
+        jTableTipodeServico.getTableHeader().setReorderingAllowed(false);
+        jScrollPane6.setViewportView(jTableTipodeServico);
+
+        jPanel3.add(jScrollPane6, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 120, 410, 130));
+
+        jBtnRemoverTipo.setText("Remover Tipo");
+        jBtnRemoverTipo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnRemoverTipoActionPerformed(evt);
+            }
+        });
+        jPanel3.add(jBtnRemoverTipo, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 80, -1, -1));
+
+        jBtnAdicionarTipo.setText("Adicionar Tipo");
+        jBtnAdicionarTipo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnAdicionarTipoActionPerformed(evt);
+            }
+        });
+        jPanel3.add(jBtnAdicionarTipo, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 80, -1, -1));
 
         jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true), "Equipamentos"));
 
@@ -401,6 +454,7 @@ public class CadastrarServico extends javax.swing.JFrame {
                 "Codigo", "Equipamento"
             }
         ));
+        jTableEquipamento.getTableHeader().setReorderingAllowed(false);
         jScrollPane2.setViewportView(jTableEquipamento);
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
@@ -418,8 +472,7 @@ public class CadastrarServico extends javax.swing.JFrame {
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jComboBoxEquipamentos, javax.swing.GroupLayout.PREFERRED_SIZE, 224, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 10, Short.MAX_VALUE)))
+                        .addComponent(jComboBoxEquipamentos, 0, 284, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel4Layout.setVerticalGroup(
@@ -448,6 +501,7 @@ public class CadastrarServico extends javax.swing.JFrame {
                 "Código", "Funcionário"
             }
         ));
+        jTableFuncionario.getTableHeader().setReorderingAllowed(false);
         jScrollPane3.setViewportView(jTableFuncionario);
 
         jComboBoxFuncionarios.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Selecione o Funcionário" }));
@@ -480,17 +534,17 @@ public class CadastrarServico extends javax.swing.JFrame {
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addGap(18, 18, 18)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel5Layout.createSequentialGroup()
-                        .addComponent(jLabel7)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jComboBoxFuncionarios, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 327, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(jPanel5Layout.createSequentialGroup()
+                            .addComponent(jLabel7)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(jComboBoxFuncionarios, 0, 274, Short.MAX_VALUE))
                         .addGroup(jPanel5Layout.createSequentialGroup()
                             .addComponent(jBtnRemoverFunc)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jBtbIncluirFunc))
-                        .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 324, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(18, Short.MAX_VALUE))
+                            .addComponent(jBtbIncluirFunc))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -536,9 +590,9 @@ public class CadastrarServico extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(txtTotalPecas, javax.swing.GroupLayout.DEFAULT_SIZE, 163, Short.MAX_VALUE)
                     .addComponent(txtMaoObra))
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jBtnCalcularTotalServico)
-                .addGap(18, 18, 18)
+                .addGap(57, 57, 57)
                 .addComponent(jLabel4)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(txtTotalGeral, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -548,19 +602,14 @@ public class CadastrarServico extends javax.swing.JFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel2)
-                            .addComponent(txtTotalPecas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jBtnCalcularTotalServico)
-                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(jLabel4)
-                                .addComponent(txtTotalGeral, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(5, 5, 5)))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(txtTotalPecas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel4)
+                        .addComponent(txtTotalGeral, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jBtnCalcularTotalServico)))
+                .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(txtMaoObra, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -571,31 +620,31 @@ public class CadastrarServico extends javax.swing.JFrame {
         jPanel13.setLayout(jPanel13Layout);
         jPanel13Layout.setHorizontalGroup(
             jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel13Layout.createSequentialGroup()
-                .addGap(25, 25, 25)
-                .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel13Layout.createSequentialGroup()
+                .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel13Layout.createSequentialGroup()
+                        .addGap(25, 25, 25)
                         .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(jPanel14, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 720, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jLabel32))
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(jPanel13Layout.createSequentialGroup()
-                        .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(jPanel13Layout.createSequentialGroup()
+                                .addGap(408, 408, 408)
+                                .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                             .addGroup(jPanel13Layout.createSequentialGroup()
                                 .addComponent(jBtnCancelarCadServico3)
                                 .addGap(28, 28, 28)
                                 .addComponent(jButtonLimparFornServico3)
                                 .addGap(469, 469, 469)
-                                .addComponent(jBtnCadastrarServico3))
-                            .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel13Layout.createSequentialGroup()
-                                    .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                                .addComponent(jBtnCadastrarServico3)
+                                .addGap(0, 0, Short.MAX_VALUE))))
+                    .addGroup(jPanel13Layout.createSequentialGroup()
+                        .addContainerGap(32, Short.MAX_VALUE)
+                        .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel32)
+                            .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, 804, Short.MAX_VALUE)
+                                .addComponent(jPanel14, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
+                .addGap(24, 24, 24))
         );
         jPanel13Layout.setVerticalGroup(
             jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -603,8 +652,8 @@ public class CadastrarServico extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jLabel32, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(1, 1, 1)
-                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(4, 4, 4)
+                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel14, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -613,25 +662,21 @@ public class CadastrarServico extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(22, 22, 22)
-                .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jBtnCancelarCadServico3)
-                    .addComponent(jButtonLimparFornServico3)
-                    .addComponent(jBtnCadastrarServico3))
-                .addContainerGap(20, Short.MAX_VALUE))
+                .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jBtnCadastrarServico3)
+                    .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jBtnCancelarCadServico3)
+                        .addComponent(jButtonLimparFornServico3)))
+                .addContainerGap(47, Short.MAX_VALUE))
         );
 
-        javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
-        jPanel6.setLayout(jPanel6Layout);
-        jPanel6Layout.setHorizontalGroup(
-            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel13, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
-        jPanel6Layout.setVerticalGroup(
-            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel6Layout.createSequentialGroup()
-                .addComponent(jPanel13, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 77, Short.MAX_VALUE))
-        );
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.ipadx = 22;
+        gridBagConstraints.ipady = 36;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        jPanel6.add(jPanel13, gridBagConstraints);
 
         jScrollPane5.setViewportView(jPanel6);
 
@@ -639,12 +684,16 @@ public class CadastrarServico extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 791, Short.MAX_VALUE)
+            .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 880, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 683, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 685, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
+
+        bindingGroup.bind();
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -683,12 +732,11 @@ public class CadastrarServico extends javax.swing.JFrame {
         
         
         
-        for(int j=0; j < jTablePecas.getRowCount(); j++) {
+        for(int j = 0; j < jTablePecas.getRowCount(); j++) {
                  
             dtServ.setCodServico(codServico); 
             dtServ.setCodDetProduto(Integer.parseInt(jTablePecas.getValueAt(j, 0).toString()));
-            dtServ.setQuantidade(Integer.parseInt(jTablePecas.getValueAt(j, 6).toString()));
-           
+            dtServ.setQuantidade(Integer.parseInt(jTablePecas.getValueAt(j, 6).toString()));           
             DetServicoProdutoDAO.CadDetServProduto(dtServ);
         }
         
@@ -708,21 +756,20 @@ public class CadastrarServico extends javax.swing.JFrame {
             DetServicoFuncionarioDAO.CadDetServFuncionario(dtServFunc);
         }
         
-        ServTipo.setCodServico(codServico);
-        ServTipo.setCodTipo(codTipoServico);
-        System.out.println(codTipoServico);
-        
-        DetServicoTipoDAO.CadDetServTipoServ(ServTipo);
-        
-        
-        
-        txtTipoServico.setVisible(false);
-        jComboBoxTipoServico.setVisible(true);
+        for(int j=0; j < jTableTipodeServico.getRowCount(); j++) {
+                 
+            ServTipo.setCodServico(codServico); 
+            ServTipo.setCodTipo(Integer.parseInt(jTableTipodeServico.getValueAt(j, 0).toString()));
+           
+            DetServicoTipoDAO.CadDetServTipoServ(ServTipo);
+        }
+             
+//        txtTipoServico.setVisible(false);
+//        jComboBoxTipoServico.setVisible(true);
         
         limparCampos();
-        jComboBoxTipoServico.removeAllItems();
-        populaComboBoxProduto();
-        jBtbIncluirPeca.setVisible(true);
+//        jComboBoxTipoServico.removeAllItems();
+//        jBtbIncluirPeca.setVisible(true);
     }//GEN-LAST:event_jBtnCadastrarServico3ActionPerformed
 
     private void jComboBoxProdutoItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jComboBoxProdutoItemStateChanged
@@ -783,6 +830,9 @@ public class CadastrarServico extends javax.swing.JFrame {
 
     private void jComboBoxTipoServicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxTipoServicoActionPerformed
         idTipoServicoComboBox();
+        if (jComboBoxTipoServico.getSelectedItem() != null) {
+            tipoServico = jComboBoxTipoServico.getSelectedItem().toString();
+        }
     }//GEN-LAST:event_jComboBoxTipoServicoActionPerformed
 
     private void jBtbNovoTipoServicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtbNovoTipoServicoActionPerformed
@@ -871,39 +921,34 @@ public class CadastrarServico extends javax.swing.JFrame {
         txtTotalGeral.setText(String.valueOf(total));
     }//GEN-LAST:event_jBtnCalcularTotalServicoActionPerformed
 
+    private void jBtnAdicionarTipoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnAdicionarTipoActionPerformed
+        TabelaTipoServico();
+    }//GEN-LAST:event_jBtnAdicionarTipoActionPerformed
+
+    private void jBtnRemoverTipoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnRemoverTipoActionPerformed
+        DefaultTableModel dtm = (DefaultTableModel) jTableTipodeServico.getModel();
+        int linha = jTableTipodeServico.getSelectedRow();
+
+        if(linha != -1) {
+            dtm.removeRow(linha);
+        }
+    }//GEN-LAST:event_jBtnRemoverTipoActionPerformed
+
     private void limparCampos() {
         
-    }
-    
-    private int tamanhoTabela() {
-       
-        ArrayList<Integer> tamanho = new ArrayList<Integer>();
-        
-        tamanho.add(jTableEquipamento.getModel().getRowCount());
-        tamanho.add(jTableFuncionario.getModel().getRowCount());
-        tamanho.add(jTablePecas.getModel().getRowCount());
-        
-        int max = tamanho.get(0);
-        
-        for(int i = 1; i < tamanho.size(); i++){
-            if(tamanho.get(i) > max){
-                max = tamanho.get(i);
-            }
-        }        
-        return max;        
-    }
-    
+    }   
     
     public void TabelaProduto() {
         
         CarregaValorUnit();  
+        codDetProduto = ProdutoDAO.codDetProduto();
         int quantidade = Integer.parseInt(txtQuantidade.getText());
         double total = valorUnit * quantidade;
         try { 
             
             DefaultTableModel dtm = (DefaultTableModel) jTablePecas.getModel();
                    
-                dtm.addRow(new Object[] {codProduto, codModelo, 
+                dtm.addRow(new Object[] {codDetProduto, codModelo, 
                                          codFabricante, produto, 
                                          modelo, fabricante,
                                          quantidade,
@@ -948,6 +993,19 @@ public class CadastrarServico extends javax.swing.JFrame {
         }          
     }
     
+    public void TabelaTipoServico() {
+        
+        try { 
+            
+            DefaultTableModel dtm = (DefaultTableModel) jTableTipodeServico.getModel();
+                   
+                dtm.addRow(new Object[] {codTipoServico, tipoServico});
+                
+        } catch (Exception erro) {
+            Logger.getLogger(CadastrarCliente.class.getName()).log(Level.SEVERE, null, erro);
+        }          
+    }
+    
     public void CarregaValorUnit() { 
         
         valor = ProdutoDAO.ExisteProduto(codProduto, codModelo, codFabricante);
@@ -981,7 +1039,8 @@ public class CadastrarServico extends javax.swing.JFrame {
         
         Connection conexao = Conexao.getConnection();
         ResultSet rs;
-        String sql = "select * from tabproduto where produto = '" + jComboBoxProduto.getSelectedItem()+ "';";
+        String sql = "select * from tabproduto inner join tabdetproduto on tabproduto_id_prod = id_prod"
+                    + " where produto = '" + jComboBoxProduto.getSelectedItem()+ "';";
         
         try{
             pst = conexao.prepareStatement(sql);
@@ -1248,7 +1307,7 @@ public class CadastrarServico extends javax.swing.JFrame {
         jTablePecas.getColumnModel().getColumn( 2 ).setMinWidth( 0 );  
         jTablePecas.getTableHeader().getColumnModel().getColumn( 2 ).setMaxWidth( 0 );  
         jTablePecas.getTableHeader().getColumnModel().getColumn( 2 ).setMinWidth( 0 );
-        
+//        
         //oculta coluna equipamento
         jTableEquipamento.getColumnModel().getColumn( 0 ).setMaxWidth( 0 );  
         jTableEquipamento.getColumnModel().getColumn( 0 ).setMinWidth( 0 );  
@@ -1267,6 +1326,7 @@ public class CadastrarServico extends javax.swing.JFrame {
     private javax.swing.JButton jBtbIncluirFunc;
     private javax.swing.JButton jBtbIncluirPeca;
     private javax.swing.JButton jBtbNovoTipoServico;
+    private javax.swing.JButton jBtnAdicionarTipo;
     private javax.swing.JButton jBtnCadTipoServico;
     private javax.swing.JButton jBtnCadastrarServico3;
     private javax.swing.JButton jBtnCalcularTotalServico;
@@ -1275,6 +1335,7 @@ public class CadastrarServico extends javax.swing.JFrame {
     private javax.swing.JButton jBtnRemoveEquipamento;
     private javax.swing.JButton jBtnRemoverFunc;
     private javax.swing.JButton jBtnRemoverPeca;
+    private javax.swing.JButton jBtnRemoverTipo;
     private javax.swing.JButton jButtonLimparFornServico3;
     private javax.swing.JComboBox jComboBoxCliente;
     private javax.swing.JComboBox jComboBoxEquipamentos;
@@ -1309,9 +1370,11 @@ public class CadastrarServico extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
+    private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JTable jTableEquipamento;
     private javax.swing.JTable jTableFuncionario;
     private javax.swing.JTable jTablePecas;
+    private javax.swing.JTable jTableTipodeServico;
     private com.toedter.calendar.JDateChooser txtDataCadProduto;
     private javax.swing.JTextArea txtDescricao;
     private javax.swing.JTextField txtMaoObra;
@@ -1319,5 +1382,6 @@ public class CadastrarServico extends javax.swing.JFrame {
     private javax.swing.JTextField txtTipoServico;
     private javax.swing.JTextField txtTotalGeral;
     private javax.swing.JTextField txtTotalPecas;
+    private org.jdesktop.beansbinding.BindingGroup bindingGroup;
     // End of variables declaration//GEN-END:variables
 }

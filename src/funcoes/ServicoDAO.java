@@ -46,34 +46,6 @@ public class ServicoDAO {
         return id;
     }
     
-//    public static void CadDetServico(Servico serv) {
-//        
-//        PreparedStatement stmt;
-//        try {   
-//            String sql = ("INSERT INTO det_servico(servico_idservico,"
-//                                                + "tabdetproduto_idDetProduto,"
-//                                                + "quantidadeproduto,"
-//                                                + "tabfuncionario_idfuncionario,"
-//                                                + "tabdetequipamento_idDetEquipamento,"
-//                                                + "tabTipo_serv_idtabTipo_serv) VALUES(?,?,?,?,?,?);");
-//            
-//            stmt = Conexao.getConnection().prepareStatement(sql);      
-//  
-//            stmt.setInt(1, serv.getCodServico());
-//            stmt.setInt(2, serv.getCodDetProduto());
-//            stmt.setInt(3, serv.getQuantidade());
-//            stmt.setInt(4, serv.getCodOrdemServico());
-//            stmt.setString(5, serv.getDescricaoServico());
-//                              
-//            stmt.executeUpdate();
-//            stmt.close();  
-//
-//        } catch (SQLException ex) {      
-//            Logger.getLogger(ServicoDAO.class.getName()).log(Level.SEVERE, null, ex);
-//            throw new RuntimeException("Erro ao Cadastrar Detalhe de servico: ",ex);       
-//        }
-//    }
-    
     public static ArrayList CarregaServico(int id) {
         
         Statement stmt;

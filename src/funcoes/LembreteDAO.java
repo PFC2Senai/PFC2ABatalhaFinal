@@ -25,7 +25,7 @@ public class LembreteDAO {
             String sql = ("INSERT INTO tablembrete (tabusuario_id_usuario,dataContato,hora,descricao,tabCliente_idcliente) VALUES(?,?,?,?,?)");
             stmt = Conexao.getConnection().prepareStatement(sql);      
                   
-                stmt.setInt(1, 1);
+                stmt.setInt(1, lembrete.getCodUsuario());
                 stmt.setObject(2, lembrete.getDataLembrete());
                 stmt.setTime(3, lembrete.getHora());
                 stmt.setString(4, lembrete.getDescricao());

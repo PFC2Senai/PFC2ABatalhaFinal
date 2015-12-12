@@ -12,7 +12,7 @@ import java.util.logging.Logger;
  */
 public class DetServicoTipoDAO {
     
-    public static void CadDetServTipoServ(DetServicoTipoServ servTipo){
+    public static void CadDetServTipoServ(DetServicoTipoServ servTipo) {
         
         PreparedStatement stmt;
         

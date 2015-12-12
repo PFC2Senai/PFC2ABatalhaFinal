@@ -2,6 +2,7 @@ package telas;
 
 import atributos.Cliente;
 import atributos.Lembrete;
+import atributos.Usuario;
 import funcoes.ClienteDAO;
 import funcoes.Conexao;
 import funcoes.FuncoesDiversas;
@@ -172,7 +173,7 @@ public class CadastrarLembrete extends javax.swing.JFrame {
         
 //        try {
             Lembrete lembrete = new Lembrete();
-            
+            lembrete.setCodUsuario(Usuario.idUsuario());
             lembrete.setDataLembrete(FormataData(txtDataLembrete.getDate()));            
             lembrete.setHora(FuncoesDiversas.ConverterHora(txtHoraLembrete.getText()));
             lembrete.setDescricao(txtDescricaoLembrete.getText());                    

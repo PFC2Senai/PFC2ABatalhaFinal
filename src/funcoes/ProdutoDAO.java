@@ -16,6 +16,8 @@ import java.util.logging.Logger;
  */
 public class ProdutoDAO {
     
+    private static int codDetProduto;
+    
     public static int Cadroduto(Produto prod){
         
         int id = 0;
@@ -271,7 +273,9 @@ public class ProdutoDAO {
         }    
         return produto;
     } 
-    
+    public static int codDetProduto() {
+        return codDetProduto;
+    }
     public static double ExisteProduto(int idProduto, int idModelo, int idFabricante) {
         
         Statement stmt;
@@ -290,6 +294,7 @@ public class ProdutoDAO {
             
             while(rs.next()) {
                 valor = rs.getDouble("precoSaida");
+                codDetProduto = rs.getInt("idDetProduto");
             }            
             rs.close();
             stmt.close();

@@ -12,6 +12,7 @@ public class Lembrete {
     private String descricao;
     private int codCliente;
     private String nomeCliente;
+    private int codUsuario;
 
     /**
      * @return the idLembrete
@@ -95,6 +96,20 @@ public class Lembrete {
      */
     public void setNomeCliente(String nomeCliente) {
         this.nomeCliente = nomeCliente;
+    }
+
+    /**
+     * @return the codUsuario
+     */
+    public int getCodUsuario() {
+        return codUsuario;
+    }
+
+    /**
+     * @param codUsuario the codUsuario to set
+     */
+    public void setCodUsuario(int codUsuario) {
+        this.codUsuario = codUsuario;
     }
     
 }
