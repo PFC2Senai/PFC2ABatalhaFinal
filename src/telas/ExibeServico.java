@@ -1,16 +1,30 @@
 package telas;
 
+import static funcoes.Conexao.getConnection;
+import funcoes.ModeloTabela;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.ListSelectionModel;
+
 /**
  *
  * @author Josy
  */
 public class ExibeServico extends javax.swing.JFrame {
 
+    Statement stmt;
+    private int codServico;
+    
     /**
      * Creates new form ExibeServico
      */
     public ExibeServico() {
         initComponents();
+        TabelaEquipamento("SELECT * FROM tabservico INNER JOIN tabcliente ON idcliente = tabCliente_idcliente;");
     }
 
     /**
@@ -21,11 +35,14 @@ public class ExibeServico extends javax.swing.JFrame {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
+        bindingGroup = new org.jdesktop.beansbinding.BindingGroup();
 
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTableListarServicos = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
+        jBtnDetalhar = new javax.swing.JButton();
+        jBtnSair = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -44,6 +61,24 @@ public class ExibeServico extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel1.setText("Serviços");
 
+        jBtnDetalhar.setText("Detalhar");
+
+        org.jdesktop.beansbinding.Binding binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, jTableListarServicos, org.jdesktop.beansbinding.ELProperty.create("${selectedElement != null}"), jBtnDetalhar, org.jdesktop.beansbinding.BeanProperty.create("enabled"));
+        bindingGroup.addBinding(binding);
+
+        jBtnDetalhar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnDetalharActionPerformed(evt);
+            }
+        });
+
+        jBtnSair.setText("Sair");
+        jBtnSair.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnSairActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -51,6 +86,11 @@ public class ExibeServico extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(24, 24, 24)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(9, 9, 9)
+                        .addComponent(jBtnSair)
+                        .addGap(33, 33, 33)
+                        .addComponent(jBtnDetalhar))
                     .addComponent(jLabel1)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 776, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(30, Short.MAX_VALUE))
@@ -61,8 +101,12 @@ public class ExibeServico extends javax.swing.JFrame {
                 .addGap(29, 29, 29)
                 .addComponent(jLabel1)
                 .addGap(28, 28, 28)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 279, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(43, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 333, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 42, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jBtnDetalhar)
+                    .addComponent(jBtnSair))
+                .addGap(35, 35, 35))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -76,13 +120,64 @@ public class ExibeServico extends javax.swing.JFrame {
             .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
+        bindingGroup.bind();
+
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jBtnDetalharActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnDetalharActionPerformed
+        int linha = jTableListarServicos.getSelectedRow();        
+        codServico = (Integer.parseInt(jTableListarServicos.getValueAt(linha, 0).toString()));
+        new DetalharServico(codServico).setVisible(true);
+    }//GEN-LAST:event_jBtnDetalharActionPerformed
+
+    private void jBtnSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnSairActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_jBtnSairActionPerformed
+
+    public void TabelaEquipamento(String Sql) {
+        
+        try { 
+            
+            stmt = getConnection().createStatement();
+            ArrayList dados = new ArrayList();               
+            String [] Colunas = {"Código","Cliente", "Valor", "Data"};
+               
+            ResultSet rs;
+            rs = stmt.executeQuery(Sql);
+            
+                while(rs.next()) {
+                    dados.add(new Object[]{ rs.getObject("idservico"),rs.getObject("empresa"),
+                                            rs.getObject("preco"),rs.getObject("dataServico")});            
+                }
+
+                    for (int i = 0; i < 4; i++) {
+                        ModeloTabela modelo = new ModeloTabela(dados, Colunas);
+                        jTableListarServicos.setModel(modelo);
+                        jTableListarServicos.getColumnModel().getColumn(i).setPreferredWidth(150);
+                        jTableListarServicos.getColumnModel().getColumn(i).setResizable(false);
+                        jTableListarServicos.getTableHeader().setReorderingAllowed(false);
+                        jTableListarServicos.setAutoResizeMode(jTableListarServicos.AUTO_RESIZE_OFF);
+                        jTableListarServicos.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+                    }
+                    
+        } catch (SQLException ex) {
+            Logger.getLogger(ExibeServico.class.getName()).log(Level.SEVERE, null, ex);
+            
+        } catch (Exception erro){
+            Logger.getLogger(ExibeServico.class.getName()).log(Level.SEVERE, null, erro);
+        }         
+    }
+    
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jBtnDetalhar;
+    private javax.swing.JButton jBtnSair;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTableListarServicos;
+    private org.jdesktop.beansbinding.BindingGroup bindingGroup;
     // End of variables declaration//GEN-END:variables
 }

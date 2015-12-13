@@ -13,8 +13,8 @@ import funcoes.DetServicoEquipamentoDAO;
 import funcoes.DetServicoFuncionarioDAO;
 import funcoes.DetServicoProdutoDAO;
 import funcoes.DetServicoTipoDAO;
-import static funcoes.EquipamentoDAO.CodigoDetEquipamento;
-import static funcoes.FuncoesDiversas.FormataData;
+import funcoes.EquipamentoDAO;
+import funcoes.FuncoesDiversas;
 import funcoes.OrdemServicoDAO;
 import funcoes.ProdutoDAO;
 import funcoes.ServicoDAO;
@@ -993,7 +993,7 @@ public class CadastrarServicoTeste extends javax.swing.JFrame {
         servico.setCodUsuario(Usuario.idUsuario());
         servico.setCodCliente(codCliente);
         servico.setPreco(preco);
-        servico.setDataServico(FormataData(txtDataCadProduto.getDate()));
+        servico.setDataServico(FuncoesDiversas.FormataData(txtDataCadProduto.getDate()));
         servico.setDescricaoServico(txtDescricao.getText());
 
         oS.setTipo("Manutenção");
@@ -1089,7 +1089,7 @@ public class CadastrarServicoTeste extends javax.swing.JFrame {
     
     public void TabelaEquipamento() {
         
-        codDetEquipamento = CodigoDetEquipamento(codEquipamento, codModeloEqui, codFabricanteEqui);
+        codDetEquipamento = EquipamentoDAO.CodigoDetEquipamento(codEquipamento, codModeloEqui, codFabricanteEqui);
         
         try { 
             

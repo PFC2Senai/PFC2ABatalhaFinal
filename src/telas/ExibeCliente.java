@@ -39,6 +39,7 @@ private static int idCntato;
     }
     
     public boolean CodigoCliente() {
+        
         boolean valida = false;
         
         if(jTableListarClientes.getSelectedRow() != -1) {
@@ -49,7 +50,7 @@ private static int idCntato;
         }else{
             JOptionPane.showMessageDialog(null, "Primeiro selecione um registro.");
         }  
-    return valida;
+        return valida;
     }
     
     public void TabelaCliente(String Sql) {
@@ -62,7 +63,6 @@ private static int idCntato;
                
             ResultSet rs;
             rs = stmt.executeQuery(Sql);            
-            //rs.first();
             
                 while(rs.next()){
                     dados.add(new Object[]{ rs.getObject("idCliente"),rs.getObject("empresa"),
@@ -203,9 +203,7 @@ private static int idCntato;
             TabelaCliente("select  * from vw_cliente;");
         }
     }//GEN-LAST:event_jBtExcluirClienteActionPerformed
-
-    
-    
+   
     private void jBtnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnEditarActionPerformed
         
         if (CodigoCliente()){

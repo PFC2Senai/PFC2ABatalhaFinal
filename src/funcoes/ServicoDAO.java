@@ -22,7 +22,12 @@ public class ServicoDAO {
         PreparedStatement stmt;
         int id = 0;
         try {   
-            String sql = ("INSERT INTO tabservico(tabUsuario_id_usuario,tabCliente_idcliente,preco,dataServico,tabordemserv_idtabOrdemServ,descricao_servico) VALUES (?,?,?,?,?,?);");
+            String sql = ("INSERT INTO tabservico(tabUsuario_id_usuario,"
+                        + " tabCliente_idcliente,"
+                        + " preco,dataServico,"
+                        + " tabordemserv_idtabOrdemServ,"
+                        + " descricao_servico) VALUES (?,?,?,?,?,?);");
+            
             stmt = Conexao.getConnection().prepareStatement(sql);      
   
                 stmt.setInt(1, serv.getCodUsuario());
@@ -53,7 +58,7 @@ public class ServicoDAO {
         ArrayList<Servico> servico = new ArrayList<Servico>();
         
         try {            
-            String Sql = "SELECT * FROM tabservico INNER JOIN det_servico ON idservico = servico_idservico "
+            String Sql = "SELECT * FROM tabservico "
                        + "WHERE idservico = '" + id + "';";
                        
             
@@ -119,25 +124,6 @@ public class ServicoDAO {
             throw new RuntimeException("Erro ao alterar dados servico: ",ex);     
         }
     }
-    
-//    public static void UpdateDetServico(Servico serv, int id) {
-//        
-//        PreparedStatement stmt;
-//        
-//        try {   
-//            String sql = ("UPDATE det_servico SET tabProduto_id_prod = " + serv.getCodDetProduto() + 
-//                                               ", quantidadeproduto = " + serv.getQuantidade() + 
-//                                                " WHERE servico_idservico = " + id + ";");
-//            
-//            stmt = Conexao.getConnection().prepareStatement(sql);                             
-//            stmt.executeUpdate();
-//            stmt.close();
-//
-//        } catch (SQLException ex) {      
-//            Logger.getLogger(ServicoDAO.class.getName()).log(Level.SEVERE, null, ex);
-//            throw new RuntimeException("Erro ao alterar dados Detalhe de servico: ",ex);     
-//        }
-//    }
     
     public static ArrayList<Servico> ListarServicos(){
         

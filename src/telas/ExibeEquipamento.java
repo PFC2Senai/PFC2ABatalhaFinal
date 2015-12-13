@@ -11,7 +11,6 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ListSelectionModel;
-import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -61,17 +60,9 @@ public class ExibeEquipamento extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Código", "Equipamento"
-            }
-        ) {
-            boolean[] canEdit = new boolean [] {
-                false, false
-            };
 
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
             }
-        });
+        ));
         jTableListarEquipamento.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jTableListarEquipamentoMouseClicked(evt);
@@ -225,27 +216,6 @@ public class ExibeEquipamento extends javax.swing.JFrame {
         }         
     }
     
-    
-//    public void TabelaEquipamento(){
-//        
-//        ((DefaultTableModel) jTableListarEquipamento.getModel()).setNumRows(0);
-//        jTableListarEquipamento.updateUI();
-//        ArrayList<Equipamento> equipamentos = new ArrayList<Equipamento>();
-//        equipamentos = EquipamentoDAO.ListarEquipamentos();
-//        
-//        try { 
-//            
-//            DefaultTableModel dtm = (DefaultTableModel) jTableListarEquipamento.getModel();
-//                   
-//            for(Equipamento equipamento : equipamentos){
-//                dtm.addRow(new Object[] {String.valueOf(equipamento.getIdEquipamento()),equipamento.getEquipamento()});
-//            }
-//                             
-//        } catch (Exception erro){
-//            Logger.getLogger(ExibeEquipamento.class.getName()).log(Level.SEVERE, null, erro);
-//            System.out.println("erro" + erro);
-//        }          
-//    }
     
     private void jTableListarEquipamentoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableListarEquipamentoMouseClicked
                     

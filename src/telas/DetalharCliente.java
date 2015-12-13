@@ -48,8 +48,7 @@ public class DetalharCliente extends javax.swing.JFrame {
         populaComboBox();
         TabelaLembrete2(GetIndice());         
         TabelaContatos();
-        campoInvisivel();
-        
+        campoInvisivel();        
     }
     
     private void CarregaCliente() {
@@ -691,7 +690,6 @@ public class DetalharCliente extends javax.swing.JFrame {
 
         campoInvisivel();
         jButtonEditarContato.setVisible(true);
-      //  jButtonEditarContato.setEnabled(false);
     }//GEN-LAST:event_jBtbCancelContatoActionPerformed
 
     private void jBtnNovoLembreteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnNovoLembreteActionPerformed
