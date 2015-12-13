@@ -199,4 +199,33 @@ public class EquipamentoDAO {
         }    
         return codEquipamento;
     }
+    
+    public static int CodigoDetEquipamento(int idEquipamento, int idModelo, int idFabricante) {
+        
+        Statement stmt;
+        int idDetEquipamento = 0;
+        
+        try {            
+            String Sql = "SELECT * FROM vw_combofabricanteequipamento "
+                       + " WHERE idEquipamento = " + idEquipamento 
+                       + " AND tabmodelo_idtabModelo = " + idModelo 
+                       + " AND idtabFabricante = " + idFabricante +";";
+                       
+            
+            ResultSet rs;            
+            stmt = Conexao.getConnection().createStatement();            
+            rs = stmt.executeQuery(Sql); 
+            
+            while(rs.next()) {                
+                idDetEquipamento = rs.getInt("idDetEquipamento");
+            }            
+            rs.close();
+            stmt.close();
+            
+        } catch (SQLException ex) {      
+            Logger.getLogger(ServicoDAO.class.getName()).log(Level.SEVERE, null, ex);
+            throw new RuntimeException("Erro ao Carregar os dados do servico: ",ex);   
+        }    
+        return idDetEquipamento;
+    }
 }

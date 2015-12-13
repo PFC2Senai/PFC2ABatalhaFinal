@@ -16,6 +16,7 @@ import java.util.logging.Logger;
  */
 public class ServicoDAO {
     
+    
     public static int CadServico(Servico serv){
         
         PreparedStatement stmt;
@@ -174,5 +175,6 @@ public class ServicoDAO {
             throw new RuntimeException("Erro ao Listar servico: ",ex); 
         }
         return servicos;
-    }     
+    }  
+       
 }
