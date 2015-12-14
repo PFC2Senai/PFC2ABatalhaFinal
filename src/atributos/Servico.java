@@ -12,14 +12,7 @@ public class Servico {
     private Date dataServico;
     private int codOrdemServico; //chave estrangeira
     private String descricaoServico;
-//    //tab det Servico
-//    private int idDetServico;    
-//    private int codServico; //chave estrangeira tab servico
-//    private int codDetProduto; //chave estrangeira
-//    private int codTipoServico;
-//    private int codEquipamento; //chave estrangeira
-//    private int codFuncionario;
-//    private int quantidade;
+    private double maoDeObra;
 
     /**
      * @return the idServico
@@ -216,4 +209,18 @@ public class Servico {
 //    public void setCodTipoServico(int codTipoServico) {
 //        this.codTipoServico = codTipoServico;
 //    }
+
+    /**
+     * @return the maoDeObra
+     */
+    public double getMaoDeObra() {
+        return maoDeObra;
+    }
+
+    /**
+     * @param maoDeObra the maoDeObra to set
+     */
+    public void setMaoDeObra(double maoDeObra) {
+        this.maoDeObra = maoDeObra;
+    }
 }

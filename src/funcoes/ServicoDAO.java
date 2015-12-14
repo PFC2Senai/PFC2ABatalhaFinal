@@ -17,7 +17,7 @@ import java.util.logging.Logger;
 public class ServicoDAO {
     
     
-    public static int CadServico(Servico serv){
+    public static int CadServico(Servico serv) {
         
         PreparedStatement stmt;
         int id = 0;
@@ -26,7 +26,7 @@ public class ServicoDAO {
                         + " tabCliente_idcliente,"
                         + " preco,dataServico,"
                         + " tabordemserv_idtabOrdemServ,"
-                        + " descricao_servico) VALUES (?,?,?,?,?,?);");
+                        + " descricao_servico, maoDeObra) VALUES (?,?,?,?,?,?,?);");
             
             stmt = Conexao.getConnection().prepareStatement(sql);      
   
@@ -36,6 +36,7 @@ public class ServicoDAO {
                 stmt.setObject(4, serv.getDataServico());
                 stmt.setDouble(5, serv.getCodOrdemServico());
                 stmt.setString(6, serv.getDescricaoServico());
+                stmt.setDouble(7, serv.getMaoDeObra());
                               
                 stmt.executeUpdate();
                 
@@ -75,6 +76,7 @@ public class ServicoDAO {
                 s.setDescricaoServico(rs.getString("descricao_servico"));
                 s.setPreco(rs.getDouble("preco"));  
                 s.setDataServico(rs.getDate("dataServico"));
+                s.setMaoDeObra(rs.getDouble("maoDeObra"));
                 s.setCodOrdemServico(rs.getInt("tabordemserv_idtabOrdemServ"));
                 servico.add(s);                
             }            

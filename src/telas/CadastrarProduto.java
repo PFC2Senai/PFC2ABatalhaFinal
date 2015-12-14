@@ -297,7 +297,9 @@ public class CadastrarProduto extends javax.swing.JFrame {
         txtProduto.setVisible(false);
         jComboBoxProdutos.setVisible(true);
         jComboBoxProdutos.removeAllItems();
+        
         populaComboBoxProduto();
+        jComboBoxProdutos.setSelectedItem(prod.getProduto());
 
     }//GEN-LAST:event_jBtnCadProdutoActionPerformed
 
@@ -336,7 +338,7 @@ public class CadastrarProduto extends javax.swing.JFrame {
         try{
             pst = conexao.prepareStatement(sql);
             rs = pst.executeQuery();
-            
+            jComboBoxProdutos.addItem("Selecione a peça");
             while(rs.next()) {
                 jComboBoxProdutos.addItem(rs.getString("produto"));
             }
@@ -357,7 +359,7 @@ public class CadastrarProduto extends javax.swing.JFrame {
             rs = pst.executeQuery();
             
             while(rs.next()) {
-                codProduto = (rs.getInt("id_prod"));
+                   codProduto = (rs.getInt("id_prod"));   
             }
             
         }catch(SQLException ex) {

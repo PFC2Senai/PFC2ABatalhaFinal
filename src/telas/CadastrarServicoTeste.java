@@ -776,7 +776,7 @@ public class CadastrarServicoTeste extends javax.swing.JFrame {
         );
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPaneServico)
+            .addComponent(jTabbedPaneServico, javax.swing.GroupLayout.Alignment.TRAILING)
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -833,6 +833,7 @@ public class CadastrarServicoTeste extends javax.swing.JFrame {
 
         jComboBoxTipoServico.removeAllItems();
         populaComboBoxTipoServico();
+        jComboBoxTipoServico.setSelectedItem(tServ.getTipo());
     }//GEN-LAST:event_jBtnCadTipoServicoActionPerformed
 
     private void jBtbNovoTipoServicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtbNovoTipoServicoActionPerformed
@@ -995,6 +996,7 @@ public class CadastrarServicoTeste extends javax.swing.JFrame {
         servico.setPreco(preco);
         servico.setDataServico(FuncoesDiversas.FormataData(txtDataCadProduto.getDate()));
         servico.setDescricaoServico(txtDescricao.getText());
+        servico.setMaoDeObra(Double.parseDouble(txtMaoObra.getText()));
 
         oS.setTipo("Manutenção");
 
@@ -1050,16 +1052,13 @@ public class CadastrarServicoTeste extends javax.swing.JFrame {
         populaComboBoxModeloEqui();
         equipamento = jComboBoxEquipamentos.getSelectedItem().toString();
     }//GEN-LAST:event_jComboBoxEquipamentosItemStateChanged
-
-    
     
     private void limparCampos() {
         
     }   
     
     public void TabelaProduto() {
-        
-        
+               
         CarregaValorUnit();  
         codDetProduto = ProdutoDAO.codDetProduto();
         int quantidade = Integer.parseInt(txtQuantidade.getText());
@@ -1139,8 +1138,7 @@ public class CadastrarServicoTeste extends javax.swing.JFrame {
         
         if (valor != 0) {            
             valorUnit = valor;
-        }
-        
+        }        
     }
     
     private void populaComboBoxProduto() {
