@@ -44,6 +44,7 @@ public class DetalharServico extends javax.swing.JFrame {
     private int codDetServTipoServico;
     private int codDetServFuncionario;
     private double total;
+    private double valorMaoObra;
     Statement stmt;
     
     /**
@@ -64,7 +65,8 @@ public class DetalharServico extends javax.swing.JFrame {
         TabelaEquipamento("SELECT * FROM vw_detservequipamento where idservico = " + idServico +";");
         TabelaTipoServico();
         TabelaFuncionario();
-        ocultaCampos();        
+        ocultaCampos();  
+        ocultaCamposValor();
     }
 
     /**
@@ -83,7 +85,7 @@ public class DetalharServico extends javax.swing.JFrame {
         jPanel14 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTablePecas = new javax.swing.JTable();
-        jBtnAlterarModelo = new javax.swing.JButton();
+        jBtnAdicionarPeca = new javax.swing.JButton();
         jBtnRemover = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
@@ -112,8 +114,10 @@ public class DetalharServico extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         txtTotal = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
-        txtMaoObra = new javax.swing.JLabel();
         jBtnAlterarMaoObra = new javax.swing.JButton();
+        jBtnCancelAltValor = new javax.swing.JButton();
+        jBtnEditarValor = new javax.swing.JButton();
+        txtMaoObra = new javax.swing.JTextField();
         jPanel1 = new javax.swing.JPanel();
         jScrollPane6 = new javax.swing.JScrollPane();
         jTableTipodeServico = new javax.swing.JTable();
@@ -149,10 +153,10 @@ public class DetalharServico extends javax.swing.JFrame {
         jTablePecas.getTableHeader().setReorderingAllowed(false);
         jScrollPane1.setViewportView(jTablePecas);
 
-        jBtnAlterarModelo.setText("Adicionar");
-        jBtnAlterarModelo.addActionListener(new java.awt.event.ActionListener() {
+        jBtnAdicionarPeca.setText("Adicionar");
+        jBtnAdicionarPeca.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jBtnAlterarModeloActionPerformed(evt);
+                jBtnAdicionarPecaActionPerformed(evt);
             }
         });
 
@@ -176,7 +180,7 @@ public class DetalharServico extends javax.swing.JFrame {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 562, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jBtnAlterarModelo)
+                    .addComponent(jBtnAdicionarPeca)
                     .addComponent(jBtnRemover))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -186,7 +190,7 @@ public class DetalharServico extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel14Layout.createSequentialGroup()
-                        .addComponent(jBtnAlterarModelo)
+                        .addComponent(jBtnAdicionarPeca)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jBtnRemover)
                         .addGap(0, 35, Short.MAX_VALUE))
@@ -235,7 +239,7 @@ public class DetalharServico extends javax.swing.JFrame {
         });
         jPanel3.add(jBtnEditarServico, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 116, -1, -1));
 
-        jBtnSalvarAltServico.setText("Salvar");
+        jBtnSalvarAltServico.setText("Alterar");
         jBtnSalvarAltServico.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 jBtnSalvarAltServicoItemStateChanged(evt);
@@ -378,9 +382,26 @@ public class DetalharServico extends javax.swing.JFrame {
 
         jLabel1.setText("Mão de Obra:");
 
-        txtMaoObra.setText("mao de obra");
-
         jBtnAlterarMaoObra.setText("Alterar");
+        jBtnAlterarMaoObra.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnAlterarMaoObraActionPerformed(evt);
+            }
+        });
+
+        jBtnCancelAltValor.setText("Cancelar");
+        jBtnCancelAltValor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnCancelAltValorActionPerformed(evt);
+            }
+        });
+
+        jBtnEditarValor.setText("Editar");
+        jBtnEditarValor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnEditarValorActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -396,27 +417,34 @@ public class DetalharServico extends javax.swing.JFrame {
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addGap(18, 18, 18)
-                        .addComponent(txtMaoObra, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addComponent(txtMaoObra)))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jBtnEditarValor)
+                    .addComponent(jBtnAlterarMaoObra)
+                    .addComponent(jBtnCancelAltValor))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jBtnAlterarMaoObra)
-                .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(16, 16, 16)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(txtMaoObra, javax.swing.GroupLayout.DEFAULT_SIZE, 19, Short.MAX_VALUE)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(14, 14, 14)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtMaoObra, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(18, 18, 18)
+                .addGap(47, 47, 47))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jBtnEditarValor)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jBtnAlterarMaoObra)
-                .addGap(6, 6, 6))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jBtnCancelAltValor)
+                .addContainerGap())
         );
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true), "Tipo Serviço"));
@@ -547,7 +575,9 @@ public class DetalharServico extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 633, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 661, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         bindingGroup.bind();
@@ -556,10 +586,10 @@ public class DetalharServico extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jBtnAlterarModeloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnAlterarModeloActionPerformed
+    private void jBtnAdicionarPecaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnAdicionarPecaActionPerformed
         new AdicionaDetServProduto(idServico, this).setVisible(true);
         total = Double.parseDouble(txtTotal.getText());
-    }//GEN-LAST:event_jBtnAlterarModeloActionPerformed
+    }//GEN-LAST:event_jBtnAdicionarPecaActionPerformed
 
     private void jBtnRemoverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnRemoverActionPerformed
         
@@ -654,6 +684,29 @@ public class DetalharServico extends javax.swing.JFrame {
         idClienteComboBox();
     }//GEN-LAST:event_jComboBoxClientesActionPerformed
 
+    private void jBtnAlterarMaoObraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnAlterarMaoObraActionPerformed
+        double maoObra = Double.parseDouble(txtMaoObra.getText());
+        total = Double.parseDouble(txtTotal.getText());
+        total -= valorMaoObra;
+        total += maoObra;
+        ServicoDAO.UpdateMaoObraServico(idServico, maoObra);
+        ServicoDAO.UpdateTotalServico(idServico, total);
+        ocultaCamposValor();
+        CarregaServico();
+    }//GEN-LAST:event_jBtnAlterarMaoObraActionPerformed
+
+    private void jBtnCancelAltValorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnCancelAltValorActionPerformed
+        ocultaCamposValor();
+    }//GEN-LAST:event_jBtnCancelAltValorActionPerformed
+
+    private void jBtnEditarValorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnEditarValorActionPerformed
+        valorMaoObra = Double.parseDouble(txtMaoObra.getText());
+        jBtnEditarValor.setVisible(false);
+        txtMaoObra.setEditable(true);
+        jBtnAlterarMaoObra.setVisible(true);
+        jBtnCancelAltValor.setVisible(true);
+    }//GEN-LAST:event_jBtnEditarValorActionPerformed
+
     public void ocultaCampos() {
         jComboBoxClientes.setVisible(false);
         txtDataAlterada.setVisible(false);
@@ -663,6 +716,13 @@ public class DetalharServico extends javax.swing.JFrame {
         txtCliente.setVisible(true);
         txtData.setVisible(true);
         txtDescricao.setEditable(false);
+    }
+    
+    public void ocultaCamposValor() {
+        jBtnEditarValor.setVisible(true);
+        txtMaoObra.setEditable(false);
+        jBtnAlterarMaoObra.setVisible(false);
+        jBtnCancelAltValor.setVisible(false);
     }
     
     public void CamposEdicao() {
@@ -866,10 +926,12 @@ public class DetalharServico extends javax.swing.JFrame {
     private javax.swing.JButton jBtnAdicionarDetServTipoServico;
     private javax.swing.JButton jBtnAdicionarEquipamento;
     private javax.swing.JButton jBtnAdicionarFuncionario;
+    private javax.swing.JButton jBtnAdicionarPeca;
     private javax.swing.JButton jBtnAlterarMaoObra;
-    private javax.swing.JButton jBtnAlterarModelo;
     private javax.swing.JButton jBtnCancelAltServico;
+    private javax.swing.JButton jBtnCancelAltValor;
     private javax.swing.JButton jBtnEditarServico;
+    private javax.swing.JButton jBtnEditarValor;
     private javax.swing.JButton jBtnRemover;
     private javax.swing.JButton jBtnRemoverDetServTipoServico;
     private javax.swing.JButton jBtnRemoverEquipamento;
@@ -904,7 +966,7 @@ public class DetalharServico extends javax.swing.JFrame {
     private javax.swing.JLabel txtData;
     private com.toedter.calendar.JDateChooser txtDataAlterada;
     private javax.swing.JTextArea txtDescricao;
-    private javax.swing.JLabel txtMaoObra;
+    private javax.swing.JTextField txtMaoObra;
     private javax.swing.JLabel txtTotal;
     private org.jdesktop.beansbinding.BindingGroup bindingGroup;
     // End of variables declaration//GEN-END:variables

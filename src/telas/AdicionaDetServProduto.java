@@ -362,9 +362,7 @@ public class AdicionaDetServProduto extends javax.swing.JFrame {
                 txtTotalPecas.setEditable(false);
                 txtTotalPecas.setText(String.valueOf(totalPeca));
                 
-                txtQuantidade.setText("");
-                modelo = null;
-                fabricante = null;         
+                txtQuantidade.setText("");      
                 
         } catch (Exception erro) {
             Logger.getLogger(CadastrarCliente.class.getName()).log(Level.SEVERE, null, erro);

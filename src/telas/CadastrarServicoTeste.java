@@ -505,6 +505,11 @@ public class CadastrarServicoTeste extends javax.swing.JFrame {
                 jComboBoxModeloEquipItemStateChanged(evt);
             }
         });
+        jComboBoxModeloEquip.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBoxModeloEquipActionPerformed(evt);
+            }
+        });
 
         jLabel38.setText("Fabricante:");
 
@@ -871,15 +876,19 @@ public class CadastrarServicoTeste extends javax.swing.JFrame {
         idProdutoComboBox();
         populaComboBoxModelo();
         produto = jComboBoxProduto.getSelectedItem().toString();
+
     }//GEN-LAST:event_jComboBoxProdutoItemStateChanged
 
     private void jComboBoxProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxProdutoActionPerformed
-
+        idProdutoComboBox();
+        if (jComboBoxProduto.getSelectedItem() != null) {
+            produto = jComboBoxProduto.getSelectedItem().toString();
+        }
     }//GEN-LAST:event_jComboBoxProdutoActionPerformed
 
     private void jBtbIncluirPecaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtbIncluirPecaActionPerformed
-
         TabelaProduto();
+        //limparCamposProduto();
     }//GEN-LAST:event_jBtbIncluirPecaActionPerformed
 
     private void jComboBoxModeloItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jComboBoxModeloItemStateChanged
@@ -1053,6 +1062,16 @@ public class CadastrarServicoTeste extends javax.swing.JFrame {
         populaComboBoxModeloEqui();
         equipamento = jComboBoxEquipamentos.getSelectedItem().toString();
     }//GEN-LAST:event_jComboBoxEquipamentosItemStateChanged
+
+    private void jComboBoxModeloEquipActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxModeloEquipActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBoxModeloEquipActionPerformed
+    
+    private void limparCamposProduto() {
+        jComboBoxProduto.setSelectedIndex(0);
+        jComboBoxModelo.setSelectedIndex(-1);
+        jComboBoxFabricante.setSelectedIndex(-1);
+    }
     
     private void limparCampos() {
         
@@ -1078,9 +1097,7 @@ public class CadastrarServicoTeste extends javax.swing.JFrame {
                 txtTotalPecas.setEditable(false);
                 txtTotalPecas.setText(String.valueOf(totalPeca));
                 
-                txtQuantidade.setText("");
-                modelo = null;
-                fabricante = null;         
+                txtQuantidade.setText("");     
                 
         } catch (Exception erro) {
             Logger.getLogger(CadastrarCliente.class.getName()).log(Level.SEVERE, null, erro);
