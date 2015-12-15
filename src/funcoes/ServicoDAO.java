@@ -109,21 +109,20 @@ public class ServicoDAO {
     
     public static void UpdateServico(Servico serv, int id) {
         
-        PreparedStatement stmt;
-        
-        try {   
-            String sql = ("UPDATE tabservico SET tabCliente_idcliente = " + serv.getCodCliente() + 
-                                                 ", infoServico = '" + serv.getDescricaoServico() + 
-                                                 "', preco = " + serv.getPreco() + 
-                                                 " WHERE idservico = " + id + ";");
+        CallableStatement stmt;
+        try { 
             
-            stmt = Conexao.getConnection().prepareStatement(sql);                             
-            stmt.executeUpdate();
+            stmt = Conexao.getConnection().prepareCall("{call UpdateServico(?,?,?,?)}");        
+            stmt.setInt(1, id);
+            stmt.setInt(2, serv.getCodCliente());
+            stmt.setObject(3, serv.getDataServico());
+            stmt.setObject(4, serv.getDescricaoServico());                        
+            stmt.execute();
             stmt.close();
 
         } catch (SQLException ex) {      
-            Logger.getLogger(ServicoDAO.class.getName()).log(Level.SEVERE, null, ex);
-            throw new RuntimeException("Erro ao alterar dados servico: ",ex);     
+            Logger.getLogger(LembreteDAO.class.getName()).log(Level.SEVERE, null, ex);
+            throw new RuntimeException("Erro ao excluir os dados do servico: ",ex);    
         }
     }
     

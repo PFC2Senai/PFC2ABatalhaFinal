@@ -80,6 +80,7 @@ public class CadastrarLembrete extends javax.swing.JFrame {
         jLabNCodigo = new javax.swing.JLabel();
         jLabCodigo = new javax.swing.JLabel();
         jLabNomeEmpresa = new javax.swing.JLabel();
+        jComboBoxEmpresas = new javax.swing.JComboBox();
         jLabEmpresa = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         txtDataLembrete = new com.toedter.calendar.JDateChooser();
@@ -90,7 +91,6 @@ public class CadastrarLembrete extends javax.swing.JFrame {
         txtDescricaoLembrete = new javax.swing.JTextArea();
         jBtnSalvarLembrete = new javax.swing.JButton();
         jBtnSair = new javax.swing.JButton();
-        jComboBoxEmpresas = new javax.swing.JComboBox();
         jLabCodEmpresa = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -103,6 +103,7 @@ public class CadastrarLembrete extends javax.swing.JFrame {
 
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel1.setText("Lembrete");
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, -1, -1));
 
@@ -110,30 +111,37 @@ public class CadastrarLembrete extends javax.swing.JFrame {
         jPanel1.add(jLabNCodigo, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 60, -1, -1));
 
         jLabCodigo.setText("codigo");
-        jPanel1.add(jLabCodigo, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 60, -1, -1));
+        jPanel1.add(jLabCodigo, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 60, -1, -1));
 
         jLabNomeEmpresa.setText("Empresa:");
-        jPanel1.add(jLabNomeEmpresa, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 94, -1, 20));
+        jPanel1.add(jLabNomeEmpresa, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 100, -1, 20));
+
+        jComboBoxEmpresas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBoxEmpresasActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jComboBoxEmpresas, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 100, 170, 20));
 
         jLabEmpresa.setText("empresa");
-        jPanel1.add(jLabEmpresa, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 90, 200, 20));
+        jPanel1.add(jLabEmpresa, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 100, 200, 20));
 
         jLabel2.setText("Data:");
         jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 150, -1, -1));
-        jPanel1.add(txtDataLembrete, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 140, 140, -1));
-        jPanel1.add(txtHoraLembrete, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 190, 60, -1));
+        jPanel1.add(txtDataLembrete, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 150, 140, -1));
+        jPanel1.add(txtHoraLembrete, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 200, 60, -1));
 
         jLabel3.setText("Hora:");
-        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 200, -1, -1));
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 200, -1, -1));
 
         jLabel4.setText("Descrição:");
-        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 230, -1, -1));
+        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 240, -1, -1));
 
         txtDescricaoLembrete.setColumns(20);
         txtDescricaoLembrete.setRows(5);
         jScrollPane1.setViewportView(txtDescricaoLembrete);
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 260, 289, 191));
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 270, 289, 191));
 
         jBtnSalvarLembrete.setText("Salvar");
         jBtnSalvarLembrete.addActionListener(new java.awt.event.ActionListener() {
@@ -141,7 +149,7 @@ public class CadastrarLembrete extends javax.swing.JFrame {
                 jBtnSalvarLembreteActionPerformed(evt);
             }
         });
-        jPanel1.add(jBtnSalvarLembrete, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 470, -1, -1));
+        jPanel1.add(jBtnSalvarLembrete, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 480, -1, -1));
 
         jBtnSair.setText("Sair");
         jBtnSair.addActionListener(new java.awt.event.ActionListener() {
@@ -149,17 +157,10 @@ public class CadastrarLembrete extends javax.swing.JFrame {
                 jBtnSairActionPerformed(evt);
             }
         });
-        jPanel1.add(jBtnSair, new org.netbeans.lib.awtextra.AbsoluteConstraints(257, 469, -1, -1));
-
-        jComboBoxEmpresas.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBoxEmpresasActionPerformed(evt);
-            }
-        });
-        jPanel1.add(jComboBoxEmpresas, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 90, 170, 20));
+        jPanel1.add(jBtnSair, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 480, -1, -1));
         jPanel1.add(jLabCodEmpresa, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 50, 76, 20));
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 340, 510));
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 360, 520));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents

@@ -995,7 +995,7 @@ public class CadastrarServicoTeste extends javax.swing.JFrame {
         servico.setCodUsuario(Usuario.idUsuario());
         servico.setCodCliente(codCliente);
         servico.setPreco(preco);
-        servico.setDataServico(FuncoesDiversas.FormataData(txtDataCadProduto.getDate()));
+        servico.setDataServico(FuncoesDiversas.FormataData(txtDataCadProduto.getDate()));       
         servico.setDescricaoServico(txtDescricao.getText());
         servico.setMaoDeObra(Double.parseDouble(txtMaoObra.getText()));
 

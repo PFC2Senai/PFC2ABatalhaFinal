@@ -277,6 +277,7 @@ public class DetalharLembrete extends javax.swing.JFrame {
     private void jBtnEditarLembreteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnEditarLembreteActionPerformed
         
         txtHoraLembrete.setText(jLbHoraLembrete.getText());
+        
         Date d = ConverterData(jLbDataLembrete.getText());
         txtDataLembrete.setDate(d);
         txtDataLembrete.setVisible(true);        

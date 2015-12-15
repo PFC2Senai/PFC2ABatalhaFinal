@@ -108,7 +108,7 @@ public class LembreteDAO {
 
         } catch (SQLException ex) {      
             Logger.getLogger(LembreteDAO.class.getName()).log(Level.SEVERE, null, ex);
-            throw new RuntimeException("Erro ao excluir os dados do Cliente: ",ex);    
+            throw new RuntimeException("Erro ao excluir os dados do lembrete: ",ex);    
         }
     }
     

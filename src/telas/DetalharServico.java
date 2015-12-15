@@ -5,19 +5,26 @@ import atributos.Funcionario;
 import atributos.Servico;
 import atributos.TipoServico;
 import funcoes.ClienteDAO;
+import funcoes.Conexao;
 import static funcoes.Conexao.getConnection;
 import funcoes.DetServicoEquipamentoDAO;
 import funcoes.DetServicoFuncionarioDAO;
 import funcoes.DetServicoProdutoDAO;
 import funcoes.DetServicoTipoDAO;
+import funcoes.FuncoesDiversas;
+import static funcoes.FuncoesDiversas.ConverterData;
 import funcoes.ModeloTabela;
 import funcoes.ServicoDAO;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
 
@@ -27,6 +34,9 @@ import javax.swing.table.DefaultTableModel;
  */
 public class DetalharServico extends javax.swing.JFrame {
 
+    
+    private PreparedStatement pst;
+    private int codCliente;
     private int idServico;
     private int idCliente;
     private int codDetServProduto;
@@ -54,6 +64,7 @@ public class DetalharServico extends javax.swing.JFrame {
         TabelaEquipamento("SELECT * FROM vw_detservequipamento where idservico = " + idServico +";");
         TabelaTipoServico();
         TabelaFuncionario();
+        ocultaCampos();        
     }
 
     /**
@@ -80,8 +91,13 @@ public class DetalharServico extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         jScrollPane4 = new javax.swing.JScrollPane();
         txtDescricao = new javax.swing.JTextArea();
+        jComboBoxClientes = new javax.swing.JComboBox();
         txtCliente = new javax.swing.JLabel();
+        txtDataAlterada = new com.toedter.calendar.JDateChooser();
         txtData = new javax.swing.JLabel();
+        jBtnEditarServico = new javax.swing.JButton();
+        jBtnSalvarAltServico = new javax.swing.JButton();
+        jBtnCancelAltServico = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTableEquipamento = new javax.swing.JTable();
@@ -156,7 +172,7 @@ public class DetalharServico extends javax.swing.JFrame {
         jPanel14Layout.setHorizontalGroup(
             jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel14Layout.createSequentialGroup()
-                .addGap(26, 26, 26)
+                .addGap(17, 17, 17)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 562, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -179,60 +195,66 @@ public class DetalharServico extends javax.swing.JFrame {
         );
 
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true), "Serviço"));
+        jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel6.setText("Cliente:");
+        jPanel3.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(21, 30, -1, 20));
 
         jLabel12.setText("Data:");
+        jPanel3.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(21, 61, 30, 20));
 
         jLabel5.setText("Descrição:");
+        jPanel3.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(21, 90, -1, 20));
 
         txtDescricao.setColumns(20);
         txtDescricao.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         txtDescricao.setRows(5);
-        txtDescricao.setEnabled(false);
         jScrollPane4.setViewportView(txtDescricao);
 
+        jPanel3.add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(21, 116, 289, -1));
+
+        jComboBoxClientes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBoxClientesActionPerformed(evt);
+            }
+        });
+        jPanel3.add(jComboBoxClientes, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 30, 300, -1));
+
         txtCliente.setText("cliente");
+        jPanel3.add(txtCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 30, 310, 20));
+        jPanel3.add(txtDataAlterada, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 60, 140, -1));
 
         txtData.setText("data");
+        jPanel3.add(txtData, new org.netbeans.lib.awtextra.AbsoluteConstraints(71, 61, 150, 20));
 
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(25, 25, 25)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(20, 20, 20)
-                        .addComponent(txtData, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addGroup(jPanel3Layout.createSequentialGroup()
-                            .addComponent(jLabel6)
-                            .addGap(13, 13, 13)
-                            .addComponent(txtCliente, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addComponent(jLabel5)
-                        .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 317, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(18, Short.MAX_VALUE))
-        );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(14, 14, 14)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtData, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 9, Short.MAX_VALUE)
-                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-        );
+        jBtnEditarServico.setText("Editar");
+        jBtnEditarServico.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnEditarServicoActionPerformed(evt);
+            }
+        });
+        jPanel3.add(jBtnEditarServico, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 116, -1, -1));
+
+        jBtnSalvarAltServico.setText("Salvar");
+        jBtnSalvarAltServico.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jBtnSalvarAltServicoItemStateChanged(evt);
+            }
+        });
+        jBtnSalvarAltServico.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnSalvarAltServicoActionPerformed(evt);
+            }
+        });
+        jPanel3.add(jBtnSalvarAltServico, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 145, -1, -1));
+
+        jBtnCancelAltServico.setText("Cancelar");
+        jBtnCancelAltServico.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnCancelAltServicoActionPerformed(evt);
+            }
+        });
+        jPanel3.add(jBtnCancelAltServico, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 174, -1, -1));
 
         jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true), "Equipamentos"));
 
@@ -270,7 +292,7 @@ public class DetalharServico extends javax.swing.JFrame {
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
-                .addGap(23, 23, 23)
+                .addGap(17, 17, 17)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 559, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -327,7 +349,7 @@ public class DetalharServico extends javax.swing.JFrame {
         jPanel5Layout.setHorizontalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel5Layout.createSequentialGroup()
-                .addGap(25, 25, 25)
+                .addGap(19, 19, 19)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 362, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -475,20 +497,23 @@ public class DetalharServico extends javax.swing.JFrame {
             jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel13Layout.createSequentialGroup()
                 .addGap(37, 37, 37)
-                .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel13Layout.createSequentialGroup()
-                        .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel14, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addComponent(jLabel32)
-                        .addGroup(jPanel13Layout.createSequentialGroup()
-                            .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(14, Short.MAX_VALUE))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel13Layout.createSequentialGroup()
+                        .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(jPanel13Layout.createSequentialGroup()
+                                .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(jPanel4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jPanel14, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(jPanel13Layout.createSequentialGroup()
+                                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 405, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(49, 49, 49))))
         );
         jPanel13Layout.setVerticalGroup(
             jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -497,8 +522,10 @@ public class DetalharServico extends javax.swing.JFrame {
                 .addComponent(jLabel32, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(jPanel13Layout.createSequentialGroup()
+                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel14, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -516,13 +543,11 @@ public class DetalharServico extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 884, Short.MAX_VALUE)
-                .addGap(0, 0, 0))
+            .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 939, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 633, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 633, Short.MAX_VALUE)
         );
 
         bindingGroup.bind();
@@ -591,6 +616,62 @@ public class DetalharServico extends javax.swing.JFrame {
         TabelaFuncionario();
     }//GEN-LAST:event_jBtnRemoverFuncionarioActionPerformed
 
+    private void jBtnEditarServicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnEditarServicoActionPerformed
+        
+        jComboBoxClientes.setVisible(true);
+        jComboBoxClientes.removeAllItems();
+        populaComboBoxCliente();
+        jComboBoxClientes.setSelectedItem(txtCliente.getText());
+        txtDataAlterada.setVisible(true);
+        jBtnSalvarAltServico.setVisible(true);
+        jBtnCancelAltServico.setVisible(true);   
+        
+        Date d = ConverterData(txtData.getText());
+        txtDataAlterada.setDate(d);
+        CamposEdicao();        
+    }//GEN-LAST:event_jBtnEditarServicoActionPerformed
+
+    private void jBtnSalvarAltServicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnSalvarAltServicoActionPerformed
+        Servico serv = new Servico();
+        serv.setCodCliente(codCliente);
+        serv.setDescricaoServico(txtDescricao.getText());
+        serv.setDataServico(FuncoesDiversas.FormataData(txtDataAlterada.getDate()));
+        
+        ServicoDAO.UpdateServico(serv, idServico);
+        CarregaServico();
+        ocultaCampos();
+    }//GEN-LAST:event_jBtnSalvarAltServicoActionPerformed
+
+    private void jBtnCancelAltServicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnCancelAltServicoActionPerformed
+        ocultaCampos();
+    }//GEN-LAST:event_jBtnCancelAltServicoActionPerformed
+
+    private void jBtnSalvarAltServicoItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jBtnSalvarAltServicoItemStateChanged
+        
+    }//GEN-LAST:event_jBtnSalvarAltServicoItemStateChanged
+
+    private void jComboBoxClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxClientesActionPerformed
+        idClienteComboBox();
+    }//GEN-LAST:event_jComboBoxClientesActionPerformed
+
+    public void ocultaCampos() {
+        jComboBoxClientes.setVisible(false);
+        txtDataAlterada.setVisible(false);
+        jBtnSalvarAltServico.setVisible(false);
+        jBtnCancelAltServico.setVisible(false);
+        jBtnEditarServico.setVisible(true);
+        txtCliente.setVisible(true);
+        txtData.setVisible(true);
+        txtDescricao.setEditable(false);
+    }
+    
+    public void CamposEdicao() {
+        txtCliente.setVisible(false);
+        txtData.setVisible(false);
+        txtDescricao.setEditable(true);
+        jBtnEditarServico.setVisible(false);
+    }
+    
     public void CarregaServico() {
         
         ArrayList<Servico> servico = new ArrayList<Servico>();
@@ -742,6 +823,43 @@ public class DetalharServico extends javax.swing.JFrame {
         }          
     } 
     
+    private void populaComboBoxCliente() {
+        
+        Connection conexao = Conexao.getConnection();
+        ResultSet rs;
+        String sql = "select * from tabcliente";
+        
+        try{
+            pst = conexao.prepareStatement(sql);
+            rs = pst.executeQuery();
+            jComboBoxClientes.addItem("Selecione o Cliente");
+            while(rs.next()) {
+                jComboBoxClientes.addItem(rs.getString("empresa"));
+            }
+            
+        }catch(SQLException ex) {
+            JOptionPane.showMessageDialog(null, ex);
+        }
+    }
+    
+    private void idClienteComboBox() {
+        
+        Connection conexao = Conexao.getConnection();
+        ResultSet rs;
+        String sql = "select * from tabcliente where empresa = '" + jComboBoxClientes.getSelectedItem()+ "';";
+        
+        try{
+            pst = conexao.prepareStatement(sql);
+            rs = pst.executeQuery();
+            
+            while(rs.next()) {
+                codCliente = (rs.getInt("idcliente"));
+            }
+            
+        }catch(SQLException ex) {
+            JOptionPane.showMessageDialog(null, ex);
+        }
+    }
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -750,10 +868,14 @@ public class DetalharServico extends javax.swing.JFrame {
     private javax.swing.JButton jBtnAdicionarFuncionario;
     private javax.swing.JButton jBtnAlterarMaoObra;
     private javax.swing.JButton jBtnAlterarModelo;
+    private javax.swing.JButton jBtnCancelAltServico;
+    private javax.swing.JButton jBtnEditarServico;
     private javax.swing.JButton jBtnRemover;
     private javax.swing.JButton jBtnRemoverDetServTipoServico;
     private javax.swing.JButton jBtnRemoverEquipamento;
     private javax.swing.JButton jBtnRemoverFuncionario;
+    private javax.swing.JButton jBtnSalvarAltServico;
+    private javax.swing.JComboBox jComboBoxClientes;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel12;
@@ -780,6 +902,7 @@ public class DetalharServico extends javax.swing.JFrame {
     private javax.swing.JTable jTableTipodeServico;
     private javax.swing.JLabel txtCliente;
     private javax.swing.JLabel txtData;
+    private com.toedter.calendar.JDateChooser txtDataAlterada;
     private javax.swing.JTextArea txtDescricao;
     private javax.swing.JLabel txtMaoObra;
     private javax.swing.JLabel txtTotal;
