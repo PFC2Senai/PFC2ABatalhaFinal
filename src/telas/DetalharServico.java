@@ -312,6 +312,10 @@ public class DetalharServico extends javax.swing.JFrame {
         });
 
         jBtnRemoverFuncionario.setText("Remover");
+
+        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, jTableFuncionario, org.jdesktop.beansbinding.ELProperty.create("${selectedElement != null}"), jBtnRemoverFuncionario, org.jdesktop.beansbinding.BeanProperty.create("enabled"));
+        bindingGroup.addBinding(binding);
+
         jBtnRemoverFuncionario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jBtnRemoverFuncionarioActionPerformed(evt);
