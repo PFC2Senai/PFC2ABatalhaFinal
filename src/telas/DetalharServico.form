@@ -69,7 +69,7 @@
                               </Group>
                           </Group>
                       </Group>
-                      <EmptySpace pref="21" max="32767" attributes="0"/>
+                      <EmptySpace pref="14" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -216,7 +216,6 @@
                 <Component class="javax.swing.JButton" name="jBtnAlterarModelo">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Adicionar"/>
-                    <Property name="enabled" type="boolean" value="true"/>
                   </Properties>
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jBtnAlterarModeloActionPerformed"/>
@@ -359,10 +358,13 @@
                 <DimensionLayout dim="0">
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="23" max="-2" attributes="0"/>
                           <Component id="jScrollPane2" min="-2" pref="559" max="-2" attributes="0"/>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
-                          <Component id="jBtnAlterarEquipamento" min="-2" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="jBtnAdicionarEquipamento" min="-2" max="-2" attributes="0"/>
+                              <Component id="jBtnRemoverEquipamento" min="-2" max="-2" attributes="0"/>
+                          </Group>
                           <EmptySpace max="32767" attributes="0"/>
                       </Group>
                   </Group>
@@ -372,7 +374,11 @@
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="jBtnAlterarEquipamento" min="-2" max="-2" attributes="0"/>
+                              <Group type="102" attributes="0">
+                                  <Component id="jBtnAdicionarEquipamento" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                                  <Component id="jBtnRemoverEquipamento" min="-2" max="-2" attributes="0"/>
+                              </Group>
                               <Component id="jScrollPane2" min="-2" pref="92" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace pref="13" max="32767" attributes="0"/>
@@ -429,13 +435,24 @@
                     </Component>
                   </SubComponents>
                 </Container>
-                <Component class="javax.swing.JButton" name="jBtnAlterarEquipamento">
+                <Component class="javax.swing.JButton" name="jBtnAdicionarEquipamento">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="Alterar"/>
+                    <Property name="text" type="java.lang.String" value="Adicionar"/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jBtnAdicionarEquipamentoActionPerformed"/>
+                  </Events>
+                </Component>
+                <Component class="javax.swing.JButton" name="jBtnRemoverEquipamento">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Remover"/>
                   </Properties>
                   <BindingProperties>
-                    <BindingProperty name="enabled" source="jTableEquipamento" sourcePath="${selectedElement != null}" target="jBtnAlterarEquipamento" targetPath="enabled" updateStrategy="0" immediately="false"/>
+                    <BindingProperty name="enabled" source="jTableEquipamento" sourcePath="${selectedElement != null}" target="jBtnRemoverEquipamento" targetPath="enabled" updateStrategy="0" immediately="false"/>
                   </BindingProperties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jBtnRemoverEquipamentoActionPerformed"/>
+                  </Events>
                 </Component>
               </SubComponents>
             </Container>
@@ -620,7 +637,10 @@
                               <Group type="102" alignment="0" attributes="0">
                                   <Component id="jScrollPane6" min="-2" pref="325" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="jBtnAlterarTipoServico" min="-2" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Component id="jBtnRemoverDetServTipoServico" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jBtnAdicionarDetServTipoServico" min="-2" max="-2" attributes="0"/>
+                                  </Group>
                               </Group>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
@@ -635,7 +655,11 @@
                           <EmptySpace max="32767" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Component id="jScrollPane6" min="-2" pref="118" max="-2" attributes="0"/>
-                              <Component id="jBtnAlterarTipoServico" min="-2" max="-2" attributes="0"/>
+                              <Group type="102" attributes="0">
+                                  <Component id="jBtnAdicionarDetServTipoServico" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
+                                  <Component id="jBtnRemoverDetServTipoServico" min="-2" max="-2" attributes="0"/>
+                              </Group>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                       </Group>
@@ -643,14 +667,6 @@
                 </DimensionLayout>
               </Layout>
               <SubComponents>
-                <Component class="javax.swing.JButton" name="jBtnAlterarTipoServico">
-                  <Properties>
-                    <Property name="text" type="java.lang.String" value="Alterar"/>
-                  </Properties>
-                  <BindingProperties>
-                    <BindingProperty name="enabled" source="jTableTipodeServico" sourcePath="${selectedElement != null}" target="jBtnAlterarTipoServico" targetPath="enabled" updateStrategy="0" immediately="false"/>
-                  </BindingProperties>
-                </Component>
                 <Container class="javax.swing.JScrollPane" name="jScrollPane6">
                   <AuxValues>
                     <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
@@ -691,6 +707,22 @@
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Tipo:"/>
                   </Properties>
+                </Component>
+                <Component class="javax.swing.JButton" name="jBtnRemoverDetServTipoServico">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Remover"/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jBtnRemoverDetServTipoServicoActionPerformed"/>
+                  </Events>
+                </Component>
+                <Component class="javax.swing.JButton" name="jBtnAdicionarDetServTipoServico">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Adicionar"/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jBtnAdicionarDetServTipoServicoActionPerformed"/>
+                  </Events>
                 </Component>
               </SubComponents>
             </Container>

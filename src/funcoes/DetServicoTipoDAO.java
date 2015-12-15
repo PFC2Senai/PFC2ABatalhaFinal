@@ -66,4 +66,21 @@ public class DetServicoTipoDAO {
         }    
         return tServico;
     }
+    
+    public static void ExcluirDetServTipoServico(int id) {
+        
+        PreparedStatement stmt;
+        
+        try {   
+            String sql = ("DELETE FROM tabdetservico_tiposerv WHERE iddetServico_TipoServ = "+ id + ";");
+            stmt = Conexao.getConnection().prepareStatement(sql);            
+            
+            stmt.execute();
+            stmt.close();
+
+        } catch (SQLException ex) {      
+            Logger.getLogger(SetorDAO.class.getName()).log(Level.SEVERE, null, ex);
+            throw new RuntimeException("Erro ao excluir o detalhe servico equipamento: ",ex);    
+        }
+    }
 }

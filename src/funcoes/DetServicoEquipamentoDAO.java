@@ -33,4 +33,21 @@ public class DetServicoEquipamentoDAO {
                 throw new RuntimeException("Erro ao Cadastrar Setor: ",ex);       
             }
     }
+    
+    public static void ExcluirDetServEquipamento(int id) {
+        
+        PreparedStatement stmt;
+        
+        try {   
+            String sql = ("DELETE FROM tabdetservico_equipamento WHERE iddetServico_Equipamento = "+ id + ";");
+            stmt = Conexao.getConnection().prepareStatement(sql);            
+            
+            stmt.execute();
+            stmt.close();
+
+        } catch (SQLException ex) {      
+            Logger.getLogger(SetorDAO.class.getName()).log(Level.SEVERE, null, ex);
+            throw new RuntimeException("Erro ao excluir o detalhe servico equipamento: ",ex);    
+        }
+    }
 }

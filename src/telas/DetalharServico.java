@@ -6,6 +6,7 @@ import atributos.Servico;
 import atributos.TipoServico;
 import funcoes.ClienteDAO;
 import static funcoes.Conexao.getConnection;
+import funcoes.DetServicoEquipamentoDAO;
 import funcoes.DetServicoFuncionarioDAO;
 import funcoes.DetServicoProdutoDAO;
 import funcoes.DetServicoTipoDAO;
@@ -29,6 +30,8 @@ public class DetalharServico extends javax.swing.JFrame {
     private int idServico;
     private int idCliente;
     private int codDetServProduto;
+    private int codDetServEquipamento;
+    private int codDetServTipoServico;
     private double total;
     Statement stmt;
     
@@ -81,7 +84,8 @@ public class DetalharServico extends javax.swing.JFrame {
         jPanel4 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTableEquipamento = new javax.swing.JTable();
-        jBtnAlterarEquipamento = new javax.swing.JButton();
+        jBtnAdicionarEquipamento = new javax.swing.JButton();
+        jBtnRemoverEquipamento = new javax.swing.JButton();
         jPanel5 = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
         jTableFuncionario = new javax.swing.JTable();
@@ -93,10 +97,11 @@ public class DetalharServico extends javax.swing.JFrame {
         txtMaoObra = new javax.swing.JLabel();
         jBtnAlterarMaoObra = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
-        jBtnAlterarTipoServico = new javax.swing.JButton();
         jScrollPane6 = new javax.swing.JScrollPane();
         jTableTipodeServico = new javax.swing.JTable();
         jLabel10 = new javax.swing.JLabel();
+        jBtnRemoverDetServTipoServico = new javax.swing.JButton();
+        jBtnAdicionarDetServTipoServico = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -127,7 +132,6 @@ public class DetalharServico extends javax.swing.JFrame {
         jScrollPane1.setViewportView(jTablePecas);
 
         jBtnAlterarModelo.setText("Adicionar");
-        jBtnAlterarModelo.setEnabled(true);
         jBtnAlterarModelo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jBtnAlterarModeloActionPerformed(evt);
@@ -241,20 +245,35 @@ public class DetalharServico extends javax.swing.JFrame {
         jTableEquipamento.getTableHeader().setReorderingAllowed(false);
         jScrollPane2.setViewportView(jTableEquipamento);
 
-        jBtnAlterarEquipamento.setText("Alterar");
+        jBtnAdicionarEquipamento.setText("Adicionar");
+        jBtnAdicionarEquipamento.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnAdicionarEquipamentoActionPerformed(evt);
+            }
+        });
 
-        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, jTableEquipamento, org.jdesktop.beansbinding.ELProperty.create("${selectedElement != null}"), jBtnAlterarEquipamento, org.jdesktop.beansbinding.BeanProperty.create("enabled"));
+        jBtnRemoverEquipamento.setText("Remover");
+
+        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, jTableEquipamento, org.jdesktop.beansbinding.ELProperty.create("${selectedElement != null}"), jBtnRemoverEquipamento, org.jdesktop.beansbinding.BeanProperty.create("enabled"));
         bindingGroup.addBinding(binding);
+
+        jBtnRemoverEquipamento.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnRemoverEquipamentoActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
-                .addGap(29, 29, 29)
+                .addGap(23, 23, 23)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 559, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jBtnAlterarEquipamento)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jBtnAdicionarEquipamento)
+                    .addComponent(jBtnRemoverEquipamento))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
@@ -262,7 +281,10 @@ public class DetalharServico extends javax.swing.JFrame {
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jBtnAlterarEquipamento)
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addComponent(jBtnAdicionarEquipamento)
+                        .addGap(18, 18, 18)
+                        .addComponent(jBtnRemoverEquipamento))
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(13, Short.MAX_VALUE))
         );
@@ -357,11 +379,6 @@ public class DetalharServico extends javax.swing.JFrame {
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true), "Tipo Serviço"));
 
-        jBtnAlterarTipoServico.setText("Alterar");
-
-        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, jTableTipodeServico, org.jdesktop.beansbinding.ELProperty.create("${selectedElement != null}"), jBtnAlterarTipoServico, org.jdesktop.beansbinding.BeanProperty.create("enabled"));
-        bindingGroup.addBinding(binding);
-
         jTableTipodeServico.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -383,6 +400,20 @@ public class DetalharServico extends javax.swing.JFrame {
 
         jLabel10.setText("Tipo:");
 
+        jBtnRemoverDetServTipoServico.setText("Remover");
+        jBtnRemoverDetServTipoServico.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnRemoverDetServTipoServicoActionPerformed(evt);
+            }
+        });
+
+        jBtnAdicionarDetServTipoServico.setText("Adicionar");
+        jBtnAdicionarDetServTipoServico.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnAdicionarDetServTipoServicoActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -394,7 +425,9 @@ public class DetalharServico extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 325, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jBtnAlterarTipoServico)))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jBtnRemoverDetServTipoServico)
+                            .addComponent(jBtnAdicionarDetServTipoServico))))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -405,7 +438,10 @@ public class DetalharServico extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jBtnAlterarTipoServico))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jBtnAdicionarDetServTipoServico)
+                        .addGap(18, 18, 18)
+                        .addComponent(jBtnRemoverDetServTipoServico)))
                 .addContainerGap())
         );
 
@@ -428,7 +464,7 @@ public class DetalharServico extends javax.swing.JFrame {
                             .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                             .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(21, Short.MAX_VALUE))
+                .addContainerGap(14, Short.MAX_VALUE))
         );
         jPanel13Layout.setVerticalGroup(
             jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -496,6 +532,29 @@ public class DetalharServico extends javax.swing.JFrame {
         TabelaProduto("SELECT * FROM vw_detservicoproduto where idservico = " + idServico + ";");
         
     }//GEN-LAST:event_jBtnRemoverActionPerformed
+
+    private void jBtnAdicionarEquipamentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnAdicionarEquipamentoActionPerformed
+        new AdicionarDetServEquipamento(idServico, this).setVisible(true);
+    }//GEN-LAST:event_jBtnAdicionarEquipamentoActionPerformed
+
+    private void jBtnRemoverEquipamentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnRemoverEquipamentoActionPerformed
+        
+        int linha = jTableEquipamento.getSelectedRow();       
+        codDetServEquipamento = (Integer.parseInt(jTableEquipamento.getValueAt(linha, 0).toString()));
+        DetServicoEquipamentoDAO.ExcluirDetServEquipamento(codDetServEquipamento);
+        TabelaEquipamento("SELECT * FROM vw_detservequipamento where idservico = " + idServico +";");
+    }//GEN-LAST:event_jBtnRemoverEquipamentoActionPerformed
+
+    private void jBtnRemoverDetServTipoServicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnRemoverDetServTipoServicoActionPerformed
+        int linha = jTableTipodeServico.getSelectedRow();       
+        codDetServTipoServico = (Integer.parseInt(jTableTipodeServico.getValueAt(linha, 0).toString()));
+        DetServicoTipoDAO.ExcluirDetServTipoServico(codDetServTipoServico);
+        TabelaTipoServico();
+    }//GEN-LAST:event_jBtnRemoverDetServTipoServicoActionPerformed
+
+    private void jBtnAdicionarDetServTipoServicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnAdicionarDetServTipoServicoActionPerformed
+        new AdicionarDetServTipoServico(idServico, this).setVisible(true);
+    }//GEN-LAST:event_jBtnAdicionarDetServTipoServicoActionPerformed
 
     public void CarregaServico() {
         
@@ -570,7 +629,7 @@ public class DetalharServico extends javax.swing.JFrame {
             rs = stmt.executeQuery(Sql);
             
                 while(rs.next()) {
-                    dados.add(new Object[] { rs.getObject("idDetEquipamento"),rs.getObject("equipamento"),
+                    dados.add(new Object[] { rs.getObject("iddetServico_Equipamento"),rs.getObject("equipamento"),
                                              rs.getObject("modelo"),rs.getObject("fabricante")});            
                 }
 
@@ -649,12 +708,14 @@ public class DetalharServico extends javax.swing.JFrame {
     } 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jBtnAlterarEquipamento;
+    private javax.swing.JButton jBtnAdicionarDetServTipoServico;
+    private javax.swing.JButton jBtnAdicionarEquipamento;
     private javax.swing.JButton jBtnAlterarFuncionario;
     private javax.swing.JButton jBtnAlterarMaoObra;
     private javax.swing.JButton jBtnAlterarModelo;
-    private javax.swing.JButton jBtnAlterarTipoServico;
     private javax.swing.JButton jBtnRemover;
+    private javax.swing.JButton jBtnRemoverDetServTipoServico;
+    private javax.swing.JButton jBtnRemoverEquipamento;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel12;
