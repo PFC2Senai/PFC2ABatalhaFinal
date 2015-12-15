@@ -70,4 +70,22 @@ public class DetServicoFuncionarioDAO {
         }    
         return funcionario;
     }
+    
+    public static void ExcluirDetServFuncionario(int id) {
+        
+        PreparedStatement stmt;
+        
+        try {
+            
+            String sql = ("DELETE FROM tabdetservico_funcionario WHERE idDetServico_funcionario = "+ id + ";");
+            stmt = Conexao.getConnection().prepareStatement(sql);            
+            
+            stmt.execute();
+            stmt.close();
+
+        } catch (SQLException ex) {      
+            Logger.getLogger(SetorDAO.class.getName()).log(Level.SEVERE, null, ex);
+            throw new RuntimeException("Erro ao excluir o detalhe servico funcionario: ",ex);    
+        }
+    }
 }

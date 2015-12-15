@@ -32,6 +32,7 @@ public class DetalharServico extends javax.swing.JFrame {
     private int codDetServProduto;
     private int codDetServEquipamento;
     private int codDetServTipoServico;
+    private int codDetServFuncionario;
     private double total;
     Statement stmt;
     
@@ -89,7 +90,8 @@ public class DetalharServico extends javax.swing.JFrame {
         jPanel5 = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
         jTableFuncionario = new javax.swing.JTable();
-        jBtnAlterarFuncionario = new javax.swing.JButton();
+        jBtnAdicionarFuncionario = new javax.swing.JButton();
+        jBtnRemoverFuncionario = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
         txtTotal = new javax.swing.JLabel();
@@ -302,10 +304,19 @@ public class DetalharServico extends javax.swing.JFrame {
         jTableFuncionario.getTableHeader().setReorderingAllowed(false);
         jScrollPane3.setViewportView(jTableFuncionario);
 
-        jBtnAlterarFuncionario.setText("Alterar");
+        jBtnAdicionarFuncionario.setText("Adicionar");
+        jBtnAdicionarFuncionario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnAdicionarFuncionarioActionPerformed(evt);
+            }
+        });
 
-        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, jTableFuncionario, org.jdesktop.beansbinding.ELProperty.create("${selectedElement != null}"), jBtnAlterarFuncionario, org.jdesktop.beansbinding.BeanProperty.create("enabled"));
-        bindingGroup.addBinding(binding);
+        jBtnRemoverFuncionario.setText("Remover");
+        jBtnRemoverFuncionario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnRemoverFuncionarioActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
@@ -314,8 +325,10 @@ public class DetalharServico extends javax.swing.JFrame {
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addGap(25, 25, 25)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 362, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jBtnAlterarFuncionario)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jBtnAdicionarFuncionario)
+                    .addComponent(jBtnRemoverFuncionario))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel5Layout.setVerticalGroup(
@@ -323,7 +336,10 @@ public class DetalharServico extends javax.swing.JFrame {
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jBtnAlterarFuncionario)
+                    .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addComponent(jBtnAdicionarFuncionario)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jBtnRemoverFuncionario))
                     .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -401,6 +417,10 @@ public class DetalharServico extends javax.swing.JFrame {
         jLabel10.setText("Tipo:");
 
         jBtnRemoverDetServTipoServico.setText("Remover");
+
+        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, jTableTipodeServico, org.jdesktop.beansbinding.ELProperty.create("${selectedElement != null}"), jBtnRemoverDetServTipoServico, org.jdesktop.beansbinding.BeanProperty.create("enabled"));
+        bindingGroup.addBinding(binding);
+
         jBtnRemoverDetServTipoServico.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jBtnRemoverDetServTipoServicoActionPerformed(evt);
@@ -556,6 +576,17 @@ public class DetalharServico extends javax.swing.JFrame {
         new AdicionarDetServTipoServico(idServico, this).setVisible(true);
     }//GEN-LAST:event_jBtnAdicionarDetServTipoServicoActionPerformed
 
+    private void jBtnAdicionarFuncionarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnAdicionarFuncionarioActionPerformed
+        new AdicionarDetServFuncionario(idServico, this).setVisible(true);
+    }//GEN-LAST:event_jBtnAdicionarFuncionarioActionPerformed
+
+    private void jBtnRemoverFuncionarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnRemoverFuncionarioActionPerformed
+        int linha = jTableFuncionario.getSelectedRow();       
+        codDetServFuncionario = (Integer.parseInt(jTableFuncionario.getValueAt(linha, 0).toString()));
+        DetServicoFuncionarioDAO.ExcluirDetServFuncionario(codDetServFuncionario);
+        TabelaFuncionario();
+    }//GEN-LAST:event_jBtnRemoverFuncionarioActionPerformed
+
     public void CarregaServico() {
         
         ArrayList<Servico> servico = new ArrayList<Servico>();
@@ -706,16 +737,19 @@ public class DetalharServico extends javax.swing.JFrame {
             Logger.getLogger(DetalharCliente.class.getName()).log(Level.SEVERE, null, erro);
         }          
     } 
+    
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBtnAdicionarDetServTipoServico;
     private javax.swing.JButton jBtnAdicionarEquipamento;
-    private javax.swing.JButton jBtnAlterarFuncionario;
+    private javax.swing.JButton jBtnAdicionarFuncionario;
     private javax.swing.JButton jBtnAlterarMaoObra;
     private javax.swing.JButton jBtnAlterarModelo;
     private javax.swing.JButton jBtnRemover;
     private javax.swing.JButton jBtnRemoverDetServTipoServico;
     private javax.swing.JButton jBtnRemoverEquipamento;
+    private javax.swing.JButton jBtnRemoverFuncionario;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel12;
