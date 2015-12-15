@@ -266,6 +266,7 @@ public class AdicionaDetServProduto extends javax.swing.JFrame {
         jComboBoxFabricante.removeAllItems();
         codModelo = 0;
         modelo = null;
+        codProduto = 0;
         codFabricante = 0;
         fabricante = null;
         valorUnit = 0;

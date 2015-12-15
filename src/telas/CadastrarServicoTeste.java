@@ -42,7 +42,7 @@ public class CadastrarServicoTeste extends javax.swing.JFrame {
 
     private int codModelo;
     private int codModeloEqui;
-    private int codProduto;
+    private int codProduto = 0;
     private int codDetProduto;
     private int codFuncionario;
     private int codEquipamento;
@@ -861,6 +861,7 @@ public class CadastrarServicoTeste extends javax.swing.JFrame {
     private void jComboBoxProdutoItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jComboBoxProdutoItemStateChanged
         jComboBoxModelo.removeAllItems();
         jComboBoxFabricante.removeAllItems();
+        codProduto = 0;
         codModelo = 0;
         modelo = null;
         codFabricante = 0;

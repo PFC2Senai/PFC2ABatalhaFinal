@@ -730,9 +730,7 @@ public class CadastrarServico extends javax.swing.JFrame {
         servico.setCodOrdemServico(codOrdemS);
         
         int codServico = ServicoDAO.CadServico(servico);
-        
-        
-        
+                
         for(int j = 0; j < jTablePecas.getRowCount(); j++) {
                  
             dtServ.setCodServico(codServico); 
@@ -1180,7 +1178,6 @@ public class CadastrarServico extends javax.swing.JFrame {
                                     " tabmodelo on tabmodelo_idtabModelo = idtabModelo and " +
                                     " tabproduto_id_prod = id_prod"
                                 +   " where id_prod = " + codProduto + " group by modelo;";
-        System.out.println(codProduto);
         
         try{
             pst = conexao.prepareStatement(sql);
