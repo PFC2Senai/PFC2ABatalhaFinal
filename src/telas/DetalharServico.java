@@ -7,11 +7,10 @@ import atributos.TipoServico;
 import funcoes.ClienteDAO;
 import static funcoes.Conexao.getConnection;
 import funcoes.DetServicoFuncionarioDAO;
+import funcoes.DetServicoProdutoDAO;
 import funcoes.DetServicoTipoDAO;
-import funcoes.FuncionarioDAO;
 import funcoes.ModeloTabela;
 import funcoes.ServicoDAO;
-import funcoes.TipoServicoDAO;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -29,6 +28,8 @@ public class DetalharServico extends javax.swing.JFrame {
 
     private int idServico;
     private int idCliente;
+    private int codDetServProduto;
+    private double total;
     Statement stmt;
     
     /**
@@ -36,6 +37,9 @@ public class DetalharServico extends javax.swing.JFrame {
      */
     public DetalharServico() {
         initComponents();
+    }
+    public double Total() {
+        return total;
     }
     
     public DetalharServico(int codServico) {
@@ -65,6 +69,7 @@ public class DetalharServico extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTablePecas = new javax.swing.JTable();
         jBtnAlterarModelo = new javax.swing.JButton();
+        jBtnRemover = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
@@ -107,11 +112,11 @@ public class DetalharServico extends javax.swing.JFrame {
 
             },
             new String [] {
-                "id det serv produto", "Peça", "Modelo", "Fabricante", "Quantidade"
+                "id det serv produto", "Peça", "Modelo", "Fabricante", "Valor Unit", "Quantidade"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false
+                false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -121,14 +126,22 @@ public class DetalharServico extends javax.swing.JFrame {
         jTablePecas.getTableHeader().setReorderingAllowed(false);
         jScrollPane1.setViewportView(jTablePecas);
 
-        jBtnAlterarModelo.setText("Alterar");
-
-        org.jdesktop.beansbinding.Binding binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, jTablePecas, org.jdesktop.beansbinding.ELProperty.create("${selectedElement != null}"), jBtnAlterarModelo, org.jdesktop.beansbinding.BeanProperty.create("enabled"));
-        bindingGroup.addBinding(binding);
-
+        jBtnAlterarModelo.setText("Adicionar");
+        jBtnAlterarModelo.setEnabled(true);
         jBtnAlterarModelo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jBtnAlterarModeloActionPerformed(evt);
+            }
+        });
+
+        jBtnRemover.setText("Remover");
+
+        org.jdesktop.beansbinding.Binding binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, jTablePecas, org.jdesktop.beansbinding.ELProperty.create("${selectedElement != null}"), jBtnRemover, org.jdesktop.beansbinding.BeanProperty.create("enabled"));
+        bindingGroup.addBinding(binding);
+
+        jBtnRemover.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnRemoverActionPerformed(evt);
             }
         });
 
@@ -140,7 +153,9 @@ public class DetalharServico extends javax.swing.JFrame {
                 .addGap(26, 26, 26)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 562, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jBtnAlterarModelo)
+                .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jBtnAlterarModelo)
+                    .addComponent(jBtnRemover))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel14Layout.setVerticalGroup(
@@ -150,7 +165,9 @@ public class DetalharServico extends javax.swing.JFrame {
                 .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel14Layout.createSequentialGroup()
                         .addComponent(jBtnAlterarModelo)
-                        .addGap(0, 64, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jBtnRemover)
+                        .addGap(0, 35, Short.MAX_VALUE))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                 .addGap(17, 17, 17))
         );
@@ -455,8 +472,30 @@ public class DetalharServico extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jBtnAlterarModeloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnAlterarModeloActionPerformed
-        // TODO add your handling code here:
+        new AdicionaDetServProduto(idServico, this).setVisible(true);
+        total = Double.parseDouble(txtTotal.getText());
     }//GEN-LAST:event_jBtnAlterarModeloActionPerformed
+
+    private void jBtnRemoverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnRemoverActionPerformed
+        
+        int linha = jTablePecas.getSelectedRow();
+       
+        codDetServProduto = (Integer.parseInt(jTablePecas.getValueAt(linha, 0).toString()));
+
+        int quant = Integer.parseInt(jTablePecas.getValueAt(linha, 5).toString());
+        double precoUnit = Double.parseDouble(jTablePecas.getValueAt(linha, 4).toString());
+        double totalPeca = quant * precoUnit;
+        
+        
+        double totalGeral = Double.parseDouble(txtTotal.getText());
+        double resultado = totalGeral - totalPeca;
+        ServicoDAO.UpdateTotalServico(idServico, resultado);
+        DetServicoProdutoDAO.ExcluirDetServProduto(codDetServProduto);
+      //  txtTotal.setText(String.valueOf(resultado));
+        CarregaServico();
+        TabelaProduto("SELECT * FROM vw_detservicoproduto where idservico = " + idServico + ";");
+        
+    }//GEN-LAST:event_jBtnRemoverActionPerformed
 
     public void CarregaServico() {
         
@@ -487,17 +526,19 @@ public class DetalharServico extends javax.swing.JFrame {
             
             stmt = getConnection().createStatement();
             ArrayList dados = new ArrayList();               
-            String [] Colunas = {"Código","Peça", "Modelo", "Fabricante"};
+            String [] Colunas = {"Código","Peça", "Modelo", "Fabricante","Valor Unit","Quantidade"};
                
             ResultSet rs;
             rs = stmt.executeQuery(Sql);
             
                 while(rs.next()) {
                     dados.add(new Object[] { rs.getObject("iddetServico_produto"),rs.getObject("produto"),
-                                             rs.getObject("modelo"),rs.getObject("fabricante")});            
+                                             rs.getObject("modelo"),rs.getObject("fabricante"),
+                                             rs.getObject("precoSaida"), rs.getObject("quantidadeComprada"),
+                                            });            
                 }
 
-                for (int i = 0; i < 4; i++) {
+                for (int i = 0; i < 6; i++) {
                     
                     ModeloTabela modelo = new ModeloTabela(dados, Colunas);
                     jTablePecas.setModel(modelo);
@@ -613,6 +654,7 @@ public class DetalharServico extends javax.swing.JFrame {
     private javax.swing.JButton jBtnAlterarMaoObra;
     private javax.swing.JButton jBtnAlterarModelo;
     private javax.swing.JButton jBtnAlterarTipoServico;
+    private javax.swing.JButton jBtnRemover;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel12;

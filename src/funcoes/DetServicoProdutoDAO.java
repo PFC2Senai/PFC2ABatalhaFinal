@@ -18,7 +18,7 @@ public class DetServicoProdutoDAO {
         
         try {
             
-            String sql = ("INSERT INTO tabdetservico_produto(tabdetproduto_idDetProduto,quantidade,tabservico_idservico) VALUES (?,?,?);");
+            String sql = ("INSERT INTO tabdetservico_produto(tabdetproduto_idDetProduto,quantidadeComprada,tabservico_idservico) VALUES (?,?,?);");
             stmt = Conexao.getConnection().prepareStatement(sql);      
                   
                 stmt.setInt(1, servProduto.getCodDetProduto());
@@ -33,4 +33,22 @@ public class DetServicoProdutoDAO {
                 throw new RuntimeException("Erro ao Cadastrar Setor: ",ex);       
             }
     }
+    
+    public static void ExcluirDetServProduto(int id) {
+        
+        PreparedStatement stmt;
+        
+        try {   
+            String sql = ("DELETE FROM tabdetservico_produto WHERE iddetServico_produto = "+ id + ";");
+            stmt = Conexao.getConnection().prepareStatement(sql);            
+            
+            stmt.execute();
+            stmt.close();
+
+        } catch (SQLException ex) {      
+            Logger.getLogger(SetorDAO.class.getName()).log(Level.SEVERE, null, ex);
+            throw new RuntimeException("Erro ao excluir o detalhe servico produto: ",ex);    
+        }
+    }
+    
 }

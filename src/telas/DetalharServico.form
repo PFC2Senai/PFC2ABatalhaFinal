@@ -126,7 +126,10 @@
                           <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
                           <Component id="jScrollPane1" min="-2" pref="562" max="-2" attributes="0"/>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
-                          <Component id="jBtnAlterarModelo" min="-2" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="jBtnAlterarModelo" min="-2" max="-2" attributes="0"/>
+                              <Component id="jBtnRemover" min="-2" max="-2" attributes="0"/>
+                          </Group>
                           <EmptySpace max="32767" attributes="0"/>
                       </Group>
                   </Group>
@@ -138,7 +141,9 @@
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="102" attributes="0">
                                   <Component id="jBtnAlterarModelo" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace min="0" pref="64" max="32767" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="jBtnRemover" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace min="0" pref="35" max="32767" attributes="0"/>
                               </Group>
                               <Component id="jScrollPane1" pref="0" max="32767" attributes="0"/>
                           </Group>
@@ -158,16 +163,22 @@
                     <Component class="javax.swing.JTable" name="jTablePecas">
                       <Properties>
                         <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-                          <Table columnCount="5" rowCount="0">
+                          <Table columnCount="6" rowCount="0">
                             <Column editable="false" title="id det serv produto" type="java.lang.Object"/>
                             <Column editable="false" title="Pe&#xe7;a" type="java.lang.Object"/>
                             <Column editable="false" title="Modelo" type="java.lang.Object"/>
                             <Column editable="false" title="Fabricante" type="java.lang.Object"/>
+                            <Column editable="false" title="Valor Unit" type="java.lang.Object"/>
                             <Column editable="false" title="Quantidade" type="java.lang.Object"/>
                           </Table>
                         </Property>
                         <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
                           <TableColumnModel selectionModel="0">
+                            <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                              <Title/>
+                              <Editor/>
+                              <Renderer/>
+                            </Column>
                             <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
                               <Title/>
                               <Editor/>
@@ -204,13 +215,22 @@
                 </Container>
                 <Component class="javax.swing.JButton" name="jBtnAlterarModelo">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="Alterar"/>
+                    <Property name="text" type="java.lang.String" value="Adicionar"/>
+                    <Property name="enabled" type="boolean" value="true"/>
                   </Properties>
-                  <BindingProperties>
-                    <BindingProperty name="enabled" source="jTablePecas" sourcePath="${selectedElement != null}" target="jBtnAlterarModelo" targetPath="enabled" updateStrategy="0" immediately="false"/>
-                  </BindingProperties>
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jBtnAlterarModeloActionPerformed"/>
+                  </Events>
+                </Component>
+                <Component class="javax.swing.JButton" name="jBtnRemover">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Remover"/>
+                  </Properties>
+                  <BindingProperties>
+                    <BindingProperty name="enabled" source="jTablePecas" sourcePath="${selectedElement != null}" target="jBtnRemover" targetPath="enabled" updateStrategy="0" immediately="false"/>
+                  </BindingProperties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jBtnRemoverActionPerformed"/>
                   </Events>
                 </Component>
               </SubComponents>

@@ -164,5 +164,22 @@ public class ServicoDAO {
         }
         return servicos;
     }  
-       
+          
+    public static void UpdateTotalServico(int id, double novoTotal) {
+        
+        PreparedStatement stmt;
+        
+        try {   
+            String sql = ("UPDATE tabservico SET preco = " + novoTotal + 
+                                                 " WHERE idservico = " + id + ";");
+            
+            stmt = Conexao.getConnection().prepareStatement(sql);                             
+            stmt.executeUpdate();
+            stmt.close();
+
+        } catch (SQLException ex) {      
+            Logger.getLogger(ServicoDAO.class.getName()).log(Level.SEVERE, null, ex);
+            throw new RuntimeException("Erro ao alterar o total do servico: ",ex);     
+        }
+    }
 }
