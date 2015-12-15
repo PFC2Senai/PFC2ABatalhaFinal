@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package telas;
 
 import atributos.Equipamento;
@@ -87,23 +82,19 @@ public class CadastrarEquipamento extends javax.swing.JFrame {
         });
         getContentPane().add(jComboBoxEquipamento, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 70, 260, -1));
 
-        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
         jBtnCadEquipamento.setText("Salvar");
         jBtnCadEquipamento.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jBtnCadEquipamentoActionPerformed(evt);
             }
         });
-        jPanel1.add(jBtnCadEquipamento, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 70, -1, -1));
 
-        jBtbNovoEquipamento.setText("Novo Equipamento");
+        jBtbNovoEquipamento.setText("Novo");
         jBtbNovoEquipamento.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jBtbNovoEquipamentoActionPerformed(evt);
             }
         });
-        jPanel1.add(jBtbNovoEquipamento, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 70, -1, 23));
 
         jBtnCancelarCadEquipamento.setText("Cancelar");
         jBtnCancelarCadEquipamento.addActionListener(new java.awt.event.ActionListener() {
@@ -111,10 +102,8 @@ public class CadastrarEquipamento extends javax.swing.JFrame {
                 jBtnCancelarCadEquipamentoActionPerformed(evt);
             }
         });
-        jPanel1.add(jBtnCancelarCadEquipamento, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 70, -1, -1));
 
         jLabel8.setText("Fornecedor:");
-        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 140, -1, -1));
 
         jComboBoxFornecedor.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Selecione o fornecedor" }));
         jComboBoxFornecedor.addActionListener(new java.awt.event.ActionListener() {
@@ -122,10 +111,8 @@ public class CadastrarEquipamento extends javax.swing.JFrame {
                 jComboBoxFornecedorActionPerformed(evt);
             }
         });
-        jPanel1.add(jComboBoxFornecedor, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 140, 200, -1));
 
         jLabel9.setText("Fabricante:");
-        jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 220, -1, -1));
 
         jComboBoxFabricante.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Selecione o fabricante" }));
         jComboBoxFabricante.addActionListener(new java.awt.event.ActionListener() {
@@ -133,10 +120,8 @@ public class CadastrarEquipamento extends javax.swing.JFrame {
                 jComboBoxFabricanteActionPerformed(evt);
             }
         });
-        jPanel1.add(jComboBoxFabricante, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 210, 260, -1));
 
         jLabel10.setText("Modelo:");
-        jPanel1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 290, -1, -1));
 
         jComboBoxModelo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Selecione o modelo" }));
         jComboBoxModelo.addActionListener(new java.awt.event.ActionListener() {
@@ -144,7 +129,6 @@ public class CadastrarEquipamento extends javax.swing.JFrame {
                 jComboBoxModeloActionPerformed(evt);
             }
         });
-        jPanel1.add(jComboBoxModelo, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 290, 200, -1));
 
         jBtnSair.setText("Sair");
         jBtnSair.addActionListener(new java.awt.event.ActionListener() {
@@ -152,7 +136,6 @@ public class CadastrarEquipamento extends javax.swing.JFrame {
                 jBtnSairActionPerformed(evt);
             }
         });
-        jPanel1.add(jBtnSair, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 340, -1, -1));
 
         jBtnCadastrarEquipamento.setText("Cadastrar");
         jBtnCadastrarEquipamento.addActionListener(new java.awt.event.ActionListener() {
@@ -160,7 +143,72 @@ public class CadastrarEquipamento extends javax.swing.JFrame {
                 jBtnCadastrarEquipamentoActionPerformed(evt);
             }
         });
-        jPanel1.add(jBtnCadastrarEquipamento, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 330, -1, -1));
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(30, 30, 30)
+                        .addComponent(jLabel8)
+                        .addGap(11, 11, 11)
+                        .addComponent(jComboBoxFornecedor, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(30, 30, 30)
+                        .addComponent(jLabel9)
+                        .addGap(15, 15, 15)
+                        .addComponent(jComboBoxFabricante, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(30, 30, 30)
+                        .addComponent(jLabel10)
+                        .addGap(32, 32, 32)
+                        .addComponent(jComboBoxModelo, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(20, 20, 20)
+                        .addComponent(jBtnSair)
+                        .addGap(419, 419, 419)
+                        .addComponent(jBtnCadastrarEquipamento))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(370, 370, 370)
+                        .addComponent(jBtbNovoEquipamento)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jBtnCadEquipamento)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jBtnCancelarCadEquipamento)))
+                .addContainerGap(29, Short.MAX_VALUE))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(70, 70, 70)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jBtbNovoEquipamento)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jBtnCadEquipamento)
+                        .addComponent(jBtnCancelarCadEquipamento)))
+                .addGap(47, 47, 47)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel8)
+                    .addComponent(jComboBoxFornecedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(50, 50, 50)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(10, 10, 10)
+                        .addComponent(jLabel9))
+                    .addComponent(jComboBoxFabricante, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(56, 56, 56)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel10)
+                    .addComponent(jComboBoxModelo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(20, 20, 20)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(10, 10, 10)
+                        .addComponent(jBtnSair))
+                    .addComponent(jBtnCadastrarEquipamento)))
+        );
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 610, 380));
 
@@ -182,8 +230,11 @@ public class CadastrarEquipamento extends javax.swing.JFrame {
         codEquipamento = EquipamentoDAO.CadEquipamento(equi);
         jBtnCadEquipamento.setVisible(false);
         jBtnCancelarCadEquipamento.setVisible(false);
-        jBtbNovoEquipamento.setVisible(false);
-        txtEquipamento.setEnabled(false);
+        jBtbNovoEquipamento.setVisible(true);
+        txtEquipamento.setVisible(false);
+        jComboBoxEquipamento.setVisible(true);
+        populaComboBoxEquipamento();
+        jComboBoxEquipamento.setSelectedItem(txtEquipamento.getText());        
     }//GEN-LAST:event_jBtnCadEquipamentoActionPerformed
 
     private void jBtbNovoEquipamentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtbNovoEquipamentoActionPerformed
@@ -218,10 +269,6 @@ public class CadastrarEquipamento extends javax.swing.JFrame {
 
     private void jBtnCadastrarEquipamentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnCadastrarEquipamentoActionPerformed
 
-        // vamos ter estoque para equipamento? 
-        
-       // HistoricoProduto histProduto = new HistoricoProduto();
-
         equi.setTabusuarioIdUsuario(idUsuario());
         equi.setCodFornecedor(codFornecedor);
         equi.setCodModelo(codModelo);
@@ -230,12 +277,6 @@ public class CadastrarEquipamento extends javax.swing.JFrame {
         equi.setCodEquipamento(codEquipamento);
 
         EquipamentoDAO.CadDetEquipamento(equi);
-
-      //  histProduto.setCodDetProduto(codDet);
-      //  histProduto.setQuantidade(Integer.parseInt(txtQuantidade.getText()));
-      //  histProduto.setValor(Double.parseDouble(txtPrecoEntrada.getText()));
-     //   histProduto.setDataCadProduto(FormataData(txtDataCadProduto.getDate()));
-     //   HistoricoProdutoDAO.CadHistoricoProd(histProduto);
 
         txtEquipamento.setVisible(false);
         jComboBoxEquipamento.setVisible(true);

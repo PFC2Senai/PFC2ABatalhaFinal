@@ -888,7 +888,6 @@ public class CadastrarServicoTeste extends javax.swing.JFrame {
 
     private void jBtbIncluirPecaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtbIncluirPecaActionPerformed
         TabelaProduto();
-        //limparCamposProduto();
     }//GEN-LAST:event_jBtbIncluirPecaActionPerformed
 
     private void jComboBoxModeloItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jComboBoxModeloItemStateChanged
@@ -1066,12 +1065,6 @@ public class CadastrarServicoTeste extends javax.swing.JFrame {
     private void jComboBoxModeloEquipActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxModeloEquipActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jComboBoxModeloEquipActionPerformed
-    
-    private void limparCamposProduto() {
-        jComboBoxProduto.setSelectedIndex(0);
-        jComboBoxModelo.setSelectedIndex(-1);
-        jComboBoxFabricante.setSelectedIndex(-1);
-    }
     
     private void limparCampos() {
         

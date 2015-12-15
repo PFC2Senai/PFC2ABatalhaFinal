@@ -28,7 +28,6 @@ public class ExibeEquipamento extends javax.swing.JFrame {
     public ExibeEquipamento() {
         initComponents();
         TabelaEquipamento("SELECT * FROM vw_equipamentos; ");
-        DesabilitaCampos();
         jBtnEditar.setEnabled(false);       
     }
 
@@ -40,17 +39,14 @@ public class ExibeEquipamento extends javax.swing.JFrame {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
+        bindingGroup = new org.jdesktop.beansbinding.BindingGroup();
 
         jScrollPane1 = new javax.swing.JScrollPane();
         jTableListarEquipamento = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        txtEquipamento = new javax.swing.JTextField();
         jBtnNovo = new javax.swing.JButton();
         jBtnEditar = new javax.swing.JButton();
         jBtnExcluirEquipamento = new javax.swing.JButton();
-        jBtnSalvar = new javax.swing.JButton();
-        jBtnCancelar = new javax.swing.JButton();
         jBtnSair = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -73,8 +69,6 @@ public class ExibeEquipamento extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel1.setText("Equipamentos");
 
-        jLabel3.setText("Equipamento:");
-
         jBtnNovo.setText("Novo");
         jBtnNovo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -83,6 +77,10 @@ public class ExibeEquipamento extends javax.swing.JFrame {
         });
 
         jBtnEditar.setText("Detalhar Equipamento");
+
+        org.jdesktop.beansbinding.Binding binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, jTableListarEquipamento, org.jdesktop.beansbinding.ELProperty.create("${selectedElement != null}"), jBtnEditar, org.jdesktop.beansbinding.BeanProperty.create("enabled"));
+        bindingGroup.addBinding(binding);
+
         jBtnEditar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jBtnEditarActionPerformed(evt);
@@ -93,20 +91,6 @@ public class ExibeEquipamento extends javax.swing.JFrame {
         jBtnExcluirEquipamento.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jBtnExcluirEquipamentoActionPerformed(evt);
-            }
-        });
-
-        jBtnSalvar.setText("Salvar");
-        jBtnSalvar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jBtnSalvarActionPerformed(evt);
-            }
-        });
-
-        jBtnCancelar.setText("Cancelar");
-        jBtnCancelar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jBtnCancelarActionPerformed(evt);
             }
         });
 
@@ -121,60 +105,44 @@ public class ExibeEquipamento extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+            .addGroup(layout.createSequentialGroup()
                 .addContainerGap(20, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jBtnEditar)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jBtnSalvar)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jBtnCancelar)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jBtnExcluirEquipamento))
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                .addGap(5, 5, 5)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel1)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jLabel3)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(txtEquipamento)))))
-                        .addGap(341, 341, 341))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jBtnNovo)
-                        .addContainerGap())
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jBtnSair)
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 693, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18))))
+                        .addGap(18, 18, 18))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jBtnNovo)
+                        .addGap(125, 125, 125)
+                        .addComponent(jBtnEditar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jBtnExcluirEquipamento)
+                        .addGap(27, 27, 27))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(23, 23, 23)
+                .addGap(21, 21, 21)
                 .addComponent(jLabel1)
-                .addGap(18, 18, 18)
+                .addGap(29, 29, 29)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(txtEquipamento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addComponent(jBtnNovo)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jBtnNovo)
                     .addComponent(jBtnEditar)
-                    .addComponent(jBtnSalvar)
-                    .addComponent(jBtnCancelar)
                     .addComponent(jBtnExcluirEquipamento))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 292, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 261, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jBtnSair)
-                .addContainerGap())
+                .addGap(27, 27, 27))
         );
+
+        bindingGroup.bind();
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -190,7 +158,6 @@ public class ExibeEquipamento extends javax.swing.JFrame {
                
             ResultSet rs;
             rs = stmt.executeQuery(Sql);            
-            //rs.first();
             
                 while(rs.next()){
                     dados.add(new Object[]{ rs.getObject("idDetEquipamento"),rs.getObject("equipamento"),
@@ -218,13 +185,8 @@ public class ExibeEquipamento extends javax.swing.JFrame {
     
     
     private void jTableListarEquipamentoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableListarEquipamentoMouseClicked
-                    
-        if (jTableListarEquipamento.getSelectedRow() != -1) {
-           int linha = jTableListarEquipamento.getSelectedRow();    
-           txtEquipamento.setText(jTableListarEquipamento.getValueAt(linha, 1).toString()); 
-           indice = Integer.parseInt(jTableListarEquipamento.getValueAt(linha, 0).toString());
-        }
-        jBtnEditar.setEnabled(true);                 
+        int linha = jTableListarEquipamento.getSelectedRow();
+        indice = (Integer.parseInt(jTableListarEquipamento.getValueAt(linha, 0).toString()));                        
     }//GEN-LAST:event_jTableListarEquipamentoMouseClicked
 
     private void jBtnNovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnNovoActionPerformed
@@ -232,68 +194,27 @@ public class ExibeEquipamento extends javax.swing.JFrame {
     }//GEN-LAST:event_jBtnNovoActionPerformed
 
     private void jBtnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnEditarActionPerformed
-        
         new DetalharEquipamento(indice,this).setVisible(true);
-        
-// if (jTableListarEquipamento.getSelectedRow() != -1) {
-//        jBtnCancelar.setVisible(true);
-//        jBtnSalvar.setVisible(true);
-//        jBtnEditar.setVisible(false);
-//        txtEquipamento.setEnabled(true);
- //   }else{
-       // JOptionPane.showMessageDialog(null, "Primeiro selecione um registro na tabela.");
- //   }
     }//GEN-LAST:event_jBtnEditarActionPerformed
 
     private void jBtnExcluirEquipamentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnExcluirEquipamentoActionPerformed
 
         EquipamentoDAO.ExcluirEquipamento(indice);
         TabelaEquipamento("SELECT * FROM vw_equipamentos; ");
-        limparCampos();
     }//GEN-LAST:event_jBtnExcluirEquipamentoActionPerformed
-
-    private void jBtnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnSalvarActionPerformed
-        Equipamento equi = new Equipamento();
-        equi.setTabusuarioIdUsuario(1);
-        equi.setEquipamento(txtEquipamento.getText());
-       // EquipamentoDAO.UpdateEquipamento(equi, indice);
-        DesabilitaCampos();
-        jBtnEditar.setVisible(true);
-        TabelaEquipamento("SELECT * FROM vw_equipamentos; ");
-        limparCampos();
-    }//GEN-LAST:event_jBtnSalvarActionPerformed
-
-    private void jBtnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnCancelarActionPerformed
-        DesabilitaCampos();
-        limparCampos();
-        jBtnEditar.setVisible(true);
-    }//GEN-LAST:event_jBtnCancelarActionPerformed
 
     private void jBtnSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnSairActionPerformed
         this.dispose();
     }//GEN-LAST:event_jBtnSairActionPerformed
 
-    private void limparCampos() {       
-        txtEquipamento.setText("");
-    }
-    
-    private void DesabilitaCampos() {       
-        txtEquipamento.setEnabled(false);
-        jBtnCancelar.setVisible(false);
-        jBtnSalvar.setVisible(false);
-    }
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jBtnCancelar;
     private javax.swing.JButton jBtnEditar;
     private javax.swing.JButton jBtnExcluirEquipamento;
     private javax.swing.JButton jBtnNovo;
     private javax.swing.JButton jBtnSair;
-    private javax.swing.JButton jBtnSalvar;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTableListarEquipamento;
-    private javax.swing.JTextField txtEquipamento;
+    private org.jdesktop.beansbinding.BindingGroup bindingGroup;
     // End of variables declaration//GEN-END:variables
 }

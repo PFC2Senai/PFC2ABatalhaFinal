@@ -22,10 +22,10 @@ import javax.swing.ListSelectionModel;
  */
 public final class ExibeCliente extends javax.swing.JFrame {
     
-Statement stmt ;
-Cliente cliente = new Cliente();
-private static int indice;
-private static int idCntato;
+    Statement stmt ;
+    Cliente cliente = new Cliente();
+    private static int indice;
+    private static int idCntato;
     /**
      * Creates new form CadastroDeFuncionarios
      */

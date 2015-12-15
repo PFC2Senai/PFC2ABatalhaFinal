@@ -3,7 +3,6 @@ package telas;
 import atributos.Equipamento;
 import funcoes.Conexao;
 import funcoes.EquipamentoDAO;
-import static funcoes.EquipamentoDAO.idEquipamento;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -74,7 +73,6 @@ public final class DetalharEquipamento extends javax.swing.JFrame {
         jBtbEditarEquipamento = new javax.swing.JButton();
         txtFabricante = new javax.swing.JTextField();
         jComboBoxFabricante = new javax.swing.JComboBox();
-        jBtnCadastrarEquipamento = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -130,7 +128,7 @@ public final class DetalharEquipamento extends javax.swing.JFrame {
                 jBtnCancelarAltEquipamentoActionPerformed(evt);
             }
         });
-        jPanel1.add(jBtnCancelarAltEquipamento, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 220, -1, -1));
+        jPanel1.add(jBtnCancelarAltEquipamento, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 200, -1, -1));
 
         jBtnAlterarEquipamento.setText("Salvar");
         jBtnAlterarEquipamento.addActionListener(new java.awt.event.ActionListener() {
@@ -138,7 +136,7 @@ public final class DetalharEquipamento extends javax.swing.JFrame {
                 jBtnAlterarEquipamentoActionPerformed(evt);
             }
         });
-        jPanel1.add(jBtnAlterarEquipamento, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 150, -1, -1));
+        jPanel1.add(jBtnAlterarEquipamento, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 150, -1, -1));
 
         jBtbEditarEquipamento.setText("Editar Equipamento");
         jBtbEditarEquipamento.addActionListener(new java.awt.event.ActionListener() {
@@ -146,7 +144,7 @@ public final class DetalharEquipamento extends javax.swing.JFrame {
                 jBtbEditarEquipamentoActionPerformed(evt);
             }
         });
-        jPanel1.add(jBtbEditarEquipamento, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 80, -1, 23));
+        jPanel1.add(jBtbEditarEquipamento, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 100, -1, 23));
         jPanel1.add(txtFabricante, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 220, 220, -1));
 
         jComboBoxFabricante.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Selecione o fabricante" }));
@@ -156,14 +154,6 @@ public final class DetalharEquipamento extends javax.swing.JFrame {
             }
         });
         jPanel1.add(jComboBoxFabricante, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 220, 240, -1));
-
-        jBtnCadastrarEquipamento.setText("Cadastrar");
-        jBtnCadastrarEquipamento.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jBtnCadastrarEquipamentoActionPerformed(evt);
-            }
-        });
-        jPanel1.add(jBtnCadastrarEquipamento, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 300, -1, -1));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 580, 380));
 
@@ -178,8 +168,11 @@ public final class DetalharEquipamento extends javax.swing.JFrame {
         txtEquipamento.setEnabled(true);
         
         jComboBoxFabricante.setVisible(true);
+        jComboBoxFabricante.setSelectedItem(txtFabricante.getText());
         jComboBoxFornecedor.setVisible(true);
+        jComboBoxFornecedor.setSelectedItem(txtFornecedor.getText());
         jComboBoxModelo.setVisible(true);
+        jComboBoxModelo.setSelectedItem(txtModelo.getText());
         txtFornecedor.setVisible(false);
         txtFabricante.setVisible(false);
         txtFabricante.setVisible(false);
@@ -206,7 +199,6 @@ public final class DetalharEquipamento extends javax.swing.JFrame {
 
         equi.setIdDetEquipamento(codDetEquipamento);
         equi.setIdEquipamento(codEquipamento);
-        System.out.println("Aqui "+ codEquipamento);
         equi.setEquipamento(txtEquipamento.getText());
         equi.setCodModelo(codModelo);
         equi.setCodFabricante(codFabricante);
@@ -248,33 +240,8 @@ public final class DetalharEquipamento extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_jBtnSairActionPerformed
 
-    private void jBtnCadastrarEquipamentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnCadastrarEquipamentoActionPerformed
-
-        // vamos ter estoque para equipamento?
-
-        // HistoricoProduto histProduto = new HistoricoProduto();
-
-        equi.setCodFornecedor(codFornecedor);
-        equi.setCodModelo(codModelo);
-        equi.setCodFabricante(codFabricante);
-
-        equi.setCodEquipamento(codEquipamento);
-
-        EquipamentoDAO.CadDetEquipamento(equi);
-
-        //  histProduto.setCodDetProduto(codDet);
-        //  histProduto.setQuantidade(Integer.parseInt(txtQuantidade.getText()));
-        //  histProduto.setValor(Double.parseDouble(txtPrecoEntrada.getText()));
-        //   histProduto.setDataCadProduto(FormataData(txtDataCadProduto.getDate()));
-        //   HistoricoProdutoDAO.CadHistoricoProd(histProduto);
-
-        txtEquipamento.setVisible(false);
-
-        limparCampos();
-        jBtbEditarEquipamento.setVisible(true);
-    }//GEN-LAST:event_jBtnCadastrarEquipamentoActionPerformed
-
     private void limparCampos() {
+        
         jComboBoxFabricante.setSelectedIndex(0);
         jComboBoxFornecedor.setSelectedIndex(0);
         jComboBoxModelo.setSelectedIndex(0);
@@ -435,7 +402,6 @@ public final class DetalharEquipamento extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBtbEditarEquipamento;
     private javax.swing.JButton jBtnAlterarEquipamento;
-    private javax.swing.JButton jBtnCadastrarEquipamento;
     private javax.swing.JButton jBtnCancelarAltEquipamento;
     private javax.swing.JButton jBtnSair;
     private javax.swing.JComboBox jComboBoxFabricante;
