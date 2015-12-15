@@ -795,7 +795,7 @@ public class CadastrarServicoTeste extends javax.swing.JFrame {
             .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
-        pack();
+        setSize(new java.awt.Dimension(909, 671));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
