@@ -6,6 +6,7 @@ import atributos.Endereco;
 import atributos.PessoaContato;
 import atributos.Telefone;
 import static atributos.Usuario.idUsuario;
+import funcoes.AuditoriaDAO;
 import funcoes.ClienteDAO;
 import funcoes.Conexao;
 import funcoes.ContatosDAO;
@@ -23,6 +24,7 @@ import javax.swing.table.DefaultTableModel;
 public class CadastrarCliente extends javax.swing.JFrame {
 
     private PreparedStatement pst;
+    private String descricaoAudit;
     private int codSetor;
     
     public CadastrarCliente() {
@@ -466,9 +468,14 @@ public class CadastrarCliente extends javax.swing.JFrame {
             PessoaContatoDAO.CadPessoaContato(pContato);
         }
         
+        
+        descricaoAudit = "Empresa "+ cli.getEmpresa() +" /CNPJ: "+ cli.getCnpj() +" foi cadastrada.";
+        AuditoriaDAO.CadDetAuditoria(descricaoAudit);
+        
         limparCampos();
         ((DefaultTableModel) jTableContatos.getModel()).setNumRows(0);
         jTableContatos.updateUI();
+        
     }//GEN-LAST:event_btnCadClienteActionPerformed
 
     private void jBtnOutroContatoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnOutroContatoActionPerformed
@@ -560,8 +567,9 @@ public class CadastrarCliente extends javax.swing.JFrame {
         txtEstado.setText("");
         txtRua.setText("");     
     }
-
-
+    
+    
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCadCliente;
     private javax.swing.JButton btnCancelar;

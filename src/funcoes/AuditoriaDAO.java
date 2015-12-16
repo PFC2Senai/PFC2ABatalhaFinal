@@ -9,6 +9,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import static telas.TelaLogin.idAuditoria;
 
 /**
  *
@@ -16,9 +17,11 @@ import java.util.logging.Logger;
  */
 public class AuditoriaDAO {
     
-    public static void CadAuditoria(Auditoria audt){
+    public static int CadAuditoria(Auditoria audt){
         
         PreparedStatement stmt;
+        int id = 0;
+        
         try {   
             String sql = ("INSERT INTO tabauditoria(tabusuario_id_usuario) VALUES (?);");
             stmt = Conexao.getConnection().prepareStatement(sql);      
@@ -26,23 +29,28 @@ public class AuditoriaDAO {
                 stmt.setInt(1, audt.getCodUsuario());
                               
                 stmt.executeUpdate();
+                ResultSet rs = stmt.getGeneratedKeys();
+                if (rs.next()) {
+                    id = rs.getInt(1);
+                }
                 stmt.close();  
 
             } catch (SQLException ex) {      
                 Logger.getLogger(AuditoriaDAO.class.getName()).log(Level.SEVERE, null, ex);
                 throw new RuntimeException("Erro ao Cadastrar auditoria: ",ex);       
             }
+        return id;
     }
     
-    public static void CadDetAuditoria(Auditoria audt){
+    public static void CadDetAuditoria(String descricao){
         
         PreparedStatement stmt;
         try {   
             String sql = ("INSERT INTO tabdetauditoria(tabAuditoria_idtabAuditoria, descricao) VALUES (?,?);");
             stmt = Conexao.getConnection().prepareStatement(sql);      
                   
-                stmt.setInt(1, audt.getCodUsuario());
-                stmt.setString(2, audt.getDescricao());
+                stmt.setInt(1, idAuditoria());
+                stmt.setString(2, descricao);
                               
                 stmt.executeUpdate();
                 stmt.close();  

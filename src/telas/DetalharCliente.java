@@ -6,6 +6,7 @@ import atributos.Endereco;
 import atributos.Lembrete;
 import atributos.PessoaContato;
 import atributos.Telefone;
+import funcoes.AuditoriaDAO;
 import funcoes.ClienteDAO;
 import funcoes.Conexao;
 import funcoes.ContatosDAO;
@@ -748,6 +749,10 @@ public class DetalharCliente extends javax.swing.JFrame {
         jBtbCancelDadosP.setVisible(false);
         jButtonAr1.setVisible(true);
         CarregaCliente();
+        
+        String descricaoAudit = "Empresa "+ cli.getEmpresa() +" /CNPJ: "+ cli.getCnpj() +"teve os dados alterados.";
+        AuditoriaDAO.CadDetAuditoria(descricaoAudit);
+        
     }//GEN-LAST:event_jBtnAltDadosPActionPerformed
 
     private void jComboBoxSetoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxSetoresActionPerformed
