@@ -187,7 +187,7 @@ public class TelaLogin extends javax.swing.JFrame {
     }
     
     public static int idAuditoria() {
-        return codAuditoria;          
+        return codAuditoria = 1;          
     }
     
 //    public static void main(String args[]) {

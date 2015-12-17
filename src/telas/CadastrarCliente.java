@@ -475,7 +475,8 @@ public class CadastrarCliente extends javax.swing.JFrame {
         limparCampos();
         ((DefaultTableModel) jTableContatos.getModel()).setNumRows(0);
         jTableContatos.updateUI();
-        
+                
+        JOptionPane.showMessageDialog(null, "Cadastrado com sucesso!");
     }//GEN-LAST:event_btnCadClienteActionPerformed
 
     private void jBtnOutroContatoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnOutroContatoActionPerformed

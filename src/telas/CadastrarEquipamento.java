@@ -285,6 +285,8 @@ public class CadastrarEquipamento extends javax.swing.JFrame {
         jComboBoxEquipamento.removeAllItems();
         populaComboBoxEquipamento();
         jBtbNovoEquipamento.setVisible(true);
+        
+        JOptionPane.showMessageDialog(null, "Cadastrado com sucesso!");
     }//GEN-LAST:event_jBtnCadastrarEquipamentoActionPerformed
 
     private void limparCampos() {
