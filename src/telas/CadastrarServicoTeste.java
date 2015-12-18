@@ -32,6 +32,7 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author Josy
  */
+
 public class CadastrarServicoTeste extends javax.swing.JFrame {
 
     
@@ -907,6 +908,12 @@ public class CadastrarServicoTeste extends javax.swing.JFrame {
         DefaultTableModel dtm = (DefaultTableModel) jTablePecas.getModel();
         int linha = jTablePecas.getSelectedRow();
 
+        double totalParcial = Double.parseDouble(jTablePecas.getValueAt(linha, 8).toString());
+        
+        totalPeca -= totalParcial;
+        
+        txtTotalPecas.setText(String.valueOf(totalPeca));
+        
         if(linha != -1) {
             dtm.removeRow(linha);
         }

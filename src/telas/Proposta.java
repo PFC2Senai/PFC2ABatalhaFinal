@@ -877,6 +877,9 @@ public class Proposta extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jComboBoxClienteItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jComboBoxClienteItemStateChanged
+        codCliente = 0;
+        jComboBoxContato.removeAllItems();
+        idClienteComboBox();
         populaComboBoxContato();
     }//GEN-LAST:event_jComboBoxClienteItemStateChanged
 
@@ -942,7 +945,7 @@ public class Proposta extends javax.swing.JFrame {
             rs = pst.executeQuery();
 
             while (rs.next()) {
-                jComboBoxProduto.addItem(rs.getString("tabcliente_idcliente"));
+                jComboBoxContato.addItem(rs.getString("contato"));
             }
 
         } catch (SQLException ex) {
