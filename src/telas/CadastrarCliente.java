@@ -409,6 +409,7 @@ public class CadastrarCliente extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jComboBoxSetoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxSetoresActionPerformed
@@ -437,8 +438,9 @@ public class CadastrarCliente extends javax.swing.JFrame {
         cli.setCodSetor(codSetor);
 
         int i = ContatosDAO.CadContato();
-              
+        
         cli.setIdContato(i);
+        
         int codCli = ClienteDAO.CadCliente(cli);
                
         endereco.setPais(txtPais.getText());
@@ -460,10 +462,12 @@ public class CadastrarCliente extends javax.swing.JFrame {
             tel.setCel(jTableContatos.getValueAt(j, 2).toString());          
             email = jTableContatos.getValueAt(j, 3).toString(); 
            
-            ContatosDAO.CadTel(i, tel);
-            ContatosDAO.CadEmail(i, email);
+            int codContato = ContatosDAO.CadContato();
+            
+            ContatosDAO.CadTel(codContato, tel);
+            ContatosDAO.CadEmail(codContato, email);
             pContato.setCodCliente(codCli);
-            pContato.setCodContato(i);
+            pContato.setCodContato(codContato);
             
             PessoaContatoDAO.CadPessoaContato(pContato);
         }

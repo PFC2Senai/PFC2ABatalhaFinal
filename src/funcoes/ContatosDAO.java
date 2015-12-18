@@ -292,13 +292,15 @@ public class ContatosDAO {
         return telefones;
     }
     
-    public static int CodTel(String tel) {
+    public static int CodTel(String tel, int codContato) {
         
         Statement stmt;
         int codTel = 0;
         
-        try {            
-            String Sql = "SELECT * FROM tabtel where telefone = '" + tel + "';";
+        try {
+            
+            String Sql = "SELECT * FROM tabtel where telefone = '" + tel + "' and "
+                       + " Contato_id = " + codContato + ";";
             
             ResultSet rs;            
             stmt = Conexao.getConnection().createStatement();            
@@ -318,13 +320,14 @@ public class ContatosDAO {
         return codTel;
     }
     
-    public static int CodEmail(String email) {
+    public static int CodEmail(String email, int codContato) {
         
         Statement stmt;
         int codTel = 0;
         
         try {            
-            String Sql = "SELECT id_email FROM tabemail where email = '" + email + "';";
+            String Sql = "SELECT id_email FROM tabemail where email = '" + email + "' and "
+                       + " contato_id_contato = " + codContato + ";";
             
             ResultSet rs;            
             stmt = Conexao.getConnection().createStatement();            

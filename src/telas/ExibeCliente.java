@@ -59,7 +59,7 @@ public final class ExibeCliente extends javax.swing.JFrame {
             
             stmt = getConnection().createStatement();
             ArrayList dados = new ArrayList();               
-            String [] Colunas = {"Código","Empresa", "CNPJ", "Setor", "Estado","Telefone","Email"};
+            String [] Colunas = {"Código","Empresa", "CNPJ", "Setor", "Estado"};
                
             ResultSet rs;
             rs = stmt.executeQuery(Sql);            
@@ -67,10 +67,10 @@ public final class ExibeCliente extends javax.swing.JFrame {
                 while(rs.next()){
                     dados.add(new Object[]{ rs.getObject("idCliente"),rs.getObject("empresa"),
                                             rs.getObject("cnpj"),rs.getObject("setor"), 
-                                            rs.getObject("estado"),rs.getObject("telefone"),rs.getObject("email")});            
+                                            rs.getObject("estado")});            
                 }
 
-                    for (int i = 0; i < 7; i++){
+                    for (int i = 0; i < 5; i++){
                         ModeloTabela modelo = new ModeloTabela(dados, Colunas);
                         jTableListarClientes.setModel(modelo);
                         jTableListarClientes.getColumnModel().getColumn(i).setPreferredWidth(150);

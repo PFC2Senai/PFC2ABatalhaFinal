@@ -9,10 +9,12 @@ import atributos.Telefone;
 import funcoes.AuditoriaDAO;
 import funcoes.ClienteDAO;
 import funcoes.Conexao;
+import static funcoes.Conexao.getConnection;
 import funcoes.ContatosDAO;
 import static funcoes.ContatosDAO.CodEmail;
 import static funcoes.ContatosDAO.CodTel;
 import funcoes.LembreteDAO;
+import funcoes.ModeloTabela;
 import funcoes.PessoaContatoDAO;
 import java.awt.Color;
 import java.sql.Connection;
@@ -24,6 +26,7 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
 import static telas.ExibeCliente.GetIndice;
 
@@ -38,6 +41,8 @@ public class DetalharCliente extends javax.swing.JFrame {
     private int codSetor;
     private PreparedStatement pst;
     Statement stmt ;
+    private int codCliente = GetIndice();
+    private int codContato;
     
     /**
      * Creates new form CadastrarCliente
@@ -48,7 +53,7 @@ public class DetalharCliente extends javax.swing.JFrame {
         CarregaCliente();
         populaComboBox();
         TabelaLembrete2(GetIndice());         
-        TabelaContatos();
+        TabelaContatos("SELECT * FROM vw_contatos WHERE idcliente = " + codCliente + ";");
         campoInvisivel();        
     }
     
@@ -63,10 +68,7 @@ public class DetalharCliente extends javax.swing.JFrame {
         endereco = ContatosDAO.CarregaEndereco(idContato);
 
         ArrayList<Cliente> cliente = new ArrayList<Cliente>();
-        cliente = ClienteDAO.CarregaCliente(GetIndice());
-        
-        ArrayList<Telefone> telefone = new ArrayList<Telefone>();
-        telefone = ContatosDAO.CarregaTelefones(idContato);            
+        cliente = ClienteDAO.CarregaCliente(codCliente);         
                
         for (Cliente cli : cliente) {
             txtEmpresa.setText(cli.getEmpresa());
@@ -174,38 +176,73 @@ public class DetalharCliente extends javax.swing.JFrame {
         }          
     } 
     
-    public void TabelaContatos() {
+    public void TabelaContatos(String Sql) {
         
-        ((DefaultTableModel) jTableContatos.getModel()).setNumRows(0);
-        jTableContatos.updateUI();
-        
-        ArrayList<String> telefone = new ArrayList<String>();
-        telefone = ContatosDAO.Telefones(idContato); 
-        
-        ArrayList<String> celular = new ArrayList<String>();
-        celular = ContatosDAO.Celular(idContato); 
-        
-        ArrayList<String> email = new ArrayList<String>();
-        email = ContatosDAO.Email(idContato); 
-
-        ArrayList<PessoaContato> pContato = new ArrayList<PessoaContato>();
-        pContato = PessoaContatoDAO.Contatos(GetIndice()); 
-        
-        int i = 0;
         try { 
             
-            DefaultTableModel dtm = (DefaultTableModel) jTableContatos.getModel();
-            if (pContato != null) {
-                for(PessoaContato p : pContato) {
-
-                    dtm.addRow(new Object[] {p.getIdPessoaContato(), p.getNomeContato(), telefone.get(i), celular.get(i), email.get(i)});
-                    i++;
+            stmt = getConnection().createStatement();
+            ArrayList dados = new ArrayList();               
+            String [] Colunas = {"CodContato","Código","Contato", "Telefone", "Celular", "Email"};
+               
+            ResultSet rs;
+            rs = stmt.executeQuery(Sql);            
+            
+                while(rs.next()){
+                    dados.add(new Object[]{ rs.getObject("id_contato"),rs.getObject("idPessoaContato"),rs.getObject("contato"),
+                                            rs.getObject("telefone"),rs.getObject("celular"), 
+                                            rs.getObject("email")});            
                 }
-            } 
-        } catch (Exception erro) {
-            Logger.getLogger(DetalharCliente.class.getName()).log(Level.SEVERE, null, erro);
+
+                    for (int i = 0; i < 5; i++){
+                        ModeloTabela modelo = new ModeloTabela(dados, Colunas);
+                        jTableContatos.setModel(modelo);
+                        jTableContatos.getColumnModel().getColumn(i).setPreferredWidth(150);
+                        jTableContatos.getColumnModel().getColumn(i).setResizable(false);
+                        jTableContatos.getTableHeader().setReorderingAllowed(false);
+                        jTableContatos.setAutoResizeMode(jTableContatos.AUTO_RESIZE_OFF);
+                        jTableContatos.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+                    }
+                    
+        } catch (SQLException ex) {
+            Logger.getLogger(ExibeCliente.class.getName()).log(Level.SEVERE, null, ex);
+            
+        } catch (Exception erro){
+            Logger.getLogger(ExibeCliente.class.getName()).log(Level.SEVERE, null, erro);
         }          
-    } 
+    }
+    
+//    public void TabelaContatos() {
+//        
+//        ((DefaultTableModel) jTableContatos.getModel()).setNumRows(0);
+//        jTableContatos.updateUI();
+//        
+//        ArrayList<String> telefone = new ArrayList<String>();
+//        telefone = ContatosDAO.Telefones(idContato); 
+//        
+//        ArrayList<String> celular = new ArrayList<String>();
+//        celular = ContatosDAO.Celular(idContato); 
+//        
+//        ArrayList<String> email = new ArrayList<String>();
+//        email = ContatosDAO.Email(idContato); 
+//
+//        ArrayList<PessoaContato> pContato = new ArrayList<PessoaContato>();
+//        pContato = PessoaContatoDAO.Contatos(GetIndice()); 
+//        
+//        int i = 0;
+//        try { 
+//            
+//            DefaultTableModel dtm = (DefaultTableModel) jTableContatos.getModel();
+//            if (pContato != null) {
+//                for(PessoaContato p : pContato) {
+//
+//                    dtm.addRow(new Object[] {p.getIdPessoaContato(), p.getNomeContato(), telefone.get(i), celular.get(i), email.get(i)});
+//                    i++;
+//                }
+//            } 
+//        } catch (Exception erro) {
+//            Logger.getLogger(DetalharCliente.class.getName()).log(Level.SEVERE, null, erro);
+//        }          
+//    } 
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -661,8 +698,8 @@ public class DetalharCliente extends javax.swing.JFrame {
 
     private void jButtonEditarContatoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEditarContatoActionPerformed
 
-        codTel = CodTel(txtTel.getText().trim());
-        codEmail = CodEmail(txtEmail.getText().trim());
+        codTel = CodTel(txtTel.getText().trim(), codContato);
+        codEmail = CodEmail(txtEmail.getText().trim(), codContato);
         exibeCampo();
 
         jButtonEditarContato.setVisible(false);
@@ -672,6 +709,7 @@ public class DetalharCliente extends javax.swing.JFrame {
 
     private void jBtnAltContatoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnAltContatoActionPerformed
         Telefone tel = new Telefone();
+        
         PessoaContato p = new PessoaContato();
         
         tel.setTel(txtTel.getText());
@@ -683,7 +721,7 @@ public class DetalharCliente extends javax.swing.JFrame {
         System.out.println(codEmail);
         campoInvisivel();
         jButtonEditarContato.setVisible(true);
-        TabelaContatos();
+        TabelaContatos("SELECT * FROM vw_contatos WHERE idcliente = " + codCliente + ";");
         jButtonEditarContato.setEnabled(false);
     }//GEN-LAST:event_jBtnAltContatoActionPerformed
 
@@ -799,7 +837,8 @@ public class DetalharCliente extends javax.swing.JFrame {
     private void jTableContatosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableContatosMouseClicked
         jButtonEditarContato.setEnabled(true);
         int linha = jTableContatos.getSelectedRow();
-        codPessoaContato = Integer.parseInt(jTableContatos.getValueAt(linha, 0).toString());
+        codPessoaContato = Integer.parseInt(jTableContatos.getValueAt(linha, 1).toString());
+        codContato = Integer.parseInt(jTableContatos.getValueAt(linha, 0).toString());
         txtContato.setText(jTableContatos.getValueAt(linha, 1).toString());
         txtTel.setText(jTableContatos.getValueAt(linha, 2).toString());
         txtTelCel.setText(jTableContatos.getValueAt(linha, 3).toString());

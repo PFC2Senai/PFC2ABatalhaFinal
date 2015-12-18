@@ -743,7 +743,7 @@ public class CadastrarServicoTeste extends javax.swing.JFrame {
                 .addContainerGap(204, Short.MAX_VALUE))
         );
 
-        jBtnCadastrarServico3.setText("Cadastrar");
+        jBtnCadastrarServico3.setText("Finalizar Serviço");
         jBtnCadastrarServico3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jBtnCadastrarServico3ActionPerformed(evt);

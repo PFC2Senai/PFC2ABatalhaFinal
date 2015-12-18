@@ -50,16 +50,8 @@ public class ClienteDAO {
         ArrayList<Cliente> cliente = new ArrayList<Cliente>();
         
         try {            
-            String Sql = "SELECT * FROM tabcliente cli\n" +
-                        "INNER JOIN tabtel tel\n" +
-                        "INNER JOIN tabemail email\n" +
-                        "INNER JOIN tabcontato cont\n" +
-                        "INNER JOIN tabsetor setor\n" +
-                        "ON cont.id_contato = cli.tabContato_id_contato AND\n" +
-                        "cont.id_contato = tel.contato_id AND\n" +
-                        "id_contato = email.contato_id_contato AND\n" +
-                        "cli.tabSetor_idtabSetor = setor.idtabSetor "
-                       + "where cli.idcliente = '"+ id +"';";
+            String Sql = " SELECT * FROM vw_cliente "
+                       + " where idcliente = '"+ id +"';";
             
             ResultSet rs;            
             stmt = Conexao.getConnection().createStatement();            

@@ -42,19 +42,6 @@ public class Cliente {
         this.empresa = empresa;
     }
 
-//    /**
-//     * @return the tel
-//     */
-//    public String getTel() {
-//        return tel;
-//    }
-//
-//    /**
-//     * @param tel the tel to set
-//     */
-//    public void setTel(String tel) {
-//        this.tel = tel;
-//    }
 
     /**
      * @return the cnpj
