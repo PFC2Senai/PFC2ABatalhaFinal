@@ -167,42 +167,42 @@ public class ContatosDAO {
         }
     }
 
-    public static void UpdateTel(int id, Telefone tel) {
-
-        PreparedStatement stmt;
-
-        try {
-            String sql = ("UPDATE tabTel SET telefone='" + tel.getTel()
-                    + "' , celular = '" + tel.getCel()
-                    + "' where id_telefone = '" + id + "';"); //precisa alterar: caso mais de um telefone cadastrado desse mesmo contato, dessa forma vai alterar todos os tels. criar metodo para verificar qual tel é pra alterar. teremos um and na condicao para o update
-
-            stmt = Conexao.getConnection().prepareStatement(sql);
-            stmt.executeUpdate();
-            stmt.close();
-
-        } catch (SQLException ex) {
-            Logger.getLogger(ContatosDAO.class.getName()).log(Level.SEVERE, null, ex);
-            throw new RuntimeException("Erro ao Alterar o Tel do cliente: ", ex);
-        }
-    }
-
-    public static void UpdateEmail(int id, String email) {
-
-        PreparedStatement stmt;
-
-        try {
-            String sql = ("UPDATE tabemail SET email = '" + email 
-                        + "' WHERE id_email = "+ id +";");//mesma coisa aqui
-
-            stmt = Conexao.getConnection().prepareStatement(sql);
-            stmt.executeUpdate();
-            stmt.close();
-
-        } catch (SQLException ex) {
-            Logger.getLogger(ContatosDAO.class.getName()).log(Level.SEVERE, null, ex);
-            throw new RuntimeException("Erro ao Alterar o Email do cliente: ", ex);
-        }
-    }
+//    public static void UpdateTel(int id, Telefone tel) {
+//
+//        PreparedStatement stmt;
+//
+//        try {
+//            String sql = ("UPDATE tabTel SET telefone='" + tel.getTel()
+//                    + "' , celular = '" + tel.getCel()
+//                    + "' where id_telefone = '" + id + "';"); //precisa alterar: caso mais de um telefone cadastrado desse mesmo contato, dessa forma vai alterar todos os tels. criar metodo para verificar qual tel é pra alterar. teremos um and na condicao para o update
+//
+//            stmt = Conexao.getConnection().prepareStatement(sql);
+//            stmt.executeUpdate();
+//            stmt.close();
+//
+//        } catch (SQLException ex) {
+//            Logger.getLogger(ContatosDAO.class.getName()).log(Level.SEVERE, null, ex);
+//            throw new RuntimeException("Erro ao Alterar o Tel do cliente: ", ex);
+//        }
+//    }
+//
+//    public static void UpdateEmail(int id, String email) {
+//
+//        PreparedStatement stmt;
+//
+//        try {
+//            String sql = ("UPDATE tabemail SET email = '" + email 
+//                        + "' WHERE id_email = "+ id +";");//mesma coisa aqui
+//
+//            stmt = Conexao.getConnection().prepareStatement(sql);
+//            stmt.executeUpdate();
+//            stmt.close();
+//
+//        } catch (SQLException ex) {
+//            Logger.getLogger(ContatosDAO.class.getName()).log(Level.SEVERE, null, ex);
+//            throw new RuntimeException("Erro ao Alterar o Email do cliente: ", ex);
+//        }
+//    }
     
     public static void UpdateEndereco(int id, Endereco endereco) {
 
@@ -292,60 +292,60 @@ public class ContatosDAO {
         return telefones;
     }
     
-    public static int CodTel(String tel, int codContato) {
-        
-        Statement stmt;
-        int codTel = 0;
-        
-        try {
-            
-            String Sql = "SELECT * FROM tabtel where telefone = '" + tel + "' and "
-                       + " Contato_id = " + codContato + ";";
-            
-            ResultSet rs;            
-            stmt = Conexao.getConnection().createStatement();            
-            rs = stmt.executeQuery(Sql); 
-            
-            while(rs.next()){                
-               codTel = rs.getInt("id_telefone");
-            }
-            
-            rs.close();
-            stmt.close();
-            
-        } catch (SQLException ex) {      
-            Logger.getLogger(ContatosDAO.class.getName()).log(Level.SEVERE, null, ex);
-            throw new RuntimeException("Erro ao carregar o codigo do telefone: ", ex);    
-        }    
-        return codTel;
-    }
-    
-    public static int CodEmail(String email, int codContato) {
-        
-        Statement stmt;
-        int codTel = 0;
-        
-        try {            
-            String Sql = "SELECT id_email FROM tabemail where email = '" + email + "' and "
-                       + " contato_id_contato = " + codContato + ";";
-            
-            ResultSet rs;            
-            stmt = Conexao.getConnection().createStatement();            
-            rs = stmt.executeQuery(Sql); 
-            
-            while(rs.next()){                
-               codTel = rs.getInt("id_email");
-            }
-            
-            rs.close();
-            stmt.close();
-            
-        } catch (SQLException ex) {      
-            Logger.getLogger(ContatosDAO.class.getName()).log(Level.SEVERE, null, ex);
-            throw new RuntimeException("Erro ao carregar o codigo do email: ", ex);    
-        }    
-        return codTel;
-    }
+//    public static int CodTel(String tel, int codContato) {
+//        
+//        Statement stmt;
+//        int codTel = 0;
+//        
+//        try {
+//            
+//            String Sql = "SELECT * FROM tabtel where telefone = '" + tel + "' and "
+//                       + " Contato_id = " + codContato + ";";
+//            
+//            ResultSet rs;            
+//            stmt = Conexao.getConnection().createStatement();            
+//            rs = stmt.executeQuery(Sql); 
+//            
+//            while(rs.next()){                
+//               codTel = rs.getInt("id_telefone");
+//            }
+//            
+//            rs.close();
+//            stmt.close();
+//            
+//        } catch (SQLException ex) {      
+//            Logger.getLogger(ContatosDAO.class.getName()).log(Level.SEVERE, null, ex);
+//            throw new RuntimeException("Erro ao carregar o codigo do telefone: ", ex);    
+//        }    
+//        return codTel;
+//    }
+//    
+//    public static int CodEmail(String email, int codContato) {
+//        
+//        Statement stmt;
+//        int codTel = 0;
+//        
+//        try {            
+//            String Sql = "SELECT id_email FROM tabemail where email = '" + email + "' and "
+//                       + " contato_id_contato = " + codContato + ";";
+//            
+//            ResultSet rs;            
+//            stmt = Conexao.getConnection().createStatement();            
+//            rs = stmt.executeQuery(Sql); 
+//            
+//            while(rs.next()){                
+//               codTel = rs.getInt("id_email");
+//            }
+//            
+//            rs.close();
+//            stmt.close();
+//            
+//        } catch (SQLException ex) {      
+//            Logger.getLogger(ContatosDAO.class.getName()).log(Level.SEVERE, null, ex);
+//            throw new RuntimeException("Erro ao carregar o codigo do email: ", ex);    
+//        }    
+//        return codTel;
+//    }
 
     public static void CadTel(int i, String telefone) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
@@ -427,5 +427,46 @@ public class ContatosDAO {
             throw new RuntimeException("Erro ao carregar telefones: ", ex);    
         }    
         return email;
+    }
+    
+    
+    
+    //////////////////////////////////////////////////////////////////////////////////////
+    
+    public static void UpdateTel2(int id, Telefone tel) {
+
+        PreparedStatement stmt;
+
+        try {
+            String sql = ("UPDATE tabTel SET telefone='" + tel.getTel()
+                    + "' , celular = '" + tel.getCel()
+                    + "' where Contato_id = '" + id + "';");
+
+            stmt = Conexao.getConnection().prepareStatement(sql);
+            stmt.executeUpdate();
+            stmt.close();
+
+        } catch (SQLException ex) {
+            Logger.getLogger(ContatosDAO.class.getName()).log(Level.SEVERE, null, ex);
+            throw new RuntimeException("Erro ao Alterar o Tel do cliente: ", ex);
+        }
+    }
+    
+    public static void UpdateEmail2(int id, String email) {
+
+        PreparedStatement stmt;
+
+        try {
+            String sql = ("UPDATE tabemail SET email = '" + email 
+                        + "' WHERE contato_id_contato = "+ id +";");//mesma coisa aqui
+
+            stmt = Conexao.getConnection().prepareStatement(sql);
+            stmt.executeUpdate();
+            stmt.close();
+
+        } catch (SQLException ex) {
+            Logger.getLogger(ContatosDAO.class.getName()).log(Level.SEVERE, null, ex);
+            throw new RuntimeException("Erro ao Alterar o Email do cliente: ", ex);
+        }
     }
 }

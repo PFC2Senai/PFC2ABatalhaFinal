@@ -2,17 +2,12 @@ package telas;
 
 import atributos.Endereco;
 import atributos.Funcionario;
-import atributos.Lembrete;
 import atributos.Telefone;
 import funcoes.ContatosDAO;
-import static funcoes.ContatosDAO.CodTel;
+//import static funcoes.ContatosDAO.CodTel;
 import funcoes.FuncionarioDAO;
-import funcoes.LembreteDAO;
 import java.awt.Color;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.swing.table.DefaultTableModel;
 import static telas.ExibeFuncionario.GetIndice;
 
 /**
@@ -21,8 +16,8 @@ import static telas.ExibeFuncionario.GetIndice;
  */
 public class AlterarFuncionario extends javax.swing.JFrame {
     int idContato;
-    int codTel;
-    int codCel;
+   // int codTel;
+   // int codCel;
 
     /**
      * Creates new form AlterarFuncionario
@@ -813,8 +808,8 @@ public class AlterarFuncionario extends javax.swing.JFrame {
 
     private void jButtonAr2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAr2ActionPerformed
 
-        codTel = CodTel(txtTel.getText().trim());
-        codCel = CodTel(txtTelCel.getText());
+      //  codTel = CodTel(txtTel.getText().trim(), idContato);
+      //  codCel = CodTel(txtTelCel.getText(), idContato);
 
         txtTel.setEnabled(true);
         txtTelCel.setEnabled(true);
@@ -830,8 +825,8 @@ public class AlterarFuncionario extends javax.swing.JFrame {
         Telefone tel = new Telefone();
         tel.setTel(txtTel.getText());
         tel.setCel(txtTelCel.getText());
-        ContatosDAO.UpdateTel(codTel, tel);       
-        ContatosDAO.UpdateEmail(idContato, txtEmail.getText()); 
+        ContatosDAO.UpdateTel2(idContato, tel);       
+        ContatosDAO.UpdateEmail2(idContato, txtEmail.getText()); 
         desabilitarContato();
         jButtonAr2.setVisible(true);
         

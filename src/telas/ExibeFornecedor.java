@@ -136,7 +136,7 @@ public class ExibeFornecedor extends javax.swing.JFrame {
         }  
     }
     
-    public void TabelaFornecedor(String Sql){
+    public void TabelaFornecedor(String Sql) {
         
         try { 
             
@@ -146,7 +146,6 @@ public class ExibeFornecedor extends javax.swing.JFrame {
                
             ResultSet rs;
             rs = stmt.executeQuery(Sql);            
-         //   rs.first();
             
                     while(rs.next()){
                         dados.add(new Object[]{rs.getObject("id_forn"),rs.getObject("fornecedor"),

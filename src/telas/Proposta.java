@@ -1,28 +1,18 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package telas;
 
-import atributos.PessoaContato;
 import atributos.Servico;
 import atributos.TipoServico;
 import funcoes.Conexao;
-import funcoes.EquipamentoDAO;
-import funcoes.PessoaContatoDAO;
 import funcoes.ProdutoDAO;
 import funcoes.TipoServicoDAO;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-import static telas.ExibeCliente.GetIndice;
 
 /**
  *
@@ -216,14 +206,14 @@ public class Proposta extends javax.swing.JFrame {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel3)
                             .addComponent(jLabel2))
-                        .addGap(29, 29, 29)
+                        .addGap(32, 32, 32)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jComboBoxCliente, 0, 387, Short.MAX_VALUE)
                             .addComponent(jComboBoxContato, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel7)
                         .addGap(18, 18, 18)
-                        .addComponent(jComboBoxFuncionarios, 0, 384, Short.MAX_VALUE)))
+                        .addComponent(jComboBoxFuncionarios, 0, 387, Short.MAX_VALUE)))
                 .addContainerGap(287, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -273,7 +263,7 @@ public class Proposta extends javax.swing.JFrame {
                     .addComponent(jLabel8)
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 657, Short.MAX_VALUE)
                     .addComponent(txtReferencia))
-                .addContainerGap(83, Short.MAX_VALUE))
+                .addContainerGap(86, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -571,7 +561,7 @@ public class Proposta extends javax.swing.JFrame {
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 766, Short.MAX_VALUE)
+            .addGap(0, 769, Short.MAX_VALUE)
             .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel4Layout.createSequentialGroup()
                     .addContainerGap()
@@ -612,7 +602,7 @@ public class Proposta extends javax.swing.JFrame {
                     .addComponent(jLabel12)
                     .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 658, Short.MAX_VALUE)
                     .addComponent(jScrollPane4))
-                .addContainerGap(83, Short.MAX_VALUE))
+                .addContainerGap(86, Short.MAX_VALUE))
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -883,11 +873,11 @@ public class Proposta extends javax.swing.JFrame {
     }//GEN-LAST:event_jComboBoxFabricanteActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
+        
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jComboBoxClienteItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jComboBoxClienteItemStateChanged
-       
+        populaComboBoxContato();
     }//GEN-LAST:event_jComboBoxClienteItemStateChanged
 
     public void TabelaProduto() {
@@ -952,7 +942,7 @@ public class Proposta extends javax.swing.JFrame {
             rs = pst.executeQuery();
 
             while (rs.next()) {
-                jComboBoxProduto.addItem(rs.getString("produto"));
+                jComboBoxProduto.addItem(rs.getString("tabcliente_idcliente"));
             }
 
         } catch (SQLException ex) {

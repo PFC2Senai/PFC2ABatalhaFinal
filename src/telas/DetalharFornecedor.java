@@ -5,7 +5,7 @@ import atributos.Endereco;
 import atributos.Fornecedor;
 import atributos.Telefone;
 import funcoes.ContatosDAO;
-import static funcoes.ContatosDAO.CodTel;
+//import static funcoes.ContatosDAO.CodTel;
 import funcoes.FornecedorDAO;
 import java.awt.Color;
 import java.util.ArrayList;
@@ -15,8 +15,8 @@ import static telas.ExibeFornecedor.GetIndiceForn;
 public class DetalharFornecedor extends javax.swing.JFrame {
 
     int idContato = FornecedorDAO.idContato(GetIndiceForn()); 
-    int codTel;
-    int codCel;
+   // int codTel;
+  //  int codCel;
     /**
      * Creates new form DetalharFornecedor
      */
@@ -451,8 +451,7 @@ public class DetalharFornecedor extends javax.swing.JFrame {
 
     private void jBtnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnEditarActionPerformed
                 
-        txtFornecedor.setEnabled(true);
-        
+        txtFornecedor.setEnabled(true);        
         jBtnSalvarForn.setVisible(true);
         jBtnCancelarForn.setVisible(true);
         jBtnEditar.setVisible(false);
@@ -460,7 +459,7 @@ public class DetalharFornecedor extends javax.swing.JFrame {
 
     private void jBtnAltContatoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnAltContatoActionPerformed
 
-        codTel = CodTel(txtTel.getText().trim());
+        //codTel = CodTel(txtTel.getText().trim(), idContato);
         
         txtTel.setEnabled(true);
         txtTelCel.setEnabled(true);
@@ -512,8 +511,9 @@ public class DetalharFornecedor extends javax.swing.JFrame {
         Telefone tel = new Telefone();
         tel.setTel(txtTel.getText());
         tel.setCel(txtTelCel.getText()); 
-        ContatosDAO.UpdateTel(codTel, tel); 
-        ContatosDAO.UpdateEmail(idContato, txtEmail.getText()); 
+        ContatosDAO.UpdateTel2(idContato, tel); 
+        
+        ContatosDAO.UpdateEmail2(idContato, txtEmail.getText()); 
         desabilitarContato();
         jBtnAltContato.setVisible(true);
         jBtnSalvarContato.setVisible(false);
