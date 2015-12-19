@@ -2,6 +2,32 @@
 <!-- Created with Jaspersoft Studio version last-->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="RelatorioProposta" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="818841b8-7aa5-45a5-88b6-fdabac1cb175">
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
+	<subDataset name="Dataset1" whenResourceMissingType="Empty" uuid="c122a284-ae7a-41f9-a223-b677191260fd">
+		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
+		<queryString>
+			<![CDATA[]]>
+		</queryString>
+		<field name="tipoServico" class="java.lang.String">
+			<fieldDescription><![CDATA[tipoServico]]></fieldDescription>
+		</field>
+	</subDataset>
+	<subDataset name="Dataset2" uuid="62ce2b09-9b76-4e19-8f7a-f2bb9eed7163">
+		<queryString>
+			<![CDATA[]]>
+		</queryString>
+		<field name="tipoServico" class="java.lang.String">
+			<fieldDescription><![CDATA[tipoServico]]></fieldDescription>
+		</field>
+	</subDataset>
+	<subDataset name="Dataset3" uuid="77cd392b-d7dd-428e-ab98-0a034a3de5ca">
+		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
+		<queryString>
+			<![CDATA[]]>
+		</queryString>
+		<field name="tipoServico" class="java.lang.String">
+			<fieldDescription><![CDATA[tipoServico]]></fieldDescription>
+		</field>
+	</subDataset>
 	<queryString>
 		<![CDATA[]]>
 	</queryString>
@@ -66,13 +92,13 @@
 		<band splitType="Stretch"/>
 	</background>
 	<title>
-		<band height="89" splitType="Stretch">
+		<band height="79" splitType="Stretch">
 			<image>
 				<reportElement uuid="a487a350-93a6-48ec-83c3-cfbedf3505a9" x="0" y="6" width="200" height="63"/>
 				<imageExpression><![CDATA["C:/Users/Josy/Desktop/logoDracol.png"]]></imageExpression>
 			</image>
 			<staticText>
-				<reportElement uuid="24ed4e52-ee91-4517-8575-1ee2ea20d485" positionType="FixRelativeToBottom" stretchType="RelativeToTallestObject" x="350" y="9" width="195" height="60"/>
+				<reportElement uuid="24ed4e52-ee91-4517-8575-1ee2ea20d485" positionType="FixRelativeToBottom" stretchType="RelativeToTallestObject" x="340" y="9" width="212" height="60"/>
 				<box>
 					<topPen lineWidth="0.0"/>
 					<leftPen lineWidth="0.0"/>
@@ -82,16 +108,16 @@
 				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font fontName="Arial" size="8"/>
 				</textElement>
-				<text><![CDATA[HEAT EXCHANGER IMPORT. E EXPORT. LTDA
-Rua Candido Rissut, Galpão 04, Caji
-Lauro de Freitas / BA
-Tel.: +55 71 3378-6640
-Cel.: +55 71 8894-4919
-Bahia@dracoolbrasil.com.br
+				<text><![CDATA[HEAT EXCHANGER IMPORT. E EXPORT. LTDA    
+Rua Candido Rissut, Galpão 04, Caji   
+Lauro de Freitas / BA   
+Tel.: +55 71 3378-6640   
+Cel.: +55 71 8894-4919   
+Bahia@dracoolbrasil.com.br   
 ]]></text>
 			</staticText>
 			<line>
-				<reportElement uuid="f84b7161-c42c-4998-bc23-08e22454f1fa" mode="Opaque" x="0" y="80" width="553" height="2" forecolor="#000080" backcolor="#0080FF">
+				<reportElement uuid="f84b7161-c42c-4998-bc23-08e22454f1fa" mode="Opaque" x="2" y="70" width="553" height="2" forecolor="#000080" backcolor="#0080FF">
 					<property name="local_mesure_unity" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.y" value="px"/>
 					<property name="local_mesure_unitx" value="pixel"/>
@@ -181,11 +207,6 @@ Email.: 	Bahia@dracoolbrasil.com.br]]></text>
 		</band>
 		<band height="121">
 			<textField>
-				<reportElement uuid="ee1513b7-ca5d-47cd-ba67-ab71e110acb7" x="1" y="0" width="554" height="50"/>
-				<textElement/>
-				<textFieldExpression><![CDATA[$F{tipoServico}]]></textFieldExpression>
-			</textField>
-			<textField>
 				<reportElement uuid="b09caae0-7078-48ee-81d5-e3c7b302323e" x="0" y="50" width="552" height="50"/>
 				<textElement/>
 				<textFieldExpression><![CDATA[$F{pecas}]]></textFieldExpression>
@@ -195,6 +216,19 @@ Email.: 	Bahia@dracoolbrasil.com.br]]></text>
 				<textElement/>
 				<textFieldExpression><![CDATA[$F{valorTotal}]]></textFieldExpression>
 			</textField>
+			<componentElement>
+				<reportElement uuid="81fe5573-7070-4619-9297-3d684429a17d" x="170" y="10" width="100" height="30"/>
+				<jr:list xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
+					<datasetRun subDataset="Dataset3" uuid="32f1afa0-7306-4f26-a7a7-406e949be48f"/>
+					<jr:listContents height="30" width="100">
+						<textField>
+							<reportElement uuid="4dac2e61-db16-40cc-b00c-2b9c44058fb1" x="0" y="0" width="70" height="30"/>
+							<textElement/>
+							<textFieldExpression><![CDATA[$F{tipoServico}]]></textFieldExpression>
+						</textField>
+					</jr:listContents>
+				</jr:list>
+			</componentElement>
 		</band>
 		<band height="460">
 			<textField>

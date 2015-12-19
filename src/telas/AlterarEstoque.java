@@ -25,16 +25,21 @@ public final class AlterarEstoque extends javax.swing.JFrame {
     private PreparedStatement pst;
     private int codDetProd;
     private int codFornecedor;
-    private int codProduto = GetIndiceProduto();
-    private final ExibeProdutos telaExibeProdutos;
+    private int codProduto;
+    private ExibeProdutos telaExibeProdutos = null;
     
     /**
      * Creates new form AlterarEstoque
-     * @param codDetP
-     * @param telaExibeProd
      */
+    
+    public AlterarEstoque() {
+        initComponents();
+    }
+    
+    
     public AlterarEstoque(int codDetP, ExibeProdutos telaExibeProd) {
         initComponents();
+        this.codProduto = GetIndiceProduto();
         this.telaExibeProdutos = telaExibeProd;
         codDetProd = codDetP;
         CarregarDadosProduto();

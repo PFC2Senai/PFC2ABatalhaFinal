@@ -162,7 +162,7 @@ public class Proposta extends javax.swing.JFrame {
         txtGarantias = new javax.swing.JTextArea();
         jButton1 = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel1.setText("Proposta Comercial");
@@ -743,6 +743,7 @@ public class Proposta extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jComboBoxClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxClienteActionPerformed
@@ -756,6 +757,7 @@ public class Proposta extends javax.swing.JFrame {
 
     private void jComboBoxContatoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxContatoActionPerformed
         idContatoComboBox();
+        ContatoCliente();
     }//GEN-LAST:event_jComboBoxContatoActionPerformed
 
     private void jComboBoxTipoServicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxTipoServicoActionPerformed
@@ -903,7 +905,7 @@ public class Proposta extends javax.swing.JFrame {
         //mRelatProposta.setDataProposta(getDateTime());
         mRelatProposta.setEmail(emailCliente);
         mRelatProposta.setEmpresa(jComboBoxCliente.getSelectedItem().toString());
-        mRelatProposta.setFuncionario(funcionario);
+        mRelatProposta.setFuncionario(jComboBoxFuncionarios.getSelectedItem().toString());
         mRelatProposta.setGarantia(txtGarantias.getText());
         mRelatProposta.setImpostos(txtImpostos.getText());
         mRelatProposta.setLocalServico(txtLocalExecucaoServ.getText());
@@ -1030,13 +1032,14 @@ public class Proposta extends javax.swing.JFrame {
         Connection conexao = Conexao.getConnection();
         ResultSet rs;
         String sql = "SELECT * FROM vw_contatoproposta WHERE id_contato = " + codContato;
-
+        System.out.println(codContato);
         try {
             pst = conexao.prepareStatement(sql);
             rs = pst.executeQuery();
 
             while (rs.next()) {
                 emailCliente = rs.getString("email");
+                System.out.println(emailCliente);
             }
 
         } catch (SQLException ex) {

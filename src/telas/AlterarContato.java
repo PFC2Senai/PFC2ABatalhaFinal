@@ -18,18 +18,20 @@ import java.util.logging.Logger;
 public final class AlterarContato extends javax.swing.JFrame {
 
     Statement stmt ;
-    private final int codCliente;
-    private final int codPessoaContato;
-    private final int codContato;
-    private final DetalharCliente telaDetCliente;
+    private int codCliente = 0;
+    private int codPessoaContato = 0;
+    private int codContato = 0;
+    private DetalharCliente telaDetCliente = null;
     
     /**
      * Creates new form AlterarContato
-     * @param telaDetCli
-     * @param codCliente
-     * @param codCont
-     * @param codPessoaCont
      */
+    
+ 
+    public AlterarContato() {       
+        initComponents(); 
+    }
+    
     public AlterarContato(DetalharCliente telaDetCli, int codCliente, int codPessoaCont, int codCont) {
         this.telaDetCliente = telaDetCli;
         this.codContato = codCont;

@@ -30,19 +30,21 @@ import static telas.ExibeCliente.GetIndice;
 
 public class DetalharCliente extends javax.swing.JFrame {
 
-    int idContato = ClienteDAO.idContato(GetIndice());    
+    int idContato;    
     public static int codLembrete;
     private int codPessoaContato;
     private int codSetor;
     private PreparedStatement pst;
     Statement stmt ;
-    private final int codCliente = GetIndice();
+    private final int codCliente;
     private int codContato;
     
     /**
      * Creates new form CadastrarCliente
      */
     public DetalharCliente() {
+        this.idContato = ClienteDAO.idContato(GetIndice());
+        this.codCliente = GetIndice();
         
         initComponents();
         CarregaCliente();

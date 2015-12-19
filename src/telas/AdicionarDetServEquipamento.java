@@ -32,9 +32,12 @@ public class AdicionarDetServEquipamento extends javax.swing.JFrame {
     
     /**
      * Creates new form AdicionarDetServEquipamento
-     * @param idServ
-     * @param telaDetalharServ
      */
+    
+    public AdicionarDetServEquipamento() {
+        initComponents();
+    }
+    
     public AdicionarDetServEquipamento(int idServ, DetalharServico telaDetalharServ) {
         this.idServico = idServ;
         this.telaDatalharServico = telaDetalharServ;

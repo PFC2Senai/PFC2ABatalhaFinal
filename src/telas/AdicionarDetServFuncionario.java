@@ -27,9 +27,12 @@ public class AdicionarDetServFuncionario extends javax.swing.JFrame {
     
     /**
      * Creates new form AdicionarDetServFuncionario
-     * @param idServ
-     * @param telaDetalharServ
      */
+    
+    public AdicionarDetServFuncionario() {       
+        initComponents();
+    }
+    
     public AdicionarDetServFuncionario(int idServ, DetalharServico telaDetalharServ) {        
         this.idServico = idServ;
         this.telaDatalharServico = telaDetalharServ;

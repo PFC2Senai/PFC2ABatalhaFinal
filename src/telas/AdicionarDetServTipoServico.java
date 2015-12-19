@@ -30,9 +30,12 @@ public class AdicionarDetServTipoServico extends javax.swing.JFrame {
     
     /**
      * Creates new form AdicionarDetServTipoServico
-     * @param idServ
-     * @param telaDetalharServ
      */
+    
+    public AdicionarDetServTipoServico() {
+        initComponents();
+    }
+ 
     public AdicionarDetServTipoServico(int idServ, DetalharServico telaDetalharServ) {
         this.idServico = idServ;
         this.telaDatalharServico = telaDetalharServ;
