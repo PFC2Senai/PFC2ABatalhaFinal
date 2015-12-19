@@ -47,7 +47,7 @@ public class ExibeFuncionario extends javax.swing.JFrame {
             stmt = getConnection().createStatement();
             ArrayList dados = new ArrayList();               
             String [] Colunas = {"Código", "Funcionário", "RG", "CPF", "Cargo", "Salario", "Cód do Contato", 
-                "Cód do Usuário", "Data de Admição"};
+                "Cód do Usuário", "Data de Admissão"};
                
             ResultSet rs;
             rs = stmt.executeQuery(Sql);            
@@ -56,10 +56,10 @@ public class ExibeFuncionario extends javax.swing.JFrame {
             while(rs.next()){
                dados.add(new Object[]{rs.getObject("idfuncionario"),rs.getObject("funcionario"),rs.getObject("rg"),rs.getObject("cpf")
                ,rs.getObject("cargo"),rs.getObject("salario"),rs.getObject("tabContato_id_contato")
-               ,rs.getObject("tabUsuario_id_usuario"),rs.getObject("data_admicao")});            
+               ,rs.getObject("tabUsuario_id_usuario"),rs.getObject("data_admissao")});            
             }
                         
-            for (int i = 0; i < dados.size(); i++){
+            for (int i = 0; i < 9; i++){
                 ModeloTabela modelo = new ModeloTabela(dados, Colunas);
                 jTableListarFuncionarios.setModel(modelo);
                 jTableListarFuncionarios.getColumnModel().getColumn(i).setPreferredWidth(150);

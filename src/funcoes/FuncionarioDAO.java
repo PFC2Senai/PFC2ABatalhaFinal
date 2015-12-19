@@ -19,7 +19,7 @@ public class FuncionarioDAO {
         
         PreparedStatement stmt;
         try {   
-            String sql = ("INSERT INTO tabfuncionario(funcionario, rg, cpf, cargo, salario, tabContato_id_contato, tabUsuario_id_Usuario, data_admicao, ctps, serie, numeroCtps, uf) VALUES(?,?,?,?,?,?,?,?,?,?,?,?)");
+            String sql = ("INSERT INTO tabfuncionario(funcionario, rg, cpf, cargo, salario, tabContato_id_contato, tabUsuario_id_Usuario, data_admissao, ctps, serie, numeroCtps, uf) VALUES(?,?,?,?,?,?,?,?,?,?,?,?)");
             stmt = Conexao.getConnection().prepareStatement(sql);      
   
                 stmt.setString(1, func.getFuncionario());  
@@ -92,7 +92,7 @@ public class FuncionarioDAO {
                 f.setSalario(Double.parseDouble(rs.getString("salario")));
                 f.setIdContato(Integer.parseInt(rs.getString("tabContato_id_contato")));
                 f.setIdUsuario(Integer.parseInt(rs.getString("tabUsuario_id_usuario")));
-                f.setDataAdmicao(rs.getString("data_admicao"));
+                f.setDataAdmicao(rs.getString("data_admissao"));
                 f.setCtps(rs.getString("ctps"));
                 f.setSerieCtps(rs.getString("serie"));
                 f.setNumCtps(rs.getString("numeroCtps"));
@@ -139,7 +139,7 @@ public class FuncionarioDAO {
                     "', salario='"+func.getSalario()+
                     "', tabContato_id_contato='"+func.getIdContato()+
                     "', tabUsuario_id_Usuario='"+func.getIdUsuario()+
-                    "', data_admicao='"+func.getDataAdmicao()+
+                    "', data_admissao='"+func.getDataAdmicao()+
                     "', ctps='"+func.getCtps()+
                     "', serie='"+func.getSerieCtps()+
                     "', numeroCtps='"+func.getNumCtps()+
@@ -179,7 +179,7 @@ public class FuncionarioDAO {
                 f.setSalario(Double.parseDouble(rs.getString("salario")));
                 f.setIdContato(Integer.parseInt(rs.getString("tabContato_id_contato")));
                 f.setIdUsuario(Integer.parseInt(rs.getString("tabUsuario_id_usuario")));
-                f.setDataAdmicao(String.valueOf(rs.getString("data_admicao")));
+                f.setDataAdmicao(String.valueOf(rs.getString("data_admissao")));
                 f.setCtps(String.valueOf(rs.getString("ctps")));
                 f.setSerieCtps(String.valueOf(rs.getString("serie")));
                 f.setNumCtps(String.valueOf(rs.getString("numeroCtps")));

@@ -3,16 +3,23 @@ package telas;
 import atributos.Servico;
 import atributos.TipoServico;
 import funcoes.Conexao;
+import funcoes.DetServicoProdutoDAO;
 import funcoes.ProdutoDAO;
 import funcoes.TipoServicoDAO;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import modeloRelatorio.ModeloRelatProposta;
+import modeloRelatorio.Relatorio;
 
 /**
  *
@@ -21,10 +28,12 @@ import javax.swing.table.DefaultTableModel;
 public class Proposta extends javax.swing.JFrame {
 
     private PreparedStatement pst;
-
+    
+    ArrayList<ModeloRelatProposta> relatorio = new ArrayList<ModeloRelatProposta>();
+        
     Servico servico = new Servico();
     public static int teste;
-
+    private int codContato;
     private int codModelo;
     private int codModeloEqui;
     private int codProduto = 0;
@@ -49,6 +58,8 @@ public class Proposta extends javax.swing.JFrame {
     private String fabricanteEqui;
     private String tipoServico;
 
+    private String emailCliente;
+
     /**
      * Creates new form Proposta
      */
@@ -58,7 +69,7 @@ public class Proposta extends javax.swing.JFrame {
         populaComboBoxProduto();
         populaComboBoxCliente();
         populaComboBoxFuncionario();
-        
+
         populaComboBoxTipoServico();
 
         //  ocultaColunaTabelas();
@@ -122,8 +133,6 @@ public class Proposta extends javax.swing.JFrame {
         jComboBoxFabricante = new javax.swing.JComboBox();
         jLabel14 = new javax.swing.JLabel();
         txtTotalPecas = new javax.swing.JTextField();
-        jLabel15 = new javax.swing.JLabel();
-        txtMaoObra = new javax.swing.JTextField();
         jLabel16 = new javax.swing.JLabel();
         txtTotalGeral = new javax.swing.JTextField();
         jPanel5 = new javax.swing.JPanel();
@@ -201,7 +210,6 @@ public class Proposta extends javax.swing.JFrame {
                     .addComponent(jLabel6)
                     .addComponent(jLabel1)
                     .addComponent(jLabel4)
-                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel3)
@@ -213,7 +221,8 @@ public class Proposta extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel7)
                         .addGap(18, 18, 18)
-                        .addComponent(jComboBoxFuncionarios, 0, 387, Short.MAX_VALUE)))
+                        .addComponent(jComboBoxFuncionarios, 0, 387, Short.MAX_VALUE))
+                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 241, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(287, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -473,8 +482,6 @@ public class Proposta extends javax.swing.JFrame {
 
         jLabel14.setText("Valor total de peças:");
 
-        jLabel15.setText("Mão de obra:");
-
         jLabel16.setText("Total serviço:");
 
         javax.swing.GroupLayout jPanel14Layout = new javax.swing.GroupLayout(jPanel14);
@@ -487,12 +494,10 @@ public class Proposta extends javax.swing.JFrame {
                     .addGroup(jPanel14Layout.createSequentialGroup()
                         .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel14)
-                            .addComponent(jLabel15)
                             .addComponent(jLabel16))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(txtTotalPecas)
-                            .addComponent(txtMaoObra)
                             .addComponent(txtTotalGeral, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel14Layout.createSequentialGroup()
                         .addComponent(jBtbIncluirPeca)
@@ -542,19 +547,15 @@ public class Proposta extends javax.swing.JFrame {
                     .addComponent(jBtnRemoverPeca))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addGap(36, 36, 36)
                 .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel14)
                     .addComponent(txtTotalPecas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(20, 20, 20)
-                .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel15)
-                    .addComponent(txtMaoObra, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(23, 23, 23)
+                .addGap(21, 21, 21)
                 .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel16)
                     .addComponent(txtTotalGeral, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(110, Short.MAX_VALUE))
+                .addContainerGap(134, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
@@ -611,9 +612,9 @@ public class Proposta extends javax.swing.JFrame {
                 .addComponent(jLabel12)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(26, 26, 26)
+                .addGap(53, 53, 53)
                 .addComponent(jLabel13)
-                .addGap(33, 33, 33)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(98, Short.MAX_VALUE))
         );
@@ -754,7 +755,7 @@ public class Proposta extends javax.swing.JFrame {
     }//GEN-LAST:event_jComboBoxFuncionariosActionPerformed
 
     private void jComboBoxContatoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxContatoActionPerformed
-        // TODO add your handling code here:
+        idContatoComboBox();
     }//GEN-LAST:event_jComboBoxContatoActionPerformed
 
     private void jComboBoxTipoServicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxTipoServicoActionPerformed
@@ -873,8 +874,62 @@ public class Proposta extends javax.swing.JFrame {
     }//GEN-LAST:event_jComboBoxFabricanteActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+       
+        Relatorio relat = new Relatorio();
+        ArrayList<String> pecas = new ArrayList<String>();
+        ArrayList<String> tipoServico = new ArrayList<String>();
         
+        for(int j = 0; j < jTablePecas.getRowCount(); j++) {
+
+            String peca = jTablePecas.getValueAt(j, 3).toString() + 
+                          jTablePecas.getValueAt(j, 4).toString() + 
+                          jTablePecas.getValueAt(j, 5).toString();
+            
+            pecas.add(peca);
+        }
+        
+        for(int j = 0; j < jTableTipodeServico.getRowCount(); j++) {
+
+            String tipoServ = jTableTipodeServico.getValueAt(j, 1).toString();
+            
+            tipoServico.add(tipoServ);
+        }
+        
+        ModeloRelatProposta mRelatProposta = new ModeloRelatProposta();
+
+        mRelatProposta.setCondicaoVenda(txtCondicoesDeVenda.getText());
+        mRelatProposta.setCondicoesGerais(txtCondicoesGerais.getText());
+        mRelatProposta.setContato(jComboBoxContato.getSelectedItem().toString());
+        //mRelatProposta.setDataProposta(getDateTime());
+        mRelatProposta.setEmail(emailCliente);
+        mRelatProposta.setEmpresa(jComboBoxCliente.getSelectedItem().toString());
+        mRelatProposta.setFuncionario(funcionario);
+        mRelatProposta.setGarantia(txtGarantias.getText());
+        mRelatProposta.setImpostos(txtImpostos.getText());
+        mRelatProposta.setLocalServico(txtLocalExecucaoServ.getText());
+        mRelatProposta.setMensagem(txtMensagem.getText());
+        mRelatProposta.setObservacao(txtObservacaoImportante.getText());
+        mRelatProposta.setPagamento(txtPagamento.getText());
+        mRelatProposta.setPecas(pecas);
+        mRelatProposta.setPrazoExecucao(txtPrazo.getText());
+        mRelatProposta.setReajuste(txtReajuste.getText());
+        mRelatProposta.setReferencia(txtReferencia.getText());
+        mRelatProposta.setTipoServico(tipoServico);
+        mRelatProposta.setValidadeP(txtValidadeProposta.getText());
+        mRelatProposta.setValorTotal(txtTotalGeral.getText());
+        
+        relatorio.add(mRelatProposta);
+               
+        relat.gerarRelatorio(relatorio);
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private String getDateTime() {
+        
+        DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        Date date = new Date();
+        return dateFormat.format(date);
+    }
+
 
     private void jComboBoxClienteItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jComboBoxClienteItemStateChanged
         codCliente = 0;
@@ -923,8 +978,6 @@ public class Proposta extends javax.swing.JFrame {
         }
     }
 
-    
-
     public void CarregaValorUnit() {
 
         valor = ProdutoDAO.ExisteProduto(codProduto, codModelo, codFabricante);
@@ -933,7 +986,7 @@ public class Proposta extends javax.swing.JFrame {
             valorUnit = valor;
         }
     }
-    
+
     private void populaComboBoxContato() {
 
         Connection conexao = Conexao.getConnection();
@@ -946,6 +999,44 @@ public class Proposta extends javax.swing.JFrame {
 
             while (rs.next()) {
                 jComboBoxContato.addItem(rs.getString("contato"));
+            }
+
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, ex);
+        }
+    }
+
+    private void idContatoComboBox() {
+
+        Connection conexao = Conexao.getConnection();
+        ResultSet rs;
+        String sql = "select * from tabpessoacontato where contato = '" + jComboBoxContato.getSelectedItem() + "';";
+
+        try {
+            pst = conexao.prepareStatement(sql);
+            rs = pst.executeQuery();
+
+            while (rs.next()) {
+                codContato = (rs.getInt("cod_contato"));
+            }
+
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, ex);
+        }
+    }
+
+    private void ContatoCliente() {
+
+        Connection conexao = Conexao.getConnection();
+        ResultSet rs;
+        String sql = "SELECT * FROM vw_contatoproposta WHERE id_contato = " + codContato;
+
+        try {
+            pst = conexao.prepareStatement(sql);
+            rs = pst.executeQuery();
+
+            while (rs.next()) {
+                emailCliente = rs.getString("email");
             }
 
         } catch (SQLException ex) {
@@ -1069,6 +1160,24 @@ public class Proposta extends javax.swing.JFrame {
         }
     }
 
+//    private void ContatoFuncionario() {
+//
+//        Connection conexao = Conexao.getConnection();
+//        ResultSet rs;
+//        String sql = "SELECT * FROM vw_contatofuncionario WHERE id_contato = " + codContato;
+//
+//        try {
+//            pst = conexao.prepareStatement(sql);
+//            rs = pst.executeQuery();
+//
+//            while (rs.next()) {
+//                emailCliente = rs.getString("email");
+//            }
+//
+//        } catch (SQLException ex) {
+//            JOptionPane.showMessageDialog(null, ex);
+//        }
+//    }
     private void populaComboBoxModelo() {
 
         Connection conexao = Conexao.getConnection();
@@ -1248,7 +1357,6 @@ public class Proposta extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
-    private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
@@ -1291,7 +1399,6 @@ public class Proposta extends javax.swing.JFrame {
     private javax.swing.JTextArea txtGarantias;
     private javax.swing.JTextField txtImpostos;
     private javax.swing.JTextField txtLocalExecucaoServ;
-    private javax.swing.JTextField txtMaoObra;
     private javax.swing.JTextArea txtMensagem;
     private javax.swing.JTextArea txtObservacaoImportante;
     private javax.swing.JTextField txtPagamento;

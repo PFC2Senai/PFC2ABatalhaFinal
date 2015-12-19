@@ -1,0 +1,307 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version last-->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="RelatorioProposta" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="818841b8-7aa5-45a5-88b6-fdabac1cb175">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<field name="empresa" class="java.lang.String">
+		<fieldDescription><![CDATA[empresa]]></fieldDescription>
+	</field>
+	<field name="contato" class="java.lang.String">
+		<fieldDescription><![CDATA[contato]]></fieldDescription>
+	</field>
+	<field name="email" class="java.lang.String">
+		<fieldDescription><![CDATA[email]]></fieldDescription>
+	</field>
+	<field name="funcionario" class="java.lang.String">
+		<fieldDescription><![CDATA[funcionario]]></fieldDescription>
+	</field>
+	<field name="referencia" class="java.lang.String">
+		<fieldDescription><![CDATA[referencia]]></fieldDescription>
+	</field>
+	<field name="mensagem" class="java.lang.String">
+		<fieldDescription><![CDATA[mensagem]]></fieldDescription>
+	</field>
+	<field name="tipoServico" class="java.lang.String">
+		<fieldDescription><![CDATA[tipoServico]]></fieldDescription>
+	</field>
+	<field name="pecas" class="java.lang.String">
+		<fieldDescription><![CDATA[pecas]]></fieldDescription>
+	</field>
+	<field name="valorTotal" class="java.lang.String">
+		<fieldDescription><![CDATA[valorTotal]]></fieldDescription>
+	</field>
+	<field name="condicaoVenda" class="java.lang.String">
+		<fieldDescription><![CDATA[condicaoVenda]]></fieldDescription>
+	</field>
+	<field name="observacao" class="java.lang.String">
+		<fieldDescription><![CDATA[observacao]]></fieldDescription>
+	</field>
+	<field name="validadeP" class="java.lang.String">
+		<fieldDescription><![CDATA[validadeP]]></fieldDescription>
+	</field>
+	<field name="reajuste" class="java.lang.String">
+		<fieldDescription><![CDATA[reajuste]]></fieldDescription>
+	</field>
+	<field name="localServico" class="java.lang.String">
+		<fieldDescription><![CDATA[localServico]]></fieldDescription>
+	</field>
+	<field name="prazoExecucao" class="java.lang.String">
+		<fieldDescription><![CDATA[prazoExecucao]]></fieldDescription>
+	</field>
+	<field name="pagamento" class="java.lang.String">
+		<fieldDescription><![CDATA[pagamento]]></fieldDescription>
+	</field>
+	<field name="impostos" class="java.lang.String">
+		<fieldDescription><![CDATA[impostos]]></fieldDescription>
+	</field>
+	<field name="condicoesGerais" class="java.lang.String">
+		<fieldDescription><![CDATA[condicoesGerais]]></fieldDescription>
+	</field>
+	<field name="garantia" class="java.lang.String">
+		<fieldDescription><![CDATA[garantia]]></fieldDescription>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="89" splitType="Stretch">
+			<image>
+				<reportElement uuid="a487a350-93a6-48ec-83c3-cfbedf3505a9" x="0" y="6" width="200" height="63"/>
+				<imageExpression><![CDATA["C:/Users/Josy/Desktop/logoDracol.png"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement uuid="24ed4e52-ee91-4517-8575-1ee2ea20d485" positionType="FixRelativeToBottom" stretchType="RelativeToTallestObject" x="350" y="9" width="195" height="60"/>
+				<box>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<text><![CDATA[HEAT EXCHANGER IMPORT. E EXPORT. LTDA
+Rua Candido Rissut, Galpão 04, Caji
+Lauro de Freitas / BA
+Tel.: +55 71 3378-6640
+Cel.: +55 71 8894-4919
+Bahia@dracoolbrasil.com.br
+]]></text>
+			</staticText>
+			<line>
+				<reportElement uuid="f84b7161-c42c-4998-bc23-08e22454f1fa" mode="Opaque" x="0" y="80" width="553" height="2" forecolor="#000080" backcolor="#0080FF">
+					<property name="local_mesure_unity" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<property name="local_mesure_unitx" value="pixel"/>
+					<property name="local_mesure_unitwidth" value="pixel"/>
+				</reportElement>
+				<graphicElement>
+					<pen lineWidth="2.0" lineStyle="Solid"/>
+				</graphicElement>
+			</line>
+		</band>
+	</title>
+	<detail>
+		<band height="539" splitType="Stretch">
+			<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.VerticalRowLayout"/>
+			<textField>
+				<reportElement uuid="5effbe5c-0c50-40c9-92fc-187d715f1e82" x="-1" y="150" width="555" height="330"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{mensagem}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="022af2d7-8667-4bf6-a3f8-e996046e05f9" x="80" y="480" width="400" height="59"/>
+				<textElement/>
+				<text><![CDATA[Ricardo Nascimento | HEAT EXCHANGER REPRESENTAÇÕES | DRACOOL BRASIL  
+Gerente Técnico / Comercial
+Salvador - BA | Brasil 
+ Phone: +55 (71) 3378-6640 | (71) 8894-4919 I  Fax: +55 (71) 3378-6640
+ E-mail: Bahia@dracoolbrasil.com.br 
+]]></text>
+			</staticText>
+			<textField>
+				<reportElement uuid="a2bcbde1-1078-4183-a352-31f4e8cfb888" x="-1" y="110" width="555" height="40"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{referencia}]]></textFieldExpression>
+			</textField>
+			<frame>
+				<reportElement uuid="063d8578-0eee-40ba-ad1c-0da2422b8f14" x="-1" y="3" width="555" height="100"/>
+				<textField pattern="MMMMM dd, yyyy">
+					<reportElement uuid="5e2bd558-45da-4848-be3b-e24706090496" x="10" y="6" width="110" height="20"/>
+					<textElement/>
+					<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement uuid="e08eeea5-4be9-4f74-8a61-469f1e300f19" x="9" y="25" width="221" height="20"/>
+					<textElement/>
+					<textFieldExpression><![CDATA[$F{empresa}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement uuid="857ba3b5-c123-4c58-ac83-f1618d26100a" x="8" y="46" width="222" height="20"/>
+					<textElement/>
+					<textFieldExpression><![CDATA[$F{contato}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement uuid="d587a627-d713-4f97-b0fe-589e551eb699" x="7" y="66" width="223" height="20"/>
+					<textElement/>
+					<textFieldExpression><![CDATA[$F{email}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement uuid="126b41c5-4e6e-4cd2-b6b5-1a4676d5e308" x="330" y="1" width="225" height="30"/>
+					<textElement/>
+					<text><![CDATA[HEAT EXCHANGER – DRACOOL BRASIL
+Gerência Técnica Comercial]]></text>
+				</staticText>
+				<textField>
+					<reportElement uuid="62d572b5-89ae-47cc-8533-67c7229facbd" x="330" y="31" width="225" height="20"/>
+					<textElement/>
+					<textFieldExpression><![CDATA[$F{funcionario}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement uuid="ca4b1e29-e3ce-4b4c-8238-394ce7b0ea99" x="330" y="51" width="224" height="42"/>
+					<textElement/>
+					<text><![CDATA[Tel.: 	71 3378-6640
+Cel.: 	71 8894-4919
+Email.: 	Bahia@dracoolbrasil.com.br]]></text>
+				</staticText>
+				<line>
+					<reportElement uuid="bfd10953-0cd1-44a7-9240-82a6acc7f706" mode="Opaque" x="1" y="93" width="553" height="2" forecolor="#000080" backcolor="#0080FF">
+						<property name="local_mesure_unity" value="pixel"/>
+						<property name="com.jaspersoft.studio.unit.y" value="px"/>
+						<property name="local_mesure_unitx" value="pixel"/>
+						<property name="local_mesure_unitwidth" value="pixel"/>
+					</reportElement>
+					<graphicElement>
+						<pen lineWidth="2.0" lineStyle="Solid"/>
+					</graphicElement>
+				</line>
+			</frame>
+		</band>
+		<band height="121">
+			<textField>
+				<reportElement uuid="ee1513b7-ca5d-47cd-ba67-ab71e110acb7" x="1" y="0" width="554" height="50"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{tipoServico}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="b09caae0-7078-48ee-81d5-e3c7b302323e" x="0" y="50" width="552" height="50"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{pecas}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="59a2d4e9-5070-450f-aea4-8b036721ab84" x="-1" y="100" width="381" height="21"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{valorTotal}]]></textFieldExpression>
+			</textField>
+		</band>
+		<band height="460">
+			<textField>
+				<reportElement uuid="9ef5223b-d257-4b42-9212-ed15fc2f1c38" x="0" y="1" width="553" height="29"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{condicaoVenda}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="7cda4454-4c75-4914-87bc-27fa3d944629" x="2" y="30" width="552" height="414"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{observacao}]]></textFieldExpression>
+			</textField>
+		</band>
+		<band height="741">
+			<textField>
+				<reportElement uuid="4c854b0a-4a41-48fe-a1bc-15b9de392477" x="0" y="20" width="379" height="30"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{validadeP}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="3e8ffc69-60cd-4b12-8b06-c8be3cbb58f0" x="0" y="50" width="379" height="30"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{reajuste}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="13e804ab-1a91-4fa3-97ca-fd46c6592617" x="0" y="80" width="379" height="22"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{localServico}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="c5e71eeb-2d74-42cd-9584-aba448a466b9" x="-1" y="102" width="380" height="18"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{prazoExecucao}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="c4de9947-5dae-4aba-b7ca-dd00afcfa6b7" x="0" y="120" width="379" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{pagamento}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="56cb6272-a399-4aaf-974d-f00dab65e30f" x="0" y="140" width="379" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{impostos}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="e34fb8f1-6b54-421e-876e-eedbfcad6d31" x="0" y="160" width="379" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{condicoesGerais}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="20b0c1ef-4feb-4694-a287-c80f9404dc58" x="0" y="180" width="379" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{garantia}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="1784643e-b5df-4689-a9a4-e5322208e622" x="80" y="230" width="400" height="81"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[HEAT EXCHANGER IMPORTAÇÃO E EXPORTAÇÃO LTDA.
+Endereço: Rua Candido Rissut, Galpão 04, Caji
+Lauro de Freitas / BA / Brasil - CEP 42700-000
+CNPJ – 13.079.653/0001-50	
+Inscrição Estadual – 082.199.074 NO
+Bahia@dracoolbrasil.com.br
+]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="d543a9a5-a447-4a26-a5d9-fd160368e285" x="-1" y="340" width="554" height="20"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[EM CASO DE EVENTUAL PEDIDO, FAVOR INFORMAR O NÚMERO DE NOSSO ORÇAMENTO.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="8f77dbe8-91af-484a-8a43-aaed6364bf79" x="-2" y="380" width="180" height="20"/>
+				<textElement/>
+				<text><![CDATA[Atenciosamente,]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="756d3511-2f61-4d9d-af0e-108b67fc5404" x="79" y="430" width="400" height="70"/>
+				<textElement/>
+				<text><![CDATA[Ricardo Nascimento | HEAT EXCHANGER REPRESENTAÇÕES | DRACOOL BRASIL  
+Gerente Técnico / Comercial
+Salvador - BA | Brasil 
+ Phone: +55 (71) 3378-6640 | (71) 8894-4919 I  Fax: +55 (71) 3378-6640
+ E-mail: Bahia@dracoolbrasil.com.br 
+]]></text>
+			</staticText>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="60" splitType="Stretch">
+			<line>
+				<reportElement uuid="ef1ef697-0216-4e4f-8b1d-1b1050fbc517" mode="Opaque" x="0" y="20" width="553" height="2" forecolor="#000080" backcolor="#0080FF">
+					<property name="local_mesure_unity" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<property name="local_mesure_unitx" value="pixel"/>
+					<property name="local_mesure_unitwidth" value="pixel"/>
+				</reportElement>
+				<graphicElement>
+					<pen lineWidth="2.0" lineStyle="Solid"/>
+				</graphicElement>
+			</line>
+			<textField>
+				<reportElement uuid="2402063f-fe40-4736-8c6f-51121b024e1b" x="440" y="30" width="115" height="30"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Page " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+</jasperReport>

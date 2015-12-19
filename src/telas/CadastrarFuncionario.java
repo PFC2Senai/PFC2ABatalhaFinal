@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package telas;
 
 import atributos.Endereco;
@@ -11,7 +6,6 @@ import atributos.Telefone;
 import funcoes.ContatosDAO;
 import funcoes.FuncionarioDAO;
 import java.sql.PreparedStatement;
-import java.util.ArrayList;
 
 /**
  *
@@ -21,7 +15,6 @@ public class CadastrarFuncionario extends javax.swing.JFrame {
     
     private PreparedStatement pst;
     int posicao = 10;
-    ArrayList<String> telefones = new ArrayList<String>();
     
     public CadastrarFuncionario() {
         initComponents();
@@ -328,7 +321,7 @@ public class CadastrarFuncionario extends javax.swing.JFrame {
         func.setCargo(jTextCargo.getText());
         func.setSalario(Double.parseDouble(jTextSalario.getText()));
         
-        func.setIdContato(Integer.parseInt(jTextCodContato.getText()));
+        
         func.setIdUsuario(Integer.parseInt(jTextCodUsuario.getText()));
         func.setDataAdmicao(jTextDataAdmicao.getText());
         
@@ -339,19 +332,13 @@ public class CadastrarFuncionario extends javax.swing.JFrame {
         
         tel.setTel(txtTel01.getText());
         tel.setCel(txtTelCel.getText());
-       // telefones.add(txtTel01.getText());
-        //telefones.add(txtTelCel.getText());
-        
+  
         int i = ContatosDAO.CadContato();
 
-        for (String telefone : telefones) {
-            if (telefone.isEmpty()){
-                break;
-            }else{
-                ContatosDAO.CadTel(i, telefone);
-            }
-        }
-
+        func.setIdContato(i);
+        
+        ContatosDAO.CadTel(i, tel);
+        
         ContatosDAO.CadEmail(i, txtEmail.getText());
 
         endereco.setPais(txtPais.getText());
@@ -377,8 +364,6 @@ public class CadastrarFuncionario extends javax.swing.JFrame {
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         limparCampos();
     }//GEN-LAST:event_jButton3ActionPerformed
-
-   
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
