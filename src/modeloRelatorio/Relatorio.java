@@ -1,6 +1,5 @@
 package modeloRelatorio;
 
-import atributos.Cliente;
 import static funcoes.Conexao.getConnection;
 import java.io.InputStream;
 import java.sql.ResultSet;
@@ -39,7 +38,7 @@ public class Relatorio {
             Logger.getLogger(Relatorio.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
+
     public void gerarRelatorioSQL() {
        
         try {

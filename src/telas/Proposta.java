@@ -3,7 +3,6 @@ package telas;
 import atributos.Servico;
 import atributos.TipoServico;
 import funcoes.Conexao;
-import funcoes.DetServicoProdutoDAO;
 import funcoes.ProdutoDAO;
 import funcoes.TipoServicoDAO;
 import java.sql.Connection;
