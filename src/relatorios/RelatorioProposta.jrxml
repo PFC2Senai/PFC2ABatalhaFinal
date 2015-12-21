@@ -60,6 +60,9 @@
 			<fieldDescription><![CDATA[tipoServico]]></fieldDescription>
 		</field>
 	</subDataset>
+	<parameter name="logoDracol" class="java.awt.Image">
+		<parameterDescription><![CDATA[logoDracol]]></parameterDescription>
+	</parameter>
 	<queryString>
 		<![CDATA[]]>
 	</queryString>
@@ -125,12 +128,11 @@
 	</background>
 	<title>
 		<band height="77" splitType="Stretch">
-			<image>
-				<reportElement uuid="a487a350-93a6-48ec-83c3-cfbedf3505a9" x="1" y="0" width="200" height="63"/>
-				<imageExpression><![CDATA["C:/Users/Josy/Desktop/logoDracol.png"]]></imageExpression>
-			</image>
 			<staticText>
-				<reportElement uuid="24ed4e52-ee91-4517-8575-1ee2ea20d485" positionType="FixRelativeToBottom" stretchType="RelativeToTallestObject" x="242" y="0" width="212" height="60"/>
+				<reportElement uuid="24ed4e52-ee91-4517-8575-1ee2ea20d485" positionType="FixRelativeToBottom" stretchType="RelativeToTallestObject" x="260" y="0" width="194" height="70">
+					<property name="local_mesure_unitheight" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
 				<box>
 					<topPen lineWidth="0.0"/>
 					<leftPen lineWidth="0.0"/>
@@ -138,7 +140,7 @@
 					<rightPen lineWidth="0.0"/>
 				</box>
 				<textElement textAlignment="Right" verticalAlignment="Middle">
-					<font fontName="Arial" size="8"/>
+					<font fontName="Arial" size="9"/>
 				</textElement>
 				<text><![CDATA[HEAT EXCHANGER IMPORT. E EXPORT. LTDA    
 Rua Candido Rissut, Galpão 04, Caji   
@@ -159,6 +161,15 @@ Bahia@dracoolbrasil.com.br
 					<pen lineWidth="2.0" lineStyle="Solid"/>
 				</graphicElement>
 			</line>
+			<image>
+				<reportElement uuid="24183a5d-bdae-4821-b24d-9229d26aeed5" x="1" y="0" width="200" height="70">
+					<property name="local_mesure_unitwidth" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="local_mesure_unitheight" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<imageExpression><![CDATA[$P{logoDracol}]]></imageExpression>
+			</image>
 		</band>
 	</title>
 	<detail>
@@ -166,7 +177,7 @@ Bahia@dracoolbrasil.com.br
 			<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.VerticalRowLayout"/>
 			<property name="local_mesure_unitheight" value="pixel"/>
 			<textField>
-				<reportElement uuid="5effbe5c-0c50-40c9-92fc-187d715f1e82" x="2" y="154" width="450" height="362"/>
+				<reportElement uuid="5effbe5c-0c50-40c9-92fc-187d715f1e82" stretchType="RelativeToBandHeight" x="2" y="154" width="450" height="362" isPrintWhenDetailOverflows="true"/>
 				<textElement/>
 				<textFieldExpression><![CDATA[$F{mensagem}]]></textFieldExpression>
 			</textField>

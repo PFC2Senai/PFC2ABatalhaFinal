@@ -7,8 +7,10 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.ImageIcon;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JRResultSetDataSource;
 import net.sf.jasperreports.engine.JasperCompileManager;
@@ -22,6 +24,7 @@ import net.sf.jasperreports.view.JasperViewer;
 public class Relatorio {
     
      Statement stmt ;
+     private final String logotipo = "/imagens/logoDracol.png";
     
     public void gerarRelatorio(ArrayList<ModeloRelatProposta> lista) {
        
@@ -30,7 +33,12 @@ public class Relatorio {
             
             JasperReport report = JasperCompileManager.compileReport(fonte);
             
-            JasperPrint print = JasperFillManager.fillReport(report, null, new JRBeanCollectionDataSource(lista));
+           Map parametros = new HashMap();
+          // parametros.clear();
+           ImageIcon gto = new ImageIcon(getClass().getResource("/imagens/logoDracol.png"));
+           parametros.put("logoDracol", gto.getImage());
+            
+            JasperPrint print = JasperFillManager.fillReport(report, parametros, new JRBeanCollectionDataSource(lista));
             
             JasperViewer.viewReport(print, false);
             

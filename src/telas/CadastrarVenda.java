@@ -47,9 +47,7 @@ public class CadastrarVenda extends javax.swing.JFrame {
         jTextProduto.setText("");
         JDataVenda.setDateFormatString("");
     }
-    
-    
-    
+       
      private void populaComboBox() {
         Connection conexao = Conexao.getConnection();
         ResultSet rs;
