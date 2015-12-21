@@ -365,7 +365,7 @@ public class CadastrarServico extends javax.swing.JFrame {
                 jBtbNovoTipoServicoActionPerformed(evt);
             }
         });
-        jPanel3.add(jBtbNovoTipoServico, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 50, -1, -1));
+        jPanel3.add(jBtbNovoTipoServico, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 20, -1, -1));
 
         jBtnCadTipoServico.setText("Salvar");
         jBtnCadTipoServico.addActionListener(new java.awt.event.ActionListener() {
