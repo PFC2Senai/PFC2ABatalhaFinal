@@ -73,7 +73,7 @@ public class CadastrarVenda extends javax.swing.JFrame {
             rs.first();
             
             do{
-               dados.add(new Object[]{rs.getObject("idtabVendas"),rs.getObject("cliente_idcliente"),rs.getObject("tabusuario_id_usuario")
+                dados.add(new Object[]{rs.getObject("idtabVendas"),rs.getObject("cliente_idcliente"),rs.getObject("tabusuario_id_usuario")
                        ,rs.getObject("produto"),rs.getObject("dataVenda"),rs.getObject("hora"),rs.getObject("tabordemserv_idtabOrdemServ")});            
             }while(rs.next());
                         
@@ -113,6 +113,7 @@ public class CadastrarVenda extends javax.swing.JFrame {
     
     
     private void idProdutoComboBox() {
+        
         Connection conexao = Conexao.getConnection();
         ResultSet rs;
         String sql = "select * from tabproduto where produto = '" + jComboBoxProdutos.getSelectedItem()+ "';";
