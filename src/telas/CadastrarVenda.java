@@ -246,13 +246,10 @@ public class CadastrarVenda extends javax.swing.JFrame {
 
         jTableProduto.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {},
-                {},
-                {},
-                {}
+
             },
             new String [] {
-
+                "Código", "Produto"
             }
         ));
         jScrollPane1.setViewportView(jTableProduto);
@@ -408,6 +405,9 @@ public class CadastrarVenda extends javax.swing.JFrame {
 
     private void jComboBoxProdutosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxProdutosActionPerformed
         idProdutoComboBox();
+        if (jComboBoxProdutos.getSelectedItem() != null) {
+            produto = jComboBoxProdutos.getSelectedItem().toString();
+        }
     }//GEN-LAST:event_jComboBoxProdutosActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
