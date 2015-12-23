@@ -145,7 +145,7 @@ public class CadastrarVenda extends javax.swing.JFrame {
             
             DefaultTableModel dtm = (DefaultTableModel) jTableProduto.getModel();
                    
-                dtm.addRow(new Object[] {codProduto, produto});
+                dtm.addRow(new Object[] {codProduto, produto, modelo, fabricante});
                 
         } catch (Exception erro) {
             Logger.getLogger(CadastrarCliente.class.getName()).log(Level.SEVERE, null, erro);
@@ -352,7 +352,7 @@ public class CadastrarVenda extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Código", "Produto"
+                "Código", "Produto", "Modelo", "Fabricante"
             }
         ));
         jScrollPane1.setViewportView(jTableProduto);
@@ -451,7 +451,7 @@ public class CadastrarVenda extends javax.swing.JFrame {
                                         .addGap(18, 18, 18)
                                         .addComponent(jButton4))
                                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 540, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(0, 9, Short.MAX_VALUE)))
+                                .addGap(0, 0, Short.MAX_VALUE)))
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel8)
