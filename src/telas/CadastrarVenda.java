@@ -199,6 +199,28 @@ public class CadastrarVenda extends javax.swing.JFrame {
     }
     
     
+    private void populaComboBoxFabricante() {
+        
+        Connection conexao = Conexao.getConnection();
+        ResultSet rs;
+        String sql = "SELECT * FROM vw_combofabricanteproduto "
+                   + " WHERE id_prod = " + codProduto 
+                   + " AND tabmodelo_idtabModelo = " + codModelo + " group by fabricante;";
+        
+        try{
+            pst = conexao.prepareStatement(sql);
+            rs = pst.executeQuery();
+            
+            while(rs.next()) {
+                jComboFabricante.addItem(rs.getString("fabricante"));
+            }
+            
+        }catch(SQLException ex) {
+            JOptionPane.showMessageDialog(null, ex);
+        }
+    }
+    
+    
     private void idFabricanteComboBox() {
         
         Connection conexao = Conexao.getConnection();
@@ -354,6 +376,11 @@ public class CadastrarVenda extends javax.swing.JFrame {
         jLabel8.setText("Fabricante:");
 
         jComboModelo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Selecione" }));
+        jComboModelo.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jComboModeloItemStateChanged(evt);
+            }
+        });
         jComboModelo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jComboModeloActionPerformed(evt);
@@ -412,8 +439,7 @@ public class CadastrarVenda extends javax.swing.JFrame {
                                 .addGap(83, 83, 83)
                                 .addComponent(jLabel6)
                                 .addGap(18, 18, 18)
-                                .addComponent(jTextHora, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addComponent(jTextHora, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jScrollPane1)
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -573,6 +599,15 @@ public class CadastrarVenda extends javax.swing.JFrame {
         produto = jComboBoxProdutos.getSelectedItem().toString();
 
     }//GEN-LAST:event_jComboBoxProdutosItemStateChanged
+
+    private void jComboModeloItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jComboModeloItemStateChanged
+        jComboFabricante.removeAllItems();
+        idModeloComboBox();
+        populaComboBoxFabricante();
+        if (jComboModelo.getSelectedItem() != null) {
+            modelo = jComboModelo.getSelectedItem().toString();
+        }
+    }//GEN-LAST:event_jComboModeloItemStateChanged
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private com.toedter.calendar.JDateChooser JDataVenda;
