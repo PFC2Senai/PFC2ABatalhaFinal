@@ -12,17 +12,19 @@ public class Aluguel {
     private int idtabDetLocacao;
     private int tabusuarioIdUsuario;
     private int tabclienteIdcliente;
-    private String tabDetLocacaocol;
-    
-    // atributos da tabela detAluguel no banco
-    private int idDetAluguel;
+    private String descricaotLocacao;
     private Date dataAluguel;
     private Time hora;
-    private float valorHora;
-    private Date dataDevolucao;
-    private int codAluguel;
-    private int codEquipamento;
     private int codOrdemServico;
+    private Date dataDevolucao;
+    
+    // atributos da tabela detAluguel no banco
+    private int idDetAluguel;    
+    private double valorLocacao;  
+    private int codAluguel;
+    private int codDetEquipamento;
+    private int quatidadeEqui;
+    
 
 
     /**
@@ -68,17 +70,17 @@ public class Aluguel {
     }
 
     /**
-     * @return the tabDetLocacaocol
+     * @return the descricaotLocacao
      */
-    public String getTabDetLocacaocol() {
-        return tabDetLocacaocol;
+    public String getDescricaotLocacao() {
+        return descricaotLocacao;
     }
 
     /**
-     * @param tabDetLocacaocol the tabDetLocacaocol to set
+     * @param descricaotLocacao the descricaotLocacao to set
      */
-    public void setTabDetLocacaocol(String tabDetLocacaocol) {
-        this.tabDetLocacaocol = tabDetLocacaocol;
+    public void setDescricaotLocacao(String descricaotLocacao) {
+        this.descricaotLocacao = descricaotLocacao;
     }
     
     /**
@@ -124,17 +126,17 @@ public class Aluguel {
     }
 
     /**
-     * @return the valorHora
+     * @return the valorLocacao
      */
-    public float getValorHora() {
-        return valorHora;
+    public double getValorLocacao() {
+        return valorLocacao;
     }
 
     /**
-     * @param valorHora the valorHora to set
+     * @param valorLocacao the valorLocacao to set
      */
-    public void setValorHora(float valorHora) {
-        this.valorHora = valorHora;
+    public void setValorLocacao(double valorLocacao) {
+        this.valorLocacao = valorLocacao;
     }
 
     /**
@@ -166,17 +168,17 @@ public class Aluguel {
     }
 
     /**
-     * @return the codEquipamento
+     * @return the codDetEquipamento
      */
-    public int getCodEquipamento() {
-        return codEquipamento;
+    public int getCodDetEquipamento() {
+        return codDetEquipamento;
     }
 
     /**
-     * @param codEquipamento the codEquipamento to set
+     * @param codDetEquipamento the codDetEquipamento to set
      */
-    public void setCodEquipamento(int codEquipamento) {
-        this.codEquipamento = codEquipamento;
+    public void setCodDetEquipamento(int codDetEquipamento) {
+        this.codDetEquipamento = codDetEquipamento;
     }
 
     /**
@@ -191,5 +193,19 @@ public class Aluguel {
      */
     public void setCodOrdemServico(int codOrdemServico) {
         this.codOrdemServico = codOrdemServico;
+    }
+
+    /**
+     * @return the quatidadeEqui
+     */
+    public int getQuatidadeEqui() {
+        return quatidadeEqui;
+    }
+
+    /**
+     * @param quatidadeEqui the quatidadeEqui to set
+     */
+    public void setQuatidadeEqui(int quatidadeEqui) {
+        this.quatidadeEqui = quatidadeEqui;
     }
 }
