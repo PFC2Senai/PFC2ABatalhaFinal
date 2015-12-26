@@ -53,6 +53,7 @@ public class Menu extends javax.swing.JFrame {
         jMenuItem23 = new javax.swing.JMenuItem();
         jMenuItem30 = new javax.swing.JMenuItem();
         jMenuItem32 = new javax.swing.JMenuItem();
+        jMenuItem34 = new javax.swing.JMenuItem();
         jMenu15 = new javax.swing.JMenu();
         jMenuItem11 = new javax.swing.JMenuItem();
         jMenuItem25 = new javax.swing.JMenuItem();
@@ -281,6 +282,14 @@ public class Menu extends javax.swing.JFrame {
         });
         jMenu10.add(jMenuItem32);
 
+        jMenuItem34.setText("Aluguel");
+        jMenuItem34.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem34ActionPerformed(evt);
+            }
+        });
+        jMenu10.add(jMenuItem34);
+
         jMenu4.add(jMenu10);
 
         jMenu15.setText("Editar");
@@ -447,6 +456,10 @@ public class Menu extends javax.swing.JFrame {
         new CadastrarAluguel().setVisible(true);
     }//GEN-LAST:event_jMenuItem33ActionPerformed
 
+    private void jMenuItem34ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem34ActionPerformed
+        new ExibeAluguel2().setVisible(true);
+    }//GEN-LAST:event_jMenuItem34ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -519,6 +532,7 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem31;
     private javax.swing.JMenuItem jMenuItem32;
     private javax.swing.JMenuItem jMenuItem33;
+    private javax.swing.JMenuItem jMenuItem34;
     private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JMenuItem jMenuItem6;
