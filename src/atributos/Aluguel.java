@@ -9,7 +9,7 @@ import java.util.Date;
  */
 public class Aluguel {
     
-    private int idtabDetLocacao;
+    private int idLocacao;
     private int tabusuarioIdUsuario;
     private int tabclienteIdcliente;
     private String descricaotLocacao;
@@ -24,21 +24,19 @@ public class Aluguel {
     private int codAluguel;
     private int codDetEquipamento;
     private int quatidadeEqui;
-    
-
 
     /**
-     * @return the idtabDetLocacao
+     * @return the idLocacao
      */
-    public int getIdtabDetLocacao() {
-        return idtabDetLocacao;
+    public int getIdLocacao() {
+        return idLocacao;
     }
 
     /**
-     * @param idtabDetLocacao the idtabDetLocacao to set
+     * @param idLocacao the idLocacao to set
      */
-    public void setIdtabDetLocacao(int idtabDetLocacao) {
-        this.idtabDetLocacao = idtabDetLocacao;
+    public void setIdLocacao(int idLocacao) {
+        this.idLocacao = idLocacao;
     }
 
     /**

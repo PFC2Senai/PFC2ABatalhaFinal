@@ -59,25 +59,26 @@ public class DetalharLembrete extends javax.swing.JFrame {
     private void initComponents() {
 
         jButton1 = new javax.swing.JButton();
+        jPanel1 = new javax.swing.JPanel();
+        jLabel4 = new javax.swing.JLabel();
+        txtHoraLembrete = new javax.swing.JFormattedTextField();
         jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        jLbDataLembrete = new javax.swing.JLabel();
-        jLbHoraLembrete = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
-        jBtnEditarLembrete = new javax.swing.JButton();
-        jBtnAlterarLembrete = new javax.swing.JButton();
+        jLabCodigo = new javax.swing.JLabel();
+        jLabEmpresa = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         txtDescricaoLembrete = new javax.swing.JTextArea();
-        txtHoraLembrete = new javax.swing.JFormattedTextField();
+        jLabel6 = new javax.swing.JLabel();
+        jLbDataLembrete = new javax.swing.JLabel();
         txtDataLembrete = new com.toedter.calendar.JDateChooser();
         jBtnExcluir = new javax.swing.JButton();
-        jBtnCancel = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
-        jLabel4 = new javax.swing.JLabel();
-        jLabCodigo = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        jLabEmpresa = new javax.swing.JLabel();
+        jBtnAlterarLembrete = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLbHoraLembrete = new javax.swing.JLabel();
+        jBtnCancel = new javax.swing.JButton();
+        jBtnEditarLembrete = new javax.swing.JButton();
 
         jButton1.setText("jButton1");
 
@@ -89,35 +90,10 @@ public class DetalharLembrete extends javax.swing.JFrame {
             }
         });
 
-        jLabel1.setText("Lembrete:");
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel2.setText("Data:");
-
-        jLabel3.setText("Hora:");
-
-        jLbDataLembrete.setText("Exibe Data");
-
-        jLbHoraLembrete.setText("Exibe Hora");
-
-        jLabel6.setText("Descrição:");
-
-        jBtnEditarLembrete.setText("Editar");
-        jBtnEditarLembrete.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jBtnEditarLembreteActionPerformed(evt);
-            }
-        });
-
-        jBtnAlterarLembrete.setText("Salvar");
-        jBtnAlterarLembrete.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jBtnAlterarLembreteActionPerformed(evt);
-            }
-        });
-
-        txtDescricaoLembrete.setColumns(20);
-        txtDescricaoLembrete.setRows(5);
-        jScrollPane1.setViewportView(txtDescricaoLembrete);
+        jLabel4.setText("Código:");
+        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, -1, 20));
 
         try {
             txtHoraLembrete.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##:##")));
@@ -125,6 +101,29 @@ public class DetalharLembrete extends javax.swing.JFrame {
             ex.printStackTrace();
         }
         txtHoraLembrete.setText("00:00");
+        jPanel1.add(txtHoraLembrete, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 130, 42, 20));
+
+        jLabel1.setText("Lembrete:");
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(22, 11, -1, -1));
+
+        jLabCodigo.setText("codigo");
+        jPanel1.add(jLabCodigo, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 30, -1, 20));
+
+        jLabEmpresa.setText("empresa");
+        jPanel1.add(jLabEmpresa, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 60, 176, 20));
+
+        txtDescricaoLembrete.setColumns(20);
+        txtDescricaoLembrete.setRows(5);
+        jScrollPane1.setViewportView(txtDescricaoLembrete);
+
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(22, 189, 342, 150));
+
+        jLabel6.setText("Descrição:");
+        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(22, 169, -1, -1));
+
+        jLbDataLembrete.setText("Exibe Data");
+        jPanel1.add(jLbDataLembrete, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 90, 142, 23));
+        jPanel1.add(txtDataLembrete, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 90, 140, 20));
 
         jBtnExcluir.setText("Excluir");
         jBtnExcluir.addActionListener(new java.awt.event.ActionListener() {
@@ -132,13 +131,7 @@ public class DetalharLembrete extends javax.swing.JFrame {
                 jBtnExcluirActionPerformed(evt);
             }
         });
-
-        jBtnCancel.setText("Cancelar");
-        jBtnCancel.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jBtnCancelActionPerformed(evt);
-            }
-        });
+        jPanel1.add(jBtnExcluir, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 360, -1, -1));
 
         jButton2.setText("Sair");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -146,105 +139,53 @@ public class DetalharLembrete extends javax.swing.JFrame {
                 jButton2ActionPerformed(evt);
             }
         });
-
-        jLabel4.setText("Código:");
-
-        jLabCodigo.setText("codigo");
+        jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 410, -1, -1));
 
         jLabel5.setText("Empresa:");
+        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(22, 64, -1, -1));
 
-        jLabEmpresa.setText("empresa");
+        jBtnAlterarLembrete.setText("Salvar");
+        jBtnAlterarLembrete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnAlterarLembreteActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jBtnAlterarLembrete, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 360, -1, -1));
+
+        jLabel2.setText("Data:");
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(22, 95, -1, -1));
+
+        jLabel3.setText("Hora:");
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 130, -1, 20));
+
+        jLbHoraLembrete.setText("Exibe Hora");
+        jPanel1.add(jLbHoraLembrete, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 130, 135, 20));
+
+        jBtnCancel.setText("Cancelar");
+        jBtnCancel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnCancelActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jBtnCancel, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 360, -1, -1));
+
+        jBtnEditarLembrete.setText("Editar");
+        jBtnEditarLembrete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnEditarLembreteActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jBtnEditarLembrete, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 360, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(25, 25, 25)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel4)
-                        .addGap(10, 10, 10)
-                        .addComponent(jLabCodigo))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel5)
-                        .addGap(6, 6, 6)
-                        .addComponent(jLabEmpresa, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel2)
-                        .addGap(24, 24, 24)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(115, 115, 115)
-                                .addComponent(txtDataLembrete, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jLbDataLembrete, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel3)
-                        .addGap(24, 24, 24)
-                        .addComponent(jLbHoraLembrete, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(10, 10, 10)
-                        .addComponent(txtHoraLembrete, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jLabel6)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jBtnEditarLembrete)
-                        .addGap(6, 6, 6)
-                        .addComponent(jBtnAlterarLembrete)
-                        .addGap(18, 18, 18)
-                        .addComponent(jBtnCancel)
-                        .addGap(18, 18, 18)
-                        .addComponent(jBtnExcluir))
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(jButton2)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 342, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(26, 26, 26))
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(19, 19, 19)
-                .addComponent(jLabel1)
-                .addGap(11, 11, 11)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel4)
-                    .addComponent(jLabCodigo))
-                .addGap(8, 8, 8)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(6, 6, 6)
-                        .addComponent(jLabel5))
-                    .addComponent(jLabEmpresa, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(13, 13, 13)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(4, 4, 4)
-                        .addComponent(jLabel2))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(1, 1, 1)
-                        .addComponent(txtDataLembrete, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jLbDataLembrete, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(6, 6, 6)
-                        .addComponent(jLabel3))
-                    .addComponent(jLbHoraLembrete, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(3, 3, 3)
-                        .addComponent(txtHoraLembrete, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(11, 11, 11)
-                .addComponent(jLabel6)
-                .addGap(6, 6, 6)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jBtnEditarLembrete)
-                    .addComponent(jBtnAlterarLembrete)
-                    .addComponent(jBtnCancel)
-                    .addComponent(jBtnExcluir))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 10, Short.MAX_VALUE)
-                .addComponent(jButton2)
-                .addContainerGap())
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -361,6 +302,7 @@ public class DetalharLembrete extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLbDataLembrete;
     private javax.swing.JLabel jLbHoraLembrete;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private com.toedter.calendar.JDateChooser txtDataLembrete;
     private javax.swing.JTextArea txtDescricaoLembrete;

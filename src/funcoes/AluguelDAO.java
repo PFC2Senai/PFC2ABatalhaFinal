@@ -103,17 +103,17 @@ public class AluguelDAO {
 
                 Aluguel a = new Aluguel();
 
-                a.setCodAluguel(rs.getInt("idtabDetLocacao"));
+                a.setIdLocacao(rs.getInt("idtabDetLocacao"));
                 a.setTabusuarioIdUsuario(rs.getInt("tabusuario_id_usuario"));
                 a.setTabclienteIdcliente(rs.getInt("tabcliente_idcliente"));
-                a.setDescricaotLocacao(rs.getString("tabDetLocacaocol"));
-                a.setIdDetAluguel(rs.getInt("idLocacao"));
+                a.setDescricaotLocacao(rs.getString("DescricaoLocacao"));
+                a.setIdDetAluguel(rs.getInt("idDetLocacao"));
                 a.setDataAluguel((rs.getDate("dataLocacao")));
-                a.setHora(rs.getTime("hora"));
-                a.setValorLocacao(rs.getFloat("valorHora"));
+                a.setHora(rs.getTime("horaLocacao"));
+                a.setValorLocacao(rs.getFloat("valorLocacao"));
                 a.setDataDevolucao(rs.getDate("dataDevolucao"));
                 a.setCodAluguel(rs.getInt("tabLocacao_idtabDetLocacao"));
-                a.setCodDetEquipamento(rs.getInt("tabEquipamento_idEquipamento"));
+                a.setCodDetEquipamento(rs.getInt("tabdetequipamento_idDetEquipamento"));
                 a.setCodOrdemServico(rs.getInt("tabordemserv_idtabOrdemServ"));
                 aluguel.add(a);
             }
@@ -133,6 +133,7 @@ public class AluguelDAO {
         CallableStatement stmt;
 
         try {
+            
             stmt = Conexao.getConnection().prepareCall("{call ExcluirAluguel(?)}");
 
             stmt.setInt(1, id);
@@ -145,21 +146,36 @@ public class AluguelDAO {
             throw new RuntimeException("Erro ao excluir os dados do aluguel: ", ex);
         }
     }
+    
+    public static void ExcluirDetAluguel(int id) {
+        
+        PreparedStatement stmt;
+        
+        try {   
+            String sql = ("DELETE FROM tabdetlocacao WHERE idDetLocacao = "+ id + ";");
+            stmt = Conexao.getConnection().prepareStatement(sql);            
+            
+            stmt.execute();
+            stmt.close();
+
+        } catch (SQLException ex) {      
+            Logger.getLogger(SetorDAO.class.getName()).log(Level.SEVERE, null, ex);
+            throw new RuntimeException("Erro ao excluir o detalhe locacao: ", ex);    
+        }
+    }
 
     public static void UpdateAluguel(Aluguel al, int id) {
 
         CallableStatement stmt;
         try {
-            stmt = Conexao.getConnection().prepareCall("{call UpdateAluguel(?,?,?,?,?,?,?,?)}");
+            stmt = Conexao.getConnection().prepareCall("{call UpdateAluguel(?,?,?,?,?,?)}");
 
             stmt.setInt(1, id);
             stmt.setInt(2, al.getTabclienteIdcliente());
-            stmt.setString(3, al.getDescricaotLocacao());
-            stmt.setObject(4, al.getDataAluguel());
-            stmt.setTime(5, al.getHora());
-            stmt.setDouble(6, al.getValorLocacao());
-            stmt.setObject(7, al.getDataDevolucao());
-            stmt.setInt(8, al.getCodDetEquipamento());
+            stmt.setObject(3, al.getDataAluguel());
+            stmt.setObject(4, al.getDataDevolucao());
+            stmt.setString(5, al.getDescricaotLocacao());           
+            stmt.setTime(6, al.getHora());
 
             stmt.execute();
             stmt.close();
