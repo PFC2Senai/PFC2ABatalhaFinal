@@ -466,7 +466,7 @@ public class CadastrarCliente extends javax.swing.JFrame {
             
             ContatosDAO.CadTel(codContato, tel);
             ContatosDAO.CadEmail(codContato, email);
-            pContato.setCodCliente(codCli);
+            pContato.setCodTabEstrangeira(codCli);
             pContato.setCodContato(codContato);
             
             PessoaContatoDAO.CadPessoaContato(pContato);

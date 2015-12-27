@@ -47,7 +47,7 @@ public final class ExibeCliente extends javax.swing.JFrame {
             this.dispose();
             int linha = jTableListarClientes.getSelectedRow();        
             indice = (Integer.parseInt(jTableListarClientes.getValueAt(linha, 0).toString()));
-        }else{
+        }else {
             JOptionPane.showMessageDialog(null, "Primeiro selecione um registro.");
         }  
         return valida;

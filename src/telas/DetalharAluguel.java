@@ -289,7 +289,8 @@ public class DetalharAluguel extends javax.swing.JFrame {
     private void jBtnRemoverEquipamentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnRemoverEquipamentoActionPerformed
 
         if (jTableEquipamento.getRowCount() == 1) {
-            JOptionPane.showMessageDialog(null, "Não foi possível excluir o equipamento /n. É preciso que tenha ao menos um equipamento Alugado.");
+            JOptionPane.showMessageDialog(null, "Não foi possível excluir o equipamento /n. É preciso que tenha ao menos um equipamento alugado.");
+            
         } else {
             int linha = jTableEquipamento.getSelectedRow();
             idDetAluguel = (Integer.parseInt(jTableEquipamento.getValueAt(linha, 0).toString()));

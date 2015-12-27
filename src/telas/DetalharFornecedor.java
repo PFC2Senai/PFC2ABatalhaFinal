@@ -418,13 +418,7 @@ public class DetalharFornecedor extends javax.swing.JFrame {
         for (Fornecedor forn : fornecedor) {
             lblCodigo.setText(String.valueOf(forn.getIdForn()));
             txtFornecedor.setText(forn.getFornecedor());
-            idContato = forn.getCodContato();
-            txtEmail.setText(forn.getEmail());
-        }
-        
-        for (Telefone tel : telefone) {
-            txtTel.setText(tel.getTel());
-            txtTelCel.setText(tel.getCel());
+            idContato = forn.getCodContato();         
         }
         
         for (Endereco end : endereco) {

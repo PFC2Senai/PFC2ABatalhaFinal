@@ -34,6 +34,7 @@ public class ExibeFornecedor extends javax.swing.JFrame {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
+        bindingGroup = new org.jdesktop.beansbinding.BindingGroup();
 
         jBtnNovoFornecedor = new javax.swing.JButton();
         jBtnDetalhar = new javax.swing.JButton();
@@ -53,6 +54,10 @@ public class ExibeFornecedor extends javax.swing.JFrame {
         });
 
         jBtnDetalhar.setText("Detalhar");
+
+        org.jdesktop.beansbinding.Binding binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, jTableListarFornecedores, org.jdesktop.beansbinding.ELProperty.create("${selectedElement != null}"), jBtnDetalhar, org.jdesktop.beansbinding.BeanProperty.create("enabled"));
+        bindingGroup.addBinding(binding);
+
         jBtnDetalhar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jBtnDetalharActionPerformed(evt);
@@ -91,12 +96,11 @@ public class ExibeFornecedor extends javax.swing.JFrame {
                         .addComponent(jBtnNovoFornecedor)
                         .addGap(77, 77, 77)
                         .addComponent(jBtnDetalhar)
-                        .addGap(76, 76, 76)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jBtExcluirFornecedor)
                         .addGap(77, 77, 77)
-                        .addComponent(jBtnVoltar)
-                        .addGap(0, 152, Short.MAX_VALUE))
-                    .addComponent(jScrollPane1))
+                        .addComponent(jBtnVoltar))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 636, Short.MAX_VALUE))
                 .addGap(22, 22, 22))
             .addGroup(layout.createSequentialGroup()
                 .addGap(305, 305, 305)
@@ -118,6 +122,8 @@ public class ExibeFornecedor extends javax.swing.JFrame {
                     .addComponent(jBtnVoltar))
                 .addGap(20, 20, 20))
         );
+
+        bindingGroup.bind();
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -176,7 +182,6 @@ public class ExibeFornecedor extends javax.swing.JFrame {
     }//GEN-LAST:event_jBtnNovoFornecedorActionPerformed
 
     private void jBtnDetalharActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnDetalharActionPerformed
-
         CodigoFornecedor();
         new DetalharFornecedor().setVisible(true);
     }//GEN-LAST:event_jBtnDetalharActionPerformed
@@ -198,5 +203,6 @@ public class ExibeFornecedor extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTableListarFornecedores;
+    private org.jdesktop.beansbinding.BindingGroup bindingGroup;
     // End of variables declaration//GEN-END:variables
 }

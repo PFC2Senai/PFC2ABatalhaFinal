@@ -14,9 +14,11 @@ import java.util.logging.Logger;
 
 public class FornecedorDAO {
     
-    public static void CadFornecedor(Fornecedor fornecedor){
+    public static int CadFornecedor(Fornecedor fornecedor){
         
         PreparedStatement stmt;
+        int id = 0;
+        
         try {   
             String sql = ("INSERT INTO tabfornecedor(tabusuario_id_usuario, tabContato_id_contato,fornecedor) VALUES(?,?,?)");
             stmt = Conexao.getConnection().prepareStatement(sql);      
@@ -26,12 +28,18 @@ public class FornecedorDAO {
                 stmt.setString(3, fornecedor.getFornecedor());
                               
                 stmt.executeUpdate();
+                
+                ResultSet rs = stmt.getGeneratedKeys();
+                if (rs.next()) {
+                    id = rs.getInt(1);
+                }
                 stmt.close();  
 
             } catch (SQLException ex) {      
                 Logger.getLogger(FornecedorDAO.class.getName()).log(Level.SEVERE, null, ex);
                 throw new RuntimeException("Erro ao Cadastrar Fornecedor: ",ex);       
             }
+        return id;
     }
     
     public static ArrayList CarregaFornecedor(int id) {
@@ -40,16 +48,8 @@ public class FornecedorDAO {
         ArrayList<Fornecedor> fornecedor = new ArrayList<Fornecedor>();
         
         try {            
-            String Sql = "SELECT * FROM tabfornecedor AS forn\n" +
-                        "INNER JOIN tabtel AS tel\n" +
-                        "INNER JOIN tabemail AS email\n" +
-                        "inner join tabendereco AS ende\n" +
-                        "INNER JOIN tabcontato AS cont\n" +
-                        "ON cont.id_contato = forn.tabContato_id_contato AND\n" +
-                        "cont.id_contato = tel.contato_id AND\n" +
-                        "id_contato = email.contato_id_contato AND\n" +
-                        "cont.id_contato = cod_contato AND ende.cod_contato=cont.id_contato "
-                      + "where forn.id_forn = '"+ id +"';";
+            String Sql = "select  * from vw_fornecedores "
+                      + "where id_forn = '"+ id +"';";
             
             ResultSet rs;            
             stmt = Conexao.getConnection().createStatement();            
@@ -61,7 +61,7 @@ public class FornecedorDAO {
                 f.setIdForn(rs.getInt("id_forn"));
                 f.setFornecedor((rs.getString("fornecedor")));
                 f.setCodContato(rs.getInt("tabContato_id_contato"));
-                f.setEmail(rs.getString("email"));
+                //f.setEmail(rs.getString("email"));
                 fornecedor.add(f);                
             }            
             rs.close();

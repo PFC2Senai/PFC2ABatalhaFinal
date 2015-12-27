@@ -5,7 +5,7 @@ public class PessoaContato {
     
     private int idPessoaContato;
     private String nomeContato;
-    private int codCliente;
+    private int codTabEstrangeira;
     private int codContato; // tabela contato no banco
 
     /**
@@ -37,17 +37,17 @@ public class PessoaContato {
     }
 
     /**
-     * @return the codCliente
+     * @return the codTabEstrangeira
      */
-    public int getCodCliente() {
-        return codCliente;
+    public int getCodTabEstrangeira() {
+        return codTabEstrangeira;
     }
 
     /**
-     * @param codCliente the codCliente to set
+     * @param codTabEstrangeira the codTabEstrangeira to set
      */
-    public void setCodCliente(int codCliente) {
-        this.codCliente = codCliente;
+    public void setCodTabEstrangeira(int codTabEstrangeira) {
+        this.codTabEstrangeira = codTabEstrangeira;
     }
 
     /**

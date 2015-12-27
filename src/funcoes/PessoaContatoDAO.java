@@ -23,7 +23,7 @@ public class PessoaContatoDAO {
             stmt = Conexao.getConnection().prepareStatement(sql);      
                   
                 stmt.setString(1, pContato.getNomeContato());
-                stmt.setInt(2, pContato.getCodCliente());
+                stmt.setInt(2, pContato.getCodTabEstrangeira());
                 stmt.setInt(3, pContato.getCodContato());
                               
                 stmt.executeUpdate();
@@ -33,7 +33,27 @@ public class PessoaContatoDAO {
                 Logger.getLogger(PessoaContatoDAO.class.getName()).log(Level.SEVERE, null, ex);
                 throw new RuntimeException("Erro ao Cadastrar a pessoa contato: ",ex);       
             }
-    }    
+    }     
+    
+    public static void CadPesContatoFornecedor(PessoaContato pContato) {
+        
+        PreparedStatement stmt;
+        try {   
+            String sql = ("INSERT INTO tabpessoacontatofornecedor(contato, tabfornecedor_id_forn, tabContato_id_contato) VALUES(?,?,?);");
+            stmt = Conexao.getConnection().prepareStatement(sql);      
+                  
+                stmt.setString(1, pContato.getNomeContato());
+                stmt.setInt(2, pContato.getCodTabEstrangeira());
+                stmt.setInt(3, pContato.getCodContato());
+                              
+                stmt.executeUpdate();
+                stmt.close();  
+
+            } catch (SQLException ex) {      
+                Logger.getLogger(PessoaContatoDAO.class.getName()).log(Level.SEVERE, null, ex);
+                throw new RuntimeException("Erro ao Cadastrar a pessoa contato: ",ex);       
+            }
+    }
    
     public static void ExcluirPessoaContato(int id){
         
@@ -85,11 +105,12 @@ public class PessoaContatoDAO {
             rs = stmt.executeQuery(Sql); 
             
             while(rs.next()){
+                
                 PessoaContato p = new PessoaContato();
                 
                 p.setIdPessoaContato(rs.getInt("idPessoaContato"));
                 p.setNomeContato((rs.getString("contato")));
-                p.setCodCliente(rs.getInt("tabcliente_idcliente"));
+                p.setCodTabEstrangeira(rs.getInt("tabcliente_idcliente"));
                 p.setCodContato(rs.getInt("cod_contato"));
                 pessoaContato.add(p);                
             }            
