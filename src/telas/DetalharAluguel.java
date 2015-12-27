@@ -6,7 +6,6 @@ import funcoes.AluguelDAO;
 import funcoes.ClienteDAO;
 import funcoes.Conexao;
 import static funcoes.Conexao.getConnection;
-import funcoes.DetServicoEquipamentoDAO;
 import funcoes.FuncoesDiversas;
 import static funcoes.FuncoesDiversas.ConverterData;
 import static funcoes.FuncoesDiversas.FormataData;
@@ -271,7 +270,7 @@ public class DetalharAluguel extends javax.swing.JFrame {
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(17, 17, 17)
+                .addGap(35, 35, 35)
                 .addComponent(jLabel1)
                 .addGap(18, 18, 18)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -289,14 +288,18 @@ public class DetalharAluguel extends javax.swing.JFrame {
 
     private void jBtnRemoverEquipamentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnRemoverEquipamentoActionPerformed
 
-        int linha = jTableEquipamento.getSelectedRow();
-        idDetAluguel = (Integer.parseInt(jTableEquipamento.getValueAt(linha, 0).toString()));
-        AluguelDAO.ExcluirDetAluguel(idDetAluguel);
-        TabelaEquipamento("SELECT * FROM vw_detaluguel where idtabDetLocacao = " + idAluguel + ";");
+        if (jTableEquipamento.getRowCount() == 1) {
+            JOptionPane.showMessageDialog(null, "Não foi possível excluir o equipamento /n. É preciso que tenha ao menos um equipamento Alugado.");
+        } else {
+            int linha = jTableEquipamento.getSelectedRow();
+            idDetAluguel = (Integer.parseInt(jTableEquipamento.getValueAt(linha, 0).toString()));
+            AluguelDAO.ExcluirDetAluguel(idDetAluguel);
+            TabelaEquipamento("SELECT * FROM vw_detaluguel where idtabDetLocacao = " + idAluguel + ";");
+        }
     }//GEN-LAST:event_jBtnRemoverEquipamentoActionPerformed
 
     private void jBtnAdicionarEquipamentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnAdicionarEquipamentoActionPerformed
-        // new AdicionarDetServEquipamento(idAluguel, this).setVisible(true);
+        new AdicionarDetAluguel(idAluguel, this).setVisible(true);
     }//GEN-LAST:event_jBtnAdicionarEquipamentoActionPerformed
 
     private void jComboBoxClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxClienteActionPerformed
@@ -328,7 +331,7 @@ public class DetalharAluguel extends javax.swing.JFrame {
     }//GEN-LAST:event_jBtnSalvarAltAluguelItemStateChanged
 
     private void jBtnSalvarAltAluguelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnSalvarAltAluguelActionPerformed
-        
+
         Aluguel alug = new Aluguel();
 
         alug.setTabclienteIdcliente(codCliente);
@@ -378,7 +381,7 @@ public class DetalharAluguel extends javax.swing.JFrame {
             total = 0;
             stmt = getConnection().createStatement();
             ArrayList dados = new ArrayList();
-            String[] Colunas = {"Código", "Equipamento", "Modelo", "Fabricante","Qtd.","Vr. Locação","Total"};
+            String[] Colunas = {"Código", "Equipamento", "Modelo", "Fabricante", "Qtd.", "Vr. Locação", "Total"};
 
             ResultSet rs;
             rs = stmt.executeQuery(Sql);
@@ -386,10 +389,10 @@ public class DetalharAluguel extends javax.swing.JFrame {
             while (rs.next()) {
                 double totalEquipamento = rs.getInt("quantEquipamento") * rs.getDouble("valorLocacao");
                 dados.add(new Object[]{rs.getObject("idDetLocacao"), rs.getObject("equipamento"),
-                    rs.getObject("modelo"), rs.getObject("fabricante"), 
-                    rs.getObject("quantEquipamento"), rs.getObject("valorLocacao"), 
-                    totalEquipamento}); 
-                total += totalEquipamento;                
+                    rs.getObject("modelo"), rs.getObject("fabricante"),
+                    rs.getObject("quantEquipamento"), rs.getObject("valorLocacao"),
+                    totalEquipamento});
+                total += totalEquipamento;
             }
 
             txtTotal.setText(String.valueOf(total));

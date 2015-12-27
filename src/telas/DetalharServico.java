@@ -53,6 +53,7 @@ public class DetalharServico extends javax.swing.JFrame {
     public DetalharServico() {
         initComponents();
     }
+    
     public double Total() {
         return total;
     }

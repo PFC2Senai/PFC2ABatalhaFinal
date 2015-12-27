@@ -1,5 +1,7 @@
 package telas;
 
+import atributos.Aluguel;
+import funcoes.AluguelDAO;
 import funcoes.Conexao;
 import funcoes.EquipamentoDAO;
 import java.sql.Connection;
@@ -31,10 +33,19 @@ public class AdicionarDetAluguel extends javax.swing.JFrame {
     private String modeloEqui;
     private String equipamento;
     private String fabricanteEqui;
+    
+    private DetalharAluguel telaDetAluguel;
+    private int idAluguel;
     /**
      * Creates new form AdicionarDetAluguel
      */
     public AdicionarDetAluguel() {
+        initComponents();       
+    }
+    
+    public AdicionarDetAluguel(int codAluguel, DetalharAluguel telaAluguel) {
+        this.idAluguel = codAluguel;
+        this.telaDetAluguel = telaAluguel;
         initComponents();
         populaComboBoxEquipamento();
     }
@@ -65,8 +76,9 @@ public class AdicionarDetAluguel extends javax.swing.JFrame {
         txtQuantEqui = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         txtTotal = new javax.swing.JTextField();
+        jBtnIncluirEquipamento = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jPanel4.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
@@ -146,42 +158,52 @@ public class AdicionarDetAluguel extends javax.swing.JFrame {
 
         jLabel4.setText("Vr. Total Locação:");
 
+        jBtnIncluirEquipamento.setText("Salvar");
+        jBtnIncluirEquipamento.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnIncluirEquipamentoActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addGap(34, 34, 34)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addComponent(jLabel4)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addComponent(jBtbIncluirEquipamento)
-                        .addGap(18, 18, 18)
-                        .addComponent(jBtnRemoveEquipamento))
-                    .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addComponent(jLabel38)
-                        .addGap(33, 33, 33)
-                        .addComponent(jComboBoxFabricanteEquip, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1)
-                            .addComponent(jLabel37))
-                        .addGap(21, 21, 21)
-                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jComboBoxEquipamentos, javax.swing.GroupLayout.PREFERRED_SIZE, 261, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jComboBoxModeloEquip, javax.swing.GroupLayout.PREFERRED_SIZE, 264, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel3))
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(txtValorLocacao, javax.swing.GroupLayout.DEFAULT_SIZE, 76, Short.MAX_VALUE)
-                            .addComponent(txtQuantEqui)))
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 680, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(txtTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(385, 385, 385)
+                        .addComponent(jBtnIncluirEquipamento))
+                    .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanel4Layout.createSequentialGroup()
+                            .addComponent(jBtbIncluirEquipamento)
+                            .addGap(18, 18, 18)
+                            .addComponent(jBtnRemoveEquipamento))
+                        .addGroup(jPanel4Layout.createSequentialGroup()
+                            .addComponent(jLabel38)
+                            .addGap(33, 33, 33)
+                            .addComponent(jComboBoxFabricanteEquip, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(jPanel4Layout.createSequentialGroup()
+                            .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jLabel1)
+                                .addComponent(jLabel37))
+                            .addGap(21, 21, 21)
+                            .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(jComboBoxEquipamentos, 0, 330, Short.MAX_VALUE)
+                                .addComponent(jComboBoxModeloEquip, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addGroup(jPanel4Layout.createSequentialGroup()
+                            .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jLabel2)
+                                .addComponent(jLabel3))
+                            .addGap(18, 18, 18)
+                            .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(txtValorLocacao, javax.swing.GroupLayout.DEFAULT_SIZE, 76, Short.MAX_VALUE)
+                                .addComponent(txtQuantEqui)))
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 680, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(45, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
@@ -213,11 +235,12 @@ public class AdicionarDetAluguel extends javax.swing.JFrame {
                     .addComponent(jBtnRemoveEquipamento))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 53, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 52, Short.MAX_VALUE)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
-                    .addComponent(txtTotal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(45, 45, 45))
+                    .addComponent(txtTotal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jBtnIncluirEquipamento))
+                .addGap(43, 43, 43))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -232,6 +255,7 @@ public class AdicionarDetAluguel extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jComboBoxEquipamentosItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jComboBoxEquipamentosItemStateChanged
@@ -294,6 +318,24 @@ public class AdicionarDetAluguel extends javax.swing.JFrame {
             fabricanteEqui = jComboBoxFabricanteEquip.getSelectedItem().toString();
         }
     }//GEN-LAST:event_jComboBoxFabricanteEquipActionPerformed
+
+    private void jBtnIncluirEquipamentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnIncluirEquipamentoActionPerformed
+        
+        Aluguel aluguel = new Aluguel();
+        
+        for(int j = 0; j < jTableEquipamento.getRowCount(); j++) {
+            
+            aluguel.setCodAluguel(idAluguel);           
+            aluguel.setCodDetEquipamento(Integer.parseInt(jTableEquipamento.getValueAt(j, 0).toString()));
+            aluguel.setQuatidadeEqui(Integer.parseInt(jTableEquipamento.getValueAt(j, 6).toString()));
+            aluguel.setValorLocacao(Double.parseDouble(jTableEquipamento.getValueAt(j, 7).toString()));
+            
+            AluguelDAO.CadDetAluguel(aluguel);
+        }
+        
+        telaDetAluguel.TabelaEquipamento("SELECT * FROM vw_detaluguel where idtabDetLocacao = " + idAluguel + ";");
+        this.dispose();
+    }//GEN-LAST:event_jBtnIncluirEquipamentoActionPerformed
 
 
     public void TabelaEquipamento() {
@@ -454,6 +496,7 @@ public class AdicionarDetAluguel extends javax.swing.JFrame {
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBtbIncluirEquipamento;
+    private javax.swing.JButton jBtnIncluirEquipamento;
     private javax.swing.JButton jBtnRemoveEquipamento;
     private javax.swing.JComboBox jComboBoxEquipamentos;
     private javax.swing.JComboBox jComboBoxFabricanteEquip;
