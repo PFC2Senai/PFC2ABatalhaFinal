@@ -66,7 +66,7 @@ public class Splash extends javax.swing.JFrame {
         setSize(new java.awt.Dimension(511, 259));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-//
+
 //    /**
 //     * @param args the command line arguments
 //     */

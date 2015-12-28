@@ -21,14 +21,15 @@ public class ExibeAuditoria extends javax.swing.JFrame {
      */
     public ExibeAuditoria() {
         initComponents();
-        TabelaAuditoria("SELECT * FROM vw_auditoria;"); 
+        TabelaAuditoria(); 
     }
     
-    public void TabelaAuditoria(String Sql) {
+    public void TabelaAuditoria() {
         
         Statement stmt ;
         
         try { 
+            String Sql = "SELECT * FROM vw_auditoria;";
             
             stmt = getConnection().createStatement();
             ArrayList dados = new ArrayList();               
@@ -123,7 +124,7 @@ public class ExibeAuditoria extends javax.swing.JFrame {
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
+                if ("Windows".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
                 }

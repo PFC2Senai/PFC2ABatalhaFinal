@@ -9,8 +9,6 @@ import funcoes.ClienteDAO;
 import funcoes.Conexao;
 import static funcoes.Conexao.getConnection;
 import funcoes.ContatosDAO;
-//import static funcoes.ContatosDAO.CodEmail;
-//import static funcoes.ContatosDAO.CodTel;
 import funcoes.LembreteDAO;
 import funcoes.ModeloTabela;
 import java.awt.Color;
@@ -50,7 +48,7 @@ public class DetalharCliente extends javax.swing.JFrame {
         CarregaCliente();
         populaComboBox();
         TabelaLembrete2(GetIndice());         
-        TabelaContatos("SELECT * FROM vw_contatos WHERE idcliente = " + codCliente + ";");      
+        TabelaContatos();      
     }
     
     private void CarregaCliente() {
@@ -168,9 +166,10 @@ public class DetalharCliente extends javax.swing.JFrame {
         }          
     } 
     
-    public void TabelaContatos(String Sql) {
+    public void TabelaContatos() {
         
         try { 
+            String Sql = "SELECT * FROM vw_contatos WHERE idcliente = " + codCliente + ";";
             
             stmt = getConnection().createStatement();
             ArrayList dados = new ArrayList();               
@@ -216,23 +215,10 @@ public class DetalharCliente extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        txtSetor = new javax.swing.JTextField();
-        jLabel6 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        txtEmpresa = new javax.swing.JTextField();
-        txtCnpj = new javax.swing.JTextField();
-        jLabel2 = new javax.swing.JLabel();
-        jButtonAr1 = new javax.swing.JButton();
-        jLabel10 = new javax.swing.JLabel();
-        txtEndCep = new javax.swing.JTextField();
         jLabel11 = new javax.swing.JLabel();
-        jLabel12 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
-        jLabel15 = new javax.swing.JLabel();
         jLabel16 = new javax.swing.JLabel();
-        jLabel17 = new javax.swing.JLabel();
         txtEndNum = new javax.swing.JTextField();
         txtEndRua = new javax.swing.JTextField();
         txtEndEstado = new javax.swing.JTextField();
@@ -240,19 +226,32 @@ public class DetalharCliente extends javax.swing.JFrame {
         txtEndCidade = new javax.swing.JTextField();
         txtEndPais = new javax.swing.JTextField();
         jButtonAr3 = new javax.swing.JButton();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTableLembretes = new javax.swing.JTable();
-        jLabel18 = new javax.swing.JLabel();
-        jComboBoxSetores = new javax.swing.JComboBox();
-        jBtnAltDadosP = new javax.swing.JButton();
-        jBtbCancelDadosP = new javax.swing.JButton();
         jBtnAltEndereco = new javax.swing.JButton();
         jBtbCancelEndereco = new javax.swing.JButton();
-        jBtnNovoLembrete = new javax.swing.JButton();
-        jLabel8 = new javax.swing.JLabel();
-        jButtonEditarContato = new javax.swing.JButton();
+        jPanel2 = new javax.swing.JPanel();
+        jLabel3 = new javax.swing.JLabel();
+        txtEmpresa = new javax.swing.JTextField();
+        jButtonAr1 = new javax.swing.JButton();
+        jLabel4 = new javax.swing.JLabel();
+        jBtnAltDadosP = new javax.swing.JButton();
+        jBtbCancelDadosP = new javax.swing.JButton();
+        txtSetor = new javax.swing.JTextField();
+        jComboBoxSetores = new javax.swing.JComboBox();
+        jLabel6 = new javax.swing.JLabel();
+        txtCnpj = new javax.swing.JFormattedTextField();
+        txtEndCep = new javax.swing.JFormattedTextField();
+        jPanel3 = new javax.swing.JPanel();
+        jLabel17 = new javax.swing.JLabel();
+        jLabel15 = new javax.swing.JLabel();
+        jLabel12 = new javax.swing.JLabel();
+        jPanel4 = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
         jTableContatos = new javax.swing.JTable();
+        jButtonEditarContato = new javax.swing.JButton();
+        jPanel5 = new javax.swing.JPanel();
+        jBtnNovoLembrete = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTableLembretes = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -263,38 +262,8 @@ public class DetalharCliente extends javax.swing.JFrame {
         jLabel1.setText("Cliente");
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(38, 22, -1, -1));
 
-        jLabel3.setText("Empresa:");
-        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(38, 80, -1, -1));
-        jPanel1.add(txtSetor, new org.netbeans.lib.awtextra.AbsoluteConstraints(108, 137, 245, -1));
-
-        jLabel6.setText("Setor:");
-        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(38, 137, -1, -1));
-
-        jLabel4.setText("CNPJ:");
-        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(38, 112, -1, -1));
-        jPanel1.add(txtEmpresa, new org.netbeans.lib.awtextra.AbsoluteConstraints(108, 80, 260, -1));
-        jPanel1.add(txtCnpj, new org.netbeans.lib.awtextra.AbsoluteConstraints(108, 109, 260, -1));
-
-        jLabel2.setText("DADOS PESSOAIS:");
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(38, 50, -1, -1));
-
-        jButtonAr1.setText("Editar");
-        jButtonAr1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonAr1ActionPerformed(evt);
-            }
-        });
-        jPanel1.add(jButtonAr1, new org.netbeans.lib.awtextra.AbsoluteConstraints(398, 79, -1, -1));
-
-        jLabel10.setText("ENDEREÇO:");
-        jPanel1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(38, 191, -1, -1));
-        jPanel1.add(txtEndCep, new org.netbeans.lib.awtextra.AbsoluteConstraints(449, 235, 115, -1));
-
         jLabel11.setText("Cep:");
         jPanel1.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(399, 238, -1, -1));
-
-        jLabel12.setText("Rua:");
-        jPanel1.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(38, 300, -1, -1));
 
         jLabel13.setText("Numero:");
         jPanel1.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(398, 300, -1, -1));
@@ -302,14 +271,8 @@ public class DetalharCliente extends javax.swing.JFrame {
         jLabel14.setText("Bairro:");
         jPanel1.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(399, 270, -1, -1));
 
-        jLabel15.setText("Cidade:");
-        jPanel1.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(38, 270, -1, -1));
-
         jLabel16.setText("Estado:");
         jPanel1.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(574, 238, -1, -1));
-
-        jLabel17.setText("País:");
-        jPanel1.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(38, 238, -1, -1));
         jPanel1.add(txtEndNum, new org.netbeans.lib.awtextra.AbsoluteConstraints(448, 301, 69, -1));
         jPanel1.add(txtEndRua, new org.netbeans.lib.awtextra.AbsoluteConstraints(118, 300, 262, -1));
         jPanel1.add(txtEndEstado, new org.netbeans.lib.awtextra.AbsoluteConstraints(615, 235, 114, -1));
@@ -324,58 +287,6 @@ public class DetalharCliente extends javax.swing.JFrame {
             }
         });
         jPanel1.add(jButtonAr3, new org.netbeans.lib.awtextra.AbsoluteConstraints(747, 235, -1, 20));
-
-        jTableLembretes.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-                "Código", "Descrição"
-            }
-        ) {
-            boolean[] canEdit = new boolean [] {
-                false, false
-            };
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
-        jTableLembretes.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jTableLembretes.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jTableLembretesMouseClicked(evt);
-            }
-        });
-        jScrollPane1.setViewportView(jTableLembretes);
-
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(508, 70, 327, 110));
-
-        jLabel18.setText("Lembretes");
-        jPanel1.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(508, 50, -1, -1));
-
-        jComboBoxSetores.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBoxSetoresActionPerformed(evt);
-            }
-        });
-        jPanel1.add(jComboBoxSetores, new org.netbeans.lib.awtextra.AbsoluteConstraints(108, 137, 260, -1));
-
-        jBtnAltDadosP.setText("Salvar");
-        jBtnAltDadosP.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jBtnAltDadosPActionPerformed(evt);
-            }
-        });
-        jPanel1.add(jBtnAltDadosP, new org.netbeans.lib.awtextra.AbsoluteConstraints(398, 108, 70, -1));
-
-        jBtbCancelDadosP.setText("Cancelar");
-        jBtbCancelDadosP.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jBtbCancelDadosPActionPerformed(evt);
-            }
-        });
-        jPanel1.add(jBtbCancelDadosP, new org.netbeans.lib.awtextra.AbsoluteConstraints(398, 137, -1, -1));
 
         jBtnAltEndereco.setText("Salvar");
         jBtnAltEndereco.addActionListener(new java.awt.event.ActionListener() {
@@ -393,28 +304,105 @@ public class DetalharCliente extends javax.swing.JFrame {
         });
         jPanel1.add(jBtbCancelEndereco, new org.netbeans.lib.awtextra.AbsoluteConstraints(747, 300, -1, -1));
 
-        jBtnNovoLembrete.setText("Novo Lembrete");
-        jBtnNovoLembrete.addActionListener(new java.awt.event.ActionListener() {
+        jPanel2.setBackground(new java.awt.Color(223, 237, 253));
+        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Dados da empresa"));
+        jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel3.setText("Empresa:");
+        jPanel2.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, -1, -1));
+        jPanel2.add(txtEmpresa, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 30, 260, -1));
+
+        jButtonAr1.setText("Editar");
+        jButtonAr1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jBtnNovoLembreteActionPerformed(evt);
+                jButtonAr1ActionPerformed(evt);
             }
         });
-        jPanel1.add(jBtnNovoLembrete, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 191, -1, -1));
+        jPanel2.add(jButtonAr1, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 30, -1, -1));
 
-        jLabel8.setText("CONTATOS");
-        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(38, 329, -1, -1));
+        jLabel4.setText("CNPJ:");
+        jPanel2.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 60, -1, -1));
 
-        jButtonEditarContato.setText("Editar");
-
-        org.jdesktop.beansbinding.Binding binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, jTableContatos, org.jdesktop.beansbinding.ELProperty.create("${selectedElement != null}"), jButtonEditarContato, org.jdesktop.beansbinding.BeanProperty.create("enabled"));
-        bindingGroup.addBinding(binding);
-
-        jButtonEditarContato.addActionListener(new java.awt.event.ActionListener() {
+        jBtnAltDadosP.setText("Salvar");
+        jBtnAltDadosP.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonEditarContatoActionPerformed(evt);
+                jBtnAltDadosPActionPerformed(evt);
             }
         });
-        jPanel1.add(jButtonEditarContato, new org.netbeans.lib.awtextra.AbsoluteConstraints(691, 470, -1, -1));
+        jPanel2.add(jBtnAltDadosP, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 60, 70, -1));
+
+        jBtbCancelDadosP.setText("Cancelar");
+        jBtbCancelDadosP.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtbCancelDadosPActionPerformed(evt);
+            }
+        });
+        jPanel2.add(jBtbCancelDadosP, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 90, -1, -1));
+        jPanel2.add(txtSetor, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 90, 245, -1));
+
+        jComboBoxSetores.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBoxSetoresActionPerformed(evt);
+            }
+        });
+        jPanel2.add(jComboBoxSetores, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 90, 260, -1));
+
+        jLabel6.setText("Setor:");
+        jPanel2.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 90, -1, -1));
+
+        try {
+            txtCnpj.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##.###.###/####-##")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+        jPanel2.add(txtCnpj, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 60, 140, -1));
+
+        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 50, 470, 130));
+
+        try {
+            txtEndCep.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("#####-###")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+        jPanel1.add(txtEndCep, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 230, 110, -1));
+
+        jPanel3.setBackground(new java.awt.Color(223, 237, 253));
+        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder("Endereço"));
+
+        jLabel17.setText("País:");
+
+        jLabel15.setText("Cidade:");
+
+        jLabel12.setText("Rua:");
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel17)
+                    .addComponent(jLabel15)
+                    .addComponent(jLabel12))
+                .addContainerGap(781, Short.MAX_VALUE))
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel17)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel15)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel12)
+                .addContainerGap(18, Short.MAX_VALUE))
+        );
+
+        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 210, 840, 130));
+
+        jPanel4.setBackground(new java.awt.Color(223, 237, 253));
+        jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder("Contatos"));
 
         jTableContatos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -440,13 +428,101 @@ public class DetalharCliente extends javax.swing.JFrame {
         });
         jScrollPane3.setViewportView(jTableContatos);
 
-        jPanel1.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(38, 354, 630, 139));
+        jButtonEditarContato.setText("Editar");
+
+        org.jdesktop.beansbinding.Binding binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, jTableContatos, org.jdesktop.beansbinding.ELProperty.create("${selectedElement != null}"), jButtonEditarContato, org.jdesktop.beansbinding.BeanProperty.create("enabled"));
+        bindingGroup.addBinding(binding);
+
+        jButtonEditarContato.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonEditarContatoActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
+        jPanel4.setLayout(jPanel4Layout);
+        jPanel4Layout.setHorizontalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 630, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButtonEditarContato)
+                .addContainerGap(121, Short.MAX_VALUE))
+        );
+        jPanel4Layout.setVerticalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jButtonEditarContato)
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(17, Short.MAX_VALUE))
+        );
+
+        jPanel1.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 370, 840, 190));
+
+        jPanel5.setBackground(new java.awt.Color(223, 237, 253));
+        jPanel5.setBorder(javax.swing.BorderFactory.createTitledBorder("Lembretes"));
+
+        jBtnNovoLembrete.setText("Novo Lembrete");
+        jBtnNovoLembrete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnNovoLembreteActionPerformed(evt);
+            }
+        });
+
+        jTableLembretes.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Código", "Descrição"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jTableLembretes.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jTableLembretes.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTableLembretesMouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(jTableLembretes);
+
+        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
+        jPanel5.setLayout(jPanel5Layout);
+        jPanel5Layout.setHorizontalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jBtnNovoLembrete)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 327, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(11, Short.MAX_VALUE))
+        );
+        jPanel5Layout.setVerticalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
+                .addGap(0, 8, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jBtnNovoLembrete))
+        );
+
+        jPanel1.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 30, 360, 170));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 1034, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 908, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -631,7 +707,6 @@ public class DetalharCliente extends javax.swing.JFrame {
     private javax.swing.JButton jButtonEditarContato;
     private javax.swing.JComboBox jComboBoxSetores;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
@@ -639,21 +714,22 @@ public class DetalharCliente extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
-    private javax.swing.JLabel jLabel18;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel5;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTable jTableContatos;
     private javax.swing.JTable jTableLembretes;
-    private javax.swing.JTextField txtCnpj;
+    private javax.swing.JFormattedTextField txtCnpj;
     private javax.swing.JTextField txtEmpresa;
     private javax.swing.JTextField txtEndBairro;
-    private javax.swing.JTextField txtEndCep;
+    private javax.swing.JFormattedTextField txtEndCep;
     private javax.swing.JTextField txtEndCidade;
     private javax.swing.JTextField txtEndEstado;
     private javax.swing.JTextField txtEndNum;

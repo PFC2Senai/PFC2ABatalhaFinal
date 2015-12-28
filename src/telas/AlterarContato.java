@@ -22,6 +22,8 @@ public final class AlterarContato extends javax.swing.JFrame {
     private int codPessoaContato = 0;
     private int codContato = 0;
     private DetalharCliente telaDetCliente = null;
+    private int codFornecedor = 0;
+    private DetalharFornecedor telaDetFornecedor = null;
     
     /**
      * Creates new form AlterarContato
@@ -39,9 +41,28 @@ public final class AlterarContato extends javax.swing.JFrame {
         this.codPessoaContato = codPessoaCont;
 
         initComponents();
-        CarregaContatos();
+        CarregaContatoCliente();
     }
 
+    public AlterarContato(DetalharFornecedor telaDetForn, int codfornecedor, int codPessoaCont, int codCont) {
+        this.telaDetFornecedor = telaDetForn;
+        this.codContato = codCont;
+        this.codFornecedor = codfornecedor;
+        this.codPessoaContato = codPessoaCont;        
+        initComponents(); 
+        CarregaContatosFornecedor();
+    }
+    
+    private void CarregaContatos(){
+        
+        if (codCliente != 0) {
+            
+        }
+        if (codFornecedor != 0) {
+            
+        }
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -172,10 +193,19 @@ public final class AlterarContato extends javax.swing.JFrame {
         tel.setCel(txtTelCel.getText());
         p.setNomeContato(txtContato.getText());
         ContatosDAO.UpdateTel2(codContato, tel);
-        PessoaContatoDAO.UpdatePessoaContato(p, codPessoaContato);
+        
         ContatosDAO.UpdateEmail2(codContato, txtEmail.getText());
         
-        telaDetCliente.TabelaContatos("SELECT * FROM vw_contatos WHERE idcliente = " + codCliente + ";");
+        if (codCliente != 0) {
+            PessoaContatoDAO.UpdatePessoaContato(p, codPessoaContato);
+            telaDetCliente.TabelaContatos();
+        }
+        
+        if (codFornecedor != 0) {
+            PessoaContatoDAO.UpdatePessoaContFornecedor(p, codPessoaContato);
+            telaDetFornecedor.TabelaContatos();
+        }
+                
         this.dispose();
     }//GEN-LAST:event_jBtnAltContatoActionPerformed
 
@@ -183,7 +213,7 @@ public final class AlterarContato extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_jBtbCancelContatoActionPerformed
 
-    public void CarregaContatos() {
+    public void CarregaContatoCliente() {
         
         try { 
             String Sql = "SELECT * FROM vw_contatos WHERE id_contato = " + codContato + ";";
@@ -207,6 +237,32 @@ public final class AlterarContato extends javax.swing.JFrame {
             Logger.getLogger(ExibeCliente.class.getName()).log(Level.SEVERE, null, erro);
         }          
     }
+    
+    public void CarregaContatosFornecedor() {
+        
+        try { 
+            String Sql = "SELECT * FROM vw_contatofornecedor WHERE id_contato = " + codContato + ";";
+            
+            stmt = getConnection().createStatement();  
+               
+            ResultSet rs;
+            rs = stmt.executeQuery(Sql);            
+            
+                while(rs.next()){
+                    txtContato.setText(String.valueOf(rs.getObject("contato")));
+                    txtTel.setText(String.valueOf(rs.getObject("telefone")));
+                    txtTelCel.setText(String.valueOf(rs.getObject("celular")));
+                    txtEmail.setText(String.valueOf(rs.getObject("email")));                                                      
+                }
+                    
+        } catch (SQLException ex) {
+            Logger.getLogger(AlterarContato.class.getName()).log(Level.SEVERE, null, ex);
+            
+        } catch (Exception erro){
+            Logger.getLogger(ExibeCliente.class.getName()).log(Level.SEVERE, null, erro);
+        }          
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBtbCancelContato;
     private javax.swing.JButton jBtnAltContato;

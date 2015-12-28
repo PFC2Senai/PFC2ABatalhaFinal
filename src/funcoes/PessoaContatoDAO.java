@@ -74,7 +74,7 @@ public class PessoaContatoDAO {
         }
     }
     
-    public static void UpdatePessoaContato(PessoaContato pContato, int id){
+    public static void UpdatePessoaContato(PessoaContato pContato, int id) {
         
         PreparedStatement stmt;
         
@@ -89,6 +89,24 @@ public class PessoaContatoDAO {
         } catch (SQLException ex) {      
             Logger.getLogger(PessoaContatoDAO.class.getName()).log(Level.SEVERE, null, ex);
             throw new RuntimeException("Erro ao Alterar a pessoa contato: ",ex);    
+        }
+    }
+    
+    public static void UpdatePessoaContFornecedor(PessoaContato pContato, int id) {
+        
+        PreparedStatement stmt;
+        
+        try {   
+            String sql = ("UPDATE tabpessoacontatofornecedor SET contato = '" + pContato.getNomeContato()
+                        + "' WHERE idPessoaContatoFornecedor = " + id + ";");
+            
+            stmt = Conexao.getConnection().prepareStatement(sql);                             
+            stmt.executeUpdate();
+            stmt.close();
+
+        } catch (SQLException ex) {      
+            Logger.getLogger(PessoaContatoDAO.class.getName()).log(Level.SEVERE, null, ex);
+            throw new RuntimeException("Erro ao Alterar a pessoa contato fornecedor: ",ex);    
         }
     }
     
