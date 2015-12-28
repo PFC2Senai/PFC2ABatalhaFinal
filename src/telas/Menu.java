@@ -449,7 +449,7 @@ public class Menu extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem32ActionPerformed
 
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
-        new CadastrarServico().setVisible(true);
+        new CadastrarServicoTeste().setVisible(true);
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
     private void jMenuItem33ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem33ActionPerformed

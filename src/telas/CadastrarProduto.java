@@ -142,7 +142,6 @@ public class CadastrarProduto extends javax.swing.JFrame {
         jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 330, -1, -1));
         jPanel1.add(txtProduto, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 80, 240, -1));
 
-        jComboBoxProdutos.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Selecione o produto" }));
         jComboBoxProdutos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jComboBoxProdutosActionPerformed(evt);

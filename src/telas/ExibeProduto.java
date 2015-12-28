@@ -184,7 +184,7 @@ public class ExibeProduto extends javax.swing.JFrame {
             this.dispose();
             int linha = jTableListarProdutos.getSelectedRow();
             indice = (Integer.parseInt(jTableListarProdutos.getValueAt(linha, 0).toString()));
-            new AlterarProduto().setVisible(true);
+            //new AlterarProduto().setVisible(true);
         }else{
             JOptionPane.showMessageDialog(null, "Primeiro selecione um registro.");
         }
