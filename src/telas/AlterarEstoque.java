@@ -1,5 +1,6 @@
 package telas;
 
+
 import atributos.HistoricoProduto;
 import atributos.Produto;
 import funcoes.Conexao;
@@ -59,7 +60,6 @@ public final class AlterarEstoque extends javax.swing.JFrame {
         jLabQuantidade.setVisible(false);
         jComboBoxFornecedor.setVisible(false);
         jLabelFornecedor.setVisible(false);
-
     }
 
     public void mostraCampos() {
