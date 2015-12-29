@@ -394,7 +394,7 @@ public final class DetalharEquipamento extends javax.swing.JFrame {
             stmt.close();
             
         } catch (SQLException ex) {      
-            Logger.getLogger(ExibeProdutos.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ExibeProdutosDetalhe.class.getName()).log(Level.SEVERE, null, ex);
             throw new RuntimeException("Erro ao carregar os dados do Produto: ", ex);    
         }
     }

@@ -15,11 +15,16 @@ import javax.swing.table.DefaultTableModel;
 
 public class CadastrarFornecedor extends javax.swing.JFrame {
 
-        
+    private CadastrarProduto telaCadastrarProduto;    
     /**
      * Creates new form CadastrarFornecedor
      */
     public CadastrarFornecedor() {
+        initComponents();
+    }
+    
+    public CadastrarFornecedor(CadastrarProduto telaCadProduto) {
+        this.telaCadastrarProduto = telaCadProduto;
         initComponents();
     }
 
@@ -70,6 +75,11 @@ public class CadastrarFornecedor extends javax.swing.JFrame {
         jBtnRemoverContato = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosed(java.awt.event.WindowEvent evt) {
+                formWindowClosed(evt);
+            }
+        });
 
         jPanel1.setBackground(new java.awt.Color(223, 237, 253));
 
@@ -233,7 +243,16 @@ public class CadastrarFornecedor extends javax.swing.JFrame {
             new String [] {
                 "Contato", "Telefone", "Celular", "Email"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jTableContatos.getTableHeader().setReorderingAllowed(false);
         jScrollPane1.setViewportView(jTableContatos);
 
         jBtnRemoverContato.setText("Remover contato");
@@ -363,6 +382,7 @@ public class CadastrarFornecedor extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnCadFornecedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadFornecedorActionPerformed
@@ -438,6 +458,10 @@ public class CadastrarFornecedor extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jBtnRemoverContatoActionPerformed
 
+    private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
+        telaCadastrarProduto.populaComboBoxFornecedor();
+    }//GEN-LAST:event_formWindowClosed
+
     public void TabelaContatos() {
         
         try { 
@@ -470,6 +494,8 @@ public class CadastrarFornecedor extends javax.swing.JFrame {
         txtBairro.setText("");
         txtEstado.setText("");
         txtRua.setText("");  
+        ((DefaultTableModel) jTableContatos.getModel()).setNumRows(0);
+        jTableContatos.updateUI();
     }
     
     

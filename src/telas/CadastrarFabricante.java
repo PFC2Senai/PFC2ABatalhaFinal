@@ -126,7 +126,7 @@ public class CadastrarFabricante extends javax.swing.JFrame {
         
         fab.setFabricante(jTextFabricante.getText());
         
-        FabricanteDAO.CadModelo(fab);
+        FabricanteDAO.CadFabricante(fab);
         limparCampos();
     }//GEN-LAST:event_jButton4ActionPerformed
 

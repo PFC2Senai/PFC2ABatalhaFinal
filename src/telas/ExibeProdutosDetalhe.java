@@ -15,7 +15,7 @@ import static telas.ExibeProduto.GetIndiceProduto;
  *
  * @author Josy
  */
-public class ExibeProdutos extends javax.swing.JFrame {
+public class ExibeProdutosDetalhe extends javax.swing.JFrame {
 
     
     Statement stmt ;
@@ -25,7 +25,7 @@ public class ExibeProdutos extends javax.swing.JFrame {
     /**
      * Creates new form ExibeProdutos
      */
-    public ExibeProdutos() {
+    public ExibeProdutosDetalhe() {
         initComponents();
         TabelaProduto("SELECT * FROM vw_produtos WHERE id_prod = " + codProduto + ";");
     }
@@ -216,7 +216,7 @@ public class ExibeProdutos extends javax.swing.JFrame {
             }
             
         } catch (SQLException ex) {
-            Logger.getLogger(ExibeProdutos.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ExibeProdutosDetalhe.class.getName()).log(Level.SEVERE, null, ex);
         }
     }   
     

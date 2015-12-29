@@ -20,7 +20,8 @@ import java.util.logging.Logger;
  * @author graciele
  */
 public class FabricanteDAO {
-    public static void CadModelo(Fabricante fab){
+    
+    public static void CadFabricante(Fabricante fab){
         
         PreparedStatement stmt;
         try {   
