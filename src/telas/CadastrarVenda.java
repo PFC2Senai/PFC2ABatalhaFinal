@@ -654,14 +654,14 @@ public class CadastrarVenda extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jComboModeloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboModeloActionPerformed
-        idProdutoComboBox();
+        idModeloComboBox();
         if (jComboModelo.getSelectedItem() != null) {
             modelo = jComboModelo.getSelectedItem().toString();
         }
     }//GEN-LAST:event_jComboModeloActionPerformed
 
     private void jComboFabricanteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboFabricanteActionPerformed
-        idProdutoComboBox();
+        idFabricanteComboBox();
         if (jComboFabricante.getSelectedItem() != null) {
             fabricante = jComboFabricante.getSelectedItem().toString();
         }
