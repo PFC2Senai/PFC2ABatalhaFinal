@@ -637,7 +637,7 @@ public class CadastrarVenda extends javax.swing.JFrame {
         int linha = jTableProduto.getSelectedRow();
         
         
-        double totalParcial = Double.parseDouble(jTableProduto.getValueAt(linha, 8).toString());
+        double totalParcial = Double.parseDouble(jTableProduto.getValueAt(linha, 6).toString());
         
         totalPeca -= totalParcial;
         
