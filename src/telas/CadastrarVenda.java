@@ -68,7 +68,7 @@ public class CadastrarVenda extends javax.swing.JFrame {
     }
     
     
-    public void TabelaVendas(String Sql){
+    public void TabelaVendas(String Sql) {
         
         try {
             stmt = getConnection().createStatement();

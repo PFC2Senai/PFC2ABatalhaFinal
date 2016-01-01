@@ -19,8 +19,16 @@ public class ExibeSetor extends javax.swing.JFrame {
      */
     public ExibeSetor() {
         initComponents();
-        jBtnNovoSetor.setVisible(false);
         TabelaSetor();
+        ocultaCampos();
+    }
+    
+    private void ocultaCampos() {
+        jBtnCadastrarSetor.setVisible(false);
+        jBtnAlterarSetor.setVisible(false);
+        jBtnCancelarCadSetor.setVisible(false);
+        jBtnCancelarAlterarSetor.setVisible(false);
+        txtSetor.setEnabled(false);
     }
     
     /**
@@ -64,19 +72,23 @@ public class ExibeSetor extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTableListarSetores = new javax.swing.JTable();
-        jBtnEditar = new javax.swing.JButton();
-        jBtnNovo = new javax.swing.JButton();
+        jBtnAlterarSetor = new javax.swing.JButton();
         jBtnNovoSetor = new javax.swing.JButton();
-        txtSetor = new javax.swing.JTextField();
+        jBtnCadastrarSetor = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         jBtnExcluirSetor = new javax.swing.JButton();
         jBtnSair = new javax.swing.JButton();
-        jBtnCancelar = new javax.swing.JButton();
+        jBtnEditarSetor = new javax.swing.JButton();
+        txtSetor = new javax.swing.JTextField();
+        jBtnCancelarAlterarSetor = new javax.swing.JButton();
+        jBtnCancelarCadSetor = new javax.swing.JButton();
 
         jButton2.setText("jButton2");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+
+        jPanel1.setBackground(new java.awt.Color(252, 252, 230));
 
         jTableListarSetores.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -106,29 +118,26 @@ public class ExibeSetor extends javax.swing.JFrame {
             jTableListarSetores.getColumnModel().getColumn(1).setPreferredWidth(50);
         }
 
-        jBtnEditar.setText("Alterar");
-        jBtnEditar.addActionListener(new java.awt.event.ActionListener() {
+        jBtnAlterarSetor.setText("Alterar");
+        jBtnAlterarSetor.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jBtnEditarActionPerformed(evt);
+                jBtnAlterarSetorActionPerformed(evt);
             }
         });
 
-        jBtnNovo.setText("Novo");
-        jBtnNovo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jBtnNovoActionPerformed(evt);
-            }
-        });
-
-        jBtnNovoSetor.setText("Cadastrar");
+        jBtnNovoSetor.setText("Novo");
         jBtnNovoSetor.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jBtnNovoSetorActionPerformed(evt);
             }
         });
 
-        org.jdesktop.beansbinding.Binding binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, jTableListarSetores, org.jdesktop.beansbinding.ELProperty.create("${selectedElement != null}"), txtSetor, org.jdesktop.beansbinding.BeanProperty.create("enabled"));
-        bindingGroup.addBinding(binding);
+        jBtnCadastrarSetor.setText("Cadastrar");
+        jBtnCadastrarSetor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnCadastrarSetorActionPerformed(evt);
+            }
+        });
 
         jLabel3.setText("Setor:");
 
@@ -149,10 +158,28 @@ public class ExibeSetor extends javax.swing.JFrame {
             }
         });
 
-        jBtnCancelar.setText("Cancelar");
-        jBtnCancelar.addActionListener(new java.awt.event.ActionListener() {
+        jBtnEditarSetor.setText("Editar");
+
+        org.jdesktop.beansbinding.Binding binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, jTableListarSetores, org.jdesktop.beansbinding.ELProperty.create("${selectedElement != null}"), jBtnEditarSetor, org.jdesktop.beansbinding.BeanProperty.create("enabled"));
+        bindingGroup.addBinding(binding);
+
+        jBtnEditarSetor.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jBtnCancelarActionPerformed(evt);
+                jBtnEditarSetorActionPerformed(evt);
+            }
+        });
+
+        jBtnCancelarAlterarSetor.setText("Cancelar");
+        jBtnCancelarAlterarSetor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnCancelarAlterarSetorActionPerformed(evt);
+            }
+        });
+
+        jBtnCancelarCadSetor.setText("Cancelar");
+        jBtnCancelarCadSetor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnCancelarCadSetorActionPerformed(evt);
             }
         });
 
@@ -162,49 +189,63 @@ public class ExibeSetor extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(68, 68, 68)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jBtnSair)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addGroup(jPanel1Layout.createSequentialGroup()
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(jPanel1Layout.createSequentialGroup()
-                                    .addComponent(jBtnNovo)
-                                    .addGap(18, 18, 18)
-                                    .addComponent(jBtnNovoSetor)
-                                    .addGap(18, 18, 18)
-                                    .addComponent(jBtnCancelar)
-                                    .addGap(27, 27, 27)
-                                    .addComponent(jBtnEditar))
-                                .addComponent(jLabel1))
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jBtnExcluirSetor))
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 466, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGroup(jPanel1Layout.createSequentialGroup()
-                            .addComponent(jLabel3)
-                            .addGap(18, 18, 18)
-                            .addComponent(txtSetor))))
-                .addContainerGap(77, Short.MAX_VALUE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jBtnExcluirSetor)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 485, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jBtnSair))
+                    .addComponent(jLabel1)
+                    .addComponent(jBtnEditarSetor)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jBtnNovoSetor)
+                            .addComponent(jLabel3))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(txtSetor)
+                                .addGap(57, 57, 57))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addGap(4, 4, 4)
+                                        .addComponent(jBtnAlterarSetor)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(jBtnCancelarAlterarSetor))
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addComponent(jBtnCadastrarSetor)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(jBtnCancelarCadSetor)
+                                        .addGap(2, 2, 2)))
+                                .addGap(0, 0, Short.MAX_VALUE)))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(30, 30, 30)
+                .addGap(39, 39, 39)
                 .addComponent(jLabel1)
                 .addGap(27, 27, 27)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(txtSetor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(28, 28, 28)
+                .addGap(21, 21, 21)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jBtnNovo)
-                    .addComponent(jBtnEditar)
                     .addComponent(jBtnNovoSetor)
-                    .addComponent(jBtnExcluirSetor)
-                    .addComponent(jBtnCancelar))
-                .addGap(27, 27, 27)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 361, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jBtnCadastrarSetor)
+                    .addComponent(jBtnCancelarCadSetor))
                 .addGap(18, 18, 18)
-                .addComponent(jBtnSair)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jBtnEditarSetor)
+                    .addComponent(jBtnAlterarSetor)
+                    .addComponent(jBtnCancelarAlterarSetor))
+                .addGap(27, 27, 27)
+                .addComponent(jBtnExcluirSetor)
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jBtnSair)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 361, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(24, Short.MAX_VALUE))
         );
 
@@ -231,16 +272,17 @@ public class ExibeSetor extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_jBtnSairActionPerformed
 
-    private void jBtnNovoSetorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnNovoSetorActionPerformed
+    private void jBtnCadastrarSetorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnCadastrarSetorActionPerformed
         
         Setor setor = new Setor();
         setor.setSetor(txtSetor.getText());
         SetorDAO.CadSetor(setor);
         limparCampos();
         TabelaSetor();
-        jBtnNovoSetor.setVisible(false);
-        jBtnNovo.setVisible(true);
-    }//GEN-LAST:event_jBtnNovoSetorActionPerformed
+        jBtnCadastrarSetor.setVisible(false);
+        jBtnCancelarCadSetor.setVisible(false);
+        jBtnNovoSetor.setVisible(true);
+    }//GEN-LAST:event_jBtnCadastrarSetorActionPerformed
 
     private void jBtnExcluirSetorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnExcluirSetorActionPerformed
 
@@ -249,13 +291,17 @@ public class ExibeSetor extends javax.swing.JFrame {
         limparCampos();
     }//GEN-LAST:event_jBtnExcluirSetorActionPerformed
 
-    private void jBtnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnEditarActionPerformed
+    private void jBtnAlterarSetorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnAlterarSetorActionPerformed
         
         Setor setor = new Setor();        
         setor.setSetor(txtSetor.getText());
         SetorDAO.UpdateSetor(setor, indice);
         TabelaSetor();
-    }//GEN-LAST:event_jBtnEditarActionPerformed
+        limparCampos();
+        jBtnAlterarSetor.setVisible(false);
+        jBtnCancelarAlterarSetor.setVisible(false);
+        jBtnEditarSetor.setVisible(true);
+    }//GEN-LAST:event_jBtnAlterarSetorActionPerformed
 
     private void jTableListarSetoresMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableListarSetoresMouseClicked
 
@@ -264,26 +310,46 @@ public class ExibeSetor extends javax.swing.JFrame {
         indice = Integer.parseInt(jTableListarSetores.getValueAt(linha, 0).toString());
     }//GEN-LAST:event_jTableListarSetoresMouseClicked
 
-    private void jBtnNovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnNovoActionPerformed
+    private void jBtnNovoSetorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnNovoSetorActionPerformed
         txtSetor.setText("");
-        jBtnNovoSetor.setVisible(true);
-        jBtnNovo.setVisible(false);
-    }//GEN-LAST:event_jBtnNovoActionPerformed
+        jBtnCadastrarSetor.setVisible(true);
+        jBtnCancelarCadSetor.setVisible(true);
+        jBtnNovoSetor.setVisible(false);
+    }//GEN-LAST:event_jBtnNovoSetorActionPerformed
 
-    private void jBtnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnCancelarActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jBtnCancelarActionPerformed
+    private void jBtnEditarSetorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnEditarSetorActionPerformed
+        jBtnEditarSetor.setVisible(false);
+        jBtnCancelarAlterarSetor.setVisible(true);
+        jBtnAlterarSetor.setVisible(true);
+    }//GEN-LAST:event_jBtnEditarSetorActionPerformed
+
+    private void jBtnCancelarCadSetorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnCancelarCadSetorActionPerformed
+        limparCampos();
+        jBtnCancelarCadSetor.setVisible(false);
+        jBtnCadastrarSetor.setVisible(false);
+        jBtnNovoSetor.setVisible(true);
+    }//GEN-LAST:event_jBtnCancelarCadSetorActionPerformed
+
+    private void jBtnCancelarAlterarSetorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnCancelarAlterarSetorActionPerformed
+        limparCampos();
+        jBtnAlterarSetor.setVisible(false);
+        jBtnCancelarAlterarSetor.setVisible(false);
+        jBtnEditarSetor.setVisible(true);
+    }//GEN-LAST:event_jBtnCancelarAlterarSetorActionPerformed
    
     private void limparCampos() {       
         txtSetor.setText("");
+        txtSetor.setEnabled(false);
     }
 
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jBtnCancelar;
-    private javax.swing.JButton jBtnEditar;
+    private javax.swing.JButton jBtnAlterarSetor;
+    private javax.swing.JButton jBtnCadastrarSetor;
+    private javax.swing.JButton jBtnCancelarAlterarSetor;
+    private javax.swing.JButton jBtnCancelarCadSetor;
+    private javax.swing.JButton jBtnEditarSetor;
     private javax.swing.JButton jBtnExcluirSetor;
-    private javax.swing.JButton jBtnNovo;
     private javax.swing.JButton jBtnNovoSetor;
     private javax.swing.JButton jBtnSair;
     private javax.swing.JButton jButton2;
