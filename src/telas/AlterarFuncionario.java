@@ -739,6 +739,7 @@ public class AlterarFuncionario extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jTextDataAdmicaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextDataAdmicaoActionPerformed

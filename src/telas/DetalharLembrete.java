@@ -189,6 +189,7 @@ public class DetalharLembrete extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
     private void CarregaLembrete() {
 

@@ -1,15 +1,18 @@
 package telas;
 
-import atributos.Equipamento;
+import funcoes.Conexao;
 import static funcoes.Conexao.getConnection;
 import funcoes.EquipamentoDAO;
 import funcoes.ModeloTabela;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import javax.swing.ListSelectionModel;
 
 /**
@@ -20,6 +23,7 @@ public class ExibeEquipamento extends javax.swing.JFrame {
 
     
     Statement stmt ;
+    private PreparedStatement pst;
     private static int indice;
     
     /**
@@ -28,6 +32,9 @@ public class ExibeEquipamento extends javax.swing.JFrame {
     public ExibeEquipamento() {
         initComponents();
         TabelaEquipamento("SELECT * FROM vw_equipamentos; ");
+        populaComboBoxModelo();
+        populaComboBoxFabricante();
+        populaComboBoxFornecedor();
         jBtnEditar.setEnabled(false);       
     }
 
@@ -41,30 +48,21 @@ public class ExibeEquipamento extends javax.swing.JFrame {
     private void initComponents() {
         bindingGroup = new org.jdesktop.beansbinding.BindingGroup();
 
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTableListarEquipamento = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
         jBtnNovo = new javax.swing.JButton();
         jBtnEditar = new javax.swing.JButton();
         jBtnExcluirEquipamento = new javax.swing.JButton();
         jBtnSair = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
+        txtBuscar = new javax.swing.JTextField();
+        jLabel3 = new javax.swing.JLabel();
+        jComboBoxFornecedor = new javax.swing.JComboBox();
+        jComboBoxFabricante = new javax.swing.JComboBox();
+        jComboBoxModelo = new javax.swing.JComboBox();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTableListarEquipamento = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-
-        jTableListarEquipamento.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-
-            }
-        ));
-        jTableListarEquipamento.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jTableListarEquipamentoMouseClicked(evt);
-            }
-        });
-        jScrollPane1.setViewportView(jTableListarEquipamento);
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel1.setText("Equipamentos");
@@ -78,7 +76,7 @@ public class ExibeEquipamento extends javax.swing.JFrame {
 
         jBtnEditar.setText("Detalhar Equipamento");
 
-        org.jdesktop.beansbinding.Binding binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, jTableListarEquipamento, org.jdesktop.beansbinding.ELProperty.create("${selectedElement != null}"), jBtnEditar, org.jdesktop.beansbinding.BeanProperty.create("enabled"));
+        org.jdesktop.beansbinding.Binding binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, new javax.swing.JTable(), org.jdesktop.beansbinding.ELProperty.create("${selectedElement != null}"), jBtnEditar, org.jdesktop.beansbinding.BeanProperty.create("enabled"));
         bindingGroup.addBinding(binding);
 
         jBtnEditar.addActionListener(new java.awt.event.ActionListener() {
@@ -101,50 +99,95 @@ public class ExibeEquipamento extends javax.swing.JFrame {
             }
         });
 
+        jLabel2.setText("Pesquisar Equipamento:");
+
+        txtBuscar.addCaretListener(new javax.swing.event.CaretListener() {
+            public void caretUpdate(javax.swing.event.CaretEvent evt) {
+                txtBuscarCaretUpdate(evt);
+            }
+        });
+
+        jLabel3.setText("Filtrar:");
+
+        jComboBoxFornecedor.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Selecione o fornecedor" }));
+
+        jComboBoxFabricante.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Selecione o fabricante" }));
+
+        jComboBoxModelo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Selecione o modelo" }));
+
+        jTableListarEquipamento.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+
+            }
+        ));
+        jTableListarEquipamento.getTableHeader().setReorderingAllowed(false);
+        jScrollPane2.setViewportView(jTableListarEquipamento);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap(20, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(35, 35, 35)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jBtnSair)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 693, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(jLabel1)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jBtnNovo)
-                        .addGap(125, 125, 125)
+                        .addGap(74, 74, 74)
                         .addComponent(jBtnEditar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(97, 97, 97)
                         .addComponent(jBtnExcluirEquipamento)
-                        .addGap(27, 27, 27))))
+                        .addGap(221, 221, 221)
+                        .addComponent(jBtnSair))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jLabel2)
+                                .addComponent(jLabel3))
+                            .addGap(18, 18, 18)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(jComboBoxFornecedor, 0, 210, Short.MAX_VALUE)
+                                .addComponent(txtBuscar))
+                            .addGap(18, 18, 18)
+                            .addComponent(jComboBoxFabricante, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(18, 18, 18)
+                            .addComponent(jComboBoxModelo, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(33, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(21, 21, 21)
+                .addGap(26, 26, 26)
                 .addComponent(jLabel1)
-                .addGap(29, 29, 29)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(txtBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(21, 21, 21)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(jComboBoxFornecedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jComboBoxFabricante, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jComboBoxModelo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 356, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jBtnSair)
                     .addComponent(jBtnNovo)
                     .addComponent(jBtnEditar)
                     .addComponent(jBtnExcluirEquipamento))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 292, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jBtnSair)
                 .addGap(27, 27, 27))
         );
 
         bindingGroup.bind();
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     
@@ -184,11 +227,6 @@ public class ExibeEquipamento extends javax.swing.JFrame {
     }
     
     
-    private void jTableListarEquipamentoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableListarEquipamentoMouseClicked
-        int linha = jTableListarEquipamento.getSelectedRow();
-        indice = (Integer.parseInt(jTableListarEquipamento.getValueAt(linha, 0).toString()));                        
-    }//GEN-LAST:event_jTableListarEquipamentoMouseClicked
-
     private void jBtnNovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnNovoActionPerformed
         new CadastrarEquipamento().setVisible(true);
     }//GEN-LAST:event_jBtnNovoActionPerformed
@@ -207,14 +245,81 @@ public class ExibeEquipamento extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_jBtnSairActionPerformed
 
+    private void txtBuscarCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_txtBuscarCaretUpdate
+        TabelaEquipamento("select * from vw_equipamentos where equipamento like '%" + txtBuscar.getText() + "%';");
+    }//GEN-LAST:event_txtBuscarCaretUpdate
+
+    private void populaComboBoxFabricante() {
+        
+        Connection conexao = Conexao.getConnection();
+        ResultSet rs;
+        String sql = "select * from tabfabricante";
+        
+        try{
+            pst = conexao.prepareStatement(sql);
+            rs = pst.executeQuery();
+            
+            while(rs.next()) {
+                jComboBoxFabricante.addItem(rs.getString("fabricante"));
+            }
+            
+        }catch(SQLException ex){
+            JOptionPane.showMessageDialog(null, ex);
+        }
+    }
+    
+    private void populaComboBoxModelo() {
+        
+        Connection conexao = Conexao.getConnection();
+        ResultSet rs;
+        String sql = "select * from tabmodelo";
+        
+        try{
+            pst = conexao.prepareStatement(sql);
+            rs = pst.executeQuery();
+            
+            while(rs.next()) {
+                jComboBoxModelo.addItem(rs.getString("modelo"));
+            }
+            
+        }catch(SQLException ex) {
+            JOptionPane.showMessageDialog(null, ex);
+        }
+    }
+    
+    private void populaComboBoxFornecedor() {
+        
+        Connection conexao = Conexao.getConnection();
+        ResultSet rs;
+        String sql = "select * from tabfornecedor";
+        
+        try{
+            pst = conexao.prepareStatement(sql);
+            rs = pst.executeQuery();
+            
+            while(rs.next()) {
+                jComboBoxFornecedor.addItem(rs.getString("fornecedor"));
+            }
+            
+        }catch(SQLException ex) {
+            JOptionPane.showMessageDialog(null, ex);
+        }
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBtnEditar;
     private javax.swing.JButton jBtnExcluirEquipamento;
     private javax.swing.JButton jBtnNovo;
     private javax.swing.JButton jBtnSair;
+    private javax.swing.JComboBox jComboBoxFabricante;
+    private javax.swing.JComboBox jComboBoxFornecedor;
+    private javax.swing.JComboBox jComboBoxModelo;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTableListarEquipamento;
+    private javax.swing.JTextField txtBuscar;
     private org.jdesktop.beansbinding.BindingGroup bindingGroup;
     // End of variables declaration//GEN-END:variables
 }

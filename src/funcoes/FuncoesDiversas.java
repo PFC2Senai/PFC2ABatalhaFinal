@@ -33,7 +33,7 @@ public class FuncoesDiversas {
         Date d = null ;
         
         try {
-            DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+            DateFormat formatter = new SimpleDateFormat("yyyyMMdd");
             String dt1 = formatter.format(data);
             
             d = (Date)formatter.parse(dt1);

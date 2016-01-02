@@ -126,6 +126,7 @@ public class ExibeFornecedor extends javax.swing.JFrame {
         bindingGroup.bind();
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     public static int GetIndiceForn() {         

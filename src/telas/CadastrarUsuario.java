@@ -152,6 +152,7 @@ public class CadastrarUsuario extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jComboTipoUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboTipoUserActionPerformed

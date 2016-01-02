@@ -90,22 +90,22 @@ public class AlterarFabricante extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(id)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(20, 20, 20)
-                                .addComponent(jLabel2)))
-                        .addGap(28, 28, 28)
-                        .addComponent(jTextFabricante))
                     .addComponent(jLabel1)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(20, 20, 20)
-                        .addComponent(jButtonCancelar)
-                        .addGap(37, 37, 37)
-                        .addComponent(jButtonLimpar)
-                        .addGap(38, 38, 38)
-                        .addComponent(jButtonSalvar)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(id)
+                                    .addComponent(jLabel2))
+                                .addGap(28, 28, 28)
+                                .addComponent(jTextFabricante))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jButtonCancelar)
+                                .addGap(37, 37, 37)
+                                .addComponent(jButtonLimpar)
+                                .addGap(38, 38, 38)
+                                .addComponent(jButtonSalvar)))))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -128,6 +128,7 @@ public class AlterarFabricante extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelarActionPerformed
