@@ -29,11 +29,11 @@ public class FuncoesDiversas {
     return time;   
     }
     
-    public static Date FormataData(Date data){
+    public static Date FormataData(Date data) {
         Date d = null ;
         
         try {
-            DateFormat formatter = new SimpleDateFormat("yyyyMMdd");
+            DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
             String dt1 = formatter.format(data);
             
             d = (Date)formatter.parse(dt1);

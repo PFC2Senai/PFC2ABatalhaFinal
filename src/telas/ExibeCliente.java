@@ -1,10 +1,13 @@
 package telas;
 
-
 import atributos.Cliente;
 import funcoes.ClienteDAO;
+import funcoes.Conexao;
 import static funcoes.Conexao.getConnection;
 import funcoes.ModeloTabela;
+import java.awt.Color;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -16,77 +19,83 @@ import javax.swing.ListSelectionModel;
 
 /**
  *
- * @author S015365
- * pfc2senai@gmail.com
- * 
+ * @author S015365 pfc2senai@gmail.com
+ *
  */
 public final class ExibeCliente extends javax.swing.JFrame {
-    
-    Statement stmt ;
+
+    Statement stmt;
     Cliente cliente = new Cliente();
     private static int indice;
     private static int idCntato;
+    private PreparedStatement pst;
+    private int codSetor;
+    private int linhaTabela;
+    String opcaoPesquisa = "empresa";
+
     /**
      * Creates new form CadastroDeFuncionarios
      */
-    public ExibeCliente() {        
+    public ExibeCliente() {
         initComponents();
-        TabelaCliente("select  * from vw_cliente;");       
+        populaComboBox();
+        TabelaCliente("select  * from vw_cliente;");
     }
-    
-    public static int GetIndice() {         
+
+    public static int GetIndice() {
         return indice;
     }
-    
+
     public boolean CodigoCliente() {
-        
+
         boolean valida = false;
-        
-        if(jTableListarClientes.getSelectedRow() != -1) {
+
+        if (jTableListarClientes.getSelectedRow() != -1) {
             valida = true;
             this.dispose();
-            int linha = jTableListarClientes.getSelectedRow();        
+            int linha = jTableListarClientes.getSelectedRow();
             indice = (Integer.parseInt(jTableListarClientes.getValueAt(linha, 0).toString()));
-        }else {
+        } else {
             JOptionPane.showMessageDialog(null, "Primeiro selecione um registro.");
-        }  
+        }
         return valida;
     }
-    
-    public void TabelaCliente(String Sql) {
-        
-        try { 
-            
-            stmt = getConnection().createStatement();
-            ArrayList dados = new ArrayList();               
-            String [] Colunas = {"Código","Empresa", "CNPJ", "Setor", "Estado"};
-               
-            ResultSet rs;
-            rs = stmt.executeQuery(Sql);            
-            
-                while(rs.next()){
-                    dados.add(new Object[]{ rs.getObject("idCliente"),rs.getObject("empresa"),
-                                            rs.getObject("cnpj"),rs.getObject("setor"), 
-                                            rs.getObject("estado")});            
-                }
 
-                    for (int i = 0; i < 5; i++){
-                        ModeloTabela modelo = new ModeloTabela(dados, Colunas);
-                        jTableListarClientes.setModel(modelo);
-                        jTableListarClientes.getColumnModel().getColumn(i).setPreferredWidth(150);
-                        jTableListarClientes.getColumnModel().getColumn(i).setResizable(false);
-                        jTableListarClientes.getTableHeader().setReorderingAllowed(false);
-                        jTableListarClientes.setAutoResizeMode(jTableListarClientes.AUTO_RESIZE_OFF);
-                        jTableListarClientes.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-                    }
-                    
+    public void TabelaCliente(String Sql) {
+
+        try {
+
+            stmt = getConnection().createStatement();
+            ArrayList dados = new ArrayList();
+            String[] Colunas = {"Código", "Empresa", "CNPJ", "Setor", "Estado"};
+
+            ResultSet rs;
+            rs = stmt.executeQuery(Sql);
+
+            while (rs.next()) {
+                dados.add(new Object[]{rs.getObject("idCliente"), rs.getObject("empresa"),
+                    rs.getObject("cnpj"), rs.getObject("setor"),
+                    rs.getObject("estado")});
+            }
+
+            for (int i = 0; i < 5; i++) {
+                ModeloTabela modelo = new ModeloTabela(dados, Colunas);
+                jTableListarClientes.setModel(modelo);
+                jTableListarClientes.getColumnModel().getColumn(i).setPreferredWidth(150);
+                jTableListarClientes.getColumnModel().getColumn(i).setResizable(false);
+                jTableListarClientes.getTableHeader().setReorderingAllowed(false);
+                jTableListarClientes.setAutoResizeMode(jTableListarClientes.AUTO_RESIZE_OFF);
+                jTableListarClientes.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+            }
+
         } catch (SQLException ex) {
             Logger.getLogger(ExibeCliente.class.getName()).log(Level.SEVERE, null, ex);
-            
-        } catch (Exception erro){
+
+        } catch (Exception erro) {
             Logger.getLogger(ExibeCliente.class.getName()).log(Level.SEVERE, null, erro);
-        }          
+        }
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -105,9 +114,18 @@ public final class ExibeCliente extends javax.swing.JFrame {
         jBtExcluirCliente = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
         jBtLembrete = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
+        txtBuscar = new javax.swing.JTextField();
+        jLabel4 = new javax.swing.JLabel();
+        jComboBoxSetores = new javax.swing.JComboBox();
+        jLabel5 = new javax.swing.JLabel();
+        jComboUf = new javax.swing.JComboBox();
+        jComboBoxOpcaoPesquisa = new javax.swing.JComboBox();
+        jBtnBuscar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
+        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel1.setText("Cadastro de Clientes");
 
         jTableListarClientes.setModel(new javax.swing.table.DefaultTableModel(
@@ -158,90 +176,245 @@ public final class ExibeCliente extends javax.swing.JFrame {
             }
         });
 
+        jLabel2.setText("Pesquisar:");
+
+        txtBuscar.addCaretListener(new javax.swing.event.CaretListener() {
+            public void caretUpdate(javax.swing.event.CaretEvent evt) {
+                txtBuscarCaretUpdate(evt);
+            }
+        });
+
+        jLabel4.setText("Filtrar:");
+
+        jComboBoxSetores.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBoxSetoresActionPerformed(evt);
+            }
+        });
+
+        jLabel5.setText("Estado:");
+
+        jComboUf.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Selecione", "AC", "AL", "AP", "AM", "BA", "CE", "DF", "ES", "GO", "MA", "MT", "MS", "MG", "PA", "PB", "PR", "PE", "PI", "RJ", "RN", "RS", "RO", "RR", "SC", "SP", "SE", "TO" }));
+        jComboUf.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboUfActionPerformed(evt);
+            }
+        });
+
+        jComboBoxOpcaoPesquisa.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Selecione a opção de pesquisa", "Código", "Nome", "CNPJ" }));
+        jComboBoxOpcaoPesquisa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBoxOpcaoPesquisaActionPerformed(evt);
+            }
+        });
+
+        jBtnBuscar.setText("Buscar");
+        jBtnBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnBuscarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addGap(35, 35, 35)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel1)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(305, 305, 305)
-                        .addComponent(jLabel1))
+                        .addComponent(jButton1)
+                        .addGap(66, 66, 66)
+                        .addComponent(jBtnEditar)
+                        .addGap(76, 76, 76)
+                        .addComponent(jBtExcluirCliente)
+                        .addGap(77, 77, 77)
+                        .addComponent(jButton4)
+                        .addGap(152, 152, 152)
+                        .addComponent(jBtLembrete))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 702, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(35, 35, 35)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel4))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jComboBoxOpcaoPesquisa, 0, 204, Short.MAX_VALUE)
+                            .addComponent(jComboBoxSetores, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(36, 36, 36)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(txtBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 256, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jButton1)
-                                .addGap(66, 66, 66)
-                                .addComponent(jBtnEditar)
-                                .addGap(76, 76, 76)
-                                .addComponent(jBtExcluirCliente)
-                                .addGap(77, 77, 77)
-                                .addComponent(jButton4)
-                                .addGap(152, 152, 152)
-                                .addComponent(jBtLembrete))
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 702, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(31, Short.MAX_VALUE))
+                                .addComponent(jLabel5)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jComboUf, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jBtnBuscar)))
+                .addContainerGap(85, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(23, 23, 23)
+                .addComponent(jLabel1)
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 248, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(txtBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jComboBoxOpcaoPesquisa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jBtnBuscar))
                 .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4)
+                    .addComponent(jComboBoxSetores, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel5)
+                    .addComponent(jComboUf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 326, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(20, 20, 20)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
                     .addComponent(jBtnEditar)
                     .addComponent(jBtExcluirCliente)
                     .addComponent(jButton4)
                     .addComponent(jBtLembrete))
-                .addGap(20, 20, 20))
+                .addGap(21, 21, 21))
         );
 
         bindingGroup.bind();
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jBtExcluirClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtExcluirClienteActionPerformed
 
-        if (CodigoCliente()){
+        if (CodigoCliente()) {
             int codContato = ClienteDAO.idContato(indice);
-            ClienteDAO.ExcluirCliente(codContato);                   
+            ClienteDAO.ExcluirCliente(codContato);
             TabelaCliente("select  * from vw_cliente;");
         }
     }//GEN-LAST:event_jBtExcluirClienteActionPerformed
-   
+
     private void jBtnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnEditarActionPerformed
-        
-        if (CodigoCliente()){
-            new DetalharCliente().setVisible(true); 
+
+        if (CodigoCliente()) {
+            new DetalharCliente().setVisible(true);
         }
     }//GEN-LAST:event_jBtnEditarActionPerformed
 
     private void jBtLembreteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtLembreteActionPerformed
-       
-        if (CodigoCliente()){
-            new CadastrarLembrete(indice).setVisible(true); 
-        }        
+
+        if (CodigoCliente()) {
+            new CadastrarLembrete(indice).setVisible(true);
+        }
     }//GEN-LAST:event_jBtLembreteActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
 
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    private void jComboBoxSetoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxSetoresActionPerformed
+        TabelaCliente("select  * from vw_cliente where " + opcaoPesquisa
+                + " like '%" + txtBuscar.getText() + "%' and setor = '" + jComboBoxSetores.getSelectedItem().toString() + "';");
+    }//GEN-LAST:event_jComboBoxSetoresActionPerformed
+
+    private void txtBuscarCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_txtBuscarCaretUpdate
+        TabelaCliente("select  * from vw_cliente where " + opcaoPesquisa
+                + " like '%" + txtBuscar.getText() + "%';");
+    }//GEN-LAST:event_txtBuscarCaretUpdate
+
+    private void jComboBoxOpcaoPesquisaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxOpcaoPesquisaActionPerformed
+        switch (jComboBoxOpcaoPesquisa.getSelectedItem().toString()) {
+            case "Código":
+                opcaoPesquisa = "idcliente";
+                linhaTabela = 0;
+                break;
+            case "Nome":
+                opcaoPesquisa = "empresa";
+                linhaTabela = 1;
+                break;
+            case "CNPJ":
+                opcaoPesquisa = "cnpj";
+                linhaTabela = 2;
+                break;
+        }
+    }//GEN-LAST:event_jComboBoxOpcaoPesquisaActionPerformed
+
+    private void jBtnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnBuscarActionPerformed
+
+        int posi = 0;
+        boolean valida = false;
+
+        for (int j = 0; j < jTableListarClientes.getRowCount(); j++) {
+
+            if (jComboBoxSetores.getSelectedItem().toString().equalsIgnoreCase(jTableListarClientes.getValueAt(j, 3).toString())) {
+                valida = true;
+                posi = j;
+                break;
+            } else {
+                valida = false;
+            }
+        }
+
+        if (valida) {
+            jTableListarClientes.getSelectionModel().setSelectionInterval(posi, posi);
+            jTableListarClientes.setSelectionBackground(Color.green);
+        }
+    }//GEN-LAST:event_jBtnBuscarActionPerformed
+
+    private void jComboUfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboUfActionPerformed
+       
+        if (jComboBoxSetores.getSelectedIndex() != 0) {
+            TabelaCliente("select  * from vw_cliente where " + opcaoPesquisa
+                    + " like '%" + txtBuscar.getText() + "%' "
+                    + "and setor = '" + jComboBoxSetores.getSelectedItem().toString() + "' "
+                    + "and estado = '" + jComboUf.getSelectedItem().toString() + "';");
+        } else {
+            TabelaCliente("select  * from vw_cliente where " + opcaoPesquisa
+                    + " like '%" + txtBuscar.getText() + "%' "
+                    + "and estado = '" + jComboUf.getSelectedItem().toString() + "';");
+        }
+    }//GEN-LAST:event_jComboUfActionPerformed
+
+    private void populaComboBox() {
+
+        Connection conexao = Conexao.getConnection();
+        ResultSet rs;
+        String sql = "select * from tabSetor";
+
+        try {
+            pst = conexao.prepareStatement(sql);
+            rs = pst.executeQuery();
+
+            jComboBoxSetores.addItem("Selecione o Setor");
+            while (rs.next()) {
+                jComboBoxSetores.addItem(rs.getString("setor"));
+            }
+
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, ex);
+        }
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBtExcluirCliente;
     private javax.swing.JButton jBtLembrete;
+    private javax.swing.JButton jBtnBuscar;
     private javax.swing.JButton jBtnEditar;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton4;
+    private javax.swing.JComboBox jComboBoxOpcaoPesquisa;
+    private javax.swing.JComboBox jComboBoxSetores;
+    private javax.swing.JComboBox jComboUf;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTableListarClientes;
+    private javax.swing.JTextField txtBuscar;
     private org.jdesktop.beansbinding.BindingGroup bindingGroup;
     // End of variables declaration//GEN-END:variables
 }

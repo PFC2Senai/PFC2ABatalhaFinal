@@ -2,7 +2,6 @@ package telas;
 
 import atributos.Aluguel;
 import atributos.OrdemServico;
-import atributos.Servico;
 import atributos.Usuario;
 import funcoes.AluguelDAO;
 import funcoes.Conexao;
@@ -17,7 +16,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-import telas.CadastrarCliente;
 
 /**
  *
