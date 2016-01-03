@@ -21,11 +21,10 @@ import javax.swing.ListSelectionModel;
  */
 public class ExibeEquipamento extends javax.swing.JFrame {
 
-    
-    Statement stmt ;
+    Statement stmt;
     private PreparedStatement pst;
     private static int indice;
-    
+
     /**
      * Creates new form ExibeEquipamento
      */
@@ -35,7 +34,7 @@ public class ExibeEquipamento extends javax.swing.JFrame {
         populaComboBoxModelo();
         populaComboBoxFabricante();
         populaComboBoxFornecedor();
-        jBtnEditar.setEnabled(false);       
+        jBtnEditar.setEnabled(false);
     }
 
     /**
@@ -76,7 +75,7 @@ public class ExibeEquipamento extends javax.swing.JFrame {
 
         jBtnEditar.setText("Detalhar Equipamento");
 
-        org.jdesktop.beansbinding.Binding binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, new javax.swing.JTable(), org.jdesktop.beansbinding.ELProperty.create("${selectedElement != null}"), jBtnEditar, org.jdesktop.beansbinding.BeanProperty.create("enabled"));
+        org.jdesktop.beansbinding.Binding binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, jTableListarEquipamento, org.jdesktop.beansbinding.ELProperty.create("${selectedElement != null}"), jBtnEditar, org.jdesktop.beansbinding.BeanProperty.create("enabled"));
         bindingGroup.addBinding(binding);
 
         jBtnEditar.addActionListener(new java.awt.event.ActionListener() {
@@ -110,10 +109,25 @@ public class ExibeEquipamento extends javax.swing.JFrame {
         jLabel3.setText("Filtrar:");
 
         jComboBoxFornecedor.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Selecione o fornecedor" }));
+        jComboBoxFornecedor.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jComboBoxFornecedorItemStateChanged(evt);
+            }
+        });
 
         jComboBoxFabricante.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Selecione o fabricante" }));
+        jComboBoxFabricante.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jComboBoxFabricanteItemStateChanged(evt);
+            }
+        });
 
         jComboBoxModelo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Selecione o modelo" }));
+        jComboBoxModelo.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jComboBoxModeloItemStateChanged(evt);
+            }
+        });
 
         jTableListarEquipamento.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -190,49 +204,51 @@ public class ExibeEquipamento extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    
-    public void TabelaEquipamento(String Sql){
-        
-        try { 
-            
-            stmt = getConnection().createStatement();
-            ArrayList dados = new ArrayList();               
-            String [] Colunas = {"Código","Equipamento", "Fornecedor", "Fabricante", "Modelo"};
-               
-            ResultSet rs;
-            rs = stmt.executeQuery(Sql);            
-            
-                while(rs.next()){
-                    dados.add(new Object[]{ rs.getObject("idDetEquipamento"),rs.getObject("equipamento"),
-                                            rs.getObject("fornecedor"),rs.getObject("fabricante"), 
-                                            rs.getObject("modelo")});            
-                }
+    public void TabelaEquipamento(String Sql) {
 
-                    for (int i = 0; i < 5; i++){
-                        ModeloTabela modelo = new ModeloTabela(dados, Colunas);
-                        jTableListarEquipamento.setModel(modelo);
-                        jTableListarEquipamento.getColumnModel().getColumn(i).setPreferredWidth(150);
-                        jTableListarEquipamento.getColumnModel().getColumn(i).setResizable(false);
-                        jTableListarEquipamento.getTableHeader().setReorderingAllowed(false);
-                        jTableListarEquipamento.setAutoResizeMode(jTableListarEquipamento.AUTO_RESIZE_OFF);
-                        jTableListarEquipamento.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-                    }
-                    
+        try {
+
+            stmt = getConnection().createStatement();
+            ArrayList dados = new ArrayList();
+            String[] Colunas = {"Código", "Equipamento", "Fornecedor", "Fabricante", "Modelo"};
+
+            ResultSet rs;
+            rs = stmt.executeQuery(Sql);
+
+            while (rs.next()) {
+                dados.add(new Object[]{rs.getObject("idDetEquipamento"), rs.getObject("equipamento"),
+                    rs.getObject("fornecedor"), rs.getObject("fabricante"),
+                    rs.getObject("modelo")});
+            }
+
+            for (int i = 0; i < 5; i++) {
+                ModeloTabela modelo = new ModeloTabela(dados, Colunas);
+                jTableListarEquipamento.setModel(modelo);
+                jTableListarEquipamento.getColumnModel().getColumn(i).setPreferredWidth(150);
+                jTableListarEquipamento.getColumnModel().getColumn(i).setResizable(false);
+                jTableListarEquipamento.getTableHeader().setReorderingAllowed(false);
+                jTableListarEquipamento.setAutoResizeMode(jTableListarEquipamento.AUTO_RESIZE_OFF);
+                jTableListarEquipamento.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+            }
+
         } catch (SQLException ex) {
             Logger.getLogger(ExibeCliente.class.getName()).log(Level.SEVERE, null, ex);
-            
-        } catch (Exception erro){
+
+        } catch (Exception erro) {
             Logger.getLogger(ExibeCliente.class.getName()).log(Level.SEVERE, null, erro);
-        }         
+        }
     }
-    
-    
+
+
     private void jBtnNovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnNovoActionPerformed
         new CadastrarEquipamento().setVisible(true);
     }//GEN-LAST:event_jBtnNovoActionPerformed
 
     private void jBtnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnEditarActionPerformed
-        new DetalharEquipamento(indice,this).setVisible(true);
+        
+        int linha = jTableListarEquipamento.getSelectedRow();
+        indice = (Integer.parseInt(jTableListarEquipamento.getValueAt(linha, 0).toString()));
+        new DetalharEquipamento(indice, this).setVisible(true);
     }//GEN-LAST:event_jBtnEditarActionPerformed
 
     private void jBtnExcluirEquipamentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnExcluirEquipamentoActionPerformed
@@ -246,66 +262,166 @@ public class ExibeEquipamento extends javax.swing.JFrame {
     }//GEN-LAST:event_jBtnSairActionPerformed
 
     private void txtBuscarCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_txtBuscarCaretUpdate
-        TabelaEquipamento("select * from vw_equipamentos where equipamento like '%" + txtBuscar.getText() + "%';");
+        TabelaEquipamento("select * from vw_equipamentos where equipamento "
+                + "like '%" + txtBuscar.getText() + "%';");
     }//GEN-LAST:event_txtBuscarCaretUpdate
 
-    private void populaComboBoxFabricante() {
+    private void jComboBoxFornecedorItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jComboBoxFornecedorItemStateChanged
         
+        if (jComboBoxFabricante.getSelectedIndex() != 0 && jComboBoxModelo.getSelectedIndex() != 0) {
+            
+            TabelaEquipamento("select  * from vw_equipamentos where equipamento "
+                    + "like '%" + txtBuscar.getText() + "%' "
+                    + "and fornecedor = '" + jComboBoxFornecedor.getSelectedItem().toString() + "'"
+                    + "and fabricante = '" + jComboBoxFabricante.getSelectedItem().toString() + "'"
+                    + "and modelo = '" + jComboBoxModelo.getSelectedItem().toString() + "';");
+        
+        } else if (jComboBoxFabricante.getSelectedIndex() != 0 && jComboBoxModelo.getSelectedIndex() == 0) {
+            
+            TabelaEquipamento("select  * from vw_equipamentos where equipamento "
+                    + "like '%" + txtBuscar.getText() + "%' "
+                    + "and fornecedor = '" + jComboBoxFornecedor.getSelectedItem().toString() + "'"
+                    + "and fabricante = '" + jComboBoxFabricante.getSelectedItem().toString() + "' ;");
+            
+        } else if (jComboBoxModelo.getSelectedIndex() != 0 && jComboBoxFabricante.getSelectedIndex() == 0) {
+            
+            TabelaEquipamento("select  * from vw_equipamentos where equipamento "
+                    + "like '%" + txtBuscar.getText() + "%' "
+                    + "and fornecedor = '" + jComboBoxFornecedor.getSelectedItem().toString() + "'"
+                    + "and modelo = '" + jComboBoxModelo.getSelectedItem().toString() + "';");
+            
+        } else if (jComboBoxFabricante.getSelectedIndex() == 0 && jComboBoxModelo.getSelectedIndex() == 0) {
+            
+            TabelaEquipamento("select  * from vw_equipamentos where equipamento "
+                    + "like '%" + txtBuscar.getText() + "%' "
+                    + "and fornecedor = '" + jComboBoxFornecedor.getSelectedItem().toString() + "';");
+        }
+        
+    }//GEN-LAST:event_jComboBoxFornecedorItemStateChanged
+
+    private void jComboBoxFabricanteItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jComboBoxFabricanteItemStateChanged
+        
+        if (jComboBoxFornecedor.getSelectedIndex() != 0 && jComboBoxModelo.getSelectedIndex() != 0) {
+            
+            TabelaEquipamento("select  * from vw_equipamentos where equipamento "
+                    + "like '%" + txtBuscar.getText() + "%' "
+                    + "and fornecedor = '" + jComboBoxFornecedor.getSelectedItem().toString() + "'"
+                    + "and fabricante = '" + jComboBoxFabricante.getSelectedItem().toString() + "'"
+                    + "and modelo = '" + jComboBoxModelo.getSelectedItem().toString() + "';");
+        
+        } else if (jComboBoxFornecedor.getSelectedIndex() != 0 && jComboBoxModelo.getSelectedIndex() == 0) {
+            
+            TabelaEquipamento("select  * from vw_equipamentos where equipamento "
+                    + "like '%" + txtBuscar.getText() + "%' "
+                    + "and fornecedor = '" + jComboBoxFornecedor.getSelectedItem().toString() + "'"
+                    + "and fabricante = '" + jComboBoxFabricante.getSelectedItem().toString() + "';");
+        
+        } else if (jComboBoxModelo.getSelectedIndex() != 0 && jComboBoxFornecedor.getSelectedIndex() == 0) {
+            
+            TabelaEquipamento("select  * from vw_equipamentos where equipamento "
+                    + "like '%" + txtBuscar.getText() + "%' "
+                    + "and fabricante = '" + jComboBoxFabricante.getSelectedItem().toString() + "'"
+                    + "and modelo = '" + jComboBoxModelo.getSelectedItem().toString() + "';");
+        
+        } else if (jComboBoxFornecedor.getSelectedIndex() == 0 && jComboBoxModelo.getSelectedIndex() == 0) {
+            
+            TabelaEquipamento("select  * from vw_equipamentos where equipamento "
+                    + "like '%" + txtBuscar.getText() + "%' "
+                    + "and fabricante = '" + jComboBoxFabricante.getSelectedItem().toString() + "';");
+        }
+        
+    }//GEN-LAST:event_jComboBoxFabricanteItemStateChanged
+
+    private void jComboBoxModeloItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jComboBoxModeloItemStateChanged
+        
+        if (jComboBoxFornecedor.getSelectedIndex() != 0 && jComboBoxFabricante.getSelectedIndex() != 0) {
+            
+            TabelaEquipamento("select  * from vw_equipamentos where equipamento "
+                    + "like '%" + txtBuscar.getText() + "%' "
+                    + "and fornecedor = '" + jComboBoxFornecedor.getSelectedItem().toString() + "'"
+                    + "and fabricante = '" + jComboBoxFabricante.getSelectedItem().toString() + "'"
+                    + "and modelo = '" + jComboBoxModelo.getSelectedItem().toString() + "';");
+        
+        } else if (jComboBoxFornecedor.getSelectedIndex() != 0 && jComboBoxFabricante.getSelectedIndex() == 0) {
+            
+            TabelaEquipamento("select  * from vw_equipamentos where equipamento "
+                    + "like '%" + txtBuscar.getText() + "%' "
+                    + "and fornecedor = '" + jComboBoxFornecedor.getSelectedItem().toString() + "'"
+                    + "and modelo = '" + jComboBoxModelo.getSelectedItem().toString() + "';");
+        
+        } else if (jComboBoxFabricante.getSelectedIndex() != 0 && jComboBoxFornecedor.getSelectedIndex() == 0) {
+            
+            TabelaEquipamento("select  * from vw_equipamentos where equipamento "
+                    + "like '%" + txtBuscar.getText() + "%' "
+                    + "and fabricante = '" + jComboBoxFabricante.getSelectedItem().toString() + "'"
+                    + "and modelo = '" + jComboBoxModelo.getSelectedItem().toString() + "';");
+        
+        } else if (jComboBoxFabricante.getSelectedIndex() == 0 && jComboBoxFornecedor.getSelectedIndex() == 0) {
+            
+            TabelaEquipamento("select  * from vw_equipamentos where equipamento "
+                    + "like '%" + txtBuscar.getText() + "%' "
+                    + "and modelo = '" + jComboBoxModelo.getSelectedItem().toString() + "';");
+        }
+        
+    }//GEN-LAST:event_jComboBoxModeloItemStateChanged
+
+    private void populaComboBoxFabricante() {
+
         Connection conexao = Conexao.getConnection();
         ResultSet rs;
         String sql = "select * from tabfabricante";
-        
-        try{
+
+        try {
             pst = conexao.prepareStatement(sql);
             rs = pst.executeQuery();
-            
-            while(rs.next()) {
+
+            while (rs.next()) {
                 jComboBoxFabricante.addItem(rs.getString("fabricante"));
             }
-            
-        }catch(SQLException ex){
+
+        } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, ex);
         }
     }
-    
+
     private void populaComboBoxModelo() {
-        
+
         Connection conexao = Conexao.getConnection();
         ResultSet rs;
         String sql = "select * from tabmodelo";
-        
-        try{
+
+        try {
             pst = conexao.prepareStatement(sql);
             rs = pst.executeQuery();
-            
-            while(rs.next()) {
+
+            while (rs.next()) {
                 jComboBoxModelo.addItem(rs.getString("modelo"));
             }
-            
-        }catch(SQLException ex) {
+
+        } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, ex);
         }
     }
-    
+
     private void populaComboBoxFornecedor() {
-        
+
         Connection conexao = Conexao.getConnection();
         ResultSet rs;
         String sql = "select * from tabfornecedor";
-        
-        try{
+
+        try {
             pst = conexao.prepareStatement(sql);
             rs = pst.executeQuery();
-            
-            while(rs.next()) {
+
+            while (rs.next()) {
                 jComboBoxFornecedor.addItem(rs.getString("fornecedor"));
             }
-            
-        }catch(SQLException ex) {
+
+        } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, ex);
         }
     }
-    
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBtnEditar;
     private javax.swing.JButton jBtnExcluirEquipamento;

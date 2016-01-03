@@ -157,6 +157,9 @@
           </StringArray>
         </Property>
       </Properties>
+      <Events>
+        <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="jComboBoxFornecedorItemStateChanged"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JComboBox" name="jComboBoxFabricante">
       <Properties>
@@ -166,6 +169,9 @@
           </StringArray>
         </Property>
       </Properties>
+      <Events>
+        <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="jComboBoxFabricanteItemStateChanged"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JComboBox" name="jComboBoxModelo">
       <Properties>
@@ -175,6 +181,9 @@
           </StringArray>
         </Property>
       </Properties>
+      <Events>
+        <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="jComboBoxModeloItemStateChanged"/>
+      </Events>
     </Component>
     <Container class="javax.swing.JScrollPane" name="jScrollPane2">
       <AuxValues>
