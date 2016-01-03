@@ -20,6 +20,7 @@ public class CadastrarFornecedor extends javax.swing.JFrame {
      * Creates new form CadastrarFornecedor
      */
     public CadastrarFornecedor() {
+        this.telaCadastrarProduto = null;
         initComponents();
     }
     
@@ -459,7 +460,10 @@ public class CadastrarFornecedor extends javax.swing.JFrame {
     }//GEN-LAST:event_jBtnRemoverContatoActionPerformed
 
     private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
-        telaCadastrarProduto.populaComboBoxFornecedor();
+        
+        if (telaCadastrarProduto != null) { 
+            telaCadastrarProduto.populaComboBoxFornecedor();
+        }
     }//GEN-LAST:event_formWindowClosed
 
     public void TabelaContatos() {
@@ -498,8 +502,6 @@ public class CadastrarFornecedor extends javax.swing.JFrame {
         jTableContatos.updateUI();
     }
     
-    
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCadFornecedor;
     private javax.swing.JButton btnCancelar;
