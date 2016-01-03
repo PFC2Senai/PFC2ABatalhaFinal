@@ -316,8 +316,35 @@ public final class ExibeCliente extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jComboBoxSetoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxSetoresActionPerformed
-        TabelaCliente("select  * from vw_cliente where " + opcaoPesquisa
-                + " like '%" + txtBuscar.getText() + "%' and setor = '" + jComboBoxSetores.getSelectedItem().toString() + "';");
+        
+        if (jComboUf.getSelectedIndex() != 0) {
+            
+            TabelaCliente("select  * from vw_cliente where " + opcaoPesquisa
+                    + " like '%" + txtBuscar.getText() + "%' "
+                    + "and setor = '" + jComboBoxSetores.getSelectedItem().toString() + "' "
+                    + "and estado = '" + jComboUf.getSelectedItem().toString() + "';");
+        
+        }else if (jComboUf.getSelectedIndex() == 0) {
+            
+            TabelaCliente("select  * from vw_cliente where " + opcaoPesquisa
+                    + " like '%" + txtBuscar.getText() + "%' "
+                    + "and setor = '" + jComboBoxSetores.getSelectedItem().toString() + "' ;");
+        
+        }
+        
+        if (jComboUf.getSelectedIndex() != 0 && jComboBoxSetores.getSelectedIndex() == 0) {
+            
+            TabelaCliente("select  * from vw_cliente where " + opcaoPesquisa
+                    + " like '%" + txtBuscar.getText() + "%' "
+                    + "and estado = '" + jComboUf.getSelectedItem().toString() + "';");
+        }
+        
+        if (jComboUf.getSelectedIndex() == 0 && jComboBoxSetores.getSelectedIndex() == 0) {
+            
+            TabelaCliente("select  * from vw_cliente where " + opcaoPesquisa
+                    + " like '%" + txtBuscar.getText() + "%';");
+        }
+
     }//GEN-LAST:event_jComboBoxSetoresActionPerformed
 
     private void txtBuscarCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_txtBuscarCaretUpdate
@@ -365,16 +392,32 @@ public final class ExibeCliente extends javax.swing.JFrame {
     }//GEN-LAST:event_jBtnBuscarActionPerformed
 
     private void jComboUfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboUfActionPerformed
-       
+
         if (jComboBoxSetores.getSelectedIndex() != 0) {
+            
             TabelaCliente("select  * from vw_cliente where " + opcaoPesquisa
                     + " like '%" + txtBuscar.getText() + "%' "
                     + "and setor = '" + jComboBoxSetores.getSelectedItem().toString() + "' "
                     + "and estado = '" + jComboUf.getSelectedItem().toString() + "';");
-        } else {
+            
+        } else if (jComboBoxSetores.getSelectedIndex() == 0) {
+            
             TabelaCliente("select  * from vw_cliente where " + opcaoPesquisa
                     + " like '%" + txtBuscar.getText() + "%' "
                     + "and estado = '" + jComboUf.getSelectedItem().toString() + "';");
+            
+        }
+        
+        if (jComboBoxSetores.getSelectedIndex() != 0 && jComboUf.getSelectedIndex() == 0) {
+            
+            TabelaCliente("select  * from vw_cliente where " + opcaoPesquisa
+                    + " like '%" + txtBuscar.getText() + "%' "
+                    + "and setor = '" + jComboBoxSetores.getSelectedItem().toString() + "' ;");
+        }
+        if (jComboBoxSetores.getSelectedIndex() == 0 && jComboUf.getSelectedIndex() == 0) {
+            
+            TabelaCliente("select  * from vw_cliente where " + opcaoPesquisa
+                    + " like '%" + txtBuscar.getText() + "%';");
         }
     }//GEN-LAST:event_jComboUfActionPerformed
 
