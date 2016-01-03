@@ -18,7 +18,8 @@ import javax.swing.ListSelectionModel;
  * @author graciele
  */
 public class ExibeModelo extends javax.swing.JFrame {
-    Statement stmt ;
+
+    Statement stmt;
     Modelo modelo = new Modelo();
     private static int indice;
 
@@ -27,29 +28,28 @@ public class ExibeModelo extends javax.swing.JFrame {
      */
     public ExibeModelo() {
         initComponents();
-        TabelaUsuario("select * from tabmodelo;");  
+        TabelaModelo("select * from tabmodelo;");
     }
-    
-    public static int GetIndice() {         
+
+    public static int GetIndice() {
         return indice;
     }
-    
-    public void TabelaUsuario(String Sql){
-        
+
+    public void TabelaModelo(String Sql) {
+
         try {
             stmt = getConnection().createStatement();
-            ArrayList dados = new ArrayList();               
-            String [] Colunas = {"Código do Modelo","Modelo"};
-               
+            ArrayList dados = new ArrayList();
+            String[] Colunas = {"Código", "Modelo"};
+
             ResultSet rs;
-            rs = stmt.executeQuery(Sql);            
-            //rs.first();
-            
-            while(rs.next()){
-               dados.add(new Object[]{rs.getObject("idtabModelo"),rs.getObject("modelo")});            
+            rs = stmt.executeQuery(Sql);
+
+            while (rs.next()) {
+                dados.add(new Object[]{rs.getObject("idtabModelo"), rs.getObject("modelo")});
             }
-                        
-            for (int i = 0; i < 2; i++){
+
+            for (int i = 0; i < 2; i++) {
                 ModeloTabela modelo = new ModeloTabela(dados, Colunas);
                 jTableListarUsuarios.setModel(modelo);
                 jTableListarUsuarios.getColumnModel().getColumn(i).setPreferredWidth(150);
@@ -58,10 +58,10 @@ public class ExibeModelo extends javax.swing.JFrame {
                 jTableListarUsuarios.setAutoResizeMode(jTableListarUsuarios.AUTO_RESIZE_OFF);
                 jTableListarUsuarios.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
             }
-            
+
         } catch (SQLException ex) {
             Logger.getLogger(ExibeModelo.class.getName()).log(Level.SEVERE, null, ex);
-        }             
+        }
     }
 
     /**
@@ -80,11 +80,13 @@ public class ExibeModelo extends javax.swing.JFrame {
         jButton5 = new javax.swing.JButton();
         jButton6 = new javax.swing.JButton();
         jButton7 = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
+        txtBuscar = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        jLabel1.setText("Cadastro de Modelos");
+        jLabel1.setText("Modelos");
 
         jTableListarUsuarios.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -124,6 +126,14 @@ public class ExibeModelo extends javax.swing.JFrame {
             }
         });
 
+        jLabel2.setText("Pesquisar:");
+
+        txtBuscar.addCaretListener(new javax.swing.event.CaretListener() {
+            public void caretUpdate(javax.swing.event.CaretEvent evt) {
+                txtBuscarCaretUpdate(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -144,24 +154,33 @@ public class ExibeModelo extends javax.swing.JFrame {
                         .addGap(38, 38, 38)
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 479, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(153, 153, 153)
-                        .addComponent(jLabel1)))
+                        .addGap(36, 36, 36)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel1)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel2)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(txtBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addContainerGap(40, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(23, 23, 23)
                 .addComponent(jLabel1)
+                .addGap(30, 30, 30)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(txtBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 326, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton3)
                     .addComponent(jButton5)
                     .addComponent(jButton6)
                     .addComponent(jButton7))
-                .addContainerGap())
+                .addGap(20, 20, 20))
         );
 
         pack();
@@ -173,43 +192,49 @@ public class ExibeModelo extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-        if(jTableListarUsuarios.getSelectedRow() != -1){
+        if (jTableListarUsuarios.getSelectedRow() != -1) {
             this.dispose();
             int linha = jTableListarUsuarios.getSelectedRow();
             indice = (Integer.parseInt(jTableListarUsuarios.getValueAt(linha, 0).toString()));
             new AlterarModelo().setVisible(true);
-        }else{
+        } else {
             JOptionPane.showMessageDialog(null, "Primeiro selecione um registro.");
         }
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
-        if(jTableListarUsuarios.getSelectedRow() != -1) {
+        if (jTableListarUsuarios.getSelectedRow() != -1) {
 
             int linha = jTableListarUsuarios.getSelectedRow();
             modelo.setIdModelo(Integer.parseInt(jTableListarUsuarios.getValueAt(linha, 0).toString()));
 
             int cod = ModeloDAO.idModelo(modelo.getIdModelo());
             ModeloDAO.ExcluirModelo(cod);
-            //            ContatosDAO.ExcluirEndereco(codContato);
-            //            ContatosDAO.ExcluirTel(codContato);
-            //            ContatosDAO.ExcluirEmail(codContato);
+            
         } else {
             JOptionPane.showMessageDialog(null, "Primeiro selecione um registro.");
         }
-        TabelaUsuario("select  * from tabmodelo;");
+        TabelaModelo("select  * from tabmodelo;");
     }//GEN-LAST:event_jButton6ActionPerformed
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
         this.dispose();
     }//GEN-LAST:event_jButton7ActionPerformed
+
+    private void txtBuscarCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_txtBuscarCaretUpdate
+        TabelaModelo("select  * from tabmodelo where modelo "
+                + "like '%" + txtBuscar.getText() + "%';");
+    }//GEN-LAST:event_txtBuscarCaretUpdate
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton7;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTableListarUsuarios;
+    private javax.swing.JTextField txtBuscar;
     // End of variables declaration//GEN-END:variables
 }

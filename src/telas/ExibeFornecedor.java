@@ -18,6 +18,7 @@ public class ExibeFornecedor extends javax.swing.JFrame {
 
     private static int indice;
     Statement stmt ;
+    private String opcaoPesquisa = "fornecedor";
     /**
      * Creates new form ExibeFornecedor
      */
@@ -43,6 +44,11 @@ public class ExibeFornecedor extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTableListarFornecedores = new javax.swing.JTable();
+        txtBuscar = new javax.swing.JTextField();
+        jLabel2 = new javax.swing.JLabel();
+        jComboBoxOpcaoPesquisa = new javax.swing.JComboBox();
+        jLabel3 = new javax.swing.JLabel();
+        jComboUf = new javax.swing.JComboBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -73,6 +79,7 @@ public class ExibeFornecedor extends javax.swing.JFrame {
 
         jBtnVoltar.setText("Voltar");
 
+        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel1.setText("Fornecedores");
 
         jTableListarFornecedores.setModel(new javax.swing.table.DefaultTableModel(
@@ -85,6 +92,30 @@ public class ExibeFornecedor extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(jTableListarFornecedores);
 
+        txtBuscar.addCaretListener(new javax.swing.event.CaretListener() {
+            public void caretUpdate(javax.swing.event.CaretEvent evt) {
+                txtBuscarCaretUpdate(evt);
+            }
+        });
+
+        jLabel2.setText("Pesquisar por:");
+
+        jComboBoxOpcaoPesquisa.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Selecione a opção de pesquisa", "Código", "Fabricante", "CEP" }));
+        jComboBoxOpcaoPesquisa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBoxOpcaoPesquisaActionPerformed(evt);
+            }
+        });
+
+        jLabel3.setText("Filtrar:");
+
+        jComboUf.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Selecione o estado", "AC", "AL", "AP", "AM", "BA", "CE", "DF", "ES", "GO", "MA", "MT", "MS", "MG", "PA", "PB", "PR", "PE", "PI", "RJ", "RN", "RS", "RO", "RR", "SC", "SP", "SE", "TO" }));
+        jComboUf.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboUfActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -93,27 +124,48 @@ public class ExibeFornecedor extends javax.swing.JFrame {
                 .addGap(24, 24, 24)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jBtnNovoFornecedor)
-                        .addGap(77, 77, 77)
-                        .addComponent(jBtnDetalhar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jBtExcluirFornecedor)
-                        .addGap(77, 77, 77)
-                        .addComponent(jBtnVoltar))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 636, Short.MAX_VALUE))
-                .addGap(22, 22, 22))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(305, 305, 305)
-                .addComponent(jLabel1)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(jLabel1)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jBtnNovoFornecedor)
+                                .addGap(77, 77, 77)
+                                .addComponent(jBtnDetalhar)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jBtExcluirFornecedor)
+                                .addGap(77, 77, 77)
+                                .addComponent(jBtnVoltar))
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 636, Short.MAX_VALUE))
+                        .addGap(22, 22, 22))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel3))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jComboBoxOpcaoPesquisa, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jComboUf, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(18, 18, 18)
+                        .addComponent(txtBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 296, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(61, 61, 61))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(33, 33, 33)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 196, Short.MAX_VALUE)
+                .addGap(34, 34, 34)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2)
+                    .addComponent(jComboBoxOpcaoPesquisa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 25, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(jComboUf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(28, 28, 28)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jBtnNovoFornecedor)
@@ -195,15 +247,53 @@ public class ExibeFornecedor extends javax.swing.JFrame {
         TabelaFornecedor("select  * from vw_fornecedores;");
     }//GEN-LAST:event_jBtExcluirFornecedorActionPerformed
 
+    private void txtBuscarCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_txtBuscarCaretUpdate
+        
+        TabelaFornecedor("select  * from vw_fornecedores where " + opcaoPesquisa
+            + " like '%" + txtBuscar.getText() + "%';");
+    }//GEN-LAST:event_txtBuscarCaretUpdate
+
+    private void jComboBoxOpcaoPesquisaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxOpcaoPesquisaActionPerformed
+        switch (jComboBoxOpcaoPesquisa.getSelectedItem().toString()) {
+            case "Código":
+            opcaoPesquisa = "id_forn";
+            break;
+            case "Fabricante":
+            opcaoPesquisa = "fornecedor";
+            break;
+            case "CEP":
+            opcaoPesquisa = "cep";
+            break;
+        }
+    }//GEN-LAST:event_jComboBoxOpcaoPesquisaActionPerformed
+
+    private void jComboUfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboUfActionPerformed
+
+        if (jComboUf.getSelectedIndex() == 0) {
+
+            TabelaFornecedor("select  * from vw_fornecedores where " + opcaoPesquisa
+                + " like '%" + txtBuscar.getText() + "%';");
+        }else{
+            TabelaFornecedor("select  * from vw_fornecedores where " + opcaoPesquisa
+                + " like '%" + txtBuscar.getText() + "%' "
+                + "and estado = '" + jComboUf.getSelectedItem().toString() + "';");
+        }
+    }//GEN-LAST:event_jComboUfActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBtExcluirFornecedor;
     private javax.swing.JButton jBtnDetalhar;
     private javax.swing.JButton jBtnNovoFornecedor;
     private javax.swing.JButton jBtnVoltar;
+    private javax.swing.JComboBox jComboBoxOpcaoPesquisa;
+    private javax.swing.JComboBox jComboUf;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTableListarFornecedores;
+    private javax.swing.JTextField txtBuscar;
     private org.jdesktop.beansbinding.BindingGroup bindingGroup;
     // End of variables declaration//GEN-END:variables
 }

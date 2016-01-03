@@ -23,8 +23,8 @@ public class FuncionarioDAO {
             stmt = Conexao.getConnection().prepareStatement(sql);      
   
                 stmt.setString(1, func.getFuncionario());  
-                stmt.setString(3, func.getRg());
-                stmt.setString(2, func.getCpf());               
+                stmt.setString(2, func.getRg());
+                stmt.setString(3, func.getCpf());               
                 stmt.setString(4, func.getCargo());
                 stmt.setString(5, (String.valueOf(func.getSalario())));
                 stmt.setString(6, (String.valueOf(func.getIdContato())));
