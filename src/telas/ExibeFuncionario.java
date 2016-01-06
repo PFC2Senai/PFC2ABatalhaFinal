@@ -128,12 +128,12 @@ public class ExibeFuncionario extends javax.swing.JFrame {
         });
         getContentPane().add(jComboBoxOpcaoPesquisa, new org.netbeans.lib.awtextra.AbsoluteConstraints(87, 68, -1, -1));
 
-        txtBuscar.addCaretListener(new javax.swing.event.CaretListener() {
-            public void caretUpdate(javax.swing.event.CaretEvent evt) {
-                txtBuscarCaretUpdate(evt);
+        txtBuscar.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtBuscarKeyReleased(evt);
             }
         });
-        getContentPane().add(txtBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 70, 208, -1));
+        getContentPane().add(txtBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 70, 300, -1));
 
         try {
             txtRg.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##.###.###-##")));
@@ -289,11 +289,6 @@ public class ExibeFuncionario extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jComboBoxOpcaoPesquisaActionPerformed
 
-    private void txtBuscarCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_txtBuscarCaretUpdate
-        TabelaFuncionario("select  * from tabfuncionario where " + opcaoPesquisa
-                + " like '%" + txtBuscar.getText() + "%';");
-    }//GEN-LAST:event_txtBuscarCaretUpdate
-
     private void txtCpfCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_txtCpfCaretUpdate
         TabelaFuncionario("select  * from tabfuncionario where cpf like '%" + txtCpf.getText() + "%';");
     }//GEN-LAST:event_txtCpfCaretUpdate
@@ -301,6 +296,11 @@ public class ExibeFuncionario extends javax.swing.JFrame {
     private void txtRgCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_txtRgCaretUpdate
         TabelaFuncionario("select  * from tabfuncionario where rg like '%" + txtRg.getText() + "%';");
     }//GEN-LAST:event_txtRgCaretUpdate
+
+    private void txtBuscarKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBuscarKeyReleased
+        TabelaFuncionario("select  * from tabfuncionario where " + opcaoPesquisa
+                + " like '%" + txtBuscar.getText() + "%';");
+    }//GEN-LAST:event_txtBuscarKeyReleased
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

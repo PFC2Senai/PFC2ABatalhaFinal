@@ -92,9 +92,9 @@ public class ExibeFornecedor extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(jTableListarFornecedores);
 
-        txtBuscar.addCaretListener(new javax.swing.event.CaretListener() {
-            public void caretUpdate(javax.swing.event.CaretEvent evt) {
-                txtBuscarCaretUpdate(evt);
+        txtBuscar.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtBuscarKeyReleased(evt);
             }
         });
 
@@ -247,12 +247,6 @@ public class ExibeFornecedor extends javax.swing.JFrame {
         TabelaFornecedor("select  * from vw_fornecedores;");
     }//GEN-LAST:event_jBtExcluirFornecedorActionPerformed
 
-    private void txtBuscarCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_txtBuscarCaretUpdate
-        
-        TabelaFornecedor("select  * from vw_fornecedores where " + opcaoPesquisa
-            + " like '%" + txtBuscar.getText() + "%';");
-    }//GEN-LAST:event_txtBuscarCaretUpdate
-
     private void jComboBoxOpcaoPesquisaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxOpcaoPesquisaActionPerformed
         switch (jComboBoxOpcaoPesquisa.getSelectedItem().toString()) {
             case "Código":
@@ -279,6 +273,11 @@ public class ExibeFornecedor extends javax.swing.JFrame {
                 + "and estado = '" + jComboUf.getSelectedItem().toString() + "';");
         }
     }//GEN-LAST:event_jComboUfActionPerformed
+
+    private void txtBuscarKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBuscarKeyReleased
+        TabelaFornecedor("select  * from vw_fornecedores where " + opcaoPesquisa
+            + " like '%" + txtBuscar.getText() + "%';");
+    }//GEN-LAST:event_txtBuscarKeyReleased
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

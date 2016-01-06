@@ -1,18 +1,14 @@
 package telas;
 
 import static funcoes.Conexao.getConnection;
-import funcoes.FuncoesDiversas;
 import funcoes.ModeloTabela;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javafx.scene.chart.PieChart.Data;
 import javax.swing.ListSelectionModel;
 
 /**
@@ -123,9 +119,9 @@ public class ExibeAluguel2 extends javax.swing.JFrame {
             }
         });
 
-        txtBuscar.addCaretListener(new javax.swing.event.CaretListener() {
-            public void caretUpdate(javax.swing.event.CaretEvent evt) {
-                txtBuscarCaretUpdate(evt);
+        txtBuscar.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtBuscarKeyReleased(evt);
             }
         });
 
@@ -151,11 +147,11 @@ public class ExibeAluguel2 extends javax.swing.JFrame {
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 707, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel2)
-                                .addGap(18, 18, 18)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(jComboBoxOpcaoPesquisa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(txtBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 253, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(txtDatapesquisa, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jBtnBuscar))
@@ -222,14 +218,11 @@ public class ExibeAluguel2 extends javax.swing.JFrame {
                 txtBuscar.setVisible(false);
                 break;
         }
+        
+        if (jComboBoxOpcaoPesquisa.getSelectedIndex() == 0) {
+            TabelaAluguel("SELECT * FROM vw_aluguel;");
+        }
     }//GEN-LAST:event_jComboBoxOpcaoPesquisaActionPerformed
-
-    private void txtBuscarCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_txtBuscarCaretUpdate
-
-        TabelaAluguel("SELECT * FROM vw_aluguel where " + opcaoPesquisa
-                + " like '%" + txtBuscar.getText() + "%';");
-
-    }//GEN-LAST:event_txtBuscarCaretUpdate
 
     private void jBtnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnBuscarActionPerformed
        
@@ -240,6 +233,12 @@ public class ExibeAluguel2 extends javax.swing.JFrame {
         TabelaAluguel("SELECT * FROM vw_aluguel where " + opcaoPesquisa
                 + " like '%" + dt1 + "%';");
     }//GEN-LAST:event_jBtnBuscarActionPerformed
+
+    private void txtBuscarKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBuscarKeyReleased
+        
+        TabelaAluguel("SELECT * FROM vw_aluguel where " + opcaoPesquisa
+                + " like '%" + txtBuscar.getText() + "%';");
+    }//GEN-LAST:event_txtBuscarKeyReleased
 
     
     // Variables declaration - do not modify//GEN-BEGIN:variables

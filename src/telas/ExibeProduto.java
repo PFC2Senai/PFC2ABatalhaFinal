@@ -16,7 +16,6 @@ import javax.swing.ListSelectionModel;
 /**
  *
  * @author graciele
- * http://www.informaticon.com.br/j/index.php/java-se-i-estoque.html
  */
 public class ExibeProduto extends javax.swing.JFrame {
     
@@ -36,9 +35,10 @@ public class ExibeProduto extends javax.swing.JFrame {
         return indice;
     }
     
-    public void TabelaProduto(String Sql){
+    public void TabelaProduto(String Sql) {
         
         try {
+            
             stmt = getConnection().createStatement();
             ArrayList dados = new ArrayList();               
             String [] Colunas = {"Código", "Produto"};
@@ -85,6 +85,8 @@ public class ExibeProduto extends javax.swing.JFrame {
         jScrollPane2 = new javax.swing.JScrollPane();
         jTableListarProdutos = new javax.swing.JTable();
         jBtnDetalharProduto = new javax.swing.JButton();
+        txtBuscar = new javax.swing.JTextField();
+        jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -117,7 +119,7 @@ public class ExibeProduto extends javax.swing.JFrame {
         });
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        jLabel1.setText("Cadastro de Produtos");
+        jLabel1.setText("Produtos");
 
         jTableListarProdutos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -140,35 +142,50 @@ public class ExibeProduto extends javax.swing.JFrame {
             }
         });
 
+        txtBuscar.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtBuscarKeyReleased(evt);
+            }
+        });
+
+        jLabel2.setText("Pesquisar Produto:");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(26, 26, 26)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel2)
+                        .addGap(18, 18, 18)
+                        .addComponent(txtBuscar))
                     .addComponent(jLabel1)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(jButton3)
-                            .addGap(70, 70, 70)
-                            .addComponent(jBtnDetalharProduto)
-                            .addGap(100, 100, 100)
-                            .addComponent(jButton5)
-                            .addGap(107, 107, 107)
-                            .addComponent(jButton6)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jButton7))
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 664, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(22, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jButton3)
+                        .addGap(70, 70, 70)
+                        .addComponent(jBtnDetalharProduto)
+                        .addGap(52, 52, 52)
+                        .addComponent(jButton5)
+                        .addGap(55, 55, 55)
+                        .addComponent(jButton6)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton7))
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 594, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(30, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(18, 18, 18)
                 .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 240, Short.MAX_VALUE)
+                .addGap(29, 29, 29)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(txtBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(26, 26, 26)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 285, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton3)
@@ -201,6 +218,7 @@ public class ExibeProduto extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+       
         if(jTableListarProdutos.getSelectedRow() != -1) {
 
             int linha = jTableListarProdutos.getSelectedRow();
@@ -211,7 +229,7 @@ public class ExibeProduto extends javax.swing.JFrame {
         } else {
             JOptionPane.showMessageDialog(null, "Primeiro selecione um registro.");
         }
-        TabelaProduto("SELECT * FROM vw_produtos;");
+        TabelaProduto("SELECT * FROM tabproduto;");
     }//GEN-LAST:event_jButton6ActionPerformed
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
@@ -224,6 +242,12 @@ public class ExibeProduto extends javax.swing.JFrame {
         new ExibeProdutosDetalhe().setVisible(true);
     }//GEN-LAST:event_jBtnDetalharProdutoActionPerformed
 
+    private void txtBuscarKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBuscarKeyReleased
+
+        TabelaProduto("select * from tabproduto where produto "
+            + "like '%" + txtBuscar.getText() + "%';");
+    }//GEN-LAST:event_txtBuscarKeyReleased
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBtnDetalharProduto;
     private javax.swing.JButton jButton3;
@@ -231,8 +255,10 @@ public class ExibeProduto extends javax.swing.JFrame {
     private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton7;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTableListarProdutos;
+    private javax.swing.JTextField txtBuscar;
     private org.jdesktop.beansbinding.BindingGroup bindingGroup;
     // End of variables declaration//GEN-END:variables
 }

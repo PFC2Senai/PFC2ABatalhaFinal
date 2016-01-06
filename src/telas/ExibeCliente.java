@@ -178,9 +178,9 @@ public final class ExibeCliente extends javax.swing.JFrame {
 
         jLabel2.setText("Pesquisar:");
 
-        txtBuscar.addCaretListener(new javax.swing.event.CaretListener() {
-            public void caretUpdate(javax.swing.event.CaretEvent evt) {
-                txtBuscarCaretUpdate(evt);
+        txtBuscar.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtBuscarKeyReleased(evt);
             }
         });
 
@@ -347,11 +347,6 @@ public final class ExibeCliente extends javax.swing.JFrame {
 
     }//GEN-LAST:event_jComboBoxSetoresActionPerformed
 
-    private void txtBuscarCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_txtBuscarCaretUpdate
-        TabelaCliente("select  * from vw_cliente where " + opcaoPesquisa
-                + " like '%" + txtBuscar.getText() + "%';");
-    }//GEN-LAST:event_txtBuscarCaretUpdate
-
     private void jComboBoxOpcaoPesquisaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxOpcaoPesquisaActionPerformed
         switch (jComboBoxOpcaoPesquisa.getSelectedItem().toString()) {
             case "Código":
@@ -420,6 +415,11 @@ public final class ExibeCliente extends javax.swing.JFrame {
                     + " like '%" + txtBuscar.getText() + "%';");
         }
     }//GEN-LAST:event_jComboUfActionPerformed
+
+    private void txtBuscarKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBuscarKeyReleased
+        TabelaCliente("select  * from vw_cliente where " + opcaoPesquisa
+                + " like '%" + txtBuscar.getText() + "%';");
+    }//GEN-LAST:event_txtBuscarKeyReleased
 
     private void populaComboBox() {
 

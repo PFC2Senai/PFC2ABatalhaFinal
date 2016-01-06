@@ -1,13 +1,17 @@
 package telas;
 
+import funcoes.Conexao;
 import static funcoes.Conexao.getConnection;
 import funcoes.ModeloTabela;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import javax.swing.ListSelectionModel;
 import static telas.ExibeProduto.GetIndiceProduto;
 
@@ -17,17 +21,20 @@ import static telas.ExibeProduto.GetIndiceProduto;
  */
 public class ExibeProdutosDetalhe extends javax.swing.JFrame {
 
-    
-    Statement stmt ;
+    Statement stmt;
     private int codProduto = GetIndiceProduto();
     private int codDetProd;
-    
+    private PreparedStatement pst;
+
     /**
      * Creates new form ExibeProdutos
      */
     public ExibeProdutosDetalhe() {
+
         initComponents();
         TabelaProduto("SELECT * FROM vw_produtos WHERE id_prod = " + codProduto + ";");
+        populaComboBoxFabricante();
+        populaComboBoxModelo();
     }
 
     /**
@@ -45,12 +52,12 @@ public class ExibeProdutosDetalhe extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTableListarProdutos = new javax.swing.JTable();
-        jLabel12 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
         jButton2 = new javax.swing.JButton();
         jLabel13 = new javax.swing.JLabel();
         codigoProdutoTabela = new javax.swing.JLabel();
-        jBtnBuscar = new javax.swing.JButton();
+        jComboBoxFabricante = new javax.swing.JComboBox();
+        jComboBoxModelo = new javax.swing.JComboBox();
+        jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -80,8 +87,6 @@ public class ExibeProdutosDetalhe extends javax.swing.JFrame {
         });
         jScrollPane2.setViewportView(jTableListarProdutos);
 
-        jLabel12.setText("Buscar:");
-
         jButton2.setBackground(new java.awt.Color(230, 226, 226));
         jButton2.setText("Alterar");
 
@@ -98,69 +103,77 @@ public class ExibeProdutosDetalhe extends javax.swing.JFrame {
 
         codigoProdutoTabela.setText("codigo");
 
-        jBtnBuscar.setText("Buscar");
+        jComboBoxFabricante.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Selecione o fabricante" }));
+        jComboBoxFabricante.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBoxFabricanteActionPerformed(evt);
+            }
+        });
+
+        jComboBoxModelo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Selecione o modelo" }));
+        jComboBoxModelo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBoxModeloActionPerformed(evt);
+            }
+        });
+
+        jLabel2.setText("Filtros:");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(37, 37, 37)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(30, 30, 30)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 423, Short.MAX_VALUE)
+                        .addComponent(jLabel13)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(codigoProdutoTabela, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(57, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addComponent(jButton1)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 715, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel2)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addGap(19, 19, 19)
-                                        .addComponent(jLabel12)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(jBtnBuscar)
-                                        .addGap(143, 143, 143))
                                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(442, 442, 442)))
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGap(597, 597, 597)
+                                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addComponent(jLabel13)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(codigoProdutoTabela, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(0, 0, Short.MAX_VALUE))))))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 715, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(35, 35, 35))
+                                        .addComponent(jComboBoxFabricante, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(40, 40, 40)
+                                        .addComponent(jComboBoxModelo, javax.swing.GroupLayout.PREFERRED_SIZE, 222, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(0, 0, Short.MAX_VALUE)))))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(20, 20, 20)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(jLabel13)
                     .addComponent(codigoProdutoTabela))
-                .addGap(24, 24, 24)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jBtnBuscar)
-                        .addComponent(jLabel12))
+                .addGap(23, 23, 23)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jComboBoxFabricante, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jComboBoxModelo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2)
                     .addComponent(jButton2))
-                .addGap(30, 30, 30)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 304, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(31, 31, 31)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 307, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jButton1)
                 .addContainerGap())
         );
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 790, 440));
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 790, 490));
 
         bindingGroup.bind();
 
@@ -176,35 +189,92 @@ public class ExibeProdutosDetalhe extends javax.swing.JFrame {
         if (jTableListarProdutos.getSelectedRow() != -1) {
             int linha = jTableListarProdutos.getSelectedRow();
             codDetProd = (Integer.parseInt(jTableListarProdutos.getValueAt(linha, 0).toString()));
-        }        
+        }
     }//GEN-LAST:event_jTableListarProdutosMouseClicked
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
-   
+
+    private void jComboBoxFabricanteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxFabricanteActionPerformed
+
+        if (jComboBoxModelo.getSelectedIndex() != 0) {
+
+            TabelaProduto("select  * from vw_produtos where "
+                    + "fabricante = '" + jComboBoxFabricante.getSelectedItem().toString() + "'"
+                    + "and modelo = '" + jComboBoxModelo.getSelectedItem().toString() + "';");
+
+        } else if (jComboBoxModelo.getSelectedIndex() == 0) {
+
+            TabelaProduto("select  * from vw_produtos where "
+                    + "fabricante = '" + jComboBoxFabricante.getSelectedItem().toString() + "';");
+
+        }
+
+        //
+        if (jComboBoxModelo.getSelectedIndex() != 0 && jComboBoxFabricante.getSelectedIndex() == 0) {
+
+            TabelaProduto("select  * from vw_produtos where "
+                    + "modelo = '" + jComboBoxModelo.getSelectedItem().toString() + "';");
+
+        } else if (jComboBoxModelo.getSelectedIndex() == 0 && jComboBoxFabricante.getSelectedIndex() == 0) {
+
+            TabelaProduto("select  * from vw_produtos;");
+        }
+    }//GEN-LAST:event_jComboBoxFabricanteActionPerformed
+
+    private void jComboBoxModeloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxModeloActionPerformed
+
+        if (jComboBoxFabricante.getSelectedIndex() != 0) {
+
+            TabelaProduto("select  * from vw_produtos where "
+                    + "fabricante = '" + jComboBoxFabricante.getSelectedItem().toString() + "'"
+                    + "and modelo = '" + jComboBoxModelo.getSelectedItem().toString() + "';");
+
+        } else if (jComboBoxFabricante.getSelectedIndex() == 0) {
+
+            TabelaProduto("select  * from vw_produtos where "
+                    + "modelo = '" + jComboBoxModelo.getSelectedItem().toString() + "';");
+
+        }
+
+        //
+        if (jComboBoxFabricante.getSelectedIndex() != 0 && jComboBoxModelo.getSelectedIndex() == 0) {
+
+            TabelaProduto("select  * from vw_produtos where "
+                    + "fabricante = '" + jComboBoxFabricante.getSelectedItem().toString() + "';");
+
+        } else if (jComboBoxFabricante.getSelectedIndex() == 0 && jComboBoxModelo.getSelectedIndex() == 0) {
+
+            TabelaProduto("select  * from vw_produtos ;");
+        }
+    }//GEN-LAST:event_jComboBoxModeloActionPerformed
+
     public void TabelaProduto(String Sql) {
-        
+
         try {
+
             stmt = getConnection().createStatement();
-            ArrayList dados = new ArrayList();               
-            String [] Colunas = {"Código", "Produto", "Fabricante",
-                                 "Modelo", "Valor Entrada", "Valor Saída","Estoque"};
-               
+            ArrayList dados = new ArrayList();
+            String[] Colunas = {"Código", "Produto", "Fabricante",
+                "Modelo", "Valor Entrada", "Valor Saída", "Estoque"};
+
             ResultSet rs;
-            rs = stmt.executeQuery(Sql);            
-            
-            while(rs.next()){
-                dados.add(new Object[]{rs.getObject("idDetProduto"),
-                                       rs.getObject("produto"),
-                                       rs.getObject("fabricante"),
-                                       rs.getObject("modelo"),
-                                       rs.getObject("precoEntrada"),
-                                       rs.getObject("precoSaida"),
-                                       rs.getObject("quantidade")
-                                       });            
+            rs = stmt.executeQuery(Sql);
+
+            while (rs.next()) {
+
+                dados.add(new Object[]{
+                    rs.getObject("idDetProduto"),
+                    rs.getObject("produto"),
+                    rs.getObject("fabricante"),
+                    rs.getObject("modelo"),
+                    rs.getObject("precoEntrada"),
+                    rs.getObject("precoSaida"),
+                    rs.getObject("quantidade")
+                });
             }
-                        
+
             for (int i = 0; i < 7; i++) {
                 ModeloTabela modelo = new ModeloTabela(dados, Colunas);
                 jTableListarProdutos.setModel(modelo);
@@ -214,24 +284,70 @@ public class ExibeProdutosDetalhe extends javax.swing.JFrame {
                 jTableListarProdutos.setAutoResizeMode(jTableListarProdutos.AUTO_RESIZE_OFF);
                 jTableListarProdutos.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
             }
-            
+
         } catch (SQLException ex) {
             Logger.getLogger(ExibeProdutosDetalhe.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }   
-    
+    }
+
+    private void populaComboBoxFabricante() {
+
+        Connection conexao = Conexao.getConnection();
+        ResultSet rs;
+        String sql = "SELECT * FROM vw_combofabricanteproduto "
+                   + " where id_prod = " + codProduto + " group by fabricante;";
+        
+        try{
+            
+            pst = conexao.prepareStatement(sql);
+            rs = pst.executeQuery();
+            
+            while(rs.next()) {
+                jComboBoxFabricante.addItem(rs.getString("fabricante"));
+            }
+            
+        }catch(SQLException ex) {
+            JOptionPane.showMessageDialog(null, ex);
+        }
+    }
+
+    private void populaComboBoxModelo() {
+
+        Connection conexao = Conexao.getConnection();
+        ResultSet rs;
+        String sql = "select modelo " +
+                                    " from tabdetproduto inner join " +
+                                    " tabproduto inner join " +
+                                    " tabmodelo on tabmodelo_idtabModelo = idtabModelo and " +
+                                    " tabproduto_id_prod = id_prod"
+                                +   " where id_prod = " + codProduto + " group by modelo;";
+        
+        try {
+            
+            pst = conexao.prepareStatement(sql);
+            rs = pst.executeQuery();
+            
+            while(rs.next()) {
+                jComboBoxModelo.addItem(rs.getString("modelo"));
+            }
+            
+        }catch(SQLException ex) {
+            JOptionPane.showMessageDialog(null, ex);
+        }
+    }
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel codigoProdutoTabela;
-    private javax.swing.JButton jBtnBuscar;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
+    private javax.swing.JComboBox jComboBoxFabricante;
+    private javax.swing.JComboBox jComboBoxModelo;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTableListarProdutos;
-    private javax.swing.JTextField jTextField1;
     private org.jdesktop.beansbinding.BindingGroup bindingGroup;
     // End of variables declaration//GEN-END:variables
 }

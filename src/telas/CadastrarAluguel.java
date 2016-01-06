@@ -478,6 +478,7 @@ public class CadastrarAluguel extends javax.swing.JFrame {
             
             AluguelDAO.CadDetAluguel(aluguel);
         }
+        
         JOptionPane.showMessageDialog(null, "Cadastrado com sucesso.");
         limpacampos();
     }//GEN-LAST:event_jBtnCadastrarAluguelActionPerformed
@@ -493,7 +494,9 @@ public class CadastrarAluguel extends javax.swing.JFrame {
 
             DefaultTableModel dtm = (DefaultTableModel) jTableEquipamento.getModel();
 
-            dtm.addRow(new Object[]{codDetEquipamento,
+            dtm.addRow(new Object[] {
+                
+                codDetEquipamento,
                 codModeloEqui,
                 codFabricanteEqui,
                 equipamento,

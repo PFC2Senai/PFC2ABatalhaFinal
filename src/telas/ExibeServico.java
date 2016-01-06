@@ -5,6 +5,7 @@ import funcoes.ModeloTabela;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -18,13 +19,17 @@ public class ExibeServico extends javax.swing.JFrame {
 
     Statement stmt;
     private int codServico;
-    
+    private int dataPesquisa;
+    String opcaoPesquisa = "empresa";
+
     /**
      * Creates new form ExibeServico
      */
     public ExibeServico() {
         initComponents();
-        TabelaEquipamento("SELECT * FROM tabservico INNER JOIN tabcliente ON idcliente = tabCliente_idcliente;");
+        TabelaServico("SELECT * FROM vw_servico;");
+        txtDatapesquisa.setVisible(false);
+        jBtnBuscar.setVisible(false);
     }
 
     /**
@@ -40,13 +45,23 @@ public class ExibeServico extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTableListarServicos = new javax.swing.JTable();
+        txtBuscar = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         jBtnDetalhar = new javax.swing.JButton();
         jBtnSair = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
+        jComboBoxOpcaoPesquisa = new javax.swing.JComboBox();
+        txtDatapesquisa = new com.toedter.calendar.JDateChooser();
+        jBtnBuscar = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                formKeyReleased(evt);
+            }
+        });
 
-        jPanel1.setBackground(new java.awt.Color(204, 255, 255));
+        jPanel1.setBackground(new java.awt.Color(204, 255, 204));
 
         jTableListarServicos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -57,6 +72,12 @@ public class ExibeServico extends javax.swing.JFrame {
             }
         ));
         jScrollPane1.setViewportView(jTableListarServicos);
+
+        txtBuscar.addCaretListener(new javax.swing.event.CaretListener() {
+            public void caretUpdate(javax.swing.event.CaretEvent evt) {
+                txtBuscarCaretUpdate(evt);
+            }
+        });
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel1.setText("Serviços");
@@ -79,6 +100,22 @@ public class ExibeServico extends javax.swing.JFrame {
             }
         });
 
+        jLabel2.setText("Pesquisar:");
+
+        jComboBoxOpcaoPesquisa.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Selecione a opção de pesquisa", "Código", "Empresa", "Data Serviço" }));
+        jComboBoxOpcaoPesquisa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBoxOpcaoPesquisaActionPerformed(evt);
+            }
+        });
+
+        jBtnBuscar.setText("Buscar");
+        jBtnBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnBuscarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -86,6 +123,16 @@ public class ExibeServico extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(24, 24, 24)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jComboBoxOpcaoPesquisa, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(txtBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 253, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(txtDatapesquisa, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jBtnBuscar))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(9, 9, 9)
                         .addComponent(jBtnSair)
@@ -100,8 +147,16 @@ public class ExibeServico extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addGap(29, 29, 29)
                 .addComponent(jLabel1)
-                .addGap(28, 28, 28)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 333, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(24, 24, 24)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel2)
+                        .addComponent(jComboBoxOpcaoPesquisa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtDatapesquisa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jBtnBuscar))
+                .addGap(32, 32, 32)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 348, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 42, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jBtnDetalhar)
@@ -127,7 +182,7 @@ public class ExibeServico extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jBtnDetalharActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnDetalharActionPerformed
-        int linha = jTableListarServicos.getSelectedRow();        
+        int linha = jTableListarServicos.getSelectedRow();
         codServico = (Integer.parseInt(jTableListarServicos.getValueAt(linha, 0).toString()));
         new DetalharServico(codServico).setVisible(true);
     }//GEN-LAST:event_jBtnDetalharActionPerformed
@@ -136,48 +191,112 @@ public class ExibeServico extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_jBtnSairActionPerformed
 
-    public void TabelaEquipamento(String Sql) {
+    private void jComboBoxOpcaoPesquisaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxOpcaoPesquisaActionPerformed
+
         
-        try { 
-            
+        if (jComboBoxOpcaoPesquisa.getSelectedIndex() == 0) {
+            TabelaServico("SELECT * FROM vw_servico;");
+        }
+        switch (jComboBoxOpcaoPesquisa.getSelectedItem().toString()) {
+
+            case "Código":
+                opcaoPesquisa = "idservico";
+                txtDatapesquisa.setVisible(false);
+                jBtnBuscar.setVisible(false);
+                txtBuscar.setVisible(true);
+                dataPesquisa = 0;
+                break;
+            case "Empresa":
+                opcaoPesquisa = "empresa";
+                txtDatapesquisa.setVisible(false);
+                jBtnBuscar.setVisible(false);
+                txtBuscar.setVisible(true);
+                dataPesquisa = 0;
+                break;
+            case "Data Serviço":
+                opcaoPesquisa = "dataServico";
+                dataPesquisa = 1;
+                txtDatapesquisa.setVisible(true);
+                jBtnBuscar.setVisible(true);
+                txtBuscar.setVisible(false);
+                break;
+                
+        }       
+
+    }//GEN-LAST:event_jComboBoxOpcaoPesquisaActionPerformed
+
+    private void jBtnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnBuscarActionPerformed
+
+        SimpleDateFormat formatador = new SimpleDateFormat("yyyy-MM-dd");
+
+        String dt1 = formatador.format(txtDatapesquisa.getDate());
+
+        TabelaServico("SELECT * FROM vw_servico where " + opcaoPesquisa
+                + " like '%" + dt1 + "%';");
+    }//GEN-LAST:event_jBtnBuscarActionPerformed
+
+    private void txtBuscarCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_txtBuscarCaretUpdate
+
+
+    }//GEN-LAST:event_txtBuscarCaretUpdate
+
+    private void formKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_formKeyReleased
+        TabelaServico("SELECT * FROM vw_servico where " + opcaoPesquisa
+                + " like '%" + txtBuscar.getText() + "%';");
+    }//GEN-LAST:event_formKeyReleased
+
+    public void TabelaServico(String Sql) {
+
+        try {
+
             stmt = getConnection().createStatement();
-            ArrayList dados = new ArrayList();               
-            String [] Colunas = {"Código","Cliente", "Valor", "Data"};
-               
+            ArrayList dados = new ArrayList();
+            String[] Colunas = {"Código", "Cliente", "Valor", "Data"};
+
             ResultSet rs;
             rs = stmt.executeQuery(Sql);
-            
-                while(rs.next()) {
-                    dados.add(new Object[]{ rs.getObject("idservico"),rs.getObject("empresa"),
-                                            rs.getObject("preco"),rs.getObject("dataServico")});            
-                }
 
-                    for (int i = 0; i < 4; i++) {
-                        ModeloTabela modelo = new ModeloTabela(dados, Colunas);
-                        jTableListarServicos.setModel(modelo);
-                        jTableListarServicos.getColumnModel().getColumn(i).setPreferredWidth(150);
-                        jTableListarServicos.getColumnModel().getColumn(i).setResizable(false);
-                        jTableListarServicos.getTableHeader().setReorderingAllowed(false);
-                        jTableListarServicos.setAutoResizeMode(jTableListarServicos.AUTO_RESIZE_OFF);
-                        jTableListarServicos.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-                    }
-                    
+            while (rs.next()) {
+
+                dados.add(new Object[]{
+                    rs.getObject("idservico"),
+                    rs.getObject("empresa"),
+                    rs.getObject("preco"),
+                    rs.getObject("dataServico")
+                });
+            }
+
+            for (int i = 0; i < 4; i++) {
+                ModeloTabela modelo = new ModeloTabela(dados, Colunas);
+                jTableListarServicos.setModel(modelo);
+                jTableListarServicos.getColumnModel().getColumn(i).setPreferredWidth(150);
+                jTableListarServicos.getColumnModel().getColumn(i).setResizable(false);
+                jTableListarServicos.getTableHeader().setReorderingAllowed(false);
+                jTableListarServicos.setAutoResizeMode(jTableListarServicos.AUTO_RESIZE_OFF);
+                jTableListarServicos.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+            }
+
         } catch (SQLException ex) {
             Logger.getLogger(ExibeServico.class.getName()).log(Level.SEVERE, null, ex);
-            
-        } catch (Exception erro){
+
+        } catch (Exception erro) {
             Logger.getLogger(ExibeServico.class.getName()).log(Level.SEVERE, null, erro);
-        }         
+        }
     }
-    
-    
+
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jBtnBuscar;
     private javax.swing.JButton jBtnDetalhar;
     private javax.swing.JButton jBtnSair;
+    private javax.swing.JComboBox jComboBoxOpcaoPesquisa;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTableListarServicos;
+    private javax.swing.JTextField txtBuscar;
+    private com.toedter.calendar.JDateChooser txtDatapesquisa;
     private org.jdesktop.beansbinding.BindingGroup bindingGroup;
     // End of variables declaration//GEN-END:variables
 }
