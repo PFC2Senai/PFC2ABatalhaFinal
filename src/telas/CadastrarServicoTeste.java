@@ -32,12 +32,10 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author Josy
  */
-
 public class CadastrarServicoTeste extends javax.swing.JFrame {
 
-    
     private PreparedStatement pst;
-    
+
     Servico servico = new Servico();
     public static int teste;
 
@@ -55,7 +53,7 @@ public class CadastrarServicoTeste extends javax.swing.JFrame {
     private double valorUnit;
     private double valor;
     private double totalPeca = 0;
-    
+
     private String produto;
     private String modelo;
     private String modeloEqui;
@@ -64,19 +62,20 @@ public class CadastrarServicoTeste extends javax.swing.JFrame {
     private String fabricante;
     private String fabricanteEqui;
     private String tipoServico;
+
     /**
      * Creates new form CadastrarServicoTeste
      */
     public CadastrarServicoTeste() {
         initComponents();
-        
+
         populaComboBoxProduto();
         populaComboBoxCliente();
         populaComboBoxEquipamento();
         populaComboBoxFuncionario();
-        
-        populaComboBoxTipoServico(); 
-        
+
+        populaComboBoxTipoServico();
+
         ocultaColunaTabelas();
         txtTipoServico.setVisible(false);
         jBtnCadTipoServico.setVisible(false);
@@ -719,12 +718,6 @@ public class CadastrarServicoTeste extends javax.swing.JFrame {
 
         jLabel3.setText("Mão de obra:");
 
-        txtMaoObra.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                txtMaoObraKeyPressed(evt);
-            }
-        });
-
         jLabel4.setText("Total serviço:");
 
         jBtnCalcularTotalServico.setText("Calcular Total");
@@ -838,7 +831,7 @@ public class CadastrarServicoTeste extends javax.swing.JFrame {
         DefaultTableModel dtm = (DefaultTableModel) jTableTipodeServico.getModel();
         int linha = jTableTipodeServico.getSelectedRow();
 
-        if(linha != -1) {
+        if (linha != -1) {
             dtm.removeRow(linha);
         }
     }//GEN-LAST:event_jBtnRemoverTipoActionPerformed
@@ -939,12 +932,12 @@ public class CadastrarServicoTeste extends javax.swing.JFrame {
         int linha = jTablePecas.getSelectedRow();
 
         double totalParcial = Double.parseDouble(jTablePecas.getValueAt(linha, 8).toString());
-        
+
         totalPeca -= totalParcial;
-        
+
         txtTotalPecas.setText(String.valueOf(totalPeca));
-        
-        if(linha != -1) {
+
+        if (linha != -1) {
             dtm.removeRow(linha);
         }
     }//GEN-LAST:event_jBtnRemoverPecaActionPerformed
@@ -973,11 +966,11 @@ public class CadastrarServicoTeste extends javax.swing.JFrame {
     }//GEN-LAST:event_jComboBoxEquipamentosActionPerformed
 
     private void jBtnRemoveEquipamentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnRemoveEquipamentoActionPerformed
-        
+
         DefaultTableModel dtm = (DefaultTableModel) jTableEquipamento.getModel();
         int linha = jTableEquipamento.getSelectedRow();
 
-        if(linha != -1) {
+        if (linha != -1) {
             dtm.removeRow(linha);
         }
     }//GEN-LAST:event_jBtnRemoveEquipamentoActionPerformed
@@ -987,7 +980,7 @@ public class CadastrarServicoTeste extends javax.swing.JFrame {
     }//GEN-LAST:event_jBtbIncluirEquipamentoActionPerformed
 
     private void jComboBoxModeloEquipItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jComboBoxModeloEquipItemStateChanged
-        
+
         jComboBoxFabricanteEquip.removeAllItems();
         idModeloEquiComboBox();
         populaComboBoxFabricanteEquip();
@@ -1015,7 +1008,7 @@ public class CadastrarServicoTeste extends javax.swing.JFrame {
         DefaultTableModel dtm = (DefaultTableModel) jTableFuncionario.getModel();
         int linha = jTableFuncionario.getSelectedRow();
 
-        if(linha != -1) {
+        if (linha != -1) {
             dtm.removeRow(linha);
         }
     }//GEN-LAST:event_jBtnRemoverFuncActionPerformed
@@ -1042,7 +1035,7 @@ public class CadastrarServicoTeste extends javax.swing.JFrame {
         servico.setCodUsuario(Usuario.idUsuario());
         servico.setCodCliente(codCliente);
         servico.setPreco(preco);
-        servico.setDataServico(FuncoesDiversas.FormataData(txtDataCadProduto.getDate()));       
+        servico.setDataServico(FuncoesDiversas.FormataData(txtDataCadProduto.getDate()));
         servico.setDescricaoServico(txtDescricao.getText());
         servico.setMaoDeObra(Double.parseDouble(txtMaoObra.getText()));
 
@@ -1054,7 +1047,7 @@ public class CadastrarServicoTeste extends javax.swing.JFrame {
 
         int codServico = ServicoDAO.CadServico(servico);
 
-        for(int j = 0; j < jTablePecas.getRowCount(); j++) {
+        for (int j = 0; j < jTablePecas.getRowCount(); j++) {
 
             dtServ.setCodServico(codServico);
             dtServ.setCodDetProduto(Integer.parseInt(jTablePecas.getValueAt(j, 0).toString()));
@@ -1062,7 +1055,7 @@ public class CadastrarServicoTeste extends javax.swing.JFrame {
             DetServicoProdutoDAO.CadDetServProduto(dtServ);
         }
 
-        for(int j=0; j < jTableEquipamento.getRowCount(); j++) {
+        for (int j = 0; j < jTableEquipamento.getRowCount(); j++) {
 
             dtServEqui.setCodServico(codServico);
             dtServEqui.setCodDetEquipamento(Integer.parseInt(jTableEquipamento.getValueAt(j, 0).toString()));
@@ -1070,7 +1063,7 @@ public class CadastrarServicoTeste extends javax.swing.JFrame {
             DetServicoEquipamentoDAO.CadDetServEquipamento(dtServEqui);
         }
 
-        for (int j=0; j < jTableFuncionario.getRowCount(); j++) {
+        for (int j = 0; j < jTableFuncionario.getRowCount(); j++) {
 
             dtServFunc.setCodServico(codServico);
             dtServFunc.setCodFuncionario(Integer.parseInt(jTableFuncionario.getValueAt(j, 0).toString()));
@@ -1078,7 +1071,7 @@ public class CadastrarServicoTeste extends javax.swing.JFrame {
             DetServicoFuncionarioDAO.CadDetServFuncionario(dtServFunc);
         }
 
-        for (int j=0; j < jTableTipodeServico.getRowCount(); j++) {
+        for (int j = 0; j < jTableTipodeServico.getRowCount(); j++) {
 
             ServTipo.setCodServico(codServico);
             ServTipo.setCodTipo(Integer.parseInt(jTableTipodeServico.getValueAt(j, 0).toString()));
@@ -1106,13 +1099,8 @@ public class CadastrarServicoTeste extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jComboBoxModeloEquipActionPerformed
 
-    private void txtMaoObraKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtMaoObraKeyPressed
-        double total = totalPeca + Double.parseDouble(txtMaoObra.getText());
-        txtTotalGeral.setText(String.valueOf(total));
-    }//GEN-LAST:event_txtMaoObraKeyPressed
-    
     private void limparCampos() {
-        
+
         txtDataCadProduto.setDate(null);
         txtDescricao.setText("");
         txtMaoObra.setText("");
@@ -1120,13 +1108,13 @@ public class CadastrarServicoTeste extends javax.swing.JFrame {
         txtTipoServico.setText("");
         txtTotalGeral.setText("");
         txtTotalPecas.setText("");
-         
+
         codEquipamento = 0;
         codModeloEqui = 0;
         modeloEqui = null;
         codFabricanteEqui = 0;
         fabricanteEqui = null;
-        
+
         jComboBoxCliente.setSelectedIndex(0);
         jComboBoxEquipamentos.setSelectedIndex(0);
         jComboBoxFuncionarios.setSelectedIndex(0);
@@ -1136,498 +1124,497 @@ public class CadastrarServicoTeste extends javax.swing.JFrame {
         jComboBoxModelo.removeAllItems();
         jComboBoxFabricanteEquip.removeAllItems();
         jComboBoxModeloEquip.removeAllItems();
-        
+
         ((DefaultTableModel) jTableEquipamento.getModel()).setNumRows(0);
         jTableEquipamento.updateUI();
         ((DefaultTableModel) jTableFuncionario.getModel()).setNumRows(0);
-        jTableFuncionario.updateUI();       
+        jTableFuncionario.updateUI();
         ((DefaultTableModel) jTablePecas.getModel()).setNumRows(0);
         jTablePecas.updateUI();
         ((DefaultTableModel) jTableTipodeServico.getModel()).setNumRows(0);
         jTableTipodeServico.updateUI();
-        
+
         jTabbedPaneServico.setSelectedComponent(this.jPanelServico);
-    }   
-    
+    }
+
     public void TabelaProduto() {
-               
-        CarregaValorUnit();  
+
+        CarregaValorUnit();
         codDetProduto = ProdutoDAO.codDetProduto();
         int quantidade = Integer.parseInt(txtQuantidade.getText());
         double total = valorUnit * quantidade;
-        try { 
-            
+        try {
+
             DefaultTableModel dtm = (DefaultTableModel) jTablePecas.getModel();
-                   
-                dtm.addRow(new Object[] {codDetProduto, codModelo, 
-                                         codFabricante, produto, 
-                                         modelo, fabricante,
-                                         quantidade,
-                                         valorUnit,
-                                         total});
-                totalPeca += total;
-                txtTotalPecas.setEditable(false);
-                txtTotalPecas.setText(String.valueOf(totalPeca));
-                
-                txtQuantidade.setText("");     
-                
+
+            dtm.addRow(new Object[]{codDetProduto, codModelo,
+                codFabricante, produto,
+                modelo, fabricante,
+                quantidade,
+                valorUnit,
+                total});
+            totalPeca += total;
+            txtTotalPecas.setEditable(false);
+            txtTotalPecas.setText(String.valueOf(totalPeca));
+
+            txtQuantidade.setText("");
+
         } catch (Exception erro) {
             Logger.getLogger(CadastrarCliente.class.getName()).log(Level.SEVERE, null, erro);
-        }          
+        }
     }
-    
+
     public void TabelaEquipamento() {
-        
+
         codDetEquipamento = EquipamentoDAO.CodigoDetEquipamento(codEquipamento, codModeloEqui, codFabricanteEqui);
-        
-        try { 
-            
+
+        try {
+
             DefaultTableModel dtm = (DefaultTableModel) jTableEquipamento.getModel();
-                   
-                dtm.addRow(new Object[] {codDetEquipamento,
-                                         codModeloEqui,
-                                         codFabricanteEqui, 
-                                         equipamento, 
-                                         modeloEqui, 
-                                         fabricanteEqui});
-                                                     
+
+            dtm.addRow(new Object[]{codDetEquipamento,
+                codModeloEqui,
+                codFabricanteEqui,
+                equipamento,
+                modeloEqui,
+                fabricanteEqui});
+
         } catch (Exception erro) {
             Logger.getLogger(CadastrarCliente.class.getName()).log(Level.SEVERE, null, erro);
-        }          
+        }
     }
-    
+
     public void TabelaFuncionario() {
-        
-        try { 
-            
+
+        try {
+
             DefaultTableModel dtm = (DefaultTableModel) jTableFuncionario.getModel();
-                   
-                dtm.addRow(new Object[] {codFuncionario, funcionario});
-                
+
+            dtm.addRow(new Object[]{codFuncionario, funcionario});
+
         } catch (Exception erro) {
             Logger.getLogger(CadastrarCliente.class.getName()).log(Level.SEVERE, null, erro);
-        }          
+        }
     }
-    
+
     public void TabelaTipoServico() {
-        
-        try { 
-            
+
+        try {
+
             DefaultTableModel dtm = (DefaultTableModel) jTableTipodeServico.getModel();
-                   
-                dtm.addRow(new Object[] {codTipoServico, tipoServico});
-                
+
+            dtm.addRow(new Object[]{codTipoServico, tipoServico});
+
         } catch (Exception erro) {
             Logger.getLogger(CadastrarCliente.class.getName()).log(Level.SEVERE, null, erro);
-        }          
+        }
     }
-    
-    public void CarregaValorUnit() { 
-        
+
+    public void CarregaValorUnit() {
+
         valor = ProdutoDAO.ExisteProduto(codProduto, codModelo, codFabricante);
-        
-        if (valor != 0) {            
+
+        if (valor != 0) {
             valorUnit = valor;
-        }        
+        }
     }
-    
+
     private void populaComboBoxProduto() {
-        
+
         Connection conexao = Conexao.getConnection();
         ResultSet rs;
         String sql = "select * from tabproduto;";
-        
-        try{
+
+        try {
             pst = conexao.prepareStatement(sql);
             rs = pst.executeQuery();
-            
-            while(rs.next()) {
+
+            while (rs.next()) {
                 jComboBoxProduto.addItem(rs.getString("produto"));
             }
-            
-        }catch(SQLException ex) {
+
+        } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, ex);
         }
     }
-    
+
     private void idProdutoComboBox() {
-        
+
         Connection conexao = Conexao.getConnection();
         ResultSet rs;
         String sql = "select * from tabproduto inner join tabdetproduto on tabproduto_id_prod = id_prod"
-                    + " where produto = '" + jComboBoxProduto.getSelectedItem()+ "';";
-        
-        try{
+                + " where produto = '" + jComboBoxProduto.getSelectedItem() + "';";
+
+        try {
             pst = conexao.prepareStatement(sql);
             rs = pst.executeQuery();
-            
-            while(rs.next()) {
+
+            while (rs.next()) {
                 codProduto = (rs.getInt("id_prod"));
             }
-            
-        }catch(SQLException ex) {
+
+        } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, ex);
         }
     }
-    
+
     private void populaComboBoxCliente() {
-        
+
         Connection conexao = Conexao.getConnection();
         ResultSet rs;
         String sql = "select * from tabcliente";
-        
-        try{
+
+        try {
             pst = conexao.prepareStatement(sql);
             rs = pst.executeQuery();
-            
-            while(rs.next()) {
+
+            while (rs.next()) {
                 jComboBoxCliente.addItem(rs.getString("empresa"));
             }
-            
-        }catch(SQLException ex) {
+
+        } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, ex);
         }
     }
-    
+
     private void idClienteComboBox() {
-        
+
         Connection conexao = Conexao.getConnection();
         ResultSet rs;
-        String sql = "select * from tabcliente where empresa = '" + jComboBoxCliente.getSelectedItem()+ "';";
-        
-        try{
+        String sql = "select * from tabcliente where empresa = '" + jComboBoxCliente.getSelectedItem() + "';";
+
+        try {
             pst = conexao.prepareStatement(sql);
             rs = pst.executeQuery();
-            
-            while(rs.next()) {
+
+            while (rs.next()) {
                 codCliente = (rs.getInt("idcliente"));
             }
-            
-        }catch(SQLException ex) {
+
+        } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, ex);
         }
     }
-   
+
     private void populaComboBoxEquipamento() {
-        
+
         Connection conexao = Conexao.getConnection();
         ResultSet rs;
         String sql = "select * from tabequipamento";
-        
-        try{
+
+        try {
             pst = conexao.prepareStatement(sql);
             rs = pst.executeQuery();
-            
-            while(rs.next()) {
+
+            while (rs.next()) {
                 jComboBoxEquipamentos.addItem(rs.getString("equipamento"));
             }
-            
-        }catch(SQLException ex) {
+
+        } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, ex);
         }
     }
-    
+
     private void idEquipamentoComboBox() {
-        
+
         Connection conexao = Conexao.getConnection();
         ResultSet rs;
-        String sql = "select * from tabequipamento where equipamento = '" + jComboBoxEquipamentos.getSelectedItem()+ "';";
-        
-        try{
+        String sql = "select * from tabequipamento where equipamento = '" + jComboBoxEquipamentos.getSelectedItem() + "';";
+
+        try {
             pst = conexao.prepareStatement(sql);
             rs = pst.executeQuery();
-            
-            while(rs.next()) {
+
+            while (rs.next()) {
                 codEquipamento = (rs.getInt("idEquipamento"));
             }
-            
-        }catch(SQLException ex) {
+
+        } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, ex);
         }
     }
-    
+
     private void populaComboBoxFuncionario() {
-        
+
         Connection conexao = Conexao.getConnection();
         ResultSet rs;
         String sql = "select * from tabfuncionario";
-        
-        try{
+
+        try {
             pst = conexao.prepareStatement(sql);
             rs = pst.executeQuery();
-            
-            while(rs.next()) {
+
+            while (rs.next()) {
                 jComboBoxFuncionarios.addItem(rs.getString("funcionario"));
             }
-            
-        }catch(SQLException ex) {
+
+        } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, ex);
         }
     }
-    
+
     private void idFuncionarioComboBox() {
-        
+
         Connection conexao = Conexao.getConnection();
         ResultSet rs;
-        String sql = "select * from tabfuncionario where funcionario = '" + jComboBoxFuncionarios.getSelectedItem()+ "';";
-        
-        try{
+        String sql = "select * from tabfuncionario where funcionario = '" + jComboBoxFuncionarios.getSelectedItem() + "';";
+
+        try {
             pst = conexao.prepareStatement(sql);
             rs = pst.executeQuery();
-            
-            while(rs.next()) {
+
+            while (rs.next()) {
                 codFuncionario = (rs.getInt("idfuncionario"));
             }
-            
-        }catch(SQLException ex) {
+
+        } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, ex);
         }
     }
-    
+
     private void populaComboBoxModelo() {
-        
+
         Connection conexao = Conexao.getConnection();
         ResultSet rs;
-        String sql = "select modelo " +
-                                    " from tabdetproduto inner join " +
-                                    " tabproduto inner join " +
-                                    " tabmodelo on tabmodelo_idtabModelo = idtabModelo and " +
-                                    " tabproduto_id_prod = id_prod"
-                                +   " where id_prod = " + codProduto + " group by modelo;";
+        String sql = "select modelo "
+                + " from tabdetproduto inner join "
+                + " tabproduto inner join "
+                + " tabmodelo on tabmodelo_idtabModelo = idtabModelo and "
+                + " tabproduto_id_prod = id_prod"
+                + " where id_prod = " + codProduto + " group by modelo;";
         System.out.println(codProduto);
-        
-        try{
+
+        try {
             pst = conexao.prepareStatement(sql);
             rs = pst.executeQuery();
-            
-            while(rs.next()) {
+
+            while (rs.next()) {
                 jComboBoxModelo.addItem(rs.getString("modelo"));
             }
-            
-        }catch(SQLException ex) {
+
+        } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, ex);
         }
     }
-    
+
     private void idModeloComboBox() {
-        
+
         Connection conexao = Conexao.getConnection();
         ResultSet rs;
-        String sql = "select * from tabmodelo where modelo = '" + jComboBoxModelo.getSelectedItem()+ "';";
-        
-        try{
+        String sql = "select * from tabmodelo where modelo = '" + jComboBoxModelo.getSelectedItem() + "';";
+
+        try {
             pst = conexao.prepareStatement(sql);
             rs = pst.executeQuery();
-            
-            while(rs.next()) {
+
+            while (rs.next()) {
                 codModelo = (rs.getInt("idtabModelo"));
             }
-            
-        }catch(SQLException ex) {
+
+        } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, ex);
         }
     }
-    
+
     private void populaComboBoxTipoServico() {
-        
+
         Connection conexao = Conexao.getConnection();
         ResultSet rs;
         String sql = "select * from tabtipo_serv";
-        
-        try{
+
+        try {
             pst = conexao.prepareStatement(sql);
             rs = pst.executeQuery();
-            
-            while(rs.next()) {
+
+            while (rs.next()) {
                 jComboBoxTipoServico.addItem(rs.getString("Tipo_serv"));
             }
-            
-        }catch(SQLException ex) {
+
+        } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, ex);
         }
     }
-    
+
     private void idTipoServicoComboBox() {
-        
+
         Connection conexao = Conexao.getConnection();
         ResultSet rs;
-        String sql = "select * from tabtipo_serv where Tipo_serv = '" + jComboBoxTipoServico.getSelectedItem()+ "';";
-        
-        try{
+        String sql = "select * from tabtipo_serv where Tipo_serv = '" + jComboBoxTipoServico.getSelectedItem() + "';";
+
+        try {
             pst = conexao.prepareStatement(sql);
             rs = pst.executeQuery();
-            
-            while(rs.next()) {
+
+            while (rs.next()) {
                 codTipoServico = (rs.getInt("idtabTipo_serv"));
             }
-            
-        }catch(SQLException ex) {
+
+        } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, ex);
         }
     }
-    
+
     private void populaComboBoxFabricante() {
-        
+
         Connection conexao = Conexao.getConnection();
         ResultSet rs;
         String sql = "SELECT * FROM vw_combofabricanteproduto "
-                   + " WHERE id_prod = " + codProduto 
-                   + " AND tabmodelo_idtabModelo = " + codModelo + " group by fabricante;";
-        
-        try{
+                + " WHERE id_prod = " + codProduto
+                + " AND tabmodelo_idtabModelo = " + codModelo + " group by fabricante;";
+
+        try {
             pst = conexao.prepareStatement(sql);
             rs = pst.executeQuery();
-            
-            while(rs.next()) {
+
+            while (rs.next()) {
                 jComboBoxFabricante.addItem(rs.getString("fabricante"));
             }
-            
-        }catch(SQLException ex) {
+
+        } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, ex);
         }
     }
-    
+
     private void idFabricanteComboBox() {
-        
+
         Connection conexao = Conexao.getConnection();
         ResultSet rs;
-        String sql = "select * from tabfabricante where fabricante = '" + jComboBoxFabricante.getSelectedItem()+ "';";
-        
-        try{
+        String sql = "select * from tabfabricante where fabricante = '" + jComboBoxFabricante.getSelectedItem() + "';";
+
+        try {
             pst = conexao.prepareStatement(sql);
             rs = pst.executeQuery();
-            
-            while(rs.next()) {
+
+            while (rs.next()) {
                 codFabricante = (rs.getInt("idtabFabricante"));
             }
-            
-        }catch(SQLException ex) {
+
+        } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, ex);
         }
     }
-    
+
     private void populaComboBoxModeloEqui() {
-        
+
         Connection conexao = Conexao.getConnection();
         ResultSet rs;
-        String sql = "select modelo " +
-                                    " from tabdetequipamento inner join " +
-                                    " tabequipamento inner join " +
-                                    " tabmodelo on tabmodelo_idtabModelo = idtabModelo and " +
-                                    " tabequipamento_idEquipamento = idEquipamento"
-                                +   " where idEquipamento = " + codEquipamento + " group by modelo;";
-        
-        try{
+        String sql = "select modelo "
+                + " from tabdetequipamento inner join "
+                + " tabequipamento inner join "
+                + " tabmodelo on tabmodelo_idtabModelo = idtabModelo and "
+                + " tabequipamento_idEquipamento = idEquipamento"
+                + " where idEquipamento = " + codEquipamento + " group by modelo;";
+
+        try {
             pst = conexao.prepareStatement(sql);
             rs = pst.executeQuery();
-            
-            while(rs.next()) {
+
+            while (rs.next()) {
                 jComboBoxModeloEquip.addItem(rs.getString("modelo"));
             }
-            
-        }catch(SQLException ex) {
+
+        } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, ex);
         }
     }
-    
+
     private void idModeloEquiComboBox() {
-        
+
         Connection conexao = Conexao.getConnection();
         ResultSet rs;
-        String sql = "select * from tabmodelo where modelo = '" + jComboBoxModeloEquip.getSelectedItem()+ "';";
-        
-        try{
+        String sql = "select * from tabmodelo where modelo = '" + jComboBoxModeloEquip.getSelectedItem() + "';";
+
+        try {
             pst = conexao.prepareStatement(sql);
             rs = pst.executeQuery();
-            
-            while(rs.next()) {
+
+            while (rs.next()) {
                 codModeloEqui = (rs.getInt("idtabModelo"));
             }
-            
-        }catch(SQLException ex) {
+
+        } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, ex);
         }
     }
-    
-    
+
     private void populaComboBoxFabricanteEquip() {
-        
+
         Connection conexao = Conexao.getConnection();
         ResultSet rs;
         String sql = "SELECT * FROM vw_combofabricanteequipamento "
-                   + " WHERE idEquipamento = " + codEquipamento 
-                   + " AND tabmodelo_idtabModelo = " + codModeloEqui + " group by fabricante;";
-        
-        try{
+                + " WHERE idEquipamento = " + codEquipamento
+                + " AND tabmodelo_idtabModelo = " + codModeloEqui + " group by fabricante;";
+
+        try {
             pst = conexao.prepareStatement(sql);
             rs = pst.executeQuery();
-            
-            while(rs.next()) {
+
+            while (rs.next()) {
                 jComboBoxFabricanteEquip.addItem(rs.getString("fabricante"));
             }
-            
-        }catch(SQLException ex) {
+
+        } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, ex);
         }
     }
-    
+
     private void idFabricanteEquiComboBox() {
-        
+
         Connection conexao = Conexao.getConnection();
         ResultSet rs;
-        String sql = "select * from tabfabricante where fabricante = '" + jComboBoxFabricanteEquip.getSelectedItem()+ "';";
-        
-        try{
+        String sql = "select * from tabfabricante where fabricante = '" + jComboBoxFabricanteEquip.getSelectedItem() + "';";
+
+        try {
             pst = conexao.prepareStatement(sql);
             rs = pst.executeQuery();
-            
-            while(rs.next()) {
+
+            while (rs.next()) {
                 codFabricanteEqui = (rs.getInt("idtabFabricante"));
             }
-            
-        }catch(SQLException ex) {
+
+        } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, ex);
         }
     }
-    
+
     private void ocultaColunaTabelas() {
         // tabela produto
-        jTablePecas.getColumnModel().getColumn( 0 ).setMaxWidth( 0 );  
-        jTablePecas.getColumnModel().getColumn( 0 ).setMinWidth( 0 );  
-        jTablePecas.getTableHeader().getColumnModel().getColumn( 0 ).setMaxWidth( 0 );  
-        jTablePecas.getTableHeader().getColumnModel().getColumn( 0 ).setMinWidth( 0 ); 
-        
-        jTablePecas.getColumnModel().getColumn( 1 ).setMaxWidth( 0 );  
-        jTablePecas.getColumnModel().getColumn( 1 ).setMinWidth( 0 );  
-        jTablePecas.getTableHeader().getColumnModel().getColumn( 1 ).setMaxWidth( 0 );  
-        jTablePecas.getTableHeader().getColumnModel().getColumn( 1 ).setMinWidth( 0 ); 
-        
-        jTablePecas.getColumnModel().getColumn( 2 ).setMaxWidth( 0 );  
-        jTablePecas.getColumnModel().getColumn( 2 ).setMinWidth( 0 );  
-        jTablePecas.getTableHeader().getColumnModel().getColumn( 2 ).setMaxWidth( 0 );  
-        jTablePecas.getTableHeader().getColumnModel().getColumn( 2 ).setMinWidth( 0 );
+        jTablePecas.getColumnModel().getColumn(0).setMaxWidth(0);
+        jTablePecas.getColumnModel().getColumn(0).setMinWidth(0);
+        jTablePecas.getTableHeader().getColumnModel().getColumn(0).setMaxWidth(0);
+        jTablePecas.getTableHeader().getColumnModel().getColumn(0).setMinWidth(0);
+
+        jTablePecas.getColumnModel().getColumn(1).setMaxWidth(0);
+        jTablePecas.getColumnModel().getColumn(1).setMinWidth(0);
+        jTablePecas.getTableHeader().getColumnModel().getColumn(1).setMaxWidth(0);
+        jTablePecas.getTableHeader().getColumnModel().getColumn(1).setMinWidth(0);
+
+        jTablePecas.getColumnModel().getColumn(2).setMaxWidth(0);
+        jTablePecas.getColumnModel().getColumn(2).setMinWidth(0);
+        jTablePecas.getTableHeader().getColumnModel().getColumn(2).setMaxWidth(0);
+        jTablePecas.getTableHeader().getColumnModel().getColumn(2).setMinWidth(0);
 //        
         //oculta coluna equipamento
-        jTableEquipamento.getColumnModel().getColumn( 0 ).setMaxWidth( 0 );  
-        jTableEquipamento.getColumnModel().getColumn( 0 ).setMinWidth( 0 );  
-        jTableEquipamento.getTableHeader().getColumnModel().getColumn( 0 ).setMaxWidth( 0 );  
-        jTableEquipamento.getTableHeader().getColumnModel().getColumn( 0 ).setMinWidth( 0 );
-        
-        jTableEquipamento.getColumnModel().getColumn( 1 ).setMaxWidth( 0 );  
-        jTableEquipamento.getColumnModel().getColumn( 1 ).setMinWidth( 0 );  
-        jTableEquipamento.getTableHeader().getColumnModel().getColumn( 1 ).setMaxWidth( 0 );  
-        jTableEquipamento.getTableHeader().getColumnModel().getColumn( 1 ).setMinWidth( 0 );
-        
-        jTableEquipamento.getColumnModel().getColumn( 2 ).setMaxWidth( 0 );  
-        jTableEquipamento.getColumnModel().getColumn( 2 ).setMinWidth( 0 );  
-        jTableEquipamento.getTableHeader().getColumnModel().getColumn( 2 ).setMaxWidth( 0 );  
-        jTableEquipamento.getTableHeader().getColumnModel().getColumn( 2 ).setMinWidth( 0 );
-        
+        jTableEquipamento.getColumnModel().getColumn(0).setMaxWidth(0);
+        jTableEquipamento.getColumnModel().getColumn(0).setMinWidth(0);
+        jTableEquipamento.getTableHeader().getColumnModel().getColumn(0).setMaxWidth(0);
+        jTableEquipamento.getTableHeader().getColumnModel().getColumn(0).setMinWidth(0);
+
+        jTableEquipamento.getColumnModel().getColumn(1).setMaxWidth(0);
+        jTableEquipamento.getColumnModel().getColumn(1).setMinWidth(0);
+        jTableEquipamento.getTableHeader().getColumnModel().getColumn(1).setMaxWidth(0);
+        jTableEquipamento.getTableHeader().getColumnModel().getColumn(1).setMinWidth(0);
+
+        jTableEquipamento.getColumnModel().getColumn(2).setMaxWidth(0);
+        jTableEquipamento.getColumnModel().getColumn(2).setMinWidth(0);
+        jTableEquipamento.getTableHeader().getColumnModel().getColumn(2).setMaxWidth(0);
+        jTableEquipamento.getTableHeader().getColumnModel().getColumn(2).setMinWidth(0);
+
         //oculta coluna funcionario
-        jTableFuncionario.getColumnModel().getColumn( 0 ).setMaxWidth( 0 );  
-        jTableFuncionario.getColumnModel().getColumn( 0 ).setMinWidth( 0 );  
-        jTableFuncionario.getTableHeader().getColumnModel().getColumn( 0 ).setMaxWidth( 0 );  
-        jTableFuncionario.getTableHeader().getColumnModel().getColumn( 0 ).setMinWidth( 0 );
+        jTableFuncionario.getColumnModel().getColumn(0).setMaxWidth(0);
+        jTableFuncionario.getColumnModel().getColumn(0).setMinWidth(0);
+        jTableFuncionario.getTableHeader().getColumnModel().getColumn(0).setMaxWidth(0);
+        jTableFuncionario.getTableHeader().getColumnModel().getColumn(0).setMinWidth(0);
     }
 
 
