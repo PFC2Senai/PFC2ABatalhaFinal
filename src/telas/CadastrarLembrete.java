@@ -46,8 +46,7 @@ public class CadastrarLembrete extends javax.swing.JFrame {
     }
     
     public CadastrarLembrete(int codCliente, DetalharCliente detalharCliente) {        
-        initComponents();
-       // this();     
+        initComponents();   
         this.detalharCliente = detalharCliente;       
         this.codCli = codCliente;
         jComboBoxEmpresas.setVisible(false);
@@ -66,6 +65,7 @@ public class CadastrarLembrete extends javax.swing.JFrame {
                 jLabEmpresa.setText(cli.getEmpresa());
             }
     }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -84,7 +84,6 @@ public class CadastrarLembrete extends javax.swing.JFrame {
         jLabEmpresa = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         txtDataLembrete = new com.toedter.calendar.JDateChooser();
-        txtHoraLembrete = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -92,6 +91,8 @@ public class CadastrarLembrete extends javax.swing.JFrame {
         jBtnSalvarLembrete = new javax.swing.JButton();
         jBtnSair = new javax.swing.JButton();
         jLabCodEmpresa = new javax.swing.JLabel();
+        txtHoraLembrete = new javax.swing.JFormattedTextField();
+        jPanel2 = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -128,8 +129,7 @@ public class CadastrarLembrete extends javax.swing.JFrame {
 
         jLabel2.setText("Data:");
         jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 150, -1, -1));
-        jPanel1.add(txtDataLembrete, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 150, 140, -1));
-        jPanel1.add(txtHoraLembrete, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 200, 60, -1));
+        jPanel1.add(txtDataLembrete, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 150, 130, -1));
 
         jLabel3.setText("Hora:");
         jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 200, -1, -1));
@@ -160,6 +160,14 @@ public class CadastrarLembrete extends javax.swing.JFrame {
         jPanel1.add(jBtnSair, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 480, -1, -1));
         jPanel1.add(jLabCodEmpresa, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 50, 76, 20));
 
+        try {
+            txtHoraLembrete.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##:##")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+        jPanel1.add(txtHoraLembrete, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 200, 40, -1));
+        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 360, 520));
+
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 360, 520));
 
         pack();
@@ -170,10 +178,9 @@ public class CadastrarLembrete extends javax.swing.JFrame {
         
         if (!jLabCodEmpresa.getText().isEmpty()) {
             codCli = Integer.parseInt(jLabCodEmpresa.getText());
-            System.out.println(codCli);
         }
         
-//        try {
+        try {
             Lembrete lembrete = new Lembrete();
             lembrete.setCodUsuario(Usuario.idUsuario());
             lembrete.setDataLembrete(FormataData(txtDataLembrete.getDate()));            
@@ -186,9 +193,9 @@ public class CadastrarLembrete extends javax.swing.JFrame {
             verificaPagina();
            // limparCampos();
             
-//        }catch (Exception e) {
-//            JOptionPane.showMessageDialog(null, "Campo data Inválido!");
-//        }
+        }catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Campo data Inválido!");
+        }
         
     }//GEN-LAST:event_jBtnSalvarLembreteActionPerformed
 
@@ -197,7 +204,7 @@ public class CadastrarLembrete extends javax.swing.JFrame {
     }//GEN-LAST:event_jBtnSairActionPerformed
 
     private void jComboBoxEmpresasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxEmpresasActionPerformed
-        idSetorComboBox();
+        idClienteComboBox();
     }//GEN-LAST:event_jComboBoxEmpresasActionPerformed
 
     private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
@@ -229,17 +236,15 @@ public class CadastrarLembrete extends javax.swing.JFrame {
             pst = conexao.prepareStatement(sql);
             rs = pst.executeQuery();
             
-            while(rs.next())
-            {
+            while(rs.next()) {
                 jComboBoxEmpresas.addItem(rs.getString("empresa"));
             }
-        }catch(SQLException ex)
-        {
+        }catch(SQLException ex) {
             JOptionPane.showMessageDialog(null, ex);
         }
     }
     
-    private void idSetorComboBox() {
+    private void idClienteComboBox() {
         
         Connection conexao = Conexao.getConnection();
         ResultSet rs;
@@ -249,12 +254,11 @@ public class CadastrarLembrete extends javax.swing.JFrame {
             pst = conexao.prepareStatement(sql);
             rs = pst.executeQuery();
             
-            while(rs.next())
-            {
+            while(rs.next()) {
                 jLabCodEmpresa.setText(String.valueOf(rs.getInt("idcliente")));
             }
-        }catch(SQLException ex)
-        {
+            
+        }catch(SQLException ex) {
             JOptionPane.showMessageDialog(null, ex);
         }
     }
@@ -273,9 +277,10 @@ public class CadastrarLembrete extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private com.toedter.calendar.JDateChooser txtDataLembrete;
     private javax.swing.JTextArea txtDescricaoLembrete;
-    private javax.swing.JTextField txtHoraLembrete;
+    private javax.swing.JFormattedTextField txtHoraLembrete;
     // End of variables declaration//GEN-END:variables
 }

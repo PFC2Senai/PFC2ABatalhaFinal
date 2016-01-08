@@ -192,11 +192,13 @@ public class ExibeModelo extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+       
         if (jTableListarUsuarios.getSelectedRow() != -1) {
             this.dispose();
             int linha = jTableListarUsuarios.getSelectedRow();
             indice = (Integer.parseInt(jTableListarUsuarios.getValueAt(linha, 0).toString()));
             new AlterarModelo().setVisible(true);
+            
         } else {
             JOptionPane.showMessageDialog(null, "Primeiro selecione um registro.");
         }

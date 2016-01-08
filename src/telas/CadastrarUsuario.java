@@ -1,13 +1,7 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package telas;
 
 import atributos.Usuario;
 import funcoes.UsuarioDAO;
-import funcoes.ContatosDAO;
 import javax.swing.JOptionPane;
 
 /**
@@ -47,22 +41,18 @@ public class CadastrarUsuario extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
+        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel1.setText("Cadastro de usuário");
 
         jLabel3.setText("Nome:");
 
         jLabel4.setText("Senha:");
 
-        jLabel5.setText("Confirmação de senha:");
+        jLabel5.setText("Confirmar senha:");
 
         jLabel6.setText("Tipo de Usuário:");
 
-        jComboTipoUser.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "A", "F" }));
-        jComboTipoUser.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboTipoUserActionPerformed(evt);
-            }
-        });
+        jComboTipoUser.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Selecione", "Administrador", "Funcionário" }));
 
         jButton1.setText("Cadastrar");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -88,44 +78,34 @@ public class CadastrarUsuario extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(27, 27, 27)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(jLabel3)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
-                                .addComponent(jTextNome, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel3)
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addComponent(jLabel6)
                                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                         .addComponent(jLabel5)
                                         .addComponent(jLabel4)))
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(20, 20, 20)
-                                        .addComponent(jComboTipoUser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(0, 0, Short.MAX_VALUE))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jPasswordSenha)
-                                            .addComponent(jPasswordConfirmaSenha)))))))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jTextNome, javax.swing.GroupLayout.DEFAULT_SIZE, 216, Short.MAX_VALUE)
+                                    .addComponent(jPasswordSenha)
+                                    .addComponent(jPasswordConfirmaSenha)
+                                    .addComponent(jComboTipoUser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(jLabel1)))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jButton2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 81, Short.MAX_VALUE)
                         .addComponent(jButton3)
                         .addGap(26, 26, 26)
                         .addComponent(jButton1)))
-                .addContainerGap(24, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel1)
-                .addGap(104, 104, 104))
+                .addContainerGap(37, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(21, 21, 21)
                 .addComponent(jLabel1)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -143,7 +123,7 @@ public class CadastrarUsuario extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
                     .addComponent(jComboTipoUser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 70, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 48, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
                     .addComponent(jButton2)
@@ -155,38 +135,49 @@ public class CadastrarUsuario extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jComboTipoUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboTipoUserActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jComboTipoUserActionPerformed
-
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-       Usuario user = new Usuario();     
+        
+        String tipoUser = "";
+        
+        Usuario user = new Usuario();
         user.setNome(jTextNome.getText());
         user.setSenha(jPasswordSenha.getText());
-        user.setTipo((String) jComboTipoUser.getSelectedItem());        
         
-        if(jPasswordSenha.getText().equals(jPasswordConfirmaSenha.getText())){
-            if(!jPasswordConfirmaSenha.getText().trim().equals("") ){
-         UsuarioDAO.CadUsuario(user);
-         
-        JOptionPane.showMessageDialog(this, "Cadastrado com Sucesso! Agora você tem permissões para "
-                + "acessar o sistema!");
-        Menu m = new Menu();
-        //m.setVisible(true);
-        this.dispose();
-         }else{
-             JOptionPane.showMessageDialog(null,"Campo(s) Vazio(s)!");
-         }
-        }else{
-             JOptionPane.showMessageDialog(null,"Não foi possivel confirmar a senha!");
-         }
+        switch (jComboTipoUser.getSelectedItem().toString()) {
+            
+            case "Administrador":
+                tipoUser = "A";
+                break;
+            case "Funcionário":
+                tipoUser = "F";
+                break;
+        }
+        
+        user.setTipo(tipoUser);
+
+        if (jPasswordSenha.getText().equals(jPasswordConfirmaSenha.getText())) {
+            if (!jPasswordConfirmaSenha.getText().trim().equals("")) {
+                UsuarioDAO.CadUsuario(user);
+
+                JOptionPane.showMessageDialog(this, "Cadastrado com Sucesso! Agora você tem permissões para "
+                        + "acessar o sistema!");
+                
+                Menu m = new Menu();
+                //m.setVisible(true);
+                this.dispose();
+                
+            } else {
+                JOptionPane.showMessageDialog(null, "Campo(s) Vazio(s)!");
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "Não foi possivel confirmar a senha!");
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         this.dispose();
     }//GEN-LAST:event_jButton2ActionPerformed
 
-   
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;

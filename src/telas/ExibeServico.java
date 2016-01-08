@@ -55,11 +55,6 @@ public class ExibeServico extends javax.swing.JFrame {
         jBtnBuscar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                formKeyReleased(evt);
-            }
-        });
 
         jPanel1.setBackground(new java.awt.Color(204, 255, 204));
 
@@ -73,9 +68,9 @@ public class ExibeServico extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(jTableListarServicos);
 
-        txtBuscar.addCaretListener(new javax.swing.event.CaretListener() {
-            public void caretUpdate(javax.swing.event.CaretEvent evt) {
-                txtBuscarCaretUpdate(evt);
+        txtBuscar.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtBuscarKeyReleased(evt);
             }
         });
 
@@ -121,35 +116,32 @@ public class ExibeServico extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(24, 24, 24)
+                .addGap(33, 33, 33)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel1)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jComboBoxOpcaoPesquisa, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(txtBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 253, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jComboBoxOpcaoPesquisa, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(txtDatapesquisa, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jBtnBuscar))
-                    .addComponent(jLabel1)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 752, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(9, 9, 9)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 752, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jBtnSair)
-                                .addGap(33, 33, 33)
-                                .addComponent(jBtnDetalhar)))))
-                .addContainerGap(45, Short.MAX_VALUE))
+                        .addComponent(jBtnSair)
+                        .addGap(33, 33, 33)
+                        .addComponent(jBtnDetalhar)))
+                .addContainerGap(39, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGap(29, 29, 29)
+                .addGap(38, 38, 38)
                 .addComponent(jLabel1)
-                .addGap(24, 24, 24)
+                .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel2)
@@ -158,8 +150,8 @@ public class ExibeServico extends javax.swing.JFrame {
                     .addComponent(txtDatapesquisa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jBtnBuscar))
                 .addGap(32, 32, 32)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 348, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 42, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 372, Short.MAX_VALUE)
+                .addGap(27, 27, 27)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jBtnDetalhar)
                     .addComponent(jBtnSair))
@@ -199,6 +191,7 @@ public class ExibeServico extends javax.swing.JFrame {
         if (jComboBoxOpcaoPesquisa.getSelectedIndex() == 0) {
             TabelaServico("SELECT * FROM vw_servico;");
         }
+        
         switch (jComboBoxOpcaoPesquisa.getSelectedItem().toString()) {
 
             case "Código":
@@ -221,8 +214,7 @@ public class ExibeServico extends javax.swing.JFrame {
                 txtDatapesquisa.setVisible(true);
                 jBtnBuscar.setVisible(true);
                 txtBuscar.setVisible(false);
-                break;
-                
+                break;               
         }       
 
     }//GEN-LAST:event_jComboBoxOpcaoPesquisaActionPerformed
@@ -237,15 +229,11 @@ public class ExibeServico extends javax.swing.JFrame {
                 + " like '%" + dt1 + "%';");
     }//GEN-LAST:event_jBtnBuscarActionPerformed
 
-    private void txtBuscarCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_txtBuscarCaretUpdate
-
-
-    }//GEN-LAST:event_txtBuscarCaretUpdate
-
-    private void formKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_formKeyReleased
+    private void txtBuscarKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBuscarKeyReleased
+        
         TabelaServico("SELECT * FROM vw_servico where " + opcaoPesquisa
                 + " like '%" + txtBuscar.getText() + "%';");
-    }//GEN-LAST:event_formKeyReleased
+    }//GEN-LAST:event_txtBuscarKeyReleased
 
     public void TabelaServico(String Sql) {
 
@@ -260,7 +248,7 @@ public class ExibeServico extends javax.swing.JFrame {
 
             while (rs.next()) {
 
-                dados.add(new Object[]{
+                dados.add(new Object[] {
                     rs.getObject("idservico"),
                     rs.getObject("empresa"),
                     rs.getObject("preco"),
@@ -269,6 +257,7 @@ public class ExibeServico extends javax.swing.JFrame {
             }
 
             for (int i = 0; i < 4; i++) {
+                
                 ModeloTabela modelo = new ModeloTabela(dados, Colunas);
                 jTableListarServicos.setModel(modelo);
                 jTableListarServicos.getColumnModel().getColumn(i).setPreferredWidth(150);

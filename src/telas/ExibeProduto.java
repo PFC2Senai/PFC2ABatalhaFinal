@@ -45,14 +45,14 @@ public class ExibeProduto extends javax.swing.JFrame {
                
             ResultSet rs;
             rs = stmt.executeQuery(Sql);            
-            //rs.first();
             
-            while(rs.next()){
+            while(rs.next()) {
                dados.add(new Object[]{rs.getObject("id_prod"),
                                       rs.getObject("produto")});            
             }
                         
             for (int i = 0; i < 2; i++){
+                
                 ModeloTabela modelo = new ModeloTabela(dados, Colunas);
                 jTableListarProdutos.setModel(modelo);
                 jTableListarProdutos.getColumnModel().getColumn(i).setPreferredWidth(150);
@@ -173,18 +173,18 @@ public class ExibeProduto extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jButton7))
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 594, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(30, Short.MAX_VALUE))
+                .addContainerGap(27, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(18, 18, 18)
                 .addComponent(jLabel1)
-                .addGap(29, 29, 29)
+                .addGap(23, 23, 23)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(txtBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(26, 26, 26)
+                .addGap(23, 23, 23)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 285, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -193,7 +193,7 @@ public class ExibeProduto extends javax.swing.JFrame {
                     .addComponent(jButton6)
                     .addComponent(jButton7)
                     .addComponent(jBtnDetalharProduto))
-                .addContainerGap())
+                .addGap(23, 23, 23))
         );
 
         bindingGroup.bind();
@@ -212,7 +212,7 @@ public class ExibeProduto extends javax.swing.JFrame {
             int linha = jTableListarProdutos.getSelectedRow();
             indice = (Integer.parseInt(jTableListarProdutos.getValueAt(linha, 0).toString()));
             //new AlterarProduto().setVisible(true);
-        }else{
+        }else {
             JOptionPane.showMessageDialog(null, "Primeiro selecione um registro.");
         }
     }//GEN-LAST:event_jButton5ActionPerformed
@@ -226,9 +226,11 @@ public class ExibeProduto extends javax.swing.JFrame {
 
             int cod = ProdutoDAO.idProduto(produto.getIdProduto());
             ProdutoDAO.ExcluirProduto(cod);
+            
         } else {
             JOptionPane.showMessageDialog(null, "Primeiro selecione um registro.");
         }
+        
         TabelaProduto("SELECT * FROM tabproduto;");
     }//GEN-LAST:event_jButton6ActionPerformed
 
