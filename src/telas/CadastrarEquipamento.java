@@ -4,6 +4,7 @@ import atributos.Equipamento;
 import static atributos.Usuario.idUsuario;
 import funcoes.Conexao;
 import funcoes.EquipamentoDAO;
+import funcoes.LimitarDigitos;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -35,6 +36,8 @@ public class CadastrarEquipamento extends javax.swing.JFrame {
         txtEquipamento.setVisible(false);
         jBtnCadEquipamento.setVisible(false);
         jBtnCancelarCadEquipamento.setVisible(false);
+        
+        txtEquipamento.setDocument(new LimitarDigitos(45));
     }
 
     /**

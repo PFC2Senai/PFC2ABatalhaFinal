@@ -3,6 +3,7 @@ package telas;
 import atributos.DetServicoProduto;
 import funcoes.Conexao;
 import funcoes.DetServicoProdutoDAO;
+import funcoes.LimitarDigitos;
 import funcoes.ProdutoDAO;
 import funcoes.ServicoDAO;
 import java.sql.Connection;
@@ -43,7 +44,8 @@ public class AdicionaDetServProduto extends javax.swing.JFrame {
      */
     
     public AdicionaDetServProduto() {
-        initComponents();        
+        initComponents();       
+        txtQuantidade.setDocument(new LimitarDigitos(5));
     }
     
     public AdicionaDetServProduto(int idServ, DetalharServico telaDetalharServ) {

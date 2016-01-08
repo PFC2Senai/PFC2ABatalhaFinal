@@ -10,6 +10,7 @@ import funcoes.Conexao;
 import static funcoes.Conexao.getConnection;
 import funcoes.ContatosDAO;
 import funcoes.LembreteDAO;
+import funcoes.LimitarDigitos;
 import funcoes.ModeloTabela;
 import java.awt.Color;
 import java.sql.Connection;
@@ -49,6 +50,10 @@ public class DetalharCliente extends javax.swing.JFrame {
         populaComboBox();
         TabelaLembrete2(GetIndice());         
         TabelaContatos();      
+        
+        //txtEmpresa.setDocument(new LimitarDigitos(45));
+        //txtSetor.setDocument(new LimitarDigitos(50));
+        
     }
     
     private void CarregaCliente() {

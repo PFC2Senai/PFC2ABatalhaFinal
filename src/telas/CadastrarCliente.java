@@ -11,6 +11,7 @@ import funcoes.AuditoriaDAO;
 import funcoes.ClienteDAO;
 import funcoes.Conexao;
 import funcoes.ContatosDAO;
+import funcoes.LimitarDigitos;
 import funcoes.PessoaContatoDAO;
 import funcoes.SetorDAO;
 import java.sql.Connection;
@@ -35,6 +36,21 @@ public class CadastrarCliente extends javax.swing.JFrame {
         txtSetor.setVisible(false);
         jBtnSalvarSetor.setVisible(false);
         jBtnCancelarSetor.setVisible(false);
+        
+        txtEmpresa.setDocument(new LimitarDigitos(45));
+        txtSetor.setDocument(new LimitarDigitos(50));
+        txtPais.setDocument(new LimitarDigitos(45));
+        txtEstado.setDocument(new LimitarDigitos(45));
+        txtBairro.setDocument(new LimitarDigitos(45));
+        txtCidade.setDocument(new LimitarDigitos(45));
+        txtRua.setDocument(new LimitarDigitos(45));
+        txtNumero.setDocument(new LimitarDigitos(10));
+        
+        txtContato.setDocument(new LimitarDigitos(45));
+        txtEmail.setDocument(new LimitarDigitos(45));
+        txtTelCel.setDocument(new LimitarDigitos(20));
+        
+        
     }
 
     /**

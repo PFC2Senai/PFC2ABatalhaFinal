@@ -7,6 +7,7 @@ package telas;
 
 import atributos.Fabricante;
 import funcoes.FabricanteDAO;
+import funcoes.LimitarDigitos;
 
 /**
  *
@@ -19,6 +20,7 @@ public class CadastrarFabricante extends javax.swing.JFrame {
      */
     public CadastrarFabricante() {
         initComponents();
+        jTextFabricante.setDocument(new LimitarDigitos(45));
     }
     
     private void limparCampos(){

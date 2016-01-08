@@ -9,8 +9,10 @@ import funcoes.Conexao;
 import funcoes.FabricanteDAO;
 import static funcoes.FuncoesDiversas.FormataData;
 import funcoes.HistoricoProdutoDAO;
+import funcoes.LimitarDigitos;
 import funcoes.ModeloDAO;
 import funcoes.ProdutoDAO;
+import java.awt.event.KeyEvent;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -40,6 +42,18 @@ public class CadastrarProduto extends javax.swing.JFrame {
         populaComboBoxModelo();
         populaComboBoxProduto();
         ocultaCampos();
+        
+        txtProduto.setDocument(new LimitarDigitos(45));
+        txtFabricante.setDocument(new LimitarDigitos(45));
+        txtModelo.setDocument(new LimitarDigitos(70));
+        txtPrecoEntrada.setDocument(new LimitarDigitos(45));
+        txtPrecoEntrada.setDocument(new LimitarDigitos(10));
+        txtPercentual.setDocument(new LimitarDigitos(5));
+        txtPrecoSaida.setDocument(new LimitarDigitos(10));
+        txtQuantidade.setDocument(new LimitarDigitos(5));
+        txtQuantMinima.setDocument(new LimitarDigitos(5));
+        
+        
     }
 
     private void ocultaCampos() {
@@ -88,7 +102,6 @@ public class CadastrarProduto extends javax.swing.JFrame {
         jBtnCadProduto = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
         jBtbNovoProduto = new javax.swing.JButton();
-        txtProduto = new javax.swing.JTextField();
         jComboBoxProdutos = new javax.swing.JComboBox();
         jLabel10 = new javax.swing.JLabel();
         jBtnNovoFabricante = new javax.swing.JButton();
@@ -101,6 +114,7 @@ public class CadastrarProduto extends javax.swing.JFrame {
         txtModelo = new javax.swing.JTextField();
         txtFabricante = new javax.swing.JTextField();
         jComboBoxFabricante = new javax.swing.JComboBox();
+        txtProduto = new javax.swing.JTextField();
         jPanel3 = new javax.swing.JPanel();
         txtPrecoEntrada = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
@@ -243,6 +257,8 @@ public class CadastrarProduto extends javax.swing.JFrame {
             }
         });
 
+        txtProduto.setText("jTextField1");
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -255,8 +271,10 @@ public class CadastrarProduto extends javax.swing.JFrame {
                     .addComponent(jLabel5))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jComboBoxProdutos, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(txtProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 360, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(txtProduto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(143, 143, 143)
+                        .addComponent(jComboBoxProdutos, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addComponent(jComboBoxModelo, 0, 380, Short.MAX_VALUE)
                     .addComponent(txtModelo, javax.swing.GroupLayout.PREFERRED_SIZE, 359, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jComboBoxFabricante, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -292,8 +310,8 @@ public class CadastrarProduto extends javax.swing.JFrame {
                     .addComponent(jBtbNovoProduto)
                     .addComponent(jBtnCancelarCadProduto)
                     .addComponent(jBtnCadProduto)
-                    .addComponent(txtProduto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel10))
+                    .addComponent(jLabel10)
+                    .addComponent(txtProduto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)

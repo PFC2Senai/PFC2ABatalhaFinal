@@ -6,6 +6,7 @@ import atributos.Telefone;
 import atributos.Usuario;
 import funcoes.ContatosDAO;
 import funcoes.FuncionarioDAO;
+import funcoes.LimitarDigitos;
 import java.sql.PreparedStatement;
 
 /**
@@ -20,6 +21,21 @@ public class CadastrarFuncionario extends javax.swing.JFrame {
     public CadastrarFuncionario() {
         initComponents();
         //labelCodFuncionario.setVisible(false);
+        jTextNome.setDocument(new LimitarDigitos(45));
+        jTextCargo.setDocument(new LimitarDigitos(45));
+        jTextSalario.setDocument(new LimitarDigitos(45));    
+        
+        txtTelCel.setDocument(new LimitarDigitos(25));
+        txtEmail.setDocument(new LimitarDigitos(45));
+        jTextNumCtps.setDocument(new LimitarDigitos(10));
+        jTextSerieCtps.setDocument(new LimitarDigitos(5));
+        txtCidade.setDocument(new LimitarDigitos(45));
+        txtBairro.setDocument(new LimitarDigitos(45));
+        txtRua.setDocument(new LimitarDigitos(45));
+        txtNumero.setDocument(new LimitarDigitos(5));
+        
+        
+
     }
     
     private void limparCampos(){

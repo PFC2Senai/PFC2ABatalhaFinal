@@ -6,6 +6,7 @@
 package telas;
 
 import atributos.Modelo;
+import funcoes.LimitarDigitos;
 import funcoes.ModeloDAO;
 
 /**
@@ -19,6 +20,7 @@ public class CadastrarModelo extends javax.swing.JFrame {
      */
     public CadastrarModelo() {
         initComponents();
+        jTextModelo.setDocument(new LimitarDigitos(70));
     }
     
     private void limparCampos(){
