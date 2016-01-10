@@ -7,6 +7,7 @@ import atributos.Telefone;
 import static atributos.Usuario.idUsuario;
 import funcoes.ContatosDAO;
 import funcoes.FornecedorDAO;
+import funcoes.LimitarDigitos;
 import funcoes.PessoaContatoDAO;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -22,6 +23,19 @@ public class CadastrarFornecedor extends javax.swing.JFrame {
     public CadastrarFornecedor() {
         this.telaCadastrarProduto = null;
         initComponents();
+        
+        txtFornecedor.setDocument(new LimitarDigitos(45));
+        txtEstado.setDocument(new LimitarDigitos(45));
+        txtCidade.setDocument(new LimitarDigitos(45));
+        txtBairro.setDocument(new LimitarDigitos(45));
+        txtRua.setDocument(new LimitarDigitos(45));
+        txtNumero.setDocument(new LimitarDigitos(10));
+        
+        txtContato.setDocument(new LimitarDigitos(45));
+        txtEmail.setDocument(new LimitarDigitos(45));
+        txtTelCel.setDocument(new LimitarDigitos(25));
+        
+        
     }
     
     public CadastrarFornecedor(CadastrarProduto telaCadProduto) {

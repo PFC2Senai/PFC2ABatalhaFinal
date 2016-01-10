@@ -2,6 +2,8 @@ package telas;
 
 import atributos.Usuario;
 import funcoes.UsuarioDAO;
+import funcoes.ContatosDAO;
+import funcoes.LimitarDigitos;
 import javax.swing.JOptionPane;
 
 /**
@@ -15,6 +17,11 @@ public class CadastrarUsuario extends javax.swing.JFrame {
      */
     public CadastrarUsuario() {
         initComponents();
+        
+        jTextNome.setDocument(new LimitarDigitos(45));
+        jPasswordSenha.setDocument(new LimitarDigitos(10));
+        jPasswordConfirmaSenha.setDocument(new LimitarDigitos(10));
+        
     }
 
     /**

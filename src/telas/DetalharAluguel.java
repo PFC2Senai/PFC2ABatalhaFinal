@@ -9,6 +9,7 @@ import static funcoes.Conexao.getConnection;
 import funcoes.FuncoesDiversas;
 import static funcoes.FuncoesDiversas.ConverterData;
 import static funcoes.FuncoesDiversas.FormataData;
+import funcoes.LimitarDigitos;
 import funcoes.ModeloTabela;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -41,6 +42,7 @@ public class DetalharAluguel extends javax.swing.JFrame {
      */
     public DetalharAluguel() {
         initComponents();
+        txtDescricao.setDocument(new LimitarDigitos(255));
     }
 
     public DetalharAluguel(int codAluguel) {

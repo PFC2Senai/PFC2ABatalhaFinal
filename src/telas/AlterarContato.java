@@ -4,6 +4,7 @@ import atributos.PessoaContato;
 import atributos.Telefone;
 import static funcoes.Conexao.getConnection;
 import funcoes.ContatosDAO;
+import funcoes.LimitarDigitos;
 import funcoes.PessoaContatoDAO;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -32,6 +33,10 @@ public final class AlterarContato extends javax.swing.JFrame {
  
     public AlterarContato() {       
         initComponents(); 
+        txtContato.setDocument(new LimitarDigitos(45));
+        txtEmail.setDocument(new LimitarDigitos(45));
+        txtTel.setDocument(new LimitarDigitos(45));
+        txtTelCel.setDocument(new LimitarDigitos(45));
     }
     
     public AlterarContato(DetalharCliente telaDetCli, int codCliente, int codPessoaCont, int codCont) {

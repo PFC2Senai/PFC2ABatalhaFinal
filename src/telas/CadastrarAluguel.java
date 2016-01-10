@@ -7,6 +7,7 @@ import funcoes.AluguelDAO;
 import funcoes.Conexao;
 import funcoes.EquipamentoDAO;
 import funcoes.FuncoesDiversas;
+import funcoes.LimitarDigitos;
 import funcoes.OrdemServicoDAO;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -45,6 +46,8 @@ public class CadastrarAluguel extends javax.swing.JFrame {
 
         populaComboBoxCliente();
         populaComboBoxEquipamento();
+        txtValorLocacao.setDocument(new LimitarDigitos(10));
+        txtQuantEqui.setDocument(new LimitarDigitos(10));
     }
 
     /**

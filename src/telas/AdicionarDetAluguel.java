@@ -4,6 +4,7 @@ import atributos.Aluguel;
 import funcoes.AluguelDAO;
 import funcoes.Conexao;
 import funcoes.EquipamentoDAO;
+import funcoes.LimitarDigitos;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -41,6 +42,9 @@ public class AdicionarDetAluguel extends javax.swing.JFrame {
      */
     public AdicionarDetAluguel() {
         initComponents();       
+        txtValorLocacao.setDocument(new LimitarDigitos(10));
+        txtQuantEqui.setDocument(new LimitarDigitos(5));
+        txtTotal.setDocument(new LimitarDigitos(10));
     }
     
     public AdicionarDetAluguel(int codAluguel, DetalharAluguel telaAluguel) {

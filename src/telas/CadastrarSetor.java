@@ -1,6 +1,7 @@
 package telas;
 
 import atributos.Setor;
+import funcoes.LimitarDigitos;
 import funcoes.SetorDAO;
 
 
@@ -11,6 +12,7 @@ public class CadastrarSetor extends javax.swing.JFrame {
      */
     public CadastrarSetor() {
         initComponents();
+        txtSetor.setDocument(new LimitarDigitos(45));
     }
 
     /**
