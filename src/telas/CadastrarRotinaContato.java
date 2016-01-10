@@ -5,6 +5,8 @@ import atributos.RotinaContatos;
 import atributos.Usuario;
 import funcoes.ClienteDAO;
 import funcoes.Conexao;
+import funcoes.FuncoesDiversas;
+import static funcoes.FuncoesDiversas.FormataData;
 import funcoes.RotinaContatosDAO;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -60,23 +62,23 @@ public class CadastrarRotinaContato extends javax.swing.JFrame {
             }
     }
     
-    public void populaComboBox() {
-        
-        Connection conexao = Conexao.getConnection();
-        
-        String sql = "select * from tabcliente";
-        
-        try{
-            pst = conexao.prepareStatement(sql);
-            rs = pst.executeQuery();
-            
-            while(rs.next()) {
-                ComboBoxCliente.addItem(rs.getString("empresa"));
-            }
-        }catch(SQLException ex) {
-            JOptionPane.showMessageDialog(null, ex);
-        }
-    }
+//    public void populaComboBox() {
+//        
+//        Connection conexao = Conexao.getConnection();
+//        
+//        String sql = "select * from tabcliente";
+//        
+//        try{
+//            pst = conexao.prepareStatement(sql);
+//            rs = pst.executeQuery();
+//            
+//            while(rs.next()) {
+//                ComboBoxCliente.addItem(rs.getString("empresa"));
+//            }
+//        }catch(SQLException ex) {
+//            JOptionPane.showMessageDialog(null, ex);
+//        }
+//    }
         
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -84,6 +86,8 @@ public class CadastrarRotinaContato extends javax.swing.JFrame {
 
         jCalendar1 = new com.toedter.calendar.JCalendar();
         jLabel4 = new javax.swing.JLabel();
+        jPanel1 = new javax.swing.JPanel();
+        jLabel5 = new javax.swing.JLabel();
         jToggleButton2 = new javax.swing.JToggleButton();
         jToggleButton3 = new javax.swing.JToggleButton();
         jLabel1 = new javax.swing.JLabel();
@@ -92,7 +96,6 @@ public class CadastrarRotinaContato extends javax.swing.JFrame {
         jTextDescricao = new javax.swing.JTextArea();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
         JDataRotinaContato = new com.toedter.calendar.JDateChooser();
         jButton1 = new javax.swing.JButton();
         jLabCodigo = new javax.swing.JLabel();
@@ -107,48 +110,52 @@ public class CadastrarRotinaContato extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel5.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel5.setText("Rotina de Contato");
+        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 30, -1, -1));
+
+        jToggleButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/ok.png"))); // NOI18N
         jToggleButton2.setText("Salvar");
         jToggleButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jToggleButton2ActionPerformed(evt);
             }
         });
-        getContentPane().add(jToggleButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 440, -1, -1));
+        jPanel1.add(jToggleButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 440, -1, -1));
 
+        jToggleButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/cancelar.png"))); // NOI18N
         jToggleButton3.setText("Sair");
         jToggleButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jToggleButton3ActionPerformed(evt);
             }
         });
-        getContentPane().add(jToggleButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 440, -1, -1));
+        jPanel1.add(jToggleButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 440, -1, -1));
 
         jLabel1.setText("Data:");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 155, -1, -1));
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 150, -1, -1));
 
         ComboBoxCliente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 ComboBoxClienteActionPerformed(evt);
             }
         });
-        getContentPane().add(ComboBoxCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 110, 150, -1));
+        jPanel1.add(ComboBoxCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 110, 250, -1));
 
         jTextDescricao.setColumns(20);
         jTextDescricao.setRows(5);
         jScrollPane1.setViewportView(jTextDescricao);
 
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 260, 320, 160));
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 260, 320, 160));
 
         jLabel2.setText("Descrição do contato:");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 240, -1, -1));
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 240, -1, -1));
 
         jLabel3.setText("Hora:");
-        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 190, -1, -1));
-
-        jLabel5.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jLabel5.setText("Rotina de Contato");
-        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 24, -1, -1));
-        getContentPane().add(JDataRotinaContato, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 150, 121, -1));
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 190, -1, -1));
+        jPanel1.add(JDataRotinaContato, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 150, 121, -1));
 
         jButton1.setText("Exibir Rotinas");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -156,27 +163,29 @@ public class CadastrarRotinaContato extends javax.swing.JFrame {
                 jButton1ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 440, -1, -1));
+        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 440, -1, -1));
 
         jLabCodigo.setText("codigo");
-        getContentPane().add(jLabCodigo, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 70, 140, 20));
+        jPanel1.add(jLabCodigo, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 70, 140, 20));
 
         jLabNCodigo.setText("Código:");
-        getContentPane().add(jLabNCodigo, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 70, -1, 20));
-        getContentPane().add(jLabCodEmpresa, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 50, 76, 20));
+        jPanel1.add(jLabNCodigo, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 70, -1, 20));
+        jPanel1.add(jLabCodEmpresa, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 50, 76, 20));
 
         jLabEmpresa.setText("empresa");
-        getContentPane().add(jLabEmpresa, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 110, 200, 20));
+        jPanel1.add(jLabEmpresa, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 110, 260, 20));
 
         jLabel8.setText("Empresa:");
-        getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 110, -1, 20));
+        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 110, -1, 20));
 
         try {
             jTextHora.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##:##")));
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
-        getContentPane().add(jTextHora, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 190, 40, -1));
+        jPanel1.add(jTextHora, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 190, 40, -1));
+
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 400, 490));
 
         pack();
         setLocationRelativeTo(null);
@@ -199,8 +208,8 @@ public class CadastrarRotinaContato extends javax.swing.JFrame {
         RotinaContatos rot = new RotinaContatos();
         rot.setIdCliente(codCli);
         rot.setIdUsuario(Usuario.idUsuario()); 
-        rot.setDataRotinaContato(((JTextField)JDataRotinaContato.getDateEditor().getUiComponent()).getText());
-        rot.setHoraRotinaContato(jTextHora.getText());
+        rot.setDataRotinaContato(FormataData(JDataRotinaContato.getDate()));
+        rot.setHoraRotinaContato(FuncoesDiversas.ConverterHora(jTextHora.getText()));
         rot.setDescricaoRotina(jTextDescricao.getText());
         
         RotinaContatosDAO.CadRotinaContato(rot);
@@ -220,9 +229,28 @@ public class CadastrarRotinaContato extends javax.swing.JFrame {
         }
     }
     
+    private void populaComboBox() {
+        
+        Connection conexao = Conexao.getConnection();
+        ResultSet rs;
+        String sql = "select * from tabcliente";
+        
+        try{
+            pst = conexao.prepareStatement(sql);
+            rs = pst.executeQuery();
+            
+            while(rs.next()) {
+                ComboBoxCliente.addItem(rs.getString("empresa"));
+            }
+        }catch(SQLException ex) {
+            JOptionPane.showMessageDialog(null, ex);
+        }
+    }
+    
     private void idClienteComboBox() {
         
         Connection conexao = Conexao.getConnection();
+        ResultSet rs;
         String sql = "select * from tabcliente where empresa = '" + ComboBoxCliente.getSelectedItem()+ "';";
         
         try{
@@ -253,6 +281,7 @@ public class CadastrarRotinaContato extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextArea jTextDescricao;
     private javax.swing.JFormattedTextField jTextHora;

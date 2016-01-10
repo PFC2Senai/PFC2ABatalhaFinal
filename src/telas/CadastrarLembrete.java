@@ -129,6 +129,7 @@ public class CadastrarLembrete extends javax.swing.JFrame {
 
         jLabel2.setText("Data:");
         jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 150, -1, -1));
+
         jPanel1.add(txtDataLembrete, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 150, 130, -1));
 
         jLabel3.setText("Hora:");
@@ -141,8 +142,9 @@ public class CadastrarLembrete extends javax.swing.JFrame {
         txtDescricaoLembrete.setRows(5);
         jScrollPane1.setViewportView(txtDescricaoLembrete);
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 270, 289, 191));
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 270, 310, 191));
 
+        jBtnSalvarLembrete.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/ok.png"))); // NOI18N
         jBtnSalvarLembrete.setText("Salvar");
         jBtnSalvarLembrete.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -151,6 +153,7 @@ public class CadastrarLembrete extends javax.swing.JFrame {
         });
         jPanel1.add(jBtnSalvarLembrete, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 480, -1, -1));
 
+        jBtnSair.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/cancelar.png"))); // NOI18N
         jBtnSair.setText("Sair");
         jBtnSair.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -166,9 +169,9 @@ public class CadastrarLembrete extends javax.swing.JFrame {
             ex.printStackTrace();
         }
         jPanel1.add(txtHoraLembrete, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 200, 40, -1));
-        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 360, 520));
+        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 370, 520));
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 360, 520));
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 370, 520));
 
         pack();
         setLocationRelativeTo(null);
@@ -187,7 +190,6 @@ public class CadastrarLembrete extends javax.swing.JFrame {
             lembrete.setHora(FuncoesDiversas.ConverterHora(txtHoraLembrete.getText()));
             lembrete.setDescricao(txtDescricaoLembrete.getText());                    
             lembrete.setCodCliente(codCli);
-            System.out.println(codCli);
             LembreteDAO.CadLembrete(lembrete);      
             this.dispose();
             verificaPagina();

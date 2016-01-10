@@ -1,6 +1,5 @@
 package telas;
 
-
 import atributos.Cliente;
 import atributos.Endereco;
 import atributos.Lembrete;
@@ -22,55 +21,59 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.ListSelectionModel;
+import javax.swing.border.LineBorder;
 import javax.swing.table.DefaultTableModel;
 import static telas.ExibeCliente.GetIndice;
 
-
 public class DetalharCliente extends javax.swing.JFrame {
 
-    int idContato;    
+    int idContato;
     public static int codLembrete;
     private int codPessoaContato;
     private int codSetor;
     private PreparedStatement pst;
-    Statement stmt ;
+    Statement stmt;
     private final int codCliente;
     private int codContato;
-    
+
     /**
      * Creates new form CadastrarCliente
      */
     public DetalharCliente() {
         this.idContato = ClienteDAO.idContato(GetIndice());
         this.codCliente = GetIndice();
-        
+
         initComponents();
         CarregaCliente();
         populaComboBox();
-        TabelaLembrete2(GetIndice());         
-        TabelaContatos();      
+        TabelaLembrete2(GetIndice());
+        TabelaContatos();
+
+        Color minhaCor = new Color(217, 228, 241);
+        this.getContentPane().setBackground(minhaCor);
+        //this.setExtendedState(this.getExtendedState()|JFrame.MAXIMIZED_BOTH);
     }
-    
+
     private void CarregaCliente() {
- 
+
         jButtonEditarContato.setEnabled(false);
         OcultaBotoes();
         desabilitarEndereco();
         desabilitarDadosPessoais();
-        
+
         ArrayList<Endereco> endereco = new ArrayList<Endereco>();
         endereco = ContatosDAO.CarregaEndereco(idContato);
 
         ArrayList<Cliente> cliente = new ArrayList<Cliente>();
-        cliente = ClienteDAO.CarregaCliente(codCliente);         
-               
+        cliente = ClienteDAO.CarregaCliente(codCliente);
+
         for (Cliente cli : cliente) {
             txtEmpresa.setText(cli.getEmpresa());
             txtCnpj.setText(cli.getCnpj());
             txtSetor.setText(cli.getSetor());
             idContato = cli.getIdContato();
         }
-        
+
         for (Endereco end : endereco) {
             txtEndRua.setText(end.getRua());
             txtEndBairro.setText(end.getBairro());
@@ -81,127 +84,173 @@ public class DetalharCliente extends javax.swing.JFrame {
             txtEndPais.setText(end.getPais());
         }
     }
-    
+
     private void OcultaBotoes() {
-        
-       jBtbCancelDadosP.setVisible(false);
-       jBtbCancelEndereco.setVisible(false);
-       jBtnAltDadosP.setVisible(false);
-       jBtnAltEndereco.setVisible(false);
-       jComboBoxSetores.setVisible(false);
+
+        jBtbCancelDadosP.setVisible(false);
+        jBtbCancelEndereco.setVisible(false);
+        jBtnAltDadosP.setVisible(false);
+        jBtnAltEndereco.setVisible(false);
+        jComboBoxSetores.setVisible(false);
     }
-    
+
     private void desabilitarDadosPessoais() {
         //desabilita campos dados pessoais
-        txtEmpresa.setEditable(false);        
-        txtCnpj.setEnabled(false);
-        txtSetor.setEnabled(false);
+        txtEmpresa.setEditable(false);
+        txtCnpj.setEditable(false);
+        txtSetor.setEditable(false);
         jComboBoxSetores.setVisible(false);
-      // customiza o textfild
+        // customiza o textfild
         txtEmpresa.setOpaque(false);
-        txtEmpresa.setBackground(new Color(0,0,0,0));
+        txtEmpresa.setBackground(new Color(0, 0, 0, 0));
         txtEmpresa.setBorder(null);
         txtCnpj.setOpaque(false);
-        txtCnpj.setBackground(new Color(0,0,0,0));
+        txtCnpj.setBackground(new Color(0, 0, 0, 0));
+        txtCnpj.setBorder(null);
         txtSetor.setOpaque(false);
-        txtSetor.setBackground(new Color(0,0,0,0));
-      //oculta botoes  
+        txtSetor.setBackground(new Color(0, 0, 0, 0));
+        txtSetor.setBorder(null);
+        //oculta botoes  
         jBtbCancelDadosP.setVisible(false);
         jBtnAltDadosP.setVisible(false);
     }
-   
-    private void desabilitarEndereco() {  
-        
-        txtEndBairro.setEnabled(false);
-        txtEndCep.setEnabled(false);
-        txtEndCidade.setEnabled(false);
-        txtEndEstado.setEnabled(false);
-        txtEndNum.setEnabled(false);
-        txtEndPais.setEnabled(false);
-        txtEndRua.setEnabled(false); 
-        
+    
+    private void EditarDadosPessoais() {
+        // customiza o textfild
+        txtEmpresa.setOpaque(true);
+        txtEmpresa.setBackground(new Color(255, 255, 255));
+        txtEmpresa.setBorder(new LineBorder(Color.BLACK));
+        txtCnpj.setOpaque(true);
+        txtCnpj.setBackground(new Color(255, 255, 255));
+        txtCnpj.setBorder(new LineBorder(Color.BLACK));       
+    }
+
+    private void desabilitarEndereco() {
+
         txtEndBairro.setOpaque(false);
-        txtEndBairro.setBackground(new Color(0,0,0,0));
+        txtEndBairro.setBackground(new Color(0, 0, 0, 0));
+        txtEndBairro.setBorder(null);
+        txtEndBairro.setEditable(false);
         txtEndCep.setOpaque(false);
-        txtEndCep.setBackground(new Color(0,0,0,0));
+        txtEndCep.setBackground(new Color(0, 0, 0, 0));
+        txtEndCep.setEditable(false);
+        txtEndCep.setBorder(null);
         txtEndCidade.setOpaque(false);
-        txtEndCidade.setBackground(new Color(0,0,0,0));
+        txtEndCidade.setBackground(new Color(0, 0, 0, 0));
+        txtEndCidade.setBorder(null);
+        txtEndCidade.setEditable(false);
         txtEndEstado.setOpaque(false);
-        txtEndEstado.setBackground(new Color(0,0,0,0));
+        txtEndEstado.setBackground(new Color(0, 0, 0, 0));
+        txtEndEstado.setBorder(null);
+        txtEndEstado.setEditable(false);
         txtEndNum.setOpaque(false);
-        txtEndNum.setBackground(new Color(0,0,0,0));
+        txtEndNum.setBackground(new Color(0, 0, 0, 0));
+        txtEndNum.setBorder(null);
+        txtEndNum.setEditable(false);
         txtEndPais.setOpaque(false);
-        txtEndPais.setBackground(new Color(0,0,0,0));
+        txtEndPais.setBackground(new Color(0, 0, 0, 0));
+        txtEndPais.setBorder(null);
+        txtEndPais.setEditable(false);
         txtEndRua.setOpaque(false);
-        txtEndRua.setBackground(new Color(0,0,0,0));
-        
+        txtEndRua.setBackground(new Color(0, 0, 0, 0));
+        txtEndRua.setBorder(null);
+        txtEndRua.setEditable(false);
+
         jBtbCancelEndereco.setVisible(false);
         jBtnAltEndereco.setVisible(false);
     }
     
+    private void EditarEndereco() {
+
+        txtEndBairro.setOpaque(true);
+        txtEndBairro.setBackground(new Color(255, 255, 255));
+        txtEndBairro.setBorder(new LineBorder(Color.BLACK));
+        txtEndCep.setOpaque(true);
+        txtEndCep.setBackground(new Color(255, 255, 255));
+        txtEndCep.setBorder(new LineBorder(Color.BLACK));
+        txtEndCidade.setOpaque(true);
+        txtEndCidade.setBackground(new Color(255, 255, 255));
+        txtEndCidade.setBorder(new LineBorder(Color.BLACK));
+        txtEndEstado.setOpaque(true);
+        txtEndEstado.setBackground(new Color(255, 255, 255));
+        txtEndEstado.setBorder(new LineBorder(Color.BLACK));
+        txtEndNum.setOpaque(true);
+        txtEndNum.setBackground(new Color(255, 255, 255));
+        txtEndNum.setBorder(new LineBorder(Color.BLACK));
+        txtEndPais.setOpaque(true);
+        txtEndPais.setBackground(new Color(255, 255, 255));
+        txtEndPais.setBorder(new LineBorder(Color.BLACK));
+        txtEndRua.setOpaque(true);
+        txtEndRua.setBackground(new Color(255, 255, 255));
+        txtEndRua.setBorder(new LineBorder(Color.BLACK));
+
+        jBtbCancelEndereco.setVisible(false);
+        jBtnAltEndereco.setVisible(false);
+    }
+
     public void TabelaLembrete2(int idcli) {
-        
+
         ((DefaultTableModel) jTableLembretes.getModel()).setNumRows(0);
         jTableLembretes.updateUI();
+
         ArrayList<Lembrete> lembretes = new ArrayList<Lembrete>();
         lembretes = LembreteDAO.ListarLembretes(idcli);
-        
-        try { 
-            
-            DefaultTableModel dtm = (DefaultTableModel) jTableLembretes.getModel();
-                   
-            for(Lembrete lembrete : lembretes) {
-                dtm.addRow(new Object[] {
-                                        String.valueOf(lembrete.getIdLembrete()),
-                                                       lembrete.getDescricao()});
-            }
-        
-            //pog oculta coluna jtable
-            jTableLembretes.getColumnModel().getColumn( 0 ).setMaxWidth( 0 );  
-            jTableLembretes.getColumnModel().getColumn( 0 ).setMinWidth( 0 );  
-            jTableLembretes.getTableHeader().getColumnModel().getColumn( 0 ).setMaxWidth( 0 );  
-            jTableLembretes.getTableHeader().getColumnModel().getColumn( 0 ).setMinWidth( 0 );  
-        } catch (Exception erro){
-            Logger.getLogger(DetalharCliente.class.getName()).log(Level.SEVERE, null, erro);
-        }          
-    } 
-    
-    public void TabelaContatos() {
-        
-        try { 
-            String Sql = "SELECT * FROM vw_contatos WHERE idcliente = " + codCliente + ";";
-            
-            stmt = getConnection().createStatement();
-            ArrayList dados = new ArrayList();               
-            String [] Colunas = {"CodContato","Código","Contato", "Telefone", "Celular", "Email"};
-               
-            ResultSet rs;
-            rs = stmt.executeQuery(Sql);            
-            
-                while(rs.next()){
-                    dados.add(new Object[]{ rs.getObject("id_contato"),rs.getObject("idPessoaContato"),rs.getObject("contato"),
-                                            rs.getObject("telefone"),rs.getObject("celular"), 
-                                            rs.getObject("email")});            
-                }
 
-                    for (int i = 0; i < 6; i++){
-                        ModeloTabela modelo = new ModeloTabela(dados, Colunas);
-                        jTableContatos.setModel(modelo);
-                        jTableContatos.getColumnModel().getColumn(i).setPreferredWidth(150);
-                        jTableContatos.getColumnModel().getColumn(i).setResizable(false);
-                        jTableContatos.getTableHeader().setReorderingAllowed(false);
-                        jTableContatos.setAutoResizeMode(jTableContatos.AUTO_RESIZE_OFF);
-                        jTableContatos.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-                    }
-                    
+        try {
+
+            DefaultTableModel dtm = (DefaultTableModel) jTableLembretes.getModel();
+
+            for (Lembrete lembrete : lembretes) {
+                dtm.addRow(new Object[]{
+                    String.valueOf(lembrete.getIdLembrete()),
+                    lembrete.getDescricao()});
+            }
+
+            //pog oculta coluna jtable
+            jTableLembretes.getColumnModel().getColumn(0).setMaxWidth(0);
+            jTableLembretes.getColumnModel().getColumn(0).setMinWidth(0);
+            jTableLembretes.getTableHeader().getColumnModel().getColumn(0).setMaxWidth(0);
+            jTableLembretes.getTableHeader().getColumnModel().getColumn(0).setMinWidth(0);
+        } catch (Exception erro) {
+            Logger.getLogger(DetalharCliente.class.getName()).log(Level.SEVERE, null, erro);
+        }
+    }
+
+    public void TabelaContatos() {
+
+        try {
+            String Sql = "SELECT * FROM vw_contatos WHERE idcliente = " + codCliente + ";";
+
+            stmt = getConnection().createStatement();
+            ArrayList dados = new ArrayList();
+            String[] Colunas = {"CodContato", "Código", "Contato", "Telefone", "Celular", "Email"};
+
+            ResultSet rs;
+            rs = stmt.executeQuery(Sql);
+
+            while (rs.next()) {
+                dados.add(new Object[]{rs.getObject("id_contato"), rs.getObject("idPessoaContato"), rs.getObject("contato"),
+                    rs.getObject("telefone"), rs.getObject("celular"),
+                    rs.getObject("email")});
+            }
+
+            for (int i = 0; i < 6; i++) {
+                ModeloTabela modelo = new ModeloTabela(dados, Colunas);
+                jTableContatos.setModel(modelo);
+                jTableContatos.getColumnModel().getColumn(i).setPreferredWidth(150);
+                jTableContatos.getColumnModel().getColumn(i).setResizable(false);
+                jTableContatos.getTableHeader().setReorderingAllowed(false);
+                jTableContatos.setAutoResizeMode(jTableContatos.AUTO_RESIZE_OFF);
+                jTableContatos.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+            }
+
         } catch (SQLException ex) {
             Logger.getLogger(ExibeCliente.class.getName()).log(Level.SEVERE, null, ex);
-            
-        } catch (Exception erro){
+
+        } catch (Exception erro) {
             Logger.getLogger(ExibeCliente.class.getName()).log(Level.SEVERE, null, erro);
-        }          
+        }
     }
-    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -215,35 +264,35 @@ public class DetalharCliente extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jLabel11 = new javax.swing.JLabel();
-        jLabel13 = new javax.swing.JLabel();
-        jLabel14 = new javax.swing.JLabel();
-        jLabel16 = new javax.swing.JLabel();
-        txtEndNum = new javax.swing.JTextField();
-        txtEndRua = new javax.swing.JTextField();
-        txtEndEstado = new javax.swing.JTextField();
-        txtEndBairro = new javax.swing.JTextField();
-        txtEndCidade = new javax.swing.JTextField();
-        txtEndPais = new javax.swing.JTextField();
-        jButtonAr3 = new javax.swing.JButton();
-        jBtnAltEndereco = new javax.swing.JButton();
-        jBtbCancelEndereco = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         txtEmpresa = new javax.swing.JTextField();
         jButtonAr1 = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
-        jBtnAltDadosP = new javax.swing.JButton();
         jBtbCancelDadosP = new javax.swing.JButton();
         txtSetor = new javax.swing.JTextField();
         jComboBoxSetores = new javax.swing.JComboBox();
         jLabel6 = new javax.swing.JLabel();
         txtCnpj = new javax.swing.JFormattedTextField();
-        txtEndCep = new javax.swing.JFormattedTextField();
+        jBtnAltDadosP = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
+        jLabel14 = new javax.swing.JLabel();
+        jLabel16 = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
+        txtEndPais = new javax.swing.JTextField();
+        jLabel13 = new javax.swing.JLabel();
+        txtEndBairro = new javax.swing.JTextField();
+        txtEndRua = new javax.swing.JTextField();
+        txtEndCidade = new javax.swing.JTextField();
+        txtEndEstado = new javax.swing.JTextField();
+        txtEndNum = new javax.swing.JTextField();
+        txtEndCep = new javax.swing.JFormattedTextField();
         jLabel17 = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
+        jButtonAr3 = new javax.swing.JButton();
+        jBtnAltEndereco = new javax.swing.JButton();
+        jBtbCancelEndereco = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
         jTableContatos = new javax.swing.JTable();
@@ -252,92 +301,57 @@ public class DetalharCliente extends javax.swing.JFrame {
         jBtnNovoLembrete = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTableLembretes = new javax.swing.JTable();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Cadastrar Cliente");
+        setBackground(new java.awt.Color(238, 162, 162));
+        setExtendedState(6);
+        setName("j"); // NOI18N
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel1.setBackground(new java.awt.Color(223, 237, 253));
+        jPanel1.setName("jFrame"); // NOI18N
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel1.setText("Cliente");
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(38, 22, -1, -1));
 
-        jLabel11.setText("Cep:");
-        jPanel1.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(399, 238, -1, -1));
-
-        jLabel13.setText("Numero:");
-        jPanel1.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(398, 300, -1, -1));
-
-        jLabel14.setText("Bairro:");
-        jPanel1.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(399, 270, -1, -1));
-
-        jLabel16.setText("Estado:");
-        jPanel1.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(574, 238, -1, -1));
-        jPanel1.add(txtEndNum, new org.netbeans.lib.awtextra.AbsoluteConstraints(448, 301, 69, -1));
-        jPanel1.add(txtEndRua, new org.netbeans.lib.awtextra.AbsoluteConstraints(118, 300, 262, -1));
-        jPanel1.add(txtEndEstado, new org.netbeans.lib.awtextra.AbsoluteConstraints(615, 235, 114, -1));
-        jPanel1.add(txtEndBairro, new org.netbeans.lib.awtextra.AbsoluteConstraints(449, 267, 280, -1));
-        jPanel1.add(txtEndCidade, new org.netbeans.lib.awtextra.AbsoluteConstraints(118, 267, 260, -1));
-        jPanel1.add(txtEndPais, new org.netbeans.lib.awtextra.AbsoluteConstraints(118, 235, 260, -1));
-
-        jButtonAr3.setText("Editar");
-        jButtonAr3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonAr3ActionPerformed(evt);
-            }
-        });
-        jPanel1.add(jButtonAr3, new org.netbeans.lib.awtextra.AbsoluteConstraints(747, 235, -1, 20));
-
-        jBtnAltEndereco.setText("Salvar");
-        jBtnAltEndereco.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jBtnAltEnderecoActionPerformed(evt);
-            }
-        });
-        jPanel1.add(jBtnAltEndereco, new org.netbeans.lib.awtextra.AbsoluteConstraints(747, 266, 70, -1));
-
-        jBtbCancelEndereco.setText("Cancelar");
-        jBtbCancelEndereco.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jBtbCancelEnderecoActionPerformed(evt);
-            }
-        });
-        jPanel1.add(jBtbCancelEndereco, new org.netbeans.lib.awtextra.AbsoluteConstraints(747, 300, -1, -1));
-
         jPanel2.setBackground(new java.awt.Color(223, 237, 253));
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Dados da empresa"));
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        jLabel3.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel3.setText("Empresa:");
         jPanel2.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, -1, -1));
+
+        txtEmpresa.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jPanel2.add(txtEmpresa, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 30, 260, -1));
 
+        jButtonAr1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/editar.png"))); // NOI18N
         jButtonAr1.setText("Editar");
         jButtonAr1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonAr1ActionPerformed(evt);
             }
         });
-        jPanel2.add(jButtonAr1, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 30, -1, -1));
+        jPanel2.add(jButtonAr1, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 30, -1, -1));
 
+        jLabel4.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel4.setText("CNPJ:");
         jPanel2.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 60, -1, -1));
 
-        jBtnAltDadosP.setText("Salvar");
-        jBtnAltDadosP.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jBtnAltDadosPActionPerformed(evt);
-            }
-        });
-        jPanel2.add(jBtnAltDadosP, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 60, 70, -1));
-
+        jBtbCancelDadosP.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/cancelar.png"))); // NOI18N
         jBtbCancelDadosP.setText("Cancelar");
         jBtbCancelDadosP.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jBtbCancelDadosPActionPerformed(evt);
             }
         });
-        jPanel2.add(jBtbCancelDadosP, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 90, -1, -1));
+        jPanel2.add(jBtbCancelDadosP, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 30, -1, -1));
+
+        txtSetor.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jPanel2.add(txtSetor, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 90, 245, -1));
 
         jComboBoxSetores.addActionListener(new java.awt.event.ActionListener() {
@@ -347,6 +361,7 @@ public class DetalharCliente extends javax.swing.JFrame {
         });
         jPanel2.add(jComboBoxSetores, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 90, 260, -1));
 
+        jLabel6.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel6.setText("Setor:");
         jPanel2.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 90, -1, -1));
 
@@ -355,49 +370,105 @@ public class DetalharCliente extends javax.swing.JFrame {
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
+        txtCnpj.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jPanel2.add(txtCnpj, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 60, 140, -1));
 
+        jBtnAltDadosP.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/ok.png"))); // NOI18N
+        jBtnAltDadosP.setText("Salvar");
+        jBtnAltDadosP.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnAltDadosPActionPerformed(evt);
+            }
+        });
+        jPanel2.add(jBtnAltDadosP, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 60, 94, -1));
+
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 50, 470, 130));
+
+        jPanel3.setBackground(new java.awt.Color(223, 237, 253));
+        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder("Endereço"));
+        jPanel3.setNextFocusableComponent(txtEmpresa);
+        jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel14.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jLabel14.setText("Bairro:");
+        jPanel3.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 60, -1, -1));
+
+        jLabel16.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jLabel16.setText("Estado:");
+        jPanel3.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 30, -1, -1));
+
+        jLabel11.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jLabel11.setText("Cep:");
+        jPanel3.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 30, -1, -1));
+
+        txtEndPais.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jPanel3.add(txtEndPais, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 30, 260, -1));
+
+        jLabel13.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jLabel13.setText("Numero:");
+        jPanel3.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 90, -1, -1));
+
+        txtEndBairro.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jPanel3.add(txtEndBairro, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 60, 280, -1));
+
+        txtEndRua.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jPanel3.add(txtEndRua, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 90, 262, -1));
+
+        txtEndCidade.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jPanel3.add(txtEndCidade, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 60, 260, -1));
+
+        txtEndEstado.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jPanel3.add(txtEndEstado, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 30, 114, -1));
+
+        txtEndNum.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jPanel3.add(txtEndNum, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 90, 69, -1));
 
         try {
             txtEndCep.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("#####-###")));
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
-        jPanel1.add(txtEndCep, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 230, 110, -1));
+        txtEndCep.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jPanel3.add(txtEndCep, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 30, 110, -1));
 
-        jPanel3.setBackground(new java.awt.Color(223, 237, 253));
-        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder("Endereço"));
-
+        jLabel17.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel17.setText("País:");
+        jPanel3.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, -1, 20));
 
+        jLabel15.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel15.setText("Cidade:");
+        jPanel3.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 60, -1, 20));
 
+        jLabel12.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel12.setText("Rua:");
+        jPanel3.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 90, -1, 20));
 
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel17)
-                    .addComponent(jLabel15)
-                    .addComponent(jLabel12))
-                .addContainerGap(781, Short.MAX_VALUE))
-        );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel17)
-                .addGap(18, 18, 18)
-                .addComponent(jLabel15)
-                .addGap(18, 18, 18)
-                .addComponent(jLabel12)
-                .addContainerGap(18, Short.MAX_VALUE))
-        );
+        jButtonAr3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/editar.png"))); // NOI18N
+        jButtonAr3.setText("Editar");
+        jButtonAr3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonAr3ActionPerformed(evt);
+            }
+        });
+        jPanel3.add(jButtonAr3, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 30, -1, -1));
+
+        jBtnAltEndereco.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/ok.png"))); // NOI18N
+        jBtnAltEndereco.setText("Salvar");
+        jBtnAltEndereco.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnAltEnderecoActionPerformed(evt);
+            }
+        });
+        jPanel3.add(jBtnAltEndereco, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 60, 94, -1));
+
+        jBtbCancelEndereco.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/cancelar.png"))); // NOI18N
+        jBtbCancelEndereco.setText("Cancelar");
+        jBtbCancelEndereco.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtbCancelEnderecoActionPerformed(evt);
+            }
+        });
+        jPanel3.add(jBtbCancelEndereco, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 30, -1, -1));
 
         jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 210, 840, 130));
 
@@ -428,6 +499,7 @@ public class DetalharCliente extends javax.swing.JFrame {
         });
         jScrollPane3.setViewportView(jTableContatos);
 
+        jButtonEditarContato.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/editar.png"))); // NOI18N
         jButtonEditarContato.setText("Editar");
 
         org.jdesktop.beansbinding.Binding binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, jTableContatos, org.jdesktop.beansbinding.ELProperty.create("${selectedElement != null}"), jButtonEditarContato, org.jdesktop.beansbinding.BeanProperty.create("enabled"));
@@ -448,7 +520,7 @@ public class DetalharCliente extends javax.swing.JFrame {
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 630, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButtonEditarContato)
-                .addContainerGap(121, Short.MAX_VALUE))
+                .addContainerGap(101, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -465,6 +537,7 @@ public class DetalharCliente extends javax.swing.JFrame {
         jPanel5.setBackground(new java.awt.Color(223, 237, 253));
         jPanel5.setBorder(javax.swing.BorderFactory.createTitledBorder("Lembretes"));
 
+        jBtnNovoLembrete.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/adicionar.gif"))); // NOI18N
         jBtnNovoLembrete.setText("Novo Lembrete");
         jBtnNovoLembrete.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -510,7 +583,7 @@ public class DetalharCliente extends javax.swing.JFrame {
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
-                .addGap(0, 8, Short.MAX_VALUE)
+                .addGap(0, 6, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jBtnNovoLembrete))
@@ -518,18 +591,15 @@ public class DetalharCliente extends javax.swing.JFrame {
 
         jPanel1.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 30, 360, 170));
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 908, Short.MAX_VALUE)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 590, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
-        );
+        jButton1.setText("Nova Rotina de Conatato");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 20, -1, -1));
+
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -5, 910, 620));
 
         bindingGroup.bind();
 
@@ -538,17 +608,17 @@ public class DetalharCliente extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonEditarContatoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEditarContatoActionPerformed
-        if(jTableContatos.getSelectedRow() != -1) {         
-            int linha = jTableContatos.getSelectedRow();        
+        if (jTableContatos.getSelectedRow() != -1) {
+            int linha = jTableContatos.getSelectedRow();
             codContato = (Integer.parseInt(jTableContatos.getValueAt(linha, 0).toString()));
             codPessoaContato = Integer.parseInt(jTableContatos.getValueAt(linha, 1).toString());
         }
-        new AlterarContato(this, codCliente, codPessoaContato, codContato).setVisible(true);        
+        new AlterarContato(this, codCliente, codPessoaContato, codContato).setVisible(true);
     }//GEN-LAST:event_jButtonEditarContatoActionPerformed
 
     private void jBtnNovoLembreteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnNovoLembreteActionPerformed
         this.setEnabled(false);
-        new CadastrarLembrete(GetIndice(),this).setVisible(true);
+        new CadastrarLembrete(GetIndice(), this).setVisible(true);
     }//GEN-LAST:event_jBtnNovoLembreteActionPerformed
 
     private void jBtbCancelEnderecoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtbCancelEnderecoActionPerformed
@@ -586,6 +656,7 @@ public class DetalharCliente extends javax.swing.JFrame {
         jBtnAltDadosP.setVisible(false);
         jBtbCancelDadosP.setVisible(false);
         jButtonAr1.setVisible(true);
+        
     }//GEN-LAST:event_jBtbCancelDadosPActionPerformed
 
     private void jBtnAltDadosPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnAltDadosPActionPerformed
@@ -602,10 +673,10 @@ public class DetalharCliente extends javax.swing.JFrame {
         jBtbCancelDadosP.setVisible(false);
         jButtonAr1.setVisible(true);
         CarregaCliente();
-        
-        String descricaoAudit = "Empresa "+ cli.getEmpresa() +" /CNPJ: "+ cli.getCnpj() +"teve os dados alterados.";
+
+        String descricaoAudit = "Empresa " + cli.getEmpresa() + " /CNPJ: " + cli.getCnpj() + "teve os dados alterados.";
         AuditoriaDAO.CadDetAuditoria(descricaoAudit);
-        
+
     }//GEN-LAST:event_jBtnAltDadosPActionPerformed
 
     private void jComboBoxSetoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxSetoresActionPerformed
@@ -624,13 +695,14 @@ public class DetalharCliente extends javax.swing.JFrame {
 
     private void jButtonAr3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAr3ActionPerformed
 
-        txtEndBairro.setEnabled(true);
-        txtEndCep.setEnabled(true);
-        txtEndCidade.setEnabled(true);
-        txtEndEstado.setEnabled(true);
-        txtEndNum.setEnabled(true);
-        txtEndPais.setEnabled(true);
-        txtEndRua.setEnabled(true);
+        EditarEndereco();
+        txtEndBairro.setEditable(true);
+        txtEndCep.setEditable(true);
+        txtEndCidade.setEditable(true);
+        txtEndEstado.setEditable(true);
+        txtEndNum.setEditable(true);
+        txtEndPais.setEditable(true);
+        txtEndRua.setEditable(true);
 
         jButtonAr3.setVisible(false);
         jBtnAltEndereco.setVisible(true);
@@ -638,9 +710,9 @@ public class DetalharCliente extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonAr3ActionPerformed
 
     private void jButtonAr1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAr1ActionPerformed
-
+        EditarDadosPessoais();
         txtEmpresa.setEditable(true);
-        txtCnpj.setEnabled(true);
+        txtCnpj.setEditable(true);
         txtSetor.setVisible(false);
         jComboBoxSetores.setVisible(true);
 
@@ -650,58 +722,61 @@ public class DetalharCliente extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonAr1ActionPerformed
 
     private void jTableContatosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableContatosMouseClicked
-                
+
     }//GEN-LAST:event_jTableContatosMouseClicked
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        this.setEnabled(false);
+        new CadastrarLembrete(GetIndice(), this).setVisible(true);
+    }//GEN-LAST:event_jButton1ActionPerformed
+
     private void populaComboBox() {
-        
+
         Connection conexao = Conexao.getConnection();
         ResultSet rs;
         String sql = "select * from tabSetor";
-        
-        try{
+
+        try {
             pst = conexao.prepareStatement(sql);
             rs = pst.executeQuery();
-            
-            while(rs.next())
-            {
+
+            while (rs.next()) {
                 jComboBoxSetores.addItem(rs.getString("setor"));
             }
-        }catch(SQLException ex) {
+        } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, ex);
         }
-    }    
-    
+    }
+
     private void idSetorComboBox() {
-        
+
         Connection conexao = Conexao.getConnection();
         ResultSet rs;
-        String sql = "select * from tabSetor where setor = '"+ jComboBoxSetores.getSelectedItem()+ "';";
-        
-        try{
+        String sql = "select * from tabSetor where setor = '" + jComboBoxSetores.getSelectedItem() + "';";
+
+        try {
             pst = conexao.prepareStatement(sql);
             rs = pst.executeQuery();
-            
-            while(rs.next())
-            {
+
+            while (rs.next()) {
                 codSetor = (rs.getInt("idtabSetor"));
             }
-        }catch(SQLException ex)
-        {
+        } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, ex);
         }
     }
-    
-    public static int GetIdLembrete() {         
+
+    public static int GetIdLembrete() {
         return codLembrete;
     }
-    
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBtbCancelDadosP;
     private javax.swing.JButton jBtbCancelEndereco;
     private javax.swing.JButton jBtnAltDadosP;
     private javax.swing.JButton jBtnAltEndereco;
     private javax.swing.JButton jBtnNovoLembrete;
+    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButtonAr1;
     private javax.swing.JButton jButtonAr3;
     private javax.swing.JButton jButtonEditarContato;

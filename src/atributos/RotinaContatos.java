@@ -1,9 +1,7 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package atributos;
+
+import java.sql.Time;
+import java.util.Date;
 
 /**
  *
@@ -13,9 +11,9 @@ public class RotinaContatos {
     int idRotinaContato;
     int idCliente;
     int idUsuario;
-    String dataRotinaContato;
+    Date dataRotinaContato;
     String Cliente;
-    String horaRotinaContato;
+    Time horaRotinaContato;
     String descricaoRotina;
 
     public int getIdUsuario() {
@@ -50,19 +48,19 @@ public class RotinaContatos {
         this.idRotinaContato = idRotinaContato;
     }
 
-    public String getDataRotinaContato() {
+    public Date getDataRotinaContato() {
         return dataRotinaContato;
     }
 
-    public void setDataRotinaContato(String dataRotinaContato) {
+    public void setDataRotinaContato(Date dataRotinaContato) {
         this.dataRotinaContato = dataRotinaContato;
     }
 
-    public String getHoraRotinaContato() {
+    public Time getHoraRotinaContato() {
         return horaRotinaContato;
     }
 
-    public void setHoraRotinaContato(String horaRotinaContato) {
+    public void setHoraRotinaContato(Time horaRotinaContato) {
         this.horaRotinaContato = horaRotinaContato;
     }
 

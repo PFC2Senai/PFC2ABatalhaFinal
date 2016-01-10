@@ -1,5 +1,7 @@
 package telas;
 
+import javax.swing.SwingConstants;
+
 /**
  *
  * @author S015365
@@ -10,7 +12,14 @@ public class Menu extends javax.swing.JFrame {
      * Creates new form Menu
      */
     public Menu() {
-        initComponents();       
+        initComponents(); 
+        
+        jButton1.setVerticalTextPosition(SwingConstants.BOTTOM);
+        jButton1.setHorizontalTextPosition(SwingConstants.CENTER);
+        jBtnCadastrarLembrete.setVerticalTextPosition(SwingConstants.BOTTOM);
+        jBtnCadastrarLembrete.setHorizontalTextPosition(SwingConstants.CENTER);
+        jBtnRotinaContato.setVerticalTextPosition(SwingConstants.BOTTOM);
+        jBtnRotinaContato.setHorizontalTextPosition(SwingConstants.CENTER);
     }
 
     /**
@@ -25,6 +34,7 @@ public class Menu extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         jBtnCadastrarLembrete = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
+        jBtnRotinaContato = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu4 = new javax.swing.JMenu();
         jMenu14 = new javax.swing.JMenu();
@@ -69,16 +79,18 @@ public class Menu extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        jButton1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jButton1.setText("Cadastrar Rotina de Contato");
+        jButton1.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/1452414361_kontact_1.png"))); // NOI18N
+        jButton1.setText("Rotina de Contato");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
             }
         });
 
-        jBtnCadastrarLembrete.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jBtnCadastrarLembrete.setText("Cadastrar Lembrete");
+        jBtnCadastrarLembrete.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jBtnCadastrarLembrete.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/CadastrarLembrete.png"))); // NOI18N
+        jBtnCadastrarLembrete.setText("Lembrete");
         jBtnCadastrarLembrete.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jBtnCadastrarLembreteActionPerformed(evt);
@@ -97,6 +109,10 @@ public class Menu extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 88, Short.MAX_VALUE)
         );
+
+        jBtnRotinaContato.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jBtnRotinaContato.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/1452415489_icon-57.fw_1.png"))); // NOI18N
+        jBtnRotinaContato.setText("Proposta");
 
         jMenu4.setBackground(new java.awt.Color(204, 153, 255));
         jMenu4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/menu.png"))); // NOI18N
@@ -381,11 +397,11 @@ public class Menu extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 239, Short.MAX_VALUE)
-                    .addComponent(jBtnCadastrarLembrete, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 260, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(jBtnRotinaContato, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButton1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jBtnCadastrarLembrete, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 507, Short.MAX_VALUE)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -394,14 +410,16 @@ public class Menu extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(74, 74, 74)
-                        .addComponent(jButton1))
-                    .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(99, 99, 99)
+                        .addComponent(jButton1)
+                        .addGap(18, 18, 18)
+                        .addComponent(jBtnCadastrarLembrete)))
                 .addGap(18, 18, 18)
-                .addComponent(jBtnCadastrarLembrete)
-                .addContainerGap(172, Short.MAX_VALUE))
+                .addComponent(jBtnRotinaContato)
+                .addContainerGap(137, Short.MAX_VALUE))
         );
 
         pack();
@@ -549,6 +567,7 @@ public class Menu extends javax.swing.JFrame {
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBtnCadastrarLembrete;
+    private javax.swing.JButton jBtnRotinaContato;
     private javax.swing.JButton jButton1;
     private javax.swing.JMenu jMenu10;
     private javax.swing.JMenu jMenu14;
