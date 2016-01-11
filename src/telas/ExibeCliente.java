@@ -185,6 +185,11 @@ public final class ExibeCliente extends javax.swing.JFrame {
 
         jLabel2.setText("Pesquisar:");
 
+        txtBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtBuscarActionPerformed(evt);
+            }
+        });
         txtBuscar.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 txtBuscarKeyReleased(evt);
@@ -457,6 +462,10 @@ public final class ExibeCliente extends javax.swing.JFrame {
     private void jBtnRotinaContatoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnRotinaContatoActionPerformed
         new CadastrarRotinaContato(indice).setVisible(true);
     }//GEN-LAST:event_jBtnRotinaContatoActionPerformed
+
+    private void txtBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtBuscarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtBuscarActionPerformed
 
     private void populaComboBox() {
 
