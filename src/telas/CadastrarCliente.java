@@ -509,7 +509,7 @@ public class CadastrarCliente extends javax.swing.JFrame {
                 
         JOptionPane.showMessageDialog(null, "Cadastrado com sucesso!");
         if (JOptionPane.showConfirmDialog(null, "Deseja continuar cadastrando?", "Confirmar a Exclusão", JOptionPane.YES_NO_OPTION) == 1) {
-                this.dispose();
+            this.dispose();
         }
     }//GEN-LAST:event_btnCadClienteActionPerformed
 
