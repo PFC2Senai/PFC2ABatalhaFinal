@@ -308,7 +308,8 @@ public class DetalharCliente extends javax.swing.JFrame {
         jBtnNovoLembrete = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTableLembretes = new javax.swing.JTable();
-        jButton1 = new javax.swing.JButton();
+        jBtnCadastrarRotinaContato = new javax.swing.JButton();
+        jBtnExibeRotina = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Cadastrar Cliente");
@@ -598,13 +599,22 @@ public class DetalharCliente extends javax.swing.JFrame {
 
         jPanel1.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 30, 360, 170));
 
-        jButton1.setText("Nova Rotina de Conatato");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        jBtnCadastrarRotinaContato.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/adicionar.gif"))); // NOI18N
+        jBtnCadastrarRotinaContato.setText("Nova Rotina de Conatato");
+        jBtnCadastrarRotinaContato.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                jBtnCadastrarRotinaContatoActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 20, -1, -1));
+        jPanel1.add(jBtnCadastrarRotinaContato, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 20, -1, -1));
+
+        jBtnExibeRotina.setText("Exibir Rotinas");
+        jBtnExibeRotina.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnExibeRotinaActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jBtnExibeRotina, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 20, 140, -1));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -5, 910, 620));
 
@@ -732,10 +742,15 @@ public class DetalharCliente extends javax.swing.JFrame {
 
     }//GEN-LAST:event_jTableContatosMouseClicked
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void jBtnCadastrarRotinaContatoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnCadastrarRotinaContatoActionPerformed
         this.setEnabled(false);
-        new CadastrarLembrete(GetIndice(), this).setVisible(true);
-    }//GEN-LAST:event_jButton1ActionPerformed
+        new CadastrarRotinaContato(GetIndice(), this).setVisible(true);
+    }//GEN-LAST:event_jBtnCadastrarRotinaContatoActionPerformed
+
+    private void jBtnExibeRotinaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnExibeRotinaActionPerformed
+        this.setEnabled(false);
+        new ExibeRotina(GetIndice(), this).setVisible(true);
+    }//GEN-LAST:event_jBtnExibeRotinaActionPerformed
 
     private void populaComboBox() {
 
@@ -782,8 +797,9 @@ public class DetalharCliente extends javax.swing.JFrame {
     private javax.swing.JButton jBtbCancelEndereco;
     private javax.swing.JButton jBtnAltDadosP;
     private javax.swing.JButton jBtnAltEndereco;
+    private javax.swing.JButton jBtnCadastrarRotinaContato;
+    private javax.swing.JButton jBtnExibeRotina;
     private javax.swing.JButton jBtnNovoLembrete;
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButtonAr1;
     private javax.swing.JButton jButtonAr3;
     private javax.swing.JButton jButtonEditarContato;

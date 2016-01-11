@@ -16,6 +16,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.ListSelectionModel;
+import javax.swing.SwingConstants;
 
 /**
  *
@@ -39,6 +40,10 @@ public final class ExibeCliente extends javax.swing.JFrame {
     public ExibeCliente() {
         initComponents();
         populaComboBox();
+        jBtnLembrete.setVerticalTextPosition(SwingConstants.BOTTOM);
+        jBtnLembrete.setHorizontalTextPosition(SwingConstants.CENTER);
+        jBtnRotinaContato.setVerticalTextPosition(SwingConstants.BOTTOM);
+        jBtnRotinaContato.setHorizontalTextPosition(SwingConstants.CENTER);
         TabelaCliente("select  * from vw_cliente;");
     }
 
@@ -113,7 +118,7 @@ public final class ExibeCliente extends javax.swing.JFrame {
         jBtnEditar = new javax.swing.JButton();
         jBtExcluirCliente = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
-        jBtLembrete = new javax.swing.JButton();
+        jBtnLembrete = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         txtBuscar = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
@@ -122,6 +127,7 @@ public final class ExibeCliente extends javax.swing.JFrame {
         jComboUf = new javax.swing.JComboBox();
         jComboBoxOpcaoPesquisa = new javax.swing.JComboBox();
         jBtnBuscar = new javax.swing.JButton();
+        jBtnRotinaContato = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -165,14 +171,15 @@ public final class ExibeCliente extends javax.swing.JFrame {
 
         jButton4.setText("Voltar");
 
-        jBtLembrete.setText("Lembrete");
+        jBtnLembrete.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/CadastrarLembrete.png"))); // NOI18N
+        jBtnLembrete.setText("Lembrete");
 
-        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, jTableListarClientes, org.jdesktop.beansbinding.ELProperty.create("${selectedElement != null}"), jBtLembrete, org.jdesktop.beansbinding.BeanProperty.create("enabled"));
+        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, jTableListarClientes, org.jdesktop.beansbinding.ELProperty.create("${selectedElement != null}"), jBtnLembrete, org.jdesktop.beansbinding.BeanProperty.create("enabled"));
         bindingGroup.addBinding(binding);
 
-        jBtLembrete.addActionListener(new java.awt.event.ActionListener() {
+        jBtnLembrete.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jBtLembreteActionPerformed(evt);
+                jBtnLembreteActionPerformed(evt);
             }
         });
 
@@ -215,43 +222,61 @@ public final class ExibeCliente extends javax.swing.JFrame {
             }
         });
 
+        jBtnRotinaContato.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jBtnRotinaContato.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/1452414361_kontact_1.png"))); // NOI18N
+        jBtnRotinaContato.setText("Rotina de Contato");
+
+        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, jTableListarClientes, org.jdesktop.beansbinding.ELProperty.create("${selectedElement != null}"), jBtnRotinaContato, org.jdesktop.beansbinding.BeanProperty.create("enabled"));
+        bindingGroup.addBinding(binding);
+
+        jBtnRotinaContato.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnRotinaContatoActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(35, 35, 35)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jButton1)
-                        .addGap(66, 66, 66)
-                        .addComponent(jBtnEditar)
-                        .addGap(76, 76, 76)
-                        .addComponent(jBtExcluirCliente)
-                        .addGap(77, 77, 77)
-                        .addComponent(jButton4)
-                        .addGap(152, 152, 152)
-                        .addComponent(jBtLembrete))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 702, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createSequentialGroup()
+                        .addGap(35, 35, 35)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel4))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addComponent(jLabel1)
+                            .addComponent(jButton4)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 702, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jBtnEditar)
+                                    .addComponent(jButton1)
+                                    .addComponent(jBtExcluirCliente)
+                                    .addComponent(jBtnRotinaContato, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jBtnLembrete, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(39, 39, 39)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jComboBoxOpcaoPesquisa, 0, 204, Short.MAX_VALUE)
-                            .addComponent(jComboBoxSetores, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(36, 36, 36)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(txtBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 256, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel4)
+                                .addGap(28, 28, 28)
+                                .addComponent(jComboBoxSetores, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel2)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jComboBoxOpcaoPesquisa, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(txtBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 256, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(34, 34, 34)
+                                .addComponent(jBtnBuscar))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel5)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jComboUf, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jBtnBuscar)))
-                .addContainerGap(85, Short.MAX_VALUE))
+                                .addComponent(jComboUf, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addContainerGap(34, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -270,16 +295,24 @@ public final class ExibeCliente extends javax.swing.JFrame {
                     .addComponent(jComboBoxSetores, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel5)
                     .addComponent(jComboUf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 326, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(20, 20, 20)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jBtnEditar)
-                    .addComponent(jBtExcluirCliente)
-                    .addComponent(jButton4)
-                    .addComponent(jBtLembrete))
-                .addGap(21, 21, 21))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jBtnEditar)
+                        .addGap(50, 50, 50)
+                        .addComponent(jButton1)
+                        .addGap(53, 53, 53)
+                        .addComponent(jBtnLembrete)
+                        .addGap(18, 18, 18)
+                        .addComponent(jBtnRotinaContato)
+                        .addGap(18, 18, 18)
+                        .addComponent(jBtExcluirCliente)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 438, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
+                .addComponent(jButton4)
+                .addGap(16, 16, 16))
         );
 
         bindingGroup.bind();
@@ -304,12 +337,12 @@ public final class ExibeCliente extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jBtnEditarActionPerformed
 
-    private void jBtLembreteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtLembreteActionPerformed
+    private void jBtnLembreteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnLembreteActionPerformed
 
         if (CodigoCliente()) {
             new CadastrarLembrete(indice).setVisible(true);
         }
-    }//GEN-LAST:event_jBtLembreteActionPerformed
+    }//GEN-LAST:event_jBtnLembreteActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
 
@@ -421,6 +454,10 @@ public final class ExibeCliente extends javax.swing.JFrame {
                 + " like '%" + txtBuscar.getText() + "%';");
     }//GEN-LAST:event_txtBuscarKeyReleased
 
+    private void jBtnRotinaContatoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnRotinaContatoActionPerformed
+        new CadastrarRotinaContato(indice).setVisible(true);
+    }//GEN-LAST:event_jBtnRotinaContatoActionPerformed
+
     private void populaComboBox() {
 
         Connection conexao = Conexao.getConnection();
@@ -443,9 +480,10 @@ public final class ExibeCliente extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBtExcluirCliente;
-    private javax.swing.JButton jBtLembrete;
     private javax.swing.JButton jBtnBuscar;
     private javax.swing.JButton jBtnEditar;
+    private javax.swing.JButton jBtnLembrete;
+    private javax.swing.JButton jBtnRotinaContato;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton4;
     private javax.swing.JComboBox jComboBoxOpcaoPesquisa;

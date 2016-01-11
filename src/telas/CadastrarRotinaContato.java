@@ -14,7 +14,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
-import javax.swing.JTextField;
 
 public class CadastrarRotinaContato extends javax.swing.JFrame {
     
@@ -61,25 +60,7 @@ public class CadastrarRotinaContato extends javax.swing.JFrame {
                 jLabEmpresa.setText(cli.getEmpresa());
             }
     }
-    
-//    public void populaComboBox() {
-//        
-//        Connection conexao = Conexao.getConnection();
-//        
-//        String sql = "select * from tabcliente";
-//        
-//        try{
-//            pst = conexao.prepareStatement(sql);
-//            rs = pst.executeQuery();
-//            
-//            while(rs.next()) {
-//                ComboBoxCliente.addItem(rs.getString("empresa"));
-//            }
-//        }catch(SQLException ex) {
-//            JOptionPane.showMessageDialog(null, ex);
-//        }
-//    }
-        
+           
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {

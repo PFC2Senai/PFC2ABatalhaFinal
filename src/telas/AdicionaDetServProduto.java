@@ -81,6 +81,8 @@ public class AdicionaDetServProduto extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         txtTotalPecas = new javax.swing.JTextField();
         jBtnInserirPeca = new javax.swing.JButton();
+        jLabel39 = new javax.swing.JLabel();
+        txtValorUnit = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -100,6 +102,7 @@ public class AdicionaDetServProduto extends javax.swing.JFrame {
 
         jLabel33.setText("Peça:");
 
+        jBtbIncluirPeca.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/adicionar.gif"))); // NOI18N
         jBtbIncluirPeca.setText("Incluir Peça");
         jBtbIncluirPeca.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -142,6 +145,7 @@ public class AdicionaDetServProduto extends javax.swing.JFrame {
         jTablePecas.getTableHeader().setReorderingAllowed(false);
         jScrollPane1.setViewportView(jTablePecas);
 
+        jBtnRemoverPeca.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/excluir.png"))); // NOI18N
         jBtnRemoverPeca.setText("Remover");
         jBtnRemoverPeca.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -170,6 +174,8 @@ public class AdicionaDetServProduto extends javax.swing.JFrame {
             }
         });
 
+        jLabel39.setText("Valor Unit.");
+
         javax.swing.GroupLayout jPanel14Layout = new javax.swing.GroupLayout(jPanel14);
         jPanel14.setLayout(jPanel14Layout);
         jPanel14Layout.setHorizontalGroup(
@@ -177,15 +183,7 @@ public class AdicionaDetServProduto extends javax.swing.JFrame {
             .addGroup(jPanel14Layout.createSequentialGroup()
                 .addGap(30, 30, 30)
                 .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel14Layout.createSequentialGroup()
-                        .addComponent(jLabel2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(txtTotalPecas, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jLabel1)
-                    .addGroup(jPanel14Layout.createSequentialGroup()
-                        .addComponent(jBtbIncluirPeca)
-                        .addGap(60, 60, 60)
-                        .addComponent(jBtnRemoverPeca))
                     .addGroup(jPanel14Layout.createSequentialGroup()
                         .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(jPanel14Layout.createSequentialGroup()
@@ -201,13 +199,25 @@ public class AdicionaDetServProduto extends javax.swing.JFrame {
                             .addGroup(jPanel14Layout.createSequentialGroup()
                                 .addComponent(jLabel36)
                                 .addGap(18, 18, 18)
-                                .addComponent(jComboBoxFabricante, javax.swing.GroupLayout.PREFERRED_SIZE, 258, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(jComboBoxFabricante, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel14Layout.createSequentialGroup()
                                 .addComponent(jLabel34)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(txtQuantidade, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 632, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(26, Short.MAX_VALUE))
+                                .addComponent(txtQuantidade, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabel39)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txtValorUnit, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGroup(jPanel14Layout.createSequentialGroup()
+                            .addComponent(jLabel2)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addComponent(txtTotalPecas, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(351, 351, 351))
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 632, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jBtnRemoverPeca)
+                        .addComponent(jBtbIncluirPeca)))
+                .addContainerGap(41, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel14Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jBtnInserirPeca)
@@ -229,14 +239,16 @@ public class AdicionaDetServProduto extends javax.swing.JFrame {
                     .addComponent(jLabel35)
                     .addComponent(jComboBoxModelo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel34)
-                    .addComponent(txtQuantidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(41, 41, 41)
-                .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jBtbIncluirPeca)
-                    .addComponent(jBtnRemoverPeca))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                    .addComponent(txtQuantidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel39)
+                    .addComponent(txtValorUnit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(26, 26, 26)
+                .addComponent(jBtbIncluirPeca)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(27, 27, 27)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jBtnRemoverPeca)
+                .addGap(18, 18, 18)
                 .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(txtTotalPecas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -249,13 +261,13 @@ public class AdicionaDetServProduto extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 695, Short.MAX_VALUE)
+            .addGap(0, 732, Short.MAX_VALUE)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addComponent(jPanel14, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 441, Short.MAX_VALUE)
+            .addGap(0, 450, Short.MAX_VALUE)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addComponent(jPanel14, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -294,8 +306,10 @@ public class AdicionaDetServProduto extends javax.swing.JFrame {
         jComboBoxFabricante.removeAllItems();
         idModeloComboBox();
         populaComboBoxFabricante();
+        txtValorUnit.setText("");
         if (jComboBoxModelo.getSelectedItem() != null) {
             modelo = jComboBoxModelo.getSelectedItem().toString();
+            CarregaValorUnit();
         }
     }//GEN-LAST:event_jComboBoxModeloItemStateChanged
 
@@ -323,6 +337,7 @@ public class AdicionaDetServProduto extends javax.swing.JFrame {
         idFabricanteComboBox();
         if (jComboBoxFabricante.getSelectedItem() != null) {
             fabricante = jComboBoxFabricante.getSelectedItem().toString();
+            CarregaValorUnit();
         }
     }//GEN-LAST:event_jComboBoxFabricanteActionPerformed
 
@@ -349,9 +364,9 @@ public class AdicionaDetServProduto extends javax.swing.JFrame {
     
     public void TabelaProduto() {
                
-        CarregaValorUnit();  
         codDetProduto = ProdutoDAO.codDetProduto();
         int quantidade = Integer.parseInt(txtQuantidade.getText());
+        valorUnit = Double.parseDouble(txtValorUnit.getText());
         double total = valorUnit * quantidade;
         try { 
             
@@ -379,7 +394,7 @@ public class AdicionaDetServProduto extends javax.swing.JFrame {
         valor = ProdutoDAO.ExisteProduto(codProduto, codModelo, codFabricante);
         
         if (valor != 0) {            
-            valorUnit = valor;
+            txtValorUnit.setText(String.valueOf(valor));
         }        
     }
     
@@ -519,10 +534,12 @@ public class AdicionaDetServProduto extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel34;
     private javax.swing.JLabel jLabel35;
     private javax.swing.JLabel jLabel36;
+    private javax.swing.JLabel jLabel39;
     private javax.swing.JPanel jPanel14;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTablePecas;
     private javax.swing.JTextField txtQuantidade;
     private javax.swing.JTextField txtTotalPecas;
+    private javax.swing.JTextField txtValorUnit;
     // End of variables declaration//GEN-END:variables
 }

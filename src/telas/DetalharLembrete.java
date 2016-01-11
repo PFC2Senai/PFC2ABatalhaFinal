@@ -68,8 +68,8 @@ public class DetalharLembrete extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         txtDescricaoLembrete = new javax.swing.JTextArea();
         jLabel6 = new javax.swing.JLabel();
-        jLbDataLembrete = new javax.swing.JLabel();
         txtDataLembrete = new com.toedter.calendar.JDateChooser();
+        jLbDataLembrete = new javax.swing.JLabel();
         jBtnExcluir = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
@@ -90,10 +90,8 @@ public class DetalharLembrete extends javax.swing.JFrame {
             }
         });
 
-        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
+        jLabel4.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel4.setText("Código:");
-        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, -1, 20));
 
         try {
             txtHoraLembrete.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##:##")));
@@ -101,29 +99,24 @@ public class DetalharLembrete extends javax.swing.JFrame {
             ex.printStackTrace();
         }
         txtHoraLembrete.setText("00:00");
-        jPanel1.add(txtHoraLembrete, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 130, 42, 20));
 
+        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel1.setText("Lembrete:");
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(22, 11, -1, -1));
 
+        jLabCodigo.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabCodigo.setText("codigo");
-        jPanel1.add(jLabCodigo, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 30, -1, 20));
 
+        jLabEmpresa.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabEmpresa.setText("empresa");
-        jPanel1.add(jLabEmpresa, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 60, 176, 20));
 
         txtDescricaoLembrete.setColumns(20);
         txtDescricaoLembrete.setRows(5);
         jScrollPane1.setViewportView(txtDescricaoLembrete);
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(22, 189, 342, 150));
-
+        jLabel6.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel6.setText("Descrição:");
-        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(22, 169, -1, -1));
 
         jLbDataLembrete.setText("Exibe Data");
-        jPanel1.add(jLbDataLembrete, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 90, 142, 23));
-        jPanel1.add(txtDataLembrete, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 90, 140, 20));
 
         jBtnExcluir.setText("Excluir");
         jBtnExcluir.addActionListener(new java.awt.event.ActionListener() {
@@ -131,7 +124,6 @@ public class DetalharLembrete extends javax.swing.JFrame {
                 jBtnExcluirActionPerformed(evt);
             }
         });
-        jPanel1.add(jBtnExcluir, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 360, -1, -1));
 
         jButton2.setText("Sair");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -139,10 +131,9 @@ public class DetalharLembrete extends javax.swing.JFrame {
                 jButton2ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 410, -1, -1));
 
+        jLabel5.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel5.setText("Empresa:");
-        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(22, 64, -1, -1));
 
         jBtnAlterarLembrete.setText("Salvar");
         jBtnAlterarLembrete.addActionListener(new java.awt.event.ActionListener() {
@@ -150,16 +141,15 @@ public class DetalharLembrete extends javax.swing.JFrame {
                 jBtnAlterarLembreteActionPerformed(evt);
             }
         });
-        jPanel1.add(jBtnAlterarLembrete, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 360, -1, -1));
 
+        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel2.setText("Data:");
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(22, 95, -1, -1));
 
+        jLabel3.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel3.setText("Hora:");
-        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 130, -1, 20));
 
+        jLbHoraLembrete.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLbHoraLembrete.setText("Exibe Hora");
-        jPanel1.add(jLbHoraLembrete, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 130, 135, 20));
 
         jBtnCancel.setText("Cancelar");
         jBtnCancel.addActionListener(new java.awt.event.ActionListener() {
@@ -167,7 +157,6 @@ public class DetalharLembrete extends javax.swing.JFrame {
                 jBtnCancelActionPerformed(evt);
             }
         });
-        jPanel1.add(jBtnCancel, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 360, -1, -1));
 
         jBtnEditarLembrete.setText("Editar");
         jBtnEditarLembrete.addActionListener(new java.awt.event.ActionListener() {
@@ -175,7 +164,97 @@ public class DetalharLembrete extends javax.swing.JFrame {
                 jBtnEditarLembreteActionPerformed(evt);
             }
         });
-        jPanel1.add(jBtnEditarLembrete, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 360, -1, -1));
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jButton2)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanel1Layout.createSequentialGroup()
+                            .addGap(30, 30, 30)
+                            .addComponent(jLabel1))
+                        .addGroup(jPanel1Layout.createSequentialGroup()
+                            .addGap(30, 30, 30)
+                            .addComponent(jLabel4)
+                            .addGap(19, 19, 19)
+                            .addComponent(jLabCodigo))
+                        .addGroup(jPanel1Layout.createSequentialGroup()
+                            .addGap(30, 30, 30)
+                            .addComponent(jLabel5)
+                            .addGap(10, 10, 10)
+                            .addComponent(jLabEmpresa, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(jPanel1Layout.createSequentialGroup()
+                            .addGap(30, 30, 30)
+                            .addComponent(jLabel2)
+                            .addGap(31, 31, 31)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(txtDataLembrete, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLbDataLembrete, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(jPanel1Layout.createSequentialGroup()
+                            .addGap(30, 30, 30)
+                            .addComponent(jLabel3)
+                            .addGap(31, 31, 31)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jLbHoraLembrete, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(txtHoraLembrete, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(jPanel1Layout.createSequentialGroup()
+                            .addGap(30, 30, 30)
+                            .addComponent(jLabel6))
+                        .addGroup(jPanel1Layout.createSequentialGroup()
+                            .addGap(30, 30, 30)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 342, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(jPanel1Layout.createSequentialGroup()
+                            .addGap(30, 30, 30)
+                            .addComponent(jBtnEditarLembrete)
+                            .addGap(9, 9, 9)
+                            .addComponent(jBtnAlterarLembrete)
+                            .addGap(7, 7, 7)
+                            .addComponent(jBtnCancel)
+                            .addGap(65, 65, 65)
+                            .addComponent(jBtnExcluir))))
+                .addContainerGap(33, Short.MAX_VALUE))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(29, 29, 29)
+                .addComponent(jLabel1)
+                .addGap(23, 23, 23)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel5)
+                    .addComponent(jLabEmpresa, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(24, 24, 24)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtDataLembrete, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLbDataLembrete, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(20, 20, 20)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(txtHoraLembrete, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLbHoraLembrete, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(24, 24, 24)
+                .addComponent(jLabel6)
+                .addGap(25, 25, 25)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(30, 30, 30)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jBtnEditarLembrete)
+                    .addComponent(jBtnAlterarLembrete)
+                    .addComponent(jBtnCancel)
+                    .addComponent(jBtnExcluir))
+                .addGap(18, 18, 18)
+                .addComponent(jButton2)
+                .addContainerGap(22, Short.MAX_VALUE))
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
