@@ -411,16 +411,12 @@
                   <Component id="jBtnRotinaContato" alignment="0" min="-2" pref="140" max="-2" attributes="0"/>
                   <Component id="jBtnCadastrarLembrete" alignment="0" max="32767" attributes="0"/>
               </Group>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="jScrollPane2" min="-2" pref="430" max="-2" attributes="0"/>
+              <EmptySpace max="32767" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" attributes="0">
-                      <EmptySpace pref="507" max="32767" attributes="0"/>
-                      <Component id="jPanel1" min="-2" max="-2" attributes="0"/>
-                  </Group>
-                  <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="57" max="-2" attributes="0"/>
-                      <Component id="jScrollPane1" min="-2" pref="417" max="-2" attributes="0"/>
-                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                  </Group>
+                  <Component id="jPanel1" alignment="1" min="-2" max="-2" attributes="0"/>
+                  <Component id="jScrollPane1" alignment="1" min="-2" pref="395" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
@@ -430,29 +426,32 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" attributes="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" attributes="0">
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" attributes="0">
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="jPanel1" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                          <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace min="-2" pref="99" max="-2" attributes="0"/>
-                              <Component id="jBtnRotinaContato" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Component id="jBtnCadastrarLembrete" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                      </Group>
-                      <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
-                      <Component id="jBtnProposta" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="0" pref="110" max="32767" attributes="0"/>
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace min="-2" pref="99" max="-2" attributes="0"/>
+                      <Component id="jBtnRotinaContato" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Component id="jBtnCadastrarLembrete" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <Group type="102" attributes="0">
-                      <EmptySpace min="-2" pref="151" max="-2" attributes="0"/>
-                      <Component id="jScrollPane1" max="32767" attributes="0"/>
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="jPanel1" min="-2" max="-2" attributes="0"/>
+                          <Component id="jScrollPane2" min="-2" pref="199" max="-2" attributes="0"/>
+                      </Group>
                   </Group>
               </Group>
-              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" attributes="0">
+                      <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
+                      <Component id="jBtnProposta" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="1" attributes="0">
+                      <EmptySpace max="32767" attributes="0"/>
+                      <Component id="jScrollPane1" min="-2" pref="246" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                  </Group>
+              </Group>
           </Group>
       </Group>
     </DimensionLayout>
@@ -533,7 +532,23 @@
           <Properties>
             <Property name="columns" type="int" value="20"/>
             <Property name="rows" type="int" value="5"/>
-            <Property name="text" type="java.lang.String" value="lista minera&#xe7;&#xe3;o:&#xa;&#xa;- cliente mais atendido&#xa;- tipo de servi&#xe7;o mais realizado&#xa;(tipo definido, ex: troca de placa e &#xa;tipo servi&#xe7;o ex: venda aluguel, ou manuten&#xe7;&#xe3;o)&#xa;- pe&#xe7;a com mais sa&#xed;da&#xa;- pe&#xe7;a com menos sa&#xed;da&#xa;- periodo do ano com mais movimento&#xa;- periodo do ano com menos mevimento&#xa;- qual o per&#xed;odo do ano que determinado setor est&#xe1; em alta&#xa;- qual funcion&#xe1;rio realizou mais servi&#xe7;os"/>
+            <Property name="text" type="java.lang.String" value="Lista minera&#xe7;&#xe3;o:&#xa;&#xa;- cliente mais atendido&#xa;- tipo de servi&#xe7;o mais realizado&#xa;(tipo definido, ex: troca de placa e &#xa;tipo servi&#xe7;o ex: venda aluguel, ou manuten&#xe7;&#xe3;o)&#xa;- pe&#xe7;a com mais sa&#xed;da&#xa;- pe&#xe7;a com menos sa&#xed;da&#xa;- periodo do ano com mais movimento&#xa;- periodo do ano com menos mevimento&#xa;- qual o per&#xed;odo do ano que &#xa;determinado setor est&#xe1; em alta&#xa;- qual funcion&#xe1;rio realizou mais servi&#xe7;os"/>
+          </Properties>
+        </Component>
+      </SubComponents>
+    </Container>
+    <Container class="javax.swing.JScrollPane" name="jScrollPane2">
+      <AuxValues>
+        <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
+      </AuxValues>
+
+      <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+      <SubComponents>
+        <Component class="javax.swing.JTextArea" name="jTextArea2">
+          <Properties>
+            <Property name="columns" type="int" value="20"/>
+            <Property name="rows" type="int" value="5"/>
+            <Property name="text" type="java.lang.String" value="Pend&#xea;ncias do sistema:&#xa;&#xa;- tela de minera&#xe7;&#xe3;o&#xa;- formata&#xe7;&#xe3;o dos campos(caracteres)&#xa;- refer&#xea;ncias formatadas nas normas ABNT&#xa;- verificar campos para evitar dados duplicados"/>
           </Properties>
         </Component>
       </SubComponents>
