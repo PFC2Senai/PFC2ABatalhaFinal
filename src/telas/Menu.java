@@ -16,12 +16,12 @@ public class Menu extends javax.swing.JFrame {
     public Menu() {
         initComponents(); 
         
-        jButton1.setVerticalTextPosition(SwingConstants.BOTTOM);
-        jButton1.setHorizontalTextPosition(SwingConstants.CENTER);
-        jBtnCadastrarLembrete.setVerticalTextPosition(SwingConstants.BOTTOM);
-        jBtnCadastrarLembrete.setHorizontalTextPosition(SwingConstants.CENTER);
         jBtnRotinaContato.setVerticalTextPosition(SwingConstants.BOTTOM);
         jBtnRotinaContato.setHorizontalTextPosition(SwingConstants.CENTER);
+        jBtnCadastrarLembrete.setVerticalTextPosition(SwingConstants.BOTTOM);
+        jBtnCadastrarLembrete.setHorizontalTextPosition(SwingConstants.CENTER);
+        jBtnProposta.setVerticalTextPosition(SwingConstants.BOTTOM);
+        jBtnProposta.setHorizontalTextPosition(SwingConstants.CENTER);
     }
 
     /**
@@ -33,10 +33,10 @@ public class Menu extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jButton1 = new javax.swing.JButton();
+        jBtnRotinaContato = new javax.swing.JButton();
         jBtnCadastrarLembrete = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
-        jBtnRotinaContato = new javax.swing.JButton();
+        jBtnProposta = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu4 = new javax.swing.JMenu();
         jMenu14 = new javax.swing.JMenu();
@@ -81,12 +81,12 @@ public class Menu extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        jButton1.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/1452414361_kontact_1.png"))); // NOI18N
-        jButton1.setText("Rotina de Contato");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        jBtnRotinaContato.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jBtnRotinaContato.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/1452414361_kontact_1.png"))); // NOI18N
+        jBtnRotinaContato.setText("Rotina de Contato");
+        jBtnRotinaContato.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                jBtnRotinaContatoActionPerformed(evt);
             }
         });
 
@@ -112,9 +112,14 @@ public class Menu extends javax.swing.JFrame {
             .addGap(0, 88, Short.MAX_VALUE)
         );
 
-        jBtnRotinaContato.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jBtnRotinaContato.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/1452415489_icon-57.fw_1.png"))); // NOI18N
-        jBtnRotinaContato.setText("Proposta");
+        jBtnProposta.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jBtnProposta.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/1452415489_icon-57.fw_1.png"))); // NOI18N
+        jBtnProposta.setText("Proposta");
+        jBtnProposta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnPropostaActionPerformed(evt);
+            }
+        });
 
         jMenu4.setBackground(new java.awt.Color(204, 153, 255));
         jMenu4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/menu.png"))); // NOI18N
@@ -400,8 +405,8 @@ public class Menu extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(jBtnRotinaContato, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jBtnProposta, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jBtnRotinaContato, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jBtnCadastrarLembrete, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 507, Short.MAX_VALUE)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -416,11 +421,11 @@ public class Menu extends javax.swing.JFrame {
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(99, 99, 99)
-                        .addComponent(jButton1)
+                        .addComponent(jBtnRotinaContato)
                         .addGap(18, 18, 18)
                         .addComponent(jBtnCadastrarLembrete)))
                 .addGap(18, 18, 18)
-                .addComponent(jBtnRotinaContato)
+                .addComponent(jBtnProposta)
                 .addContainerGap(137, Short.MAX_VALUE))
         );
 
@@ -456,9 +461,9 @@ public class Menu extends javax.swing.JFrame {
         new CadastrarUsuario().setVisible(true);
     }//GEN-LAST:event_jMenuItem8ActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void jBtnRotinaContatoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnRotinaContatoActionPerformed
         new CadastrarRotinaContato().setVisible(true);
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_jBtnRotinaContatoActionPerformed
 
     private void jMenuItem13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem13ActionPerformed
         new CadastrarSetor().setVisible(true);
@@ -532,6 +537,10 @@ public class Menu extends javax.swing.JFrame {
         new ExibeAluguel2().setVisible(true);
     }//GEN-LAST:event_jMenuItem34ActionPerformed
 
+    private void jBtnPropostaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnPropostaActionPerformed
+        new Proposta().setVisible(true);
+    }//GEN-LAST:event_jBtnPropostaActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -569,8 +578,8 @@ public class Menu extends javax.swing.JFrame {
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBtnCadastrarLembrete;
+    private javax.swing.JButton jBtnProposta;
     private javax.swing.JButton jBtnRotinaContato;
-    private javax.swing.JButton jButton1;
     private javax.swing.JMenu jMenu10;
     private javax.swing.JMenu jMenu14;
     private javax.swing.JMenu jMenu15;
