@@ -8,12 +8,14 @@ import atributos.Setor;
 import atributos.Telefone;
 import static atributos.Usuario.idUsuario;
 import funcoes.AuditoriaDAO;
+import funcoes.CepWebService;
 import funcoes.ClienteDAO;
 import funcoes.Conexao;
 import funcoes.ContatosDAO;
 import funcoes.LimitarDigitos;
 import funcoes.PessoaContatoDAO;
 import funcoes.SetorDAO;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -95,6 +97,7 @@ public class CadastrarCliente extends javax.swing.JFrame {
         txtCidade = new javax.swing.JTextField();
         jLabel15 = new javax.swing.JLabel();
         txtEstado = new javax.swing.JTextField();
+        jButton1 = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         txtEmpresa = new javax.swing.JTextField();
@@ -108,6 +111,11 @@ public class CadastrarCliente extends javax.swing.JFrame {
         jBtnCancelarSetor = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                formKeyReleased(evt);
+            }
+        });
 
         jPanel1.setBackground(new java.awt.Color(223, 237, 253));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -268,6 +276,13 @@ public class CadastrarCliente extends javax.swing.JFrame {
 
         jLabel15.setText("Estado:");
 
+        jButton1.setText("Carrega cep");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -296,7 +311,10 @@ public class CadastrarCliente extends javax.swing.JFrame {
                         .addComponent(jLabel15)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(txtEstado, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(txtNumero, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(txtNumero, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(30, 30, 30)
+                        .addComponent(jButton1))
                     .addComponent(txtBairro))
                 .addContainerGap(12, Short.MAX_VALUE))
         );
@@ -322,7 +340,8 @@ public class CadastrarCliente extends javax.swing.JFrame {
                     .addComponent(jLabel11)
                     .addComponent(txtRua, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel12)
-                    .addComponent(txtNumero, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtNumero, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton1))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -508,13 +527,13 @@ public class CadastrarCliente extends javax.swing.JFrame {
         jTableContatos.updateUI();
                 
         JOptionPane.showMessageDialog(null, "Cadastrado com sucesso!");
+        
         if (JOptionPane.showConfirmDialog(null, "Deseja continuar cadastrando?", "Confirmar a Exclusão", JOptionPane.YES_NO_OPTION) == 1) {
             this.dispose();
-        }
+        }       
     }//GEN-LAST:event_btnCadClienteActionPerformed
 
     private void jBtnOutroContatoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnOutroContatoActionPerformed
-        
         TabelaContatos();                           
     }//GEN-LAST:event_jBtnOutroContatoActionPerformed
 
@@ -529,6 +548,7 @@ public class CadastrarCliente extends javax.swing.JFrame {
     }//GEN-LAST:event_jBtnRemoverContatoActionPerformed
 
     private void jBtnNovoSetorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnNovoSetorActionPerformed
+        
         txtSetor.setVisible(true);
         jComboBoxSetores.setVisible(false);
         jBtnSalvarSetor.setVisible(true);
@@ -537,6 +557,7 @@ public class CadastrarCliente extends javax.swing.JFrame {
     }//GEN-LAST:event_jBtnNovoSetorActionPerformed
 
     private void jBtnCancelarSetorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnCancelarSetorActionPerformed
+        
         jBtnSalvarSetor.setVisible(false);
         jBtnCancelarSetor.setVisible(false);
         jBtnNovoSetor.setVisible(true);
@@ -546,6 +567,7 @@ public class CadastrarCliente extends javax.swing.JFrame {
     }//GEN-LAST:event_jBtnCancelarSetorActionPerformed
 
     private void jBtnSalvarSetorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnSalvarSetorActionPerformed
+        
         Setor setor = new Setor();
         
         setor.setSetor(txtSetor.getText());
@@ -561,6 +583,42 @@ public class CadastrarCliente extends javax.swing.JFrame {
         populaComboBox();
         jComboBoxSetores.setSelectedItem(setor.getSetor());
     }//GEN-LAST:event_jBtnSalvarSetorActionPerformed
+
+    private void formKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_formKeyReleased
+        
+    }//GEN-LAST:event_formKeyReleased
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+       // CarregaCEP cep = new CarregaCEP();
+        BuscaLogradouro(txtCep.getText());
+//        txtCidade.setText(cep.getCidade(txtCep.getText()));
+//        txtBairro.setText(cep.getBairro(txtCep.getText()));
+//        txtRua.setText(cep.getEndereco(txtCep.getText()));
+//        txtEstado.setText(cep.getUF(txtCep.getText()));
+    }//GEN-LAST:event_jButton1ActionPerformed
+    
+//    public void BuscaLogradouro(String cep) {
+//        try {
+//            
+//            
+//
+//            CepWebService cepWebService = new CepWebService(cep);
+//                
+//            if (cepWebService.getResultado()==1) {
+//                System.out.println(cepWebService.getTipo_logradouro() + " " + cepWebService.getLogradouro());
+//                System.out.println(cepWebService.getCidade());
+//                System.out.println(cepWebService.getBairro());
+//                System.out.println(cepWebService.getResultado());
+//                System.out.println(cepWebService.getResultado_txt());
+//            }
+//            else {
+//                System.out.println("Servidor não está respondendo.");
+//            }            
+//        }
+//        catch (Exception ex) {
+//            ex.printStackTrace();
+//        }  
+//    }
     
     public void TabelaContatos() {
         
@@ -646,6 +704,7 @@ public class CadastrarCliente extends javax.swing.JFrame {
     private javax.swing.JButton jBtnOutroContato;
     private javax.swing.JButton jBtnRemoverContato;
     private javax.swing.JButton jBtnSalvarSetor;
+    private javax.swing.JButton jButton1;
     private javax.swing.JComboBox jComboBoxSetores;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
