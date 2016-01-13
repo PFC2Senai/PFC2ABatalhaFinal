@@ -8,37 +8,36 @@ import funcoes.ContatosDAO;
 import funcoes.FuncionarioDAO;
 import funcoes.LimitarDigitos;
 import java.sql.PreparedStatement;
+import javax.swing.JOptionPane;
 
 /**
  *
  * @author S015365
  */
 public class CadastrarFuncionario extends javax.swing.JFrame {
-    
+
     private PreparedStatement pst;
     int posicao = 10;
-    
+
     public CadastrarFuncionario() {
         initComponents();
         //labelCodFuncionario.setVisible(false);
-        jTextNome.setDocument(new LimitarDigitos(45));
-        jTextCargo.setDocument(new LimitarDigitos(45));
-        jTextSalario.setDocument(new LimitarDigitos(45));    
-        
-        txtTelCel.setDocument(new LimitarDigitos(25));
-        txtEmail.setDocument(new LimitarDigitos(45));
-        jTextNumCtps.setDocument(new LimitarDigitos(10));
-        jTextSerieCtps.setDocument(new LimitarDigitos(5));
-        txtCidade.setDocument(new LimitarDigitos(45));
-        txtBairro.setDocument(new LimitarDigitos(45));
-        txtRua.setDocument(new LimitarDigitos(45));
-        txtNumero.setDocument(new LimitarDigitos(5));
-        
-        
+//        jTextNome.setDocument(new LimitarDigitos(45));
+//        jTextCargo.setDocument(new LimitarDigitos(45));
+//        jTextSalario.setDocument(new LimitarDigitos(45));
+//
+//        txtTelCel.setDocument(new LimitarDigitos(25));
+//        txtEmail.setDocument(new LimitarDigitos(45));
+//        jTextNumCtps.setDocument(new LimitarDigitos(10));
+//        jTextSerieCtps.setDocument(new LimitarDigitos(5));
+//        txtCidade.setDocument(new LimitarDigitos(45));
+//        txtBairro.setDocument(new LimitarDigitos(45));
+//        txtRua.setDocument(new LimitarDigitos(45));
+//        txtNumero.setDocument(new LimitarDigitos(5));
 
     }
-    
-    private void limparCampos(){
+
+    private void limparCampos() {
         jTextNome.setText("");
         jTextRg.setText("");
         jTextCpf.setText("");
@@ -498,49 +497,54 @@ public class CadastrarFuncionario extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jBtnCadastrarFuncionarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnCadastrarFuncionarioActionPerformed
-        Funcionario func = new Funcionario();
-        Endereco endereco = new Endereco();
-        Telefone tel = new Telefone();
-        
-        func.setFuncionario(jTextNome.getText());
-        func.setRg(jTextRg.getText());
-        func.setCpf(jTextCpf.getText());
-        func.setCargo(jTextCargo.getText());
-        func.setSalario(Double.parseDouble(jTextSalario.getText()));
-   
-        func.setIdUsuario(Usuario.idUsuario());
-        func.setDataAdmicao(jTextDataAdmicao.getText());
-        
-        func.setCtps(jTextCtps.getText());
-        func.setSerieCtps(jTextSerieCtps.getText());
-        func.setNumCtps(jTextNumCtps.getText());
-        func.setUfCtps((String) jComboUf.getSelectedItem());
-        
-        tel.setTel(txtTel01.getText());
-        tel.setCel(txtTelCel.getText());
-  
-        int i = ContatosDAO.CadContato();
 
-        func.setIdContato(i);
-        
-        ContatosDAO.CadTel(i, tel);
-        
-        ContatosDAO.CadEmail(i, txtEmail.getText());
+        if (VerificaCampos() == true) {
+            Funcionario func = new Funcionario();
+            Endereco endereco = new Endereco();
+            Telefone tel = new Telefone();
 
-        endereco.setPais(txtPais.getText());
-        endereco.setCep(txtCep.getText());
-        endereco.setRua(txtRua.getText());
-        endereco.setNumero(txtNumero.getText());
-        endereco.setBairro(txtBairro.getText());
-        endereco.setCidade(txtCidade.getText());
-        endereco.setEstado(txtEstado.getText());
-        endereco.setIdContato(i);
+            func.setFuncionario(jTextNome.getText());
+            func.setRg(jTextRg.getText());
+            func.setCpf(jTextCpf.getText());
+            func.setCargo(jTextCargo.getText());
+            func.setSalario(Double.parseDouble(jTextSalario.getText()));
 
-        ContatosDAO.CadEndereco(endereco);
-        
-        FuncionarioDAO.CadFuncionario(func);
-        limparCampos();
-        
+            func.setIdUsuario(Usuario.idUsuario());
+            func.setDataAdmicao(jTextDataAdmicao.getText());
+
+            func.setCtps(jTextCtps.getText());
+            func.setSerieCtps(jTextSerieCtps.getText());
+            func.setNumCtps(jTextNumCtps.getText());
+            func.setUfCtps((String) jComboUf.getSelectedItem());
+
+            tel.setTel(txtTel01.getText());
+            tel.setCel(txtTelCel.getText());
+
+            int i = ContatosDAO.CadContato();
+
+            func.setIdContato(i);
+
+            ContatosDAO.CadTel(i, tel);
+
+            ContatosDAO.CadEmail(i, txtEmail.getText());
+
+            endereco.setPais(txtPais.getText());
+            endereco.setCep(txtCep.getText());
+            endereco.setRua(txtRua.getText());
+            endereco.setNumero(txtNumero.getText());
+            endereco.setBairro(txtBairro.getText());
+            endereco.setCidade(txtCidade.getText());
+            endereco.setEstado(txtEstado.getText());
+            endereco.setIdContato(i);
+
+            ContatosDAO.CadEndereco(endereco);
+
+            FuncionarioDAO.CadFuncionario(func);
+            limparCampos();
+        } else {
+            JOptionPane.showMessageDialog(null, "Campo(s) vazio(s)!");
+        }
+
     }//GEN-LAST:event_jBtnCadastrarFuncionarioActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -550,6 +554,133 @@ public class CadastrarFuncionario extends javax.swing.JFrame {
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         limparCampos();
     }//GEN-LAST:event_jButton3ActionPerformed
+
+    private boolean VerificaCampos() {
+        boolean valida = true;
+
+        if (jTextNome.getText().trim().equals("")) {
+            JOptionPane.showMessageDialog(null, "Campo(s) vazio(s)!");
+            valida = false;
+            return valida;
+        }
+
+        if (jTextCargo.getText().trim().equals("")) {
+            JOptionPane.showMessageDialog(null, "Campo(s) vazio(s)!");
+            valida = false;
+            return valida;
+        }
+
+        if (jTextRg.getText().trim().equals("")) {
+            JOptionPane.showMessageDialog(null, "Campo(s) vazio(s)!");
+            valida = false;
+            return valida;
+        }
+
+        if (jTextCpf.getText().trim().equals("")) {
+            JOptionPane.showMessageDialog(null, "Campo(s) vazio(s)!");
+            valida = false;
+            return valida;
+        }
+
+        if (jTextDataAdmicao.getText().trim().equals("")) {
+            JOptionPane.showMessageDialog(null, "Campo(s) vazio(s)!");
+            valida = false;
+            return valida;
+        }
+
+        if (jTextSalario.getText().trim().equals("")) {
+            JOptionPane.showMessageDialog(null, "Campo(s) vazio(s)!");
+            valida = false;
+            return valida;
+        }
+
+        if (txtTel01.getText().trim().equals("")) {
+            JOptionPane.showMessageDialog(null, "Campo(s) vazio(s)!");
+            valida = false;
+            return valida;
+        }
+
+        if (txtTelCel.getText().trim().equals("")) {
+            JOptionPane.showMessageDialog(null, "Campo(s) vazio(s)!");
+            valida = false;
+            return valida;
+        }
+
+        if (txtEmail.getText().trim().equals("")) {
+            JOptionPane.showMessageDialog(null, "Campo(s) vazio(s)!");
+            valida = false;
+            return valida;
+        }
+
+        if (jTextCtps.getText().trim().equals("")) {
+            JOptionPane.showMessageDialog(null, "Campo(s) vazio(s)!");
+            valida = false;
+            return valida;
+        }
+
+        if (jTextNumCtps.getText().trim().equals("")) {
+            JOptionPane.showMessageDialog(null, "Campo(s) vazio(s)!");
+            valida = false;
+            return valida;
+        }
+
+        if (jTextSerieCtps.getText().trim().equals("")) {
+            JOptionPane.showMessageDialog(null, "Campo(s) vazio(s)!");
+            valida = false;
+            return valida;
+        }
+
+        if (jComboUf.getSelectedItem().equals("Selecione")) {
+            JOptionPane.showMessageDialog(null, "Selecione um item!");
+            valida = false;
+            return valida;
+        }
+
+        if (txtPais.getText().trim().equals("")) {
+            JOptionPane.showMessageDialog(null, "Campo(s) vazio(s)!");
+            valida = false;
+            return valida;
+        }
+
+        if (txtCidade.getText().trim().equals("")) {
+            JOptionPane.showMessageDialog(null, "Campo(s) vazio(s)!");
+            valida = false;
+            return valida;
+        }
+
+        if (txtRua.getText().trim().equals("")) {
+            JOptionPane.showMessageDialog(null, "Campo(s) vazio(s)!");
+            valida = false;
+            return valida;
+        }
+
+        if (txtCep.getText().trim().equals("")) {
+            JOptionPane.showMessageDialog(null, "Campo(s) vazio(s)!");
+            valida = false;
+            return valida;
+        }
+
+        if (txtEstado.getText().trim().equals("")) {
+            JOptionPane.showMessageDialog(null, "Campo(s) vazio(s)!");
+            valida = false;
+            return valida;
+        }
+
+        if (txtBairro.getText().trim().equals("")) {
+            JOptionPane.showMessageDialog(null, "Campo(s) vazio(s)!");
+            valida = false;
+            return valida;
+        }
+
+        if (txtNumero.getText().trim().equals("")) {
+            JOptionPane.showMessageDialog(null, "Campo(s) vazio(s)!");
+            valida = false;
+            return valida;
+        }
+
+       // valida = false;
+        return valida;
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBtnCadastrarFuncionario;

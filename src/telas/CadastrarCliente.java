@@ -590,7 +590,7 @@ public class CadastrarCliente extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
        // CarregaCEP cep = new CarregaCEP();
-        BuscaLogradouro(txtCep.getText());
+    //    BuscaLogradouro(txtCep.getText());
 //        txtCidade.setText(cep.getCidade(txtCep.getText()));
 //        txtBairro.setText(cep.getBairro(txtCep.getText()));
 //        txtRua.setText(cep.getEndereco(txtCep.getText()));
