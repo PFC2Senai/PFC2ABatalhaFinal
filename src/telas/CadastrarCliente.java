@@ -1,6 +1,5 @@
 package telas;
 
-
 import atributos.Cliente;
 import atributos.Endereco;
 import atributos.PessoaContato;
@@ -8,6 +7,7 @@ import atributos.Setor;
 import atributos.Telefone;
 import static atributos.Usuario.idUsuario;
 import funcoes.AuditoriaDAO;
+import funcoes.CarregaCEP;
 import funcoes.CepWebService;
 import funcoes.ClienteDAO;
 import funcoes.Conexao;
@@ -15,6 +15,7 @@ import funcoes.ContatosDAO;
 import funcoes.LimitarDigitos;
 import funcoes.PessoaContatoDAO;
 import funcoes.SetorDAO;
+import funcoes.WebServiceCep_1;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -25,34 +26,32 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
-
 public class CadastrarCliente extends javax.swing.JFrame {
 
     private PreparedStatement pst;
     private String descricaoAudit;
     private int codSetor;
-    
+
     public CadastrarCliente() {
         initComponents();
-        this.populaComboBox();   
+        this.populaComboBox();
         txtSetor.setVisible(false);
         jBtnSalvarSetor.setVisible(false);
         jBtnCancelarSetor.setVisible(false);
-        
-        txtEmpresa.setDocument(new LimitarDigitos(45));
-        txtSetor.setDocument(new LimitarDigitos(50));
-        txtPais.setDocument(new LimitarDigitos(45));
-        txtEstado.setDocument(new LimitarDigitos(45));
-        txtBairro.setDocument(new LimitarDigitos(45));
-        txtCidade.setDocument(new LimitarDigitos(45));
-        txtRua.setDocument(new LimitarDigitos(45));
-        txtNumero.setDocument(new LimitarDigitos(10));
-        
-        txtContato.setDocument(new LimitarDigitos(45));
-        txtEmail.setDocument(new LimitarDigitos(45));
-        txtTelCel.setDocument(new LimitarDigitos(20));
-        
-        
+
+//        txtEmpresa.setDocument(new LimitarDigitos(45));
+//        txtSetor.setDocument(new LimitarDigitos(50));
+//        txtPais.setDocument(new LimitarDigitos(45));
+//        txtEstado.setDocument(new LimitarDigitos(45));
+//        txtBairro.setDocument(new LimitarDigitos(45));
+//        txtCidade.setDocument(new LimitarDigitos(45));
+//        txtRua.setDocument(new LimitarDigitos(45));
+//        txtNumero.setDocument(new LimitarDigitos(10));
+//
+//        txtContato.setDocument(new LimitarDigitos(45));
+//        txtEmail.setDocument(new LimitarDigitos(45));
+//        txtTelCel.setDocument(new LimitarDigitos(20));
+
     }
 
     /**
@@ -265,6 +264,11 @@ public class CadastrarCliente extends javax.swing.JFrame {
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
+        txtCep.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtCepActionPerformed(evt);
+            }
+        });
 
         jLabel11.setText("Rua:");
 
@@ -475,7 +479,7 @@ public class CadastrarCliente extends javax.swing.JFrame {
         Cliente cli = new Cliente();
         Telefone tel = new Telefone();
         PessoaContato pContato = new PessoaContato();
-        String email;        
+        String email;
         Endereco endereco = new Endereco();
 
         cli.setCodUser(idUsuario());
@@ -484,11 +488,11 @@ public class CadastrarCliente extends javax.swing.JFrame {
         cli.setCodSetor(codSetor);
 
         int i = ContatosDAO.CadContato();
-        
+
         cli.setIdContato(i);
-        
+
         int codCli = ClienteDAO.CadCliente(cli);
-               
+
         endereco.setPais(txtPais.getText());
         endereco.setCep(txtCep.getText());
         endereco.setRua(txtRua.getText());
@@ -499,56 +503,54 @@ public class CadastrarCliente extends javax.swing.JFrame {
         endereco.setIdContato(i);
 
         ContatosDAO.CadEndereco(endereco);
-        
-        
-        for(int j=0; j < jTableContatos.getRowCount(); j++) {
-                 
-            pContato.setNomeContato(jTableContatos.getValueAt(j, 0).toString());    
-            tel.setTel(jTableContatos.getValueAt(j, 1).toString());        
-            tel.setCel(jTableContatos.getValueAt(j, 2).toString());          
-            email = jTableContatos.getValueAt(j, 3).toString(); 
-           
+
+        for (int j = 0; j < jTableContatos.getRowCount(); j++) {
+
+            pContato.setNomeContato(jTableContatos.getValueAt(j, 0).toString());
+            tel.setTel(jTableContatos.getValueAt(j, 1).toString());
+            tel.setCel(jTableContatos.getValueAt(j, 2).toString());
+            email = jTableContatos.getValueAt(j, 3).toString();
+
             int codContato = ContatosDAO.CadContato();
-            
+
             ContatosDAO.CadTel(codContato, tel);
             ContatosDAO.CadEmail(codContato, email);
             pContato.setCodTabEstrangeira(codCli);
             pContato.setCodContato(codContato);
-            
+
             PessoaContatoDAO.CadPessoaContato(pContato);
         }
-        
-        
-        descricaoAudit = "Empresa "+ cli.getEmpresa() +" /CNPJ: "+ cli.getCnpj() +" foi cadastrada.";
+
+        descricaoAudit = "Empresa " + cli.getEmpresa() + " /CNPJ: " + cli.getCnpj() + " foi cadastrada.";
         AuditoriaDAO.CadDetAuditoria(descricaoAudit);
-        
+
         limparCampos();
         ((DefaultTableModel) jTableContatos.getModel()).setNumRows(0);
         jTableContatos.updateUI();
-                
+
         JOptionPane.showMessageDialog(null, "Cadastrado com sucesso!");
-        
+
         if (JOptionPane.showConfirmDialog(null, "Deseja continuar cadastrando?", "Confirmar a Exclusão", JOptionPane.YES_NO_OPTION) == 1) {
             this.dispose();
-        }       
+        }
     }//GEN-LAST:event_btnCadClienteActionPerformed
 
     private void jBtnOutroContatoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnOutroContatoActionPerformed
-        TabelaContatos();                           
+        TabelaContatos();
     }//GEN-LAST:event_jBtnOutroContatoActionPerformed
 
     private void jBtnRemoverContatoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnRemoverContatoActionPerformed
-        
+
         DefaultTableModel dtm = (DefaultTableModel) jTableContatos.getModel();
         int linha = jTableContatos.getSelectedRow();
- 
-        if( linha != -1){
-            dtm.removeRow( linha );
+
+        if (linha != -1) {
+            dtm.removeRow(linha);
         }
     }//GEN-LAST:event_jBtnRemoverContatoActionPerformed
 
     private void jBtnNovoSetorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnNovoSetorActionPerformed
-        
+
         txtSetor.setVisible(true);
         jComboBoxSetores.setVisible(false);
         jBtnSalvarSetor.setVisible(true);
@@ -557,7 +559,7 @@ public class CadastrarCliente extends javax.swing.JFrame {
     }//GEN-LAST:event_jBtnNovoSetorActionPerformed
 
     private void jBtnCancelarSetorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnCancelarSetorActionPerformed
-        
+
         jBtnSalvarSetor.setVisible(false);
         jBtnCancelarSetor.setVisible(false);
         jBtnNovoSetor.setVisible(true);
@@ -567,9 +569,9 @@ public class CadastrarCliente extends javax.swing.JFrame {
     }//GEN-LAST:event_jBtnCancelarSetorActionPerformed
 
     private void jBtnSalvarSetorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnSalvarSetorActionPerformed
-        
+
         Setor setor = new Setor();
-        
+
         setor.setSetor(txtSetor.getText());
         SetorDAO.CadSetor(setor);
         jBtnSalvarSetor.setVisible(false);
@@ -582,103 +584,179 @@ public class CadastrarCliente extends javax.swing.JFrame {
 
         populaComboBox();
         jComboBoxSetores.setSelectedItem(setor.getSetor());
+        
     }//GEN-LAST:event_jBtnSalvarSetorActionPerformed
 
     private void formKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_formKeyReleased
-        
+
     }//GEN-LAST:event_formKeyReleased
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-       // CarregaCEP cep = new CarregaCEP();
-    //    BuscaLogradouro(txtCep.getText());
-//        txtCidade.setText(cep.getCidade(txtCep.getText()));
-//        txtBairro.setText(cep.getBairro(txtCep.getText()));
-//        txtRua.setText(cep.getEndereco(txtCep.getText()));
-//        txtEstado.setText(cep.getUF(txtCep.getText()));
-    }//GEN-LAST:event_jButton1ActionPerformed
-    
-//    public void BuscaLogradouro(String cep) {
-//        try {
-//            
-//            
-//
-//            CepWebService cepWebService = new CepWebService(cep);
-//                
-//            if (cepWebService.getResultado()==1) {
-//                System.out.println(cepWebService.getTipo_logradouro() + " " + cepWebService.getLogradouro());
-//                System.out.println(cepWebService.getCidade());
-//                System.out.println(cepWebService.getBairro());
-//                System.out.println(cepWebService.getResultado());
-//                System.out.println(cepWebService.getResultado_txt());
-//            }
-//            else {
-//                System.out.println("Servidor não está respondendo.");
-//            }            
-//        }
-//        catch (Exception ex) {
-//            ex.printStackTrace();
-//        }  
-//    }
-    
-    public void TabelaContatos() {
-        
-        try { 
+
+        try {
+
+            CarregaCEP cep = new CarregaCEP();
+            //BuscaLogradouro(txtCep.getText());
+            // buscaCep();
+
+            String ceptxt = txtCep.getText();
+            String cidade = (cep.getCidade(ceptxt));
+            String bairro = (cep.getBairro(ceptxt));
+            String endereco = (cep.getEndereco(ceptxt));
+            String uf = (cep.getUF(ceptxt));
             
+            txtCidade.setText(cidade);
+            txtBairro.setText(bairro);
+            txtRua.setText(endereco);
+            txtEstado.setText(uf);
+
+            System.out.println(cep.getCidade(txtCep.getText()));
+            System.out.println(cep.getBairro(txtCep.getText()));
+            System.out.println(cep.getEndereco(txtCep.getText()));
+            System.out.println(cep.getUF(txtCep.getText()));
+
+        } catch (IOException ex) {
+            Logger.getLogger(CadastrarCliente.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void txtCepActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCepActionPerformed
+        try {
+            CarregaCEP cep = new CarregaCEP();
+            //BuscaLogradouro(txtCep.getText());
+            // buscaCep();
+
+            String ceptxt = txtCep.getText();
+            String cidade = (cep.getCidade(ceptxt));
+            String bairro = (cep.getBairro(ceptxt));
+            String endereco = (cep.getEndereco(ceptxt));
+            String uf = (cep.getUF(ceptxt));
+            
+            txtCidade.setText(cidade);
+            txtBairro.setText(bairro);
+            txtRua.setText(endereco);
+            txtEstado.setText(uf);
+
+            System.out.println(cep.getCidade(txtCep.getText()));
+            System.out.println(cep.getBairro(txtCep.getText()));
+            System.out.println(cep.getEndereco(txtCep.getText()));
+            System.out.println(cep.getUF(txtCep.getText()));
+        } catch (IOException ex) {
+            Logger.getLogger(CadastrarCliente.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_txtCepActionPerformed
+
+    public void BuscaLogradouro(String cep) {
+
+        try {
+
+            CepWebService cepWebService = new CepWebService(cep);
+
+            if (cepWebService.getResultado() == 1) {
+
+                txtRua.setText(cepWebService.getTipo_logradouro() + " " + cepWebService.getLogradouro());
+                txtCidade.setText(cepWebService.getCidade());
+                txtBairro.setText(cepWebService.getBairro());
+                txtEstado.setText(cepWebService.getEstado());
+                System.out.println(cepWebService.getTipo_logradouro() + " " + cepWebService.getLogradouro());
+                System.out.println(cepWebService.getCidade());
+                System.out.println(cepWebService.getBairro());
+                System.out.println(cepWebService.getResultado());
+                System.out.println(cepWebService.getResultado_txt());
+            } else {
+                System.out.println("Servidor não está respondendo.");
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    public void buscaCep() {
+        //Faz a busca para o cep 58043-280
+        WebServiceCep_1 webServiceCep = WebServiceCep_1.searchCep(txtCep.getText());
+        //A ferramenta de busca ignora qualquer caracter que n?o seja n?mero.
+
+        //caso a busca ocorra bem, imprime os resultados.
+        if (webServiceCep.wasSuccessful()) {
+            
+            txtRua.setText("Cep: " + webServiceCep.getLogradouroFull());
+            txtCidade.setText("Logradouro: " + webServiceCep.getCidade());
+            txtBairro.setText("Bairro: " + webServiceCep.getBairro());
+            txtEstado.setText("Cidade: " + webServiceCep.getUf());
+            // txtEstado.setSelectedItem(webServiceCep.getUf());
+            System.out.println("Cep: " + webServiceCep.getCep());
+            System.out.println("Logradouro: " + webServiceCep.getLogradouroFull());
+            System.out.println("Bairro: " + webServiceCep.getBairro());
+            System.out.println("Cidade: "
+                    + webServiceCep.getCidade() + "/" + webServiceCep.getUf());
+            System.out.println("UF: " + webServiceCep.getUf());
+
+            //caso haja problemas imprime as exce??es.
+        } else {
+            JOptionPane.showMessageDialog(null, "Erro numero: " + webServiceCep.getResulCode());
+
+            JOptionPane.showMessageDialog(null, "Descrição do erro: " + webServiceCep.getResultText());
+        }
+    }
+
+    public void TabelaContatos() {
+
+        try {
+
             DefaultTableModel dtm = (DefaultTableModel) jTableContatos.getModel();
-                   
-                dtm.addRow(new Object[] {txtContato.getText(),txtTel01.getText(),txtTelCel.getText(),txtEmail.getText()});
-                
-                txtContato.setText("");
-                txtTel01.setText(null);
-                txtTelCel.setText(null);
-                txtEmail.setText("");
-                txtContato.requestFocus();    
-                
+
+            dtm.addRow(new Object[]{txtContato.getText(), txtTel01.getText(), txtTelCel.getText(), txtEmail.getText()});
+
+            txtContato.setText("");
+            txtTel01.setText(null);
+            txtTelCel.setText(null);
+            txtEmail.setText("");
+            txtContato.requestFocus();
+
         } catch (Exception erro) {
             Logger.getLogger(CadastrarCliente.class.getName()).log(Level.SEVERE, null, erro);
-        }          
+        }
     }
-    
+
     private void populaComboBox() {
-        
+
         Connection conexao = Conexao.getConnection();
         ResultSet rs;
         String sql = "select * from tabSetor";
-        
-        try{
+
+        try {
             pst = conexao.prepareStatement(sql);
             rs = pst.executeQuery();
-            
-            while(rs.next()) {
+
+            while (rs.next()) {
                 jComboBoxSetores.addItem(rs.getString("setor"));
             }
-            
-        }catch(SQLException ex) {
+
+        } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, ex);
         }
     }
-    
+
     private void idSetorComboBox() {
-        
+
         Connection conexao = Conexao.getConnection();
         ResultSet rs;
-        String sql = "select * from tabSetor where setor = '" + jComboBoxSetores.getSelectedItem()+ "';";
-        
-        try{
+        String sql = "select * from tabSetor where setor = '" + jComboBoxSetores.getSelectedItem() + "';";
+
+        try {
             pst = conexao.prepareStatement(sql);
             rs = pst.executeQuery();
-            
-            while(rs.next())
-            {
+
+            while (rs.next()) {
                 codSetor = (rs.getInt("idtabSetor"));
             }
-        }catch(SQLException ex)
-        {
+        } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, ex);
         }
     }
-    
-    private void limparCampos(){
+
+    private void limparCampos() {
         txtEmpresa.setText("");
         txtEndCep.setText("");
         txtContato.setText("");
@@ -692,9 +770,9 @@ public class CadastrarCliente extends javax.swing.JFrame {
         txtNumero.setText("");
         txtBairro.setText("");
         txtEstado.setText("");
-        txtRua.setText("");     
+        txtRua.setText("");
     }
-  
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCadCliente;
     private javax.swing.JButton btnCancelar;
