@@ -228,4 +228,32 @@ public class EquipamentoDAO {
         }    
         return idDetEquipamento;
     }
+    
+    
+    public static boolean VerificaEquipamento(String equipamento) {
+        
+        Statement stmt;
+        boolean achou = false;
+        
+        try {            
+            String Sql = "SELECT * FROM tabequipamento "
+                       + " WHERE equipamento = " + equipamento + ";";
+                       
+            
+            ResultSet rs;            
+            stmt = Conexao.getConnection().createStatement();            
+            rs = stmt.executeQuery(Sql); 
+            
+            while(rs.next()) {                
+               achou = true;
+            }            
+            rs.close();
+            stmt.close();
+            
+        } catch (SQLException ex) {      
+            Logger.getLogger(ServicoDAO.class.getName()).log(Level.SEVERE, null, ex);
+            throw new RuntimeException("Erro ao Carregar os dados do servico: ",ex);   
+        }    
+        return achou;
+    }
 }
