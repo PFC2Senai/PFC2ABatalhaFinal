@@ -728,7 +728,7 @@ String qualbuscar;
         criaGrafico("Meses");
     }//GEN-LAST:event_jButtonMesesActionPerformed
    
-    private void qualItem(){
+    private void qualItem() {
         
         contSelect();
         String l = letra.getText();
@@ -778,6 +778,7 @@ String qualbuscar;
             jLabel1.revalidate();
             jLabel1.repaint();
     }
+    
     private void qualItemEdata(){
        try{
         SimpleDateFormat formatador = new SimpleDateFormat("ddMMyyyy");

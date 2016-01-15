@@ -26,14 +26,16 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
-public class CadastrarCliente extends javax.swing.JFrame {
+public class CadastrarCliente extends javax.swing.JFrame implements Runnable {
 
     private PreparedStatement pst;
     private String descricaoAudit;
     private int codSetor;
+    private CadastrarCliente telaCliente;
 
     public CadastrarCliente() {
         initComponents();
+        telaCliente = this;
         this.populaComboBox();
         txtSetor.setVisible(false);
         jBtnSalvarSetor.setVisible(false);
@@ -51,7 +53,6 @@ public class CadastrarCliente extends javax.swing.JFrame {
 //        txtContato.setDocument(new LimitarDigitos(45));
 //        txtEmail.setDocument(new LimitarDigitos(45));
 //        txtTelCel.setDocument(new LimitarDigitos(20));
-
     }
 
     /**
@@ -62,6 +63,7 @@ public class CadastrarCliente extends javax.swing.JFrame {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
+        bindingGroup = new org.jdesktop.beansbinding.BindingGroup();
 
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
@@ -96,7 +98,7 @@ public class CadastrarCliente extends javax.swing.JFrame {
         txtCidade = new javax.swing.JTextField();
         jLabel15 = new javax.swing.JLabel();
         txtEstado = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        jBtnCarregaCep = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         txtEmpresa = new javax.swing.JTextField();
@@ -110,11 +112,6 @@ public class CadastrarCliente extends javax.swing.JFrame {
         jBtnCancelarSetor = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                formKeyReleased(evt);
-            }
-        });
 
         jPanel1.setBackground(new java.awt.Color(223, 237, 253));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -123,13 +120,14 @@ public class CadastrarCliente extends javax.swing.JFrame {
         jLabel1.setText("Cadastrar cliente");
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(25, 12, -1, -1));
 
+        btnCadCliente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/cliente.png"))); // NOI18N
         btnCadCliente.setText("Cadastrar");
         btnCadCliente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCadClienteActionPerformed(evt);
             }
         });
-        jPanel1.add(btnCadCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(578, 546, -1, -1));
+        jPanel1.add(btnCadCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 600, -1, -1));
 
         btnCancelar.setText("Cancelar");
         btnCancelar.addActionListener(new java.awt.event.ActionListener() {
@@ -137,7 +135,7 @@ public class CadastrarCliente extends javax.swing.JFrame {
                 btnCancelarActionPerformed(evt);
             }
         });
-        jPanel1.add(btnCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(23, 546, -1, -1));
+        jPanel1.add(btnCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 600, -1, -1));
 
         btnLimpar.setText("Limpar");
         btnLimpar.addActionListener(new java.awt.event.ActionListener() {
@@ -145,13 +143,14 @@ public class CadastrarCliente extends javax.swing.JFrame {
                 btnLimparActionPerformed(evt);
             }
         });
-        jPanel1.add(btnLimpar, new org.netbeans.lib.awtextra.AbsoluteConstraints(116, 546, -1, -1));
+        jPanel1.add(btnLimpar, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 600, -1, -1));
 
         jPanel2.setBackground(new java.awt.Color(223, 237, 253));
-        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Contatos"));
+        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Contatos", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 2, 11))); // NOI18N
 
         jLabel5.setText("Contato:");
 
+        jBtnOutroContato.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/add.png"))); // NOI18N
         jBtnOutroContato.setText("Adicionar contato");
         jBtnOutroContato.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -181,7 +180,12 @@ public class CadastrarCliente extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(jTableContatos);
 
+        jBtnRemoverContato.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/excluir.png"))); // NOI18N
         jBtnRemoverContato.setText("Remover contato");
+
+        org.jdesktop.beansbinding.Binding binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, jTableContatos, org.jdesktop.beansbinding.ELProperty.create("${selectedElement != null}"), jBtnRemoverContato, org.jdesktop.beansbinding.BeanProperty.create("enabled"));
+        bindingGroup.addBinding(binding);
+
         jBtnRemoverContato.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jBtnRemoverContatoActionPerformed(evt);
@@ -193,9 +197,8 @@ public class CadastrarCliente extends javax.swing.JFrame {
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(22, 22, 22)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 619, Short.MAX_VALUE)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel5)
@@ -208,26 +211,28 @@ public class CadastrarCliente extends javax.swing.JFrame {
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addComponent(jLabel7)
-                                .addGap(18, 18, 18))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                                 .addComponent(jLabel13)
-                                .addGap(27, 27, 27)))
+                                .addGap(21, 21, 21)))
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtTel01, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtTelCel, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 655, Short.MAX_VALUE)
                             .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(txtTel01, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE))
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(txtTelCel, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(154, 154, 154))))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jBtnRemoverContato)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jBtnOutroContato)))
-                .addContainerGap())
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jBtnRemoverContato)
+                                    .addComponent(jBtnOutroContato))))
+                        .addGap(21, 21, 21))))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
                     .addComponent(txtContato, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -239,19 +244,19 @@ public class CadastrarCliente extends javax.swing.JFrame {
                     .addComponent(jLabel9)
                     .addComponent(jLabel13)
                     .addComponent(txtTelCel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jBtnOutroContato)
-                    .addComponent(jBtnRemoverContato))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jBtnOutroContato)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 11, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(13, 13, 13)
+                .addComponent(jBtnRemoverContato)
                 .addContainerGap())
         );
 
-        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(25, 258, -1, -1));
+        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(25, 258, 710, -1));
 
         jPanel3.setBackground(new java.awt.Color(223, 237, 253));
-        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder("Endereço"));
+        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Endereço", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 2, 11))); // NOI18N
 
         jLabel10.setText("País:");
 
@@ -280,10 +285,11 @@ public class CadastrarCliente extends javax.swing.JFrame {
 
         jLabel15.setText("Estado:");
 
-        jButton1.setText("Carrega cep");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        jBtnCarregaCep.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/pesquisar.gif"))); // NOI18N
+        jBtnCarregaCep.setText("Carrega CEP");
+        jBtnCarregaCep.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                jBtnCarregaCepActionPerformed(evt);
             }
         });
 
@@ -292,7 +298,7 @@ public class CadastrarCliente extends javax.swing.JFrame {
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(16, 16, 16)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel14)
                     .addComponent(jLabel11)
@@ -307,20 +313,19 @@ public class CadastrarCliente extends javax.swing.JFrame {
                     .addComponent(jLabel2)
                     .addComponent(jLabel12)
                     .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addGap(21, 21, 21)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addComponent(txtCep, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jBtnCarregaCep)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel15)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtEstado, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(txtNumero, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(30, 30, 30)
-                        .addComponent(jButton1))
+                        .addComponent(txtEstado, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtNumero, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtBairro))
-                .addContainerGap(12, Short.MAX_VALUE))
+                .addContainerGap(18, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -332,7 +337,8 @@ public class CadastrarCliente extends javax.swing.JFrame {
                     .addComponent(jLabel2)
                     .addComponent(txtCep, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel15)
-                    .addComponent(txtEstado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtEstado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jBtnCarregaCep))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8)
@@ -344,15 +350,14 @@ public class CadastrarCliente extends javax.swing.JFrame {
                     .addComponent(jLabel11)
                     .addComponent(txtRua, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel12)
-                    .addComponent(txtNumero, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(txtNumero, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(13, Short.MAX_VALUE))
         );
 
-        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(25, 130, -1, -1));
+        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(25, 130, 710, -1));
 
         jPanel4.setBackground(new java.awt.Color(223, 237, 253));
-        jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createTitledBorder(""), "Empresa", javax.swing.border.TitledBorder.LEFT, javax.swing.border.TitledBorder.DEFAULT_POSITION));
+        jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createTitledBorder(""), "Empresa", javax.swing.border.TitledBorder.LEFT, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 2, 11))); // NOI18N
 
         jLabel3.setText("Empresa:");
 
@@ -372,6 +377,7 @@ public class CadastrarCliente extends javax.swing.JFrame {
             }
         });
 
+        jBtnNovoSetor.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/add.png"))); // NOI18N
         jBtnNovoSetor.setText("Novo Setor");
         jBtnNovoSetor.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -379,6 +385,7 @@ public class CadastrarCliente extends javax.swing.JFrame {
             }
         });
 
+        jBtnSalvarSetor.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/ok.png"))); // NOI18N
         jBtnSalvarSetor.setText("Salvar");
         jBtnSalvarSetor.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -386,6 +393,7 @@ public class CadastrarCliente extends javax.swing.JFrame {
             }
         });
 
+        jBtnCancelarSetor.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/cancelar.png"))); // NOI18N
         jBtnCancelarSetor.setText("Cancelar");
         jBtnCancelarSetor.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -398,7 +406,7 @@ public class CadastrarCliente extends javax.swing.JFrame {
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(16, 16, 16)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel3)
                     .addComponent(jLabel6))
@@ -412,14 +420,14 @@ public class CadastrarCliente extends javax.swing.JFrame {
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addComponent(jLabel4)
                         .addGap(30, 30, 30)
-                        .addComponent(txtEndCep, javax.swing.GroupLayout.DEFAULT_SIZE, 117, Short.MAX_VALUE)
+                        .addComponent(txtEndCep, javax.swing.GroupLayout.DEFAULT_SIZE, 171, Short.MAX_VALUE)
                         .addGap(168, 168, 168))
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addComponent(jBtnNovoSetor)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jBtnSalvarSetor)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jBtnCancelarSetor)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jBtnSalvarSetor)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         jPanel4Layout.setVerticalGroup(
@@ -443,20 +451,20 @@ public class CadastrarCliente extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jPanel1.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(25, 38, 650, -1));
+        jPanel1.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(25, 38, 710, 90));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 701, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 768, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 607, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 655, Short.MAX_VALUE)
         );
+
+        bindingGroup.bind();
 
         pack();
         setLocationRelativeTo(null);
@@ -533,6 +541,7 @@ public class CadastrarCliente extends javax.swing.JFrame {
         if (JOptionPane.showConfirmDialog(null, "Deseja continuar cadastrando?", "Confirmar a Exclusão", JOptionPane.YES_NO_OPTION) == 1) {
             this.dispose();
         }
+
     }//GEN-LAST:event_btnCadClienteActionPerformed
 
     private void jBtnOutroContatoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnOutroContatoActionPerformed
@@ -584,122 +593,145 @@ public class CadastrarCliente extends javax.swing.JFrame {
 
         populaComboBox();
         jComboBoxSetores.setSelectedItem(setor.getSetor());
-        
+
     }//GEN-LAST:event_jBtnSalvarSetorActionPerformed
 
-    private void formKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_formKeyReleased
+    private void jBtnCarregaCepActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnCarregaCepActionPerformed
 
-    }//GEN-LAST:event_formKeyReleased
+        TelaEspera telaTeste = new TelaEspera();
+        this.setEnabled(false);
+        final Thread t1 = new Thread(new Runnable() {//cria uma thread pra gravar o seu arquivo
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+            @Override
+            public void run() {
 
-        try {
+                try {
 
-            CarregaCEP cep = new CarregaCEP();
-            //BuscaLogradouro(txtCep.getText());
-            // buscaCep();
+                    telaTeste.setVisible(true);
+                    CarregaCEP cep = new CarregaCEP();
 
-            String ceptxt = txtCep.getText();
-            String cidade = (cep.getCidade(ceptxt));
-            String bairro = (cep.getBairro(ceptxt));
-            String endereco = (cep.getEndereco(ceptxt));
-            String uf = (cep.getUF(ceptxt));
-            
-            txtCidade.setText(cidade);
-            txtBairro.setText(bairro);
-            txtRua.setText(endereco);
-            txtEstado.setText(uf);
+                    String ceptxt = txtCep.getText();
+                    txtCidade.setText(cep.getCidade(ceptxt));
+                    txtBairro.setText(cep.getBairro(ceptxt));
+                    txtRua.setText(cep.getEndereco(ceptxt));
+                    txtEstado.setText(cep.getUF(ceptxt));
 
-            System.out.println(cep.getCidade(txtCep.getText()));
-            System.out.println(cep.getBairro(txtCep.getText()));
-            System.out.println(cep.getEndereco(txtCep.getText()));
-            System.out.println(cep.getUF(txtCep.getText()));
+                } catch (IOException ex) {
+                    JOptionPane.showMessageDialog(null, ex);
+                }
+            }
+        });
+        t1.start();
+        new Thread(new Runnable() {//cria outra thread pra sua tela de espera
+            @Override
+            public void run() {
+                try {
+                    //cria a tela de espera e mostra ela
+                    t1.join();//fica esperando a primeira thread acabar
+                    telaCliente.setEnabled(true);  // quando acabar fecha a janela de espera, podes fazer outras coisas aqui
+                    telaTeste.dispose();
+                } catch (InterruptedException ex) {
+                    Logger.getLogger(CadastrarCliente.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }).start();
 
-        } catch (IOException ex) {
-            Logger.getLogger(CadastrarCliente.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_jBtnCarregaCepActionPerformed
 
     private void txtCepActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCepActionPerformed
-        try {
-            CarregaCEP cep = new CarregaCEP();
-            //BuscaLogradouro(txtCep.getText());
-            // buscaCep();
 
-            String ceptxt = txtCep.getText();
-            String cidade = (cep.getCidade(ceptxt));
-            String bairro = (cep.getBairro(ceptxt));
-            String endereco = (cep.getEndereco(ceptxt));
-            String uf = (cep.getUF(ceptxt));
-            
-            txtCidade.setText(cidade);
-            txtBairro.setText(bairro);
-            txtRua.setText(endereco);
-            txtEstado.setText(uf);
+        TelaEspera telaTeste = new TelaEspera();
+        this.setEnabled(false);
+        final Thread t1 = new Thread(new Runnable() {//cria uma thread pra gravar o seu arquivo
 
-            System.out.println(cep.getCidade(txtCep.getText()));
-            System.out.println(cep.getBairro(txtCep.getText()));
-            System.out.println(cep.getEndereco(txtCep.getText()));
-            System.out.println(cep.getUF(txtCep.getText()));
-        } catch (IOException ex) {
-            Logger.getLogger(CadastrarCliente.class.getName()).log(Level.SEVERE, null, ex);
-        }
+            @Override
+            public void run() {
+
+                try {
+
+                    telaTeste.setVisible(true);
+                    CarregaCEP cep = new CarregaCEP();
+
+                    String ceptxt = txtCep.getText();
+                    txtCidade.setText(cep.getCidade(ceptxt));
+                    txtBairro.setText(cep.getBairro(ceptxt));
+                    txtRua.setText(cep.getEndereco(ceptxt));
+                    txtEstado.setText(cep.getUF(ceptxt));
+
+                } catch (IOException ex) {
+                    JOptionPane.showMessageDialog(null, ex);
+                }
+            }
+        });
+        t1.start();
+        new Thread(new Runnable() {//cria outra thread pra sua tela de espera
+            @Override
+            public void run() {
+                try {
+                    //cria a tela de espera e mostra ela
+                    t1.join();//fica esperando a primeira thread acabar
+                    telaCliente.setEnabled(true);  // quando acabar fecha a janela de espera, podes fazer outras coisas aqui
+                    telaTeste.dispose();
+                } catch (InterruptedException ex) {
+                    Logger.getLogger(CadastrarCliente.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }).start();
+
     }//GEN-LAST:event_txtCepActionPerformed
 
-    public void BuscaLogradouro(String cep) {
-
-        try {
-
-            CepWebService cepWebService = new CepWebService(cep);
-
-            if (cepWebService.getResultado() == 1) {
-
-                txtRua.setText(cepWebService.getTipo_logradouro() + " " + cepWebService.getLogradouro());
-                txtCidade.setText(cepWebService.getCidade());
-                txtBairro.setText(cepWebService.getBairro());
-                txtEstado.setText(cepWebService.getEstado());
-                System.out.println(cepWebService.getTipo_logradouro() + " " + cepWebService.getLogradouro());
-                System.out.println(cepWebService.getCidade());
-                System.out.println(cepWebService.getBairro());
-                System.out.println(cepWebService.getResultado());
-                System.out.println(cepWebService.getResultado_txt());
-            } else {
-                System.out.println("Servidor não está respondendo.");
-            }
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
-    }
-
-    public void buscaCep() {
-        //Faz a busca para o cep 58043-280
-        WebServiceCep_1 webServiceCep = WebServiceCep_1.searchCep(txtCep.getText());
-        //A ferramenta de busca ignora qualquer caracter que n?o seja n?mero.
-
-        //caso a busca ocorra bem, imprime os resultados.
-        if (webServiceCep.wasSuccessful()) {
-            
-            txtRua.setText("Cep: " + webServiceCep.getLogradouroFull());
-            txtCidade.setText("Logradouro: " + webServiceCep.getCidade());
-            txtBairro.setText("Bairro: " + webServiceCep.getBairro());
-            txtEstado.setText("Cidade: " + webServiceCep.getUf());
-            // txtEstado.setSelectedItem(webServiceCep.getUf());
-            System.out.println("Cep: " + webServiceCep.getCep());
-            System.out.println("Logradouro: " + webServiceCep.getLogradouroFull());
-            System.out.println("Bairro: " + webServiceCep.getBairro());
-            System.out.println("Cidade: "
-                    + webServiceCep.getCidade() + "/" + webServiceCep.getUf());
-            System.out.println("UF: " + webServiceCep.getUf());
-
-            //caso haja problemas imprime as exce??es.
-        } else {
-            JOptionPane.showMessageDialog(null, "Erro numero: " + webServiceCep.getResulCode());
-
-            JOptionPane.showMessageDialog(null, "Descrição do erro: " + webServiceCep.getResultText());
-        }
-    }
-
+//    public void BuscaLogradouro(String cep) {
+//
+//        try {
+//
+//            CepWebService cepWebService = new CepWebService(cep);
+//
+//            if (cepWebService.getResultado() == 1) {
+//
+//                txtRua.setText(cepWebService.getTipo_logradouro() + " " + cepWebService.getLogradouro());
+//                txtCidade.setText(cepWebService.getCidade());
+//                txtBairro.setText(cepWebService.getBairro());
+//                txtEstado.setText(cepWebService.getEstado());
+//                System.out.println(cepWebService.getTipo_logradouro() + " " + cepWebService.getLogradouro());
+//                System.out.println(cepWebService.getCidade());
+//                System.out.println(cepWebService.getBairro());
+//                System.out.println(cepWebService.getResultado());
+//                System.out.println(cepWebService.getResultado_txt());
+//            } else {
+//                System.out.println("Servidor não está respondendo.");
+//            }
+//        } catch (Exception ex) {
+//            ex.printStackTrace();
+//        }
+//    }
+//
+//    public void buscaCep() {
+//        //Faz a busca para o cep 58043-280
+//        WebServiceCep_1 webServiceCep = WebServiceCep_1.searchCep(txtCep.getText());
+//        //A ferramenta de busca ignora qualquer caracter que n?o seja n?mero.
+//
+//        //caso a busca ocorra bem, imprime os resultados.
+//        if (webServiceCep.wasSuccessful()) {
+//            
+//            txtRua.setText("Cep: " + webServiceCep.getLogradouroFull());
+//            txtCidade.setText("Logradouro: " + webServiceCep.getCidade());
+//            txtBairro.setText("Bairro: " + webServiceCep.getBairro());
+//            txtEstado.setText("Cidade: " + webServiceCep.getUf());
+//            // txtEstado.setSelectedItem(webServiceCep.getUf());
+//            System.out.println("Cep: " + webServiceCep.getCep());
+//            System.out.println("Logradouro: " + webServiceCep.getLogradouroFull());
+//            System.out.println("Bairro: " + webServiceCep.getBairro());
+//            System.out.println("Cidade: "
+//                    + webServiceCep.getCidade() + "/" + webServiceCep.getUf());
+//            System.out.println("UF: " + webServiceCep.getUf());
+//
+//            //caso haja problemas imprime as exce??es.
+//        } else {
+//            JOptionPane.showMessageDialog(null, "Erro numero: " + webServiceCep.getResulCode());
+//
+//            JOptionPane.showMessageDialog(null, "Descrição do erro: " + webServiceCep.getResultText());
+//        }
+//    }
     public void TabelaContatos() {
 
         try {
@@ -778,11 +810,11 @@ public class CadastrarCliente extends javax.swing.JFrame {
     private javax.swing.JButton btnCancelar;
     private javax.swing.JButton btnLimpar;
     private javax.swing.JButton jBtnCancelarSetor;
+    private javax.swing.JButton jBtnCarregaCep;
     private javax.swing.JButton jBtnNovoSetor;
     private javax.swing.JButton jBtnOutroContato;
     private javax.swing.JButton jBtnRemoverContato;
     private javax.swing.JButton jBtnSalvarSetor;
-    private javax.swing.JButton jButton1;
     private javax.swing.JComboBox jComboBoxSetores;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
@@ -819,5 +851,11 @@ public class CadastrarCliente extends javax.swing.JFrame {
     private javax.swing.JTextField txtSetor;
     private javax.swing.JFormattedTextField txtTel01;
     private javax.swing.JTextField txtTelCel;
+    private org.jdesktop.beansbinding.BindingGroup bindingGroup;
     // End of variables declaration//GEN-END:variables
+
+    @Override
+    public void run() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }

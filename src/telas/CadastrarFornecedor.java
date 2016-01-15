@@ -5,41 +5,47 @@ import atributos.Fornecedor;
 import atributos.PessoaContato;
 import atributos.Telefone;
 import static atributos.Usuario.idUsuario;
+import funcoes.CarregaCEP;
 import funcoes.ContatosDAO;
 import funcoes.FornecedorDAO;
 import funcoes.LimitarDigitos;
 import funcoes.PessoaContatoDAO;
+import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 
 public class CadastrarFornecedor extends javax.swing.JFrame {
 
-    private CadastrarProduto telaCadastrarProduto;    
+    private CadastrarProduto telaCadastrarProduto;   
+    private CadastrarFornecedor telaForn;
     /**
      * Creates new form CadastrarFornecedor
      */
     public CadastrarFornecedor() {
         this.telaCadastrarProduto = null;
+        telaForn = this;
         initComponents();
         
-        txtFornecedor.setDocument(new LimitarDigitos(45));
-        txtEstado.setDocument(new LimitarDigitos(45));
-        txtCidade.setDocument(new LimitarDigitos(45));
-        txtBairro.setDocument(new LimitarDigitos(45));
-        txtRua.setDocument(new LimitarDigitos(45));
-        txtNumero.setDocument(new LimitarDigitos(10));
-        
-        txtContato.setDocument(new LimitarDigitos(45));
-        txtEmail.setDocument(new LimitarDigitos(45));
-        txtTelCel.setDocument(new LimitarDigitos(25));
-        
+//        txtFornecedor.setDocument(new LimitarDigitos(45));
+//        txtEstado.setDocument(new LimitarDigitos(45));
+//        txtCidade.setDocument(new LimitarDigitos(45));
+//        txtBairro.setDocument(new LimitarDigitos(45));
+//        txtRua.setDocument(new LimitarDigitos(45));
+//        txtNumero.setDocument(new LimitarDigitos(10));
+//        
+//        txtContato.setDocument(new LimitarDigitos(45));
+//        txtEmail.setDocument(new LimitarDigitos(45));
+//        txtTelCel.setDocument(new LimitarDigitos(25));
+//        
         
     }
     
     public CadastrarFornecedor(CadastrarProduto telaCadProduto) {
         this.telaCadastrarProduto = telaCadProduto;
+        telaForn = this;
         initComponents();
     }
 
@@ -51,6 +57,7 @@ public class CadastrarFornecedor extends javax.swing.JFrame {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
+        bindingGroup = new org.jdesktop.beansbinding.BindingGroup();
 
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
@@ -75,6 +82,7 @@ public class CadastrarFornecedor extends javax.swing.JFrame {
         jLabel10 = new javax.swing.JLabel();
         txtPais = new javax.swing.JTextField();
         txtCidade = new javax.swing.JTextField();
+        jBtnCarregaCep = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
         txtContato = new javax.swing.JTextField();
@@ -136,6 +144,11 @@ public class CadastrarFornecedor extends javax.swing.JFrame {
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
+        txtCep.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtCepActionPerformed(evt);
+            }
+        });
 
         jLabel11.setText("Rua:");
 
@@ -148,6 +161,14 @@ public class CadastrarFornecedor extends javax.swing.JFrame {
         jLabel10.setText("País:");
 
         txtPais.setText("Brasil");
+
+        jBtnCarregaCep.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/pesquisar.gif"))); // NOI18N
+        jBtnCarregaCep.setText("Carrega CEP");
+        jBtnCarregaCep.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnCarregaCepActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -193,7 +214,10 @@ public class CadastrarFornecedor extends javax.swing.JFrame {
                             .addComponent(jLabel2))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtCep, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(txtCep, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jBtnCarregaCep))
                             .addComponent(txtEstado, javax.swing.GroupLayout.PREFERRED_SIZE, 231, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap())
         );
@@ -205,7 +229,8 @@ public class CadastrarFornecedor extends javax.swing.JFrame {
                     .addComponent(jLabel3)
                     .addComponent(txtFornecedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2)
-                    .addComponent(txtCep, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtCep, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jBtnCarregaCep))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel10)
@@ -232,6 +257,7 @@ public class CadastrarFornecedor extends javax.swing.JFrame {
 
         jLabel5.setText("Contato:");
 
+        jBtnOutroContato.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/add.png"))); // NOI18N
         jBtnOutroContato.setText("Adicionar contato");
         jBtnOutroContato.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -270,7 +296,12 @@ public class CadastrarFornecedor extends javax.swing.JFrame {
         jTableContatos.getTableHeader().setReorderingAllowed(false);
         jScrollPane1.setViewportView(jTableContatos);
 
+        jBtnRemoverContato.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/excluir.png"))); // NOI18N
         jBtnRemoverContato.setText("Remover contato");
+
+        org.jdesktop.beansbinding.Binding binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, jTableContatos, org.jdesktop.beansbinding.ELProperty.create("${selectedElement != null}"), jBtnRemoverContato, org.jdesktop.beansbinding.BeanProperty.create("enabled"));
+        bindingGroup.addBinding(binding);
+
         jBtnRemoverContato.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jBtnRemoverContatoActionPerformed(evt);
@@ -305,10 +336,11 @@ public class CadastrarFornecedor extends javax.swing.JFrame {
                             .addComponent(txtTelCel, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 609, Short.MAX_VALUE)
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(jBtnRemoverContato)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jBtnOutroContato)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jBtnOutroContato, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jBtnRemoverContato, javax.swing.GroupLayout.Alignment.TRAILING))))
                 .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
@@ -327,11 +359,11 @@ public class CadastrarFornecedor extends javax.swing.JFrame {
                     .addComponent(jLabel13)
                     .addComponent(txtTelCel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jBtnOutroContato)
-                    .addComponent(jBtnRemoverContato))
+                .addComponent(jBtnOutroContato)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(13, 13, 13)
+                .addComponent(jBtnRemoverContato)
                 .addContainerGap())
         );
 
@@ -367,7 +399,7 @@ public class CadastrarFornecedor extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(24, 24, 24)
                 .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(18, 18, 18)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
@@ -376,7 +408,7 @@ public class CadastrarFornecedor extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnCadFornecedor)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -395,6 +427,8 @@ public class CadastrarFornecedor extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
+
+        bindingGroup.bind();
 
         pack();
         setLocationRelativeTo(null);
@@ -480,6 +514,89 @@ public class CadastrarFornecedor extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_formWindowClosed
 
+    private void jBtnCarregaCepActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnCarregaCepActionPerformed
+
+        TelaEspera telaTeste = new TelaEspera();
+        this.setEnabled(false);
+        final Thread t1 = new Thread(new Runnable() {//cria uma thread pra gravar o seu arquivo
+
+            @Override
+            public void run() {
+
+                try {
+
+                    telaTeste.setVisible(true);
+                    
+                    CarregaCEP cep = new CarregaCEP();
+
+                    String ceptxt = txtCep.getText();
+                    txtCidade.setText(cep.getCidade(ceptxt));
+                    txtBairro.setText(cep.getBairro(ceptxt));
+                    txtRua.setText(cep.getEndereco(ceptxt));
+                    txtEstado.setText(cep.getUF(ceptxt));
+
+                } catch (IOException ex) {
+                    JOptionPane.showMessageDialog(null, ex);
+                }
+            }
+        });
+        t1.start();
+        new Thread(new Runnable() {//cria outra thread pra sua tela de espera
+            @Override
+            public void run() {
+                try {
+                    //cria a tela de espera e mostra ela
+                    t1.join();//fica esperando a primeira thread acabar
+                    telaForn.setEnabled(true);  // quando acabar fecha a janela de espera, podes fazer outras coisas aqui
+                    telaTeste.dispose();
+                } catch (InterruptedException ex) {
+                    Logger.getLogger(CadastrarCliente.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }).start();
+    }//GEN-LAST:event_jBtnCarregaCepActionPerformed
+
+    private void txtCepActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCepActionPerformed
+       
+        TelaEspera telaTeste = new TelaEspera();
+        this.setEnabled(false);
+        final Thread t1 = new Thread(new Runnable() {//cria uma thread pra gravar o seu arquivo
+
+            @Override
+            public void run() {
+
+                try {
+
+                    telaTeste.setVisible(true);
+                    CarregaCEP cep = new CarregaCEP();
+
+                    String ceptxt = txtCep.getText();
+                    txtCidade.setText(cep.getCidade(ceptxt));
+                    txtBairro.setText(cep.getBairro(ceptxt));
+                    txtRua.setText(cep.getEndereco(ceptxt));
+                    txtEstado.setText(cep.getUF(ceptxt));
+
+                } catch (IOException ex) {
+                    JOptionPane.showMessageDialog(null, ex);
+                }
+            }
+        });
+        t1.start();
+        new Thread(new Runnable() {//cria outra thread pra sua tela de espera
+            @Override
+            public void run() {
+                try {
+                    //cria a tela de espera e mostra ela
+                    t1.join();//fica esperando a primeira thread acabar
+                    telaForn.setEnabled(true);  // quando acabar fecha a janela de espera, podes fazer outras coisas aqui
+                    telaTeste.dispose();
+                } catch (InterruptedException ex) {
+                    Logger.getLogger(CadastrarCliente.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }).start();
+    }//GEN-LAST:event_txtCepActionPerformed
+
     public void TabelaContatos() {
         
         try { 
@@ -520,6 +637,7 @@ public class CadastrarFornecedor extends javax.swing.JFrame {
     private javax.swing.JButton btnCadFornecedor;
     private javax.swing.JButton btnCancelar;
     private javax.swing.JButton btnLimpar;
+    private javax.swing.JButton jBtnCarregaCep;
     private javax.swing.JButton jBtnOutroContato;
     private javax.swing.JButton jBtnRemoverContato;
     private javax.swing.JLabel jLabel1;
@@ -553,5 +671,6 @@ public class CadastrarFornecedor extends javax.swing.JFrame {
     private javax.swing.JTextField txtRua;
     private javax.swing.JFormattedTextField txtTel01;
     private javax.swing.JTextField txtTelCel;
+    private org.jdesktop.beansbinding.BindingGroup bindingGroup;
     // End of variables declaration//GEN-END:variables
 }

@@ -39,7 +39,7 @@ public class CarregaCEP {
 
     public String getBairro(String CEP) throws IOException {
 
-        //***************************************************
+        //********************************************************
         try {
 
             Document doc = Jsoup.connect("http://www.qualocep.com/busca-cep/" + CEP)
