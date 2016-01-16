@@ -210,4 +210,31 @@ public class ClienteDAO {
         }    
         return cliente;
     }
+    
+    public static ArrayList ComboCliente() {
+        
+        Statement stmt;
+        ArrayList<Cliente> cliente = new ArrayList<Cliente>();
+        
+        try {            
+            String Sql = "select idcliente, empresa from tabcliente;";
+            
+            ResultSet rs;            
+            stmt = Conexao.getConnection().createStatement();            
+            rs = stmt.executeQuery(Sql); 
+            
+            while(rs.next()){
+                Cliente c = new Cliente();             
+                c.setEmpresa((rs.getString("empresa")));
+                cliente.add(c);                
+            }            
+            rs.close();
+            stmt.close();
+            
+        } catch (SQLException ex) {      
+            Logger.getLogger(ClienteDAO.class.getName()).log(Level.SEVERE, null, ex);
+            throw new RuntimeException("Erro ao exibir os dados do Cliente: ", ex);    
+        }    
+        return cliente;
+    }
 }

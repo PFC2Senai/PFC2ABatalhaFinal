@@ -1,5 +1,6 @@
 package telas;
 
+import atributos.Cliente;
 import atributos.DetServicoEquipamento;
 import atributos.DetServicoFuncionario;
 import atributos.DetServicoProduto;
@@ -8,6 +9,7 @@ import atributos.OrdemServico;
 import atributos.Servico;
 import atributos.TipoServico;
 import atributos.Usuario;
+import funcoes.ClienteDAO;
 import funcoes.Conexao;
 import funcoes.DetServicoEquipamentoDAO;
 import funcoes.DetServicoFuncionarioDAO;
@@ -23,6 +25,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -67,10 +70,13 @@ public class CadastrarServicoTeste extends javax.swing.JFrame {
      * Creates new form CadastrarServicoTeste
      */
     public CadastrarServicoTeste() {
+        this.codCliente = 0;
         initComponents();
 
         populaComboBoxProduto();
-        populaComboBoxCliente();
+      //  populaComboBoxCliente();
+        carregarCombo();
+        uJComboBoxClientes.setAutocompletar(true);
         populaComboBoxEquipamento();
         populaComboBoxFuncionario();
 
@@ -113,6 +119,7 @@ public class CadastrarServicoTeste extends javax.swing.JFrame {
         jScrollPane6 = new javax.swing.JScrollPane();
         jTableTipodeServico = new javax.swing.JTable();
         jBtnRemoverTipo = new javax.swing.JButton();
+        uJComboBoxClientes = new componentes.UJComboBox();
         jBtnAvancarPainelPecas = new javax.swing.JButton();
         jPanelPecas = new javax.swing.JPanel();
         jPanel14 = new javax.swing.JPanel();
@@ -180,13 +187,14 @@ public class CadastrarServicoTeste extends javax.swing.JFrame {
         jPanel7.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 60, -1, 20));
         jPanel7.add(txtTipoServico, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 270, 240, -1));
 
+        jComboBoxCliente.setEditable(true);
         jComboBoxCliente.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Selecione o Cliente" }));
         jComboBoxCliente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jComboBoxClienteActionPerformed(evt);
             }
         });
-        jPanel7.add(jComboBoxCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 60, 240, 20));
+        jPanel7.add(jComboBoxCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 60, 350, 20));
 
         jLabel10.setText("Tipo:");
         jPanel7.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 250, -1, -1));
@@ -200,8 +208,8 @@ public class CadastrarServicoTeste extends javax.swing.JFrame {
         jPanel7.add(jComboBoxTipoServico, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 270, 260, -1));
 
         jLabel12.setText("Data:");
-        jPanel7.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 60, 30, 20));
-        jPanel7.add(txtDataCadProduto, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 60, 120, -1));
+        jPanel7.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 60, 30, 20));
+        jPanel7.add(txtDataCadProduto, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 60, 120, -1));
 
         jBtbNovoTipoServico.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/ferramenta.png"))); // NOI18N
         jBtbNovoTipoServico.setText("Novo");
@@ -273,6 +281,19 @@ public class CadastrarServicoTeste extends javax.swing.JFrame {
             }
         });
         jPanel7.add(jBtnRemoverTipo, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 460, -1, -1));
+
+        uJComboBoxClientes.setEditable(true);
+        uJComboBoxClientes.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                uJComboBoxClientesMouseExited(evt);
+            }
+        });
+        uJComboBoxClientes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                uJComboBoxClientesActionPerformed(evt);
+            }
+        });
+        jPanel7.add(uJComboBoxClientes, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 90, 340, -1));
 
         jBtnAvancarPainelPecas.setText("Avançar");
         jBtnAvancarPainelPecas.addActionListener(new java.awt.event.ActionListener() {
@@ -978,12 +999,14 @@ public class CadastrarServicoTeste extends javax.swing.JFrame {
 
     private void jComboBoxClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxClienteActionPerformed
         idClienteComboBox();
+
+
     }//GEN-LAST:event_jComboBoxClienteActionPerformed
 
     private void jComboBoxProdutoItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jComboBoxProdutoItemStateChanged
         jComboBoxModelo.removeAllItems();
         jComboBoxFabricante.removeAllItems();
-        
+
         codProduto = 0;
         codModelo = 0;
         modelo = null;
@@ -1084,6 +1107,7 @@ public class CadastrarServicoTeste extends javax.swing.JFrame {
     }//GEN-LAST:event_jComboBoxModeloEquipItemStateChanged
 
     private void jComboBoxFabricanteEquipActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxFabricanteEquipActionPerformed
+       
         idFabricanteEquiComboBox();
         if (jComboBoxFabricanteEquip.getSelectedItem() != null) {
             fabricanteEqui = jComboBoxFabricanteEquip.getSelectedItem().toString();
@@ -1099,6 +1123,7 @@ public class CadastrarServicoTeste extends javax.swing.JFrame {
     }//GEN-LAST:event_jComboBoxFuncionariosActionPerformed
 
     private void jBtnRemoverFuncActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnRemoverFuncActionPerformed
+        
         DefaultTableModel dtm = (DefaultTableModel) jTableFuncionario.getModel();
         int linha = jTableFuncionario.getSelectedRow();
 
@@ -1179,7 +1204,7 @@ public class CadastrarServicoTeste extends javax.swing.JFrame {
 
     private void jComboBoxEquipamentosItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jComboBoxEquipamentosItemStateChanged
         jComboBoxModeloEquip.removeAllItems();
-        jComboBoxFabricanteEquip.removeAllItems();      
+        jComboBoxFabricanteEquip.removeAllItems();
         codModeloEqui = 0;
         modeloEqui = null;
         codFabricanteEqui = 0;
@@ -1218,6 +1243,19 @@ public class CadastrarServicoTeste extends javax.swing.JFrame {
         jTabbedPaneServico.setSelectedComponent(this.jPanelFuncionario);
     }//GEN-LAST:event_jBtnVoltarPainelFuncionarioActionPerformed
 
+    private void uJComboBoxClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_uJComboBoxClientesActionPerformed
+        codCliente = 0;
+        idClienteComboBox();
+        
+    }//GEN-LAST:event_uJComboBoxClientesActionPerformed
+
+    private void uJComboBoxClientesMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_uJComboBoxClientesMouseExited
+        if (codCliente == 0) {
+                JOptionPane.showMessageDialog(null, "Esse registro não encontra-se cadastrado na base de dados.");
+                uJComboBoxClientes.setSelectedIndex(0);
+        }
+    }//GEN-LAST:event_uJComboBoxClientesMouseExited
+
     private void limparCampos() {
 
         txtDataCadProduto.setDate(null);
@@ -1228,6 +1266,7 @@ public class CadastrarServicoTeste extends javax.swing.JFrame {
         txtTotalGeral.setText("");
         txtTotalPecas.setText("");
 
+        
         codEquipamento = 0;
         codModeloEqui = 0;
         modeloEqui = null;
@@ -1262,7 +1301,7 @@ public class CadastrarServicoTeste extends javax.swing.JFrame {
         int quantidade = Integer.parseInt(txtQuantidade.getText());
         valorUnit = Double.parseDouble(txtValorUnit.getText());
         double total = valorUnit * quantidade;
-        
+
         try {
 
             DefaultTableModel dtm = (DefaultTableModel) jTablePecas.getModel();
@@ -1335,11 +1374,35 @@ public class CadastrarServicoTeste extends javax.swing.JFrame {
 
         valor = ProdutoDAO.ExisteProduto(codProduto, codModelo, codFabricante);
 
-        if (valor != 0) {           
-            txtValorUnit.setText(String.valueOf(valor));          
+        if (valor != 0) {
+            txtValorUnit.setText(String.valueOf(valor));
         }
     }
 
+    private void carregarCombo(){
+        
+        uJComboBoxClientes.clear();
+        
+        ArrayList<Cliente> cliente = new ArrayList<Cliente>();
+        cliente = ClienteDAO.ComboCliente();
+        
+        for (Cliente cli : cliente) {
+            uJComboBoxClientes.addItem(cli.getEmpresa(), cli);
+        }
+    }
+    
+    /**
+     * @return pessoa com nome selecionado
+     */
+    private Cliente getCombo(){
+        /**
+         * para retornar o objeto utilise o método getSelectedObject
+         * para retornar o nome utilize o método getSelectedItem
+         */
+        return (Cliente) uJComboBoxClientes.getSelectedItem();
+    }
+    
+    
     private void populaComboBoxProduto() {
 
         Connection conexao = Conexao.getConnection();
@@ -1379,39 +1442,40 @@ public class CadastrarServicoTeste extends javax.swing.JFrame {
         }
     }
 
-    private void populaComboBoxCliente() {
-
-        Connection conexao = Conexao.getConnection();
-        ResultSet rs;
-        String sql = "select * from tabcliente";
-
-        try {
-            pst = conexao.prepareStatement(sql);
-            rs = pst.executeQuery();
-
-            while (rs.next()) {
-                jComboBoxCliente.addItem(rs.getString("empresa"));
-            }
-
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, ex);
-        }
-    }
+//    private void populaComboBoxCliente() {
+//
+//        Connection conexao = Conexao.getConnection();
+//        ResultSet rs;
+//        String sql = "select * from tabcliente";
+//
+//        try {
+//            pst = conexao.prepareStatement(sql);
+//            rs = pst.executeQuery();
+//
+//            while (rs.next()) {
+//                jComboBoxCliente.addItem(rs.getString("empresa"));
+//            }
+//
+//        } catch (SQLException ex) {
+//            JOptionPane.showMessageDialog(null, ex);
+//        }
+//    }
 
     private void idClienteComboBox() {
 
         Connection conexao = Conexao.getConnection();
         ResultSet rs;
-        String sql = "select * from tabcliente where empresa = '" + jComboBoxCliente.getSelectedItem() + "';";
-
+        String sql = "select * from tabcliente where empresa = '" + uJComboBoxClientes.getSelectedItem() + "';";
+        System.out.println(" Aqui" + uJComboBoxClientes.getSelectedItem());
+        
         try {
             pst = conexao.prepareStatement(sql);
             rs = pst.executeQuery();
 
             while (rs.next()) {
-                codCliente = (rs.getInt("idcliente"));
+                codCliente = (rs.getInt("idcliente"));               
             }
-
+            
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, ex);
         }
@@ -1815,6 +1879,7 @@ public class CadastrarServicoTeste extends javax.swing.JFrame {
     private javax.swing.JTextField txtTotalGeral;
     private javax.swing.JTextField txtTotalPecas;
     private javax.swing.JTextField txtValorUnit;
+    private componentes.UJComboBox uJComboBoxClientes;
     private org.jdesktop.beansbinding.BindingGroup bindingGroup;
     // End of variables declaration//GEN-END:variables
 }
