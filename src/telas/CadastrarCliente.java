@@ -199,7 +199,8 @@ public class CadastrarCliente extends javax.swing.JFrame implements Runnable {
             }
         });
 
-        jLabelEmail.setText("jLabel16");
+        jLabelEmail.setFont(new java.awt.Font("Tahoma", 3, 11)); // NOI18N
+        jLabelEmail.setForeground(new java.awt.Color(255, 0, 0));
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -234,14 +235,11 @@ public class CadastrarCliente extends javax.swing.JFrame implements Runnable {
                                     .addComponent(txtTelCel, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                             .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(jLabelEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addGroup(jPanel2Layout.createSequentialGroup()
-                                        .addGap(0, 0, Short.MAX_VALUE)
-                                        .addComponent(jBtnRemoverContato))
-                                    .addGroup(jPanel2Layout.createSequentialGroup()
-                                        .addComponent(jLabelEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(jBtnOutroContato)))
+                                    .addComponent(jBtnRemoverContato)
+                                    .addComponent(jBtnOutroContato))
                                 .addGap(21, 21, 21))))))
         );
         jPanel2Layout.setVerticalGroup(
@@ -260,10 +258,10 @@ public class CadastrarCliente extends javax.swing.JFrame implements Runnable {
                     .addComponent(jLabel13)
                     .addComponent(txtTelCel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jBtnOutroContato)
-                    .addComponent(jLabelEmail))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 11, Short.MAX_VALUE)
+                    .addComponent(jLabelEmail, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(11, 11, 11)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(13, 13, 13)
                 .addComponent(jBtnRemoverContato)
@@ -303,7 +301,7 @@ public class CadastrarCliente extends javax.swing.JFrame implements Runnable {
         jLabel15.setText("Estado:");
 
         jBtnCarregaCep.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/pesquisar.gif"))); // NOI18N
-        jBtnCarregaCep.setText("Carrega CEP");
+        jBtnCarregaCep.setText("Buscar CEP");
         jBtnCarregaCep.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jBtnCarregaCepActionPerformed(evt);
@@ -342,7 +340,7 @@ public class CadastrarCliente extends javax.swing.JFrame implements Runnable {
                         .addComponent(txtEstado, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(txtNumero, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtBairro))
-                .addContainerGap(22, Short.MAX_VALUE))
+                .addContainerGap(28, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -697,61 +695,9 @@ public class CadastrarCliente extends javax.swing.JFrame implements Runnable {
     }//GEN-LAST:event_txtCepActionPerformed
 
     private void txtEmailFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtEmailFocusLost
-        // TODO add your handling code here:
+        ValidaEmail();
     }//GEN-LAST:event_txtEmailFocusLost
 
-//    public void BuscaLogradouro(String cep) {
-//
-//        try {
-//
-//            CepWebService cepWebService = new CepWebService(cep);
-//
-//            if (cepWebService.getResultado() == 1) {
-//
-//                txtRua.setText(cepWebService.getTipo_logradouro() + " " + cepWebService.getLogradouro());
-//                txtCidade.setText(cepWebService.getCidade());
-//                txtBairro.setText(cepWebService.getBairro());
-//                txtEstado.setText(cepWebService.getEstado());
-//                System.out.println(cepWebService.getTipo_logradouro() + " " + cepWebService.getLogradouro());
-//                System.out.println(cepWebService.getCidade());
-//                System.out.println(cepWebService.getBairro());
-//                System.out.println(cepWebService.getResultado());
-//                System.out.println(cepWebService.getResultado_txt());
-//            } else {
-//                System.out.println("Servidor não está respondendo.");
-//            }
-//        } catch (Exception ex) {
-//            ex.printStackTrace();
-//        }
-//    }
-//
-//    public void buscaCep() {
-//        //Faz a busca para o cep 58043-280
-//        WebServiceCep_1 webServiceCep = WebServiceCep_1.searchCep(txtCep.getText());
-//        //A ferramenta de busca ignora qualquer caracter que n?o seja n?mero.
-//
-//        //caso a busca ocorra bem, imprime os resultados.
-//        if (webServiceCep.wasSuccessful()) {
-//            
-//            txtRua.setText("Cep: " + webServiceCep.getLogradouroFull());
-//            txtCidade.setText("Logradouro: " + webServiceCep.getCidade());
-//            txtBairro.setText("Bairro: " + webServiceCep.getBairro());
-//            txtEstado.setText("Cidade: " + webServiceCep.getUf());
-//            // txtEstado.setSelectedItem(webServiceCep.getUf());
-//            System.out.println("Cep: " + webServiceCep.getCep());
-//            System.out.println("Logradouro: " + webServiceCep.getLogradouroFull());
-//            System.out.println("Bairro: " + webServiceCep.getBairro());
-//            System.out.println("Cidade: "
-//                    + webServiceCep.getCidade() + "/" + webServiceCep.getUf());
-//            System.out.println("UF: " + webServiceCep.getUf());
-//
-//            //caso haja problemas imprime as exce??es.
-//        } else {
-//            JOptionPane.showMessageDialog(null, "Erro numero: " + webServiceCep.getResulCode());
-//
-//            JOptionPane.showMessageDialog(null, "Descrição do erro: " + webServiceCep.getResultText());
-//        }
-//    }
     public void TabelaContatos() {
 
         try {
@@ -759,9 +705,9 @@ public class CadastrarCliente extends javax.swing.JFrame implements Runnable {
             DefaultTableModel dtm = (DefaultTableModel) jTableContatos.getModel();
 
             dtm.addRow(new Object[]{
-                txtContato.getText(), 
-                txtTel01.getText(), 
-                txtTelCel.getText(), 
+                txtContato.getText(),
+                txtTel01.getText(),
+                txtTelCel.getText(),
                 txtEmail.getText()});
 
             txtContato.setText("");
@@ -828,6 +774,40 @@ public class CadastrarCliente extends javax.swing.JFrame implements Runnable {
         txtEstado.setText("");
         txtRua.setText("");
     }
+    
+    public void ValidaEmail() {
+
+        if ((txtEmail.getText().contains("@"))
+                && (txtEmail.getText().contains("."))
+                && (!txtEmail.getText().contains(" "))) {
+
+            String usuario = new String(txtEmail.getText().substring(0,
+                    txtEmail.getText().lastIndexOf('@')));
+
+            String dominio = new String(txtEmail.getText().substring(txtEmail.getText().lastIndexOf('@') + 1, txtEmail.getText().length()));
+
+            if ((usuario.length() >= 1) && (!usuario.contains("@"))
+                    && (dominio.contains(".")) && (!dominio.contains("@")) && (dominio.indexOf(".")
+                    >= 1) && (dominio.lastIndexOf(".") < dominio.length() - 1)) {
+
+                jLabelEmail.setText("");
+
+            } else {
+
+                jLabelEmail.setText("E-mail Inválido");
+
+                txtEmail.requestFocus();
+
+            }
+
+        } else {
+
+            jLabelEmail.setText("E-mail Inválido");
+
+            txtEmail.requestFocus();
+
+        }
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCadCliente;
@@ -881,6 +861,6 @@ public class CadastrarCliente extends javax.swing.JFrame implements Runnable {
 
     @Override
     public void run() {
-        
+
     }
 }

@@ -95,6 +95,7 @@ public class CadastrarFuncionario extends javax.swing.JFrame {
         jLabel11 = new javax.swing.JLabel();
         txtTel01 = new javax.swing.JFormattedTextField();
         txtTelCel = new javax.swing.JTextField();
+        jLabelEmail = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jLabel16 = new javax.swing.JLabel();
         txtEstado = new javax.swing.JTextField();
@@ -216,6 +217,12 @@ public class CadastrarFuncionario extends javax.swing.JFrame {
 
         jLabel13.setText("Celular:");
 
+        txtEmail.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtEmailFocusLost(evt);
+            }
+        });
+
         jLabel12.setText("Email:");
 
         jLabel11.setText("Telefone:");
@@ -225,6 +232,9 @@ public class CadastrarFuncionario extends javax.swing.JFrame {
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
+
+        jLabelEmail.setFont(new java.awt.Font("Tahoma", 3, 11)); // NOI18N
+        jLabelEmail.setForeground(new java.awt.Color(255, 0, 0));
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -244,7 +254,9 @@ public class CadastrarFuncionario extends javax.swing.JFrame {
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel12)
                         .addGap(18, 18, 18)
-                        .addComponent(txtEmail)))
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabelEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtEmail))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
@@ -260,7 +272,9 @@ public class CadastrarFuncionario extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel12)
                     .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(12, 12, 12))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabelEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Endereço"));
@@ -504,8 +518,8 @@ public class CadastrarFuncionario extends javax.swing.JFrame {
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
@@ -661,6 +675,10 @@ public class CadastrarFuncionario extends javax.swing.JFrame {
         }).start();
     }//GEN-LAST:event_txtCepActionPerformed
 
+    private void txtEmailFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtEmailFocusLost
+        ValidaEmail();
+    }//GEN-LAST:event_txtEmailFocusLost
+
     private boolean VerificaCampos() {
         
         boolean valida = true;
@@ -788,6 +806,40 @@ public class CadastrarFuncionario extends javax.swing.JFrame {
        // valida = false;
         return valida;
     }
+    
+    public void ValidaEmail() {
+
+        if ((txtEmail.getText().contains("@"))
+                && (txtEmail.getText().contains("."))
+                && (!txtEmail.getText().contains(" "))) {
+
+            String usuario = new String(txtEmail.getText().substring(0,
+                    txtEmail.getText().lastIndexOf('@')));
+
+            String dominio = new String(txtEmail.getText().substring(txtEmail.getText().lastIndexOf('@') + 1, txtEmail.getText().length()));
+
+            if ((usuario.length() >= 1) && (!usuario.contains("@"))
+                    && (dominio.contains(".")) && (!dominio.contains("@")) && (dominio.indexOf(".")
+                    >= 1) && (dominio.lastIndexOf(".") < dominio.length() - 1)) {
+
+                jLabelEmail.setText("");
+
+            } else {
+
+                jLabelEmail.setText("E-mail Inválido");
+
+                txtEmail.requestFocus();
+
+            }
+
+        } else {
+
+            jLabelEmail.setText("E-mail Inválido");
+
+            txtEmail.requestFocus();
+
+        }
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBtnCadastrarFuncionario;
@@ -816,6 +868,7 @@ public class CadastrarFuncionario extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabelEmail;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
