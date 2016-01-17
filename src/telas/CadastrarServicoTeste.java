@@ -1242,14 +1242,14 @@ public class CadastrarServicoTeste extends javax.swing.JFrame {
         fabricante = null;
         valorUnit = 0;
         valor = 0;
-        idProdutoComboBox();
+//        idProdutoComboBox();
         populaComboBoxModelo();
         produto = uJComboBoxPeca.getSelectedItem().toString();
      
     }//GEN-LAST:event_uJComboBoxPecaItemStateChanged
 
     private void uJComboBoxPecaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_uJComboBoxPecaActionPerformed
-        idProdutoComboBox();
+       // idProdutoComboBox();
         if (uJComboBoxPeca.getSelectedItem() != null) {
             produto = uJComboBoxPeca.getSelectedItem().toString();
         }
@@ -1447,7 +1447,7 @@ public class CadastrarServicoTeste extends javax.swing.JFrame {
     
     private void carregarComboPeca() {
 
-        uJComboBoxPeca.clear();
+       // uJComboBoxPeca.clear();
 
         ArrayList<Produto> pecas = new ArrayList<Produto>();
         pecas = ProdutoDAO.ListarProdutos();
@@ -1493,7 +1493,7 @@ public class CadastrarServicoTeste extends javax.swing.JFrame {
 
         Connection conexao = Conexao.getConnection();
         ResultSet rs;
-        String sql = "select idcliente from tabcliente where empresa = '" + uJComboBoxClientes.getSelectedItem().toString().trim() + "';";
+        String sql = "select idcliente from tabcliente where empresa = '" + uJComboBoxClientes.getSelectedItem() + "';";
 
         try {
             pst = conexao.prepareStatement(sql);
