@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package funcoes;
 
 import atributos.Fabricante;
@@ -129,12 +124,15 @@ public class FabricanteDAO {
         }
     }
     
-    public static ArrayList<Fabricante> ListarUsuario(){
+    public static ArrayList<Fabricante> ListarFabricante(int codProduto, int codModelo){
         Statement stmt;
         ArrayList<Fabricante> fabricantes = new ArrayList<Fabricante>();
         
-        try {            
-            String Sql = "SELECT * FROM tabfabricante";
+        try {
+            
+            String Sql = "SELECT fabricante FROM vw_combofabricanteproduto "
+                + " WHERE id_prod = " + codProduto
+                + " AND tabmodelo_idtabModelo = " + codModelo + " group by fabricante;";
             
             ResultSet rs;
             
@@ -144,11 +142,8 @@ public class FabricanteDAO {
             
             while(rs.next()){
                 Fabricante f = new Fabricante();
-                
-                f.setIdFabricante(rs.getInt("idtabFabricante"));
                 f.setFabricante(rs.getString("fabricante"));
-                fabricantes.add(f);
-                
+                fabricantes.add(f);                
             }
             
             rs.close();
@@ -159,6 +154,5 @@ public class FabricanteDAO {
             throw new RuntimeException("Erro ao Listar os dados dos Fabricantes: ",ex);
         }
         return fabricantes;
-    } 
-    
+    }     
 }

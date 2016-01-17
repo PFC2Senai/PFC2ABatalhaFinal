@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package funcoes;
 
 import atributos.Modelo;
@@ -128,12 +123,18 @@ public class ModeloDAO {
         }
     }
     
-    public static ArrayList<Modelo> ListarUsuario(){
+    public static ArrayList<Modelo> ListarModelo(int codProduto){
         Statement stmt;
         ArrayList<Modelo> modelos = new ArrayList<Modelo>();
         
-        try {            
-            String Sql = "SELECT * FROM tabusuario";
+        try {
+            
+            String Sql = "select modelo "
+                + " from tabdetproduto inner join "
+                + " tabproduto inner join "
+                + " tabmodelo on tabmodelo_idtabModelo = idtabModelo and "
+                + " tabproduto_id_prod = id_prod"
+                + " where id_prod = " + codProduto + " group by modelo;";
             
             ResultSet rs;
             
@@ -141,13 +142,10 @@ public class ModeloDAO {
             
             rs = stmt.executeQuery(Sql); 
             
-            while(rs.next()){
+            while(rs.next()) {
                 Modelo m = new Modelo();
-                
-                m.setIdModelo(rs.getInt("idtabModelo"));
                 m.setModelo(rs.getString("modelo"));
-                modelos.add(m);
-                
+                modelos.add(m);                
             }
             
             rs.close();
@@ -159,6 +157,5 @@ public class ModeloDAO {
         }
         return modelos;
     } 
-    
-    
+   
 }

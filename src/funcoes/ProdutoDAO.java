@@ -239,10 +239,9 @@ public class ProdutoDAO {
         Statement stmt;
         ArrayList<Produto> produto = new ArrayList<Produto>();
         
-        try {            
-            String Sql = "SELECT * FROM tabproduto "
-                      + " INNER JOIN tabdetproduto ON "
-                      + " tabproduto_id_prod = id_prod; ";
+        try {   
+            
+            String Sql = "SELECT produto FROM tabproduto ;";
             
             ResultSet rs;            
             stmt = Conexao.getConnection().createStatement();            
@@ -250,18 +249,7 @@ public class ProdutoDAO {
             
             while(rs.next()){
                 Produto p = new Produto();
-                
-                p.setIdProduto(rs.getInt("id_prod"));
-                p.setIdUsuario(rs.getInt("tabusuario_id_usuario"));
-                p.setProduto(rs.getString("produto"));
-                p.setCodProduto(rs.getInt("tabproduto_id_prod"));
-                p.setIdDetProduto(rs.getInt("idDetProduto"));
-                p.setQuantidade(rs.getInt("quantidade"));
-                p.setPrecoEntrada(rs.getDouble("precoEntrada"));
-                p.setPrecoSaida(rs.getDouble("precoSaida"));
-                p.setQuantidadeMinima(rs.getInt("quantidadeMinima"));
-                p.setCodModelo(rs.getInt("tabModelo_idtabModelo"));
-                p.setCodFabricante(rs.getInt("tabFabricante_idtabFabricante"));
+                p.setProduto(rs.getString("produto"));             
                 produto.add(p);                
             }            
             rs.close();
@@ -273,9 +261,11 @@ public class ProdutoDAO {
         }    
         return produto;
     } 
+    
     public static int codDetProduto() {
         return codDetProduto;
     }
+    
     public static double ExisteProduto(int idProduto, int idModelo, int idFabricante) {
         
         Statement stmt;

@@ -109,22 +109,20 @@ public class TipoServicoDAO {
         }
     }
     
-    public static ArrayList ListarSetor() {
+    public static ArrayList ListarTipoServico() {
         
         Statement stmt;
         ArrayList<TipoServico> tServico = new ArrayList<TipoServico>();
         
         try {            
-            String Sql = "SELECT * FROM tabtipo_serv;";
+            String Sql = "SELECT Tipo_serv FROM tabtipo_serv;";
             
             ResultSet rs;            
             stmt = Conexao.getConnection().createStatement();            
             rs = stmt.executeQuery(Sql); 
             
             while(rs.next()) {
-                TipoServico t = new TipoServico();
-                
-                t.setIdTipoServico(rs.getInt("idtabTipo_serv"));
+                TipoServico t = new TipoServico(); 
                 t.setTipo((rs.getString("Tipo_serv")));
                 tServico.add(t);                
             }            
