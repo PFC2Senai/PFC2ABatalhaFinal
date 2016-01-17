@@ -145,8 +145,9 @@ public class EquipamentoDAO {
         Statement stmt;
         ArrayList<Equipamento> equipamento = new ArrayList<Equipamento>();
         
-        try {            
-            String Sql = "SELECT * FROM tabequipamento;";
+        try { 
+            
+            String Sql = "SELECT equipamento FROM tabequipamento;";
                        
             
             ResultSet rs;            
@@ -156,8 +157,6 @@ public class EquipamentoDAO {
             while(rs.next()){
                 
                 Equipamento e = new Equipamento();
-                
-                e.setIdEquipamento(rs.getInt("idEquipamento"));
                 e.setEquipamento((rs.getString("equipamento")));                
                 equipamento.add(e);                
             }            
@@ -228,8 +227,7 @@ public class EquipamentoDAO {
         }    
         return idDetEquipamento;
     }
-    
-    
+      
     public static boolean VerificaEquipamento(String equipamento) {
         
         Statement stmt;
