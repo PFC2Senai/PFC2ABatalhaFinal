@@ -217,7 +217,7 @@ public class ClienteDAO {
         ArrayList<Cliente> cliente = new ArrayList<Cliente>();
         
         try {            
-            String Sql = "select idcliente, empresa from tabcliente;";
+            String Sql = "select empresa from tabcliente;";
             
             ResultSet rs;            
             stmt = Conexao.getConnection().createStatement();            

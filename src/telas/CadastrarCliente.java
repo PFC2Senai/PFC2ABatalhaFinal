@@ -8,14 +8,12 @@ import atributos.Telefone;
 import static atributos.Usuario.idUsuario;
 import funcoes.AuditoriaDAO;
 import funcoes.CarregaCEP;
-import funcoes.CepWebService;
 import funcoes.ClienteDAO;
 import funcoes.Conexao;
 import funcoes.ContatosDAO;
 import funcoes.LimitarDigitos;
 import funcoes.PessoaContatoDAO;
 import funcoes.SetorDAO;
-import funcoes.WebServiceCep_1;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -26,7 +24,7 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
-public class CadastrarCliente extends javax.swing.JFrame implements Runnable {
+public class CadastrarCliente extends javax.swing.JFrame {
 
     private PreparedStatement pst;
     private String descricaoAudit;
@@ -859,8 +857,5 @@ public class CadastrarCliente extends javax.swing.JFrame implements Runnable {
     private org.jdesktop.beansbinding.BindingGroup bindingGroup;
     // End of variables declaration//GEN-END:variables
 
-    @Override
-    public void run() {
 
-    }
 }
