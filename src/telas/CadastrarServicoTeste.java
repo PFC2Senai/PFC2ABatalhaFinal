@@ -6,8 +6,6 @@ import atributos.DetServicoFuncionario;
 import atributos.DetServicoProduto;
 import atributos.DetServicoTipoServ;
 import atributos.Equipamento;
-import atributos.Fabricante;
-import atributos.Modelo;
 import atributos.OrdemServico;
 import atributos.Produto;
 import atributos.Servico;
@@ -20,9 +18,7 @@ import funcoes.DetServicoFuncionarioDAO;
 import funcoes.DetServicoProdutoDAO;
 import funcoes.DetServicoTipoDAO;
 import funcoes.EquipamentoDAO;
-import funcoes.FabricanteDAO;
 import funcoes.FuncoesDiversas;
-import funcoes.ModeloDAO;
 import funcoes.OrdemServicoDAO;
 import funcoes.ProdutoDAO;
 import funcoes.ServicoDAO;
@@ -36,7 +32,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -92,8 +87,6 @@ public class CadastrarServicoTeste extends javax.swing.JFrame {
         
         jBtnCadTipoServico.setVisible(false);
         jBtnCancelarCadTipoServico.setVisible(false);
-
-     //   populaComboBoxEquipamento();
         populaComboBoxFuncionario();
         //   populaComboBoxTipoServico();
 
@@ -1284,8 +1277,8 @@ public class CadastrarServicoTeste extends javax.swing.JFrame {
 
     private void uJComboBoxEquipamentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_uJComboBoxEquipamentoActionPerformed
         idEquipamentoComboBox();
-        if (jComboBoxEquipamentos.getSelectedItem() != null) {
-            equipamento = jComboBoxEquipamentos.getSelectedItem().toString();
+        if (uJComboBoxEquipamento.getSelectedItem() != null) {
+            equipamento = uJComboBoxEquipamento.getSelectedItem().toString();
         }
     }//GEN-LAST:event_uJComboBoxEquipamentoActionPerformed
 
@@ -1299,7 +1292,7 @@ public class CadastrarServicoTeste extends javax.swing.JFrame {
         fabricanteEqui = null;
         idEquipamentoComboBox();
         populaComboBoxModeloEqui();
-        equipamento = jComboBoxEquipamentos.getSelectedItem().toString();
+        equipamento = uJComboBoxEquipamento.getSelectedItem().toString();
     }//GEN-LAST:event_uJComboBoxEquipamentoItemStateChanged
 
     private void limparCampos() {
@@ -1319,7 +1312,7 @@ public class CadastrarServicoTeste extends javax.swing.JFrame {
         fabricanteEqui = null;
 
         uJComboBoxClientes.setSelectedIndex(0);
-        jComboBoxEquipamentos.setSelectedIndex(0);
+        uJComboBoxEquipamento.setSelectedIndex(0);
         jComboBoxFuncionarios.setSelectedIndex(0);
         uJComboBoxPeca.setSelectedIndex(0);
         jComboBoxTipoServico.setSelectedIndex(0);
