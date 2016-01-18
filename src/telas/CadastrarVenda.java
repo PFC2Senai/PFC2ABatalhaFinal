@@ -627,6 +627,7 @@ public class CadastrarVenda extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jComboBoxProdutosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxProdutosActionPerformed
+        
         idProdutoComboBox();
         if (jComboBoxProdutos.getSelectedItem() != null) {
             produto = jComboBoxProdutos.getSelectedItem().toString();
@@ -655,6 +656,7 @@ public class CadastrarVenda extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jComboModeloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboModeloActionPerformed
+        
         idModeloComboBox();
         if (jComboModelo.getSelectedItem() != null) {
             modelo = jComboModelo.getSelectedItem().toString();
@@ -669,6 +671,7 @@ public class CadastrarVenda extends javax.swing.JFrame {
     }//GEN-LAST:event_jComboFabricanteActionPerformed
 
     private void jComboBoxProdutosItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jComboBoxProdutosItemStateChanged
+        
         jComboModelo.removeAllItems();
         jComboFabricante.removeAllItems();
         codProduto = 0;
@@ -685,12 +688,14 @@ public class CadastrarVenda extends javax.swing.JFrame {
     }//GEN-LAST:event_jComboBoxProdutosItemStateChanged
 
     private void jComboModeloItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jComboModeloItemStateChanged
+        
         jComboFabricante.removeAllItems();
         idModeloComboBox();
         populaComboBoxFabricante();
         if (jComboModelo.getSelectedItem() != null) {
             modelo = jComboModelo.getSelectedItem().toString();
         }
+        
     }//GEN-LAST:event_jComboModeloItemStateChanged
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed

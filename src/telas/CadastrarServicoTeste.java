@@ -6,6 +6,7 @@ import atributos.DetServicoFuncionario;
 import atributos.DetServicoProduto;
 import atributos.DetServicoTipoServ;
 import atributos.Equipamento;
+import atributos.Funcionario;
 import atributos.OrdemServico;
 import atributos.Produto;
 import atributos.Servico;
@@ -18,6 +19,7 @@ import funcoes.DetServicoFuncionarioDAO;
 import funcoes.DetServicoProdutoDAO;
 import funcoes.DetServicoTipoDAO;
 import funcoes.EquipamentoDAO;
+import funcoes.FuncionarioDAO;
 import funcoes.FuncoesDiversas;
 import funcoes.OrdemServicoDAO;
 import funcoes.ProdutoDAO;
@@ -32,6 +34,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -74,35 +77,33 @@ public class CadastrarServicoTeste extends javax.swing.JFrame {
      * Creates new form CadastrarServicoTeste
      */
     public CadastrarServicoTeste() {
+
         this.codCliente = 0;
 
         initComponents();
 
         combobox();
-        
         carregarComboClientes();
         carregarComboTipoServico();
         carregarComboPeca();
         carregarComboEquipamento();
-        
+        carregarComboFuncionario();
+
         jBtnCadTipoServico.setVisible(false);
         jBtnCancelarCadTipoServico.setVisible(false);
-        populaComboBoxFuncionario();
-        //   populaComboBoxTipoServico();
 
         ocultaColunaTabelas();
         txtTipoServico.setVisible(false);
     }
 
     private void combobox() {
-        
+
         //Combobox clientes
         uJComboBoxClientes.getEditor().getEditorComponent().addFocusListener(new FocusAdapter() {
             @Override
             public void focusLost(FocusEvent e) {
-                System.out.println("Saiu focus: ");
                 if (codCliente == 0) {
-                    JOptionPane.showMessageDialog(null, "Esse registro não encontra-se cadastrado na base de dados.");
+                    Mensangem();
                     uJComboBoxClientes.getEditor().getEditorComponent().requestFocus();
                 }
             }
@@ -113,40 +114,49 @@ public class CadastrarServicoTeste extends javax.swing.JFrame {
         jComboBoxTipoServico.getEditor().getEditorComponent().addFocusListener(new FocusAdapter() {
             @Override
             public void focusLost(FocusEvent e) {
-                System.out.println("Saiu focus: ");
                 if (codTipoServico == 0) {
-                    JOptionPane.showMessageDialog(null, "Esse registro não encontra-se cadastrado na base de dados.");
+                    Mensangem();
                     jComboBoxTipoServico.getEditor().getEditorComponent().requestFocus();
                 }
             }
         });
         jComboBoxTipoServico.setAutocompletar(true);
-        
-       //Combobox peca
+
+        //Combobox peca
         uJComboBoxPeca.getEditor().getEditorComponent().addFocusListener(new FocusAdapter() {
             @Override
             public void focusLost(FocusEvent e) {
-                System.out.println("Saiu focus: ");
                 if (codProduto == 0) {
-                    JOptionPane.showMessageDialog(null, "Esse registro não encontra-se cadastrado na base de dados.");
+                    Mensangem();
                     uJComboBoxPeca.getEditor().getEditorComponent().requestFocus();
                 }
             }
         });
-        uJComboBoxPeca.setAutocompletar(true);     
-        
+        uJComboBoxPeca.setAutocompletar(true);
+
         //Combobox equipamento
         uJComboBoxEquipamento.getEditor().getEditorComponent().addFocusListener(new FocusAdapter() {
             @Override
             public void focusLost(FocusEvent e) {
-                System.out.println("Saiu focus: ");
                 if (codEquipamento == 0) {
-                    JOptionPane.showMessageDialog(null, "Esse registro não encontra-se cadastrado na base de dados.");
+                    Mensangem();
                     uJComboBoxEquipamento.getEditor().getEditorComponent().requestFocus();
                 }
             }
         });
-        uJComboBoxEquipamento.setAutocompletar(true);  
+        uJComboBoxEquipamento.setAutocompletar(true);
+
+        //Combobox Funcionarios
+        uJComboBoxFuncionario.getEditor().getEditorComponent().addFocusListener(new FocusAdapter() {
+            @Override
+            public void focusLost(FocusEvent e) {
+                if (codFuncionario == 0) {
+                    Mensangem();
+                    uJComboBoxFuncionario.getEditor().getEditorComponent().requestFocus();
+                }
+            }
+        });
+        uJComboBoxFuncionario.setAutocompletar(true);
     }
 
     /**
@@ -217,10 +227,10 @@ public class CadastrarServicoTeste extends javax.swing.JFrame {
         jPanel5 = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
         jTableFuncionario = new javax.swing.JTable();
-        jComboBoxFuncionarios = new javax.swing.JComboBox();
         jLabel7 = new javax.swing.JLabel();
         jBtnRemoverFunc = new javax.swing.JButton();
         jBtbIncluirFunc = new javax.swing.JButton();
+        uJComboBoxFuncionario = new componentes.UJComboBox();
         jBtnVoltarPainelEquipamento = new javax.swing.JButton();
         jBtnAvancarPainelValorTotal = new javax.swing.JButton();
         jPanelValorTotalServico = new javax.swing.JPanel();
@@ -297,7 +307,7 @@ public class CadastrarServicoTeste extends javax.swing.JFrame {
         txtDescricao.setRows(5);
         jScrollPane4.setViewportView(txtDescricao);
 
-        jPanel7.add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 130, 600, 100));
+        jPanel7.add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 130, 610, 100));
 
         jTableTipodeServico.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -755,13 +765,6 @@ public class CadastrarServicoTeste extends javax.swing.JFrame {
         jTableFuncionario.getTableHeader().setReorderingAllowed(false);
         jScrollPane3.setViewportView(jTableFuncionario);
 
-        jComboBoxFuncionarios.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Selecione o Funcionário" }));
-        jComboBoxFuncionarios.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBoxFuncionariosActionPerformed(evt);
-            }
-        });
-
         jLabel7.setText("Funcionário:");
 
         jBtnRemoverFunc.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/excluir.png"))); // NOI18N
@@ -784,6 +787,13 @@ public class CadastrarServicoTeste extends javax.swing.JFrame {
             }
         });
 
+        uJComboBoxFuncionario.setEditable(true);
+        uJComboBoxFuncionario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                uJComboBoxFuncionarioActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
@@ -796,28 +806,28 @@ public class CadastrarServicoTeste extends javax.swing.JFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel5Layout.createSequentialGroup()
                         .addGap(113, 113, 113)
                         .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 477, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jBtnRemoverFunc, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(jPanel5Layout.createSequentialGroup()
                                 .addComponent(jLabel7)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jComboBoxFuncionarios, javax.swing.GroupLayout.PREFERRED_SIZE, 274, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 477, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jBtnRemoverFunc, javax.swing.GroupLayout.Alignment.TRAILING))))
+                                .addComponent(uJComboBoxFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, 336, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addContainerGap(150, Short.MAX_VALUE))
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel5Layout.createSequentialGroup()
-                .addGap(96, 96, 96)
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel7)
-                    .addComponent(jComboBoxFuncionarios, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(27, 27, 27)
-                .addComponent(jBtbIncluirFunc)
+                .addGap(122, 122, 122)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(uJComboBoxFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel7))
                 .addGap(18, 18, 18)
+                .addComponent(jBtbIncluirFunc)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(26, 26, 26)
                 .addComponent(jBtnRemoverFunc)
-                .addContainerGap(55, Short.MAX_VALUE))
+                .addContainerGap(52, Short.MAX_VALUE))
         );
 
         jBtnVoltarPainelEquipamento.setText("Voltar");
@@ -857,7 +867,7 @@ public class CadastrarServicoTeste extends javax.swing.JFrame {
                 .addGroup(jPanelFuncionarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jBtnVoltarPainelEquipamento)
                     .addComponent(jBtnAvancarPainelValorTotal))
-                .addContainerGap(36, Short.MAX_VALUE))
+                .addContainerGap(29, Short.MAX_VALUE))
         );
 
         jTabbedPaneServico.addTab("Funcionário", new javax.swing.ImageIcon(getClass().getResource("/imagens/funcionario.png")), jPanelFuncionario); // NOI18N
@@ -1099,14 +1109,6 @@ public class CadastrarServicoTeste extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jComboBoxFabricanteEquipActionPerformed
 
-    private void jComboBoxFuncionariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxFuncionariosActionPerformed
-
-        idFuncionarioComboBox();
-        if (jComboBoxFuncionarios.getSelectedItem() != null) {
-            funcionario = jComboBoxFuncionarios.getSelectedItem().toString();
-        }
-    }//GEN-LAST:event_jComboBoxFuncionariosActionPerformed
-
     private void jBtnRemoverFuncActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnRemoverFuncActionPerformed
 
         DefaultTableModel dtm = (DefaultTableModel) jTableFuncionario.getModel();
@@ -1231,7 +1233,7 @@ public class CadastrarServicoTeste extends javax.swing.JFrame {
     }//GEN-LAST:event_jComboBoxTipoServicoActionPerformed
 
     private void uJComboBoxPecaItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_uJComboBoxPecaItemStateChanged
-        
+
         jComboBoxModelo.removeAllItems();
         jComboBoxFabricante.removeAllItems();
 
@@ -1244,11 +1246,11 @@ public class CadastrarServicoTeste extends javax.swing.JFrame {
         valor = 0;
         idProdutoComboBox();
         populaComboBoxModelo();
-        
+
         if (uJComboBoxPeca.getSelectedItem() != null) {
             produto = uJComboBoxPeca.getSelectedItem().toString();
         }
-           
+
     }//GEN-LAST:event_uJComboBoxPecaItemStateChanged
 
     private void uJComboBoxPecaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_uJComboBoxPecaActionPerformed
@@ -1286,7 +1288,7 @@ public class CadastrarServicoTeste extends javax.swing.JFrame {
     }//GEN-LAST:event_uJComboBoxEquipamentoActionPerformed
 
     private void uJComboBoxEquipamentoItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_uJComboBoxEquipamentoItemStateChanged
-        
+
         jComboBoxModeloEquip.removeAllItems();
         jComboBoxFabricanteEquip.removeAllItems();
         codModeloEqui = 0;
@@ -1298,6 +1300,14 @@ public class CadastrarServicoTeste extends javax.swing.JFrame {
         populaComboBoxModeloEqui();
         equipamento = uJComboBoxEquipamento.getSelectedItem().toString();
     }//GEN-LAST:event_uJComboBoxEquipamentoItemStateChanged
+
+    private void uJComboBoxFuncionarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_uJComboBoxFuncionarioActionPerformed
+        codFuncionario = 0;
+        idFuncionarioComboBox();
+        if (uJComboBoxFuncionario.getSelectedItem() != null) {
+            funcionario = uJComboBoxFuncionario.getSelectedItem().toString();
+        }
+    }//GEN-LAST:event_uJComboBoxFuncionarioActionPerformed
 
     private void limparCampos() {
 
@@ -1317,7 +1327,7 @@ public class CadastrarServicoTeste extends javax.swing.JFrame {
 
         uJComboBoxClientes.setSelectedIndex(0);
         uJComboBoxEquipamento.setSelectedIndex(0);
-        jComboBoxFuncionarios.setSelectedIndex(0);
+        uJComboBoxFuncionario.setSelectedIndex(0);
         uJComboBoxPeca.setSelectedIndex(0);
         jComboBoxTipoServico.setSelectedIndex(0);
         jComboBoxFabricante.removeAllItems();
@@ -1359,7 +1369,7 @@ public class CadastrarServicoTeste extends javax.swing.JFrame {
             txtTotalPecas.setText(String.valueOf(totalPeca));
 
             txtQuantidade.setText("");
-            txtValorUnit.setText("");
+         //   txtValorUnit.setText("");
 
         } catch (Exception erro) {
             Logger.getLogger(CadastrarCliente.class
@@ -1448,11 +1458,10 @@ public class CadastrarServicoTeste extends javax.swing.JFrame {
             jComboBoxTipoServico.addItem(tServ.getTipo(), tServ);
         }
     }
-    
+
     private void carregarComboPeca() {
 
        // uJComboBoxPeca.clear();
-
         ArrayList<Produto> pecas = new ArrayList<Produto>();
         pecas = ProdutoDAO.ListarProdutos();
 
@@ -1460,7 +1469,7 @@ public class CadastrarServicoTeste extends javax.swing.JFrame {
             uJComboBoxPeca.addItem(prod.getProduto(), prod);
         }
     }
-    
+
     private void carregarComboEquipamento() {
 
         uJComboBoxEquipamento.clear();
@@ -1472,7 +1481,19 @@ public class CadastrarServicoTeste extends javax.swing.JFrame {
             uJComboBoxEquipamento.addItem(equi.getEquipamento(), equi);
         }
     }
-    
+
+    private void carregarComboFuncionario() {
+
+        uJComboBoxFuncionario.clear();
+
+        ArrayList<Funcionario> funcionarios = new ArrayList<Funcionario>();
+        funcionarios = FuncionarioDAO.ListarFuncionario();
+
+        for (Funcionario func : funcionarios) {
+            uJComboBoxFuncionario.addItem(func.getFuncionario(), func);
+        }
+    }
+
     private void idProdutoComboBox() {
 
         Connection conexao = Conexao.getConnection();
@@ -1511,7 +1532,7 @@ public class CadastrarServicoTeste extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, ex);
         }
     }
-    
+
     private void idEquipamentoComboBox() {
 
         Connection conexao = Conexao.getConnection();
@@ -1531,32 +1552,14 @@ public class CadastrarServicoTeste extends javax.swing.JFrame {
         }
     }
 
-    private void populaComboBoxFuncionario() {
-
-        Connection conexao = Conexao.getConnection();
-        ResultSet rs;
-        String sql = "select * from tabfuncionario";
-
-        try {
-            pst = conexao.prepareStatement(sql);
-            rs = pst.executeQuery();
-
-            while (rs.next()) {
-                jComboBoxFuncionarios.addItem(rs.getString("funcionario"));
-            }
-
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, ex);
-        }
-    }
-
     private void idFuncionarioComboBox() {
 
         Connection conexao = Conexao.getConnection();
         ResultSet rs;
-        String sql = "select * from tabfuncionario where funcionario = '" + jComboBoxFuncionarios.getSelectedItem() + "';";
+        String sql = "select * from tabfuncionario where funcionario = '" + uJComboBoxFuncionario.getSelectedItem() + "';";
 
         try {
+
             pst = conexao.prepareStatement(sql);
             rs = pst.executeQuery();
 
@@ -1593,7 +1596,7 @@ public class CadastrarServicoTeste extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, ex);
         }
     }
- 
+
     private void idModeloComboBox() {
 
         Connection conexao = Conexao.getConnection();
@@ -1653,7 +1656,6 @@ public class CadastrarServicoTeste extends javax.swing.JFrame {
         }
     }
 
-    
     private void idFabricanteComboBox() {
 
         Connection conexao = Conexao.getConnection();
@@ -1794,14 +1796,15 @@ public class CadastrarServicoTeste extends javax.swing.JFrame {
         jTableFuncionario.getColumnModel().getColumn(0).setMinWidth(0);
         jTableFuncionario.getTableHeader().getColumnModel().getColumn(0).setMaxWidth(0);
         jTableFuncionario.getTableHeader().getColumnModel().getColumn(0).setMinWidth(0);
-        
+
         //oculta coluna tipoServico
         jTableTipodeServico.getColumnModel().getColumn(0).setMaxWidth(0);
         jTableTipodeServico.getColumnModel().getColumn(0).setMinWidth(0);
         jTableTipodeServico.getTableHeader().getColumnModel().getColumn(0).setMaxWidth(0);
         jTableTipodeServico.getTableHeader().getColumnModel().getColumn(0).setMinWidth(0);
     }
- public static void main(String args[]) {
+
+    public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
@@ -1828,10 +1831,15 @@ public class CadastrarServicoTeste extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             @Override
             public void run() {
-                new CadastrarServicoTeste().setVisible(true); 
+                new CadastrarServicoTeste().setVisible(true);
             }
         });
     }
+
+    private void Mensangem() {
+        JOptionPane.showMessageDialog(null, "Esse registro não encontra-se cadastrado na base de dados.");
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBtbIncluirEquipamento;
     private javax.swing.JButton jBtbIncluirFunc;
@@ -1856,7 +1864,6 @@ public class CadastrarServicoTeste extends javax.swing.JFrame {
     private javax.swing.JButton jBtnVoltarPainelServico;
     private javax.swing.JComboBox jComboBoxFabricante;
     private javax.swing.JComboBox jComboBoxFabricanteEquip;
-    private javax.swing.JComboBox jComboBoxFuncionarios;
     private javax.swing.JComboBox jComboBoxModelo;
     private javax.swing.JComboBox jComboBoxModeloEquip;
     private componentes.UJComboBox jComboBoxTipoServico;
@@ -1907,6 +1914,7 @@ public class CadastrarServicoTeste extends javax.swing.JFrame {
     private javax.swing.JTextField txtValorUnit;
     private componentes.UJComboBox uJComboBoxClientes;
     private componentes.UJComboBox uJComboBoxEquipamento;
+    private componentes.UJComboBox uJComboBoxFuncionario;
     private componentes.UJComboBox uJComboBoxPeca;
     private org.jdesktop.beansbinding.BindingGroup bindingGroup;
     // End of variables declaration//GEN-END:variables
