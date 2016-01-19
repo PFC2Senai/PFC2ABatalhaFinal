@@ -57,7 +57,7 @@ public final class ExibeCliente extends javax.swing.JFrame {
 
         if (jTableListarClientes.getSelectedRow() != -1) {
             valida = true;
-            this.dispose();
+            //this.dispose();
             int linha = jTableListarClientes.getSelectedRow();
             indice = (Integer.parseInt(jTableListarClientes.getValueAt(linha, 0).toString()));
         } else {
@@ -455,7 +455,9 @@ public final class ExibeCliente extends javax.swing.JFrame {
     }//GEN-LAST:event_txtBuscarKeyReleased
 
     private void jBtnRotinaContatoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnRotinaContatoActionPerformed
-        new CadastrarRotinaContato(indice).setVisible(true);
+        if (CodigoCliente()) {
+            new CadastrarRotinaContato(indice).setVisible(true);
+        }             
     }//GEN-LAST:event_jBtnRotinaContatoActionPerformed
 
     private void populaComboBox() {

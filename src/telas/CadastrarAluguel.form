@@ -48,8 +48,8 @@
         <Container class="javax.swing.JPanel" name="jPanelServico">
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
-              <JTabbedPaneConstraints tabName="Servi&#xe7;o">
-                <Property name="tabTitle" type="java.lang.String" value="Servi&#xe7;o"/>
+              <JTabbedPaneConstraints tabName="Aluguel">
+                <Property name="tabTitle" type="java.lang.String" value="Aluguel"/>
               </JTabbedPaneConstraints>
             </Constraint>
           </Constraints>
@@ -223,6 +223,9 @@
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
               <JTabbedPaneConstraints tabName="Equipamento">
                 <Property name="tabTitle" type="java.lang.String" value="Equipamento"/>
+                <Property name="tabIcon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/imagens/equipamento.png"/>
+                </Property>
               </JTabbedPaneConstraints>
             </Constraint>
           </Constraints>
