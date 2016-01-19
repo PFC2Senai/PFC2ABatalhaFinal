@@ -78,6 +78,7 @@ public final class AlterarContato extends javax.swing.JFrame {
         jBtnAltContato = new javax.swing.JButton();
         jBtbCancelContato = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
+        jLabelEmail1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -95,6 +96,12 @@ public final class AlterarContato extends javax.swing.JFrame {
 
         jLabelEmail.setText("Email:");
 
+        txtEmail.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtEmailFocusLost(evt);
+            }
+        });
+
         jBtnAltContato.setText("Salvar");
         jBtnAltContato.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -111,6 +118,9 @@ public final class AlterarContato extends javax.swing.JFrame {
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel1.setText("Alterar Contato");
+
+        jLabelEmail1.setFont(new java.awt.Font("Tahoma", 3, 11)); // NOI18N
+        jLabelEmail1.setForeground(new java.awt.Color(255, 0, 0));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -133,15 +143,17 @@ public final class AlterarContato extends javax.swing.JFrame {
                         .addGap(23, 23, 23)
                         .addComponent(txtTelCel, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabelEmail)
-                        .addGap(32, 32, 32)
-                        .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 235, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
                         .addGap(79, 79, 79)
                         .addComponent(jBtnAltContato, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(10, 10, 10)
-                        .addComponent(jBtbCancelContato)))
-                .addContainerGap(58, Short.MAX_VALUE))
+                        .addComponent(jBtbCancelContato))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabelEmail)
+                        .addGap(32, 32, 32)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabelEmail1, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 235, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(231, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -168,11 +180,13 @@ public final class AlterarContato extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabelEmail)
                     .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabelEmail1, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jBtnAltContato)
                     .addComponent(jBtbCancelContato))
-                .addContainerGap(18, Short.MAX_VALUE))
+                .addContainerGap(36, Short.MAX_VALUE))
         );
 
         pack();
@@ -207,6 +221,10 @@ public final class AlterarContato extends javax.swing.JFrame {
     private void jBtbCancelContatoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtbCancelContatoActionPerformed
         this.dispose();
     }//GEN-LAST:event_jBtbCancelContatoActionPerformed
+
+    private void txtEmailFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtEmailFocusLost
+        ValidaEmail();
+    }//GEN-LAST:event_txtEmailFocusLost
 
     public void CarregaContatoCliente() {
         
@@ -243,7 +261,7 @@ public final class AlterarContato extends javax.swing.JFrame {
             ResultSet rs;
             rs = stmt.executeQuery(Sql);            
             
-                while(rs.next()){
+                while(rs.next()) {
                     txtContato.setText(String.valueOf(rs.getObject("contato")));
                     txtTel.setText(String.valueOf(rs.getObject("telefone")));
                     txtTelCel.setText(String.valueOf(rs.getObject("celular")));
@@ -258,6 +276,40 @@ public final class AlterarContato extends javax.swing.JFrame {
         }          
     }
     
+    
+    public void ValidaEmail() {
+
+        if ((txtEmail.getText().contains("@"))
+                && (txtEmail.getText().contains("."))
+                && (!txtEmail.getText().contains(" "))) {
+
+            String usuario = new String(txtEmail.getText().substring(0,
+                    txtEmail.getText().lastIndexOf('@')));
+
+            String dominio = new String(txtEmail.getText().substring(txtEmail.getText().lastIndexOf('@') + 1, txtEmail.getText().length()));
+
+            if ((usuario.length() >= 1) && (!usuario.contains("@"))
+                    && (dominio.contains(".")) && (!dominio.contains("@")) && (dominio.indexOf(".")
+                    >= 1) && (dominio.lastIndexOf(".") < dominio.length() - 1)) {
+
+                jLabelEmail1.setText("");
+
+            } else {
+
+                jLabelEmail1.setText("E-mail Inválido");
+
+                txtEmail.requestFocus();
+
+            }
+
+        } else {
+
+            jLabelEmail1.setText("E-mail Inválido");
+
+            txtEmail.requestFocus();
+
+        }
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBtbCancelContato;
     private javax.swing.JButton jBtnAltContato;
@@ -265,6 +317,7 @@ public final class AlterarContato extends javax.swing.JFrame {
     private javax.swing.JLabel jLabelCelular;
     private javax.swing.JLabel jLabelContato;
     private javax.swing.JLabel jLabelEmail;
+    private javax.swing.JLabel jLabelEmail1;
     private javax.swing.JLabel jLabelTelefone;
     private javax.swing.JTextField txtContato;
     private javax.swing.JTextField txtEmail;

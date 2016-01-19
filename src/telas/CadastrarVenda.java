@@ -139,10 +139,7 @@ public class CadastrarVenda extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, ex);
         }        
     }
-    
-    
-    
-    
+
     public void CarregaValorUnit() { 
         
         valor = ProdutoDAO.ExisteProduto(codProduto, codModelo, codFabricante);
@@ -151,10 +148,7 @@ public class CadastrarVenda extends javax.swing.JFrame {
             jTextValorUnit.setText(String.valueOf(valor));
         }       
     }
-    
-    
-    
-    
+
     public void TabelaProduto() {
         
         //CarregaValorUnit();  
