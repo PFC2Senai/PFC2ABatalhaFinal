@@ -1,18 +1,24 @@
 package telas;
 
 import atributos.Aluguel;
+import atributos.Cliente;
+import atributos.Equipamento;
 import atributos.OrdemServico;
 import atributos.Usuario;
 import funcoes.AluguelDAO;
+import funcoes.ClienteDAO;
 import funcoes.Conexao;
 import funcoes.EquipamentoDAO;
 import funcoes.FuncoesDiversas;
 import funcoes.LimitarDigitos;
 import funcoes.OrdemServicoDAO;
+import java.awt.event.FocusAdapter;
+import java.awt.event.FocusEvent;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -43,9 +49,9 @@ public class CadastrarAluguel extends javax.swing.JFrame {
      */
     public CadastrarAluguel() {
         initComponents();
-
-        populaComboBoxCliente();
-        populaComboBoxEquipamento();
+        combobox();
+        carregarComboClientes();
+        carregarComboEquipamento();
         txtValorLocacao.setDocument(new LimitarDigitos(10));
         txtQuantEqui.setDocument(new LimitarDigitos(10));
     }
@@ -63,7 +69,6 @@ public class CadastrarAluguel extends javax.swing.JFrame {
         jPanelServico = new javax.swing.JPanel();
         jPanel7 = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
-        jComboBoxCliente = new javax.swing.JComboBox();
         jLabel10 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
         txtDataDevolucao = new com.toedter.calendar.JDateChooser();
@@ -73,10 +78,10 @@ public class CadastrarAluguel extends javax.swing.JFrame {
         txtDataLocacao = new com.toedter.calendar.JDateChooser();
         jLabel8 = new javax.swing.JLabel();
         txtHoraLocacao = new javax.swing.JFormattedTextField();
+        uJComboBoxClientes = new componentes.UJComboBox();
         jBtnAvancar = new javax.swing.JButton();
         jPanelEquipamento = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
-        jComboBoxEquipamentos = new javax.swing.JComboBox();
         jLabel1 = new javax.swing.JLabel();
         jBtnRemoveEquipamento = new javax.swing.JButton();
         jBtbIncluirEquipamento = new javax.swing.JButton();
@@ -92,6 +97,7 @@ public class CadastrarAluguel extends javax.swing.JFrame {
         txtQuantEqui = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         txtTotal = new javax.swing.JTextField();
+        uJComboBoxEquipamento = new componentes.UJComboBox();
         jBtnVoltar1 = new javax.swing.JButton();
         jBtnCadastrarAluguel = new javax.swing.JButton();
 
@@ -103,16 +109,8 @@ public class CadastrarAluguel extends javax.swing.JFrame {
         jPanel7.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         jPanel7.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel6.setText("Cliente:");
+        jLabel6.setText("Empresa:");
         jPanel7.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 60, -1, 20));
-
-        jComboBoxCliente.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Selecione o Cliente" }));
-        jComboBoxCliente.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBoxClienteActionPerformed(evt);
-            }
-        });
-        jPanel7.add(jComboBoxCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 60, 240, 20));
 
         jLabel10.setText("Data Devolução:");
         jPanel7.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 300, -1, 20));
@@ -140,6 +138,14 @@ public class CadastrarAluguel extends javax.swing.JFrame {
             ex.printStackTrace();
         }
         jPanel7.add(txtHoraLocacao, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 260, 40, -1));
+
+        uJComboBoxClientes.setEditable(true);
+        uJComboBoxClientes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                uJComboBoxClientesActionPerformed(evt);
+            }
+        });
+        jPanel7.add(uJComboBoxClientes, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 60, 390, -1));
 
         jBtnAvancar.setText("Avançar");
         jBtnAvancar.addActionListener(new java.awt.event.ActionListener() {
@@ -169,21 +175,9 @@ public class CadastrarAluguel extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jTabbedPaneServico.addTab("Aluguel", jPanelServico);
+        jTabbedPaneServico.addTab("Aluguel", new javax.swing.ImageIcon(getClass().getResource("/imagens/aluguel.png")), jPanelServico); // NOI18N
 
         jPanel4.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-
-        jComboBoxEquipamentos.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Selecione o Equipamento" }));
-        jComboBoxEquipamentos.addItemListener(new java.awt.event.ItemListener() {
-            public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                jComboBoxEquipamentosItemStateChanged(evt);
-            }
-        });
-        jComboBoxEquipamentos.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBoxEquipamentosActionPerformed(evt);
-            }
-        });
 
         jLabel1.setText("Equipamento:");
 
@@ -249,6 +243,18 @@ public class CadastrarAluguel extends javax.swing.JFrame {
 
         jLabel4.setText("Vr. Total Locação:");
 
+        uJComboBoxEquipamento.setEditable(true);
+        uJComboBoxEquipamento.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                uJComboBoxEquipamentoItemStateChanged(evt);
+            }
+        });
+        uJComboBoxEquipamento.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                uJComboBoxEquipamentoActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
@@ -261,10 +267,6 @@ public class CadastrarAluguel extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(txtTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addComponent(jBtbIncluirEquipamento)
-                        .addGap(18, 18, 18)
-                        .addComponent(jBtnRemoveEquipamento))
-                    .addGroup(jPanel4Layout.createSequentialGroup()
                         .addComponent(jLabel38)
                         .addGap(33, 33, 33)
                         .addComponent(jComboBoxFabricanteEquip, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -274,7 +276,9 @@ public class CadastrarAluguel extends javax.swing.JFrame {
                             .addComponent(jLabel37))
                         .addGap(21, 21, 21)
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jComboBoxEquipamentos, javax.swing.GroupLayout.PREFERRED_SIZE, 261, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel4Layout.createSequentialGroup()
+                                .addGap(279, 279, 279)
+                                .addComponent(uJComboBoxEquipamento, javax.swing.GroupLayout.PREFERRED_SIZE, 308, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jComboBoxModeloEquip, javax.swing.GroupLayout.PREFERRED_SIZE, 264, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -284,7 +288,13 @@ public class CadastrarAluguel extends javax.swing.JFrame {
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(txtValorLocacao, javax.swing.GroupLayout.DEFAULT_SIZE, 76, Short.MAX_VALUE)
                             .addComponent(txtQuantEqui)))
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 680, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel4Layout.createSequentialGroup()
+                            .addGap(141, 141, 141)
+                            .addComponent(jBtnRemoveEquipamento)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jBtbIncluirEquipamento))
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 680, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(34, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
@@ -292,8 +302,8 @@ public class CadastrarAluguel extends javax.swing.JFrame {
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addGap(47, 47, 47)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jComboBoxEquipamentos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1))
+                    .addComponent(jLabel1)
+                    .addComponent(uJComboBoxEquipamento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel37)
@@ -420,34 +430,9 @@ public class CadastrarAluguel extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jBtnRemoveEquipamentoActionPerformed
 
-    private void jComboBoxEquipamentosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxEquipamentosActionPerformed
-
-        idEquipamentoComboBox();
-        if (jComboBoxEquipamentos.getSelectedItem() != null) {
-            equipamento = jComboBoxEquipamentos.getSelectedItem().toString();
-        }
-    }//GEN-LAST:event_jComboBoxEquipamentosActionPerformed
-
-    private void jComboBoxEquipamentosItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jComboBoxEquipamentosItemStateChanged
-        
-        jComboBoxModeloEquip.removeAllItems();
-        jComboBoxFabricanteEquip.removeAllItems();
-        codModeloEqui = 0;
-        modeloEqui = null;
-        codFabricanteEqui = 0;
-        fabricanteEqui = null;
-        idEquipamentoComboBox();
-        populaComboBoxModeloEqui();
-        equipamento = jComboBoxEquipamentos.getSelectedItem().toString();
-    }//GEN-LAST:event_jComboBoxEquipamentosItemStateChanged
-
     private void jBtnAvancarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnAvancarActionPerformed
         jTabbedPaneServico.setSelectedComponent(this.jPanelEquipamento);
     }//GEN-LAST:event_jBtnAvancarActionPerformed
-
-    private void jComboBoxClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxClienteActionPerformed
-        idClienteComboBox();
-    }//GEN-LAST:event_jComboBoxClienteActionPerformed
 
     private void jBtnVoltar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnVoltar1ActionPerformed
         jTabbedPaneServico.setSelectedComponent(this.jPanelServico);
@@ -486,6 +471,32 @@ public class CadastrarAluguel extends javax.swing.JFrame {
         limpacampos();
     }//GEN-LAST:event_jBtnCadastrarAluguelActionPerformed
 
+    private void uJComboBoxEquipamentoItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_uJComboBoxEquipamentoItemStateChanged
+
+        jComboBoxModeloEquip.removeAllItems();
+        jComboBoxFabricanteEquip.removeAllItems();
+        codModeloEqui = 0;
+        modeloEqui = null;
+        codFabricanteEqui = 0;
+        fabricanteEqui = null;
+        codEquipamento = 0;
+        idEquipamentoComboBox();
+        populaComboBoxModeloEqui();
+        equipamento = uJComboBoxEquipamento.getSelectedItem().toString();
+    }//GEN-LAST:event_uJComboBoxEquipamentoItemStateChanged
+
+    private void uJComboBoxEquipamentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_uJComboBoxEquipamentoActionPerformed
+        idEquipamentoComboBox();
+        if (uJComboBoxEquipamento.getSelectedItem() != null) {
+            equipamento = uJComboBoxEquipamento.getSelectedItem().toString();
+        }
+    }//GEN-LAST:event_uJComboBoxEquipamentoActionPerformed
+
+    private void uJComboBoxClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_uJComboBoxClientesActionPerformed
+        codCliente = 0;
+        idClienteComboBox();
+    }//GEN-LAST:event_uJComboBoxClientesActionPerformed
+
     public void TabelaEquipamento() {
 
         codDetEquipamento = EquipamentoDAO.CodigoDetEquipamento(codEquipamento, codModeloEqui, codFabricanteEqui);
@@ -521,6 +532,30 @@ public class CadastrarAluguel extends javax.swing.JFrame {
         }
     }
 
+    private void carregarComboClientes() {
+
+        uJComboBoxClientes.clear();
+
+        ArrayList<Cliente> cliente = new ArrayList<Cliente>();
+        cliente = ClienteDAO.ComboCliente();
+
+        for (Cliente cli : cliente) {
+            uJComboBoxClientes.addItem(cli.getEmpresa(), cli);
+        }
+    }
+    
+    private void carregarComboEquipamento() {
+
+        uJComboBoxEquipamento.clear();
+
+        ArrayList<Equipamento> equipamentos = new ArrayList<Equipamento>();
+        equipamentos = EquipamentoDAO.ListarEquipamentos();
+
+        for (Equipamento equi : equipamentos) {
+            uJComboBoxEquipamento.addItem(equi.getEquipamento(), equi);
+        }
+    }
+    
     private void populaComboBoxModeloEqui() {
 
         Connection conexao = Conexao.getConnection();
@@ -606,30 +641,11 @@ public class CadastrarAluguel extends javax.swing.JFrame {
         }
     }
 
-    private void populaComboBoxEquipamento() {
-
-        Connection conexao = Conexao.getConnection();
-        ResultSet rs;
-        String sql = "select * from tabequipamento";
-
-        try {
-            pst = conexao.prepareStatement(sql);
-            rs = pst.executeQuery();
-
-            while (rs.next()) {
-                jComboBoxEquipamentos.addItem(rs.getString("equipamento"));
-            }
-
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, ex);
-        }
-    }
-
     private void idEquipamentoComboBox() {
 
         Connection conexao = Conexao.getConnection();
         ResultSet rs;
-        String sql = "select * from tabequipamento where equipamento = '" + jComboBoxEquipamentos.getSelectedItem() + "';";
+        String sql = "select * from tabequipamento where equipamento = '" + uJComboBoxEquipamento.getSelectedItem() + "';";
 
         try {
             pst = conexao.prepareStatement(sql);
@@ -644,30 +660,11 @@ public class CadastrarAluguel extends javax.swing.JFrame {
         }
     }
 
-    private void populaComboBoxCliente() {
-
-        Connection conexao = Conexao.getConnection();
-        ResultSet rs;
-        String sql = "select * from tabcliente";
-
-        try {
-            pst = conexao.prepareStatement(sql);
-            rs = pst.executeQuery();
-
-            while (rs.next()) {
-                jComboBoxCliente.addItem(rs.getString("empresa"));
-            }
-
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, ex);
-        }
-    }
-
     private void idClienteComboBox() {
 
         Connection conexao = Conexao.getConnection();
         ResultSet rs;
-        String sql = "select * from tabcliente where empresa = '" + jComboBoxCliente.getSelectedItem() + "';";
+        String sql = "select * from tabcliente where empresa = '" + uJComboBoxClientes.getSelectedItem() + "';";
 
         try {
             pst = conexao.prepareStatement(sql);
@@ -691,8 +688,8 @@ public class CadastrarAluguel extends javax.swing.JFrame {
         txtQuantEqui.setText("");
         txtTotal.setText("");
         txtValorLocacao.setText("");
-        jComboBoxCliente.setSelectedIndex(0);
-        jComboBoxEquipamentos.setSelectedIndex(0);
+        uJComboBoxClientes.setSelectedIndex(0);
+        uJComboBoxEquipamento.setSelectedIndex(0);
         codEquipamento = 0;
         codModeloEqui = 0;
         modeloEqui = null;
@@ -704,15 +701,43 @@ public class CadastrarAluguel extends javax.swing.JFrame {
         jTableEquipamento.updateUI();
         jTabbedPaneServico.setSelectedComponent(this.jPanelServico);
     }
+   
+    private void combobox() {
 
+        //Combobox clientes
+        uJComboBoxClientes.getEditor().getEditorComponent().addFocusListener(new FocusAdapter() {
+            @Override
+            public void focusLost(FocusEvent e) {
+                if (codCliente == 0) {
+                    Mensangem();
+                    uJComboBoxClientes.getEditor().getEditorComponent().requestFocus();
+                }
+            }
+        });
+        uJComboBoxClientes.setAutocompletar(true);
+        
+        //Combobox equipamento
+        uJComboBoxEquipamento.getEditor().getEditorComponent().addFocusListener(new FocusAdapter() {
+            @Override
+            public void focusLost(FocusEvent e) {
+                if (codEquipamento == 0) {
+                    Mensangem();
+                    uJComboBoxEquipamento.getEditor().getEditorComponent().requestFocus();
+                }
+            }
+        });
+        uJComboBoxEquipamento.setAutocompletar(true);
+    }
+    
+    private void Mensangem() {
+        JOptionPane.showMessageDialog(null, "Esse registro não encontra-se cadastrado na base de dados.");
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBtbIncluirEquipamento;
     private javax.swing.JButton jBtnAvancar;
     private javax.swing.JButton jBtnCadastrarAluguel;
     private javax.swing.JButton jBtnRemoveEquipamento;
     private javax.swing.JButton jBtnVoltar1;
-    private javax.swing.JComboBox jComboBoxCliente;
-    private javax.swing.JComboBox jComboBoxEquipamentos;
     private javax.swing.JComboBox jComboBoxFabricanteEquip;
     private javax.swing.JComboBox jComboBoxModeloEquip;
     private javax.swing.JLabel jLabel1;
@@ -741,5 +766,7 @@ public class CadastrarAluguel extends javax.swing.JFrame {
     private javax.swing.JTextField txtQuantEqui;
     private javax.swing.JTextField txtTotal;
     private javax.swing.JTextField txtValorLocacao;
+    private componentes.UJComboBox uJComboBoxClientes;
+    private componentes.UJComboBox uJComboBoxEquipamento;
     // End of variables declaration//GEN-END:variables
 }

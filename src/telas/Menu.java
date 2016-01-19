@@ -246,6 +246,7 @@ public class Menu extends javax.swing.JFrame {
         });
         jMenu14.add(jMenuItem31);
 
+        jMenuItem33.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/aluguel.png"))); // NOI18N
         jMenuItem33.setText("Aluguel");
         jMenuItem33.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -361,6 +362,7 @@ public class Menu extends javax.swing.JFrame {
         });
         jMenu10.add(jMenuItem32);
 
+        jMenuItem34.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/aluguel.png"))); // NOI18N
         jMenuItem34.setText("Aluguel");
         jMenuItem34.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
