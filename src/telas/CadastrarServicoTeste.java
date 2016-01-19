@@ -394,6 +394,12 @@ public class CadastrarServicoTeste extends javax.swing.JFrame {
 
         jLabel34.setText("Quantidade:");
 
+        txtQuantidade.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtQuantidadeActionPerformed(evt);
+            }
+        });
+
         jComboBoxModelo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Selecione o Modelo" }));
         jComboBoxModelo.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
@@ -1307,6 +1313,10 @@ public class CadastrarServicoTeste extends javax.swing.JFrame {
             funcionario = uJComboBoxFuncionario.getSelectedItem().toString();
         }
     }//GEN-LAST:event_uJComboBoxFuncionarioActionPerformed
+
+    private void txtQuantidadeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtQuantidadeActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtQuantidadeActionPerformed
 
     private void limparCampos() {
 
