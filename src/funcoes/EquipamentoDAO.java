@@ -233,7 +233,8 @@ public class EquipamentoDAO {
         Statement stmt;
         boolean achou = false;
         
-        try {            
+        try {
+            
             String Sql = "SELECT * FROM tabequipamento "
                        + " WHERE equipamento = " + equipamento + ";";
                        
@@ -244,7 +245,8 @@ public class EquipamentoDAO {
             
             while(rs.next()) {                
                achou = true;
-            }            
+            }
+            
             rs.close();
             stmt.close();
             

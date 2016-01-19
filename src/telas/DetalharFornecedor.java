@@ -1,45 +1,50 @@
 package telas;
 
-
 import atributos.Endereco;
 import atributos.Fornecedor;
 import atributos.Telefone;
+import funcoes.CarregaCEP;
 import static funcoes.Conexao.getConnection;
 import funcoes.ContatosDAO;
 import funcoes.FornecedorDAO;
 import funcoes.ModeloTabela;
 import java.awt.Color;
+import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import javax.swing.ListSelectionModel;
 import static telas.ExibeFornecedor.GetIndiceForn;
 
-
 public class DetalharFornecedor extends javax.swing.JFrame {
 
-    Statement stmt ;
-    int idContato; 
+    Statement stmt;
+    int idContato;
     private int codPessoaContato;
     private int codContato;
     private final int codFornecedor;
+    private DetalharFornecedor telaDetFornec;
+
     /**
      * Creates new form DetalharFornecedor
      */
     public DetalharFornecedor() {
         this.codFornecedor = GetIndiceForn();
         this.idContato = FornecedorDAO.idContato(GetIndiceForn());
-        initComponents();        
+        telaDetFornec = this;
+        initComponents();
         CarregaFornecedor();
         TabelaContatos();
     }
-    
-    private void OcultaBotoes() {       
+
+    private void OcultaBotoes() {
         jBtnSalvarEnd.setVisible(false);
-        jBtnCancelEnde.setVisible(false);        
+        jBtnCancelEnde.setVisible(false);
+        jBtnCarregaCep.setVisible(false);
     }
 
     /**
@@ -76,6 +81,7 @@ public class DetalharFornecedor extends javax.swing.JFrame {
         jBtnAltEnd = new javax.swing.JButton();
         jBtnSalvarEnd = new javax.swing.JButton();
         jBtnCancelEnde = new javax.swing.JButton();
+        jBtnCarregaCep = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
         jTableContatos = new javax.swing.JTable();
@@ -127,6 +133,7 @@ public class DetalharFornecedor extends javax.swing.JFrame {
 
         jLabel13.setText("Numero:");
 
+        jBtnAltEnd.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/editar.png"))); // NOI18N
         jBtnAltEnd.setText("Editar");
         jBtnAltEnd.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -134,6 +141,7 @@ public class DetalharFornecedor extends javax.swing.JFrame {
             }
         });
 
+        jBtnSalvarEnd.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/ok.png"))); // NOI18N
         jBtnSalvarEnd.setText("Salvar");
         jBtnSalvarEnd.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -141,10 +149,19 @@ public class DetalharFornecedor extends javax.swing.JFrame {
             }
         });
 
+        jBtnCancelEnde.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/cancelar.png"))); // NOI18N
         jBtnCancelEnde.setText("Cancelar");
         jBtnCancelEnde.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jBtnCancelEndeActionPerformed(evt);
+            }
+        });
+
+        jBtnCarregaCep.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/pesquisar.gif"))); // NOI18N
+        jBtnCarregaCep.setText("Buscar CEP");
+        jBtnCarregaCep.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnCarregaCepActionPerformed(evt);
             }
         });
 
@@ -165,7 +182,10 @@ public class DetalharFornecedor extends javax.swing.JFrame {
                             .addComponent(jLabel11))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtCep, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(txtCep, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jBtnCarregaCep))
                             .addComponent(txtEndEstado, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -195,12 +215,16 @@ public class DetalharFornecedor extends javax.swing.JFrame {
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(txtEndNum, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtEndBairro))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 24, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jBtnCancelEnde, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jBtnSalvarEnd)
-                    .addComponent(jBtnAltEnd))
-                .addContainerGap())
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                        .addComponent(jBtnCancelEnde)
+                        .addContainerGap())
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jBtnSalvarEnd)
+                            .addComponent(jBtnAltEnd))
+                        .addGap(24, 24, 24))))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -211,8 +235,9 @@ public class DetalharFornecedor extends javax.swing.JFrame {
                     .addComponent(jLabel3)
                     .addComponent(jLabel11)
                     .addComponent(txtCep, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jBtnAltEnd))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                    .addComponent(jBtnAltEnd)
+                    .addComponent(jBtnCarregaCep))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel17)
@@ -221,21 +246,22 @@ public class DetalharFornecedor extends javax.swing.JFrame {
                         .addComponent(txtEndEstado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jLabel16)
                         .addComponent(jBtnSalvarEnd)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtEndBairro, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(txtEndBairro, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jBtnCancelEnde))
                     .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel15)
                         .addComponent(txtEndCidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel14)
-                        .addComponent(jBtnCancelEnde)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jLabel14)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel12)
                     .addComponent(txtEndRua, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel13)
                     .addComponent(txtEndNum, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(16, Short.MAX_VALUE))
         );
 
         jPanel3.setBackground(new java.awt.Color(223, 237, 253));
@@ -265,6 +291,7 @@ public class DetalharFornecedor extends javax.swing.JFrame {
         });
         jScrollPane3.setViewportView(jTableContatos);
 
+        jButtonEditarContato.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/editar.png"))); // NOI18N
         jButtonEditarContato.setText("Editar");
         jButtonEditarContato.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -279,7 +306,7 @@ public class DetalharFornecedor extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jButtonEditarContato)
-                .addGap(24, 24, 24))
+                .addGap(27, 27, 27))
             .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel3Layout.createSequentialGroup()
                     .addContainerGap()
@@ -289,9 +316,9 @@ public class DetalharFornecedor extends javax.swing.JFrame {
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(20, 20, 20)
                 .addComponent(jButtonEditarContato)
-                .addContainerGap(136, Short.MAX_VALUE))
+                .addContainerGap(127, Short.MAX_VALUE))
             .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                     .addContainerGap(15, Short.MAX_VALUE)
@@ -312,11 +339,11 @@ public class DetalharFornecedor extends javax.swing.JFrame {
                         .addComponent(lblCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
                         .addComponent(btnVoltar)
-                        .addGap(18, 18, 18)
+                        .addGap(29, 29, 29)
                         .addComponent(btnLimpar))
                     .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(33, Short.MAX_VALUE))
+                .addContainerGap(27, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -329,11 +356,11 @@ public class DetalharFornecedor extends javax.swing.JFrame {
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, 25, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnVoltar)
-                    .addComponent(btnLimpar))
-                .addGap(25, 25, 25))
+                    .addComponent(btnLimpar)
+                    .addComponent(btnVoltar))
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -351,28 +378,27 @@ public class DetalharFornecedor extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void CarregaFornecedor() { 
-        
+    private void CarregaFornecedor() {
+
         OcultaBotoes();
         desabilitarEndereco();
         desabilitarFornecedor();
-        
+
         ArrayList<Endereco> endereco = new ArrayList<Endereco>();
         endereco = ContatosDAO.CarregaEndereco(idContato);
 
         ArrayList<Fornecedor> fornecedor = new ArrayList<Fornecedor>();
         fornecedor = FornecedorDAO.CarregaFornecedor(codFornecedor);
-        
+
         ArrayList<Telefone> telefone = new ArrayList<Telefone>();
         telefone = ContatosDAO.CarregaTelefones(idContato);
-      
 
         for (Fornecedor forn : fornecedor) {
             lblCodigo.setText(String.valueOf(forn.getIdForn()));
             txtFornecedor.setText(forn.getFornecedor());
-            idContato = forn.getCodContato();         
+            idContato = forn.getCodContato();
         }
-        
+
         for (Endereco end : endereco) {
             txtEndRua.setText(end.getRua());
             txtEndBairro.setText(end.getBairro());
@@ -383,10 +409,9 @@ public class DetalharFornecedor extends javax.swing.JFrame {
             txtEndPais.setText(end.getPais());
         }
     }
-    
+
     private void btnVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltarActionPerformed
         this.dispose();
-        new DetalharCliente().setVisible(true);
     }//GEN-LAST:event_btnVoltarActionPerformed
 
     private void btnLimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimparActionPerformed
@@ -403,14 +428,14 @@ public class DetalharFornecedor extends javax.swing.JFrame {
         txtEndNum.setEnabled(true);
         txtEndPais.setEnabled(true);
         txtEndRua.setEnabled(true);
-        
+
         jBtnSalvarEnd.setVisible(true);
         jBtnCancelEnde.setVisible(true);
         jBtnAltEnd.setVisible(false);
-        
+
         //nome fornecedor
-        txtFornecedor.setEnabled(true);  
-        
+        txtFornecedor.setEnabled(true);
+
     }//GEN-LAST:event_jBtnAltEndActionPerformed
 
     private void jBtnSalvarEndActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnSalvarEndActionPerformed
@@ -419,9 +444,9 @@ public class DetalharFornecedor extends javax.swing.JFrame {
         forn.setFornecedor(txtFornecedor.getText());
         FornecedorDAO.UpdateFornecedor(forn, GetIndiceForn());
         txtFornecedor.setEnabled(false);
-        
+
         Endereco endereco = new Endereco();
-        
+
         endereco.setPais(txtEndPais.getText());
         endereco.setCep(txtCep.getText());
         endereco.setRua(txtEndRua.getText());
@@ -433,18 +458,20 @@ public class DetalharFornecedor extends javax.swing.JFrame {
 
         ContatosDAO.UpdateEndereco(idContato, endereco);
         desabilitarEndereco();
-        
+
         jBtnSalvarEnd.setVisible(false);
         jBtnCancelEnde.setVisible(false);
+        jBtnCarregaCep.setVisible(false);
         jBtnAltEnd.setVisible(true);
     }//GEN-LAST:event_jBtnSalvarEndActionPerformed
 
     private void jBtnCancelEndeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnCancelEndeActionPerformed
-        desabilitarEndereco();        
+        desabilitarEndereco();
         jBtnSalvarEnd.setVisible(false);
         jBtnCancelEnde.setVisible(false);
         jBtnAltEnd.setVisible(true);
-        
+        jBtnCarregaCep.setVisible(false);
+
         txtFornecedor.setEnabled(false);
     }//GEN-LAST:event_jBtnCancelEndeActionPerformed
 
@@ -453,84 +480,133 @@ public class DetalharFornecedor extends javax.swing.JFrame {
     }//GEN-LAST:event_jTableContatosMouseClicked
 
     private void jButtonEditarContatoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEditarContatoActionPerformed
-        if(jTableContatos.getSelectedRow() != -1) {
+        if (jTableContatos.getSelectedRow() != -1) {
             int linha = jTableContatos.getSelectedRow();
-            codContato= (Integer.parseInt(jTableContatos.getValueAt(linha, 0).toString()));
+            codContato = (Integer.parseInt(jTableContatos.getValueAt(linha, 0).toString()));
             codPessoaContato = Integer.parseInt(jTableContatos.getValueAt(linha, 1).toString());
         }
         new AlterarContato(this, codFornecedor, codPessoaContato, codContato).setVisible(true);
     }//GEN-LAST:event_jButtonEditarContatoActionPerformed
 
-    private void desabilitarFornecedor() {    
+    private void jBtnCarregaCepActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnCarregaCepActionPerformed
+
+        TelaEspera telaTeste = new TelaEspera();
+        this.setEnabled(false);
+        final Thread t1 = new Thread(new Runnable() {//cria uma thread pra gravar o seu arquivo
+
+            @Override
+            public void run() {
+
+                try {
+
+                    telaTeste.setVisible(true);
+                    CarregaCEP cep = new CarregaCEP();
+
+                    String ceptxt = txtCep.getText();
+                    txtEndCidade.setText(cep.getCidade(ceptxt));
+                    txtEndBairro.setText(cep.getBairro(ceptxt));
+                    txtEndRua.setText(cep.getEndereco(ceptxt));
+                    txtEndEstado.setText(cep.getUF(ceptxt));
+
+                } catch (IOException ex) {
+                    JOptionPane.showMessageDialog(null, "CEP não encontrado.");
+                }
+            }
+        });
+        t1.start();
+        new Thread(new Runnable() {//cria outra thread pra sua tela de espera
+            @Override
+            public void run() {
+                try {
+                    //cria a tela de espera e mostra ela
+                    t1.join();//fica esperando a primeira thread acabar
+                    telaDetFornec.setEnabled(true);  // quando acabar fecha a janela de espera
+                    telaTeste.dispose();
+                } catch (InterruptedException ex) {
+                    Logger.getLogger(CadastrarCliente.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }).start();
+
+    }//GEN-LAST:event_jBtnCarregaCepActionPerformed
+
+    private void desabilitarFornecedor() {
 
         txtFornecedor.setEnabled(false);
-        
         txtFornecedor.setOpaque(false);
-        txtFornecedor.setBackground(new Color(0,0,0,0));
+        txtFornecedor.setBorder(null);
+        txtFornecedor.setBackground(new Color(0, 0, 0, 0));
     }
-    
-    private void desabilitarEndereco(){  
-        
+
+    private void desabilitarEndereco() {
+
         txtEndBairro.setEnabled(false);
         txtCep.setEnabled(false);
         txtEndCidade.setEnabled(false);
         txtEndEstado.setEnabled(false);
         txtEndNum.setEnabled(false);
         txtEndPais.setEnabled(false);
-        txtEndRua.setEnabled(false); 
-        
+        txtEndRua.setEnabled(false);
+
         txtEndBairro.setOpaque(false);
-        txtEndBairro.setBackground(new Color(0,0,0,0));
+        txtEndBairro.setBackground(new Color(0, 0, 0, 0));
+        txtEndBairro.setBorder(null);
         txtCep.setOpaque(false);
-        txtCep.setBackground(new Color(0,0,0,0));
+        txtCep.setBackground(new Color(0, 0, 0, 0));
+        txtCep.setBorder(null);
         txtEndCidade.setOpaque(false);
-        txtEndCidade.setBackground(new Color(0,0,0,0));
+        txtEndCidade.setBackground(new Color(0, 0, 0, 0));
+        txtEndCidade.setBorder(null);
         txtEndEstado.setOpaque(false);
-        txtEndEstado.setBackground(new Color(0,0,0,0));
+        txtEndEstado.setBackground(new Color(0, 0, 0, 0));
+        txtEndEstado.setBorder(null);
         txtEndNum.setOpaque(false);
-        txtEndNum.setBackground(new Color(0,0,0,0));
+        txtEndNum.setBackground(new Color(0, 0, 0, 0));
+        txtEndNum.setBorder(null);
         txtEndPais.setOpaque(false);
-        txtEndPais.setBackground(new Color(0,0,0,0));
+        txtEndPais.setBackground(new Color(0, 0, 0, 0));
+        txtEndPais.setBorder(null);
         txtEndRua.setOpaque(false);
-        txtEndRua.setBackground(new Color(0,0,0,0));
-        
+        txtEndRua.setBackground(new Color(0, 0, 0, 0));
+        txtEndRua.setBorder(null);
+
         jBtnCancelEnde.setVisible(false);
         jBtnSalvarEnd.setVisible(false);
     }
-    
-    public void TabelaContatos() {
-        
-        try { 
-            String Sql = "SELECT * FROM vw_contatofornecedor WHERE id_forn = " + codFornecedor + ";";  
-            stmt = getConnection().createStatement();
-            ArrayList dados = new ArrayList();               
-            String [] Colunas = {"CodContato","Código","Contato", "Telefone", "Celular", "Email"};
-               
-            ResultSet rs;
-            rs = stmt.executeQuery(Sql);            
-            
-                while(rs.next()){
-                    dados.add(new Object[]{ rs.getObject("id_contato"),rs.getObject("idPessoaContatoFornecedor"),rs.getObject("contato"),
-                                            rs.getObject("telefone"),rs.getObject("celular"), 
-                                            rs.getObject("email")});            
-                }
 
-                    for (int i = 0; i < 6; i++){
-                        ModeloTabela modelo = new ModeloTabela(dados, Colunas);
-                        jTableContatos.setModel(modelo);
-                        jTableContatos.getColumnModel().getColumn(i).setPreferredWidth(150);
-                        jTableContatos.getColumnModel().getColumn(i).setResizable(false);
-                        jTableContatos.getTableHeader().setReorderingAllowed(false);
-                        jTableContatos.setAutoResizeMode(jTableContatos.AUTO_RESIZE_OFF);
-                        jTableContatos.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-                    }
-                    
+    public void TabelaContatos() {
+
+        try {
+            String Sql = "SELECT * FROM vw_contatofornecedor WHERE id_forn = " + codFornecedor + ";";
+            stmt = getConnection().createStatement();
+            ArrayList dados = new ArrayList();
+            String[] Colunas = {"CodContato", "Código", "Contato", "Telefone", "Celular", "Email"};
+
+            ResultSet rs;
+            rs = stmt.executeQuery(Sql);
+
+            while (rs.next()) {
+                dados.add(new Object[]{rs.getObject("id_contato"), rs.getObject("idPessoaContatoFornecedor"), rs.getObject("contato"),
+                    rs.getObject("telefone"), rs.getObject("celular"),
+                    rs.getObject("email")});
+            }
+
+            for (int i = 0; i < 6; i++) {
+                ModeloTabela modelo = new ModeloTabela(dados, Colunas);
+                jTableContatos.setModel(modelo);
+                jTableContatos.getColumnModel().getColumn(i).setPreferredWidth(150);
+                jTableContatos.getColumnModel().getColumn(i).setResizable(false);
+                jTableContatos.getTableHeader().setReorderingAllowed(false);
+                jTableContatos.setAutoResizeMode(jTableContatos.AUTO_RESIZE_OFF);
+                jTableContatos.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+            }
+
         } catch (SQLException ex) {
             Logger.getLogger(ExibeCliente.class.getName()).log(Level.SEVERE, null, ex);
-            
-        } catch (Exception erro){
+
+        } catch (Exception erro) {
             Logger.getLogger(ExibeCliente.class.getName()).log(Level.SEVERE, null, erro);
-        }          
+        }
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -538,6 +614,7 @@ public class DetalharFornecedor extends javax.swing.JFrame {
     private javax.swing.JButton btnVoltar;
     private javax.swing.JButton jBtnAltEnd;
     private javax.swing.JButton jBtnCancelEnde;
+    private javax.swing.JButton jBtnCarregaCep;
     private javax.swing.JButton jBtnSalvarEnd;
     private javax.swing.JButton jButtonEditarContato;
     private javax.swing.JLabel jLabel1;

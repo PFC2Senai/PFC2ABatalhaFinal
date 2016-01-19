@@ -554,7 +554,7 @@
           <Properties>
             <Property name="columns" type="int" value="20"/>
             <Property name="rows" type="int" value="5"/>
-            <Property name="text" type="java.lang.String" value="Pend&#xea;ncias do sistema:&#xa;&#xa;- tela de minera&#xe7;&#xe3;o&#xa;- formata&#xe7;&#xe3;o dos campos(caracteres)&#xa;- refer&#xea;ncias formatadas nas normas ABNT&#xa;- verificar campos para evitar dados duplicados"/>
+            <Property name="text" type="java.lang.String" value="Pend&#xea;ncias do sistema:&#xa;&#xa;- tela de minera&#xe7;&#xe3;o&#xa;- formata&#xe7;&#xe3;o dos campos(caracteres)&#xa;- refer&#xea;ncias formatadas nas normas ABNT&#xa;- verificar campos para evitar dados duplicados&#xa;- Backup do banco autom&#xe1;tico&#xa;- Aviso de estoque baixo"/>
           </Properties>
         </Component>
       </SubComponents>

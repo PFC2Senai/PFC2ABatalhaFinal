@@ -648,6 +648,7 @@ public class CadastrarCliente extends javax.swing.JFrame {
                 }
             }
         }).start();
+        
     }//GEN-LAST:event_jBtnCarregaCepActionPerformed
 
     private void txtCepActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCepActionPerformed
@@ -671,7 +672,7 @@ public class CadastrarCliente extends javax.swing.JFrame {
                     txtEstado.setText(cep.getUF(ceptxt));
 
                 } catch (IOException ex) {
-                    JOptionPane.showMessageDialog(null, ex);
+                    JOptionPane.showMessageDialog(null, "CEP não encontrado.");
                 }
             }
         });
