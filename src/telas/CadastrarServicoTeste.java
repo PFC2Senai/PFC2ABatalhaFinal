@@ -1,5 +1,6 @@
 package telas;
 
+
 import atributos.Cliente;
 import atributos.DetServicoEquipamento;
 import atributos.DetServicoFuncionario;
@@ -1007,6 +1008,7 @@ public class CadastrarServicoTeste extends javax.swing.JFrame {
     }//GEN-LAST:event_jBtnAdicionarTipoActionPerformed
 
     private void jBtnRemoverTipoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnRemoverTipoActionPerformed
+        
         DefaultTableModel dtm = (DefaultTableModel) jTableTipodeServico.getModel();
         int linha = jTableTipodeServico.getSelectedRow();
 
@@ -1016,6 +1018,7 @@ public class CadastrarServicoTeste extends javax.swing.JFrame {
     }//GEN-LAST:event_jBtnRemoverTipoActionPerformed
 
     private void jBtnCancelarCadTipoServicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnCancelarCadTipoServicoActionPerformed
+        
         jBtnCadTipoServico.setVisible(false);
         jBtnCancelarCadTipoServico.setVisible(false);
 
