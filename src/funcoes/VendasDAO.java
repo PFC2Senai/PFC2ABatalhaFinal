@@ -27,15 +27,15 @@ public class VendasDAO {
         
         try {   
             String sql = ("INSERT INTO tabvendas(cliente_idcliente, tabusuario_id_usuario,"
-                    + "produto, dataVenda, hora, tabordemserv_idtabOrdemServ) VALUES(?,?,?,?,?,?)");
+                    + "dataVenda, hora, tabordemserv_idtabOrdemServ, totalVenda) VALUES(?,?,?,?,?,?)");
             stmt = Conexao.getConnection().prepareStatement(sql);      
   
                 stmt.setInt(1, venda.getClienteIdcliente());
                 stmt.setInt(2, venda.getTabusuarioIdUsuario());
-                stmt.setString(3, venda.getProduto());
-                stmt.setObject(4, venda.getDataVenda());
-                stmt.setTime(5, venda.getHora());
-                stmt.setInt(6, venda.getIdOrdemServico());
+                stmt.setObject(3, venda.getDataVenda());
+                stmt.setTime(4, venda.getHora());
+                stmt.setInt(5, venda.getIdOrdemServico());
+                stmt.setDouble(6, venda.getTotal());
                               
                 stmt.executeUpdate();
                 
@@ -70,10 +70,10 @@ public class VendasDAO {
                 v.setIdtabVendas(rs.getInt("idtabVendas"));
                 v.setClienteIdcliente(rs.getInt("cliente_idcliente"));
                 v.setTabusuarioIdUsuario(rs.getInt("tabusuario_id_usuario"));
-                v.setProduto(rs.getString("produto"));
                 v.setDataVenda(rs.getDate("dataVenda"));
                 v.setHora(rs.getTime("hora"));
                 v.setIdOrdemServico(rs.getInt("tabordemserv_idtabOrdemServ"));
+                v.setTotal(rs.getInt("totalVenda"));
                 
                 venda.add(v);                
             }            
@@ -135,11 +135,11 @@ public class VendasDAO {
         PreparedStatement stmt;
         
         try {   
-            String sql = ("UPDATE tabvendas SET produto='" + venda.getProduto()+
-                                                               "', cliente_idcliente='" + venda.getClienteIdcliente() +
+            String sql = ("UPDATE tabvendas SET cliente_idcliente='" + venda.getClienteIdcliente() +
                                                                "', dataVenda='" + venda.getDataVenda() + 
                                                                "', hora='" + venda.getHora() + 
                                                                "', tabordemserv_idtabOrdemServ='" + venda.getIdOrdemServico() +
+                                                               "', tabordemserv_idtabOrdemServ='" + venda.getTotal() +
                                                                "' where idtabVendas = '" + id + "';");
             
             stmt = Conexao.getConnection().prepareStatement(sql);                              
@@ -172,10 +172,10 @@ public class VendasDAO {
                 v.setIdtabVendas(rs.getInt("idtabVendas"));
                 v.setClienteIdcliente(rs.getInt("cliente_idcliente"));
                 v.setTabusuarioIdUsuario(rs.getInt("tabusuario_id_usuario"));
-                v.setProduto(rs.getString("produto"));
                 v.setDataVenda(rs.getDate("dataVenda"));
                 v.setHora(rs.getTime("hora"));
                 v.setIdOrdemServico(rs.getInt("tabordemserv_idtabOrdemServ"));
+                v.setTotal(rs.getDouble("totalVenda"));
                 vendas.add(v);
                 
             }
