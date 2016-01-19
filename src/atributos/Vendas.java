@@ -13,10 +13,18 @@ public class Vendas {
     private int idtabVendas;
     private int clienteIdcliente;
     private int tabusuarioIdUsuario;
-    private String produto;
     private Date dataVenda;
     private Time hora;
     private int idOrdemServico;
+    private double total;
+
+    public double getTotal() {
+        return total;
+    }
+
+    public void setTotal(double total) {
+        this.total = total;
+    }
 
     public int getIdOrdemServico() {
         return idOrdemServico;
@@ -66,20 +74,6 @@ public class Vendas {
      */
     public void setTabusuarioIdUsuario(int tabusuarioIdUsuario) {
         this.tabusuarioIdUsuario = tabusuarioIdUsuario;
-    }
-
-    /**
-     * @return the produto
-     */
-    public String getProduto() {
-        return produto;
-    }
-
-    /**
-     * @param produto the produto to set
-     */
-    public void setProduto(String produto) {
-        this.produto = produto;
     }
 
     /**
