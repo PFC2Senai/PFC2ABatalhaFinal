@@ -29,15 +29,15 @@
                 </Property>
               </Properties>
               <SubComponents>
-                <MenuItem class="javax.swing.JMenuItem" name="jMenuItem8">
+                <MenuItem class="javax.swing.JMenuItem" name="jMenuItem33">
                   <Properties>
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                      <Image iconType="3" name="/imagens/user.gif"/>
+                      <Image iconType="3" name="/imagens/aluguel.png"/>
                     </Property>
-                    <Property name="text" type="java.lang.String" value="Usu&#xe1;rio"/>
+                    <Property name="text" type="java.lang.String" value="Aluguel"/>
                   </Properties>
                   <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItem8ActionPerformed"/>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItem33ActionPerformed"/>
                   </Events>
                 </MenuItem>
                 <MenuItem class="javax.swing.JMenuItem" name="jMenuItem10">
@@ -51,6 +51,17 @@
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItem10ActionPerformed"/>
                   </Events>
                 </MenuItem>
+                <MenuItem class="javax.swing.JMenuItem" name="jMenuItem29">
+                  <Properties>
+                    <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                      <Image iconType="3" name="/imagens/equipamento.png"/>
+                    </Property>
+                    <Property name="text" type="java.lang.String" value="Equipamento"/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItem29ActionPerformed"/>
+                  </Events>
+                </MenuItem>
                 <MenuItem class="javax.swing.JMenuItem" name="jMenuItem22">
                   <Properties>
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
@@ -59,26 +70,15 @@
                     <Property name="text" type="java.lang.String" value="Estoque"/>
                   </Properties>
                 </MenuItem>
-                <MenuItem class="javax.swing.JMenuItem" name="jMenuItem21">
+                <MenuItem class="javax.swing.JMenuItem" name="jMenuItem26">
                   <Properties>
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                      <Image iconType="3" name="/imagens/funcionario.png"/>
+                      <Image iconType="3" name="/imagens/fabricante.png"/>
                     </Property>
-                    <Property name="text" type="java.lang.String" value="Funcion&#xe1;rio"/>
+                    <Property name="text" type="java.lang.String" value="Fabricante"/>
                   </Properties>
                   <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItem21ActionPerformed"/>
-                  </Events>
-                </MenuItem>
-                <MenuItem class="javax.swing.JMenuItem" name="jMenuItemCadastrarServico">
-                  <Properties>
-                    <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                      <Image iconType="3" name="/imagens/servicos.png"/>
-                    </Property>
-                    <Property name="text" type="java.lang.String" value="Servi&#xe7;os"/>
-                  </Properties>
-                  <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItemCadastrarServicoActionPerformed"/>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItem26ActionPerformed"/>
                   </Events>
                 </MenuItem>
                 <MenuItem class="javax.swing.JMenuItem" name="jMenuItem5">
@@ -92,15 +92,15 @@
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItem5ActionPerformed"/>
                   </Events>
                 </MenuItem>
-                <MenuItem class="javax.swing.JMenuItem" name="jMenuItem13">
+                <MenuItem class="javax.swing.JMenuItem" name="jMenuItem21">
                   <Properties>
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                      <Image iconType="3" name="/imagens/setor.png"/>
+                      <Image iconType="3" name="/imagens/funcionario.png"/>
                     </Property>
-                    <Property name="text" type="java.lang.String" value="Setor"/>
+                    <Property name="text" type="java.lang.String" value="Funcion&#xe1;rio"/>
                   </Properties>
                   <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItem13ActionPerformed"/>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItem21ActionPerformed"/>
                   </Events>
                 </MenuItem>
                 <MenuItem class="javax.swing.JMenuItem" name="jMenuItem15">
@@ -122,26 +122,37 @@
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItem17ActionPerformed"/>
                   </Events>
                 </MenuItem>
-                <MenuItem class="javax.swing.JMenuItem" name="jMenuItem26">
+                <MenuItem class="javax.swing.JMenuItem" name="jMenuItemCadastrarServico">
                   <Properties>
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                      <Image iconType="3" name="/imagens/fabricante.png"/>
+                      <Image iconType="3" name="/imagens/servicos.png"/>
                     </Property>
-                    <Property name="text" type="java.lang.String" value="Fabricante"/>
+                    <Property name="text" type="java.lang.String" value="Servi&#xe7;os"/>
                   </Properties>
                   <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItem26ActionPerformed"/>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItemCadastrarServicoActionPerformed"/>
                   </Events>
                 </MenuItem>
-                <MenuItem class="javax.swing.JMenuItem" name="jMenuItem29">
+                <MenuItem class="javax.swing.JMenuItem" name="jMenuItem13">
                   <Properties>
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                      <Image iconType="3" name="/imagens/equipamento.png"/>
+                      <Image iconType="3" name="/imagens/setor.png"/>
                     </Property>
-                    <Property name="text" type="java.lang.String" value="Equipamento"/>
+                    <Property name="text" type="java.lang.String" value="Setor"/>
                   </Properties>
                   <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItem29ActionPerformed"/>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItem13ActionPerformed"/>
+                  </Events>
+                </MenuItem>
+                <MenuItem class="javax.swing.JMenuItem" name="jMenuItem8">
+                  <Properties>
+                    <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                      <Image iconType="3" name="/imagens/user.gif"/>
+                    </Property>
+                    <Property name="text" type="java.lang.String" value="Usu&#xe1;rio"/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItem8ActionPerformed"/>
                   </Events>
                 </MenuItem>
                 <MenuItem class="javax.swing.JMenuItem" name="jMenuItem31">
@@ -155,17 +166,6 @@
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItem31ActionPerformed"/>
                   </Events>
                 </MenuItem>
-                <MenuItem class="javax.swing.JMenuItem" name="jMenuItem33">
-                  <Properties>
-                    <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                      <Image iconType="3" name="/imagens/aluguel.png"/>
-                    </Property>
-                    <Property name="text" type="java.lang.String" value="Aluguel"/>
-                  </Properties>
-                  <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItem33ActionPerformed"/>
-                  </Events>
-                </MenuItem>
               </SubComponents>
             </Menu>
             <Menu class="javax.swing.JMenu" name="jMenu10">
@@ -176,15 +176,15 @@
                 <Property name="text" type="java.lang.String" value="Consultar"/>
               </Properties>
               <SubComponents>
-                <MenuItem class="javax.swing.JMenuItem" name="jMenuItem7">
+                <MenuItem class="javax.swing.JMenuItem" name="jMenuItem34">
                   <Properties>
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                      <Image iconType="3" name="/imagens/user.gif"/>
+                      <Image iconType="3" name="/imagens/aluguel.png"/>
                     </Property>
-                    <Property name="text" type="java.lang.String" value="Usu&#xe1;rio"/>
+                    <Property name="text" type="java.lang.String" value="Aluguel"/>
                   </Properties>
                   <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItem7ActionPerformed"/>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItem34ActionPerformed"/>
                   </Events>
                 </MenuItem>
                 <MenuItem class="javax.swing.JMenuItem" name="jMenuItem9">
@@ -198,6 +198,17 @@
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItem9ActionPerformed"/>
                   </Events>
                 </MenuItem>
+                <MenuItem class="javax.swing.JMenuItem" name="jMenuItem30">
+                  <Properties>
+                    <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                      <Image iconType="3" name="/imagens/equipamento.png"/>
+                    </Property>
+                    <Property name="text" type="java.lang.String" value="Equipamento"/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItem30ActionPerformed"/>
+                  </Events>
+                </MenuItem>
                 <MenuItem class="javax.swing.JMenuItem" name="jMenuItem19">
                   <Properties>
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
@@ -206,26 +217,15 @@
                     <Property name="text" type="java.lang.String" value="Estoque"/>
                   </Properties>
                 </MenuItem>
-                <MenuItem class="javax.swing.JMenuItem" name="jMenuItem18">
+                <MenuItem class="javax.swing.JMenuItem" name="jMenuItem23">
                   <Properties>
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                      <Image iconType="3" name="/imagens/funcionario.png"/>
+                      <Image iconType="3" name="/imagens/fabricante.png"/>
                     </Property>
-                    <Property name="text" type="java.lang.String" value="Funcion&#xe1;rio"/>
+                    <Property name="text" type="java.lang.String" value="Fabricante"/>
                   </Properties>
                   <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItem18ActionPerformed"/>
-                  </Events>
-                </MenuItem>
-                <MenuItem class="javax.swing.JMenuItem" name="jMenuItem1">
-                  <Properties>
-                    <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                      <Image iconType="3" name="/imagens/servicos.png"/>
-                    </Property>
-                    <Property name="text" type="java.lang.String" value="Servi&#xe7;os"/>
-                  </Properties>
-                  <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItem1ActionPerformed"/>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItem23ActionPerformed"/>
                   </Events>
                 </MenuItem>
                 <MenuItem class="javax.swing.JMenuItem" name="jMenuItem6">
@@ -239,15 +239,15 @@
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItem6ActionPerformed"/>
                   </Events>
                 </MenuItem>
-                <MenuItem class="javax.swing.JMenuItem" name="jMenuItem14">
+                <MenuItem class="javax.swing.JMenuItem" name="jMenuItem18">
                   <Properties>
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                      <Image iconType="3" name="/imagens/setor.png"/>
+                      <Image iconType="3" name="/imagens/funcionario.png"/>
                     </Property>
-                    <Property name="text" type="java.lang.String" value="Setor"/>
+                    <Property name="text" type="java.lang.String" value="Funcion&#xe1;rio"/>
                   </Properties>
                   <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItem14ActionPerformed"/>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItem18ActionPerformed"/>
                   </Events>
                 </MenuItem>
                 <MenuItem class="javax.swing.JMenuItem" name="jMenuItem16">
@@ -269,48 +269,48 @@
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItem20ActionPerformed"/>
                   </Events>
                 </MenuItem>
-                <MenuItem class="javax.swing.JMenuItem" name="jMenuItem23">
+                <MenuItem class="javax.swing.JMenuItem" name="jMenuItem1">
                   <Properties>
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                      <Image iconType="3" name="/imagens/fabricante.png"/>
+                      <Image iconType="3" name="/imagens/servicos.png"/>
                     </Property>
-                    <Property name="text" type="java.lang.String" value="Fabricante"/>
+                    <Property name="text" type="java.lang.String" value="Servi&#xe7;os"/>
                   </Properties>
                   <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItem23ActionPerformed"/>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItem1ActionPerformed"/>
                   </Events>
                 </MenuItem>
-                <MenuItem class="javax.swing.JMenuItem" name="jMenuItem30">
+                <MenuItem class="javax.swing.JMenuItem" name="jMenuItem14">
                   <Properties>
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                      <Image iconType="3" name="/imagens/equipamento.png"/>
+                      <Image iconType="3" name="/imagens/setor.png"/>
                     </Property>
-                    <Property name="text" type="java.lang.String" value="Equipamento"/>
+                    <Property name="text" type="java.lang.String" value="Setor"/>
                   </Properties>
                   <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItem30ActionPerformed"/>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItem14ActionPerformed"/>
+                  </Events>
+                </MenuItem>
+                <MenuItem class="javax.swing.JMenuItem" name="jMenuItem7">
+                  <Properties>
+                    <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                      <Image iconType="3" name="/imagens/user.gif"/>
+                    </Property>
+                    <Property name="text" type="java.lang.String" value="Usu&#xe1;rio"/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItem7ActionPerformed"/>
                   </Events>
                 </MenuItem>
                 <MenuItem class="javax.swing.JMenuItem" name="jMenuItem32">
                   <Properties>
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                      <Image iconType="3" name="/imagens/vendas.png"/>
+                      <Image iconType="3" name="/imagens/vendas1.gif"/>
                     </Property>
                     <Property name="text" type="java.lang.String" value="Vendas"/>
                   </Properties>
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItem32ActionPerformed"/>
-                  </Events>
-                </MenuItem>
-                <MenuItem class="javax.swing.JMenuItem" name="jMenuItem34">
-                  <Properties>
-                    <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                      <Image iconType="3" name="/imagens/aluguel.png"/>
-                    </Property>
-                    <Property name="text" type="java.lang.String" value="Aluguel"/>
-                  </Properties>
-                  <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItem34ActionPerformed"/>
                   </Events>
                 </MenuItem>
               </SubComponents>
@@ -431,21 +431,10 @@
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" attributes="0">
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="99" max="-2" attributes="0"/>
-                      <Component id="jBtnRotinaContato" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="jBtnCadastrarLembrete" min="-2" max="-2" attributes="0"/>
-                  </Group>
-                  <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="jPanel1" min="-2" max="-2" attributes="0"/>
-                          <Component id="jScrollPane2" min="-2" pref="199" max="-2" attributes="0"/>
-                      </Group>
-                  </Group>
-              </Group>
+              <EmptySpace min="-2" pref="99" max="-2" attributes="0"/>
+              <Component id="jBtnRotinaContato" min="-2" max="-2" attributes="0"/>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <Component id="jBtnCadastrarLembrete" min="-2" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
                       <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
@@ -457,6 +446,13 @@
                       <Component id="jScrollPane1" min="-2" pref="246" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
+              </Group>
+          </Group>
+          <Group type="102" alignment="0" attributes="0">
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="jPanel1" min="-2" max="-2" attributes="0"/>
+                  <Component id="jScrollPane2" min="-2" pref="263" max="-2" attributes="0"/>
               </Group>
           </Group>
       </Group>
@@ -554,7 +550,7 @@
           <Properties>
             <Property name="columns" type="int" value="20"/>
             <Property name="rows" type="int" value="5"/>
-            <Property name="text" type="java.lang.String" value="Pend&#xea;ncias do sistema:&#xa;&#xa;- tela de minera&#xe7;&#xe3;o&#xa;- formata&#xe7;&#xe3;o dos campos(caracteres)&#xa;- refer&#xea;ncias formatadas nas normas ABNT&#xa;- verificar campos para evitar dados duplicados&#xa;- Backup do banco autom&#xe1;tico&#xa;- Aviso de estoque baixo"/>
+            <Property name="text" type="java.lang.String" value="Pend&#xea;ncias do sistema:&#xa;&#xa;- tela de minera&#xe7;&#xe3;o&#xa;- formata&#xe7;&#xe3;o dos campos(caracteres)&#xa;- refer&#xea;ncias formatadas nas normas ABNT&#xa;- verificar campos para evitar dados duplicados&#xa;- Backup do banco autom&#xe1;tico&#xa;- Aviso de estoque baixo&#xa;"/>
           </Properties>
         </Component>
       </SubComponents>

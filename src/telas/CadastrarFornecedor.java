@@ -16,11 +16,11 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
-
 public class CadastrarFornecedor extends javax.swing.JFrame {
 
-    private CadastrarProduto telaCadastrarProduto;   
+    private CadastrarProduto telaCadastrarProduto;
     private CadastrarFornecedor telaForn;
+
     /**
      * Creates new form CadastrarFornecedor
      */
@@ -28,7 +28,7 @@ public class CadastrarFornecedor extends javax.swing.JFrame {
         this.telaCadastrarProduto = null;
         telaForn = this;
         initComponents();
-        
+
 //        txtFornecedor.setDocument(new LimitarDigitos(45));
 //        txtEstado.setDocument(new LimitarDigitos(45));
 //        txtCidade.setDocument(new LimitarDigitos(45));
@@ -40,9 +40,8 @@ public class CadastrarFornecedor extends javax.swing.JFrame {
 //        txtEmail.setDocument(new LimitarDigitos(45));
 //        txtTelCel.setDocument(new LimitarDigitos(25));
 //        
-        
     }
-    
+
     public CadastrarFornecedor(CadastrarProduto telaCadProduto) {
         this.telaCadastrarProduto = telaCadProduto;
         telaForn = this;
@@ -452,52 +451,57 @@ public class CadastrarFornecedor extends javax.swing.JFrame {
 
     private void btnCadFornecedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadFornecedorActionPerformed
 
-        Fornecedor forn = new Fornecedor();
-        Telefone tel = new Telefone();
-        Endereco endereco = new Endereco();
-        PessoaContato pContato = new PessoaContato();
-        String email; 
+        if (FornecedorDAO.VerificarFornecedor(txtFornecedor.getText()) == false) {
 
-        forn.setFornecedor(txtFornecedor.getText());
-        forn.setCodUsuario(idUsuario());
-        tel.setTel(txtTel01.getText());
-        tel.setCel(txtTelCel.getText());
+            Fornecedor forn = new Fornecedor();
+            Telefone tel = new Telefone();
+            Endereco endereco = new Endereco();
+            PessoaContato pContato = new PessoaContato();
+            String email;
 
-        int i = ContatosDAO.CadContato();
+            forn.setFornecedor(txtFornecedor.getText());
+            forn.setCodUsuario(idUsuario());
+            tel.setTel(txtTel01.getText());
+            tel.setCel(txtTelCel.getText());
 
-        forn.setCodContato(i);
-        
-        int codForn = FornecedorDAO.CadFornecedor(forn);
+            int i = ContatosDAO.CadContato();
 
-        endereco.setPais(txtPais.getText());
-        endereco.setCep(txtCep.getText());
-        endereco.setRua(txtRua.getText());
-        endereco.setNumero(txtNumero.getText());
-        endereco.setBairro(txtBairro.getText());
-        endereco.setCidade(txtCidade.getText());
-        endereco.setEstado(txtEstado.getText());
-        endereco.setIdContato(i);
+            forn.setCodContato(i);
 
-        ContatosDAO.CadEndereco(endereco);
-        
-        for(int j=0; j < jTableContatos.getRowCount(); j++) {
-                 
-            pContato.setNomeContato(jTableContatos.getValueAt(j, 0).toString());    
-            tel.setTel(jTableContatos.getValueAt(j, 1).toString());        
-            tel.setCel(jTableContatos.getValueAt(j, 2).toString());          
-            email = jTableContatos.getValueAt(j, 3).toString(); 
-           
-            int codContato = ContatosDAO.CadContato();
-            
-            ContatosDAO.CadTel(codContato, tel);
-            ContatosDAO.CadEmail(codContato, email);
-            pContato.setCodTabEstrangeira(codForn);
-            pContato.setCodContato(codContato);
-            
-            PessoaContatoDAO.CadPesContatoFornecedor(pContato);
+            int codForn = FornecedorDAO.CadFornecedor(forn);
+
+            endereco.setPais(txtPais.getText());
+            endereco.setCep(txtCep.getText());
+            endereco.setRua(txtRua.getText());
+            endereco.setNumero(txtNumero.getText());
+            endereco.setBairro(txtBairro.getText());
+            endereco.setCidade(txtCidade.getText());
+            endereco.setEstado(txtEstado.getText());
+            endereco.setIdContato(i);
+
+            ContatosDAO.CadEndereco(endereco);
+
+            for (int j = 0; j < jTableContatos.getRowCount(); j++) {
+
+                pContato.setNomeContato(jTableContatos.getValueAt(j, 0).toString());
+                tel.setTel(jTableContatos.getValueAt(j, 1).toString());
+                tel.setCel(jTableContatos.getValueAt(j, 2).toString());
+                email = jTableContatos.getValueAt(j, 3).toString();
+
+                int codContato = ContatosDAO.CadContato();
+
+                ContatosDAO.CadTel(codContato, tel);
+                ContatosDAO.CadEmail(codContato, email);
+                pContato.setCodTabEstrangeira(codForn);
+                pContato.setCodContato(codContato);
+
+                PessoaContatoDAO.CadPesContatoFornecedor(pContato);
+            }
+
+            limparCampos();
+        } else {
+            JOptionPane.showMessageDialog(this, "Fornecedor ja cadastrado");
         }
- 
-        limparCampos();
     }//GEN-LAST:event_btnCadFornecedorActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
@@ -518,14 +522,14 @@ public class CadastrarFornecedor extends javax.swing.JFrame {
         DefaultTableModel dtm = (DefaultTableModel) jTableContatos.getModel();
         int linha = jTableContatos.getSelectedRow();
 
-        if( linha != -1){
-            dtm.removeRow( linha );
+        if (linha != -1) {
+            dtm.removeRow(linha);
         }
     }//GEN-LAST:event_jBtnRemoverContatoActionPerformed
 
     private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
-        
-        if (telaCadastrarProduto != null) { 
+
+        if (telaCadastrarProduto != null) {
             telaCadastrarProduto.populaComboBoxFornecedor();
         }
     }//GEN-LAST:event_formWindowClosed
@@ -542,7 +546,7 @@ public class CadastrarFornecedor extends javax.swing.JFrame {
                 try {
 
                     telaTeste.setVisible(true);
-                    
+
                     CarregaCEP cep = new CarregaCEP();
 
                     String ceptxt = txtCep.getText();
@@ -573,7 +577,7 @@ public class CadastrarFornecedor extends javax.swing.JFrame {
     }//GEN-LAST:event_jBtnCarregaCepActionPerformed
 
     private void txtCepActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCepActionPerformed
-       
+
         TelaEspera telaTeste = new TelaEspera();
         this.setEnabled(false);
         final Thread t1 = new Thread(new Runnable() {//cria uma thread pra gravar o seu arquivo
@@ -618,26 +622,26 @@ public class CadastrarFornecedor extends javax.swing.JFrame {
     }//GEN-LAST:event_txtEmailFocusLost
 
     public void TabelaContatos() {
-        
-        try { 
-            
+
+        try {
+
             DefaultTableModel dtm = (DefaultTableModel) jTableContatos.getModel();
-                   
-                dtm.addRow(new Object[] {txtContato.getText(),txtTel01.getText(),txtTelCel.getText(),txtEmail.getText()});
-                
-                txtContato.setText("");
-                txtTel01.setText(null);
-                txtTelCel.setText(null);
-                txtEmail.setText("");
-                txtContato.requestFocus();    
-                
+
+            dtm.addRow(new Object[]{txtContato.getText(), txtTel01.getText(), txtTelCel.getText(), txtEmail.getText()});
+
+            txtContato.setText("");
+            txtTel01.setText(null);
+            txtTelCel.setText(null);
+            txtEmail.setText("");
+            txtContato.requestFocus();
+
         } catch (Exception erro) {
             Logger.getLogger(CadastrarCliente.class.getName()).log(Level.SEVERE, null, erro);
-        }          
+        }
     }
-    
-    private void limparCampos(){
-        
+
+    private void limparCampos() {
+
         txtFornecedor.setText("");
         txtTel01.setText("");
         txtTelCel.setText("");
@@ -648,11 +652,11 @@ public class CadastrarFornecedor extends javax.swing.JFrame {
         txtNumero.setText("");
         txtBairro.setText("");
         txtEstado.setText("");
-        txtRua.setText("");  
+        txtRua.setText("");
         ((DefaultTableModel) jTableContatos.getModel()).setNumRows(0);
         jTableContatos.updateUI();
     }
-    
+
     public void ValidaEmail() {
 
         if ((txtEmail.getText().contains("@"))
@@ -686,7 +690,7 @@ public class CadastrarFornecedor extends javax.swing.JFrame {
 
         }
     }
-    
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCadFornecedor;
     private javax.swing.JButton btnCancelar;

@@ -34,12 +34,15 @@ public class CadastrarFuncionario extends javax.swing.JFrame {
 //
 //        txtTelCel.setDocument(new LimitarDigitos(25));
 //        txtEmail.setDocument(new LimitarDigitos(45));
-//        jTextNumCtps.setDocument(new LimitarDigitos(10));
-//        jTextSerieCtps.setDocument(new LimitarDigitos(5));
+          jTextCtps.setDocument(new LimitarDigitos(14));  
+          jTextNumCtps.setDocument(new LimitarDigitos(7));
+          jTextSerieCtps.setDocument(new LimitarDigitos(4));
 //        txtCidade.setDocument(new LimitarDigitos(45));
 //        txtBairro.setDocument(new LimitarDigitos(45));
 //        txtRua.setDocument(new LimitarDigitos(45));
 //        txtNumero.setDocument(new LimitarDigitos(5));
+          txtEstado.setDocument(new LimitarDigitos(2));
+
 
     }
 
@@ -536,51 +539,57 @@ public class CadastrarFuncionario extends javax.swing.JFrame {
 
     private void jBtnCadastrarFuncionarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnCadastrarFuncionarioActionPerformed
 
-        if (VerificaCampos() == true) {
-            Funcionario func = new Funcionario();
-            Endereco endereco = new Endereco();
-            Telefone tel = new Telefone();
+        if (FuncionarioDAO.VerificarFuncionario(jTextCpf.getText()) == false) {
 
-            func.setFuncionario(jTextNome.getText());
-            func.setRg(jTextRg.getText());
-            func.setCpf(jTextCpf.getText());
-            func.setCargo(jTextCargo.getText());
-            func.setSalario(Double.parseDouble(jTextSalario.getText()));
+            if (VerificaCampos() == true) {
+                Funcionario func = new Funcionario();
+                Endereco endereco = new Endereco();
+                Telefone tel = new Telefone();
 
-            func.setIdUsuario(Usuario.idUsuario());
-            func.setDataAdmicao(jTextDataAdmicao.getText());
+                func.setFuncionario(jTextNome.getText());
+                func.setRg(jTextRg.getText());
+                func.setCpf(jTextCpf.getText());
+                func.setCargo(jTextCargo.getText());
+                func.setSalario(Double.parseDouble(jTextSalario.getText()));
 
-            func.setCtps(jTextCtps.getText());
-            func.setSerieCtps(jTextSerieCtps.getText());
-            func.setNumCtps(jTextNumCtps.getText());
-            func.setUfCtps((String) jComboUf.getSelectedItem());
+                func.setIdUsuario(Usuario.idUsuario());
+                func.setDataAdmicao(jTextDataAdmicao.getText());
 
-            tel.setTel(txtTel01.getText());
-            tel.setCel(txtTelCel.getText());
+                func.setCtps(jTextCtps.getText());
+                func.setSerieCtps(jTextSerieCtps.getText());
+                func.setNumCtps(jTextNumCtps.getText());
+                func.setUfCtps((String) jComboUf.getSelectedItem());
 
-            int i = ContatosDAO.CadContato();
+                tel.setTel(txtTel01.getText());
+                tel.setCel(txtTelCel.getText());
 
-            func.setIdContato(i);
+                int i = ContatosDAO.CadContato();
 
-            ContatosDAO.CadTel(i, tel);
+                func.setIdContato(i);
 
-            ContatosDAO.CadEmail(i, txtEmail.getText());
+                ContatosDAO.CadTel(i, tel);
 
-            endereco.setPais(txtPais.getText());
-            endereco.setCep(txtCep.getText());
-            endereco.setRua(txtRua.getText());
-            endereco.setNumero(txtNumero.getText());
-            endereco.setBairro(txtBairro.getText());
-            endereco.setCidade(txtCidade.getText());
-            endereco.setEstado(txtEstado.getText());
-            endereco.setIdContato(i);
+                ContatosDAO.CadEmail(i, txtEmail.getText());
 
-            ContatosDAO.CadEndereco(endereco);
+                endereco.setPais(txtPais.getText());
+                endereco.setCep(txtCep.getText());
+                endereco.setRua(txtRua.getText());
+                endereco.setNumero(txtNumero.getText());
+                endereco.setBairro(txtBairro.getText());
+                endereco.setCidade(txtCidade.getText());
+                endereco.setEstado(txtEstado.getText());
+                endereco.setIdContato(i);
 
-            FuncionarioDAO.CadFuncionario(func);
-            limparCampos();
+                ContatosDAO.CadEndereco(endereco);
+
+                FuncionarioDAO.CadFuncionario(func);
+                limparCampos();
+            } else {
+                JOptionPane.showMessageDialog(null, "Campo(s) vazio(s)!");
+            }
+
         } else {
-            JOptionPane.showMessageDialog(null, "Campo(s) vazio(s)!");
+            JOptionPane.showMessageDialog(this, "Funcionario ja cadastrado");
         }
 
     }//GEN-LAST:event_jBtnCadastrarFuncionarioActionPerformed
@@ -635,7 +644,7 @@ public class CadastrarFuncionario extends javax.swing.JFrame {
     }//GEN-LAST:event_jBtnCarregaCepActionPerformed
 
     private void txtCepActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCepActionPerformed
-        
+
         TelaEspera telaTeste = new TelaEspera();
         this.setEnabled(false);
         final Thread t1 = new Thread(new Runnable() {//cria uma thread pra gravar o seu arquivo
@@ -680,7 +689,7 @@ public class CadastrarFuncionario extends javax.swing.JFrame {
     }//GEN-LAST:event_txtEmailFocusLost
 
     private boolean VerificaCampos() {
-        
+
         boolean valida = true;
 
         if (jTextNome.getText().trim().equals("")) {
@@ -803,10 +812,10 @@ public class CadastrarFuncionario extends javax.swing.JFrame {
             return valida;
         }
 
-       // valida = false;
+        // valida = false;
         return valida;
     }
-    
+
     public void ValidaEmail() {
 
         if ((txtEmail.getText().contains("@"))

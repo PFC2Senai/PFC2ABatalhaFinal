@@ -44,33 +44,33 @@ public class Menu extends javax.swing.JFrame {
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu4 = new javax.swing.JMenu();
         jMenu14 = new javax.swing.JMenu();
-        jMenuItem8 = new javax.swing.JMenuItem();
+        jMenuItem33 = new javax.swing.JMenuItem();
         jMenuItem10 = new javax.swing.JMenuItem();
+        jMenuItem29 = new javax.swing.JMenuItem();
         jMenuItem22 = new javax.swing.JMenuItem();
-        jMenuItem21 = new javax.swing.JMenuItem();
-        jMenuItemCadastrarServico = new javax.swing.JMenuItem();
+        jMenuItem26 = new javax.swing.JMenuItem();
         jMenuItem5 = new javax.swing.JMenuItem();
-        jMenuItem13 = new javax.swing.JMenuItem();
+        jMenuItem21 = new javax.swing.JMenuItem();
         jMenuItem15 = new javax.swing.JMenuItem();
         jMenuItem17 = new javax.swing.JMenuItem();
-        jMenuItem26 = new javax.swing.JMenuItem();
-        jMenuItem29 = new javax.swing.JMenuItem();
+        jMenuItemCadastrarServico = new javax.swing.JMenuItem();
+        jMenuItem13 = new javax.swing.JMenuItem();
+        jMenuItem8 = new javax.swing.JMenuItem();
         jMenuItem31 = new javax.swing.JMenuItem();
-        jMenuItem33 = new javax.swing.JMenuItem();
         jMenu10 = new javax.swing.JMenu();
-        jMenuItem7 = new javax.swing.JMenuItem();
+        jMenuItem34 = new javax.swing.JMenuItem();
         jMenuItem9 = new javax.swing.JMenuItem();
+        jMenuItem30 = new javax.swing.JMenuItem();
         jMenuItem19 = new javax.swing.JMenuItem();
-        jMenuItem18 = new javax.swing.JMenuItem();
-        jMenuItem1 = new javax.swing.JMenuItem();
+        jMenuItem23 = new javax.swing.JMenuItem();
         jMenuItem6 = new javax.swing.JMenuItem();
-        jMenuItem14 = new javax.swing.JMenuItem();
+        jMenuItem18 = new javax.swing.JMenuItem();
         jMenuItem16 = new javax.swing.JMenuItem();
         jMenuItem20 = new javax.swing.JMenuItem();
-        jMenuItem23 = new javax.swing.JMenuItem();
-        jMenuItem30 = new javax.swing.JMenuItem();
+        jMenuItem1 = new javax.swing.JMenuItem();
+        jMenuItem14 = new javax.swing.JMenuItem();
+        jMenuItem7 = new javax.swing.JMenuItem();
         jMenuItem32 = new javax.swing.JMenuItem();
-        jMenuItem34 = new javax.swing.JMenuItem();
         jMenu15 = new javax.swing.JMenu();
         jMenuItem11 = new javax.swing.JMenuItem();
         jMenuItem25 = new javax.swing.JMenuItem();
@@ -132,7 +132,7 @@ public class Menu extends javax.swing.JFrame {
 
         jTextArea2.setColumns(20);
         jTextArea2.setRows(5);
-        jTextArea2.setText("Pendências do sistema:\n\n- tela de mineração\n- formatação dos campos(caracteres)\n- referências formatadas nas normas ABNT\n- verificar campos para evitar dados duplicados\n- Backup do banco automático\n- Aviso de estoque baixo");
+        jTextArea2.setText("Pendências do sistema:\n\n- tela de mineração\n- formatação dos campos(caracteres)\n- referências formatadas nas normas ABNT\n- verificar campos para evitar dados duplicados\n- Backup do banco automático\n- Aviso de estoque baixo\n");
         jScrollPane2.setViewportView(jTextArea2);
 
         jMenu4.setBackground(new java.awt.Color(204, 153, 255));
@@ -144,14 +144,14 @@ public class Menu extends javax.swing.JFrame {
         jMenu14.setMaximumSize(new java.awt.Dimension(35767, 35767));
         jMenu14.setPreferredSize(new java.awt.Dimension(130, 25));
 
-        jMenuItem8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/user.gif"))); // NOI18N
-        jMenuItem8.setText("Usuário");
-        jMenuItem8.addActionListener(new java.awt.event.ActionListener() {
+        jMenuItem33.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/aluguel.png"))); // NOI18N
+        jMenuItem33.setText("Aluguel");
+        jMenuItem33.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem8ActionPerformed(evt);
+                jMenuItem33ActionPerformed(evt);
             }
         });
-        jMenu14.add(jMenuItem8);
+        jMenu14.add(jMenuItem33);
 
         jMenuItem10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/cliente3.png"))); // NOI18N
         jMenuItem10.setText("Cliente");
@@ -162,27 +162,27 @@ public class Menu extends javax.swing.JFrame {
         });
         jMenu14.add(jMenuItem10);
 
+        jMenuItem29.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/equipamento.png"))); // NOI18N
+        jMenuItem29.setText("Equipamento");
+        jMenuItem29.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem29ActionPerformed(evt);
+            }
+        });
+        jMenu14.add(jMenuItem29);
+
         jMenuItem22.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/estoque.png"))); // NOI18N
         jMenuItem22.setText("Estoque");
         jMenu14.add(jMenuItem22);
 
-        jMenuItem21.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/funcionario.png"))); // NOI18N
-        jMenuItem21.setText("Funcionário");
-        jMenuItem21.addActionListener(new java.awt.event.ActionListener() {
+        jMenuItem26.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/fabricante.png"))); // NOI18N
+        jMenuItem26.setText("Fabricante");
+        jMenuItem26.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem21ActionPerformed(evt);
+                jMenuItem26ActionPerformed(evt);
             }
         });
-        jMenu14.add(jMenuItem21);
-
-        jMenuItemCadastrarServico.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/servicos.png"))); // NOI18N
-        jMenuItemCadastrarServico.setText("Serviços");
-        jMenuItemCadastrarServico.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItemCadastrarServicoActionPerformed(evt);
-            }
-        });
-        jMenu14.add(jMenuItemCadastrarServico);
+        jMenu14.add(jMenuItem26);
 
         jMenuItem5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/fornecedor.png"))); // NOI18N
         jMenuItem5.setText("Fornecedor");
@@ -193,14 +193,14 @@ public class Menu extends javax.swing.JFrame {
         });
         jMenu14.add(jMenuItem5);
 
-        jMenuItem13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/setor.png"))); // NOI18N
-        jMenuItem13.setText("Setor");
-        jMenuItem13.addActionListener(new java.awt.event.ActionListener() {
+        jMenuItem21.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/funcionario.png"))); // NOI18N
+        jMenuItem21.setText("Funcionário");
+        jMenuItem21.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem13ActionPerformed(evt);
+                jMenuItem21ActionPerformed(evt);
             }
         });
-        jMenu14.add(jMenuItem13);
+        jMenu14.add(jMenuItem21);
 
         jMenuItem15.setText("Modelo");
         jMenuItem15.addActionListener(new java.awt.event.ActionListener() {
@@ -219,23 +219,32 @@ public class Menu extends javax.swing.JFrame {
         });
         jMenu14.add(jMenuItem17);
 
-        jMenuItem26.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/fabricante.png"))); // NOI18N
-        jMenuItem26.setText("Fabricante");
-        jMenuItem26.addActionListener(new java.awt.event.ActionListener() {
+        jMenuItemCadastrarServico.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/servicos.png"))); // NOI18N
+        jMenuItemCadastrarServico.setText("Serviços");
+        jMenuItemCadastrarServico.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem26ActionPerformed(evt);
+                jMenuItemCadastrarServicoActionPerformed(evt);
             }
         });
-        jMenu14.add(jMenuItem26);
+        jMenu14.add(jMenuItemCadastrarServico);
 
-        jMenuItem29.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/equipamento.png"))); // NOI18N
-        jMenuItem29.setText("Equipamento");
-        jMenuItem29.addActionListener(new java.awt.event.ActionListener() {
+        jMenuItem13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/setor.png"))); // NOI18N
+        jMenuItem13.setText("Setor");
+        jMenuItem13.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem29ActionPerformed(evt);
+                jMenuItem13ActionPerformed(evt);
             }
         });
-        jMenu14.add(jMenuItem29);
+        jMenu14.add(jMenuItem13);
+
+        jMenuItem8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/user.gif"))); // NOI18N
+        jMenuItem8.setText("Usuário");
+        jMenuItem8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem8ActionPerformed(evt);
+            }
+        });
+        jMenu14.add(jMenuItem8);
 
         jMenuItem31.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/vendas1.gif"))); // NOI18N
         jMenuItem31.setText("Vendas");
@@ -246,28 +255,19 @@ public class Menu extends javax.swing.JFrame {
         });
         jMenu14.add(jMenuItem31);
 
-        jMenuItem33.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/aluguel.png"))); // NOI18N
-        jMenuItem33.setText("Aluguel");
-        jMenuItem33.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem33ActionPerformed(evt);
-            }
-        });
-        jMenu14.add(jMenuItem33);
-
         jMenu4.add(jMenu14);
 
         jMenu10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/pesquisar.gif"))); // NOI18N
         jMenu10.setText("Consultar");
 
-        jMenuItem7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/user.gif"))); // NOI18N
-        jMenuItem7.setText("Usuário");
-        jMenuItem7.addActionListener(new java.awt.event.ActionListener() {
+        jMenuItem34.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/aluguel.png"))); // NOI18N
+        jMenuItem34.setText("Aluguel");
+        jMenuItem34.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem7ActionPerformed(evt);
+                jMenuItem34ActionPerformed(evt);
             }
         });
-        jMenu10.add(jMenuItem7);
+        jMenu10.add(jMenuItem34);
 
         jMenuItem9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/cliente3.png"))); // NOI18N
         jMenuItem9.setText("Cliente");
@@ -278,27 +278,27 @@ public class Menu extends javax.swing.JFrame {
         });
         jMenu10.add(jMenuItem9);
 
+        jMenuItem30.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/equipamento.png"))); // NOI18N
+        jMenuItem30.setText("Equipamento");
+        jMenuItem30.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem30ActionPerformed(evt);
+            }
+        });
+        jMenu10.add(jMenuItem30);
+
         jMenuItem19.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/estoque.png"))); // NOI18N
         jMenuItem19.setText("Estoque");
         jMenu10.add(jMenuItem19);
 
-        jMenuItem18.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/funcionario.png"))); // NOI18N
-        jMenuItem18.setText("Funcionário");
-        jMenuItem18.addActionListener(new java.awt.event.ActionListener() {
+        jMenuItem23.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/fabricante.png"))); // NOI18N
+        jMenuItem23.setText("Fabricante");
+        jMenuItem23.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem18ActionPerformed(evt);
+                jMenuItem23ActionPerformed(evt);
             }
         });
-        jMenu10.add(jMenuItem18);
-
-        jMenuItem1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/servicos.png"))); // NOI18N
-        jMenuItem1.setText("Serviços");
-        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem1ActionPerformed(evt);
-            }
-        });
-        jMenu10.add(jMenuItem1);
+        jMenu10.add(jMenuItem23);
 
         jMenuItem6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/fornecedor.png"))); // NOI18N
         jMenuItem6.setText("Fornecedor");
@@ -309,14 +309,14 @@ public class Menu extends javax.swing.JFrame {
         });
         jMenu10.add(jMenuItem6);
 
-        jMenuItem14.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/setor.png"))); // NOI18N
-        jMenuItem14.setText("Setor");
-        jMenuItem14.addActionListener(new java.awt.event.ActionListener() {
+        jMenuItem18.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/funcionario.png"))); // NOI18N
+        jMenuItem18.setText("Funcionário");
+        jMenuItem18.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem14ActionPerformed(evt);
+                jMenuItem18ActionPerformed(evt);
             }
         });
-        jMenu10.add(jMenuItem14);
+        jMenu10.add(jMenuItem18);
 
         jMenuItem16.setText("Modelo");
         jMenuItem16.addActionListener(new java.awt.event.ActionListener() {
@@ -335,25 +335,34 @@ public class Menu extends javax.swing.JFrame {
         });
         jMenu10.add(jMenuItem20);
 
-        jMenuItem23.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/fabricante.png"))); // NOI18N
-        jMenuItem23.setText("Fabricante");
-        jMenuItem23.addActionListener(new java.awt.event.ActionListener() {
+        jMenuItem1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/servicos.png"))); // NOI18N
+        jMenuItem1.setText("Serviços");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem23ActionPerformed(evt);
+                jMenuItem1ActionPerformed(evt);
             }
         });
-        jMenu10.add(jMenuItem23);
+        jMenu10.add(jMenuItem1);
 
-        jMenuItem30.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/equipamento.png"))); // NOI18N
-        jMenuItem30.setText("Equipamento");
-        jMenuItem30.addActionListener(new java.awt.event.ActionListener() {
+        jMenuItem14.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/setor.png"))); // NOI18N
+        jMenuItem14.setText("Setor");
+        jMenuItem14.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem30ActionPerformed(evt);
+                jMenuItem14ActionPerformed(evt);
             }
         });
-        jMenu10.add(jMenuItem30);
+        jMenu10.add(jMenuItem14);
 
-        jMenuItem32.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/vendas.png"))); // NOI18N
+        jMenuItem7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/user.gif"))); // NOI18N
+        jMenuItem7.setText("Usuário");
+        jMenuItem7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem7ActionPerformed(evt);
+            }
+        });
+        jMenu10.add(jMenuItem7);
+
+        jMenuItem32.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/vendas1.gif"))); // NOI18N
         jMenuItem32.setText("Vendas");
         jMenuItem32.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -361,15 +370,6 @@ public class Menu extends javax.swing.JFrame {
             }
         });
         jMenu10.add(jMenuItem32);
-
-        jMenuItem34.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/aluguel.png"))); // NOI18N
-        jMenuItem34.setText("Aluguel");
-        jMenuItem34.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem34ActionPerformed(evt);
-            }
-        });
-        jMenu10.add(jMenuItem34);
 
         jMenu4.add(jMenu10);
 
@@ -435,17 +435,10 @@ public class Menu extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(99, 99, 99)
-                        .addComponent(jBtnRotinaContato)
-                        .addGap(18, 18, 18)
-                        .addComponent(jBtnCadastrarLembrete))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGap(99, 99, 99)
+                .addComponent(jBtnRotinaContato)
+                .addGap(18, 18, 18)
+                .addComponent(jBtnCadastrarLembrete)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(34, 34, 34)
@@ -455,6 +448,11 @@ public class Menu extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 246, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap())))
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 263, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
 
         pack();

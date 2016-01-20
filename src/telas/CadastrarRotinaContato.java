@@ -173,7 +173,8 @@ public class CadastrarRotinaContato extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jToggleButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton3ActionPerformed
-       this.dispose();
+        verificaPagina();
+        this.dispose();
     }//GEN-LAST:event_jToggleButton3ActionPerformed
 
     private void jToggleButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton2ActionPerformed

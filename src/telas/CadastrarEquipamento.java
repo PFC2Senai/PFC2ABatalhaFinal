@@ -23,7 +23,7 @@ public class CadastrarEquipamento extends javax.swing.JFrame {
     private int codFornecedor;
     private int codFabricante;
     private int codModelo;
-    
+
     /**
      * Creates new form CadastrarEquipamento
      */
@@ -36,7 +36,7 @@ public class CadastrarEquipamento extends javax.swing.JFrame {
         txtEquipamento.setVisible(false);
         jBtnCadEquipamento.setVisible(false);
         jBtnCancelarCadEquipamento.setVisible(false);
-        
+
         txtEquipamento.setDocument(new LimitarDigitos(45));
     }
 
@@ -229,16 +229,27 @@ public class CadastrarEquipamento extends javax.swing.JFrame {
 
     private void jBtnCadEquipamentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnCadEquipamentoActionPerformed
 
-        equi.setTabusuarioIdUsuario(idUsuario());
-        equi.setEquipamento(txtEquipamento.getText());
-        codEquipamento = EquipamentoDAO.CadEquipamento(equi);
+        if (EquipamentoDAO.VerificaEquipamento(txtEquipamento.getText())== false) {
+
+            equi.setTabusuarioIdUsuario(idUsuario());
+            equi.setEquipamento(txtEquipamento.getText());
+            codEquipamento = EquipamentoDAO.CadEquipamento(equi);
+
+        }
+        else
+        {
+            JOptionPane.showMessageDialog(this, "Registro ja cadastrado");
+        }
+
         jBtnCadEquipamento.setVisible(false);
         jBtnCancelarCadEquipamento.setVisible(false);
         jBtbNovoEquipamento.setVisible(true);
         txtEquipamento.setVisible(false);
         jComboBoxEquipamento.setVisible(true);
         populaComboBoxEquipamento();
-        jComboBoxEquipamento.setSelectedItem(txtEquipamento.getText());        
+        jComboBoxEquipamento.setSelectedItem(txtEquipamento.getText());
+
+
     }//GEN-LAST:event_jBtnCadEquipamentoActionPerformed
 
     private void jBtbNovoEquipamentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtbNovoEquipamentoActionPerformed
@@ -276,8 +287,8 @@ public class CadastrarEquipamento extends javax.swing.JFrame {
         equi.setTabusuarioIdUsuario(idUsuario());
         equi.setCodFornecedor(codFornecedor);
         equi.setCodModelo(codModelo);
-        equi.setCodFabricante(codFabricante);                
-        
+        equi.setCodFabricante(codFabricante);
+
         equi.setCodEquipamento(codEquipamento);
 
         EquipamentoDAO.CadDetEquipamento(equi);
@@ -289,7 +300,7 @@ public class CadastrarEquipamento extends javax.swing.JFrame {
         jComboBoxEquipamento.removeAllItems();
         populaComboBoxEquipamento();
         jBtbNovoEquipamento.setVisible(true);
-        
+
         JOptionPane.showMessageDialog(null, "Cadastrado com sucesso!");
     }//GEN-LAST:event_jBtnCadastrarEquipamentoActionPerformed
 
@@ -298,155 +309,153 @@ public class CadastrarEquipamento extends javax.swing.JFrame {
         jComboBoxFornecedor.setSelectedIndex(0);
         jComboBoxModelo.setSelectedIndex(0);
     }
-    
+
     private void populaComboBoxEquipamento() {
-        
+
         Connection conexao = Conexao.getConnection();
         ResultSet rs;
         String sql = "select * from tabequipamento;";
-        
-        try{
+
+        try {
             pst = conexao.prepareStatement(sql);
             rs = pst.executeQuery();
-            
-            while(rs.next())
-            {
+
+            while (rs.next()) {
                 jComboBoxEquipamento.addItem(rs.getString("equipamento"));
             }
-        }catch(SQLException ex)
-        {
+        } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, ex);
         }
     }
-    
+
     private void idEquipamentoComboBox() {
-        
+
         Connection conexao = Conexao.getConnection();
         ResultSet rs;
-        String sql = "select * from tabequipamento where equipamento = '" + jComboBoxEquipamento.getSelectedItem()+ "';";
-        
-        try{
+        String sql = "select * from tabequipamento where equipamento = '" + jComboBoxEquipamento.getSelectedItem() + "';";
+
+        try {
             pst = conexao.prepareStatement(sql);
             rs = pst.executeQuery();
-            
-            while(rs.next()) {
+
+            while (rs.next()) {
                 codEquipamento = (rs.getInt("idEquipamento"));
             }
-        }catch(SQLException ex) {
+        } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, ex);
         }
     }
-    
+
     private void populaComboBoxFornecedor() {
-        
+
         Connection conexao = Conexao.getConnection();
         ResultSet rs;
         String sql = "select * from tabfornecedor";
-        
-        try{
+
+        try {
             pst = conexao.prepareStatement(sql);
             rs = pst.executeQuery();
-            
-            while(rs.next()) {
+
+            while (rs.next()) {
                 jComboBoxFornecedor.addItem(rs.getString("fornecedor"));
             }
-            
-        }catch(SQLException ex) {
+
+        } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, ex);
         }
     }
-    
+
     private void idFornecedorComboBox() {
-        
+
         Connection conexao = Conexao.getConnection();
         ResultSet rs;
-        String sql = "select * from tabfornecedor where fornecedor = '" + jComboBoxFornecedor.getSelectedItem()+ "';";
-        
-        try{
+        String sql = "select * from tabfornecedor where fornecedor = '" + jComboBoxFornecedor.getSelectedItem() + "';";
+
+        try {
             pst = conexao.prepareStatement(sql);
             rs = pst.executeQuery();
-            
-            while(rs.next()) {
+
+            while (rs.next()) {
                 codFornecedor = (rs.getInt("id_forn"));
             }
-            
-        }catch(SQLException ex) {
+
+        } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, ex);
         }
     }
-   
+
     private void populaComboBoxFabricante() {
-        
+
         Connection conexao = Conexao.getConnection();
         ResultSet rs;
         String sql = "select * from tabfabricante";
-        
-        try{
+
+        try {
             pst = conexao.prepareStatement(sql);
             rs = pst.executeQuery();
-            
-            while(rs.next()) {
+
+            while (rs.next()) {
                 jComboBoxFabricante.addItem(rs.getString("fabricante"));
             }
-            
-        }catch(SQLException ex){
+
+        } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, ex);
         }
     }
-    
+
     private void idFabricanteComboBox() {
-        
+
         Connection conexao = Conexao.getConnection();
         ResultSet rs;
-        String sql = "select * from tabfabricante where fabricante = '" + jComboBoxFabricante.getSelectedItem()+ "';";
-        
-        try{
+        String sql = "select * from tabfabricante where fabricante = '" + jComboBoxFabricante.getSelectedItem() + "';";
+
+        try {
             pst = conexao.prepareStatement(sql);
             rs = pst.executeQuery();
-            
-            while(rs.next()) {
+
+            while (rs.next()) {
                 codFabricante = (rs.getInt("idtabFabricante"));
             }
-            
-        }catch(SQLException ex) {
+
+        } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, ex);
         }
     }
-    
+
     private void populaComboBoxModelo() {
-        
+
         Connection conexao = Conexao.getConnection();
         ResultSet rs;
         String sql = "select * from tabmodelo";
-        
-        try{
+
+        try {
             pst = conexao.prepareStatement(sql);
             rs = pst.executeQuery();
-            
-            while(rs.next()) {
+
+            while (rs.next()) {
                 jComboBoxModelo.addItem(rs.getString("modelo"));
             }
-            
-        }catch(SQLException ex) {
+
+        } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, ex);
         }
     }
-    
+
     private void idModeloComboBox() {
-        
+
         Connection conexao = Conexao.getConnection();
         ResultSet rs;
-        String sql = "select * from tabmodelo where modelo = '" + jComboBoxModelo.getSelectedItem()+ "';";
-        
-        try{
+        String sql = "select * from tabmodelo where modelo = '" + jComboBoxModelo.getSelectedItem() + "';";
+
+        try {
             pst = conexao.prepareStatement(sql);
             rs = pst.executeQuery();
-            
-            while(rs.next()) {
+
+            while (rs.next()) {
                 codModelo = (rs.getInt("idtabModelo"));
             }
-            
-        }catch(SQLException ex) {
+
+        } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, ex);
         }
     }
