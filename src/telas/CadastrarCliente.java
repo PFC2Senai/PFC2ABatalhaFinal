@@ -42,7 +42,7 @@ public class CadastrarCliente extends javax.swing.JFrame {
 //        txtEmpresa.setDocument(new LimitarDigitos(45));
 //        txtSetor.setDocument(new LimitarDigitos(50));
 //        txtPais.setDocument(new LimitarDigitos(45));
-//        txtEstado.setDocument(new LimitarDigitos(45));
+        txtEstado.setDocument(new LimitarDigitos(4));
 //        txtBairro.setDocument(new LimitarDigitos(45));
 //        txtCidade.setDocument(new LimitarDigitos(45));
 //        txtRua.setDocument(new LimitarDigitos(45));
@@ -528,68 +528,68 @@ public class CadastrarCliente extends javax.swing.JFrame {
 
     private void btnCadClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadClienteActionPerformed
 
-//        if(ClienteDAO.VerificarCliente(txtEmpresa.getText())== true)
-//        {
-//            return;
-        //       }
-        Cliente cli = new Cliente();
-        Telefone tel = new Telefone();
-        PessoaContato pContato = new PessoaContato();
-        String email;
-        Endereco endereco = new Endereco();
+        if (ClienteDAO.VerificarCliente(txtEndCep.getText()) == false) {
 
-        cli.setCodUser(idUsuario());
-        cli.setEmpresa(txtEmpresa.getText());
-        cli.setCnpj(txtEndCep.getText());
-        cli.setCodSetor(codSetor);
+            Cliente cli = new Cliente();
+            Telefone tel = new Telefone();
+            PessoaContato pContato = new PessoaContato();
+            String email;
+            Endereco endereco = new Endereco();
 
-        int i = ContatosDAO.CadContato();
+            cli.setCodUser(idUsuario());
+            cli.setEmpresa(txtEmpresa.getText());
+            cli.setCnpj(txtEndCep.getText());
+            cli.setCodSetor(codSetor);
 
-        cli.setIdContato(i);
+            int i = ContatosDAO.CadContato();
 
-        int codCli = ClienteDAO.CadCliente(cli);
+            cli.setIdContato(i);
 
-        endereco.setPais(txtPais.getText());
-        endereco.setCep(txtCep.getText());
-        endereco.setRua(txtRua.getText());
-        endereco.setNumero(txtNumero.getText());
-        endereco.setBairro(txtBairro.getText());
-        endereco.setCidade(txtCidade.getText());
-        endereco.setEstado(txtEstado.getText());
-        endereco.setIdContato(i);
+            int codCli = ClienteDAO.CadCliente(cli);
 
-        ContatosDAO.CadEndereco(endereco);
+            endereco.setPais(txtPais.getText());
+            endereco.setCep(txtCep.getText());
+            endereco.setRua(txtRua.getText());
+            endereco.setNumero(txtNumero.getText());
+            endereco.setBairro(txtBairro.getText());
+            endereco.setCidade(txtCidade.getText());
+            endereco.setEstado(txtEstado.getText());
+            endereco.setIdContato(i);
 
-        for (int j = 0; j < jTableContatos.getRowCount(); j++) {
+            ContatosDAO.CadEndereco(endereco);
 
-            pContato.setNomeContato(jTableContatos.getValueAt(j, 0).toString());
-            tel.setTel(jTableContatos.getValueAt(j, 1).toString());
-            tel.setCel(jTableContatos.getValueAt(j, 2).toString());
-            email = jTableContatos.getValueAt(j, 3).toString();
+            for (int j = 0; j < jTableContatos.getRowCount(); j++) {
 
-            int codContato = ContatosDAO.CadContato();
+                pContato.setNomeContato(jTableContatos.getValueAt(j, 0).toString());
+                tel.setTel(jTableContatos.getValueAt(j, 1).toString());
+                tel.setCel(jTableContatos.getValueAt(j, 2).toString());
+                email = jTableContatos.getValueAt(j, 3).toString();
 
-            ContatosDAO.CadTel(codContato, tel);
-            ContatosDAO.CadEmail(codContato, email);
-            pContato.setCodTabEstrangeira(codCli);
-            pContato.setCodContato(codContato);
+                int codContato = ContatosDAO.CadContato();
 
-            PessoaContatoDAO.CadPessoaContato(pContato);
+                ContatosDAO.CadTel(codContato, tel);
+                ContatosDAO.CadEmail(codContato, email);
+                pContato.setCodTabEstrangeira(codCli);
+                pContato.setCodContato(codContato);
+
+                PessoaContatoDAO.CadPessoaContato(pContato);
+            }
+
+            descricaoAudit = "Empresa " + cli.getEmpresa() + " /CNPJ: " + cli.getCnpj() + " foi cadastrada.";
+            AuditoriaDAO.CadDetAuditoria(descricaoAudit);
+
+            limparCampos();
+            ((DefaultTableModel) jTableContatos.getModel()).setNumRows(0);
+            jTableContatos.updateUI();
+
+            JOptionPane.showMessageDialog(null, "Cadastrado com sucesso!");
+
+            if (JOptionPane.showConfirmDialog(null, "Deseja continuar cadastrando?", "Confirmar a Exclusão", JOptionPane.YES_NO_OPTION) == 1) {
+                this.dispose();
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "Cliente ja cadastrado !");
         }
-
-        descricaoAudit = "Empresa " + cli.getEmpresa() + " /CNPJ: " + cli.getCnpj() + " foi cadastrada.";
-        AuditoriaDAO.CadDetAuditoria(descricaoAudit);
-
-        limparCampos();
-        ((DefaultTableModel) jTableContatos.getModel()).setNumRows(0);
-        jTableContatos.updateUI();
-
-        JOptionPane.showMessageDialog(null, "Cadastrado com sucesso!");
-
-        if (JOptionPane.showConfirmDialog(null, "Deseja continuar cadastrando?", "Confirmar a Exclusão", JOptionPane.YES_NO_OPTION) == 1) {
-            this.dispose();
-        }
-
     }//GEN-LAST:event_btnCadClienteActionPerformed
 
     private void jBtnOutroContatoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnOutroContatoActionPerformed
@@ -762,11 +762,11 @@ public class CadastrarCliente extends javax.swing.JFrame {
     private void txtEstadoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtEstadoKeyTyped
         // TODO add your handling code here:
         String caracteres = "0987654321";
-        
+
         if (caracteres.contains(evt.getKeyChar() + "")) {
             evt.consume();
         }
-        
+
     }//GEN-LAST:event_txtEstadoKeyTyped
 
     private void txtEmpresaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtEmpresaKeyTyped

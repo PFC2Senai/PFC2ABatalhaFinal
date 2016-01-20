@@ -47,22 +47,22 @@ public class LimitarDigitos extends PlainDocument {
     }
 
     ///
-    public void insertInt(int offset, String str, AttributeSet attr)
-            throws BadLocationException {
-
-        if (str == null || getLength() == tamanhoMax) {
-            return;
-        }
-        int totalquant = (getLength() + str.length());
-        if (totalquant <= tamanhoMax) {
-
-            super.insertString(offset, str.replaceAll("[^0-9]", ""), attr);
-            return;
-        }
-
-        String nova = str.substring(0, getLength() - tamanhoMax);
-        super.insertString(offset, nova, attr);
-
-    }
+//    public void insertInt(int offset, String str, AttributeSet attr)
+//            throws BadLocationException {
+//
+//        if (str == null || getLength() == tamanhoMax) {
+//            return;
+//        }
+//        int totalquant = (getLength() + str.length());
+//        if (totalquant <= tamanhoMax) {
+//
+//            super.insertString(offset, str.replaceAll("[^0-9]", ""), attr);
+//            return;
+//        }
+//
+//        String nova = str.substring(0, getLength() - tamanhoMax);
+//        super.insertString(offset, nova, attr);
+//
+//    }
 
 }
