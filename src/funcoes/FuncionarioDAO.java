@@ -187,4 +187,40 @@ public class FuncionarioDAO {
         }
         return funcionarios;
     }
+    
+    public static boolean VerificarFuncionario(String funcionario) {
+
+        Statement stmt;
+        boolean achou = true;
+        int fu = 0;
+
+        
+        String Sql = "SELECT COUNT(0), funcionario FROM tabfuncionario WHERE funcionario = '" + funcionario + "';";
+
+        try {
+
+            ResultSet rs;
+            stmt = Conexao.getConnection().createStatement();
+            rs = stmt.executeQuery(Sql);
+
+            rs.first();
+            do {              
+                fu = rs.getInt("COUNT(0)");                
+            } while (rs.next());
+
+            if (fu == 0) {
+                achou = false;
+            }
+           
+
+            rs.close();
+            stmt.close();
+
+        } catch (SQLException ex) {
+
+            Logger.getLogger(FuncionarioDAO.class.getName()).log(Level.SEVERE, null, ex);
+            throw new RuntimeException("Erro ao Carregar os dados do funcionario: ", ex);
+        }
+        return achou;
+    }
 }

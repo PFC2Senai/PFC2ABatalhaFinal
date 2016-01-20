@@ -46,11 +46,12 @@ public class CadastrarCliente extends javax.swing.JFrame {
 //        txtBairro.setDocument(new LimitarDigitos(45));
 //        txtCidade.setDocument(new LimitarDigitos(45));
 //        txtRua.setDocument(new LimitarDigitos(45));
-//        txtNumero.setDocument(new LimitarDigitos(10));
+        //txtNumero.setDocument(new LimitarDigitos(10).insertInt(HEIGHT, descricaoAudit,  10));
 //
 //        txtContato.setDocument(new LimitarDigitos(45));
 //        txtEmail.setDocument(new LimitarDigitos(45));
-//        txtTelCel.setDocument(new LimitarDigitos(20));
+        txtNumero.setDocument(new LimitarDigitos(6));
+        txtTelCel.setDocument(new LimitarDigitos(20));
     }
 
     /**
@@ -166,6 +167,12 @@ public class CadastrarCliente extends javax.swing.JFrame {
         }
 
         jLabel13.setText("Celular:");
+
+        txtTelCel.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtTelCelKeyTyped(evt);
+            }
+        });
 
         jLabel9.setText("Email:");
 
@@ -292,11 +299,29 @@ public class CadastrarCliente extends javax.swing.JFrame {
 
         jLabel12.setText("Nº");
 
+        txtNumero.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtNumeroKeyTyped(evt);
+            }
+        });
+
         jLabel8.setText("Bairro:");
 
         jLabel14.setText("Cidade:");
 
+        txtCidade.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtCidadeKeyTyped(evt);
+            }
+        });
+
         jLabel15.setText("Estado:");
+
+        txtEstado.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtEstadoKeyTyped(evt);
+            }
+        });
 
         jBtnCarregaCep.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/pesquisar.gif"))); // NOI18N
         jBtnCarregaCep.setText("Buscar CEP");
@@ -373,6 +398,12 @@ public class CadastrarCliente extends javax.swing.JFrame {
         jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createTitledBorder(""), "Empresa", javax.swing.border.TitledBorder.LEFT, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 2, 11))); // NOI18N
 
         jLabel3.setText("Empresa:");
+
+        txtEmpresa.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtEmpresaKeyTyped(evt);
+            }
+        });
 
         jLabel4.setText("CNPJ:");
 
@@ -497,6 +528,10 @@ public class CadastrarCliente extends javax.swing.JFrame {
 
     private void btnCadClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadClienteActionPerformed
 
+//        if(ClienteDAO.VerificarCliente(txtEmpresa.getText())== true)
+//        {
+//            return;
+        //       }
         Cliente cli = new Cliente();
         Telefone tel = new Telefone();
         PessoaContato pContato = new PessoaContato();
@@ -648,6 +683,7 @@ public class CadastrarCliente extends javax.swing.JFrame {
                 }
             }
         }).start();
+
     }//GEN-LAST:event_jBtnCarregaCepActionPerformed
 
     private void txtCepActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCepActionPerformed
@@ -671,7 +707,7 @@ public class CadastrarCliente extends javax.swing.JFrame {
                     txtEstado.setText(cep.getUF(ceptxt));
 
                 } catch (IOException ex) {
-                    JOptionPane.showMessageDialog(null, ex);
+                    JOptionPane.showMessageDialog(null, "CEP não encontrado.");
                 }
             }
         });
@@ -696,6 +732,51 @@ public class CadastrarCliente extends javax.swing.JFrame {
         ValidaEmail();
     }//GEN-LAST:event_txtEmailFocusLost
 
+    private void txtNumeroKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNumeroKeyTyped
+        // TODO add your handling code here:
+
+        String caracteres = "0987654321";
+        if (!caracteres.contains(evt.getKeyChar() + "")) {
+            evt.consume();
+        }
+
+
+    }//GEN-LAST:event_txtNumeroKeyTyped
+
+    private void txtCidadeKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCidadeKeyTyped
+        // TODO add your handling code here:
+        String caracteres = "0987654321";
+        if (caracteres.contains(evt.getKeyChar() + "")) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtCidadeKeyTyped
+
+    private void txtTelCelKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTelCelKeyTyped
+        // TODO add your handling code here:
+        String caracteres = "0987654321";
+        if (!caracteres.contains(evt.getKeyChar() + "")) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtTelCelKeyTyped
+
+    private void txtEstadoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtEstadoKeyTyped
+        // TODO add your handling code here:
+        String caracteres = "0987654321";
+        
+        if (caracteres.contains(evt.getKeyChar() + "")) {
+            evt.consume();
+        }
+        
+    }//GEN-LAST:event_txtEstadoKeyTyped
+
+    private void txtEmpresaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtEmpresaKeyTyped
+        // TODO add your handling code here:
+        String carac = "ç,.!?@:;/^~´`#$%¨&*()-_='+{[]}";
+        if (carac.contains(evt.getKeyChar() + "")) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtEmpresaKeyTyped
+
     public void TabelaContatos() {
 
         try {
@@ -715,7 +796,8 @@ public class CadastrarCliente extends javax.swing.JFrame {
             txtContato.requestFocus();
 
         } catch (Exception erro) {
-            Logger.getLogger(CadastrarCliente.class.getName()).log(Level.SEVERE, null, erro);
+            Logger.getLogger(CadastrarCliente.class
+                    .getName()).log(Level.SEVERE, null, erro);
         }
     }
 
@@ -772,7 +854,7 @@ public class CadastrarCliente extends javax.swing.JFrame {
         txtEstado.setText("");
         txtRua.setText("");
     }
-    
+
     public void ValidaEmail() {
 
         if ((txtEmail.getText().contains("@"))
@@ -856,6 +938,5 @@ public class CadastrarCliente extends javax.swing.JFrame {
     private javax.swing.JTextField txtTelCel;
     private org.jdesktop.beansbinding.BindingGroup bindingGroup;
     // End of variables declaration//GEN-END:variables
-
 
 }

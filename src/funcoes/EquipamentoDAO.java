@@ -230,8 +230,6 @@ public class EquipamentoDAO {
         int eq = 0;
 
         //"SELECT * FROM tabequipamento WHERE equipamento IN (SELECT E.equipamento FROM tabequipamento E GROUP BY E.equipamento HAVING COUNT(*) > 1) ORDER BY equipamento";
-        //"SELECT * FROM tabequipamento "
-        //+ " WHERE equipamento = " + equipamento + ";";
         String Sql = "SELECT COUNT(0), equipamento FROM tabequipamento WHERE equipamento = '" + equipamento + "';";
 
         try {
@@ -259,5 +257,5 @@ public class EquipamentoDAO {
             throw new RuntimeException("Erro ao Carregar os dados do servico: ", ex);
         }
         return achou;
-    }
+    }//VerificarEquipamento
 }

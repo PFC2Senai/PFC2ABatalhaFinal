@@ -154,5 +154,43 @@ public class FabricanteDAO {
             throw new RuntimeException("Erro ao Listar os dados dos Fabricantes: ",ex);
         }
         return fabricantes;
-    }     
+    }
+    
+    
+    public static boolean VerificarFabricante(String fabricante) {
+
+        Statement stmt;
+        boolean achou = true;
+        int fa = 0;
+
+        
+        String Sql = "SELECT COUNT(0), fabricante FROM tabfabricante WHERE fabricante = '" + fabricante + "';";
+
+        try {
+
+            ResultSet rs;
+            stmt = Conexao.getConnection().createStatement();
+            rs = stmt.executeQuery(Sql);
+
+            rs.first();
+            do {              
+                fa = rs.getInt("COUNT(0)");                
+            } while (rs.next());
+
+            if (fa == 0) {
+                achou = false;
+            }
+           
+
+            rs.close();
+            stmt.close();
+
+        } catch (SQLException ex) {
+
+            Logger.getLogger(ServicoDAO.class.getName()).log(Level.SEVERE, null, ex);
+            throw new RuntimeException("Erro ao Carregar os dados do fabricante: ", ex);
+        }
+        return achou;
+    }
+    
 }

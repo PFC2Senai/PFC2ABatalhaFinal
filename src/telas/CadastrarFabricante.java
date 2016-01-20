@@ -8,6 +8,7 @@ package telas;
 import atributos.Fabricante;
 import funcoes.FabricanteDAO;
 import funcoes.LimitarDigitos;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -22,8 +23,8 @@ public class CadastrarFabricante extends javax.swing.JFrame {
         initComponents();
         jTextFabricante.setDocument(new LimitarDigitos(45));
     }
-    
-    private void limparCampos(){
+
+    private void limparCampos() {
         jTextFabricante.setText("");
     }
 
@@ -125,12 +126,22 @@ public class CadastrarFabricante extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton6ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        Fabricante fab = new Fabricante();
-        
-        fab.setFabricante(jTextFabricante.getText());
-        
-        FabricanteDAO.CadFabricante(fab);
-        limparCampos();
+
+        if (FabricanteDAO.VerificarFabricante(jTextFabricante.getText()) == false) {
+            Fabricante fab = new Fabricante();
+
+            fab.setFabricante(jTextFabricante.getText());
+
+            FabricanteDAO.CadFabricante(fab);
+            limparCampos();
+
+        }
+        else
+        {
+            JOptionPane.showMessageDialog(this, "Fabricante ja cadastrado");
+        }
+
+
     }//GEN-LAST:event_jButton4ActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
