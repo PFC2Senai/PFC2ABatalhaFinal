@@ -52,6 +52,39 @@ public class VendasDAO {
         return id;
     }
     
+    
+    public static int CadDetVenda(Vendas venda){
+        
+        PreparedStatement stmt;
+        int id = 0;
+        
+        try {   
+            String sql = ("INSERT INTO tabdetvendas(quantidade, tabVendas_idtabVendas,"
+                    + "tabdetproduto_idDetProduto) VALUES(?,?,?)");
+            stmt = Conexao.getConnection().prepareStatement(sql);      
+  
+                stmt.setInt(1, venda.getClienteIdcliente());
+                stmt.setInt(2, venda.getTabusuarioIdUsuario());
+                stmt.setObject(3, venda.getDataVenda());
+                              
+                stmt.executeUpdate();
+                
+                ResultSet rs = stmt.getGeneratedKeys();
+                if (rs.next()) {
+                    id = rs.getInt(1);
+                }
+                stmt.close();  
+
+            } catch (SQLException ex) {      
+                Logger.getLogger(VendasDAO.class.getName()).log(Level.SEVERE, null, ex);
+                throw new RuntimeException("Erro ao Cadastrar Venda: ",ex);       
+            }
+        return id;
+    }
+    
+    
+    
+    
     public static ArrayList CarregaVendas(int id) {
         
         Statement stmt;
@@ -87,6 +120,43 @@ public class VendasDAO {
         return venda;
     }
     
+    
+    
+    public static ArrayList CarregaDetVendas(int id) {
+        
+        Statement stmt;
+        ArrayList<Vendas> venda = new ArrayList<Vendas>();
+        
+        try {            
+            String Sql = "SELECT * FROM tabdetvendas where idtabDetVendas = " + id + ";";
+            
+            ResultSet rs;            
+            stmt = Conexao.getConnection().createStatement();            
+            rs = stmt.executeQuery(Sql); 
+            
+            while(rs.next()){
+                Vendas v = new Vendas();
+                
+                v.setIdDetVendas(rs.getInt("idtabDetVendas"));
+                v.setQuantidade(rs.getDouble("quantidade"));
+                v.setIdtabVendas(rs.getInt("tabVendas_idtabVendas"));
+                v.setIdProduto(rs.getInt("tabdetproduto_idDetProduto"));
+                
+                venda.add(v);                
+            }            
+            rs.close();
+            stmt.close();
+            
+        } catch (SQLException ex) {      
+            Logger.getLogger(VendasDAO.class.getName()).log(Level.SEVERE, null, ex);
+            throw new RuntimeException("Erro ao exibir os dados do usuario: ", ex);    
+        }    
+        return venda;
+    }
+    
+    
+    
+    
     public static int idVenda(int id) {
         
         Statement stmt;
@@ -101,6 +171,34 @@ public class VendasDAO {
             
             while(rs.next()){                                
                 v.setIdtabVendas(rs.getInt("idtabVendas"));                             
+            }            
+            rs.close();
+            stmt.close();
+            
+        } catch (SQLException ex) {      
+            Logger.getLogger(VendasDAO.class.getName()).log(Level.SEVERE, null, ex);
+            throw new RuntimeException("Erro ao excluir os dados do Usuário: ", ex);    
+        }    
+        return v.getIdtabVendas();
+    }
+    
+    
+    
+    
+    public static int idDetVenda(int id) {
+        
+        Statement stmt;
+        Vendas v = new Vendas();
+        
+        try {            
+            String Sql = "SELECT  idtabDetVendas FROM tabdetvendas WHERE idtabDetVendas = '"+ id +"';";
+            
+            ResultSet rs;            
+            stmt = Conexao.getConnection().createStatement();            
+            rs = stmt.executeQuery(Sql); 
+            
+            while(rs.next()){                                
+                v.setIdtabVendas(rs.getInt("idtabDetVendas"));                             
             }            
             rs.close();
             stmt.close();

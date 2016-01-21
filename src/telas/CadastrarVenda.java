@@ -5,16 +5,20 @@
  */
 package telas;
 
+import atributos.DetServicoProduto;
+import atributos.DetServicoTipoServ;
 import atributos.OrdemServico;
 import atributos.Produto;
 import atributos.Vendas;
 import funcoes.Conexao;
 import static funcoes.Conexao.getConnection;
+import funcoes.DetServicoProdutoDAO;
 import funcoes.FuncoesDiversas;
 import static funcoes.FuncoesDiversas.FormataData;
 import funcoes.ModeloTabela;
 import funcoes.OrdemServicoDAO;
 import funcoes.ProdutoDAO;
+import funcoes.ServicoDAO;
 import funcoes.VendasDAO;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -73,6 +77,8 @@ public class CadastrarVenda extends javax.swing.JFrame {
         jTextValorUnit.setText("");
         jTextTotal.setText("");
         jTextQuantidadeProduto.setText("");
+        ((DefaultTableModel)jTableProduto.getModel()).setNumRows(0);
+        jTableProduto.updateUI();
     }
     
     
@@ -562,12 +568,17 @@ public class CadastrarVenda extends javax.swing.JFrame {
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
        OrdemServico oS = new OrdemServico();
+       Produto p = new Produto();
        
        oS.setTipo("Vendas");
        int codOrdemS = OrdemServicoDAO.CadOrdemServico(oS);
+       
+       p.setIdProduto(codProduto);
+       int codProd = ProdutoDAO.CadDetProduto(p);
         
         
         Vendas vendas = new Vendas();
+        Vendas v = new Vendas();
        
        vendas.setClienteIdcliente(Integer.parseInt(jTextCodCli.getText()));
        vendas.setTabusuarioIdUsuario(Integer.parseInt(jTextCodUser.getText()));
@@ -576,7 +587,21 @@ public class CadastrarVenda extends javax.swing.JFrame {
        vendas.setHora(FuncoesDiversas.ConverterHora(jTextHora.getText()));
        //vendas.setProduto((String) jComboBoxProdutos.getSelectedItem());
        vendas.setTotal(Double.parseDouble(jTextTotal.getText()));
-       VendasDAO.CadVenda(vendas);
+       
+       int codVenda = VendasDAO.CadDetVenda(vendas);
+       
+       for(int j = 0; j < jTableProduto.getRowCount(); j++){
+        
+        v.setIdtabVendas(codVenda);
+        v.setQuantidade(Double.parseDouble(jTextQuantidadeProduto.getText()));
+        v.setIdProduto(Integer.parseInt(jTableProduto.getValueAt(j, 0).toString()));
+        
+        //dtServ.setCodDetProduto(Integer.parseInt(jTableProduto.getValueAt(j,0).toString()));
+        //dtServ.setQuantidade(Integer.parseInt(jTableProduto.getValueAt(j, 4).toString()));
+        
+        VendasDAO.CadDetVenda(v);
+        
+    }
        limparCampos();
     }//GEN-LAST:event_jButton4ActionPerformed
 
