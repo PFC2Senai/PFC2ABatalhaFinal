@@ -125,10 +125,12 @@ public class CadastrarAluguel extends javax.swing.JFrame {
         jPanel7.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 100, -1, 20));
 
         txtDescricao.setColumns(20);
+        txtDescricao.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        txtDescricao.setLineWrap(true);
         txtDescricao.setRows(5);
         jScrollPane4.setViewportView(txtDescricao);
 
-        jPanel7.add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 130, 450, 100));
+        jPanel7.add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 100, 470, 100));
         jPanel7.add(txtDataLocacao, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 260, 120, -1));
 
         jLabel8.setText("Hora:");
@@ -147,7 +149,7 @@ public class CadastrarAluguel extends javax.swing.JFrame {
                 uJComboBoxClientesActionPerformed(evt);
             }
         });
-        jPanel7.add(uJComboBoxClientes, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 60, 390, -1));
+        jPanel7.add(uJComboBoxClientes, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 60, 470, -1));
 
         jBtnAvancar.setText("Avançar");
         jBtnAvancar.addActionListener(new java.awt.event.ActionListener() {

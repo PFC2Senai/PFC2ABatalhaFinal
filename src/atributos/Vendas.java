@@ -17,6 +17,11 @@ public class Vendas {
     private Time hora;
     private int idOrdemServico;
     private double total;
+    
+    
+    private int idDetVendas;
+    private double quantidade;
+    private int idProduto;
 
     public double getTotal() {
         return total;
@@ -103,7 +108,33 @@ public class Vendas {
     public void setHora(Time hora) {
         this.hora = hora;
     }
+
+    public int getIdDetVendas() {
+        return idDetVendas;
+    }
+
+    public void setIdDetVendas(int idDetVendas) {
+        this.idDetVendas = idDetVendas;
+    }
+
+    public double getQuantidade() {
+        return quantidade;
+    }
+
+    public void setQuantidade(double quantidade) {
+        this.quantidade = quantidade;
+    }
+
+    public int getIdProduto() {
+        return idProduto;
+    }
+
+    public void setIdProduto(int idProduto) {
+        this.idProduto = idProduto;
+    }
     
 
+    
+    
     
 }

@@ -41,7 +41,7 @@ public class CadastrarProduto extends javax.swing.JFrame {
         populaComboBoxModelo();
         populaComboBoxProduto();
         ocultaCampos();
-        
+
         txtProduto.setDocument(new LimitarDigitos(45));
         txtFabricante.setDocument(new LimitarDigitos(45));
         txtModelo.setDocument(new LimitarDigitos(70));
@@ -51,19 +51,18 @@ public class CadastrarProduto extends javax.swing.JFrame {
         txtPrecoSaida.setDocument(new LimitarDigitos(10));
         txtQuantidade.setDocument(new LimitarDigitos(5));
         txtQuantMinima.setDocument(new LimitarDigitos(5));
-        
-        
+
     }
 
     private void ocultaCampos() {
         txtProduto.setVisible(false);
         jBtnCadProduto.setVisible(false);
         jBtnCancelarCadProduto.setVisible(false);
-        
+
         txtFabricante.setVisible(false);
         jBtnSalvarFabricante.setVisible(false);
         jBtnCancelarFabricante.setVisible(false);
-        
+
         txtModelo.setVisible(false);
         jBtnSalvarModelo.setVisible(false);
         jBtnCancelarModelo.setVisible(false);
@@ -80,6 +79,10 @@ public class CadastrarProduto extends javax.swing.JFrame {
         txtPercentual.setText("");
         txtQuantMinima.setText("");
         txtDataCadProduto.setDate(null);
+    }
+
+    public void formatar() {
+        
     }
 
     /**
@@ -357,7 +360,19 @@ public class CadastrarProduto extends javax.swing.JFrame {
         jPanel3.setBackground(new java.awt.Color(222, 253, 222));
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
 
+        txtPrecoEntrada.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtPrecoEntradaKeyTyped(evt);
+            }
+        });
+
         jLabel7.setText("Valor de Entrada:");
+
+        txtPercentual.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtPercentualKeyTyped(evt);
+            }
+        });
 
         jBtnCalcularPercentual.setText("Calcular");
         jBtnCalcularPercentual.addActionListener(new java.awt.event.ActionListener() {
@@ -368,9 +383,27 @@ public class CadastrarProduto extends javax.swing.JFrame {
 
         jLabel8.setText("Valor de Saída:");
 
+        txtPrecoSaida.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtPrecoSaidaKeyTyped(evt);
+            }
+        });
+
         jLabel9.setText("Percentual:");
 
         jLabel3.setText("Quantidade:");
+
+        txtQuantidade.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtQuantidadeKeyTyped(evt);
+            }
+        });
+
+        txtQuantMinima.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtQuantMinimaKeyTyped(evt);
+            }
+        });
 
         jLabel2.setText("Fornecedor:");
 
@@ -644,6 +677,46 @@ public class CadastrarProduto extends javax.swing.JFrame {
         txtModelo.setText("");
         jComboBoxModelo.setVisible(true);
     }//GEN-LAST:event_jBtnCancelarModeloActionPerformed
+
+    private void txtPrecoEntradaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPrecoEntradaKeyTyped
+        // TODO add your handling code here:
+        String caracteres = "0987654321,.";
+        if (!caracteres.contains(evt.getKeyChar() + "")) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtPrecoEntradaKeyTyped
+
+    private void txtQuantidadeKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtQuantidadeKeyTyped
+        // TODO add your handling code here:
+        String caracteres = "0987654321,.";
+        if (!caracteres.contains(evt.getKeyChar() + "")) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtQuantidadeKeyTyped
+
+    private void txtQuantMinimaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtQuantMinimaKeyTyped
+        // TODO add your handling code here:
+        String caracteres = "0987654321,.";
+        if (!caracteres.contains(evt.getKeyChar() + "")) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtQuantMinimaKeyTyped
+
+    private void txtPercentualKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPercentualKeyTyped
+        // TODO add your handling code here:
+        String caracteres = "0987654321,.%";
+        if (!caracteres.contains(evt.getKeyChar() + "")) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtPercentualKeyTyped
+
+    private void txtPrecoSaidaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPrecoSaidaKeyTyped
+        // TODO add your handling code here:
+        String caracteres = "0987654321,.";
+        if (!caracteres.contains(evt.getKeyChar() + "")) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtPrecoSaidaKeyTyped
 
     private void populaComboBoxProduto() {
 

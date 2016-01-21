@@ -5,16 +5,20 @@
  */
 package telas;
 
+import atributos.DetServicoProduto;
+import atributos.DetServicoTipoServ;
 import atributos.OrdemServico;
 import atributos.Produto;
 import atributos.Vendas;
 import funcoes.Conexao;
 import static funcoes.Conexao.getConnection;
+import funcoes.DetServicoProdutoDAO;
 import funcoes.FuncoesDiversas;
 import static funcoes.FuncoesDiversas.FormataData;
 import funcoes.ModeloTabela;
 import funcoes.OrdemServicoDAO;
 import funcoes.ProdutoDAO;
+import funcoes.ServicoDAO;
 import funcoes.VendasDAO;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -35,19 +39,19 @@ import javax.swing.table.DefaultTableModel;
  * @author WilhamJr
  */
 public class CadastrarVenda extends javax.swing.JFrame {
-    
+
     private PreparedStatement pst;
     private int codOrdemServ;
     private int codProduto;
     private int codModelo;
     private int codDetProduto;
     private int codFabricante;
-            
+
     private String produto;
     private String fabricante;
     private String modelo;
-    Statement stmt ;
-    
+    Statement stmt;
+
     private double totalPeca = 0;
     private double valor;
     private double valorUnit;
@@ -60,9 +64,9 @@ public class CadastrarVenda extends javax.swing.JFrame {
         //TabelaVendas("select * from tabvendas;");
         populaComboBoxProdutos();
         jTextTotal.setEditable(false);
-   }
-    
-    private void limparCampos(){
+    }
+
+    private void limparCampos() {
         jTextCodCli.setText("");
         jTextCodUser.setText("");
         jTextHora.setText("");
@@ -73,173 +77,167 @@ public class CadastrarVenda extends javax.swing.JFrame {
         jTextValorUnit.setText("");
         jTextTotal.setText("");
         jTextQuantidadeProduto.setText("");
+        ((DefaultTableModel) jTableProduto.getModel()).setNumRows(0);
+        jTableProduto.updateUI();
     }
-    
-    
-     private void populaComboBoxProdutos() {
+
+    private void populaComboBoxProdutos() {
         Connection conexao = Conexao.getConnection();
         ResultSet rs;
         String sql = "select * from tabproduto";
-        
-        try{
+
+        try {
             pst = conexao.prepareStatement(sql);
             rs = pst.executeQuery();
-            
-            while(rs.next()) {
+
+            while (rs.next()) {
                 jComboBoxProdutos.addItem(rs.getString("produto"));
             }
-            
-        }catch(SQLException ex) {
+
+        } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, ex);
         }
     }
-    
-    
+
     private void idProdutoComboBox() {
-        
+
         Connection conexao = Conexao.getConnection();
         ResultSet rs;
         String sql = "select * from tabproduto inner join tabdetproduto on tabproduto_id_prod = id_prod"
-                    + " where produto = '" + jComboBoxProdutos.getSelectedItem()+ "';";
-        
-        try{
+                + " where produto = '" + jComboBoxProdutos.getSelectedItem() + "';";
+
+        try {
             pst = conexao.prepareStatement(sql);
             rs = pst.executeQuery();
-            
-            while(rs.next()) {
+
+            while (rs.next()) {
                 codProduto = (rs.getInt("id_prod"));
             }
-        }catch(SQLException ex)
-        {
+        } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, ex);
-        }        
+        }
     }
 
-    public void CarregaValorUnit() { 
-        
+    public void CarregaValorUnit() {
+
         valor = ProdutoDAO.ExisteProduto(codProduto, codModelo, codFabricante);
 
         if (valor != 0) {
             jTextValorUnit.setText(String.valueOf(valor));
-        }       
+        }
     }
 
     public void TabelaProduto() {
-        
+
         //CarregaValorUnit();  
         codDetProduto = ProdutoDAO.codDetProduto();
         int quantidade = Integer.parseInt(jTextQuantidadeProduto.getText());
         valorUnit = Double.parseDouble(jTextValorUnit.getText());
         double total = valorUnit * quantidade;
-        
-        
-        
-        try { 
-            
+
+        try {
+
             DefaultTableModel dtm = (DefaultTableModel) jTableProduto.getModel();
-                   
-                dtm.addRow(new Object[] {codProduto, produto, modelo, fabricante,quantidade,
-                                         valorUnit,
-                                         total});
-                
-                totalPeca += total;
-                jTextTotal.setEditable(false);
-                jTextTotal.setText(String.valueOf(totalPeca));
-                
-                jTextQuantidadeProduto.setText("");    
-                
+
+            dtm.addRow(new Object[]{codDetProduto, produto, modelo, fabricante, quantidade,
+                valorUnit,
+                total});
+
+            totalPeca += total;
+            jTextTotal.setEditable(false);
+            jTextTotal.setText(String.valueOf(totalPeca));
+
+            jTextQuantidadeProduto.setText("");
+
         } catch (Exception erro) {
             Logger.getLogger(CadastrarCliente.class.getName()).log(Level.SEVERE, null, erro);
-        }          
+        }
     }
-    
-    
+
     private void populaComboBoxModelo() {
-        
+
         Connection conexao = Conexao.getConnection();
         ResultSet rs;
-        String sql = "select modelo " +
-                                    " from tabdetproduto inner join " +
-                                    " tabproduto inner join " +
-                                    " tabmodelo on tabmodelo_idtabModelo = idtabModelo and " +
-                                    " tabproduto_id_prod = id_prod"
-                                +   " where id_prod = " + codProduto + " group by modelo;";
+        String sql = "select modelo "
+                + " from tabdetproduto inner join "
+                + " tabproduto inner join "
+                + " tabmodelo on tabmodelo_idtabModelo = idtabModelo and "
+                + " tabproduto_id_prod = id_prod"
+                + " where id_prod = " + codProduto + " group by modelo;";
         System.out.println(codProduto);
-        
-        try{
+
+        try {
             pst = conexao.prepareStatement(sql);
             rs = pst.executeQuery();
-            
-            while(rs.next()) {
+
+            while (rs.next()) {
                 jComboModelo.addItem(rs.getString("modelo"));
             }
-            
-        }catch(SQLException ex) {
+
+        } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, ex);
         }
     }
-    
-    
+
     private void idModeloComboBox() {
-        
+
         Connection conexao = Conexao.getConnection();
         ResultSet rs;
-        String sql = "select * from tabmodelo where modelo = '" + jComboModelo.getSelectedItem()+ "';";
-        
-        try{
+        String sql = "select * from tabmodelo where modelo = '" + jComboModelo.getSelectedItem() + "';";
+
+        try {
             pst = conexao.prepareStatement(sql);
             rs = pst.executeQuery();
-            
-            while(rs.next()) {
+
+            while (rs.next()) {
                 codModelo = (rs.getInt("idtabModelo"));
             }
-            
-        }catch(SQLException ex) {
+
+        } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, ex);
         }
     }
-    
-    
+
     private void populaComboBoxFabricante() {
-        
+
         Connection conexao = Conexao.getConnection();
         ResultSet rs;
         String sql = "SELECT * FROM vw_combofabricanteproduto "
-                   + " WHERE id_prod = " + codProduto 
-                   + " AND tabmodelo_idtabModelo = " + codModelo + " group by fabricante;";
-        
-        try{
+                + " WHERE id_prod = " + codProduto
+                + " AND tabmodelo_idtabModelo = " + codModelo + " group by fabricante;";
+
+        try {
             pst = conexao.prepareStatement(sql);
             rs = pst.executeQuery();
-            
-            while(rs.next()) {
+
+            while (rs.next()) {
                 jComboFabricante.addItem(rs.getString("fabricante"));
             }
-            
-        }catch(SQLException ex) {
+
+        } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, ex);
         }
     }
-    
-    
+
     private void idFabricanteComboBox() {
-        
+
         Connection conexao = Conexao.getConnection();
         ResultSet rs;
-        String sql = "select * from tabfabricante where fabricante = '" + jComboFabricante.getSelectedItem()+ "';";
-        
-        try{
+        String sql = "select * from tabfabricante where fabricante = '" + jComboFabricante.getSelectedItem() + "';";
+
+        try {
             pst = conexao.prepareStatement(sql);
             rs = pst.executeQuery();
-            
-            while(rs.next()) {
+
+            while (rs.next()) {
                 codFabricante = (rs.getInt("idtabFabricante"));
             }
-            
-        }catch(SQLException ex) {
+
+        } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, ex);
         }
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -389,6 +387,12 @@ public class CadastrarVenda extends javax.swing.JFrame {
         jLabel10.setText("Quantidade:");
 
         jLabel11.setText("Total:");
+
+        jTextValorUnit.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTextValorUnitKeyTyped(evt);
+            }
+        });
 
         jLabel12.setText("Valor Unitário:");
 
@@ -555,20 +559,39 @@ public class CadastrarVenda extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-       OrdemServico oS = new OrdemServico();       
-       oS.setTipo("Vendas");     
-       int codOrdemS = OrdemServicoDAO.CadOrdemServico(oS);           
-       Vendas vendas = new Vendas();
-       
-       vendas.setClienteIdcliente(Integer.parseInt(jTextCodCli.getText()));
-       vendas.setTabusuarioIdUsuario(Integer.parseInt(jTextCodUser.getText()));
-       vendas.setIdOrdemServico(codOrdemS);
-       vendas.setDataVenda(FormataData(JDataVenda.getDate()));
-       vendas.setHora(FuncoesDiversas.ConverterHora(jTextHora.getText()));
-       //vendas.setProduto((String) jComboBoxProdutos.getSelectedItem());
-       vendas.setTotal(Double.parseDouble(jTextTotal.getText()));
-       VendasDAO.CadVenda(vendas);
-       limparCampos();
+        OrdemServico oS = new OrdemServico();
+     //  Produto p = new Produto();
+
+        oS.setTipo("Vendas");
+        int codOrdemS = OrdemServicoDAO.CadOrdemServico(oS);
+
+     //  p.setIdProduto(codProduto);
+        // int codProd = ProdutoDAO.CadDetProduto(p);
+        Vendas vendas = new Vendas();
+        Vendas v = new Vendas();
+
+        vendas.setClienteIdcliente(Integer.parseInt(jTextCodCli.getText()));
+        vendas.setTabusuarioIdUsuario(Integer.parseInt(jTextCodUser.getText()));
+        vendas.setIdOrdemServico(codOrdemS);
+        vendas.setDataVenda(FormataData(JDataVenda.getDate()));
+        vendas.setHora(FuncoesDiversas.ConverterHora(jTextHora.getText()));
+        //vendas.setProduto((String) jComboBoxProdutos.getSelectedItem());
+        vendas.setTotal(Double.parseDouble(jTextTotal.getText()));
+
+        int codVenda = VendasDAO.CadVenda(vendas);
+
+        for (int j = 0; j < jTableProduto.getRowCount(); j++) {
+
+            v.setIdtabVendas(codVenda);
+            v.setQuantidade(Double.parseDouble(jTableProduto.getValueAt(j, 4).toString()));
+            v.setIdProduto(Integer.parseInt(jTableProduto.getValueAt(j, 0).toString()));
+
+        //dtServ.setCodDetProduto(Integer.parseInt(jTableProduto.getValueAt(j,0).toString()));
+            //dtServ.setQuantidade(Integer.parseInt(jTableProduto.getValueAt(j, 4).toString()));
+            VendasDAO.CadDetVenda(v);
+
+        }
+        limparCampos();
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
@@ -585,26 +608,23 @@ public class CadastrarVenda extends javax.swing.JFrame {
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         DefaultTableModel dtm = (DefaultTableModel) jTableProduto.getModel();
         int linha = jTableProduto.getSelectedRow();
-        
-        
-        double totalParcial = Double.parseDouble(jTableProduto.getValueAt(linha, 6).toString());
-        
-        totalPeca -= totalParcial;
-        
-        jTextTotal.setText(String.valueOf(totalPeca));
-        
 
-        if(linha != -1) {
+        double totalParcial = Double.parseDouble(jTableProduto.getValueAt(linha, 6).toString());
+
+        totalPeca -= totalParcial;
+
+        jTextTotal.setText(String.valueOf(totalPeca));
+
+        if (linha != -1) {
             dtm.removeRow(linha);
         }
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         TabelaProduto();
-        
-        
+
         CarregaValorUnit();
-        
+
 //        jTextValorUnit.setText(String.valueOf(total));
     }//GEN-LAST:event_jButton2ActionPerformed
 
@@ -620,7 +640,7 @@ public class CadastrarVenda extends javax.swing.JFrame {
         jTextValorUnit.setText("");
         if (jComboFabricante.getSelectedItem() != null) {
             fabricante = jComboFabricante.getSelectedItem().toString();
-            
+
             CarregaValorUnit();
         }
     }//GEN-LAST:event_jComboFabricanteActionPerformed
@@ -649,6 +669,14 @@ public class CadastrarVenda extends javax.swing.JFrame {
             modelo = jComboModelo.getSelectedItem().toString();
         }
     }//GEN-LAST:event_jComboModeloItemStateChanged
+
+    private void jTextValorUnitKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextValorUnitKeyTyped
+        // TODO add your handling code here:
+        String caracteres = "0987654321,.";
+        if (!caracteres.contains(evt.getKeyChar() + "")) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_jTextValorUnitKeyTyped
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private com.toedter.calendar.JDateChooser JDataVenda;

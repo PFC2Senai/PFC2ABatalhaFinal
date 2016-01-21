@@ -304,6 +304,7 @@ public class CadastrarServicoTeste extends javax.swing.JFrame {
         jPanel7.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 100, -1, 20));
 
         txtDescricao.setColumns(20);
+        txtDescricao.setLineWrap(true);
         txtDescricao.setRows(5);
         jScrollPane4.setViewportView(txtDescricao);
 
