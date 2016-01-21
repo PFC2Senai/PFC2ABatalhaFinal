@@ -344,6 +344,11 @@ public class CadastrarServicoTeste extends javax.swing.JFrame {
         jPanel7.add(uJComboBoxClientes, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 60, 340, -1));
 
         jComboBoxTipoServico.setEditable(true);
+        jComboBoxTipoServico.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jComboBoxTipoServicoItemStateChanged(evt);
+            }
+        });
         jComboBoxTipoServico.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jComboBoxTipoServicoActionPerformed(evt);
@@ -382,8 +387,10 @@ public class CadastrarServicoTeste extends javax.swing.JFrame {
         jTabbedPaneServico.addTab("Serviço", new javax.swing.ImageIcon(getClass().getResource("/imagens/servicos.png")), jPanelServico); // NOI18N
 
         jPanel14.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jPanel14.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel33.setText("Peça:");
+        jPanel14.add(jLabel33, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 69, -1, -1));
 
         jBtbIncluirPeca.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/add.png"))); // NOI18N
         jBtbIncluirPeca.setText("Incluir Peça");
@@ -392,14 +399,17 @@ public class CadastrarServicoTeste extends javax.swing.JFrame {
                 jBtbIncluirPecaActionPerformed(evt);
             }
         });
+        jPanel14.add(jBtbIncluirPeca, new org.netbeans.lib.awtextra.AbsoluteConstraints(615, 159, -1, -1));
 
         jLabel34.setText("Quantidade:");
+        jPanel14.add(jLabel34, new org.netbeans.lib.awtextra.AbsoluteConstraints(367, 110, -1, -1));
 
         txtQuantidade.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtQuantidadeActionPerformed(evt);
             }
         });
+        jPanel14.add(txtQuantidade, new org.netbeans.lib.awtextra.AbsoluteConstraints(437, 107, 107, -1));
 
         jComboBoxModelo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Selecione o Modelo" }));
         jComboBoxModelo.addItemListener(new java.awt.event.ItemListener() {
@@ -407,8 +417,10 @@ public class CadastrarServicoTeste extends javax.swing.JFrame {
                 jComboBoxModeloItemStateChanged(evt);
             }
         });
+        jPanel14.add(jComboBoxModelo, new org.netbeans.lib.awtextra.AbsoluteConstraints(82, 107, 261, -1));
 
         jLabel35.setText("Modelo:");
+        jPanel14.add(jLabel35, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 110, -1, -1));
 
         jTablePecas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -429,6 +441,8 @@ public class CadastrarServicoTeste extends javax.swing.JFrame {
         jTablePecas.getTableHeader().setReorderingAllowed(false);
         jScrollPane1.setViewportView(jTablePecas);
 
+        jPanel14.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 202, 682, 162));
+
         jBtnRemoverPeca.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/excluir.png"))); // NOI18N
         jBtnRemoverPeca.setText("Remover");
 
@@ -440,8 +454,10 @@ public class CadastrarServicoTeste extends javax.swing.JFrame {
                 jBtnRemoverPecaActionPerformed(evt);
             }
         });
+        jPanel14.add(jBtnRemoverPeca, new org.netbeans.lib.awtextra.AbsoluteConstraints(627, 382, -1, -1));
 
         jLabel36.setText("Fabricante:");
+        jPanel14.add(jLabel36, new org.netbeans.lib.awtextra.AbsoluteConstraints(367, 69, -1, -1));
 
         jComboBoxFabricante.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Selecione o Fabricante" }));
         jComboBoxFabricante.addActionListener(new java.awt.event.ActionListener() {
@@ -449,8 +465,11 @@ public class CadastrarServicoTeste extends javax.swing.JFrame {
                 jComboBoxFabricanteActionPerformed(evt);
             }
         });
+        jPanel14.add(jComboBoxFabricante, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 66, 282, -1));
 
         jLabel39.setText("Valor Unit.");
+        jPanel14.add(jLabel39, new org.netbeans.lib.awtextra.AbsoluteConstraints(554, 110, -1, -1));
+        jPanel14.add(txtValorUnit, new org.netbeans.lib.awtextra.AbsoluteConstraints(614, 107, 108, -1));
 
         uJComboBoxPeca.setEditable(true);
         uJComboBoxPeca.addItemListener(new java.awt.event.ItemListener() {
@@ -463,75 +482,7 @@ public class CadastrarServicoTeste extends javax.swing.JFrame {
                 uJComboBoxPecaActionPerformed(evt);
             }
         });
-
-        javax.swing.GroupLayout jPanel14Layout = new javax.swing.GroupLayout(jPanel14);
-        jPanel14.setLayout(jPanel14Layout);
-        jPanel14Layout.setHorizontalGroup(
-            jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel14Layout.createSequentialGroup()
-                .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jBtnRemoverPeca)
-                    .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addGroup(jPanel14Layout.createSequentialGroup()
-                            .addContainerGap()
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 682, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel14Layout.createSequentialGroup()
-                            .addGap(39, 39, 39)
-                            .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addGroup(jPanel14Layout.createSequentialGroup()
-                                    .addComponent(jLabel33)
-                                    .addGap(18, 18, 18)
-                                    .addComponent(uJComboBoxPeca, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                .addGroup(jPanel14Layout.createSequentialGroup()
-                                    .addComponent(jLabel35)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(jComboBoxModelo, javax.swing.GroupLayout.PREFERRED_SIZE, 261, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(jPanel14Layout.createSequentialGroup()
-                                    .addGap(24, 24, 24)
-                                    .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addGroup(jPanel14Layout.createSequentialGroup()
-                                            .addComponent(jLabel36)
-                                            .addGap(18, 18, 18)
-                                            .addComponent(jComboBoxFabricante, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                        .addGroup(jPanel14Layout.createSequentialGroup()
-                                            .addComponent(jLabel34)
-                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                            .addComponent(txtQuantidade, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                            .addComponent(jLabel39)
-                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                            .addComponent(txtValorUnit, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel14Layout.createSequentialGroup()
-                                    .addGap(272, 272, 272)
-                                    .addComponent(jBtbIncluirPeca))))))
-                .addContainerGap(44, Short.MAX_VALUE))
-        );
-        jPanel14Layout.setVerticalGroup(
-            jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel14Layout.createSequentialGroup()
-                .addContainerGap(65, Short.MAX_VALUE)
-                .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel33)
-                    .addComponent(jLabel36)
-                    .addComponent(jComboBoxFabricante, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(uJComboBoxPeca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(21, 21, 21)
-                .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel35)
-                    .addComponent(jComboBoxModelo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel34)
-                    .addComponent(txtQuantidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel39)
-                    .addComponent(txtValorUnit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(32, 32, 32)
-                .addComponent(jBtbIncluirPeca)
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jBtnRemoverPeca)
-                .addGap(45, 45, 45))
-        );
+        jPanel14.add(uJComboBoxPeca, new org.netbeans.lib.awtextra.AbsoluteConstraints(85, 66, 258, -1));
 
         jBtnVoltarPainelServico.setText("Voltar");
         jBtnVoltarPainelServico.addActionListener(new java.awt.event.ActionListener() {
@@ -553,24 +504,24 @@ public class CadastrarServicoTeste extends javax.swing.JFrame {
             jPanelPecasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelPecasLayout.createSequentialGroup()
                 .addGap(46, 46, 46)
-                .addGroup(jPanelPecasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(jPanelPecasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel14, javax.swing.GroupLayout.PREFERRED_SIZE, 765, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanelPecasLayout.createSequentialGroup()
                         .addComponent(jBtnVoltarPainelServico)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jBtnAvancarPainelEquipamento))
-                    .addComponent(jPanel14, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(30, Short.MAX_VALUE))
+                        .addGap(588, 588, 588)
+                        .addComponent(jBtnAvancarPainelEquipamento)))
+                .addContainerGap(32, Short.MAX_VALUE))
         );
         jPanelPecasLayout.setVerticalGroup(
             jPanelPecasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelPecasLayout.createSequentialGroup()
                 .addGap(45, 45, 45)
-                .addComponent(jPanel14, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(31, 31, 31)
+                .addComponent(jPanel14, javax.swing.GroupLayout.PREFERRED_SIZE, 452, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanelPecasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jBtnVoltarPainelServico)
                     .addComponent(jBtnAvancarPainelEquipamento))
-                .addContainerGap(51, Short.MAX_VALUE))
+                .addContainerGap(77, Short.MAX_VALUE))
         );
 
         jTabbedPaneServico.addTab("Peças", new javax.swing.ImageIcon(getClass().getResource("/imagens/prod.png")), jPanelPecas); // NOI18N
@@ -1043,7 +994,9 @@ public class CadastrarServicoTeste extends javax.swing.JFrame {
         jBtbNovoTipoServico.setVisible(true);
 
         jComboBoxTipoServico.removeAllItems();
+        
         carregarComboTipoServico();
+        
         jComboBoxTipoServico.setSelectedItem(tServ.getTipo());
     }//GEN-LAST:event_jBtnCadTipoServicoActionPerformed
 
@@ -1233,11 +1186,7 @@ public class CadastrarServicoTeste extends javax.swing.JFrame {
     }//GEN-LAST:event_uJComboBoxClientesActionPerformed
 
     private void jComboBoxTipoServicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxTipoServicoActionPerformed
-        codTipoServico = 0;
-        idTipoServicoComboBox();
-        if (jComboBoxTipoServico.getSelectedItem() != null) {
-            tipoServico = jComboBoxTipoServico.getSelectedItem().toString();
-        }
+        
     }//GEN-LAST:event_jComboBoxTipoServicoActionPerformed
 
     private void uJComboBoxPecaItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_uJComboBoxPecaItemStateChanged
@@ -1320,6 +1269,14 @@ public class CadastrarServicoTeste extends javax.swing.JFrame {
     private void txtQuantidadeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtQuantidadeActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtQuantidadeActionPerformed
+
+    private void jComboBoxTipoServicoItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jComboBoxTipoServicoItemStateChanged
+        codTipoServico = 0;
+        idTipoServicoComboBox();
+        if (jComboBoxTipoServico.getSelectedItem() != null) {
+            tipoServico = jComboBoxTipoServico.getSelectedItem().toString();
+        }
+    }//GEN-LAST:event_jComboBoxTipoServicoItemStateChanged
 
     private void limparCampos() {
 
@@ -1461,11 +1418,12 @@ public class CadastrarServicoTeste extends javax.swing.JFrame {
 
     private void carregarComboTipoServico() {
 
-        jComboBoxTipoServico.clear();
+       // jComboBoxTipoServico.clear();
 
         ArrayList<TipoServico> tipoServico = new ArrayList<TipoServico>();
         tipoServico = TipoServicoDAO.ListarTipoServico();
 
+        jComboBoxTipoServico.addItem("Selecione um tipo");
         for (TipoServico tServ : tipoServico) {
             jComboBoxTipoServico.addItem(tServ.getTipo(), tServ);
         }
@@ -1484,7 +1442,7 @@ public class CadastrarServicoTeste extends javax.swing.JFrame {
 
     private void carregarComboEquipamento() {
 
-        uJComboBoxEquipamento.clear();
+     //   uJComboBoxEquipamento.clear();
 
         ArrayList<Equipamento> equipamentos = new ArrayList<Equipamento>();
         equipamentos = EquipamentoDAO.ListarEquipamentos();
@@ -1496,7 +1454,7 @@ public class CadastrarServicoTeste extends javax.swing.JFrame {
 
     private void carregarComboFuncionario() {
 
-        uJComboBoxFuncionario.clear();
+    //    uJComboBoxFuncionario.clear();
 
         ArrayList<Funcionario> funcionarios = new ArrayList<Funcionario>();
         funcionarios = FuncionarioDAO.ListarFuncionario();
@@ -1632,7 +1590,7 @@ public class CadastrarServicoTeste extends javax.swing.JFrame {
 
         Connection conexao = Conexao.getConnection();
         ResultSet rs;
-        String sql = "select idtabTipo_serv from tabtipo_serv where Tipo_serv = '" + jComboBoxTipoServico.getSelectedItem().toString().trim() + "';";
+        String sql = "select idtabTipo_serv from tabtipo_serv where Tipo_serv = '" + jComboBoxTipoServico.getSelectedObject() + "';";
 
         try {
             pst = conexao.prepareStatement(sql);

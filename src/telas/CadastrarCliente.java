@@ -413,7 +413,7 @@ public class CadastrarCliente extends javax.swing.JFrame {
             ex.printStackTrace();
         }
 
-        jLabel6.setText("Setor:");
+        jLabel6.setText("Segmento:");
 
         jComboBoxSetores.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -458,13 +458,13 @@ public class CadastrarCliente extends javax.swing.JFrame {
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addComponent(txtEmpresa, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 229, Short.MAX_VALUE)
                     .addComponent(jComboBoxSetores, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(txtSetor, javax.swing.GroupLayout.Alignment.LEADING))
+                    .addComponent(txtSetor, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addComponent(jLabel4)
                         .addGap(30, 30, 30)
-                        .addComponent(txtEndCep, javax.swing.GroupLayout.DEFAULT_SIZE, 171, Short.MAX_VALUE)
+                        .addComponent(txtEndCep, javax.swing.GroupLayout.DEFAULT_SIZE, 164, Short.MAX_VALUE)
                         .addGap(168, 168, 168))
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addComponent(jBtnNovoSetor)
@@ -586,7 +586,7 @@ public class CadastrarCliente extends javax.swing.JFrame {
 
         JOptionPane.showMessageDialog(null, "Cadastrado com sucesso!");
 
-        if (JOptionPane.showConfirmDialog(null, "Deseja continuar cadastrando?", "Confirmar a Exclusão", JOptionPane.YES_NO_OPTION) == 1) {
+        if (JOptionPane.showConfirmDialog(null, "Deseja continuar cadastrando?", "Outro Cadastro", JOptionPane.YES_NO_OPTION) == 1) {
             this.dispose();
         }
 
@@ -876,7 +876,7 @@ public class CadastrarCliente extends javax.swing.JFrame {
 
                 jLabelEmail.setText("E-mail Inválido");
 
-                txtEmail.requestFocus();
+               // txtEmail.requestFocus();
 
             }
 
@@ -884,7 +884,7 @@ public class CadastrarCliente extends javax.swing.JFrame {
 
             jLabelEmail.setText("E-mail Inválido");
 
-            txtEmail.requestFocus();
+          //  txtEmail.requestFocus();
 
         }
     }
