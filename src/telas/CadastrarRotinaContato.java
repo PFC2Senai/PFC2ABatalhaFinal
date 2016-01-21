@@ -89,6 +89,11 @@ public class CadastrarRotinaContato extends javax.swing.JFrame {
         jLabel4.setText("jLabel4");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosed(java.awt.event.WindowEvent evt) {
+                formWindowClosed(evt);
+            }
+        });
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -173,7 +178,8 @@ public class CadastrarRotinaContato extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jToggleButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton3ActionPerformed
-       this.dispose();
+        verificaPagina();
+        this.dispose();
     }//GEN-LAST:event_jToggleButton3ActionPerformed
 
     private void jToggleButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton2ActionPerformed
@@ -203,7 +209,11 @@ public class CadastrarRotinaContato extends javax.swing.JFrame {
         idClienteComboBox();
     }//GEN-LAST:event_uJComboBoxClientesActionPerformed
 
-    private void verificaPagina(){
+    private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
+        verificaPagina();
+    }//GEN-LAST:event_formWindowClosed
+
+    private void verificaPagina() {
         if ((this.detalharCliente != null)) {
             this.detalharCliente.setEnabled(true);
             this.detalharCliente.toFront();

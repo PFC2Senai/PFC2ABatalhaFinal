@@ -199,6 +199,7 @@ public class CadastrarLembrete extends javax.swing.JFrame {
     }//GEN-LAST:event_jBtnSalvarLembreteActionPerformed
 
     private void jBtnSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnSairActionPerformed
+        verificaPagina();
         this.dispose();
     }//GEN-LAST:event_jBtnSairActionPerformed
 

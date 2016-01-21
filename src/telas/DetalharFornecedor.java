@@ -18,6 +18,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.ListSelectionModel;
+import javax.swing.border.LineBorder;
 import static telas.ExibeFornecedor.GetIndiceForn;
 
 public class DetalharFornecedor extends javax.swing.JFrame {
@@ -55,6 +56,7 @@ public class DetalharFornecedor extends javax.swing.JFrame {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
+        bindingGroup = new org.jdesktop.beansbinding.BindingGroup();
 
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
@@ -111,9 +113,13 @@ public class DetalharFornecedor extends javax.swing.JFrame {
         jPanel2.setBackground(new java.awt.Color(223, 237, 253));
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Dados Gerais"));
 
+        txtFornecedor.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+
         jLabel3.setText("Fornecedor:");
 
         jLabel17.setText("País:");
+
+        txtEndPais.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
 
         jLabel11.setText("Cep:");
 
@@ -122,14 +128,25 @@ public class DetalharFornecedor extends javax.swing.JFrame {
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
+        txtCep.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
 
         jLabel15.setText("Cidade:");
 
+        txtEndCidade.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+
         jLabel16.setText("Estado:");
+
+        txtEndEstado.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
 
         jLabel14.setText("Bairro:");
 
+        txtEndBairro.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+
         jLabel12.setText("Rua:");
+
+        txtEndRua.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+
+        txtEndNum.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
 
         jLabel13.setText("Numero:");
 
@@ -171,7 +188,7 @@ public class DetalharFornecedor extends javax.swing.JFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -214,7 +231,7 @@ public class DetalharFornecedor extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(txtEndNum, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtEndBairro))))
+                            .addComponent(txtEndBairro, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 24, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
@@ -248,13 +265,12 @@ public class DetalharFornecedor extends javax.swing.JFrame {
                         .addComponent(jBtnSalvarEnd)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(txtEndBairro, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jBtnCancelEnde))
+                    .addComponent(jBtnCancelEnde)
                     .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel15)
                         .addComponent(txtEndCidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel14)))
+                        .addComponent(jLabel14)
+                        .addComponent(txtEndBairro, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel12)
@@ -293,6 +309,10 @@ public class DetalharFornecedor extends javax.swing.JFrame {
 
         jButtonEditarContato.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/editar.png"))); // NOI18N
         jButtonEditarContato.setText("Editar");
+
+        org.jdesktop.beansbinding.Binding binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, jTableContatos, org.jdesktop.beansbinding.ELProperty.create("${selectedElement != null}"), jButtonEditarContato, org.jdesktop.beansbinding.BeanProperty.create("enabled"));
+        bindingGroup.addBinding(binding);
+
         jButtonEditarContato.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonEditarContatoActionPerformed(evt);
@@ -356,7 +376,7 @@ public class DetalharFornecedor extends javax.swing.JFrame {
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, 25, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, 24, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnLimpar)
                     .addComponent(btnVoltar))
@@ -373,6 +393,8 @@ public class DetalharFornecedor extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
+
+        bindingGroup.bind();
 
         pack();
         setLocationRelativeTo(null);
@@ -420,7 +442,8 @@ public class DetalharFornecedor extends javax.swing.JFrame {
     }//GEN-LAST:event_btnLimparActionPerformed
 
     private void jBtnAltEndActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnAltEndActionPerformed
-
+        
+        EditarEndereco();
         txtEndBairro.setEnabled(true);
         txtCep.setEnabled(true);
         txtEndCidade.setEnabled(true);
@@ -435,7 +458,6 @@ public class DetalharFornecedor extends javax.swing.JFrame {
 
         //nome fornecedor
         txtFornecedor.setEnabled(true);
-
     }//GEN-LAST:event_jBtnAltEndActionPerformed
 
     private void jBtnSalvarEndActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnSalvarEndActionPerformed
@@ -463,6 +485,7 @@ public class DetalharFornecedor extends javax.swing.JFrame {
         jBtnCancelEnde.setVisible(false);
         jBtnCarregaCep.setVisible(false);
         jBtnAltEnd.setVisible(true);
+        
     }//GEN-LAST:event_jBtnSalvarEndActionPerformed
 
     private void jBtnCancelEndeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnCancelEndeActionPerformed
@@ -540,6 +563,11 @@ public class DetalharFornecedor extends javax.swing.JFrame {
 
     private void desabilitarEndereco() {
 
+        txtFornecedor.setEnabled(false);
+        txtFornecedor.setOpaque(false);
+        txtFornecedor.setBorder(null);
+        txtFornecedor.setBackground(new Color(0, 0, 0, 0));
+        
         txtEndBairro.setEnabled(false);
         txtCep.setEnabled(false);
         txtEndCidade.setEnabled(false);
@@ -572,6 +600,38 @@ public class DetalharFornecedor extends javax.swing.JFrame {
 
         jBtnCancelEnde.setVisible(false);
         jBtnSalvarEnd.setVisible(false);
+    }
+    
+    private void EditarEndereco() {
+
+        txtEndBairro.setOpaque(true);
+        txtEndBairro.setBackground(new Color(255, 255, 255));
+        txtEndBairro.setBorder(new LineBorder(Color.BLACK));
+        txtCep.setOpaque(true);
+        txtCep.setBackground(new Color(255, 255, 255));
+        txtCep.setBorder(new LineBorder(Color.BLACK));
+        txtEndCidade.setOpaque(true);
+        txtEndCidade.setBackground(new Color(255, 255, 255));
+        txtEndCidade.setBorder(new LineBorder(Color.BLACK));
+        txtEndEstado.setOpaque(true);
+        txtEndEstado.setBackground(new Color(255, 255, 255));
+        txtEndEstado.setBorder(new LineBorder(Color.BLACK));
+        txtEndNum.setOpaque(true);
+        txtEndNum.setBackground(new Color(255, 255, 255));
+        txtEndNum.setBorder(new LineBorder(Color.BLACK));
+        txtEndPais.setOpaque(true);
+        txtEndPais.setBackground(new Color(255, 255, 255));
+        txtEndPais.setBorder(new LineBorder(Color.BLACK));
+        txtEndRua.setOpaque(true);
+        txtEndRua.setBackground(new Color(255, 255, 255));
+        txtEndRua.setBorder(new LineBorder(Color.BLACK));
+        
+        txtFornecedor.setOpaque(true);
+        txtFornecedor.setBackground(new Color(255, 255, 255));
+        txtFornecedor.setBorder(new LineBorder(Color.BLACK));
+
+        jBtnCancelEnde.setVisible(false);
+        jBtnAltEnd.setVisible(false);
     }
 
     public void TabelaContatos() {
@@ -640,5 +700,6 @@ public class DetalharFornecedor extends javax.swing.JFrame {
     private javax.swing.JTextField txtEndPais;
     private javax.swing.JTextField txtEndRua;
     private javax.swing.JTextField txtFornecedor;
+    private org.jdesktop.beansbinding.BindingGroup bindingGroup;
     // End of variables declaration//GEN-END:variables
 }

@@ -10,9 +10,8 @@ import javax.swing.Timer;
  */
 public class Splash extends javax.swing.JFrame {
 
-    
     private Timer t;
-    
+
     /**
      * Creates new form Splash
      */
@@ -21,28 +20,28 @@ public class Splash extends javax.swing.JFrame {
         carregar();
     }
 
-    public void carregar(){
-        
+    public void carregar() {
+
         ActionListener acao = new ActionListener() {
 
             @Override
             public void actionPerformed(ActionEvent e) {
-               
+
                 if (jProgressBar1.getValue() < 100) {
                     jProgressBar1.setValue(jProgressBar1.getValue() + 2);
-                }else{
+                } else {
                     t.stop();
                     new TelaLogin().setVisible(true);
                     dispose();
                 }
-                
+
             }
         };
-        
+
         t = new Timer(50, acao);
         t.start();
     }
-    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
