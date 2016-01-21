@@ -1,10 +1,9 @@
 package telas;
 
-
-
 import funcoes.Backup2;
 import java.io.File;
 import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
 
 /**
@@ -17,8 +16,8 @@ public class Menu extends javax.swing.JFrame {
      * Creates new form Menu
      */
     public Menu() {
-        initComponents(); 
-        
+        initComponents();
+
         jBtnRotinaContato.setVerticalTextPosition(SwingConstants.BOTTOM);
         jBtnRotinaContato.setHorizontalTextPosition(SwingConstants.CENTER);
         jBtnCadastrarLembrete.setVerticalTextPosition(SwingConstants.BOTTOM);
@@ -619,55 +618,64 @@ public class Menu extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenu6ActionPerformed
 
     private void jBtnFazerBackupActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnFazerBackupActionPerformed
-//       JFileChooser file = new JFileChooser(); 
-//          file.setFileSelectionMode(JFileChooser.FILES_ONLY);
-//          int i= file.showSaveDialog(null);
-//        if (i==1){
-//            JtextFieldLocal.setText("");
-//        } else {
-//            File arquivo = file.getSelectedFile();
-//           JtextFieldLocal.setText(arquivo.getPath());
-//           System.out.print(JtextFieldLocal.getText());
-//        }
-       Backup2.backup();
-       // Backup2.Backupdbtosql();
+        
+
+        JFileChooser fc = new JFileChooser();
+
+        // restringe a amostra a diretorios apenas
+        fc.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+
+        int res = fc.showOpenDialog(null);
+
+        if (res == JFileChooser.APPROVE_OPTION) {
+            File diretorio = fc.getSelectedFile();
+            JtextFieldLocal.setText(diretorio.getAbsolutePath());
+            System.out.println("OOOOi "+ diretorio.getName());
+            System.out.println("OOOOlá "+ diretorio.getAbsolutePath());
+            Backup2.backup(JtextFieldLocal.getText());
+             JOptionPane.showMessageDialog(null, "Voce escolheu o diretório: " + diretorio.getName());
+        } else {
+            JOptionPane.showMessageDialog(null, "Voce nao selecionou nenhum diretorio.");
+        }
+
+        // Backup2.Backupdbtosql();
     }//GEN-LAST:event_jBtnFazerBackupActionPerformed
 
     /**
      * @param args the command line arguments
      */
-    
-//    public static void main(String args[]) {
-//        /* Set the Nimbus look and feel */
-//        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-//        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-//         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-//         */
-//        try {
-//            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-//                if ("Windows".equals(info.getName())) {
-//                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-//                    break;
-//                }
-//            }
-//        } catch (ClassNotFoundException ex) {
-//            java.util.logging.Logger.getLogger(Menu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        } catch (InstantiationException ex) {
-//            java.util.logging.Logger.getLogger(Menu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        } catch (IllegalAccessException ex) {
-//            java.util.logging.Logger.getLogger(Menu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-//            java.util.logging.Logger.getLogger(Menu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        }
-//        //</editor-fold>
-//        /* Create and display the form */
-//        java.awt.EventQueue.invokeLater(new Runnable() {
-//            @Override
-//            public void run() {
-//                new Menu().setVisible(true); 
-//            }
-//        });
-//    }
+    public static void main(String args[]) {
+        /* Set the Nimbus look and feel */
+        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         */
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Windows".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (ClassNotFoundException ex) {
+            java.util.logging.Logger.getLogger(Menu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(Menu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(Menu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(Menu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+        //</editor-fold>
+        /* Create and display the form */
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                new Menu().setVisible(true);
+            }
+        });
+    }
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField JtextFieldLocal;
     private javax.swing.JButton jBtnCadastrarLembrete;

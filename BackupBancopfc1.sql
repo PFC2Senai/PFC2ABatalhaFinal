@@ -29,7 +29,7 @@ CREATE TABLE `tabauditoria` (
   PRIMARY KEY (`idtabAuditoria`),
   KEY `fk_tabAuditoria_tabusuario1_idx` (`tabusuario_id_usuario`),
   CONSTRAINT `fk_tabAuditoria_tabusuario1` FOREIGN KEY (`tabusuario_id_usuario`) REFERENCES `tabusuario` (`id_usuario`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -38,7 +38,7 @@ CREATE TABLE `tabauditoria` (
 
 LOCK TABLES `tabauditoria` WRITE;
 /*!40000 ALTER TABLE `tabauditoria` DISABLE KEYS */;
-INSERT INTO `tabauditoria` VALUES (1,'2015-12-28 21:26:03',2);
+INSERT INTO `tabauditoria` VALUES (1,'2015-12-28 21:26:03',2),(2,'2016-01-21 15:57:35',2);
 /*!40000 ALTER TABLE `tabauditoria` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1766,4 +1766,4 @@ SET character_set_client = @saved_cs_client;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-01-21  0:49:40
+-- Dump completed on 2016-01-21 14:46:08

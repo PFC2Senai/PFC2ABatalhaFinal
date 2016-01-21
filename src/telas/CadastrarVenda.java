@@ -555,13 +555,10 @@ public class CadastrarVenda extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-       OrdemServico oS = new OrdemServico();
-       
-       oS.setTipo("Vendas");
-       int codOrdemS = OrdemServicoDAO.CadOrdemServico(oS);
-        
-        
-        Vendas vendas = new Vendas();
+       OrdemServico oS = new OrdemServico();       
+       oS.setTipo("Vendas");     
+       int codOrdemS = OrdemServicoDAO.CadOrdemServico(oS);           
+       Vendas vendas = new Vendas();
        
        vendas.setClienteIdcliente(Integer.parseInt(jTextCodCli.getText()));
        vendas.setTabusuarioIdUsuario(Integer.parseInt(jTextCodUser.getText()));
