@@ -129,7 +129,8 @@ public class CadastrarLembrete extends javax.swing.JFrame {
         jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 240, -1, -1));
 
         txtDescricaoLembrete.setColumns(20);
-        txtDescricaoLembrete.setRows(5);
+        txtDescricaoLembrete.setLineWrap(true);
+        txtDescricaoLembrete.setRows(1);
         jScrollPane1.setViewportView(txtDescricaoLembrete);
 
         jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 270, 360, 191));

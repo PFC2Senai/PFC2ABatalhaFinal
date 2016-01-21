@@ -389,6 +389,9 @@
     <Component class="javax.swing.JTextField" name="jTextTotal">
     </Component>
     <Component class="javax.swing.JTextField" name="jTextValorUnit">
+      <Events>
+        <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="jTextValorUnitKeyTyped"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel12">
       <Properties>
