@@ -128,4 +128,40 @@ public class SetorDAO {
         }
         return setores;
     }
+    
+    public static boolean VerificarSetor(String setor) {
+
+        Statement stmt;
+        boolean achou = true;
+        int se = 0;
+
+        
+        String Sql = "SELECT COUNT(0), setor FROM tabsetor WHERE setor = '" + setor + "';";
+
+        try {
+
+            ResultSet rs;
+            stmt = Conexao.getConnection().createStatement();
+            rs = stmt.executeQuery(Sql);
+
+            rs.first();
+            do {              
+                se = rs.getInt("COUNT(0)");                
+            } while (rs.next());
+
+            if (se == 0) {
+                achou = false;
+            }
+           
+
+            rs.close();
+            stmt.close();
+
+        } catch (SQLException ex) {
+
+            Logger.getLogger(SetorDAO.class.getName()).log(Level.SEVERE, null, ex);
+            throw new RuntimeException("Erro ao Carregar os dados do setor: ", ex);
+        }
+        return achou;
+    }
 }

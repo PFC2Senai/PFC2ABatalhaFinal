@@ -34,11 +34,11 @@
                               <Component id="jScrollPane1" min="-2" pref="702" max="-2" attributes="0"/>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                  <Component id="jBtnEditar" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jButton1" min="-2" max="-2" attributes="0"/>
                                   <Component id="jBtExcluirCliente" alignment="0" min="-2" max="-2" attributes="0"/>
                                   <Component id="jBtnRotinaContato" min="-2" pref="140" max="-2" attributes="0"/>
                                   <Component id="jBtnLembrete" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="jBtnCadastrarNovoCliente" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="jBtnEditar" alignment="0" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                       </Group>
@@ -72,7 +72,7 @@
                       </Group>
                   </Group>
               </Group>
-              <EmptySpace pref="34" max="32767" attributes="0"/>
+              <EmptySpace pref="37" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -98,10 +98,11 @@
               <EmptySpace pref="27" max="32767" attributes="0"/>
               <Group type="103" groupAlignment="0" max="-2" attributes="0">
                   <Group type="102" attributes="0">
+                      <EmptySpace min="-2" pref="42" max="-2" attributes="0"/>
                       <Component id="jBtnEditar" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="50" max="-2" attributes="0"/>
-                      <Component id="jButton1" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="53" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
+                      <Component id="jBtnCadastrarNovoCliente" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
                       <Component id="jBtnLembrete" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="jBtnRotinaContato" min="-2" max="-2" attributes="0"/>
@@ -151,16 +152,22 @@
         </Component>
       </SubComponents>
     </Container>
-    <Component class="javax.swing.JButton" name="jButton1">
+    <Component class="javax.swing.JButton" name="jBtnCadastrarNovoCliente">
       <Properties>
+        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+          <Image iconType="3" name="/imagens/cliente2.fw.png"/>
+        </Property>
         <Property name="text" type="java.lang.String" value="Novo"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton1ActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jBtnCadastrarNovoClienteActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JButton" name="jBtnEditar">
       <Properties>
+        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+          <Image iconType="3" name="/imagens/cliente3.fw.png"/>
+        </Property>
         <Property name="text" type="java.lang.String" value="Detalhar"/>
       </Properties>
       <BindingProperties>

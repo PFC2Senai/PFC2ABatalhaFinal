@@ -120,10 +120,7 @@ public class CadastrarVenda extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, ex);
         }        
     }
-    
-    
-    
-    
+
     public void CarregaValorUnit() { 
         
         valor = ProdutoDAO.ExisteProduto(codProduto, codModelo, codFabricante);
@@ -132,10 +129,7 @@ public class CadastrarVenda extends javax.swing.JFrame {
             jTextValorUnit.setText(String.valueOf(valor));
         }       
     }
-    
-    
-    
-    
+
     public void TabelaProduto() {
         
         //CarregaValorUnit();  
@@ -401,6 +395,12 @@ public class CadastrarVenda extends javax.swing.JFrame {
         jLabel10.setText("Quantidade:");
 
         jLabel11.setText("Total:");
+
+        jTextValorUnit.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTextValorUnitKeyTyped(evt);
+            }
+        });
 
         jLabel12.setText("Valor Unitário:");
 
@@ -683,6 +683,14 @@ public class CadastrarVenda extends javax.swing.JFrame {
             modelo = jComboModelo.getSelectedItem().toString();
         }
     }//GEN-LAST:event_jComboModeloItemStateChanged
+
+    private void jTextValorUnitKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextValorUnitKeyTyped
+        // TODO add your handling code here:
+        String caracteres = "0987654321,.";
+        if (!caracteres.contains(evt.getKeyChar() + "")) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_jTextValorUnitKeyTyped
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private com.toedter.calendar.JDateChooser JDataVenda;

@@ -3,7 +3,7 @@ package telas;
 import atributos.Setor;
 import funcoes.LimitarDigitos;
 import funcoes.SetorDAO;
-
+import javax.swing.JOptionPane;
 
 public class CadastrarSetor extends javax.swing.JFrame {
 
@@ -33,9 +33,9 @@ public class CadastrarSetor extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel1.setText("Cadastrar Setor");
+        jLabel1.setText("Cadastrar Segmento");
 
-        jLabel2.setText("Setor:");
+        jLabel2.setText("Segmento:");
 
         jBtnCadastrar.setText("Cadastrar");
         jBtnCadastrar.addActionListener(new java.awt.event.ActionListener() {
@@ -68,7 +68,7 @@ public class CadastrarSetor extends javax.swing.JFrame {
                             .addComponent(jLabel2)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                             .addComponent(txtSetor, javax.swing.GroupLayout.PREFERRED_SIZE, 276, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(34, Short.MAX_VALUE))
+                .addContainerGap(12, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -91,11 +91,17 @@ public class CadastrarSetor extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jBtnCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnCadastrarActionPerformed
-        
-        Setor setor = new Setor();
-        setor.setSetor(txtSetor.getText());
-        SetorDAO.CadSetor(setor);
-        limparCampos();
+
+        if (SetorDAO.VerificarSetor(txtSetor.getText()) == false) {
+            Setor setor = new Setor();
+            setor.setSetor(txtSetor.getText());
+            SetorDAO.CadSetor(setor);
+            limparCampos();
+            JOptionPane.showMessageDialog(this, "Cadastrado com sucesso !");
+
+        } else {
+            JOptionPane.showMessageDialog(this, "Setor ja cadastrado");
+        }
     }//GEN-LAST:event_jBtnCadastrarActionPerformed
 
     private void jBtnSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnSairActionPerformed
@@ -103,7 +109,7 @@ public class CadastrarSetor extends javax.swing.JFrame {
     }//GEN-LAST:event_jBtnSairActionPerformed
 
     private void limparCampos() {
-        
+
         txtSetor.setText("");
     }
 

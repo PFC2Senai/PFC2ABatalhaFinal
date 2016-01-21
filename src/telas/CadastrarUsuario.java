@@ -57,6 +57,12 @@ public class CadastrarUsuario extends javax.swing.JFrame {
 
         jLabel5.setText("Confirmar senha:");
 
+        jTextNome.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTextNomeKeyTyped(evt);
+            }
+        });
+
         jLabel6.setText("Tipo de Usuário:");
 
         jComboTipoUser.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Selecione", "Administrador", "Funcionário" }));
@@ -184,6 +190,14 @@ public class CadastrarUsuario extends javax.swing.JFrame {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         this.dispose();
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jTextNomeKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextNomeKeyTyped
+        // TODO add your handling code here:
+        String carac = "ç,.!?@:;/^~´`#$%¨&*()-_='+{[]}";
+        if (carac.contains(evt.getKeyChar() + "")) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_jTextNomeKeyTyped
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

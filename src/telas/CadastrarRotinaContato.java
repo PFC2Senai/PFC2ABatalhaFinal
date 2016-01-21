@@ -8,6 +8,8 @@ import funcoes.Conexao;
 import funcoes.FuncoesDiversas;
 import static funcoes.FuncoesDiversas.FormataData;
 import funcoes.RotinaContatosDAO;
+import java.awt.event.FocusAdapter;
+import java.awt.event.FocusEvent;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -20,23 +22,23 @@ public class CadastrarRotinaContato extends javax.swing.JFrame {
     Connection con = null;
     PreparedStatement pst = null;
     ResultSet rs = null;
+    private int codCliCombo;
     private int codCli;
     private DetalharCliente detalharCliente;
 
     public CadastrarRotinaContato() {
         initComponents();
-        this.populaComboBox();
+        this.carregarComboClientes();  
+        combobox();
         jLabCodigo.setVisible(false);
         jLabEmpresa.setVisible(false);
         jLabNCodigo.setVisible(false);
-        jLabCodEmpresa.setVisible(false);
     }
     
     public CadastrarRotinaContato(int codCliente) {              
         initComponents();
         this.codCli = codCliente;        
-        ComboBoxCliente.setVisible(false);
-        jLabCodEmpresa.setVisible(false);            
+        uJComboBoxClientes.setVisible(false);           
         DadosEmpresa();
     }
     
@@ -44,8 +46,7 @@ public class CadastrarRotinaContato extends javax.swing.JFrame {
         initComponents();    
         this.detalharCliente = detalharCliente;       
         this.codCli = codCliente;
-        ComboBoxCliente.setVisible(false);
-        jLabCodEmpresa.setVisible(false);       
+        uJComboBoxClientes.setVisible(false);      
         DadosEmpresa();
     }
     
@@ -72,7 +73,6 @@ public class CadastrarRotinaContato extends javax.swing.JFrame {
         jToggleButton2 = new javax.swing.JToggleButton();
         jToggleButton3 = new javax.swing.JToggleButton();
         jLabel1 = new javax.swing.JLabel();
-        ComboBoxCliente = new javax.swing.JComboBox();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTextDescricao = new javax.swing.JTextArea();
         jLabel2 = new javax.swing.JLabel();
@@ -81,14 +81,19 @@ public class CadastrarRotinaContato extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         jLabCodigo = new javax.swing.JLabel();
         jLabNCodigo = new javax.swing.JLabel();
-        jLabCodEmpresa = new javax.swing.JLabel();
         jLabEmpresa = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         jTextHora = new javax.swing.JFormattedTextField();
+        uJComboBoxClientes = new componentes.UJComboBox();
 
         jLabel4.setText("jLabel4");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosed(java.awt.event.WindowEvent evt) {
+                formWindowClosed(evt);
+            }
+        });
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -118,18 +123,11 @@ public class CadastrarRotinaContato extends javax.swing.JFrame {
         jLabel1.setText("Data:");
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 150, -1, -1));
 
-        ComboBoxCliente.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ComboBoxClienteActionPerformed(evt);
-            }
-        });
-        jPanel1.add(ComboBoxCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 110, 250, -1));
-
         jTextDescricao.setColumns(20);
         jTextDescricao.setRows(5);
         jScrollPane1.setViewportView(jTextDescricao);
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 260, 320, 160));
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 260, 340, 160));
 
         jLabel2.setText("Descrição do contato:");
         jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 240, -1, -1));
@@ -151,7 +149,6 @@ public class CadastrarRotinaContato extends javax.swing.JFrame {
 
         jLabNCodigo.setText("Código:");
         jPanel1.add(jLabNCodigo, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 70, -1, 20));
-        jPanel1.add(jLabCodEmpresa, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 50, 76, 20));
 
         jLabEmpresa.setText("empresa");
         jPanel1.add(jLabEmpresa, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 110, 260, 20));
@@ -166,24 +163,29 @@ public class CadastrarRotinaContato extends javax.swing.JFrame {
         }
         jPanel1.add(jTextHora, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 190, 40, -1));
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 400, 490));
+        uJComboBoxClientes.setEditable(true);
+        uJComboBoxClientes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                uJComboBoxClientesActionPerformed(evt);
+            }
+        });
+        jPanel1.add(uJComboBoxClientes, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 110, 280, -1));
+
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 430, 490));
 
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jToggleButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton3ActionPerformed
-       this.dispose();
+        verificaPagina();
+        this.dispose();
     }//GEN-LAST:event_jToggleButton3ActionPerformed
-
-    private void ComboBoxClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ComboBoxClienteActionPerformed
-        idClienteComboBox();
-    }//GEN-LAST:event_ComboBoxClienteActionPerformed
 
     private void jToggleButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton2ActionPerformed
 
-        if (!jLabCodEmpresa.getText().isEmpty()) {            
-            codCli = Integer.parseInt(jLabCodEmpresa.getText());
+        if (codCliCombo != 0) {
+            codCli = codCliCombo;
         }
         
         RotinaContatos rot = new RotinaContatos();
@@ -202,7 +204,16 @@ public class CadastrarRotinaContato extends javax.swing.JFrame {
         new ExibeRotina().setVisible(true);
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void verificaPagina(){
+    private void uJComboBoxClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_uJComboBoxClientesActionPerformed
+        codCliCombo = 0;
+        idClienteComboBox();
+    }//GEN-LAST:event_uJComboBoxClientesActionPerformed
+
+    private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
+        verificaPagina();
+    }//GEN-LAST:event_formWindowClosed
+
+    private void verificaPagina() {
         if ((this.detalharCliente != null)) {
             this.detalharCliente.setEnabled(true);
             this.detalharCliente.toFront();
@@ -210,21 +221,15 @@ public class CadastrarRotinaContato extends javax.swing.JFrame {
         }
     }
     
-    private void populaComboBox() {
-        
-        Connection conexao = Conexao.getConnection();
-        ResultSet rs;
-        String sql = "select * from tabcliente";
-        
-        try{
-            pst = conexao.prepareStatement(sql);
-            rs = pst.executeQuery();
-            
-            while(rs.next()) {
-                ComboBoxCliente.addItem(rs.getString("empresa"));
-            }
-        }catch(SQLException ex) {
-            JOptionPane.showMessageDialog(null, ex);
+    private void carregarComboClientes() {
+
+        uJComboBoxClientes.clear();
+
+        ArrayList<Cliente> cliente = new ArrayList<Cliente>();
+        cliente = ClienteDAO.ComboCliente();
+
+        for (Cliente cli : cliente) {
+            uJComboBoxClientes.addItem(cli.getEmpresa(), cli);
         }
     }
     
@@ -232,27 +237,40 @@ public class CadastrarRotinaContato extends javax.swing.JFrame {
         
         Connection conexao = Conexao.getConnection();
         ResultSet rs;
-        String sql = "select * from tabcliente where empresa = '" + ComboBoxCliente.getSelectedItem()+ "';";
+        String sql = "select * from tabcliente where empresa = '" + uJComboBoxClientes.getSelectedItem()+ "';";
         
         try{
             pst = conexao.prepareStatement(sql);
             rs = pst.executeQuery();
             
             while(rs.next()) {
-                jLabCodEmpresa.setText(String.valueOf(rs.getInt("idcliente")));
+                codCliCombo = (rs.getInt("idcliente"));
             }
             
         }catch(SQLException ex) {
             JOptionPane.showMessageDialog(null, ex);
         }
     }
+    
+    private void combobox() {
 
+        //Combobox clientes
+        uJComboBoxClientes.getEditor().getEditorComponent().addFocusListener(new FocusAdapter() {
+            @Override
+            public void focusLost(FocusEvent e) {
+                if (codCliCombo == 0) {
+                    JOptionPane.showMessageDialog(null, "Esse registro não encontra-se cadastrado na base de dados.");
+                    uJComboBoxClientes.getEditor().getEditorComponent().requestFocus();
+                }
+            }
+        });
+        uJComboBoxClientes.setAutocompletar(true);    
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    public static javax.swing.JComboBox ComboBoxCliente;
     private com.toedter.calendar.JDateChooser JDataRotinaContato;
     private javax.swing.JButton jButton1;
     private com.toedter.calendar.JCalendar jCalendar1;
-    private javax.swing.JLabel jLabCodEmpresa;
     private javax.swing.JLabel jLabCodigo;
     private javax.swing.JLabel jLabEmpresa;
     private javax.swing.JLabel jLabNCodigo;
@@ -268,5 +286,6 @@ public class CadastrarRotinaContato extends javax.swing.JFrame {
     private javax.swing.JFormattedTextField jTextHora;
     private javax.swing.JToggleButton jToggleButton2;
     private javax.swing.JToggleButton jToggleButton3;
+    private componentes.UJComboBox uJComboBoxClientes;
     // End of variables declaration//GEN-END:variables
 }

@@ -156,6 +156,42 @@ public class ModeloDAO {
             throw new RuntimeException("Erro ao Listar os dados dos Modelos: ",ex);
         }
         return modelos;
-    } 
+    }
+    
+    public static boolean VerificarModelo(String modelo) {
+
+        Statement stmt;
+        boolean achou = true;
+        int mo = 0;
+
+        
+        String Sql = "SELECT COUNT(0), modelo FROM tabmodelo WHERE modelo = '" + modelo + "';";
+
+        try {
+
+            ResultSet rs;
+            stmt = Conexao.getConnection().createStatement();
+            rs = stmt.executeQuery(Sql);
+
+            rs.first();
+            do {              
+                mo = rs.getInt("COUNT(0)");                
+            } while (rs.next());
+
+            if (mo == 0) {
+                achou = false;
+            }
+           
+
+            rs.close();
+            stmt.close();
+
+        } catch (SQLException ex) {
+
+            Logger.getLogger(ModeloDAO.class.getName()).log(Level.SEVERE, null, ex);
+            throw new RuntimeException("Erro ao Carregar os dados do modelo: ", ex);
+        }
+        return achou;
+    }
    
 }

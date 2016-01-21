@@ -4,6 +4,7 @@ import atributos.Cliente;
 import atributos.Endereco;
 import atributos.Lembrete;
 import funcoes.AuditoriaDAO;
+import funcoes.CarregaCEP;
 import funcoes.ClienteDAO;
 import funcoes.Conexao;
 import static funcoes.Conexao.getConnection;
@@ -12,6 +13,7 @@ import funcoes.LembreteDAO;
 import funcoes.LimitarDigitos;
 import funcoes.ModeloTabela;
 import java.awt.Color;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -36,6 +38,7 @@ public class DetalharCliente extends javax.swing.JFrame {
     Statement stmt;
     private final int codCliente;
     private int codContato;
+    private DetalharCliente telaDetalCli;
 
     /**
      * Creates new form CadastrarCliente
@@ -43,7 +46,7 @@ public class DetalharCliente extends javax.swing.JFrame {
     public DetalharCliente() {
         this.idContato = ClienteDAO.idContato(GetIndice());
         this.codCliente = GetIndice();
-
+        telaDetalCli = this;
         initComponents();
         CarregaCliente();
         populaComboBox();
@@ -85,7 +88,7 @@ public class DetalharCliente extends javax.swing.JFrame {
             txtEndRua.setText(end.getRua());
             txtEndBairro.setText(end.getBairro());
             txtEndEstado.setText(end.getEstado());
-            txtEndCep.setText(end.getCep());
+            txtCep.setText(end.getCep());
             txtEndNum.setText(end.getNumero());
             txtEndCidade.setText(end.getCidade());
             txtEndPais.setText(end.getPais());
@@ -138,10 +141,10 @@ public class DetalharCliente extends javax.swing.JFrame {
         txtEndBairro.setBackground(new Color(0, 0, 0, 0));
         txtEndBairro.setBorder(null);
         txtEndBairro.setEditable(false);
-        txtEndCep.setOpaque(false);
-        txtEndCep.setBackground(new Color(0, 0, 0, 0));
-        txtEndCep.setEditable(false);
-        txtEndCep.setBorder(null);
+        txtCep.setOpaque(false);
+        txtCep.setBackground(new Color(0, 0, 0, 0));
+        txtCep.setEditable(false);
+        txtCep.setBorder(null);
         txtEndCidade.setOpaque(false);
         txtEndCidade.setBackground(new Color(0, 0, 0, 0));
         txtEndCidade.setBorder(null);
@@ -163,6 +166,7 @@ public class DetalharCliente extends javax.swing.JFrame {
         txtEndRua.setBorder(null);
         txtEndRua.setEditable(false);
 
+        jBtnCarregaCep.setVisible(false);
         jBtbCancelEndereco.setVisible(false);
         jBtnAltEndereco.setVisible(false);
     }
@@ -172,9 +176,9 @@ public class DetalharCliente extends javax.swing.JFrame {
         txtEndBairro.setOpaque(true);
         txtEndBairro.setBackground(new Color(255, 255, 255));
         txtEndBairro.setBorder(new LineBorder(Color.BLACK));
-        txtEndCep.setOpaque(true);
-        txtEndCep.setBackground(new Color(255, 255, 255));
-        txtEndCep.setBorder(new LineBorder(Color.BLACK));
+        txtCep.setOpaque(true);
+        txtCep.setBackground(new Color(255, 255, 255));
+        txtCep.setBorder(new LineBorder(Color.BLACK));
         txtEndCidade.setOpaque(true);
         txtEndCidade.setBackground(new Color(255, 255, 255));
         txtEndCidade.setBorder(new LineBorder(Color.BLACK));
@@ -293,13 +297,14 @@ public class DetalharCliente extends javax.swing.JFrame {
         txtEndCidade = new javax.swing.JTextField();
         txtEndEstado = new javax.swing.JTextField();
         txtEndNum = new javax.swing.JTextField();
-        txtEndCep = new javax.swing.JFormattedTextField();
+        txtCep = new javax.swing.JFormattedTextField();
         jLabel17 = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
         jButtonAr3 = new javax.swing.JButton();
         jBtnAltEndereco = new javax.swing.JButton();
         jBtbCancelEndereco = new javax.swing.JButton();
+        jBtnCarregaCep = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
         jTableContatos = new javax.swing.JTable();
@@ -335,7 +340,7 @@ public class DetalharCliente extends javax.swing.JFrame {
         jPanel2.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, -1, -1));
 
         txtEmpresa.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jPanel2.add(txtEmpresa, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 30, 260, -1));
+        jPanel2.add(txtEmpresa, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 30, 260, -1));
 
         jButtonAr1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/editar.png"))); // NOI18N
         jButtonAr1.setText("Editar");
@@ -360,14 +365,14 @@ public class DetalharCliente extends javax.swing.JFrame {
         jPanel2.add(jBtbCancelDadosP, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 30, -1, -1));
 
         txtSetor.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jPanel2.add(txtSetor, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 90, 245, -1));
+        jPanel2.add(txtSetor, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 90, 245, -1));
 
         jComboBoxSetores.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jComboBoxSetoresActionPerformed(evt);
             }
         });
-        jPanel2.add(jComboBoxSetores, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 90, 260, -1));
+        jPanel2.add(jComboBoxSetores, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 90, 260, -1));
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel6.setText("Setor:");
@@ -379,7 +384,7 @@ public class DetalharCliente extends javax.swing.JFrame {
             ex.printStackTrace();
         }
         txtCnpj.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jPanel2.add(txtCnpj, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 60, 140, -1));
+        jPanel2.add(txtCnpj, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 60, 140, -1));
 
         jBtnAltDadosP.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/ok.png"))); // NOI18N
         jBtnAltDadosP.setText("Salvar");
@@ -399,45 +404,45 @@ public class DetalharCliente extends javax.swing.JFrame {
 
         jLabel14.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel14.setText("Bairro:");
-        jPanel3.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 60, -1, -1));
+        jPanel3.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 60, -1, 20));
 
         jLabel16.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel16.setText("Estado:");
-        jPanel3.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 30, -1, -1));
+        jPanel3.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 30, -1, 20));
 
         jLabel11.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel11.setText("Cep:");
-        jPanel3.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 30, -1, -1));
+        jPanel3.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 30, -1, -1));
 
         txtEndPais.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jPanel3.add(txtEndPais, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 30, 260, -1));
+        jPanel3.add(txtEndPais, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 30, 260, -1));
 
         jLabel13.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel13.setText("Numero:");
-        jPanel3.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 90, -1, -1));
+        jPanel3.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 90, -1, 20));
 
         txtEndBairro.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jPanel3.add(txtEndBairro, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 60, 280, -1));
+        jPanel3.add(txtEndBairro, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 60, 320, -1));
 
         txtEndRua.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jPanel3.add(txtEndRua, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 90, 262, -1));
+        jPanel3.add(txtEndRua, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 90, 262, -1));
 
         txtEndCidade.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jPanel3.add(txtEndCidade, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 60, 260, -1));
+        jPanel3.add(txtEndCidade, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 60, 260, -1));
 
         txtEndEstado.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jPanel3.add(txtEndEstado, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 30, 114, -1));
+        jPanel3.add(txtEndEstado, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 30, 50, -1));
 
         txtEndNum.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jPanel3.add(txtEndNum, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 90, 69, -1));
+        jPanel3.add(txtEndNum, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 90, 69, -1));
 
         try {
-            txtEndCep.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("#####-###")));
+            txtCep.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("#####-###")));
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
-        txtEndCep.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jPanel3.add(txtEndCep, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 30, 110, -1));
+        txtCep.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jPanel3.add(txtCep, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 30, 110, -1));
 
         jLabel17.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel17.setText("País:");
@@ -477,6 +482,15 @@ public class DetalharCliente extends javax.swing.JFrame {
             }
         });
         jPanel3.add(jBtbCancelEndereco, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 30, -1, -1));
+
+        jBtnCarregaCep.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/pesquisar.gif"))); // NOI18N
+        jBtnCarregaCep.setText("Buscar CEP");
+        jBtnCarregaCep.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnCarregaCepActionPerformed(evt);
+            }
+        });
+        jPanel3.add(jBtnCarregaCep, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 30, -1, -1));
 
         jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 210, 840, 130));
 
@@ -545,7 +559,7 @@ public class DetalharCliente extends javax.swing.JFrame {
         jPanel5.setBackground(new java.awt.Color(223, 237, 253));
         jPanel5.setBorder(javax.swing.BorderFactory.createTitledBorder("Lembretes"));
 
-        jBtnNovoLembrete.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/adicionar.gif"))); // NOI18N
+        jBtnNovoLembrete.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/add.png"))); // NOI18N
         jBtnNovoLembrete.setText("Novo Lembrete");
         jBtnNovoLembrete.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -599,7 +613,7 @@ public class DetalharCliente extends javax.swing.JFrame {
 
         jPanel1.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 30, 360, 170));
 
-        jBtnCadastrarRotinaContato.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/adicionar.gif"))); // NOI18N
+        jBtnCadastrarRotinaContato.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/add.png"))); // NOI18N
         jBtnCadastrarRotinaContato.setText("Nova Rotina de Conatato");
         jBtnCadastrarRotinaContato.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -643,6 +657,7 @@ public class DetalharCliente extends javax.swing.JFrame {
         jButtonAr3.setVisible(true);
         jBtbCancelEndereco.setVisible(false);
         jBtnAltEndereco.setVisible(false);
+        jBtnCarregaCep.setVisible(false);
         desabilitarEndereco();
     }//GEN-LAST:event_jBtbCancelEnderecoActionPerformed
 
@@ -651,7 +666,7 @@ public class DetalharCliente extends javax.swing.JFrame {
         Endereco endereco = new Endereco();
 
         endereco.setPais(txtEndPais.getText());
-        endereco.setCep(txtEndCep.getText());
+        endereco.setCep(txtCep.getText());
         endereco.setRua(txtEndRua.getText());
         endereco.setNumero(txtEndNum.getText());
         endereco.setBairro(txtEndBairro.getText());
@@ -663,6 +678,7 @@ public class DetalharCliente extends javax.swing.JFrame {
         jButtonAr3.setVisible(true);
         jBtbCancelEndereco.setVisible(false);
         jBtnAltEndereco.setVisible(false);
+        jBtnCarregaCep.setVisible(false);
         desabilitarEndereco();
     }//GEN-LAST:event_jBtnAltEnderecoActionPerformed
 
@@ -714,7 +730,7 @@ public class DetalharCliente extends javax.swing.JFrame {
 
         EditarEndereco();
         txtEndBairro.setEditable(true);
-        txtEndCep.setEditable(true);
+        txtCep.setEditable(true);
         txtEndCidade.setEditable(true);
         txtEndEstado.setEditable(true);
         txtEndNum.setEditable(true);
@@ -724,6 +740,7 @@ public class DetalharCliente extends javax.swing.JFrame {
         jButtonAr3.setVisible(false);
         jBtnAltEndereco.setVisible(true);
         jBtbCancelEndereco.setVisible(true);
+        jBtnCarregaCep.setVisible(true);
     }//GEN-LAST:event_jButtonAr3ActionPerformed
 
     private void jButtonAr1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAr1ActionPerformed
@@ -751,6 +768,47 @@ public class DetalharCliente extends javax.swing.JFrame {
         this.setEnabled(false);
         new ExibeRotina(GetIndice(), this).setVisible(true);
     }//GEN-LAST:event_jBtnExibeRotinaActionPerformed
+
+    private void jBtnCarregaCepActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnCarregaCepActionPerformed
+
+        TelaEspera telaTeste = new TelaEspera();
+        this.setEnabled(false);
+        final Thread t1 = new Thread(new Runnable() {//cria uma thread pra gravar o seu arquivo
+
+            @Override
+            public void run() {
+
+                try {
+
+                    telaTeste.setVisible(true);
+                    CarregaCEP cep = new CarregaCEP();
+
+                    String ceptxt = txtCep.getText();
+                    txtEndCidade.setText(cep.getCidade(ceptxt));
+                    txtEndBairro.setText(cep.getBairro(ceptxt));
+                    txtEndRua.setText(cep.getEndereco(ceptxt));
+                    txtEndEstado.setText(cep.getUF(ceptxt));
+
+                } catch (IOException ex) {
+                    JOptionPane.showMessageDialog(null, ex);
+                }
+            }
+        });
+        t1.start();
+        new Thread(new Runnable() {//cria outra thread pra sua tela de espera
+            @Override
+            public void run() {
+                try {
+                    //cria a tela de espera e mostra ela
+                    t1.join();//fica esperando a primeira thread acabar
+                    telaDetalCli.setEnabled(true);  // quando acabar fecha a janela de espera, podes fazer outras coisas aqui
+                    telaTeste.dispose();
+                } catch (InterruptedException ex) {
+                    Logger.getLogger(CadastrarCliente.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }).start();
+    }//GEN-LAST:event_jBtnCarregaCepActionPerformed
 
     private void populaComboBox() {
 
@@ -798,6 +856,7 @@ public class DetalharCliente extends javax.swing.JFrame {
     private javax.swing.JButton jBtnAltDadosP;
     private javax.swing.JButton jBtnAltEndereco;
     private javax.swing.JButton jBtnCadastrarRotinaContato;
+    private javax.swing.JButton jBtnCarregaCep;
     private javax.swing.JButton jBtnExibeRotina;
     private javax.swing.JButton jBtnNovoLembrete;
     private javax.swing.JButton jButtonAr1;
@@ -824,10 +883,10 @@ public class DetalharCliente extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTable jTableContatos;
     private javax.swing.JTable jTableLembretes;
+    private javax.swing.JFormattedTextField txtCep;
     private javax.swing.JFormattedTextField txtCnpj;
     private javax.swing.JTextField txtEmpresa;
     private javax.swing.JTextField txtEndBairro;
-    private javax.swing.JFormattedTextField txtEndCep;
     private javax.swing.JTextField txtEndCidade;
     private javax.swing.JTextField txtEndEstado;
     private javax.swing.JTextField txtEndNum;

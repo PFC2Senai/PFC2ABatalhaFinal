@@ -167,4 +167,40 @@ public class FornecedorDAO {
         }
         return fornecedores;
     }
+    
+    public static boolean VerificarFornecedor(String fornecedor) {
+
+        Statement stmt;
+        boolean achou = true;
+        int fo = 0;
+
+        
+        String Sql = "SELECT COUNT(0), fornecedor FROM tabfornecedor WHERE fornecedor = '" + fornecedor + "';";
+
+        try {
+
+            ResultSet rs;
+            stmt = Conexao.getConnection().createStatement();
+            rs = stmt.executeQuery(Sql);
+
+            rs.first();
+            do {              
+                fo = rs.getInt("COUNT(0)");                
+            } while (rs.next());
+
+            if (fo == 0) {
+                achou = false;
+            }
+           
+
+            rs.close();
+            stmt.close();
+
+        } catch (SQLException ex) {
+
+            Logger.getLogger(FornecedorDAO.class.getName()).log(Level.SEVERE, null, ex);
+            throw new RuntimeException("Erro ao Carregar os dados do fornecedor: ", ex);
+        }
+        return achou;
+    }
 }

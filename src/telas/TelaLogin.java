@@ -4,6 +4,7 @@ package telas;
 import atributos.Auditoria;
 import atributos.Usuario;
 import funcoes.AuditoriaDAO;
+import java.awt.Color;
 import javax.swing.JOptionPane;
 
 /**
@@ -20,6 +21,8 @@ public class TelaLogin extends javax.swing.JFrame {
     public TelaLogin() {
         initComponents();
         //setSize(590,397);
+        Color minhaCor = new Color(234, 234, 174);
+        this.getContentPane().setBackground(minhaCor);
     }
 
     /**
@@ -42,43 +45,41 @@ public class TelaLogin extends javax.swing.JFrame {
         jButtonAcesso = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("LOGIN");
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
         getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 260, -1, -1));
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(192, 246, 233));
         jLabel2.setText("Faça seu login");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 30, -1, -1));
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 10, -1, -1));
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(192, 246, 233));
         jLabel1.setText("Usuário:");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 100, -1, -1));
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 80, -1, -1));
 
         login.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, null, new java.awt.Color(0, 204, 153), null, null));
-        getContentPane().add(login, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 100, 193, -1));
+        login.setSelectionColor(new java.awt.Color(0, 0, 0));
+        getContentPane().add(login, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 80, 193, -1));
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(192, 246, 233));
         jLabel3.setText("Senha:");
-        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 130, -1, -1));
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 110, -1, -1));
 
         txtSenha.setToolTipText("");
         txtSenha.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, null, new java.awt.Color(0, 204, 153), null, null));
-        getContentPane().add(txtSenha, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 130, 193, -1));
+        txtSenha.setSelectionColor(new java.awt.Color(0, 0, 0));
+        getContentPane().add(txtSenha, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 110, 193, -1));
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(192, 246, 233));
         jLabel4.setText("Tipo:");
-        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 230, -1, -1));
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 180, -1, -1));
 
         jComBTipoUser.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Selecione", "Administrador", "Funcionário" }));
         jComBTipoUser.setToolTipText("");
-        getContentPane().add(jComBTipoUser, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 230, 193, -1));
+        getContentPane().add(jComBTipoUser, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 180, 193, -1));
 
         jButtonAcesso.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jButtonAcesso.setForeground(new java.awt.Color(0, 153, 102));
         jButtonAcesso.setText("Acessar");
         jButtonAcesso.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(0, 204, 153)));
         jButtonAcesso.addActionListener(new java.awt.event.ActionListener() {
@@ -86,7 +87,7 @@ public class TelaLogin extends javax.swing.JFrame {
                 jButtonAcessoActionPerformed(evt);
             }
         });
-        getContentPane().add(jButtonAcesso, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 260, 72, 27));
+        getContentPane().add(jButtonAcesso, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 210, 72, 27));
 
         pack();
         setLocationRelativeTo(null);
