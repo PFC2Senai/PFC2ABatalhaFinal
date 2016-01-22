@@ -53,6 +53,97 @@ public class CadastrarCliente extends javax.swing.JFrame {
         txtNumero.setDocument(new LimitarDigitos(6));
         txtTelCel.setDocument(new LimitarDigitos(20));
     }
+    
+    
+    
+    private boolean VerificaCampos(){
+        boolean valida = true;
+        
+          if (txtEmpresa.getText().trim().equals("")){
+    JOptionPane.showMessageDialog(null, "Campo(s) vazio(s)!");
+    valida = false;
+    return valida;
+        }
+        
+         if (txtSetor.getText().trim().equals("")){
+    JOptionPane.showMessageDialog(null, "Campo(s) vazio(s)!");
+    valida = false;
+    return valida;
+        }
+         
+            if (txtEndCep.getText().trim().equals("")){
+    JOptionPane.showMessageDialog(null, "Campo(s) vazio(s)!");
+    valida = false;
+    return valida;
+        }
+        
+         if (txtContato.getText().trim().equals("")){
+    JOptionPane.showMessageDialog(null, "Campo(s) vazio(s)!");
+    valida = false;
+    return valida;
+        }
+        
+         if (txtTelCel.getText().trim().equals("")){
+    JOptionPane.showMessageDialog(null, "Campo(s) vazio(s)!");
+    valida = false;
+    return valida;
+        }
+         
+            if (txtEmail.getText().trim().equals("")){
+    JOptionPane.showMessageDialog(null, "Campo(s) vazio(s)!");
+    valida = false;
+    return valida;
+        }
+        
+         if (txtPais.getText().trim().equals("")){
+    JOptionPane.showMessageDialog(null, "Campo(s) vazio(s)!");
+    valida = false;
+    return valida;
+        }
+         
+            if (txtCidade.getText().trim().equals("")){
+    JOptionPane.showMessageDialog(null, "Campo(s) vazio(s)!");
+    valida = false;
+    return valida;
+        }
+        
+         if (txtRua.getText().trim().equals("")){
+    JOptionPane.showMessageDialog(null, "Campo(s) vazio(s)!");
+    valida = false;
+    return valida;
+        }
+         
+            if (txtCep.getText().trim().equals("")){
+    JOptionPane.showMessageDialog(null, "Campo(s) vazio(s)!");
+    valida = false;
+    return valida;
+        }
+        
+         if (txtEstado.getText().trim().equals("")){
+    JOptionPane.showMessageDialog(null, "Campo(s) vazio(s)!");
+    valida = false;
+    return valida;
+        }
+         
+            if (txtBairro.getText().trim().equals("")){
+    JOptionPane.showMessageDialog(null, "Campo(s) vazio(s)!");
+    valida = false;
+    return valida;
+        }
+        
+         if (txtNumero.getText().trim().equals("")){
+    JOptionPane.showMessageDialog(null, "Campo(s) vazio(s)!");
+    valida = false;
+    return valida;
+        }
+         
+         if (jComboBoxSetores.getSelectedIndex() == 0){
+          JOptionPane.showMessageDialog(null, "Campo(s) vazio(s)!");
+    valida = false;
+    return valida;   
+         }
+         return valida;
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -527,7 +618,8 @@ public class CadastrarCliente extends javax.swing.JFrame {
     }//GEN-LAST:event_btnCancelarActionPerformed
 
     private void btnCadClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadClienteActionPerformed
-
+        if (VerificaCampos() == true){
+            
         if (ClienteDAO.VerificarCliente(txtEndCep.getText()) == false) {
 
             Cliente cli = new Cliente();
@@ -602,6 +694,8 @@ public class CadastrarCliente extends javax.swing.JFrame {
             this.dispose();
         }
 
+    }
+        
     }//GEN-LAST:event_btnCadClienteActionPerformed
 
     private void jBtnOutroContatoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnOutroContatoActionPerformed
