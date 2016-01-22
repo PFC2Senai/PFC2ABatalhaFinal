@@ -129,6 +129,11 @@ public class DetalharFornecedor extends javax.swing.JFrame {
             ex.printStackTrace();
         }
         txtCep.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        txtCep.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtCepActionPerformed(evt);
+            }
+        });
 
         jLabel15.setText("Cidade:");
 
@@ -512,46 +517,12 @@ public class DetalharFornecedor extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonEditarContatoActionPerformed
 
     private void jBtnCarregaCepActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnCarregaCepActionPerformed
-
-        TelaEspera telaTeste = new TelaEspera();
-        this.setEnabled(false);
-        final Thread t1 = new Thread(new Runnable() {//cria uma thread pra gravar o seu arquivo
-
-            @Override
-            public void run() {
-
-                try {
-
-                    telaTeste.setVisible(true);
-                    CarregaCEP cep = new CarregaCEP();
-
-                    String ceptxt = txtCep.getText();
-                    txtEndCidade.setText(cep.getCidade(ceptxt));
-                    txtEndBairro.setText(cep.getBairro(ceptxt));
-                    txtEndRua.setText(cep.getEndereco(ceptxt));
-                    txtEndEstado.setText(cep.getUF(ceptxt));
-
-                } catch (IOException ex) {
-                    JOptionPane.showMessageDialog(null, "CEP não encontrado.");
-                }
-            }
-        });
-        t1.start();
-        new Thread(new Runnable() {//cria outra thread pra sua tela de espera
-            @Override
-            public void run() {
-                try {
-                    //cria a tela de espera e mostra ela
-                    t1.join();//fica esperando a primeira thread acabar
-                    telaDetFornec.setEnabled(true);  // quando acabar fecha a janela de espera
-                    telaTeste.dispose();
-                } catch (InterruptedException ex) {
-                    Logger.getLogger(CadastrarCliente.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            }
-        }).start();
-
+        CarregaCep();
     }//GEN-LAST:event_jBtnCarregaCepActionPerformed
+
+    private void txtCepActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCepActionPerformed
+        CarregaCep();
+    }//GEN-LAST:event_txtCepActionPerformed
 
     private void desabilitarFornecedor() {
 
@@ -669,6 +640,48 @@ public class DetalharFornecedor extends javax.swing.JFrame {
         }
     }
 
+    
+    public void CarregaCep() {
+
+        TelaEspera telaTeste = new TelaEspera();
+        this.setEnabled(false);
+        final Thread t1 = new Thread(new Runnable() {//cria uma thread pra gravar o seu arquivo
+
+            @Override
+            public void run() {
+
+                try {
+
+                    telaTeste.setVisible(true);
+                    CarregaCEP cep = new CarregaCEP();
+
+                    String ceptxt = txtCep.getText();
+                    txtEndCidade.setText(cep.getCidade(ceptxt));
+                    txtEndBairro.setText(cep.getBairro(ceptxt));
+                    txtEndRua.setText(cep.getEndereco(ceptxt));
+                    txtEndEstado.setText(cep.getUF(ceptxt));
+
+                } catch (IOException ex) {
+                    JOptionPane.showMessageDialog(null, "CEP não encontrado.");
+                }
+            }
+        });
+        t1.start();
+        new Thread(new Runnable() {//cria outra thread pra sua tela de espera
+            @Override
+            public void run() {
+                try {
+                    //cria a tela de espera e mostra ela
+                    t1.join();//fica esperando a primeira thread acabar
+                    telaDetFornec.setEnabled(true);  // quando acabar fecha a janela de espera
+                    telaTeste.dispose();
+                } catch (InterruptedException ex) {
+                    Logger.getLogger(CadastrarCliente.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }).start();
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnLimpar;
     private javax.swing.JButton btnVoltar;

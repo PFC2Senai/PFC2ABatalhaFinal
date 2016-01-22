@@ -1,9 +1,10 @@
 package telas;
 
-import funcoes.Backup2;
 import funcoes.ControleBackup;
 import java.awt.Toolkit;
 import java.io.File;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
@@ -15,13 +16,15 @@ import javax.swing.SwingConstants;
 public class Menu extends javax.swing.JFrame {
 
     private String caminho;
+    private Menu telaMenu;
 
     /**
      * Creates new form Menu
      */
     public Menu() {
         initComponents();
-       
+
+        telaMenu = this;
         jBtnRotinaContato.setVerticalTextPosition(SwingConstants.BOTTOM);
         jBtnRotinaContato.setHorizontalTextPosition(SwingConstants.CENTER);
         jBtnCadastrarLembrete.setVerticalTextPosition(SwingConstants.BOTTOM);
@@ -442,6 +445,11 @@ public class Menu extends javax.swing.JFrame {
         jMenu6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/sair.gif"))); // NOI18N
         jMenu6.setText("Sair");
         jMenu6.setActionCommand("System.exit();");
+        jMenu6.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jMenu6MouseClicked(evt);
+            }
+        });
         jMenu6.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenu6ActionPerformed(evt);
@@ -574,20 +582,25 @@ public class Menu extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenu6KeyPressed
 
     private void jMenu6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu6ActionPerformed
-        // TODO add your handling code here:
-        System.exit(WIDTH);
+        File file = new File("C:/Users/Josy/Desktop/Backup");
+        file.mkdir();
+        String caminho = file.getAbsolutePath();
+        ControleBackup app = new ControleBackup(caminho);
+        
+        System.exit(0);
     }//GEN-LAST:event_jMenu6ActionPerformed
 
     private void jBtnFazerBackupActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnFazerBackupActionPerformed
         JFileChooser fc = new JFileChooser();
-
+        fc.setDialogTitle("Selecione um diretório");
+        fc.setApproveButtonText("Salvar");
         // restringe a amostra a diretorios apenas
         fc.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
 
         int res = fc.showOpenDialog(null);
 
         if (res == JFileChooser.APPROVE_OPTION) {
-            
+              
             File diretorio = fc.getSelectedFile();
             caminho = diretorio.getAbsolutePath();
             ControleBackup app = new ControleBackup(caminho);
@@ -597,6 +610,43 @@ public class Menu extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jBtnFazerBackupActionPerformed
 
+    private void jMenu6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu6MouseClicked
+        Backup();        
+    }//GEN-LAST:event_jMenu6MouseClicked
+
+    public void Backup() {
+
+        TelaEspera telaTeste = new TelaEspera();
+        this.setEnabled(false);
+        final Thread t1 = new Thread(new Runnable() {//cria uma thread pra gravar o seu arquivo
+
+            @Override
+            public void run() {
+
+                telaTeste.setVisible(true);
+                File file = new File("C:/Users/Josy/Desktop");
+                file.mkdir();
+                String caminho = file.getAbsolutePath();
+                ControleBackup app = new ControleBackup(caminho);
+            }
+        });
+        t1.start();
+        new Thread(new Runnable() {//cria outra thread pra sua tela de espera
+            @Override
+            public void run() {
+                try {
+                    //cria a tela de espera e mostra ela
+                    t1.join();//fica esperando a primeira thread acabar
+                    telaMenu.setEnabled(true);  // quando acabar fecha a janela de espera, podes fazer outras coisas aqui
+                    telaTeste.dispose();
+                    System.exit(0);
+                } catch (InterruptedException ex) {
+                    Logger.getLogger(CadastrarCliente.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }).start();
+    }
+    
     /**
      * @param args the command line arguments
      */
@@ -628,6 +678,8 @@ public class Menu extends javax.swing.JFrame {
             @Override
             public void run() {
                 new Menu().setVisible(true);
+//                Agendamentos a = new Agendamentos(); 
+//                a.terceiraTarefa(21);
             }
         });   
     }
