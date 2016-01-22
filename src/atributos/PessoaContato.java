@@ -7,6 +7,7 @@ public class PessoaContato {
     private String nomeContato;
     private int codTabEstrangeira;
     private int codContato; // tabela contato no banco
+    private String setorContato;
 
     /**
      * @return the idPessoaContato
@@ -63,4 +64,18 @@ public class PessoaContato {
     public void setCodContato(int codContato) {
         this.codContato = codContato;
     }    
+
+    /**
+     * @return the setorContato
+     */
+    public String getSetorContato() {
+        return setorContato;
+    }
+
+    /**
+     * @param setorContato the setorContato to set
+     */
+    public void setSetorContato(String setorContato) {
+        this.setorContato = setorContato;
+    }
 }

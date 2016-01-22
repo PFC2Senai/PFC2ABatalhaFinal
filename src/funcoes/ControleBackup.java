@@ -94,7 +94,9 @@ public class ControleBackup {
         try {
             // Paralisa por 2 segundos
             Thread.sleep(2000);
+            
         } catch (Exception e) {
+            
         }
     // Termina o aplicativo
         //System.exit(0);
