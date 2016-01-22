@@ -92,7 +92,9 @@ public class Menu extends javax.swing.JFrame {
         jMenu6 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Menu");
         setIconImages(null);
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jBtnRotinaContato.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jBtnRotinaContato.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/1452414361_kontact_1.png"))); // NOI18N
@@ -102,6 +104,7 @@ public class Menu extends javax.swing.JFrame {
                 jBtnRotinaContatoActionPerformed(evt);
             }
         });
+        getContentPane().add(jBtnRotinaContato, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 99, 140, -1));
 
         jBtnCadastrarLembrete.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jBtnCadastrarLembrete.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/CadastrarLembrete.png"))); // NOI18N
@@ -111,6 +114,7 @@ public class Menu extends javax.swing.JFrame {
                 jBtnCadastrarLembreteActionPerformed(evt);
             }
         });
+        getContentPane().add(jBtnCadastrarLembrete, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 174, 140, -1));
 
         jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
@@ -125,6 +129,8 @@ public class Menu extends javax.swing.JFrame {
             .addGap(0, 88, Short.MAX_VALUE)
         );
 
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(611, 11, -1, -1));
+
         jBtnProposta.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jBtnProposta.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/1452415489_icon-57.fw_1.png"))); // NOI18N
         jBtnProposta.setText("Proposta");
@@ -133,16 +139,21 @@ public class Menu extends javax.swing.JFrame {
                 jBtnPropostaActionPerformed(evt);
             }
         });
+        getContentPane().add(jBtnProposta, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 265, 140, -1));
 
         jTextArea1.setColumns(20);
         jTextArea1.setRows(5);
         jTextArea1.setText("Lista mineração:\n\n- cliente mais atendido\n- tipo de serviço mais realizado\n(tipo definido, ex: troca de placa e \ntipo serviço ex: venda aluguel, ou manutenção)\n- peça com mais saída\n- peça com menos saída\n- periodo do ano com mais movimento\n- periodo do ano com menos mevimento\n- qual o período do ano que \ndeterminado setor está em alta\n- qual funcionário realizou mais serviços");
         jScrollPane1.setViewportView(jTextArea1);
 
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(614, 237, 395, 246));
+
         jTextArea2.setColumns(20);
         jTextArea2.setRows(5);
         jTextArea2.setText("Pendências do sistema:\n\n- tela de mineração\n- formatação dos campos(caracteres)\n- referências formatadas nas normas ABNT\n- verificar campos para evitar dados duplicados\n- Backup do banco automático\n- Aviso de estoque baixo\n");
         jScrollPane2.setViewportView(jTextArea2);
+
+        getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(174, 11, 430, 263));
 
         jBtnFazerBackup.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jBtnFazerBackup.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/backup (2).png"))); // NOI18N
@@ -152,6 +163,7 @@ public class Menu extends javax.swing.JFrame {
                 jBtnFazerBackupActionPerformed(evt);
             }
         });
+        getContentPane().add(jBtnFazerBackup, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 350, 140, -1));
 
         jMenu4.setBackground(new java.awt.Color(204, 153, 255));
         jMenu4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/menu.png"))); // NOI18N
@@ -443,53 +455,6 @@ public class Menu extends javax.swing.JFrame {
         jMenuBar1.add(jMenu6);
 
         setJMenuBar(jMenuBar1);
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(jBtnProposta, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jBtnRotinaContato, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jBtnCadastrarLembrete, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jBtnFazerBackup, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
-                .addGap(34, 34, 34)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 430, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(316, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 395, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(39, Short.MAX_VALUE))))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 246, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(88, 88, 88)
-                                .addComponent(jBtnRotinaContato)
-                                .addGap(18, 18, 18)
-                                .addComponent(jBtnCadastrarLembrete)
-                                .addGap(34, 34, 34)
-                                .addComponent(jBtnProposta)
-                                .addGap(28, 28, 28)
-                                .addComponent(jBtnFazerBackup))
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 263, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 76, Short.MAX_VALUE)))
-                .addContainerGap())
-        );
 
         pack();
         setLocationRelativeTo(null);

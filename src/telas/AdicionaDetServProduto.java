@@ -65,67 +65,54 @@ public class AdicionaDetServProduto extends javax.swing.JFrame {
     private void initComponents() {
         bindingGroup = new org.jdesktop.beansbinding.BindingGroup();
 
-        jPanel14 = new javax.swing.JPanel();
-        jComboBoxProduto = new javax.swing.JComboBox();
-        jLabel33 = new javax.swing.JLabel();
-        jBtbIncluirPeca = new javax.swing.JButton();
-        jLabel34 = new javax.swing.JLabel();
-        txtQuantidade = new javax.swing.JTextField();
-        jComboBoxModelo = new javax.swing.JComboBox();
-        jLabel35 = new javax.swing.JLabel();
+        jBtnInserirPeca = new javax.swing.JButton();
+        txtTotalPecas = new javax.swing.JTextField();
+        jLabel2 = new javax.swing.JLabel();
+        jBtnRemoverPeca = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTablePecas = new javax.swing.JTable();
-        jBtnRemoverPeca = new javax.swing.JButton();
-        jLabel36 = new javax.swing.JLabel();
-        jComboBoxFabricante = new javax.swing.JComboBox();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        txtTotalPecas = new javax.swing.JTextField();
-        jBtnInserirPeca = new javax.swing.JButton();
-        jLabel39 = new javax.swing.JLabel();
+        jBtbIncluirPeca = new javax.swing.JButton();
         txtValorUnit = new javax.swing.JTextField();
+        jLabel39 = new javax.swing.JLabel();
+        txtQuantidade = new javax.swing.JTextField();
+        jLabel34 = new javax.swing.JLabel();
+        jComboBoxFabricante = new javax.swing.JComboBox();
+        jLabel36 = new javax.swing.JLabel();
+        jComboBoxModelo = new javax.swing.JComboBox();
+        jLabel35 = new javax.swing.JLabel();
+        jComboBoxProduto = new javax.swing.JComboBox();
+        jLabel33 = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Alterar Peças");
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanel14.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-
-        jComboBoxProduto.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Selecione a Peça" }));
-        jComboBoxProduto.addItemListener(new java.awt.event.ItemListener() {
-            public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                jComboBoxProdutoItemStateChanged(evt);
-            }
-        });
-        jComboBoxProduto.addActionListener(new java.awt.event.ActionListener() {
+        jBtnInserirPeca.setText("Salvar");
+        jBtnInserirPeca.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBoxProdutoActionPerformed(evt);
+                jBtnInserirPecaActionPerformed(evt);
             }
         });
+        getContentPane().add(jBtnInserirPeca, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 410, -1, -1));
+        getContentPane().add(txtTotalPecas, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 410, 172, -1));
 
-        jLabel33.setText("Peça:");
+        jLabel2.setText("Valor total de peças:");
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 410, -1, -1));
 
-        jBtbIncluirPeca.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/add.png"))); // NOI18N
-        jBtbIncluirPeca.setText("Incluir Peça");
-        jBtbIncluirPeca.addActionListener(new java.awt.event.ActionListener() {
+        jBtnRemoverPeca.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/excluir.png"))); // NOI18N
+        jBtnRemoverPeca.setText("Remover");
+
+        org.jdesktop.beansbinding.Binding binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, jTablePecas, org.jdesktop.beansbinding.ELProperty.create("${selectedElement != null}"), jBtnRemoverPeca, org.jdesktop.beansbinding.BeanProperty.create("enabled"));
+        bindingGroup.addBinding(binding);
+
+        jBtnRemoverPeca.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jBtbIncluirPecaActionPerformed(evt);
+                jBtnRemoverPecaActionPerformed(evt);
             }
         });
-
-        jLabel34.setText("Quantidade:");
-
-        jComboBoxModelo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Selecione o Modelo" }));
-        jComboBoxModelo.addItemListener(new java.awt.event.ItemListener() {
-            public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                jComboBoxModeloItemStateChanged(evt);
-            }
-        });
-        jComboBoxModelo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBoxModeloActionPerformed(evt);
-            }
-        });
-
-        jLabel35.setText("Modelo:");
+        getContentPane().add(jBtnRemoverPeca, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 410, -1, -1));
 
         jTablePecas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -146,19 +133,24 @@ public class AdicionaDetServProduto extends javax.swing.JFrame {
         jTablePecas.getTableHeader().setReorderingAllowed(false);
         jScrollPane1.setViewportView(jTablePecas);
 
-        jBtnRemoverPeca.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/excluir.png"))); // NOI18N
-        jBtnRemoverPeca.setText("Remover");
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 270, 632, 130));
 
-        org.jdesktop.beansbinding.Binding binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, jTablePecas, org.jdesktop.beansbinding.ELProperty.create("${selectedElement != null}"), jBtnRemoverPeca, org.jdesktop.beansbinding.BeanProperty.create("enabled"));
-        bindingGroup.addBinding(binding);
-
-        jBtnRemoverPeca.addActionListener(new java.awt.event.ActionListener() {
+        jBtbIncluirPeca.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/add.png"))); // NOI18N
+        jBtbIncluirPeca.setText("Incluir Peça");
+        jBtbIncluirPeca.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jBtnRemoverPecaActionPerformed(evt);
+                jBtbIncluirPecaActionPerformed(evt);
             }
         });
+        getContentPane().add(jBtbIncluirPeca, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 240, -1, -1));
+        getContentPane().add(txtValorUnit, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 200, 90, -1));
 
-        jLabel36.setText("Fabricante:");
+        jLabel39.setText("Valor Unit.");
+        getContentPane().add(jLabel39, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 200, -1, -1));
+        getContentPane().add(txtQuantidade, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 200, 117, -1));
+
+        jLabel34.setText("Quantidade:");
+        getContentPane().add(jLabel34, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 200, -1, -1));
 
         jComboBoxFabricante.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Selecione o Fabricante" }));
         jComboBoxFabricante.addActionListener(new java.awt.event.ActionListener() {
@@ -166,124 +158,123 @@ public class AdicionaDetServProduto extends javax.swing.JFrame {
                 jComboBoxFabricanteActionPerformed(evt);
             }
         });
+        getContentPane().add(jComboBoxFabricante, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 160, 280, -1));
+
+        jLabel36.setText("Fabricante:");
+        getContentPane().add(jLabel36, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 160, -1, -1));
+
+        jComboBoxModelo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Selecione o Modelo" }));
+        jComboBoxModelo.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jComboBoxModeloItemStateChanged(evt);
+            }
+        });
+        jComboBoxModelo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBoxModeloActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jComboBoxModelo, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 120, 280, -1));
+
+        jLabel35.setText("Modelo:");
+        getContentPane().add(jLabel35, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 120, -1, -1));
+
+        jComboBoxProduto.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Selecione a Peça" }));
+        jComboBoxProduto.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jComboBoxProdutoItemStateChanged(evt);
+            }
+        });
+        jComboBoxProduto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBoxProdutoActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jComboBoxProduto, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 80, 280, -1));
+
+        jLabel33.setText("Peça:");
+        getContentPane().add(jLabel33, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 80, -1, -1));
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel1.setText("Alterar Peças");
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 30, -1, -1));
 
-        jLabel2.setText("Valor total de peças:");
-
-        jBtnInserirPeca.setText("Salvar");
-        jBtnInserirPeca.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jBtnInserirPecaActionPerformed(evt);
-            }
-        });
-
-        jLabel39.setText("Valor Unit.");
-
-        javax.swing.GroupLayout jPanel14Layout = new javax.swing.GroupLayout(jPanel14);
-        jPanel14.setLayout(jPanel14Layout);
-        jPanel14Layout.setHorizontalGroup(
-            jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel14Layout.createSequentialGroup()
-                .addGap(30, 30, 30)
-                .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1)
-                    .addGroup(jPanel14Layout.createSequentialGroup()
-                        .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(jPanel14Layout.createSequentialGroup()
-                                .addComponent(jLabel33)
-                                .addGap(18, 18, 18)
-                                .addComponent(jComboBoxProduto, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addGroup(jPanel14Layout.createSequentialGroup()
-                                .addComponent(jLabel35)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jComboBoxModelo, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(14, 14, 14)
-                        .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel14Layout.createSequentialGroup()
-                                .addComponent(jLabel36)
-                                .addGap(18, 18, 18)
-                                .addComponent(jComboBoxFabricante, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel14Layout.createSequentialGroup()
-                                .addComponent(jLabel34)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(txtQuantidade, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel39)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtValorUnit, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                    .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addGroup(jPanel14Layout.createSequentialGroup()
-                            .addComponent(jLabel2)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                            .addComponent(txtTotalPecas, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(351, 351, 351))
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 632, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jBtnRemoverPeca)
-                        .addComponent(jBtbIncluirPeca)))
-                .addContainerGap(41, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel14Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jBtnInserirPeca)
-                .addGap(43, 43, 43))
-        );
-        jPanel14Layout.setVerticalGroup(
-            jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel14Layout.createSequentialGroup()
-                .addContainerGap(30, Short.MAX_VALUE)
-                .addComponent(jLabel1)
-                .addGap(18, 18, 18)
-                .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel33)
-                    .addComponent(jComboBoxProduto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel36)
-                    .addComponent(jComboBoxFabricante, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(21, 21, 21)
-                .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel35)
-                    .addComponent(jComboBoxModelo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel34)
-                    .addComponent(txtQuantidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel39)
-                    .addComponent(txtValorUnit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(26, 26, 26)
-                .addComponent(jBtbIncluirPeca)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jBtnRemoverPeca)
-                .addGap(18, 18, 18)
-                .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(txtTotalPecas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(29, 29, 29)
-                .addComponent(jBtnInserirPeca)
-                .addGap(22, 22, 22))
-        );
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 732, Short.MAX_VALUE)
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(jPanel14, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 450, Short.MAX_VALUE)
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addComponent(jPanel14, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 0, Short.MAX_VALUE)))
-        );
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/troc calor.png"))); // NOI18N
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 0, 250, -1));
 
         bindingGroup.bind();
 
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jBtnInserirPecaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnInserirPecaActionPerformed
+
+        DetServicoProduto dtServ = new DetServicoProduto();
+
+        for(int j = 0; j < jTablePecas.getRowCount(); j++) {
+
+            dtServ.setCodServico(idServico);
+            dtServ.setCodDetProduto(Integer.parseInt(jTablePecas.getValueAt(j, 0).toString()));
+            dtServ.setQuantidade(Integer.parseInt(jTablePecas.getValueAt(j, 7).toString()));
+            DetServicoProdutoDAO.CadDetServProduto(dtServ);
+        }
+
+        double totalGeral = telaDatalharServico.Total();
+        double resultado = totalGeral + totalPeca;
+        ServicoDAO.UpdateTotalServico(idServico, resultado);
+
+        telaDatalharServico.TabelaProduto("SELECT * FROM vw_detservicoproduto where idservico = " + idServico +";");
+        telaDatalharServico.CarregaServico();
+        this.dispose();
+    }//GEN-LAST:event_jBtnInserirPecaActionPerformed
+
+    private void jComboBoxFabricanteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxFabricanteActionPerformed
+        idFabricanteComboBox();
+        if (jComboBoxFabricante.getSelectedItem() != null) {
+            fabricante = jComboBoxFabricante.getSelectedItem().toString();
+            CarregaValorUnit();
+        }
+    }//GEN-LAST:event_jComboBoxFabricanteActionPerformed
+
+    private void jBtnRemoverPecaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnRemoverPecaActionPerformed
+        DefaultTableModel dtm = (DefaultTableModel) jTablePecas.getModel();
+
+        int linha = jTablePecas.getSelectedRow();
+
+        double totalParcial = Double.parseDouble(jTablePecas.getValueAt(linha, 8).toString());
+
+        totalPeca -= totalParcial;
+        txtTotalPecas.setText(String.valueOf(totalPeca));
+
+        if(linha != -1) {
+            dtm.removeRow(linha);
+        }
+    }//GEN-LAST:event_jBtnRemoverPecaActionPerformed
+
+    private void jComboBoxModeloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxModeloActionPerformed
+
+    }//GEN-LAST:event_jComboBoxModeloActionPerformed
+
+    private void jComboBoxModeloItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jComboBoxModeloItemStateChanged
+
+        jComboBoxFabricante.removeAllItems();
+        idModeloComboBox();
+        populaComboBoxFabricante();
+        txtValorUnit.setText("");
+        if (jComboBoxModelo.getSelectedItem() != null) {
+            modelo = jComboBoxModelo.getSelectedItem().toString();
+            CarregaValorUnit();
+        }
+    }//GEN-LAST:event_jComboBoxModeloItemStateChanged
+
+    private void jBtbIncluirPecaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtbIncluirPecaActionPerformed
+        TabelaProduto();
+    }//GEN-LAST:event_jBtbIncluirPecaActionPerformed
+
+    private void jComboBoxProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxProdutoActionPerformed
+
+    }//GEN-LAST:event_jComboBoxProdutoActionPerformed
 
     private void jComboBoxProdutoItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jComboBoxProdutoItemStateChanged
         jComboBoxModelo.removeAllItems();
@@ -299,75 +290,6 @@ public class AdicionaDetServProduto extends javax.swing.JFrame {
         populaComboBoxModelo();
         produto = jComboBoxProduto.getSelectedItem().toString();
     }//GEN-LAST:event_jComboBoxProdutoItemStateChanged
-
-    private void jComboBoxProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxProdutoActionPerformed
-
-    }//GEN-LAST:event_jComboBoxProdutoActionPerformed
-
-    private void jBtbIncluirPecaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtbIncluirPecaActionPerformed
-        TabelaProduto();
-    }//GEN-LAST:event_jBtbIncluirPecaActionPerformed
-
-    private void jComboBoxModeloItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jComboBoxModeloItemStateChanged
-        
-        jComboBoxFabricante.removeAllItems();
-        idModeloComboBox();
-        populaComboBoxFabricante();
-        txtValorUnit.setText("");
-        if (jComboBoxModelo.getSelectedItem() != null) {
-            modelo = jComboBoxModelo.getSelectedItem().toString();
-            CarregaValorUnit();
-        }
-    }//GEN-LAST:event_jComboBoxModeloItemStateChanged
-
-    private void jComboBoxModeloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxModeloActionPerformed
-
-    }//GEN-LAST:event_jComboBoxModeloActionPerformed
-
-    private void jBtnRemoverPecaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnRemoverPecaActionPerformed
-        DefaultTableModel dtm = (DefaultTableModel) jTablePecas.getModel();
-        
-        int linha = jTablePecas.getSelectedRow();
-
-        double totalParcial = Double.parseDouble(jTablePecas.getValueAt(linha, 8).toString());
-        
-        totalPeca -= totalParcial;
-        txtTotalPecas.setText(String.valueOf(totalPeca));
-        
-        
-        if(linha != -1) {
-            dtm.removeRow(linha);
-        }
-    }//GEN-LAST:event_jBtnRemoverPecaActionPerformed
-
-    private void jComboBoxFabricanteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxFabricanteActionPerformed
-        idFabricanteComboBox();
-        if (jComboBoxFabricante.getSelectedItem() != null) {
-            fabricante = jComboBoxFabricante.getSelectedItem().toString();
-            CarregaValorUnit();
-        }
-    }//GEN-LAST:event_jComboBoxFabricanteActionPerformed
-
-    private void jBtnInserirPecaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnInserirPecaActionPerformed
-        
-        DetServicoProduto dtServ = new DetServicoProduto();
-        
-        for(int j = 0; j < jTablePecas.getRowCount(); j++) {
-
-            dtServ.setCodServico(idServico);
-            dtServ.setCodDetProduto(Integer.parseInt(jTablePecas.getValueAt(j, 0).toString()));
-            dtServ.setQuantidade(Integer.parseInt(jTablePecas.getValueAt(j, 7).toString()));
-            DetServicoProdutoDAO.CadDetServProduto(dtServ);
-        }
-                      
-        double totalGeral = telaDatalharServico.Total();
-        double resultado = totalGeral + totalPeca;
-        ServicoDAO.UpdateTotalServico(idServico, resultado);
-        
-        telaDatalharServico.TabelaProduto("SELECT * FROM vw_detservicoproduto where idservico = " + idServico +";");
-        telaDatalharServico.CarregaServico();
-        this.dispose();
-    }//GEN-LAST:event_jBtnInserirPecaActionPerformed
     
     public void TabelaProduto() {
                
@@ -537,12 +459,12 @@ public class AdicionaDetServProduto extends javax.swing.JFrame {
     private javax.swing.JComboBox jComboBoxProduto;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel33;
     private javax.swing.JLabel jLabel34;
     private javax.swing.JLabel jLabel35;
     private javax.swing.JLabel jLabel36;
     private javax.swing.JLabel jLabel39;
-    private javax.swing.JPanel jPanel14;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTablePecas;
     private javax.swing.JTextField txtQuantidade;
