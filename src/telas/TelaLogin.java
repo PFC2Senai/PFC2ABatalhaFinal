@@ -39,6 +39,9 @@ public class TelaLogin extends javax.swing.JFrame {
         txtSenha = new javax.swing.JPasswordField();
         jComBTipoUser = new javax.swing.JComboBox();
         jButtonAcesso = new javax.swing.JButton();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -49,30 +52,43 @@ public class TelaLogin extends javax.swing.JFrame {
 
         login.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, null, new java.awt.Color(0, 204, 153), null, null));
         login.setSelectionColor(new java.awt.Color(0, 0, 0));
-        getContentPane().add(login, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 130, 160, -1));
+        getContentPane().add(login, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 120, 160, -1));
 
         txtSenha.setToolTipText("");
         txtSenha.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, null, new java.awt.Color(0, 204, 153), null, null));
         txtSenha.setSelectionColor(new java.awt.Color(0, 0, 0));
-        getContentPane().add(txtSenha, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 170, 160, -1));
+        getContentPane().add(txtSenha, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 170, 160, -1));
 
-        jComBTipoUser.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Selecione o tipo de usuário", "Administrador", "Funcionário" }));
+        jComBTipoUser.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Usuário", "Administrador", "Funcionário" }));
         jComBTipoUser.setToolTipText("");
-        getContentPane().add(jComBTipoUser, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 200, 200, -1));
+        getContentPane().add(jComBTipoUser, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 200, 90, -1));
 
         jButtonAcesso.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jButtonAcesso.setText("Acessar");
+        jButtonAcesso.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/ok.png"))); // NOI18N
+        jButtonAcesso.setText("Ok");
         jButtonAcesso.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(0, 204, 153)));
         jButtonAcesso.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonAcessoActionPerformed(evt);
             }
         });
-        getContentPane().add(jButtonAcesso, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 230, 72, 27));
+        getContentPane().add(jButtonAcesso, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 200, 60, 20));
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/LogoMarcaDgua (2).png"))); // NOI18N
-        jLabel1.setText("jLabel1");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 540, 330));
+        jLabel4.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        jLabel4.setText("LOGIN");
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 30, 90, 20));
+
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/adm.png"))); // NOI18N
+        jLabel2.setText("Usuário:");
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 100, -1, -1));
+
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/key (2).png"))); // NOI18N
+        jLabel3.setText("Senha:");
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 150, -1, -1));
+
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/Login.png"))); // NOI18N
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 300));
 
         pack();
         setLocationRelativeTo(null);
@@ -162,6 +178,9 @@ public class TelaLogin extends javax.swing.JFrame {
     private javax.swing.JButton jButtonAcesso;
     private javax.swing.JComboBox jComBTipoUser;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JTextField login;
     private javax.swing.JPasswordField txtSenha;
