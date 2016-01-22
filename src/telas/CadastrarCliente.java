@@ -279,6 +279,7 @@ public class CadastrarCliente extends javax.swing.JFrame {
                 "Contato", "Telefone", "Celular", "Email"
             }
         ));
+        jTableContatos.getTableHeader().setReorderingAllowed(false);
         jScrollPane1.setViewportView(jTableContatos);
 
         jBtnRemoverContato.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/excluir.png"))); // NOI18N
@@ -747,87 +748,12 @@ public class CadastrarCliente extends javax.swing.JFrame {
     }//GEN-LAST:event_jBtnSalvarSetorActionPerformed
 
     private void jBtnCarregaCepActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnCarregaCepActionPerformed
-
-        TelaEspera telaTeste = new TelaEspera();
-        this.setEnabled(false);
-        final Thread t1 = new Thread(new Runnable() {//cria uma thread pra gravar o seu arquivo
-
-            @Override
-            public void run() {
-
-                try {
-
-                    telaTeste.setVisible(true);
-                    CarregaCEP cep = new CarregaCEP();
-
-                    String ceptxt = txtCep.getText();
-                    txtCidade.setText(cep.getCidade(ceptxt));
-                    txtBairro.setText(cep.getBairro(ceptxt));
-                    txtRua.setText(cep.getEndereco(ceptxt));
-                    txtEstado.setText(cep.getUF(ceptxt));
-
-                } catch (IOException ex) {
-                    JOptionPane.showMessageDialog(null, ex);
-                }
-            }
-        });
-        t1.start();
-        new Thread(new Runnable() {//cria outra thread pra sua tela de espera
-            @Override
-            public void run() {
-                try {
-                    //cria a tela de espera e mostra ela
-                    t1.join();//fica esperando a primeira thread acabar
-                    telaCliente.setEnabled(true);  // quando acabar fecha a janela de espera, podes fazer outras coisas aqui
-                    telaTeste.dispose();
-                } catch (InterruptedException ex) {
-                    Logger.getLogger(CadastrarCliente.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            }
-        }).start();
-
+        CarregaCep();
     }//GEN-LAST:event_jBtnCarregaCepActionPerformed
 
     private void txtCepActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCepActionPerformed
 
-        TelaEspera telaTeste = new TelaEspera();
-        this.setEnabled(false);
-        final Thread t1 = new Thread(new Runnable() {//cria uma thread pra gravar o seu arquivo
-
-            @Override
-            public void run() {
-
-                try {
-
-                    telaTeste.setVisible(true);
-                    CarregaCEP cep = new CarregaCEP();
-
-                    String ceptxt = txtCep.getText();
-                    txtCidade.setText(cep.getCidade(ceptxt));
-                    txtBairro.setText(cep.getBairro(ceptxt));
-                    txtRua.setText(cep.getEndereco(ceptxt));
-                    txtEstado.setText(cep.getUF(ceptxt));
-
-                } catch (IOException ex) {
-                    JOptionPane.showMessageDialog(null, "CEP não encontrado.");
-                }
-            }
-        });
-        t1.start();
-        new Thread(new Runnable() {//cria outra thread pra sua tela de espera
-            @Override
-            public void run() {
-                try {
-                    //cria a tela de espera e mostra ela
-                    t1.join();//fica esperando a primeira thread acabar
-                    telaCliente.setEnabled(true);  // quando acabar fecha a janela de espera, podes fazer outras coisas aqui
-                    telaTeste.dispose();
-                } catch (InterruptedException ex) {
-                    Logger.getLogger(CadastrarCliente.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            }
-        }).start();
-
+        CarregaCep();
     }//GEN-LAST:event_txtCepActionPerformed
 
     private void txtEmailFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtEmailFocusLost
@@ -978,15 +904,56 @@ public class CadastrarCliente extends javax.swing.JFrame {
 
                 jLabelEmail.setText("E-mail Inválido");
 
-               // txtEmail.requestFocus();
+                // txtEmail.requestFocus();
             }
 
         } else {
 
             jLabelEmail.setText("E-mail Inválido");
 
-          //  txtEmail.requestFocus();
+            //  txtEmail.requestFocus();
         }
+    }
+    
+    public void CarregaCep() {
+
+        TelaEspera telaTeste = new TelaEspera();
+        this.setEnabled(false);
+        final Thread t1 = new Thread(new Runnable() {//cria uma thread pra gravar o seu arquivo
+
+            @Override
+            public void run() {
+
+                try {
+
+                    telaTeste.setVisible(true);
+                    CarregaCEP cep = new CarregaCEP();
+
+                    String ceptxt = txtCep.getText();
+                    txtCidade.setText(cep.getCidade(ceptxt));
+                    txtBairro.setText(cep.getBairro(ceptxt));
+                    txtRua.setText(cep.getEndereco(ceptxt));
+                    txtEstado.setText(cep.getUF(ceptxt));
+
+                } catch (IOException ex) {
+                    JOptionPane.showMessageDialog(null, "CEP não encontrado.");
+                }
+            }
+        });
+        t1.start();
+        new Thread(new Runnable() {//cria outra thread pra sua tela de espera
+            @Override
+            public void run() {
+                try {
+                    //cria a tela de espera e mostra ela
+                    t1.join();//fica esperando a primeira thread acabar
+                    telaCliente.setEnabled(true);  // quando acabar fecha a janela de espera, podes fazer outras coisas aqui
+                    telaTeste.dispose();
+                } catch (InterruptedException ex) {
+                    Logger.getLogger(CadastrarCliente.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }).start();
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

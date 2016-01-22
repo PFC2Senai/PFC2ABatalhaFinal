@@ -58,10 +58,11 @@ public class Agendamentos {
         }, data.getTime() );
     }
     
-    public void terceiraTarefa(Calendar data) {
+    public void terceiraTarefa(int dia) {
         
         Calendar c = Calendar.getInstance();
-        c.set(Calendar.HOUR_OF_DAY, 22);
+        c.set(Calendar.DAY_OF_MONTH, dia);
+        c.set(Calendar.HOUR_OF_DAY, 23);
         c.set(Calendar.MINUTE, 31);
         c.set(Calendar.SECOND, 0);
 
