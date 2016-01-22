@@ -1,5 +1,7 @@
 package funcoes;
 
+import java.io.File;
+
 /**
  *
  * @author Josy
@@ -11,5 +13,12 @@ public class Execucoes {
             System.out.println(i + " * " + valor + " = " + (i * valor));
         }
     }
-}
 
+    public void BackupAutomatico() {
+        
+        File file = new File("C:/Users/Josy/Desktop/Backup");
+        file.mkdir();
+        String caminho = file.getAbsolutePath();
+        ControleBackup app = new ControleBackup(caminho);
+    }
+}

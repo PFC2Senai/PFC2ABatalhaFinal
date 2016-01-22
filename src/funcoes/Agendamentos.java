@@ -13,10 +13,12 @@ public class Agendamentos {
 
     private static int count = 0;
 
-    public static void main(String[] args) {
-        Agendamentos a = new Agendamentos();
-        a.primeiraTarefa();
-    }
+//    public static void main(String[] args) {
+//        Agendamentos a = new Agendamentos();
+//       // a.primeiraTarefa();
+//       // a.segundaTarefa();
+//        a.terceiraTarefa();
+//    }
 
     private void primeiraTarefa() {
         final Timer t = new Timer();
@@ -56,10 +58,11 @@ public class Agendamentos {
         }, data.getTime() );
     }
     
-     private void terceiraTarefa() {
+    public void terceiraTarefa(Calendar data) {
+        
         Calendar c = Calendar.getInstance();
-        c.set(Calendar.HOUR_OF_DAY, 18);
-        c.set(Calendar.MINUTE, 22);
+        c.set(Calendar.HOUR_OF_DAY, 22);
+        c.set(Calendar.MINUTE, 31);
         c.set(Calendar.SECOND, 0);
 
         Date time = c.getTime();

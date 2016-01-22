@@ -53,96 +53,94 @@ public class CadastrarCliente extends javax.swing.JFrame {
         txtNumero.setDocument(new LimitarDigitos(6));
         txtTelCel.setDocument(new LimitarDigitos(20));
     }
-    
-    
-    
-    private boolean VerificaCampos(){
+
+    private boolean VerificaCampos() {
         boolean valida = true;
-        
-          if (txtEmpresa.getText().trim().equals("")){
-    JOptionPane.showMessageDialog(null, "Campo(s) vazio(s)!");
-    valida = false;
-    return valida;
+
+        if (txtEmpresa.getText().trim().equals("")) {
+            JOptionPane.showMessageDialog(null, "Campo(s) vazio(s)!");
+            valida = false;
+            return valida;
         }
-        
-         if (txtSetor.getText().trim().equals("")){
-    JOptionPane.showMessageDialog(null, "Campo(s) vazio(s)!");
-    valida = false;
-    return valida;
+
+        if (txtSetor.getText().trim().equals("")) {
+            JOptionPane.showMessageDialog(null, "Campo(s) vazio(s)!");
+            valida = false;
+            return valida;
         }
-         
-            if (txtEndCep.getText().trim().equals("")){
-    JOptionPane.showMessageDialog(null, "Campo(s) vazio(s)!");
-    valida = false;
-    return valida;
+
+        if (txtEndCep.getText().trim().equals("")) {
+            JOptionPane.showMessageDialog(null, "Campo(s) vazio(s)!");
+            valida = false;
+            return valida;
         }
-        
-         if (txtContato.getText().trim().equals("")){
-    JOptionPane.showMessageDialog(null, "Campo(s) vazio(s)!");
-    valida = false;
-    return valida;
+
+        if (txtContato.getText().trim().equals("")) {
+            JOptionPane.showMessageDialog(null, "Campo(s) vazio(s)!");
+            valida = false;
+            return valida;
         }
-        
-         if (txtTelCel.getText().trim().equals("")){
-    JOptionPane.showMessageDialog(null, "Campo(s) vazio(s)!");
-    valida = false;
-    return valida;
+
+        if (txtTelCel.getText().trim().equals("")) {
+            JOptionPane.showMessageDialog(null, "Campo(s) vazio(s)!");
+            valida = false;
+            return valida;
         }
-         
-            if (txtEmail.getText().trim().equals("")){
-    JOptionPane.showMessageDialog(null, "Campo(s) vazio(s)!");
-    valida = false;
-    return valida;
+
+        if (txtEmail.getText().trim().equals("")) {
+            JOptionPane.showMessageDialog(null, "Campo(s) vazio(s)!");
+            valida = false;
+            return valida;
         }
-        
-         if (txtPais.getText().trim().equals("")){
-    JOptionPane.showMessageDialog(null, "Campo(s) vazio(s)!");
-    valida = false;
-    return valida;
+
+        if (txtPais.getText().trim().equals("")) {
+            JOptionPane.showMessageDialog(null, "Campo(s) vazio(s)!");
+            valida = false;
+            return valida;
         }
-         
-            if (txtCidade.getText().trim().equals("")){
-    JOptionPane.showMessageDialog(null, "Campo(s) vazio(s)!");
-    valida = false;
-    return valida;
+
+        if (txtCidade.getText().trim().equals("")) {
+            JOptionPane.showMessageDialog(null, "Campo(s) vazio(s)!");
+            valida = false;
+            return valida;
         }
-        
-         if (txtRua.getText().trim().equals("")){
-    JOptionPane.showMessageDialog(null, "Campo(s) vazio(s)!");
-    valida = false;
-    return valida;
+
+        if (txtRua.getText().trim().equals("")) {
+            JOptionPane.showMessageDialog(null, "Campo(s) vazio(s)!");
+            valida = false;
+            return valida;
         }
-         
-            if (txtCep.getText().trim().equals("")){
-    JOptionPane.showMessageDialog(null, "Campo(s) vazio(s)!");
-    valida = false;
-    return valida;
+
+        if (txtCep.getText().trim().equals("")) {
+            JOptionPane.showMessageDialog(null, "Campo(s) vazio(s)!");
+            valida = false;
+            return valida;
         }
-        
-         if (txtEstado.getText().trim().equals("")){
-    JOptionPane.showMessageDialog(null, "Campo(s) vazio(s)!");
-    valida = false;
-    return valida;
+
+        if (txtEstado.getText().trim().equals("")) {
+            JOptionPane.showMessageDialog(null, "Campo(s) vazio(s)!");
+            valida = false;
+            return valida;
         }
-         
-            if (txtBairro.getText().trim().equals("")){
-    JOptionPane.showMessageDialog(null, "Campo(s) vazio(s)!");
-    valida = false;
-    return valida;
+
+        if (txtBairro.getText().trim().equals("")) {
+            JOptionPane.showMessageDialog(null, "Campo(s) vazio(s)!");
+            valida = false;
+            return valida;
         }
-        
-         if (txtNumero.getText().trim().equals("")){
-    JOptionPane.showMessageDialog(null, "Campo(s) vazio(s)!");
-    valida = false;
-    return valida;
+
+        if (txtNumero.getText().trim().equals("")) {
+            JOptionPane.showMessageDialog(null, "Campo(s) vazio(s)!");
+            valida = false;
+            return valida;
         }
-         
-         if (jComboBoxSetores.getSelectedIndex() == 0){
-          JOptionPane.showMessageDialog(null, "Campo(s) vazio(s)!");
-    valida = false;
-    return valida;   
-         }
-         return valida;
+
+        if (jComboBoxSetores.getSelectedIndex() == 0) {
+            JOptionPane.showMessageDialog(null, "Campo(s) vazio(s)!");
+            valida = false;
+            return valida;
+        }
+        return valida;
     }
 
     /**
@@ -618,58 +616,69 @@ public class CadastrarCliente extends javax.swing.JFrame {
     }//GEN-LAST:event_btnCancelarActionPerformed
 
     private void btnCadClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadClienteActionPerformed
-        if (VerificaCampos() == true){
-            
-        if (ClienteDAO.VerificarCliente(txtEndCep.getText()) == false) {
+        if (VerificaCampos() == true) {
 
-            Cliente cli = new Cliente();
-            Telefone tel = new Telefone();
-            PessoaContato pContato = new PessoaContato();
-            String email;
-            Endereco endereco = new Endereco();
+            if (ClienteDAO.VerificarCliente(txtEndCep.getText()) == false) {
 
-            cli.setCodUser(idUsuario());
-            cli.setEmpresa(txtEmpresa.getText());
-            cli.setCnpj(txtEndCep.getText());
-            cli.setCodSetor(codSetor);
+                Cliente cli = new Cliente();
+                Telefone tel = new Telefone();
+                PessoaContato pContato = new PessoaContato();
+                String email;
+                Endereco endereco = new Endereco();
 
-            int i = ContatosDAO.CadContato();
+                cli.setCodUser(idUsuario());
+                cli.setEmpresa(txtEmpresa.getText());
+                cli.setCnpj(txtEndCep.getText());
+                cli.setCodSetor(codSetor);
 
-            cli.setIdContato(i);
+                int i = ContatosDAO.CadContato();
 
-            int codCli = ClienteDAO.CadCliente(cli);
+                cli.setIdContato(i);
 
-            endereco.setPais(txtPais.getText());
-            endereco.setCep(txtCep.getText());
-            endereco.setRua(txtRua.getText());
-            endereco.setNumero(txtNumero.getText());
-            endereco.setBairro(txtBairro.getText());
-            endereco.setCidade(txtCidade.getText());
-            endereco.setEstado(txtEstado.getText());
-            endereco.setIdContato(i);
+                int codCli = ClienteDAO.CadCliente(cli);
 
-            ContatosDAO.CadEndereco(endereco);
+                endereco.setPais(txtPais.getText());
+                endereco.setCep(txtCep.getText());
+                endereco.setRua(txtRua.getText());
+                endereco.setNumero(txtNumero.getText());
+                endereco.setBairro(txtBairro.getText());
+                endereco.setCidade(txtCidade.getText());
+                endereco.setEstado(txtEstado.getText());
+                endereco.setIdContato(i);
 
-            for (int j = 0; j < jTableContatos.getRowCount(); j++) {
+                ContatosDAO.CadEndereco(endereco);
 
-                pContato.setNomeContato(jTableContatos.getValueAt(j, 0).toString());
-                tel.setTel(jTableContatos.getValueAt(j, 1).toString());
-                tel.setCel(jTableContatos.getValueAt(j, 2).toString());
-                email = jTableContatos.getValueAt(j, 3).toString();
+                for (int j = 0; j < jTableContatos.getRowCount(); j++) {
 
-                int codContato = ContatosDAO.CadContato();
+                    pContato.setNomeContato(jTableContatos.getValueAt(j, 0).toString());
+                    tel.setTel(jTableContatos.getValueAt(j, 1).toString());
+                    tel.setCel(jTableContatos.getValueAt(j, 2).toString());
+                    email = jTableContatos.getValueAt(j, 3).toString();
 
-                ContatosDAO.CadTel(codContato, tel);
-                ContatosDAO.CadEmail(codContato, email);
-                pContato.setCodTabEstrangeira(codCli);
-                pContato.setCodContato(codContato);
+                    int codContato = ContatosDAO.CadContato();
 
-                PessoaContatoDAO.CadPessoaContato(pContato);
-                descricaoAudit = "Empresa " + cli.getEmpresa() + " /CNPJ: " + cli.getCnpj() + " foi cadastrada.";
-                AuditoriaDAO.CadDetAuditoria(descricaoAudit);
+                    ContatosDAO.CadTel(codContato, tel);
+                    ContatosDAO.CadEmail(codContato, email);
+                    pContato.setCodTabEstrangeira(codCli);
+                    pContato.setCodContato(codContato);
+
+                    PessoaContatoDAO.CadPessoaContato(pContato);
+                    descricaoAudit = "Empresa " + cli.getEmpresa() + " /CNPJ: " + cli.getCnpj() + " foi cadastrada.";
+                    AuditoriaDAO.CadDetAuditoria(descricaoAudit);
+                }
+
+                limparCampos();
+                ((DefaultTableModel) jTableContatos.getModel()).setNumRows(0);
+                jTableContatos.updateUI();
+
+                JOptionPane.showMessageDialog(null, "Cadastrado com sucesso!");
+
+                if (JOptionPane.showConfirmDialog(null, "Deseja continuar cadastrando?", "Confirmar a Exclusão", JOptionPane.YES_NO_OPTION) == 1) {
+                    this.dispose();
+                }
+            } else {
+                JOptionPane.showMessageDialog(null, "Cliente ja cadastrado !");
             }
-
-            
 
             limparCampos();
             ((DefaultTableModel) jTableContatos.getModel()).setNumRows(0);
@@ -677,25 +686,12 @@ public class CadastrarCliente extends javax.swing.JFrame {
 
             JOptionPane.showMessageDialog(null, "Cadastrado com sucesso!");
 
-            if (JOptionPane.showConfirmDialog(null, "Deseja continuar cadastrando?", "Confirmar a Exclusão", JOptionPane.YES_NO_OPTION) == 1) {
+            if (JOptionPane.showConfirmDialog(null, "Deseja continuar cadastrando?", "Outro Cadastro", JOptionPane.YES_NO_OPTION) == 1) {
                 this.dispose();
             }
-        } else {
-            JOptionPane.showMessageDialog(null, "Cliente ja cadastrado !");
-        }       
 
-        limparCampos();
-        ((DefaultTableModel) jTableContatos.getModel()).setNumRows(0);
-        jTableContatos.updateUI();
-
-        JOptionPane.showMessageDialog(null, "Cadastrado com sucesso!");
-
-        if (JOptionPane.showConfirmDialog(null, "Deseja continuar cadastrando?", "Outro Cadastro", JOptionPane.YES_NO_OPTION) == 1) {
-            this.dispose();
         }
 
-    }
-        
     }//GEN-LAST:event_btnCadClienteActionPerformed
 
     private void jBtnOutroContatoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnOutroContatoActionPerformed
@@ -983,7 +979,6 @@ public class CadastrarCliente extends javax.swing.JFrame {
                 jLabelEmail.setText("E-mail Inválido");
 
                // txtEmail.requestFocus();
-
             }
 
         } else {
@@ -991,7 +986,6 @@ public class CadastrarCliente extends javax.swing.JFrame {
             jLabelEmail.setText("E-mail Inválido");
 
           //  txtEmail.requestFocus();
-
         }
     }
 
