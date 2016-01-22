@@ -11,7 +11,6 @@ import funcoes.CarregaCEP;
 import funcoes.ClienteDAO;
 import funcoes.Conexao;
 import funcoes.ContatosDAO;
-import funcoes.EquipamentoDAO;
 import funcoes.LimitarDigitos;
 import funcoes.PessoaContatoDAO;
 import funcoes.SetorDAO;
@@ -26,17 +25,11 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 public class CadastrarCliente extends javax.swing.JFrame {
-
-    private int codEquipamento;
-    private int codModeloEqui;
-    private int codDetEquipamento;
-    private String modeloEqui;
-    private int codFabricanteEqui;
-    private String equipamento;
+   
     private PreparedStatement pst;
     private String descricaoAudit;
     private int codSetor;
-    private String fabricanteEqui;
+    
     private CadastrarCliente telaCliente;
 
     public CadastrarCliente() {
@@ -161,7 +154,6 @@ public class CadastrarCliente extends javax.swing.JFrame {
     private void initComponents() {
         bindingGroup = new org.jdesktop.beansbinding.BindingGroup();
 
-        jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         btnLimpar = new javax.swing.JButton();
@@ -208,22 +200,7 @@ public class CadastrarCliente extends javax.swing.JFrame {
         jBtnNovoSetor = new javax.swing.JButton();
         jBtnSalvarSetor = new javax.swing.JButton();
         jBtnCancelarSetor = new javax.swing.JButton();
-        jBtnAvancarPainelFuncionario = new javax.swing.JButton();
-        jPanel5 = new javax.swing.JPanel();
         btnCadCliente = new javax.swing.JButton();
-        jPanel6 = new javax.swing.JPanel();
-        jLabel17 = new javax.swing.JLabel();
-        jBtnRemoveEquipamento = new javax.swing.JButton();
-        jBtbIncluirEquipamento = new javax.swing.JButton();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        jTableEquipamento = new javax.swing.JTable();
-        jLabel37 = new javax.swing.JLabel();
-        jComboBoxModeloEquip = new javax.swing.JComboBox();
-        jLabel38 = new javax.swing.JLabel();
-        jComboBoxFabricanteEquip = new javax.swing.JComboBox();
-        uJComboBoxEquipamento = new componentes.UJComboBox();
-        jBtnVoltarPainelPecas = new javax.swing.JButton();
-        btnCancelar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -605,18 +582,6 @@ public class CadastrarCliente extends javax.swing.JFrame {
 
         jPanel1.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(25, 38, 710, 90));
 
-        jBtnAvancarPainelFuncionario.setText("Avançar");
-        jBtnAvancarPainelFuncionario.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jBtnAvancarPainelFuncionarioActionPerformed(evt);
-            }
-        });
-        jPanel1.add(jBtnAvancarPainelFuncionario, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 550, -1, -1));
-
-        jTabbedPane1.addTab("Dados do Cliente", new javax.swing.ImageIcon(getClass().getResource("/imagens/cliente3.png")), jPanel1); // NOI18N
-
-        jPanel5.setBackground(new java.awt.Color(223, 237, 253));
-
         btnCadCliente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/cliente.png"))); // NOI18N
         btnCadCliente.setText("Cadastrar");
         btnCadCliente.addActionListener(new java.awt.event.ActionListener() {
@@ -624,190 +589,17 @@ public class CadastrarCliente extends javax.swing.JFrame {
                 btnCadClienteActionPerformed(evt);
             }
         });
-
-        jPanel6.setBackground(new java.awt.Color(223, 237, 253));
-        jPanel6.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Equipamento", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 2, 11))); // NOI18N
-
-        jLabel17.setText("Equipamento:");
-
-        jBtnRemoveEquipamento.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/excluir.png"))); // NOI18N
-        jBtnRemoveEquipamento.setText("Remover");
-        jBtnRemoveEquipamento.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jBtnRemoveEquipamentoActionPerformed(evt);
-            }
-        });
-
-        jBtbIncluirEquipamento.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/add.png"))); // NOI18N
-        jBtbIncluirEquipamento.setText("IncluirEquipamento");
-        jBtbIncluirEquipamento.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jBtbIncluirEquipamentoActionPerformed(evt);
-            }
-        });
-
-        jTableEquipamento.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-                "Codigo", "Id modelo", "Id fabricante", "Equipamento", "Modelo", "Fabricante"
-            }
-        ) {
-            boolean[] canEdit = new boolean [] {
-                false, false, true, false, false, true
-            };
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
-        jTableEquipamento.getTableHeader().setReorderingAllowed(false);
-        jScrollPane2.setViewportView(jTableEquipamento);
-
-        jLabel37.setText("Modelo:");
-
-        jComboBoxModeloEquip.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Selecione o Modelo" }));
-        jComboBoxModeloEquip.addItemListener(new java.awt.event.ItemListener() {
-            public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                jComboBoxModeloEquipItemStateChanged(evt);
-            }
-        });
-        jComboBoxModeloEquip.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBoxModeloEquipActionPerformed(evt);
-            }
-        });
-
-        jLabel38.setText("Fabricante:");
-
-        jComboBoxFabricanteEquip.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Selecione o Fabricante" }));
-        jComboBoxFabricanteEquip.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBoxFabricanteEquipActionPerformed(evt);
-            }
-        });
-
-        uJComboBoxEquipamento.setEditable(true);
-        uJComboBoxEquipamento.addItemListener(new java.awt.event.ItemListener() {
-            public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                uJComboBoxEquipamentoItemStateChanged(evt);
-            }
-        });
-        uJComboBoxEquipamento.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                uJComboBoxEquipamentoActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
-        jPanel6.setLayout(jPanel6Layout);
-        jPanel6Layout.setHorizontalGroup(
-            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel6Layout.createSequentialGroup()
-                .addGap(49, 49, 49)
-                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
-                        .addComponent(jLabel38)
-                        .addGap(18, 18, 18)
-                        .addComponent(jComboBoxFabricanteEquip, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(jPanel6Layout.createSequentialGroup()
-                        .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel17)
-                            .addComponent(jLabel37))
-                        .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
-                                .addGap(7, 7, 7)
-                                .addComponent(jComboBoxModeloEquip, javax.swing.GroupLayout.PREFERRED_SIZE, 264, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel6Layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(uJComboBoxEquipamento, javax.swing.GroupLayout.PREFERRED_SIZE, 261, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(jPanel6Layout.createSequentialGroup()
-                .addContainerGap(44, Short.MAX_VALUE)
-                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jBtnRemoveEquipamento)
-                    .addComponent(jBtbIncluirEquipamento)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 573, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(44, Short.MAX_VALUE))
-        );
-        jPanel6Layout.setVerticalGroup(
-            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel6Layout.createSequentialGroup()
-                .addGap(71, 71, 71)
-                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel17)
-                    .addComponent(uJComboBoxEquipamento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel37)
-                    .addComponent(jComboBoxModeloEquip, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel38)
-                    .addComponent(jComboBoxFabricanteEquip, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, Short.MAX_VALUE)
-                .addComponent(jBtbIncluirEquipamento)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jBtnRemoveEquipamento)
-                .addGap(58, 58, 58))
-        );
-
-        jBtnVoltarPainelPecas.setText("Voltar");
-        jBtnVoltarPainelPecas.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jBtnVoltarPainelPecasActionPerformed(evt);
-            }
-        });
-
-        btnCancelar.setText("Cancelar");
-
-        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
-        jPanel5.setLayout(jPanel5Layout);
-        jPanel5Layout.setHorizontalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel5Layout.createSequentialGroup()
-                .addContainerGap(44, Short.MAX_VALUE)
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addGroup(jPanel5Layout.createSequentialGroup()
-                        .addComponent(jBtnVoltarPainelPecas)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnCancelar)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnCadCliente))
-                    .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(50, 50, 50))
-        );
-        jPanel5Layout.setVerticalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
-                .addContainerGap(39, Short.MAX_VALUE)
-                .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel5Layout.createSequentialGroup()
-                        .addGap(40, 40, 40)
-                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(btnCadCliente)
-                            .addComponent(btnCancelar)))
-                    .addGroup(jPanel5Layout.createSequentialGroup()
-                        .addGap(30, 30, 30)
-                        .addComponent(jBtnVoltarPainelPecas)))
-                .addGap(28, 28, 28))
-        );
-
-        jTabbedPane1.addTab("Dados do Equipamanto", new javax.swing.ImageIcon(getClass().getResource("/imagens/equipamento.png")), jPanel5); // NOI18N
+        jPanel1.add(btnCadCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 550, -1, 30));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane1, javax.swing.GroupLayout.Alignment.TRAILING)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 767, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 626, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 596, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         bindingGroup.bind();
@@ -815,37 +607,6 @@ public class CadastrarCliente extends javax.swing.JFrame {
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-
-    private void jComboBoxSetoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxSetoresActionPerformed
-        idSetorComboBox();
-    }//GEN-LAST:event_jComboBoxSetoresActionPerformed
-
-    private void btnLimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimparActionPerformed
-        limparCampos();
-    }//GEN-LAST:event_btnLimparActionPerformed
-
-    private void jBtnOutroContatoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnOutroContatoActionPerformed
-        TabelaContatos();
-    }//GEN-LAST:event_jBtnOutroContatoActionPerformed
-
-    private void jBtnRemoverContatoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnRemoverContatoActionPerformed
-
-        DefaultTableModel dtm = (DefaultTableModel) jTableContatos.getModel();
-        int linha = jTableContatos.getSelectedRow();
-
-        if (linha != -1) {
-            dtm.removeRow(linha);
-        }
-    }//GEN-LAST:event_jBtnRemoverContatoActionPerformed
-
-    private void jBtnNovoSetorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnNovoSetorActionPerformed
-
-        txtSetor.setVisible(true);
-        jComboBoxSetores.setVisible(false);
-        jBtnSalvarSetor.setVisible(true);
-        jBtnCancelarSetor.setVisible(true);
-        jBtnNovoSetor.setVisible(false);
-    }//GEN-LAST:event_jBtnNovoSetorActionPerformed
 
     private void jBtnCancelarSetorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnCancelarSetorActionPerformed
 
@@ -873,32 +634,41 @@ public class CadastrarCliente extends javax.swing.JFrame {
 
         populaComboBox();
         jComboBoxSetores.setSelectedItem(setor.getSetor());
-
     }//GEN-LAST:event_jBtnSalvarSetorActionPerformed
+
+    private void jBtnNovoSetorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnNovoSetorActionPerformed
+
+        txtSetor.setVisible(true);
+        jComboBoxSetores.setVisible(false);
+        jBtnSalvarSetor.setVisible(true);
+        jBtnCancelarSetor.setVisible(true);
+        jBtnNovoSetor.setVisible(false);
+    }//GEN-LAST:event_jBtnNovoSetorActionPerformed
+
+    private void jComboBoxSetoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxSetoresActionPerformed
+        idSetorComboBox();
+    }//GEN-LAST:event_jComboBoxSetoresActionPerformed
+
+    private void txtEmpresaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtEmpresaKeyTyped
+        // TODO add your handling code here:
+        String carac = "ç,.!?@:;/^~´`#$%¨&*()-_='+{[]}";
+        if (carac.contains(evt.getKeyChar() + "")) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtEmpresaKeyTyped
 
     private void jBtnCarregaCepActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnCarregaCepActionPerformed
         CarregaCep();
     }//GEN-LAST:event_jBtnCarregaCepActionPerformed
 
-    private void txtCepActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCepActionPerformed
-
-        CarregaCep();
-    }//GEN-LAST:event_txtCepActionPerformed
-
-    private void txtEmailFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtEmailFocusLost
-        ValidaEmail();
-    }//GEN-LAST:event_txtEmailFocusLost
-
-    private void txtNumeroKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNumeroKeyTyped
+    private void txtEstadoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtEstadoKeyTyped
         // TODO add your handling code here:
-
         String caracteres = "0987654321";
-        if (!caracteres.contains(evt.getKeyChar() + "")) {
+
+        if (caracteres.contains(evt.getKeyChar() + "")) {
             evt.consume();
         }
-
-
-    }//GEN-LAST:event_txtNumeroKeyTyped
+    }//GEN-LAST:event_txtEstadoKeyTyped
 
     private void txtCidadeKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCidadeKeyTyped
         // TODO add your handling code here:
@@ -908,6 +678,35 @@ public class CadastrarCliente extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_txtCidadeKeyTyped
 
+    private void txtNumeroKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNumeroKeyTyped
+        // TODO add your handling code here:
+
+        String caracteres = "0987654321";
+        if (!caracteres.contains(evt.getKeyChar() + "")) {
+            evt.consume();
+        }
+
+    }//GEN-LAST:event_txtNumeroKeyTyped
+
+    private void txtCepActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCepActionPerformed
+
+        CarregaCep();
+    }//GEN-LAST:event_txtCepActionPerformed
+
+    private void jBtnRemoverContatoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnRemoverContatoActionPerformed
+
+        DefaultTableModel dtm = (DefaultTableModel) jTableContatos.getModel();
+        int linha = jTableContatos.getSelectedRow();
+
+        if (linha != -1) {
+            dtm.removeRow(linha);
+        }
+    }//GEN-LAST:event_jBtnRemoverContatoActionPerformed
+
+    private void txtEmailFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtEmailFocusLost
+        ValidaEmail();
+    }//GEN-LAST:event_txtEmailFocusLost
+
     private void txtTelCelKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTelCelKeyTyped
         // TODO add your handling code here:
         String caracteres = "0987654321";
@@ -916,23 +715,13 @@ public class CadastrarCliente extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_txtTelCelKeyTyped
 
-    private void txtEstadoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtEstadoKeyTyped
-        // TODO add your handling code here:
-        String caracteres = "0987654321";
+    private void jBtnOutroContatoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnOutroContatoActionPerformed
+        TabelaContatos();
+    }//GEN-LAST:event_jBtnOutroContatoActionPerformed
 
-        if (caracteres.contains(evt.getKeyChar() + "")) {
-            evt.consume();
-        }
-
-    }//GEN-LAST:event_txtEstadoKeyTyped
-
-    private void txtEmpresaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtEmpresaKeyTyped
-        // TODO add your handling code here:
-        String carac = "ç,.!?@:;/^~´`#$%¨&*()-_='+{[]}";
-        if (carac.contains(evt.getKeyChar() + "")) {
-            evt.consume();
-        }
-    }//GEN-LAST:event_txtEmpresaKeyTyped
+    private void btnLimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimparActionPerformed
+        limparCampos();
+    }//GEN-LAST:event_btnLimparActionPerformed
 
     private void btnCadClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadClienteActionPerformed
         //  if (VerificaCampos() == true) {
@@ -1009,95 +798,9 @@ public class CadastrarCliente extends javax.swing.JFrame {
                 this.dispose();
             }
 
-       // }
+            // }
     }//GEN-LAST:event_btnCadClienteActionPerformed
-
-    private void jBtnRemoveEquipamentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnRemoveEquipamentoActionPerformed
-
-        DefaultTableModel dtm = (DefaultTableModel) jTableEquipamento.getModel();
-        int linha = jTableEquipamento.getSelectedRow();
-
-        if (linha != -1) {
-            dtm.removeRow(linha);
-        }
-    }//GEN-LAST:event_jBtnRemoveEquipamentoActionPerformed
-
-    private void jBtbIncluirEquipamentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtbIncluirEquipamentoActionPerformed
-        TabelaEquipamento();
-    }//GEN-LAST:event_jBtbIncluirEquipamentoActionPerformed
-
-    private void jComboBoxModeloEquipItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jComboBoxModeloEquipItemStateChanged
-
-        jComboBoxFabricanteEquip.removeAllItems();
-        idModeloEquiComboBox();
-        populaComboBoxFabricanteEquip();
-        if (jComboBoxModeloEquip.getSelectedItem() != null) {
-            modeloEqui = jComboBoxModeloEquip.getSelectedItem().toString();
-        }
-    }//GEN-LAST:event_jComboBoxModeloEquipItemStateChanged
-
-    private void jComboBoxModeloEquipActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxModeloEquipActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBoxModeloEquipActionPerformed
-
-    private void jComboBoxFabricanteEquipActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxFabricanteEquipActionPerformed
-
-        idFabricanteEquiComboBox();
-        if (jComboBoxFabricanteEquip.getSelectedItem() != null) {
-            fabricanteEqui = jComboBoxFabricanteEquip.getSelectedItem().toString();
-        }
-    }//GEN-LAST:event_jComboBoxFabricanteEquipActionPerformed
-
-    private void uJComboBoxEquipamentoItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_uJComboBoxEquipamentoItemStateChanged
-
-        jComboBoxModeloEquip.removeAllItems();
-        jComboBoxFabricanteEquip.removeAllItems();
-        codModeloEqui = 0;
-        modeloEqui = null;
-        codFabricanteEqui = 0;
-        fabricanteEqui = null;
-        codEquipamento = 0;
-        idEquipamentoComboBox();
-        populaComboBoxModeloEqui();
-        equipamento = uJComboBoxEquipamento.getSelectedItem().toString();
-    }//GEN-LAST:event_uJComboBoxEquipamentoItemStateChanged
-
-    private void uJComboBoxEquipamentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_uJComboBoxEquipamentoActionPerformed
-        idEquipamentoComboBox();
-        if (uJComboBoxEquipamento.getSelectedItem() != null) {
-            equipamento = uJComboBoxEquipamento.getSelectedItem().toString();
-        }
-    }//GEN-LAST:event_uJComboBoxEquipamentoActionPerformed
-
-    private void jBtnVoltarPainelPecasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnVoltarPainelPecasActionPerformed
-        jTabbedPaneServico.setSelectedComponent(this.jPanelPecas);
-    }//GEN-LAST:event_jBtnVoltarPainelPecasActionPerformed
-
-    private void jBtnAvancarPainelFuncionarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnAvancarPainelFuncionarioActionPerformed
-        jTabbedPaneServico.setSelectedComponent(this.jPanelFuncionario);
-    }//GEN-LAST:event_jBtnAvancarPainelFuncionarioActionPerformed
-
-    public void TabelaEquipamento() {
-
-        codDetEquipamento = EquipamentoDAO.CodigoDetEquipamento(codEquipamento, codModeloEqui, codFabricanteEqui);
-
-        try {
-
-            DefaultTableModel dtm = (DefaultTableModel) jTableEquipamento.getModel();
-
-            dtm.addRow(new Object[]{codDetEquipamento,
-                codModeloEqui,
-                codFabricanteEqui,
-                equipamento,
-                modeloEqui,
-                fabricanteEqui});
-
-        } catch (Exception erro) {
-            Logger.getLogger(CadastrarCliente.class
-                    .getName()).log(Level.SEVERE, null, erro);
-        }
-    }
-       
+   
     public void TabelaContatos() {
 
         try {
@@ -1119,68 +822,6 @@ public class CadastrarCliente extends javax.swing.JFrame {
         } catch (Exception erro) {
             Logger.getLogger(CadastrarCliente.class
                     .getName()).log(Level.SEVERE, null, erro);
-        }
-    }
-
-    private void populaComboBoxModeloEqui() {
-
-        Connection conexao = Conexao.getConnection();
-        ResultSet rs;
-        String sql = "select modelo "
-                + " from tabdetequipamento inner join "
-                + " tabequipamento inner join "
-                + " tabmodelo on tabmodelo_idtabModelo = idtabModelo and "
-                + " tabequipamento_idEquipamento = idEquipamento"
-                + " where idEquipamento = " + codEquipamento + " group by modelo;";
-
-        try {
-            pst = conexao.prepareStatement(sql);
-            rs = pst.executeQuery();
-
-            while (rs.next()) {
-                jComboBoxModeloEquip.addItem(rs.getString("modelo"));
-            }
-
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, ex);
-        }
-    }
-    
-    private void idModeloEquiComboBox() {
-
-        Connection conexao = Conexao.getConnection();
-        ResultSet rs;
-        String sql = "select * from tabmodelo where modelo = '" + jComboBoxModeloEquip.getSelectedItem() + "';";
-
-        try {
-            pst = conexao.prepareStatement(sql);
-            rs = pst.executeQuery();
-
-            while (rs.next()) {
-                codModeloEqui = (rs.getInt("idtabModelo"));
-            }
-
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, ex);
-        }
-    }
-    
-    private void idEquipamentoComboBox() {
-
-        Connection conexao = Conexao.getConnection();
-        ResultSet rs;
-        String sql = "select * from tabequipamento where equipamento = '" + uJComboBoxEquipamento.getSelectedItem() + "';";
-
-        try {
-            pst = conexao.prepareStatement(sql);
-            rs = pst.executeQuery();
-
-            while (rs.next()) {
-                codEquipamento = (rs.getInt("idEquipamento"));
-            }
-
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, ex);
         }
     }
     
@@ -1216,46 +857,6 @@ public class CadastrarCliente extends javax.swing.JFrame {
             while (rs.next()) {
                 codSetor = (rs.getInt("idtabSetor"));
             }
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, ex);
-        }
-    }
-
-    private void populaComboBoxFabricanteEquip() {
-
-        Connection conexao = Conexao.getConnection();
-        ResultSet rs;
-        String sql = "SELECT * FROM vw_combofabricanteequipamento "
-                + " WHERE idEquipamento = " + codEquipamento
-                + " AND tabmodelo_idtabModelo = " + codModeloEqui + " group by fabricante;";
-
-        try {
-            pst = conexao.prepareStatement(sql);
-            rs = pst.executeQuery();
-
-            while (rs.next()) {
-                jComboBoxFabricanteEquip.addItem(rs.getString("fabricante"));
-            }
-
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, ex);
-        }
-    }
-    
-    private void idFabricanteEquiComboBox() {
-
-        Connection conexao = Conexao.getConnection();
-        ResultSet rs;
-        String sql = "select * from tabfabricante where fabricante = '" + jComboBoxFabricanteEquip.getSelectedItem() + "';";
-
-        try {
-            pst = conexao.prepareStatement(sql);
-            rs = pst.executeQuery();
-
-            while (rs.next()) {
-                codFabricanteEqui = (rs.getInt("idtabFabricante"));
-            }
-
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, ex);
         }
@@ -1353,21 +954,14 @@ public class CadastrarCliente extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCadCliente;
-    private javax.swing.JButton btnCancelar;
     private javax.swing.JButton btnLimpar;
-    private javax.swing.JButton jBtbIncluirEquipamento;
-    private javax.swing.JButton jBtnAvancarPainelFuncionario;
     private javax.swing.JButton jBtnCancelarSetor;
     private javax.swing.JButton jBtnCarregaCep;
     private javax.swing.JButton jBtnNovoSetor;
     private javax.swing.JButton jBtnOutroContato;
-    private javax.swing.JButton jBtnRemoveEquipamento;
     private javax.swing.JButton jBtnRemoverContato;
     private javax.swing.JButton jBtnSalvarSetor;
-    private javax.swing.JButton jBtnVoltarPainelPecas;
     private javax.swing.JComboBox jComboBox1;
-    private javax.swing.JComboBox jComboBoxFabricanteEquip;
-    private javax.swing.JComboBox jComboBoxModeloEquip;
     private javax.swing.JComboBox jComboBoxSetores;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
@@ -1377,11 +971,8 @@ public class CadastrarCliente extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
-    private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel37;
-    private javax.swing.JLabel jLabel38;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
@@ -1393,13 +984,8 @@ public class CadastrarCliente extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
-    private javax.swing.JPanel jPanel5;
-    private javax.swing.JPanel jPanel6;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTable jTableContatos;
-    private javax.swing.JTable jTableEquipamento;
     private javax.swing.JTextField txtBairro;
     private javax.swing.JFormattedTextField txtCep;
     private javax.swing.JTextField txtCidade;
@@ -1414,7 +1000,6 @@ public class CadastrarCliente extends javax.swing.JFrame {
     private javax.swing.JTextField txtSetor;
     private javax.swing.JFormattedTextField txtTel01;
     private javax.swing.JTextField txtTelCel;
-    private componentes.UJComboBox uJComboBoxEquipamento;
     private org.jdesktop.beansbinding.BindingGroup bindingGroup;
     // End of variables declaration//GEN-END:variables
 
