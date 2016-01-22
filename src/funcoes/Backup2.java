@@ -27,7 +27,7 @@ public class Backup2 {
             String aqui = file.getAbsolutePath();
 
             
-             String semEspaco = aqui.replaceAll(" ", "\\");
+            // String semEspaco = aqui.replaceAll(" ", "");
 //
 //            System.out.println("Pasta sem espaço " + semEspaco);
 //            boolean success;
@@ -43,9 +43,9 @@ public class Backup2 {
 //
 //            String caminho = file2.getPath();
 
-            System.out.println("Aqui" + semEspaco);
+          //  System.out.println("Aqui" + semEspaco);
             String nomeBkp = "BackupBancopfc1.sql";
-            String dump = "cmd.exe /c mysqldump --user=root --password=2810 pfc1 >  '" + semEspaco + "/" + nomeBkp +"'";
+            String dump = "cmd.exe /c mysqldump --user=root --password=2810 pfc1 >  " + aqui + "/" + nomeBkp +"";
             Runtime bkp = Runtime.getRuntime();
             System.out.println("tentando fazer backup");
             bkp.exec(dump);
@@ -55,18 +55,4 @@ public class Backup2 {
         }
 
     }
-
-    public static void main(String[] argv) throws IOException { 
-        File folder = new File("C:\\Users\\Josy\\Desktop\\teste pasta com espaço"); 
-        File[] listOfFiles = folder.listFiles(); 
-        
-        for (int i = 0; i < listOfFiles.length; i++) { 
-            
-            if (listOfFiles[i].isFile()) 
-            { 
-                File f = new File("C:\\Users\\Josy\\Desktop\\teste pasta com espaço"+listOfFiles[i].getName()); 
-                f.renameTo(new File("c:\\Projects\\sample\\"+i+".txt")); 
-            }
-        } System.out.println("conversion is done"); 
-    } 
 }

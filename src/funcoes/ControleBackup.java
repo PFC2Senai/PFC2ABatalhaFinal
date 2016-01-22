@@ -1,114 +1,96 @@
 package funcoes;
 
-
 import java.util.*;
 import java.io.File;
 
- 
-
 public class ControleBackup {
-  // Constantes da classe
-  private static String VERSION = "4.0.3";
-  private static String SEPARATOR = File.separator;
-  private static String MYSQL_PATH =
-    "C:" + SEPARATOR +
-    "Program Files" + SEPARATOR +
-    "MySQL" + SEPARATOR +
-    "MySQL Server 5.1" + SEPARATOR +
-    "bin" + SEPARATOR;
- //C:/xampp/mysql/bin/mysqldump.exe
-  private static String PRESENTATION =
 
-    "==========================================================\n" +
+    // Constantes da classe
 
-    "  Backup do banco de dados MySQL - Versao " + VERSION + "\n" +
-
-    "  Autor: Marcelo Carvalho Pinto da Cunha\n\n" +
-
-    "  Desenvolvido em 07/09/2009\n\n" +
-
-    "  MarcWare Software, 2009-2012\n" +
-
-    "==========================================================\n\n";
+    private static String VERSION = "4.0.3";
+    private static String SEPARATOR = File.separator;
+    private static String MYSQL_PATH
+            = "C:" + SEPARATOR
+            + "Program Files" + SEPARATOR
+            + "MySQL" + SEPARATOR
+            + "MySQL Server 5.1" + SEPARATOR
+            + "bin" + SEPARATOR;
+    //C:/xampp/mysql/bin/mysqldump.exe
+    private static String PRESENTATION
+            = "==========================================================\n"
+            + "  Backup do banco de dados MySQL - Versao " + VERSION + "\n"
+            + "  Autor: Marcelo Carvalho Pinto da Cunha\n\n"
+            + "  Desenvolvido em 07/09/2009\n\n"
+            + "  MarcWare Software, 2009-2012\n"
+            + "==========================================================\n\n";
 
   // Lista dos bancos de dados a serem "backupeados"; se desejar adicionar mais,
-  // basta colocar o nome separado por espaços dos outros nomes
+    // basta colocar o nome separado por espaços dos outros nomes
+    private static String DATABASES
+            = "pfc1";
 
-  private static String DATABASES =
+    private List<String> dbList = new ArrayList<String>();
 
-    "pfc1";
+    public ControleBackup(String caminho) {
 
-  private List<String> dbList = new ArrayList<String>();
+        String command = MYSQL_PATH + "mysqldump.exe";
+        String[] databases = DATABASES.split(" ");
 
-  public ControleBackup() {
+        for (int i = 0; i < databases.length; i++) {
+            dbList.add(databases[i]);
+        }
+        // Mostra apresentação
+        System.out.println(PRESENTATION);
+        System.out.println("Iniciando backups...\n\n");
 
-    String command = MYSQL_PATH + "mysqldump.exe";
-    String[] databases = DATABASES.split(" ");
+        // Contador
+        int i = 1;
+        // Tempo
+        long time1, time2, time;
+        // Início
+        time1 = System.currentTimeMillis();
 
- 
-    for (int i = 0; i < databases.length; i++)
-      dbList.add(databases[i]);
-    // Mostra apresentação
-    System.out.println(PRESENTATION); 
-    System.out.println("Iniciando backups...\n\n");
+        File file = new File(caminho + "/Backup");
+        System.out.println("Criou arquivo");
+        file.mkdir();
 
+        String salvar = file.getAbsolutePath();
+        
+        for (String dbName : dbList) {
+            ProcessBuilder pb = new ProcessBuilder(
+                    command,
+                    "--user=root",
+                    "--password=2810",
+                    dbName,
+                    "--result-file=" + salvar + SEPARATOR + dbName + ".sql");
 
-    // Contador
-    int i = 1;
-    // Tempo
-    long time1, time2, time;
-    // Início
-    time1 = System.currentTimeMillis();
+            try {
+                System.out.println(
+                        "Backup do banco de dados (" + i + "): " + dbName + " ...");
+                pb.start();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            i++;
+        }
 
-           // File file = new File("Backup2");
-         //   System.out.println("Criou arquivo");
-        //    file.mkdir();
-            
-    for (String dbName : dbList) {
-      ProcessBuilder pb = new ProcessBuilder(
-        command,
-        "--user=root",
-        "--password=2810",
-        dbName,
-        "--result-file=" + "." + SEPARATOR + "C:/Users/Josy/Desktop/Novapasta" + SEPARATOR + dbName + ".sql");
- 
+        // Fim
+        time2 = System.currentTimeMillis();
+        // Tempo total da operação
+        time = time2 - time1;
 
-      try {
-        System.out.println(
-          "Backup do banco de dados (" + i + "): " + dbName + " ...");
-        pb.start();
-      }
-      catch (Exception e) {
-        e.printStackTrace();
-      } 
-      i++;
-    }
+        // Avisa do sucesso
+        System.out.println("\nBackups realizados com sucesso.\n\n");
+        System.out.println("Tempo total de processamento: " + time + " ms\n");
+        System.out.println("Finalizando...");
 
-    // Fim
-    time2 = System.currentTimeMillis();
-    // Tempo total da operação
-    time = time2 - time1;
-
-    // Avisa do sucesso
-    System.out.println("\nBackups realizados com sucesso.\n\n");
-    System.out.println("Tempo total de processamento: " + time + " ms\n");
-    System.out.println("Finalizando...");
-
-    try {
-      // Paralisa por 2 segundos
-      Thread.sleep(2000);
-    }
-    catch (Exception e) {}
+        try {
+            // Paralisa por 2 segundos
+            Thread.sleep(2000);
+        } catch (Exception e) {
+        }
     // Termina o aplicativo
-    //System.exit(0);
+        //System.exit(0);
 
-  }
-
-  public static void main(String[] args) {
-
-    ControleBackup app = new ControleBackup();
-    
-
-  } 
-
+    }
 }
