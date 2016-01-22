@@ -617,7 +617,7 @@ public class CadastrarCliente extends javax.swing.JFrame {
     }//GEN-LAST:event_btnCancelarActionPerformed
 
     private void btnCadClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadClienteActionPerformed
-        if (VerificaCampos() == true) {
+      //  if (VerificaCampos() == true) {
 
             if (ClienteDAO.VerificarCliente(txtEndCep.getText()) == false) {
 
@@ -691,7 +691,7 @@ public class CadastrarCliente extends javax.swing.JFrame {
                 this.dispose();
             }
 
-        }
+       // }
 
     }//GEN-LAST:event_btnCadClienteActionPerformed
 
