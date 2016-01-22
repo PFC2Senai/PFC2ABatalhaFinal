@@ -614,14 +614,15 @@ public class Menu extends javax.swing.JFrame {
 
     private void jBtnFazerBackupActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnFazerBackupActionPerformed
         JFileChooser fc = new JFileChooser();
-
+        fc.setDialogTitle("Selecione um diretório");
+        fc.setApproveButtonText("Salvar");
         // restringe a amostra a diretorios apenas
         fc.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
 
         int res = fc.showOpenDialog(null);
 
         if (res == JFileChooser.APPROVE_OPTION) {
-            
+              
             File diretorio = fc.getSelectedFile();
             caminho = diretorio.getAbsolutePath();
             ControleBackup app = new ControleBackup(caminho);
