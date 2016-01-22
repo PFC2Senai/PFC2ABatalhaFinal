@@ -2,6 +2,7 @@ package telas;
 
 import funcoes.Backup2;
 import funcoes.ControleBackup;
+import java.awt.Toolkit;
 import java.io.File;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
@@ -20,7 +21,7 @@ public class Menu extends javax.swing.JFrame {
      */
     public Menu() {
         initComponents();
-
+       
         jBtnRotinaContato.setVerticalTextPosition(SwingConstants.BOTTOM);
         jBtnRotinaContato.setHorizontalTextPosition(SwingConstants.CENTER);
         jBtnCadastrarLembrete.setVerticalTextPosition(SwingConstants.BOTTOM);
@@ -30,7 +31,6 @@ public class Menu extends javax.swing.JFrame {
         jBtnFazerBackup.setVerticalTextPosition(SwingConstants.BOTTOM);
         jBtnFazerBackup.setHorizontalTextPosition(SwingConstants.CENTER);
     }
-
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -92,6 +92,7 @@ public class Menu extends javax.swing.JFrame {
         jMenu6 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setIconImages(null);
 
         jBtnRotinaContato.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jBtnRotinaContato.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/1452414361_kontact_1.png"))); // NOI18N
@@ -459,11 +460,11 @@ public class Menu extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(311, Short.MAX_VALUE))
+                        .addContainerGap(316, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 395, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(38, Short.MAX_VALUE))))
+                        .addContainerGap(39, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -663,9 +664,9 @@ public class Menu extends javax.swing.JFrame {
             public void run() {
                 new Menu().setVisible(true);
             }
-        });
+        });   
     }
-
+       
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBtnCadastrarLembrete;
     private javax.swing.JButton jBtnFazerBackup;
@@ -718,4 +719,5 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JTextArea jTextArea1;
     private javax.swing.JTextArea jTextArea2;
     // End of variables declaration//GEN-END:variables
+
 }
