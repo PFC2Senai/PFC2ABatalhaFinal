@@ -273,6 +273,7 @@ public class DetalharCliente extends javax.swing.JFrame {
     private void initComponents() {
         bindingGroup = new org.jdesktop.beansbinding.BindingGroup();
 
+        jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
@@ -315,13 +316,16 @@ public class DetalharCliente extends javax.swing.JFrame {
         jTableLembretes = new javax.swing.JTable();
         jBtnCadastrarRotinaContato = new javax.swing.JButton();
         jBtnExibeRotina = new javax.swing.JButton();
+        jPanel6 = new javax.swing.JPanel();
+        jPanel7 = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Cadastrar Cliente");
         setBackground(new java.awt.Color(238, 162, 162));
         setExtendedState(6);
         setName("j"); // NOI18N
-        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jTabbedPane1.setBackground(new java.awt.Color(223, 237, 253));
 
         jPanel1.setBackground(new java.awt.Color(223, 237, 253));
         jPanel1.setName("jFrame"); // NOI18N
@@ -630,7 +634,48 @@ public class DetalharCliente extends javax.swing.JFrame {
         });
         jPanel1.add(jBtnExibeRotina, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 20, 140, -1));
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -5, 910, 620));
+        jTabbedPane1.addTab("Dados do Cliente", jPanel1);
+
+        jPanel6.setBackground(new java.awt.Color(223, 237, 253));
+
+        javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
+        jPanel6.setLayout(jPanel6Layout);
+        jPanel6Layout.setHorizontalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 905, Short.MAX_VALUE)
+        );
+        jPanel6Layout.setVerticalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 587, Short.MAX_VALUE)
+        );
+
+        jTabbedPane1.addTab("Equipamentos do Cliente", jPanel6);
+
+        jPanel7.setBackground(new java.awt.Color(223, 237, 253));
+
+        javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
+        jPanel7.setLayout(jPanel7Layout);
+        jPanel7Layout.setHorizontalGroup(
+            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 905, Short.MAX_VALUE)
+        );
+        jPanel7Layout.setVerticalGroup(
+            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 587, Short.MAX_VALUE)
+        );
+
+        jTabbedPane1.addTab("Rotina de Contato", jPanel7);
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jTabbedPane1)
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jTabbedPane1)
+        );
 
         bindingGroup.bind();
 
@@ -879,8 +924,11 @@ public class DetalharCliente extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
+    private javax.swing.JPanel jPanel6;
+    private javax.swing.JPanel jPanel7;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTable jTableContatos;
     private javax.swing.JTable jTableLembretes;
     private javax.swing.JFormattedTextField txtCep;
