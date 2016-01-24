@@ -1148,7 +1148,7 @@ public class DetalharCliente extends javax.swing.JFrame {
     }//GEN-LAST:event_jBtnCarregaCepActionPerformed
 
     private void jBtnAdicionarEquipamentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnAdicionarEquipamentoActionPerformed
-        new CadastrarEquipCliente(codCliente).setVisible(true);
+        new CadastrarEquipCliente(codCliente, this).setVisible(true);
     }//GEN-LAST:event_jBtnAdicionarEquipamentoActionPerformed
 
     private void jBtnCadastrarRotinaContatoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnCadastrarRotinaContatoActionPerformed
