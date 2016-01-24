@@ -24,6 +24,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.ListSelectionModel;
+import javax.swing.SwingConstants;
 import javax.swing.border.LineBorder;
 import javax.swing.table.DefaultTableModel;
 import static telas.ExibeCliente.GetIndice;
@@ -48,16 +49,22 @@ public class DetalharCliente extends javax.swing.JFrame {
         this.codCliente = GetIndice();
         telaDetalCli = this;
         initComponents();
+        ocultaColunaTabelas();
         CarregaCliente();
         populaComboBox();
         TabelaLembrete2(GetIndice());
         TabelaContatos();
+        TabelaEquipamentosCli();
+        TabelaRotina("select  * from tabrotinacontato where cliente_idcliente = " + codCliente + ";");
 
         Color minhaCor = new Color(217, 228, 241);
         this.getContentPane().setBackground(minhaCor);
         //this.setExtendedState(this.getExtendedState()|JFrame.MAXIMIZED_BOTH);
         TabelaLembrete2(GetIndice());         
         TabelaContatos();      
+        
+        jBtnCadastrarRotinaContato.setVerticalTextPosition(SwingConstants.BOTTOM);
+        jBtnCadastrarRotinaContato.setHorizontalTextPosition(SwingConstants.CENTER);
         
         //txtEmpresa.setDocument(new LimitarDigitos(45));
         //txtSetor.setDocument(new LimitarDigitos(50));
@@ -217,7 +224,7 @@ public class DetalharCliente extends javax.swing.JFrame {
                     lembrete.getDescricao()});
             }
 
-            //pog oculta coluna jtable
+            //oculta coluna jtable
             jTableLembretes.getColumnModel().getColumn(0).setMaxWidth(0);
             jTableLembretes.getColumnModel().getColumn(0).setMinWidth(0);
             jTableLembretes.getTableHeader().getColumnModel().getColumn(0).setMaxWidth(0);
@@ -244,15 +251,74 @@ public class DetalharCliente extends javax.swing.JFrame {
                     rs.getObject("telefone"), rs.getObject("celular"),
                     rs.getObject("email")});
             }
-
+        
             for (int i = 0; i < 6; i++) {
                 ModeloTabela modelo = new ModeloTabela(dados, Colunas);
-                jTableContatos.setModel(modelo);
-                jTableContatos.getColumnModel().getColumn(i).setPreferredWidth(150);
+                
+                jTableContatos.setModel(modelo);               
                 jTableContatos.getColumnModel().getColumn(i).setResizable(false);
                 jTableContatos.getTableHeader().setReorderingAllowed(false);
-                jTableContatos.setAutoResizeMode(jTableContatos.AUTO_RESIZE_OFF);
+                jTableContatos.getColumnModel().getColumn(0).setMaxWidth(0);
+                jTableContatos.getColumnModel().getColumn(0).setMinWidth(0);
+                jTableContatos.getTableHeader().getColumnModel().getColumn(0).setMaxWidth(0);
+                jTableContatos.getTableHeader().getColumnModel().getColumn(0).setMinWidth(0);
+                
+                jTableContatos.getColumnModel().getColumn(1).setMaxWidth(0);
+                jTableContatos.getColumnModel().getColumn(1).setMinWidth(0);
+                jTableContatos.getTableHeader().getColumnModel().getColumn(1).setMaxWidth(0);
+                jTableContatos.getTableHeader().getColumnModel().getColumn(1).setMinWidth(0);
+                
+                jTableContatos.getColumnModel().getColumn(2).setPreferredWidth(200);
+                jTableContatos.getColumnModel().getColumn(3).setPreferredWidth(80);
+                jTableContatos.getColumnModel().getColumn(4).setPreferredWidth(80);
+                jTableContatos.getColumnModel().getColumn(5).setPreferredWidth(200);
                 jTableContatos.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+            }
+            
+                jTableContatos.setAutoscrolls(true);
+        } catch (SQLException ex) {
+            Logger.getLogger(ExibeCliente.class.getName()).log(Level.SEVERE, null, ex);
+
+        } catch (Exception erro) {
+            Logger.getLogger(ExibeCliente.class.getName()).log(Level.SEVERE, null, erro);
+        }
+    }
+
+    public void TabelaEquipamentosCli() {
+
+        try {
+            String Sql = "SELECT * FROM vw_equipamentocliente WHERE idcliente = " + codCliente + ";";
+
+            stmt = getConnection().createStatement();
+            ArrayList dados = new ArrayList();
+            String[] Colunas = {"CodEquipCli", "Equipamento", "Fabricante", "Modelo"};
+
+            ResultSet rs;
+            rs = stmt.executeQuery(Sql);
+
+            while (rs.next()) {
+                dados.add(new Object[]{
+                    rs.getObject("iddetclienteequipamento"), 
+                    rs.getObject("equipamento"), 
+                    rs.getObject("fabricante"),
+                    rs.getObject("modelo")});
+            }
+
+            for (int i = 0; i < 4; i++) {
+                ModeloTabela modelo = new ModeloTabela(dados, Colunas);
+                jTableEquipCliente.setModel(modelo);
+                jTableEquipCliente.getColumnModel().getColumn(0).setMaxWidth(0);
+                jTableEquipCliente.getColumnModel().getColumn(0).setMinWidth(0);
+                jTableEquipCliente.getTableHeader().getColumnModel().getColumn(0).setMaxWidth(0);
+                jTableEquipCliente.getTableHeader().getColumnModel().getColumn(0).setMinWidth(0);
+                
+                jTableEquipCliente.getColumnModel().getColumn(1).setPreferredWidth(150);
+                jTableEquipCliente.getColumnModel().getColumn(2).setPreferredWidth(150);
+                jTableEquipCliente.getColumnModel().getColumn(3).setPreferredWidth(150);
+                
+                jTableEquipCliente.getColumnModel().getColumn(i).setResizable(false);
+                jTableEquipCliente.getTableHeader().setReorderingAllowed(false);
+                jTableEquipCliente.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
             }
 
         } catch (SQLException ex) {
@@ -262,7 +328,45 @@ public class DetalharCliente extends javax.swing.JFrame {
             Logger.getLogger(ExibeCliente.class.getName()).log(Level.SEVERE, null, erro);
         }
     }
+    
+    public void TabelaRotina(String Sql) {
 
+        try {
+
+            stmt = getConnection().createStatement();
+            ArrayList dados = new ArrayList();
+            String[] Colunas = {"Código", "Data", "Hora", "Descrição"};
+
+            ResultSet rs;
+            rs = stmt.executeQuery(Sql);
+
+            while (rs.next()){
+                
+                dados.add(new Object[]{
+                    rs.getObject("idRotinaContato"),
+                    rs.getObject("dataRotina"),
+                    rs.getObject("horaRotina"), 
+                    rs.getObject("descricaoRotina")});
+            }
+
+            for (int i = 0; i < 4; i++) {
+                ModeloTabela modelo = new ModeloTabela(dados, Colunas);
+                jTableListarRotinas.setModel(modelo);
+                jTableListarRotinas.getColumnModel().getColumn(i).setPreferredWidth(150);
+                jTableListarRotinas.getColumnModel().getColumn(i).setResizable(false);
+                jTableListarRotinas.getTableHeader().setReorderingAllowed(false);
+                jTableListarRotinas.setAutoResizeMode(jTableListarRotinas.AUTO_RESIZE_OFF);
+                jTableListarRotinas.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(ExibeCliente.class.getName()).log(Level.SEVERE, null, ex);
+
+        } catch (Exception erro) {
+            Logger.getLogger(ExibeCliente.class.getName()).log(Level.SEVERE, null, erro);
+        }
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -314,10 +418,17 @@ public class DetalharCliente extends javax.swing.JFrame {
         jBtnNovoLembrete = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTableLembretes = new javax.swing.JTable();
-        jBtnCadastrarRotinaContato = new javax.swing.JButton();
         jBtnExibeRotina = new javax.swing.JButton();
         jPanel6 = new javax.swing.JPanel();
+        jBtnAdicionarEquipamento = new javax.swing.JButton();
+        jPanel8 = new javax.swing.JPanel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTableEquipCliente = new javax.swing.JTable();
         jPanel7 = new javax.swing.JPanel();
+        jBtnCadastrarRotinaContato = new javax.swing.JButton();
+        jPanel9 = new javax.swing.JPanel();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        jTableListarRotinas = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Cadastrar Cliente");
@@ -336,7 +447,7 @@ public class DetalharCliente extends javax.swing.JFrame {
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(38, 22, -1, -1));
 
         jPanel2.setBackground(new java.awt.Color(223, 237, 253));
-        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Dados da empresa"));
+        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Endereço", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 2, 11))); // NOI18N
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
@@ -402,13 +513,13 @@ public class DetalharCliente extends javax.swing.JFrame {
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 50, 470, 130));
 
         jPanel3.setBackground(new java.awt.Color(223, 237, 253));
-        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder("Endereço"));
+        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Endereço", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 2, 11))); // NOI18N
         jPanel3.setNextFocusableComponent(txtEmpresa);
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel14.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel14.setText("Bairro:");
-        jPanel3.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 60, -1, 20));
+        jPanel3.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 60, -1, 20));
 
         jLabel16.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel16.setText("Estado:");
@@ -416,29 +527,29 @@ public class DetalharCliente extends javax.swing.JFrame {
 
         jLabel11.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel11.setText("Cep:");
-        jPanel3.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 30, -1, -1));
+        jPanel3.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 30, -1, -1));
 
         txtEndPais.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jPanel3.add(txtEndPais, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 30, 260, -1));
+        jPanel3.add(txtEndPais, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 30, 220, -1));
 
         jLabel13.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel13.setText("Numero:");
-        jPanel3.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 90, -1, 20));
+        jPanel3.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 90, -1, 20));
 
         txtEndBairro.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jPanel3.add(txtEndBairro, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 60, 320, -1));
+        jPanel3.add(txtEndBairro, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 60, 270, -1));
 
         txtEndRua.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jPanel3.add(txtEndRua, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 90, 262, -1));
+        jPanel3.add(txtEndRua, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 90, 220, -1));
 
         txtEndCidade.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jPanel3.add(txtEndCidade, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 60, 260, -1));
+        jPanel3.add(txtEndCidade, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 60, 220, -1));
 
         txtEndEstado.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jPanel3.add(txtEndEstado, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 30, 50, -1));
 
         txtEndNum.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jPanel3.add(txtEndNum, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 90, 69, -1));
+        jPanel3.add(txtEndNum, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 90, 69, -1));
 
         try {
             txtCep.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("#####-###")));
@@ -446,7 +557,7 @@ public class DetalharCliente extends javax.swing.JFrame {
             ex.printStackTrace();
         }
         txtCep.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jPanel3.add(txtCep, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 30, 110, -1));
+        jPanel3.add(txtCep, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 30, 110, -1));
 
         jLabel17.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel17.setText("País:");
@@ -488,18 +599,18 @@ public class DetalharCliente extends javax.swing.JFrame {
         jPanel3.add(jBtbCancelEndereco, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 30, -1, -1));
 
         jBtnCarregaCep.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/pesquisar.gif"))); // NOI18N
-        jBtnCarregaCep.setText("Buscar CEP");
+        jBtnCarregaCep.setText("Buscar Endereço");
         jBtnCarregaCep.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jBtnCarregaCepActionPerformed(evt);
             }
         });
-        jPanel3.add(jBtnCarregaCep, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 30, -1, -1));
+        jPanel3.add(jBtnCarregaCep, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 30, -1, -1));
 
         jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 210, 840, 130));
 
         jPanel4.setBackground(new java.awt.Color(223, 237, 253));
-        jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder("Contatos"));
+        jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Contatos", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 2, 11))); // NOI18N
 
         jTableContatos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -561,7 +672,7 @@ public class DetalharCliente extends javax.swing.JFrame {
         jPanel1.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 370, 840, 190));
 
         jPanel5.setBackground(new java.awt.Color(223, 237, 253));
-        jPanel5.setBorder(javax.swing.BorderFactory.createTitledBorder("Lembretes"));
+        jPanel5.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Endereço", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 2, 11))); // NOI18N
 
         jBtnNovoLembrete.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/add.png"))); // NOI18N
         jBtnNovoLembrete.setText("Novo Lembrete");
@@ -617,15 +728,6 @@ public class DetalharCliente extends javax.swing.JFrame {
 
         jPanel1.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 30, 360, 170));
 
-        jBtnCadastrarRotinaContato.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/add.png"))); // NOI18N
-        jBtnCadastrarRotinaContato.setText("Nova Rotina de Conatato");
-        jBtnCadastrarRotinaContato.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jBtnCadastrarRotinaContatoActionPerformed(evt);
-            }
-        });
-        jPanel1.add(jBtnCadastrarRotinaContato, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 20, -1, -1));
-
         jBtnExibeRotina.setText("Exibir Rotinas");
         jBtnExibeRotina.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -634,34 +736,139 @@ public class DetalharCliente extends javax.swing.JFrame {
         });
         jPanel1.add(jBtnExibeRotina, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 20, 140, -1));
 
-        jTabbedPane1.addTab("Dados do Cliente", jPanel1);
+        jTabbedPane1.addTab("Dados do Cliente", new javax.swing.ImageIcon(getClass().getResource("/imagens/cliente3.png")), jPanel1); // NOI18N
 
         jPanel6.setBackground(new java.awt.Color(223, 237, 253));
+
+        jBtnAdicionarEquipamento.setText("Adicionar Equipamento");
+        jBtnAdicionarEquipamento.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnAdicionarEquipamentoActionPerformed(evt);
+            }
+        });
+
+        jPanel8.setBackground(new java.awt.Color(223, 237, 253));
+        jPanel8.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Equipamentos", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 2, 11))); // NOI18N
+
+        jTableEquipCliente.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+
+            }
+        ));
+        jTableEquipCliente.getTableHeader().setReorderingAllowed(false);
+        jScrollPane2.setViewportView(jTableEquipCliente);
+
+        javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
+        jPanel8.setLayout(jPanel8Layout);
+        jPanel8Layout.setHorizontalGroup(
+            jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel8Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 682, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        jPanel8Layout.setVerticalGroup(
+            jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel8Layout.createSequentialGroup()
+                .addGap(32, 32, 32)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 277, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(36, Short.MAX_VALUE))
+        );
 
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
         jPanel6Layout.setHorizontalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 905, Short.MAX_VALUE)
+            .addGroup(jPanel6Layout.createSequentialGroup()
+                .addGap(12, 12, 12)
+                .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jBtnAdicionarEquipamento)
+                .addGap(0, 32, Short.MAX_VALUE))
         );
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 587, Short.MAX_VALUE)
+            .addGroup(jPanel6Layout.createSequentialGroup()
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel6Layout.createSequentialGroup()
+                        .addGap(88, 88, 88)
+                        .addComponent(jBtnAdicionarEquipamento))
+                    .addGroup(jPanel6Layout.createSequentialGroup()
+                        .addGap(77, 77, 77)
+                        .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(151, Short.MAX_VALUE))
         );
 
-        jTabbedPane1.addTab("Equipamentos do Cliente", jPanel6);
+        jTabbedPane1.addTab("Equipamentos do Cliente", new javax.swing.ImageIcon(getClass().getResource("/imagens/equipamento.png")), jPanel6); // NOI18N
 
         jPanel7.setBackground(new java.awt.Color(223, 237, 253));
+
+        jBtnCadastrarRotinaContato.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jBtnCadastrarRotinaContato.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/1452414361_kontact_1.png"))); // NOI18N
+        jBtnCadastrarRotinaContato.setText("Rotina de Conatato");
+        jBtnCadastrarRotinaContato.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnCadastrarRotinaContatoActionPerformed(evt);
+            }
+        });
+
+        jPanel9.setBackground(new java.awt.Color(223, 237, 253));
+        jPanel9.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Rotina de Contato", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 2, 11))); // NOI18N
+
+        jTableListarRotinas.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {},
+                {},
+                {},
+                {}
+            },
+            new String [] {
+
+            }
+        ));
+        jScrollPane4.setViewportView(jTableListarRotinas);
+
+        javax.swing.GroupLayout jPanel9Layout = new javax.swing.GroupLayout(jPanel9);
+        jPanel9.setLayout(jPanel9Layout);
+        jPanel9Layout.setHorizontalGroup(
+            jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel9Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 659, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        jPanel9Layout.setVerticalGroup(
+            jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel9Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 425, Short.MAX_VALUE)
+                .addContainerGap())
+        );
 
         javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
         jPanel7.setLayout(jPanel7Layout);
         jPanel7Layout.setHorizontalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 905, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel7Layout.createSequentialGroup()
+                .addContainerGap(26, Short.MAX_VALUE)
+                .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jBtnCadastrarRotinaContato, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(21, 21, 21))
         );
         jPanel7Layout.setVerticalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 587, Short.MAX_VALUE)
+            .addGroup(jPanel7Layout.createSequentialGroup()
+                .addGap(89, 89, 89)
+                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel7Layout.createSequentialGroup()
+                        .addGap(31, 31, 31)
+                        .addComponent(jBtnCadastrarRotinaContato)))
+                .addContainerGap(37, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Rotina de Contato", jPanel7);
@@ -804,11 +1011,6 @@ public class DetalharCliente extends javax.swing.JFrame {
 
     }//GEN-LAST:event_jTableContatosMouseClicked
 
-    private void jBtnCadastrarRotinaContatoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnCadastrarRotinaContatoActionPerformed
-        this.setEnabled(false);
-        new CadastrarRotinaContato(GetIndice(), this).setVisible(true);
-    }//GEN-LAST:event_jBtnCadastrarRotinaContatoActionPerformed
-
     private void jBtnExibeRotinaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnExibeRotinaActionPerformed
         this.setEnabled(false);
         new ExibeRotina(GetIndice(), this).setVisible(true);
@@ -855,6 +1057,15 @@ public class DetalharCliente extends javax.swing.JFrame {
         }).start();
     }//GEN-LAST:event_jBtnCarregaCepActionPerformed
 
+    private void jBtnAdicionarEquipamentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnAdicionarEquipamentoActionPerformed
+        new CadastrarEquipCliente(codCliente).setVisible(true);
+    }//GEN-LAST:event_jBtnAdicionarEquipamentoActionPerformed
+
+    private void jBtnCadastrarRotinaContatoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnCadastrarRotinaContatoActionPerformed
+       this.setEnabled(false);
+        new CadastrarRotinaContato(GetIndice(), this).setVisible(true);
+    }//GEN-LAST:event_jBtnCadastrarRotinaContatoActionPerformed
+
     private void populaComboBox() {
 
         Connection conexao = Conexao.getConnection();
@@ -895,9 +1106,36 @@ public class DetalharCliente extends javax.swing.JFrame {
         return codLembrete;
     }
 
+    private void ocultaColunaTabelas() {
+       
+        //oculta coluna equipamento
+        jTableContatos.getColumnModel().getColumn(0).setMaxWidth(0);
+        jTableContatos.getColumnModel().getColumn(0).setMinWidth(0);
+        jTableContatos.getTableHeader().getColumnModel().getColumn(0).setMaxWidth(0);
+        jTableContatos.getTableHeader().getColumnModel().getColumn(0).setMinWidth(0);
+
+        jTableContatos.getColumnModel().getColumn(1).setMaxWidth(0);
+        jTableContatos.getColumnModel().getColumn(1).setMinWidth(0);
+        jTableContatos.getTableHeader().getColumnModel().getColumn(1).setMaxWidth(0);
+        jTableContatos.getTableHeader().getColumnModel().getColumn(1).setMinWidth(0);
+
+//        //oculta coluna funcionario
+//        jTableFuncionario.getColumnModel().getColumn(0).setMaxWidth(0);
+//        jTableFuncionario.getColumnModel().getColumn(0).setMinWidth(0);
+//        jTableFuncionario.getTableHeader().getColumnModel().getColumn(0).setMaxWidth(0);
+//        jTableFuncionario.getTableHeader().getColumnModel().getColumn(0).setMinWidth(0);
+//
+//        //oculta coluna tipoServico
+//        jTableTipodeServico.getColumnModel().getColumn(0).setMaxWidth(0);
+//        jTableTipodeServico.getColumnModel().getColumn(0).setMinWidth(0);
+//        jTableTipodeServico.getTableHeader().getColumnModel().getColumn(0).setMaxWidth(0);
+//        jTableTipodeServico.getTableHeader().getColumnModel().getColumn(0).setMinWidth(0);
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBtbCancelDadosP;
     private javax.swing.JButton jBtbCancelEndereco;
+    private javax.swing.JButton jBtnAdicionarEquipamento;
     private javax.swing.JButton jBtnAltDadosP;
     private javax.swing.JButton jBtnAltEndereco;
     private javax.swing.JButton jBtnCadastrarRotinaContato;
@@ -926,11 +1164,17 @@ public class DetalharCliente extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
+    private javax.swing.JPanel jPanel8;
+    private javax.swing.JPanel jPanel9;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTable jTableContatos;
+    private javax.swing.JTable jTableEquipCliente;
     private javax.swing.JTable jTableLembretes;
+    private javax.swing.JTable jTableListarRotinas;
     private javax.swing.JFormattedTextField txtCep;
     private javax.swing.JFormattedTextField txtCnpj;
     private javax.swing.JTextField txtEmpresa;

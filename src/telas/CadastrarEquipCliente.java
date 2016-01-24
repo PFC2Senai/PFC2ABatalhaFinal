@@ -1,6 +1,7 @@
 package telas;
 
 import atributos.DetEquipamentoCliente;
+import atributos.Equipamento;
 import funcoes.Conexao;
 import funcoes.DetEquipamentoClienteDAO;
 import funcoes.DetServicoEquipamentoDAO;
@@ -9,6 +10,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -40,6 +42,7 @@ public class CadastrarEquipCliente extends javax.swing.JFrame {
     public CadastrarEquipCliente(int codCli) {
         codCliente = codCli;
         initComponents();
+        carregarComboEquipamento();
        // ocultaColunaTabelas();
     }
 
@@ -69,7 +72,7 @@ public class CadastrarEquipCliente extends javax.swing.JFrame {
         btnCancelar = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jPanel5.setBackground(new java.awt.Color(223, 237, 253));
 
@@ -347,7 +350,7 @@ public class CadastrarEquipCliente extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_uJComboBoxEquipamentoActionPerformed
 
-   public void TabelaEquipamento() {
+    public void TabelaEquipamento() {
 
         codDetEquipamento = EquipamentoDAO.CodigoDetEquipamento(codEquipamento, codModeloEqui, codFabricanteEqui);
 
@@ -368,6 +371,19 @@ public class CadastrarEquipCliente extends javax.swing.JFrame {
         }
     }
 
+    private void carregarComboEquipamento() {
+
+     //   uJComboBoxEquipamento.clear();
+
+        ArrayList<Equipamento> equipamentos = new ArrayList<Equipamento>();
+        equipamentos = EquipamentoDAO.ListarEquipamentos();
+
+        for (Equipamento equi : equipamentos) {
+            uJComboBoxEquipamento.addItem(equi.getEquipamento(), equi);
+        }
+    }
+
+    
     private void populaComboBoxModeloEqui() {
 
         Connection conexao = Conexao.getConnection();
