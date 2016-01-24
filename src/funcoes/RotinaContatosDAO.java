@@ -37,19 +37,21 @@ public class RotinaContatosDAO {
             }
     }
     
-    public static ArrayList CarregaRotinaContatos(int id) {
+    public static ArrayList CarregaRotina(int id) {
         
         Statement stmt;
-        ArrayList<RotinaContatos> rotinaContato = new ArrayList<RotinaContatos>();
+        ArrayList<RotinaContatos> rotinas = new ArrayList<RotinaContatos>();
         
         try {            
-            String Sql = "SELECT * FROM tabotinacontato cli\n" +
-                        "INNER JOIN tabtel tel\n" +
-                        "INNER JOIN tabemail email\n" +
-                        "INNER JOIN tabcontato cont\n" +
-                        "ON cont.id_contato = cli.tabContato_id_contato AND\n" +
-                        "cont.id_contato = tel.contato_id AND\n" +
-                        "id_contato = email.contato_id_contato where cli.idcliente = '"+ id +"';";
+            String Sql = "select idRotinaContato, "
+                    + "dataRotina, "
+                    + "horaRotina, "
+                    + "descricaoRotina, "
+                    + "cliente_idcliente, "
+                    + "empresa, "
+                    + "idcliente "
+                    + "from tabrotinacontato inner join tabcliente on idcliente = cliente_idcliente "
+                    + "where idRotinaContato = '"+ id +"';";
             
             ResultSet rs;            
             stmt = Conexao.getConnection().createStatement();            
@@ -59,24 +61,39 @@ public class RotinaContatosDAO {
                 RotinaContatos r = new RotinaContatos();
                 
                 r.setIdRotinaContato(rs.getInt("idRotinaContato"));
-                r.setIdCliente(rs.getInt("cliente_idciente"));
-                r.setIdUsuario(rs.getInt("tabusuario_id_usuario"));
                 r.setDataRotinaContato(rs.getDate("dataRotina"));
                 r.setHoraRotinaContato(rs.getTime("horaRotina"));
-                r.setIdCliente(rs.getInt("cliente_idcliente"));
                 r.setDescricaoRotina(rs.getString("descricaoRotina"));
-                
-                rotinaContato.add(r);
-                
+                r.setIdCliente(rs.getInt("cliente_idcliente"));
+                r.setCliente(rs.getString("empresa"));
+                rotinas.add(r);                
             }            
             rs.close();
             stmt.close();
             
         } catch (SQLException ex) {      
-            Logger.getLogger(ClienteDAO.class.getName()).log(Level.SEVERE, null, ex);
-            throw new RuntimeException("Erro ao excluir os dados da Rotina: ", ex);    
+            Logger.getLogger(LembreteDAO.class.getName()).log(Level.SEVERE, null, ex);
+            throw new RuntimeException("Erro ao carregar rotina Contato: ", ex);    
         }    
-        return rotinaContato;
+        return rotinas;
+    }
+    
+    public static void ExcluirRotina(int id) { //se tiver mais de um lembrete ver
+        
+        PreparedStatement stmt;
+        try {
+            
+            String sql = ("DELETE FROM tabrotinacontato WHERE idRotinaContato = ?; ");
+            
+            stmt = Conexao.getConnection().prepareStatement(sql);
+            stmt.setInt(1, id);
+            stmt.execute();
+            stmt.close();
+
+        } catch (SQLException ex) {      
+            Logger.getLogger(LembreteDAO.class.getName()).log(Level.SEVERE, null, ex);
+            throw new RuntimeException("Erro ao excluir rotina contato: ",ex);    
+        }
     }
     
    /* public static int idContato(int id) {

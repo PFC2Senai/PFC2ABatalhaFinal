@@ -196,6 +196,7 @@ public class CadastrarRotinaContato extends javax.swing.JFrame {
         rot.setDescricaoRotina(jTextDescricao.getText());
         
         RotinaContatosDAO.CadRotinaContato(rot);
+        
         this.dispose();
         verificaPagina();
     }//GEN-LAST:event_jToggleButton2ActionPerformed
@@ -217,7 +218,7 @@ public class CadastrarRotinaContato extends javax.swing.JFrame {
         if ((this.detalharCliente != null)) {
             this.detalharCliente.setEnabled(true);
             this.detalharCliente.toFront();
-            this.detalharCliente.TabelaLembrete2(codCli);
+            this.detalharCliente.TabelaRotina("select  * from tabrotinacontato where cliente_idcliente = " + codCli + ";");
         }
     }
     

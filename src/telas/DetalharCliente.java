@@ -12,6 +12,7 @@ import funcoes.ContatosDAO;
 import funcoes.LembreteDAO;
 import funcoes.LimitarDigitos;
 import funcoes.ModeloTabela;
+import funcoes.RotinaContatosDAO;
 import java.awt.Color;
 import java.io.IOException;
 import java.sql.Connection;
@@ -32,7 +33,8 @@ import static telas.ExibeCliente.GetIndice;
 public class DetalharCliente extends javax.swing.JFrame {
 
     int idContato;
-    public static int codLembrete;
+    public static int codLembrete; 
+    public static int codRotina;
     private int codPessoaContato;
     private int codSetor;
     private PreparedStatement pst;
@@ -68,6 +70,12 @@ public class DetalharCliente extends javax.swing.JFrame {
         jBtnNovoLembrete.setHorizontalTextPosition(SwingConstants.CENTER);
         jBtnExcluir.setVerticalTextPosition(SwingConstants.BOTTOM);
         jBtnExcluir.setHorizontalTextPosition(SwingConstants.CENTER);
+        jBtnExcluirRotina.setVerticalTextPosition(SwingConstants.BOTTOM);
+        jBtnExcluirRotina.setHorizontalTextPosition(SwingConstants.CENTER);
+        jBtnVerLembrete.setVerticalTextPosition(SwingConstants.BOTTOM);
+        jBtnVerLembrete.setHorizontalTextPosition(SwingConstants.CENTER);
+        jBtnVerRotina.setVerticalTextPosition(SwingConstants.BOTTOM);
+        jBtnVerRotina.setHorizontalTextPosition(SwingConstants.CENTER);
         
         //txtEmpresa.setDocument(new LimitarDigitos(45));
         //txtSetor.setDocument(new LimitarDigitos(50));
@@ -430,11 +438,14 @@ public class DetalharCliente extends javax.swing.JFrame {
         jTableLembretes = new javax.swing.JTable();
         jBtnNovoLembrete = new javax.swing.JButton();
         jBtnExcluir = new javax.swing.JButton();
+        jBtnVerLembrete = new javax.swing.JButton();
         jPanel7 = new javax.swing.JPanel();
         jBtnCadastrarRotinaContato = new javax.swing.JButton();
         jPanel9 = new javax.swing.JPanel();
         jScrollPane4 = new javax.swing.JScrollPane();
         jTableListarRotinas = new javax.swing.JTable();
+        jBtnExcluirRotina = new javax.swing.JButton();
+        jBtnVerRotina = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Cadastrar Cliente");
@@ -474,7 +485,7 @@ public class DetalharCliente extends javax.swing.JFrame {
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel4.setText("CNPJ:");
-        jPanel2.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 30, -1, -1));
+        jPanel2.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 30, -1, -1));
 
         jBtbCancelDadosP.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/cancelar.png"))); // NOI18N
         jBtbCancelDadosP.setText("Cancelar");
@@ -505,7 +516,7 @@ public class DetalharCliente extends javax.swing.JFrame {
             ex.printStackTrace();
         }
         txtCnpj.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jPanel2.add(txtCnpj, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 30, 140, -1));
+        jPanel2.add(txtCnpj, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 30, 140, -1));
 
         jBtnAltDadosP.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/ok.png"))); // NOI18N
         jBtnAltDadosP.setText("Salvar");
@@ -525,7 +536,7 @@ public class DetalharCliente extends javax.swing.JFrame {
 
         jLabel14.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel14.setText("Bairro:");
-        jPanel3.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 60, -1, 20));
+        jPanel3.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 60, -1, 20));
 
         jLabel16.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel16.setText("Estado:");
@@ -533,17 +544,17 @@ public class DetalharCliente extends javax.swing.JFrame {
 
         jLabel11.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel11.setText("Cep:");
-        jPanel3.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 30, -1, -1));
+        jPanel3.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 30, -1, -1));
 
         txtEndPais.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jPanel3.add(txtEndPais, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 30, 220, -1));
 
         jLabel13.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel13.setText("Numero:");
-        jPanel3.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 90, -1, 20));
+        jPanel3.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 90, -1, 20));
 
         txtEndBairro.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jPanel3.add(txtEndBairro, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 60, 270, -1));
+        jPanel3.add(txtEndBairro, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 60, 270, -1));
 
         txtEndRua.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jPanel3.add(txtEndRua, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 90, 220, -1));
@@ -555,7 +566,7 @@ public class DetalharCliente extends javax.swing.JFrame {
         jPanel3.add(txtEndEstado, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 30, 50, -1));
 
         txtEndNum.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jPanel3.add(txtEndNum, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 90, 69, -1));
+        jPanel3.add(txtEndNum, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 90, 69, -1));
 
         try {
             txtCep.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("#####-###")));
@@ -563,7 +574,12 @@ public class DetalharCliente extends javax.swing.JFrame {
             ex.printStackTrace();
         }
         txtCep.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jPanel3.add(txtCep, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 30, 110, -1));
+        txtCep.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtCepActionPerformed(evt);
+            }
+        });
+        jPanel3.add(txtCep, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 30, 110, -1));
 
         jLabel17.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel17.setText("País:");
@@ -605,13 +621,13 @@ public class DetalharCliente extends javax.swing.JFrame {
         jPanel3.add(jBtbCancelEndereco, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 30, -1, -1));
 
         jBtnCarregaCep.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/pesquisar.gif"))); // NOI18N
-        jBtnCarregaCep.setText("Buscar Endereço");
+        jBtnCarregaCep.setText("Buscar");
         jBtnCarregaCep.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jBtnCarregaCepActionPerformed(evt);
             }
         });
-        jPanel3.add(jBtnCarregaCep, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 30, -1, -1));
+        jPanel3.add(jBtnCarregaCep, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 30, -1, -1));
 
         jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 170, 840, 130));
 
@@ -735,12 +751,12 @@ public class DetalharCliente extends javax.swing.JFrame {
             .addGroup(jPanel6Layout.createSequentialGroup()
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel6Layout.createSequentialGroup()
-                        .addGap(88, 88, 88)
-                        .addComponent(jBtnAdicionarEquipamento))
-                    .addGroup(jPanel6Layout.createSequentialGroup()
                         .addGap(77, 77, 77)
-                        .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(92, Short.MAX_VALUE))
+                        .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel6Layout.createSequentialGroup()
+                        .addGap(127, 127, 127)
+                        .addComponent(jBtnAdicionarEquipamento)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Equipamentos do Cliente", new javax.swing.ImageIcon(getClass().getResource("/imagens/equipamento.png")), jPanel6); // NOI18N
@@ -812,6 +828,19 @@ public class DetalharCliente extends javax.swing.JFrame {
             }
         });
 
+        jBtnVerLembrete.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jBtnVerLembrete.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/verLembrete.fw.png"))); // NOI18N
+        jBtnVerLembrete.setText("Ver Lembrete");
+
+        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, jTableLembretes, org.jdesktop.beansbinding.ELProperty.create("${selectedElement != null}"), jBtnVerLembrete, org.jdesktop.beansbinding.BeanProperty.create("enabled"));
+        bindingGroup.addBinding(binding);
+
+        jBtnVerLembrete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnVerLembreteActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
@@ -822,7 +851,8 @@ public class DetalharCliente extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jBtnNovoLembrete, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jBtnExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                    .addComponent(jBtnExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addComponent(jBtnVerLembrete, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                 .addContainerGap(58, Short.MAX_VALUE))
         );
         jPanel5Layout.setVerticalGroup(
@@ -835,7 +865,9 @@ public class DetalharCliente extends javax.swing.JFrame {
                     .addGroup(jPanel5Layout.createSequentialGroup()
                         .addGap(97, 97, 97)
                         .addComponent(jBtnNovoLembrete)
-                        .addGap(29, 29, 29)
+                        .addGap(34, 34, 34)
+                        .addComponent(jBtnVerLembrete)
+                        .addGap(30, 30, 30)
                         .addComponent(jBtnExcluir)))
                 .addContainerGap(38, Short.MAX_VALUE))
         );
@@ -867,6 +899,11 @@ public class DetalharCliente extends javax.swing.JFrame {
 
             }
         ));
+        jTableListarRotinas.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTableListarRotinasMouseClicked(evt);
+            }
+        });
         jScrollPane4.setViewportView(jTableListarRotinas);
 
         javax.swing.GroupLayout jPanel9Layout = new javax.swing.GroupLayout(jPanel9);
@@ -886,16 +923,45 @@ public class DetalharCliente extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
+        jBtnExcluirRotina.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jBtnExcluirRotina.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/excluirRotina.fw.png"))); // NOI18N
+        jBtnExcluirRotina.setText("Excluir Rotina");
+
+        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, jTableListarRotinas, org.jdesktop.beansbinding.ELProperty.create("${selectedElement != null}"), jBtnExcluirRotina, org.jdesktop.beansbinding.BeanProperty.create("enabled"));
+        bindingGroup.addBinding(binding);
+
+        jBtnExcluirRotina.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnExcluirRotinaActionPerformed(evt);
+            }
+        });
+
+        jBtnVerRotina.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jBtnVerRotina.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/verRotina.fw.png"))); // NOI18N
+        jBtnVerRotina.setText("Ver Rotina");
+
+        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, jTableListarRotinas, org.jdesktop.beansbinding.ELProperty.create("${selectedElement != null}"), jBtnVerRotina, org.jdesktop.beansbinding.BeanProperty.create("enabled"));
+        bindingGroup.addBinding(binding);
+
+        jBtnVerRotina.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnVerRotinaActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
         jPanel7.setLayout(jPanel7Layout);
         jPanel7Layout.setHorizontalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel7Layout.createSequentialGroup()
-                .addContainerGap(35, Short.MAX_VALUE)
+                .addContainerGap(23, Short.MAX_VALUE)
                 .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jBtnCadastrarRotinaContato, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(29, 29, 29))
+                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jBtnCadastrarRotinaContato, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jBtnExcluirRotina, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addComponent(jBtnVerRotina, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(41, 41, 41))
         );
         jPanel7Layout.setVerticalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -906,7 +972,11 @@ public class DetalharCliente extends javax.swing.JFrame {
                         .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel7Layout.createSequentialGroup()
                         .addGap(51, 51, 51)
-                        .addComponent(jBtnCadastrarRotinaContato)))
+                        .addComponent(jBtnCadastrarRotinaContato)
+                        .addGap(27, 27, 27)
+                        .addComponent(jBtnVerRotina)
+                        .addGap(27, 27, 27)
+                        .addComponent(jBtnExcluirRotina)))
                 .addContainerGap(43, Short.MAX_VALUE))
         );
 
@@ -916,11 +986,11 @@ public class DetalharCliente extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane1)
+            .addComponent(jTabbedPane1, javax.swing.GroupLayout.Alignment.TRAILING)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 567, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jTabbedPane1)
         );
 
         bindingGroup.bind();
@@ -1011,10 +1081,10 @@ public class DetalharCliente extends javax.swing.JFrame {
     private void jTableLembretesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableLembretesMouseClicked
 
         // codLembrete = Integer.parseInt(jTableLembretes.getModel().getValueAt(jTableLembretes.getSelectedRow(),0).toString());
-        this.setEnabled(false);
+       
         int linha = jTableLembretes.getSelectedRow();
         codLembrete = (Integer.parseInt(jTableLembretes.getValueAt(linha, 0).toString()));
-        new DetalharLembrete(this).setVisible(true);
+       // new DetalharLembrete(this).setVisible(true);
     }//GEN-LAST:event_jTableLembretesMouseClicked
 
     private void jButtonAr3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAr3ActionPerformed
@@ -1052,43 +1122,7 @@ public class DetalharCliente extends javax.swing.JFrame {
 
     private void jBtnCarregaCepActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnCarregaCepActionPerformed
 
-        TelaEspera telaTeste = new TelaEspera();
-        this.setEnabled(false);
-        final Thread t1 = new Thread(new Runnable() {//cria uma thread pra gravar o seu arquivo
-
-            @Override
-            public void run() {
-
-                try {
-
-                    telaTeste.setVisible(true);
-                    CarregaCEP cep = new CarregaCEP();
-
-                    String ceptxt = txtCep.getText();
-                    txtEndCidade.setText(cep.getCidade(ceptxt));
-                    txtEndBairro.setText(cep.getBairro(ceptxt));
-                    txtEndRua.setText(cep.getEndereco(ceptxt));
-                    txtEndEstado.setText(cep.getUF(ceptxt));
-
-                } catch (IOException ex) {
-                    JOptionPane.showMessageDialog(null, ex);
-                }
-            }
-        });
-        t1.start();
-        new Thread(new Runnable() {//cria outra thread pra sua tela de espera
-            @Override
-            public void run() {
-                try {
-                    //cria a tela de espera e mostra ela
-                    t1.join();//fica esperando a primeira thread acabar
-                    telaDetalCli.setEnabled(true);  // quando acabar fecha a janela de espera, podes fazer outras coisas aqui
-                    telaTeste.dispose();
-                } catch (InterruptedException ex) {
-                    Logger.getLogger(CadastrarCliente.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            }
-        }).start();
+        BuscarEndereco();
     }//GEN-LAST:event_jBtnCarregaCepActionPerformed
 
     private void jBtnAdicionarEquipamentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnAdicionarEquipamentoActionPerformed
@@ -1096,14 +1130,38 @@ public class DetalharCliente extends javax.swing.JFrame {
     }//GEN-LAST:event_jBtnAdicionarEquipamentoActionPerformed
 
     private void jBtnCadastrarRotinaContatoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnCadastrarRotinaContatoActionPerformed
-       this.setEnabled(false);
+        this.setEnabled(false);
         new CadastrarRotinaContato(GetIndice(), this).setVisible(true);
     }//GEN-LAST:event_jBtnCadastrarRotinaContatoActionPerformed
 
     private void jBtnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnExcluirActionPerformed
         LembreteDAO.ExcluirLembrete(codLembrete);
-        this.dispose();
+        TabelaLembrete2(codCliente);
     }//GEN-LAST:event_jBtnExcluirActionPerformed
+
+    private void jBtnExcluirRotinaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnExcluirRotinaActionPerformed
+        RotinaContatosDAO.ExcluirRotina(codRotina);
+        TabelaRotina("select  * from tabrotinacontato where cliente_idcliente = " + codCliente + ";");
+    }//GEN-LAST:event_jBtnExcluirRotinaActionPerformed
+
+    private void jBtnVerLembreteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnVerLembreteActionPerformed
+        this.setEnabled(false);
+        new DetalharLembrete(this).setVisible(true);
+    }//GEN-LAST:event_jBtnVerLembreteActionPerformed
+
+    private void jTableListarRotinasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableListarRotinasMouseClicked
+        int linha = jTableListarRotinas.getSelectedRow();
+        codRotina = (Integer.parseInt(jTableListarRotinas.getValueAt(linha, 0).toString()));
+    }//GEN-LAST:event_jTableListarRotinasMouseClicked
+
+    private void jBtnVerRotinaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnVerRotinaActionPerformed
+        this.setEnabled(false);
+        new DetalharRotina(this).setVisible(true);
+    }//GEN-LAST:event_jBtnVerRotinaActionPerformed
+
+    private void txtCepActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCepActionPerformed
+        BuscarEndereco();
+    }//GEN-LAST:event_txtCepActionPerformed
 
     private void populaComboBox() {
 
@@ -1143,7 +1201,51 @@ public class DetalharCliente extends javax.swing.JFrame {
 
     public static int GetIdLembrete() {
         return codLembrete;
-    }   
+    } 
+    
+    public static int GetIdRotina() {
+        return codRotina;
+    }
+    
+    public void BuscarEndereco() {
+        TelaEspera telaTeste = new TelaEspera();
+        this.setEnabled(false);
+        final Thread t1 = new Thread(new Runnable() {//cria uma thread pra gravar o seu arquivo
+
+            @Override
+            public void run() {
+
+                try {
+
+                    telaTeste.setVisible(true);
+                    CarregaCEP cep = new CarregaCEP();
+
+                    String ceptxt = txtCep.getText();
+                    txtEndCidade.setText(cep.getCidade(ceptxt));
+                    txtEndBairro.setText(cep.getBairro(ceptxt));
+                    txtEndRua.setText(cep.getEndereco(ceptxt));
+                    txtEndEstado.setText(cep.getUF(ceptxt));
+
+                } catch (IOException ex) {
+                    JOptionPane.showMessageDialog(null, ex);
+                }
+            }
+        });
+        t1.start();
+        new Thread(new Runnable() {//cria outra thread pra sua tela de espera
+            @Override
+            public void run() {
+                try {
+                    //cria a tela de espera e mostra ela
+                    t1.join();//fica esperando a primeira thread acabar
+                    telaDetalCli.setEnabled(true);  // quando acabar fecha a janela de espera, podes fazer outras coisas aqui
+                    telaTeste.dispose();
+                } catch (InterruptedException ex) {
+                    Logger.getLogger(CadastrarCliente.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }).start();
+    }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBtbCancelDadosP;
@@ -1154,7 +1256,10 @@ public class DetalharCliente extends javax.swing.JFrame {
     private javax.swing.JButton jBtnCadastrarRotinaContato;
     private javax.swing.JButton jBtnCarregaCep;
     private javax.swing.JButton jBtnExcluir;
+    private javax.swing.JButton jBtnExcluirRotina;
     private javax.swing.JButton jBtnNovoLembrete;
+    private javax.swing.JButton jBtnVerLembrete;
+    private javax.swing.JButton jBtnVerRotina;
     private javax.swing.JButton jButtonAr1;
     private javax.swing.JButton jButtonAr3;
     private javax.swing.JButton jButtonEditarContato;
