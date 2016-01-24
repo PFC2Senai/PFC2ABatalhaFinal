@@ -9,6 +9,7 @@ import funcoes.ClienteDAO;
 import funcoes.Conexao;
 import static funcoes.Conexao.getConnection;
 import funcoes.ContatosDAO;
+import funcoes.DetEquipamentoClienteDAO;
 import funcoes.LembreteDAO;
 import funcoes.LimitarDigitos;
 import funcoes.ModeloTabela;
@@ -35,6 +36,7 @@ public class DetalharCliente extends javax.swing.JFrame {
     int idContato;
     public static int codLembrete; 
     public static int codRotina;
+    private int codEquipClie;
     private int codPessoaContato;
     private int codSetor;
     private PreparedStatement pst;
@@ -432,6 +434,7 @@ public class DetalharCliente extends javax.swing.JFrame {
         jPanel8 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTableEquipCliente = new javax.swing.JTable();
+        jBtnExcluirEquipCli = new javax.swing.JButton();
         jPanel5 = new javax.swing.JPanel();
         jPanel10 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -716,6 +719,11 @@ public class DetalharCliente extends javax.swing.JFrame {
             }
         ));
         jTableEquipCliente.getTableHeader().setReorderingAllowed(false);
+        jTableEquipCliente.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTableEquipClienteMouseClicked(evt);
+            }
+        });
         jScrollPane2.setViewportView(jTableEquipCliente);
 
         javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
@@ -735,6 +743,17 @@ public class DetalharCliente extends javax.swing.JFrame {
                 .addContainerGap(36, Short.MAX_VALUE))
         );
 
+        jBtnExcluirEquipCli.setText("Remover Equipamento");
+
+        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, jTableEquipCliente, org.jdesktop.beansbinding.ELProperty.create("${selectedElement  != null}"), jBtnExcluirEquipCli, org.jdesktop.beansbinding.BeanProperty.create("enabled"));
+        bindingGroup.addBinding(binding);
+
+        jBtnExcluirEquipCli.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnExcluirEquipCliActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
         jPanel6Layout.setHorizontalGroup(
@@ -743,7 +762,9 @@ public class DetalharCliente extends javax.swing.JFrame {
                 .addGap(12, 12, 12)
                 .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jBtnAdicionarEquipamento)
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jBtnAdicionarEquipamento)
+                    .addComponent(jBtnExcluirEquipCli))
                 .addGap(0, 41, Short.MAX_VALUE))
         );
         jPanel6Layout.setVerticalGroup(
@@ -754,9 +775,11 @@ public class DetalharCliente extends javax.swing.JFrame {
                         .addGap(77, 77, 77)
                         .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel6Layout.createSequentialGroup()
-                        .addGap(127, 127, 127)
-                        .addComponent(jBtnAdicionarEquipamento)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(138, 138, 138)
+                        .addComponent(jBtnAdicionarEquipamento)
+                        .addGap(28, 28, 28)
+                        .addComponent(jBtnExcluirEquipCli)))
+                .addContainerGap(92, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Equipamentos do Cliente", new javax.swing.ImageIcon(getClass().getResource("/imagens/equipamento.png")), jPanel6); // NOI18N
@@ -1121,7 +1144,6 @@ public class DetalharCliente extends javax.swing.JFrame {
     }//GEN-LAST:event_jTableContatosMouseClicked
 
     private void jBtnCarregaCepActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnCarregaCepActionPerformed
-
         BuscarEndereco();
     }//GEN-LAST:event_jBtnCarregaCepActionPerformed
 
@@ -1163,6 +1185,16 @@ public class DetalharCliente extends javax.swing.JFrame {
         BuscarEndereco();
     }//GEN-LAST:event_txtCepActionPerformed
 
+    private void jBtnExcluirEquipCliActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnExcluirEquipCliActionPerformed
+        DetEquipamentoClienteDAO.ExcluirEquipCliente(codEquipClie);
+        TabelaEquipamentosCli();
+    }//GEN-LAST:event_jBtnExcluirEquipCliActionPerformed
+
+    private void jTableEquipClienteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableEquipClienteMouseClicked
+        int linha = jTableEquipCliente.getSelectedRow();
+        codEquipClie = (Integer.parseInt(jTableEquipCliente.getValueAt(linha, 0).toString()));
+    }//GEN-LAST:event_jTableEquipClienteMouseClicked
+
     private void populaComboBox() {
 
         Connection conexao = Conexao.getConnection();
@@ -1176,6 +1208,7 @@ public class DetalharCliente extends javax.swing.JFrame {
             while (rs.next()) {
                 jComboBoxSetores.addItem(rs.getString("setor"));
             }
+            
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, ex);
         }
@@ -1256,6 +1289,7 @@ public class DetalharCliente extends javax.swing.JFrame {
     private javax.swing.JButton jBtnCadastrarRotinaContato;
     private javax.swing.JButton jBtnCarregaCep;
     private javax.swing.JButton jBtnExcluir;
+    private javax.swing.JButton jBtnExcluirEquipCli;
     private javax.swing.JButton jBtnExcluirRotina;
     private javax.swing.JButton jBtnNovoLembrete;
     private javax.swing.JButton jBtnVerLembrete;

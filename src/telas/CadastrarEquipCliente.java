@@ -4,7 +4,6 @@ import atributos.DetEquipamentoCliente;
 import atributos.Equipamento;
 import funcoes.Conexao;
 import funcoes.DetEquipamentoClienteDAO;
-import funcoes.DetServicoEquipamentoDAO;
 import funcoes.EquipamentoDAO;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -31,6 +30,7 @@ public class CadastrarEquipCliente extends javax.swing.JFrame {
     private int codFabricanteEqui;
     private String equipamento;
     private String fabricanteEqui;
+    private DetalharCliente telaDetCliente;
     
     private PreparedStatement pst;
     
@@ -39,8 +39,9 @@ public class CadastrarEquipCliente extends javax.swing.JFrame {
         initComponents();
     }
     
-    public CadastrarEquipCliente(int codCli) {
+    public CadastrarEquipCliente(int codCli, DetalharCliente detClie) {
         codCliente = codCli;
+        this.telaDetCliente = detClie;
         initComponents();
         carregarComboEquipamento();
        // ocultaColunaTabelas();

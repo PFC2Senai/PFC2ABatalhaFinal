@@ -672,7 +672,10 @@
                       <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
                       <Component id="jPanel8" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jBtnAdicionarEquipamento" min="-2" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="jBtnAdicionarEquipamento" min="-2" max="-2" attributes="0"/>
+                          <Component id="jBtnExcluirEquipCli" min="-2" max="-2" attributes="0"/>
+                      </Group>
                       <EmptySpace min="0" pref="41" max="32767" attributes="0"/>
                   </Group>
               </Group>
@@ -686,11 +689,13 @@
                               <Component id="jPanel8" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace min="-2" pref="127" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="138" max="-2" attributes="0"/>
                               <Component id="jBtnAdicionarEquipamento" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
+                              <Component id="jBtnExcluirEquipCli" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
-                      <EmptySpace max="32767" attributes="0"/>
+                      <EmptySpace pref="92" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -758,11 +763,25 @@
                           <TableHeader reorderingAllowed="false" resizingAllowed="true"/>
                         </Property>
                       </Properties>
+                      <Events>
+                        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jTableEquipClienteMouseClicked"/>
+                      </Events>
                     </Component>
                   </SubComponents>
                 </Container>
               </SubComponents>
             </Container>
+            <Component class="javax.swing.JButton" name="jBtnExcluirEquipCli">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Remover Equipamento"/>
+              </Properties>
+              <BindingProperties>
+                <BindingProperty name="enabled" source="jTableEquipCliente" sourcePath="${selectedElement  != null}" target="jBtnExcluirEquipCli" targetPath="enabled" updateStrategy="0" immediately="false"/>
+              </BindingProperties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jBtnExcluirEquipCliActionPerformed"/>
+              </Events>
+            </Component>
           </SubComponents>
         </Container>
         <Container class="javax.swing.JPanel" name="jPanel5">
