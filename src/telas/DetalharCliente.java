@@ -49,7 +49,6 @@ public class DetalharCliente extends javax.swing.JFrame {
         this.codCliente = GetIndice();
         telaDetalCli = this;
         initComponents();
-        ocultaColunaTabelas();
         CarregaCliente();
         populaComboBox();
         TabelaLembrete2(GetIndice());
@@ -65,6 +64,10 @@ public class DetalharCliente extends javax.swing.JFrame {
         
         jBtnCadastrarRotinaContato.setVerticalTextPosition(SwingConstants.BOTTOM);
         jBtnCadastrarRotinaContato.setHorizontalTextPosition(SwingConstants.CENTER);
+        jBtnNovoLembrete.setVerticalTextPosition(SwingConstants.BOTTOM);
+        jBtnNovoLembrete.setHorizontalTextPosition(SwingConstants.CENTER);
+        jBtnExcluir.setVerticalTextPosition(SwingConstants.BOTTOM);
+        jBtnExcluir.setHorizontalTextPosition(SwingConstants.CENTER);
         
         //txtEmpresa.setDocument(new LimitarDigitos(45));
         //txtSetor.setDocument(new LimitarDigitos(50));
@@ -352,10 +355,12 @@ public class DetalharCliente extends javax.swing.JFrame {
             for (int i = 0; i < 4; i++) {
                 ModeloTabela modelo = new ModeloTabela(dados, Colunas);
                 jTableListarRotinas.setModel(modelo);
-                jTableListarRotinas.getColumnModel().getColumn(i).setPreferredWidth(150);
+                jTableListarRotinas.getColumnModel().getColumn(0).setPreferredWidth(50);
+                jTableListarRotinas.getColumnModel().getColumn(1).setPreferredWidth(60);
+                jTableListarRotinas.getColumnModel().getColumn(2).setPreferredWidth(60);
+                jTableListarRotinas.getColumnModel().getColumn(3).setPreferredWidth(300);                
                 jTableListarRotinas.getColumnModel().getColumn(i).setResizable(false);
                 jTableListarRotinas.getTableHeader().setReorderingAllowed(false);
-                jTableListarRotinas.setAutoResizeMode(jTableListarRotinas.AUTO_RESIZE_OFF);
                 jTableListarRotinas.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
             }
 
@@ -414,16 +419,17 @@ public class DetalharCliente extends javax.swing.JFrame {
         jScrollPane3 = new javax.swing.JScrollPane();
         jTableContatos = new javax.swing.JTable();
         jButtonEditarContato = new javax.swing.JButton();
-        jPanel5 = new javax.swing.JPanel();
-        jBtnNovoLembrete = new javax.swing.JButton();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTableLembretes = new javax.swing.JTable();
-        jBtnExibeRotina = new javax.swing.JButton();
         jPanel6 = new javax.swing.JPanel();
         jBtnAdicionarEquipamento = new javax.swing.JButton();
         jPanel8 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTableEquipCliente = new javax.swing.JTable();
+        jPanel5 = new javax.swing.JPanel();
+        jPanel10 = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTableLembretes = new javax.swing.JTable();
+        jBtnNovoLembrete = new javax.swing.JButton();
+        jBtnExcluir = new javax.swing.JButton();
         jPanel7 = new javax.swing.JPanel();
         jBtnCadastrarRotinaContato = new javax.swing.JButton();
         jPanel9 = new javax.swing.JPanel();
@@ -464,11 +470,11 @@ public class DetalharCliente extends javax.swing.JFrame {
                 jButtonAr1ActionPerformed(evt);
             }
         });
-        jPanel2.add(jButtonAr1, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 30, -1, -1));
+        jPanel2.add(jButtonAr1, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 30, -1, -1));
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel4.setText("CNPJ:");
-        jPanel2.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 60, -1, -1));
+        jPanel2.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 30, -1, -1));
 
         jBtbCancelDadosP.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/cancelar.png"))); // NOI18N
         jBtbCancelDadosP.setText("Cancelar");
@@ -477,21 +483,21 @@ public class DetalharCliente extends javax.swing.JFrame {
                 jBtbCancelDadosPActionPerformed(evt);
             }
         });
-        jPanel2.add(jBtbCancelDadosP, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 30, -1, -1));
+        jPanel2.add(jBtbCancelDadosP, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 30, -1, -1));
 
         txtSetor.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jPanel2.add(txtSetor, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 90, 245, -1));
+        jPanel2.add(txtSetor, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 70, 245, -1));
 
         jComboBoxSetores.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jComboBoxSetoresActionPerformed(evt);
             }
         });
-        jPanel2.add(jComboBoxSetores, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 90, 260, -1));
+        jPanel2.add(jComboBoxSetores, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 70, 260, -1));
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel6.setText("Setor:");
-        jPanel2.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 90, -1, -1));
+        jPanel2.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, -1, -1));
 
         try {
             txtCnpj.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##.###.###/####-##")));
@@ -499,7 +505,7 @@ public class DetalharCliente extends javax.swing.JFrame {
             ex.printStackTrace();
         }
         txtCnpj.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jPanel2.add(txtCnpj, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 60, 140, -1));
+        jPanel2.add(txtCnpj, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 30, 140, -1));
 
         jBtnAltDadosP.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/ok.png"))); // NOI18N
         jBtnAltDadosP.setText("Salvar");
@@ -508,9 +514,9 @@ public class DetalharCliente extends javax.swing.JFrame {
                 jBtnAltDadosPActionPerformed(evt);
             }
         });
-        jPanel2.add(jBtnAltDadosP, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 60, 94, -1));
+        jPanel2.add(jBtnAltDadosP, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 60, 94, -1));
 
-        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 50, 470, 130));
+        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 50, 840, 110));
 
         jPanel3.setBackground(new java.awt.Color(223, 237, 253));
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Endereço", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 2, 11))); // NOI18N
@@ -607,7 +613,7 @@ public class DetalharCliente extends javax.swing.JFrame {
         });
         jPanel3.add(jBtnCarregaCep, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 30, -1, -1));
 
-        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 210, 840, 130));
+        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 170, 840, 130));
 
         jPanel4.setBackground(new java.awt.Color(223, 237, 253));
         jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Contatos", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 2, 11))); // NOI18N
@@ -669,72 +675,7 @@ public class DetalharCliente extends javax.swing.JFrame {
                 .addContainerGap(17, Short.MAX_VALUE))
         );
 
-        jPanel1.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 370, 840, 190));
-
-        jPanel5.setBackground(new java.awt.Color(223, 237, 253));
-        jPanel5.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Endereço", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 2, 11))); // NOI18N
-
-        jBtnNovoLembrete.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/add.png"))); // NOI18N
-        jBtnNovoLembrete.setText("Novo Lembrete");
-        jBtnNovoLembrete.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jBtnNovoLembreteActionPerformed(evt);
-            }
-        });
-
-        jTableLembretes.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-                "Código", "Descrição"
-            }
-        ) {
-            boolean[] canEdit = new boolean [] {
-                false, false
-            };
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
-        jTableLembretes.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jTableLembretes.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jTableLembretesMouseClicked(evt);
-            }
-        });
-        jScrollPane1.setViewportView(jTableLembretes);
-
-        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
-        jPanel5.setLayout(jPanel5Layout);
-        jPanel5Layout.setHorizontalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel5Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jBtnNovoLembrete)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 327, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(11, Short.MAX_VALUE))
-        );
-        jPanel5Layout.setVerticalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
-                .addGap(0, 6, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jBtnNovoLembrete))
-        );
-
-        jPanel1.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 30, 360, 170));
-
-        jBtnExibeRotina.setText("Exibir Rotinas");
-        jBtnExibeRotina.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jBtnExibeRotinaActionPerformed(evt);
-            }
-        });
-        jPanel1.add(jBtnExibeRotina, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 20, 140, -1));
+        jPanel1.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 310, 840, 190));
 
         jTabbedPane1.addTab("Dados do Cliente", new javax.swing.ImageIcon(getClass().getResource("/imagens/cliente3.png")), jPanel1); // NOI18N
 
@@ -787,7 +728,7 @@ public class DetalharCliente extends javax.swing.JFrame {
                 .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jBtnAdicionarEquipamento)
-                .addGap(0, 32, Short.MAX_VALUE))
+                .addGap(0, 41, Short.MAX_VALUE))
         );
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -799,10 +740,107 @@ public class DetalharCliente extends javax.swing.JFrame {
                     .addGroup(jPanel6Layout.createSequentialGroup()
                         .addGap(77, 77, 77)
                         .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(151, Short.MAX_VALUE))
+                .addContainerGap(92, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Equipamentos do Cliente", new javax.swing.ImageIcon(getClass().getResource("/imagens/equipamento.png")), jPanel6); // NOI18N
+
+        jPanel5.setBackground(new java.awt.Color(223, 237, 253));
+
+        jPanel10.setBackground(new java.awt.Color(223, 237, 253));
+        jPanel10.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Lembretes", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 2, 11))); // NOI18N
+
+        jTableLembretes.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Código", "Descrição"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jTableLembretes.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jTableLembretes.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTableLembretesMouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(jTableLembretes);
+
+        javax.swing.GroupLayout jPanel10Layout = new javax.swing.GroupLayout(jPanel10);
+        jPanel10.setLayout(jPanel10Layout);
+        jPanel10Layout.setHorizontalGroup(
+            jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel10Layout.createSequentialGroup()
+                .addGap(22, 22, 22)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 617, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(30, Short.MAX_VALUE))
+        );
+        jPanel10Layout.setVerticalGroup(
+            jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel10Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 352, Short.MAX_VALUE)
+                .addGap(47, 47, 47))
+        );
+
+        jBtnNovoLembrete.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jBtnNovoLembrete.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/CadastrarLembrete.png"))); // NOI18N
+        jBtnNovoLembrete.setText("Novo Lembrete");
+        jBtnNovoLembrete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnNovoLembreteActionPerformed(evt);
+            }
+        });
+
+        jBtnExcluir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/excluiLemb.fw.png"))); // NOI18N
+        jBtnExcluir.setText("Excluir Lembrete");
+
+        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, jTableLembretes, org.jdesktop.beansbinding.ELProperty.create("${selectedElement != null}"), jBtnExcluir, org.jdesktop.beansbinding.BeanProperty.create("enabled"));
+        bindingGroup.addBinding(binding);
+
+        jBtnExcluir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnExcluirActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
+        jPanel5.setLayout(jPanel5Layout);
+        jPanel5Layout.setHorizontalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addGap(34, 34, 34)
+                .addComponent(jPanel10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jBtnNovoLembrete, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jBtnExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                .addContainerGap(58, Short.MAX_VALUE))
+        );
+        jPanel5Layout.setVerticalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addGap(66, 66, 66)
+                        .addComponent(jPanel10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addGap(97, 97, 97)
+                        .addComponent(jBtnNovoLembrete)
+                        .addGap(29, 29, 29)
+                        .addComponent(jBtnExcluir)))
+                .addContainerGap(38, Short.MAX_VALUE))
+        );
+
+        jTabbedPane1.addTab("Lembrete", new javax.swing.ImageIcon(getClass().getResource("/imagens/lembrete1.png")), jPanel5); // NOI18N
 
         jPanel7.setBackground(new java.awt.Color(223, 237, 253));
 
@@ -853,25 +891,26 @@ public class DetalharCliente extends javax.swing.JFrame {
         jPanel7Layout.setHorizontalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel7Layout.createSequentialGroup()
-                .addContainerGap(26, Short.MAX_VALUE)
+                .addContainerGap(35, Short.MAX_VALUE)
                 .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jBtnCadastrarRotinaContato, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(21, 21, 21))
+                .addGap(29, 29, 29))
         );
         jPanel7Layout.setVerticalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel7Layout.createSequentialGroup()
-                .addGap(89, 89, 89)
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel7Layout.createSequentialGroup()
-                        .addGap(31, 31, 31)
+                        .addGap(24, 24, 24)
+                        .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel7Layout.createSequentialGroup()
+                        .addGap(51, 51, 51)
                         .addComponent(jBtnCadastrarRotinaContato)))
-                .addContainerGap(37, Short.MAX_VALUE))
+                .addContainerGap(43, Short.MAX_VALUE))
         );
 
-        jTabbedPane1.addTab("Rotina de Contato", jPanel7);
+        jTabbedPane1.addTab("Rotina de Contato", new javax.swing.ImageIcon(getClass().getResource("/imagens/rotinacont.png")), jPanel7); // NOI18N
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -881,7 +920,7 @@ public class DetalharCliente extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane1)
+            .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 567, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         bindingGroup.bind();
@@ -1011,11 +1050,6 @@ public class DetalharCliente extends javax.swing.JFrame {
 
     }//GEN-LAST:event_jTableContatosMouseClicked
 
-    private void jBtnExibeRotinaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnExibeRotinaActionPerformed
-        this.setEnabled(false);
-        new ExibeRotina(GetIndice(), this).setVisible(true);
-    }//GEN-LAST:event_jBtnExibeRotinaActionPerformed
-
     private void jBtnCarregaCepActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnCarregaCepActionPerformed
 
         TelaEspera telaTeste = new TelaEspera();
@@ -1066,6 +1100,11 @@ public class DetalharCliente extends javax.swing.JFrame {
         new CadastrarRotinaContato(GetIndice(), this).setVisible(true);
     }//GEN-LAST:event_jBtnCadastrarRotinaContatoActionPerformed
 
+    private void jBtnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnExcluirActionPerformed
+        LembreteDAO.ExcluirLembrete(codLembrete);
+        this.dispose();
+    }//GEN-LAST:event_jBtnExcluirActionPerformed
+
     private void populaComboBox() {
 
         Connection conexao = Conexao.getConnection();
@@ -1104,33 +1143,7 @@ public class DetalharCliente extends javax.swing.JFrame {
 
     public static int GetIdLembrete() {
         return codLembrete;
-    }
-
-    private void ocultaColunaTabelas() {
-       
-        //oculta coluna equipamento
-        jTableContatos.getColumnModel().getColumn(0).setMaxWidth(0);
-        jTableContatos.getColumnModel().getColumn(0).setMinWidth(0);
-        jTableContatos.getTableHeader().getColumnModel().getColumn(0).setMaxWidth(0);
-        jTableContatos.getTableHeader().getColumnModel().getColumn(0).setMinWidth(0);
-
-        jTableContatos.getColumnModel().getColumn(1).setMaxWidth(0);
-        jTableContatos.getColumnModel().getColumn(1).setMinWidth(0);
-        jTableContatos.getTableHeader().getColumnModel().getColumn(1).setMaxWidth(0);
-        jTableContatos.getTableHeader().getColumnModel().getColumn(1).setMinWidth(0);
-
-//        //oculta coluna funcionario
-//        jTableFuncionario.getColumnModel().getColumn(0).setMaxWidth(0);
-//        jTableFuncionario.getColumnModel().getColumn(0).setMinWidth(0);
-//        jTableFuncionario.getTableHeader().getColumnModel().getColumn(0).setMaxWidth(0);
-//        jTableFuncionario.getTableHeader().getColumnModel().getColumn(0).setMinWidth(0);
-//
-//        //oculta coluna tipoServico
-//        jTableTipodeServico.getColumnModel().getColumn(0).setMaxWidth(0);
-//        jTableTipodeServico.getColumnModel().getColumn(0).setMinWidth(0);
-//        jTableTipodeServico.getTableHeader().getColumnModel().getColumn(0).setMaxWidth(0);
-//        jTableTipodeServico.getTableHeader().getColumnModel().getColumn(0).setMinWidth(0);
-    }
+    }   
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBtbCancelDadosP;
@@ -1140,7 +1153,7 @@ public class DetalharCliente extends javax.swing.JFrame {
     private javax.swing.JButton jBtnAltEndereco;
     private javax.swing.JButton jBtnCadastrarRotinaContato;
     private javax.swing.JButton jBtnCarregaCep;
-    private javax.swing.JButton jBtnExibeRotina;
+    private javax.swing.JButton jBtnExcluir;
     private javax.swing.JButton jBtnNovoLembrete;
     private javax.swing.JButton jButtonAr1;
     private javax.swing.JButton jButtonAr3;
@@ -1158,6 +1171,7 @@ public class DetalharCliente extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel10;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
