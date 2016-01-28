@@ -24,9 +24,9 @@ public class TabelaZebrada extends DefaultTableCellRenderer {
       
             table.setSelectionBackground(new Color(9,144,247));
         } else if (row % 2 == 0) {
-            comp.setBackground(new Color(221,241,182));
-        } else {
             comp.setBackground(new Color(238,255,205));
+        } else {
+            comp.setBackground(new Color(243,252,224));
         }
 
         return comp;		 
