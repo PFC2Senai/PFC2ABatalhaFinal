@@ -207,17 +207,24 @@ public class ExibeFornecedor extends javax.swing.JFrame {
             rs = stmt.executeQuery(Sql);            
             
                     while(rs.next()){
-                        dados.add(new Object[]{rs.getObject("id_forn"),rs.getObject("fornecedor"),
-                                              rs.getObject("cep"),rs.getObject("estado")});            
+                        dados.add(new Object[]{
+                            rs.getObject("id_forn"),
+                            rs.getObject("fornecedor"),
+                            rs.getObject("cep"),
+                            rs.getObject("estado")});            
                     }
 
-                    for (int i = 0; i < 4; i++){
+                    for (int i = 0; i < 4; i++) {
+                        
                         ModeloTabela modelo = new ModeloTabela(dados, Colunas);
                         jTableListarFornecedores.setModel(modelo);
-                        jTableListarFornecedores.getColumnModel().getColumn(i).setPreferredWidth(150);
+                        jTableListarFornecedores.getColumnModel().getColumn(0).setPreferredWidth(50);
+                        jTableListarFornecedores.getColumnModel().getColumn(1).setPreferredWidth(200);
+                        jTableListarFornecedores.getColumnModel().getColumn(2).setPreferredWidth(80);
+                        jTableListarFornecedores.getColumnModel().getColumn(3).setPreferredWidth(15);
                         jTableListarFornecedores.getColumnModel().getColumn(i).setResizable(false);
                         jTableListarFornecedores.getTableHeader().setReorderingAllowed(false);
-                        jTableListarFornecedores.setAutoResizeMode(jTableListarFornecedores.AUTO_RESIZE_OFF);
+                       // jTableListarFornecedores.setAutoResizeMode(jTableListarFornecedores.AUTO_RESIZE_OFF);
                         jTableListarFornecedores.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
                     }
                     

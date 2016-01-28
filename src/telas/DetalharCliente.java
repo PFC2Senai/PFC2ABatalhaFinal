@@ -14,6 +14,7 @@ import funcoes.LembreteDAO;
 import funcoes.LimitarDigitos;
 import funcoes.ModeloTabela;
 import funcoes.RotinaContatosDAO;
+import funcoes.TabelaZebrada;
 import java.awt.Color;
 import java.io.IOException;
 import java.sql.Connection;
@@ -29,6 +30,7 @@ import javax.swing.ListSelectionModel;
 import javax.swing.SwingConstants;
 import javax.swing.border.LineBorder;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableCellRenderer;
 import static telas.ExibeCliente.GetIndice;
 
 public class DetalharCliente extends javax.swing.JFrame {
@@ -49,6 +51,7 @@ public class DetalharCliente extends javax.swing.JFrame {
      * Creates new form CadastrarCliente
      */
     public DetalharCliente() {
+        
         this.idContato = ClienteDAO.idContato(GetIndice());
         this.codCliente = GetIndice();
         telaDetalCli = this;
@@ -266,11 +269,15 @@ public class DetalharCliente extends javax.swing.JFrame {
             }
         
             for (int i = 0; i < 6; i++) {
+                
                 ModeloTabela modelo = new ModeloTabela(dados, Colunas);
                 
-                jTableContatos.setModel(modelo);               
+                jTableContatos.setModel(modelo); 
+                TableCellRenderer renderer = new TabelaZebrada();
+                jTableContatos.setDefaultRenderer(Object.class, renderer);
                 jTableContatos.getColumnModel().getColumn(i).setResizable(false);
                 jTableContatos.getTableHeader().setReorderingAllowed(false);
+                
                 jTableContatos.getColumnModel().getColumn(0).setMaxWidth(0);
                 jTableContatos.getColumnModel().getColumn(0).setMinWidth(0);
                 jTableContatos.getTableHeader().getColumnModel().getColumn(0).setMaxWidth(0);
@@ -285,6 +292,7 @@ public class DetalharCliente extends javax.swing.JFrame {
                 jTableContatos.getColumnModel().getColumn(3).setPreferredWidth(80);
                 jTableContatos.getColumnModel().getColumn(4).setPreferredWidth(80);
                 jTableContatos.getColumnModel().getColumn(5).setPreferredWidth(200);
+                
                 jTableContatos.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
             }
             
@@ -320,6 +328,7 @@ public class DetalharCliente extends javax.swing.JFrame {
             for (int i = 0; i < 4; i++) {
                 ModeloTabela modelo = new ModeloTabela(dados, Colunas);
                 jTableEquipCliente.setModel(modelo);
+                jTableEquipCliente.setDefaultRenderer(Object.class, new TabelaZebrada());
                 jTableEquipCliente.getColumnModel().getColumn(0).setMaxWidth(0);
                 jTableEquipCliente.getColumnModel().getColumn(0).setMinWidth(0);
                 jTableEquipCliente.getTableHeader().getColumnModel().getColumn(0).setMaxWidth(0);
@@ -365,7 +374,12 @@ public class DetalharCliente extends javax.swing.JFrame {
             for (int i = 0; i < 4; i++) {
                 ModeloTabela modelo = new ModeloTabela(dados, Colunas);
                 jTableListarRotinas.setModel(modelo);
-                jTableListarRotinas.getColumnModel().getColumn(0).setPreferredWidth(50);
+                jTableListarRotinas.setDefaultRenderer(Object.class, new TabelaZebrada());
+                jTableListarRotinas.getColumnModel().getColumn(0).setMaxWidth(0);
+                jTableListarRotinas.getColumnModel().getColumn(0).setMinWidth(0);
+                jTableListarRotinas.getTableHeader().getColumnModel().getColumn(0).setMaxWidth(0);
+                jTableListarRotinas.getTableHeader().getColumnModel().getColumn(0).setMinWidth(0);
+                
                 jTableListarRotinas.getColumnModel().getColumn(1).setPreferredWidth(60);
                 jTableListarRotinas.getColumnModel().getColumn(2).setPreferredWidth(60);
                 jTableListarRotinas.getColumnModel().getColumn(3).setPreferredWidth(300);                
@@ -646,7 +660,7 @@ public class DetalharCliente extends javax.swing.JFrame {
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, true, false, false, false, false
+                false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -806,6 +820,7 @@ public class DetalharCliente extends javax.swing.JFrame {
             }
         });
         jTableLembretes.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jTableLembretes.getTableHeader().setReorderingAllowed(false);
         jTableLembretes.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jTableLembretesMouseClicked(evt);

@@ -3,6 +3,7 @@ package funcoes;
 import java.io.IOException;
 import java.net.SocketTimeoutException;
 
+
 import org.jsoup.HttpStatusException;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;

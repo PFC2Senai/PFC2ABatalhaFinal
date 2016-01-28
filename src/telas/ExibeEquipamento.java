@@ -216,18 +216,30 @@ public class ExibeEquipamento extends javax.swing.JFrame {
             rs = stmt.executeQuery(Sql);
 
             while (rs.next()) {
-                dados.add(new Object[]{rs.getObject("idDetEquipamento"), rs.getObject("equipamento"),
-                    rs.getObject("fornecedor"), rs.getObject("fabricante"),
+                dados.add(new Object[]{
+                    rs.getObject("idDetEquipamento"), 
+                    rs.getObject("equipamento"),
+                    rs.getObject("fornecedor"), 
+                    rs.getObject("fabricante"),
                     rs.getObject("modelo")});
             }
 
             for (int i = 0; i < 5; i++) {
+                
                 ModeloTabela modelo = new ModeloTabela(dados, Colunas);
                 jTableListarEquipamento.setModel(modelo);
-                jTableListarEquipamento.getColumnModel().getColumn(i).setPreferredWidth(150);
+                jTableListarEquipamento.getColumnModel().getColumn(0).setMaxWidth(0);
+                jTableListarEquipamento.getColumnModel().getColumn(0).setMinWidth(0);
+                jTableListarEquipamento.getTableHeader().getColumnModel().getColumn(0).setMaxWidth(0);
+                jTableListarEquipamento.getTableHeader().getColumnModel().getColumn(0).setMinWidth(0);
+                
+                jTableListarEquipamento.getColumnModel().getColumn(1).setPreferredWidth(200);
+                jTableListarEquipamento.getColumnModel().getColumn(2).setPreferredWidth(150);
+                jTableListarEquipamento.getColumnModel().getColumn(3).setPreferredWidth(150);
+                jTableListarEquipamento.getColumnModel().getColumn(4).setPreferredWidth(150);
                 jTableListarEquipamento.getColumnModel().getColumn(i).setResizable(false);
                 jTableListarEquipamento.getTableHeader().setReorderingAllowed(false);
-                jTableListarEquipamento.setAutoResizeMode(jTableListarEquipamento.AUTO_RESIZE_OFF);
+               // jTableListarEquipamento.setAutoResizeMode(jTableListarEquipamento.AUTO_RESIZE_OFF);
                 jTableListarEquipamento.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
             }
 

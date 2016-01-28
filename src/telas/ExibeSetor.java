@@ -5,6 +5,7 @@ import atributos.Setor;
 import static funcoes.Conexao.getConnection;
 import funcoes.ModeloTabela;
 import funcoes.SetorDAO;
+import funcoes.TabelaZebrada;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -64,13 +65,23 @@ public class ExibeSetor extends javax.swing.JFrame {
                 
                 ModeloTabela modelo = new ModeloTabela(dados, Colunas);
                 jTableListarSetores.setModel(modelo);
-                jTableListarSetores.getColumnModel().getColumn(i).setPreferredWidth(150);
+                jTableListarSetores.setDefaultRenderer(Object.class, new TabelaZebrada()); 
+                
+                jTableListarSetores.getColumnModel().getColumn(0).setMaxWidth(0);
+                jTableListarSetores.getColumnModel().getColumn(0).setMinWidth(0);
+                jTableListarSetores.getTableHeader().getColumnModel().getColumn(0).setMaxWidth(0);
+                jTableListarSetores.getTableHeader().getColumnModel().getColumn(0).setMinWidth(0);
+                
+                jTableListarSetores.getColumnModel().getColumn(1).setPreferredWidth(200);
+                
                 jTableListarSetores.getColumnModel().getColumn(i).setResizable(false);
                 jTableListarSetores.getTableHeader().setReorderingAllowed(false);
                 jTableListarSetores.setAutoResizeMode(jTableListarSetores.AUTO_RESIZE_OFF);
                 jTableListarSetores.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
             }
 
+            
+            
         } catch (SQLException ex) {
             Logger.getLogger(ExibeModelo.class.getName()).log(Level.SEVERE, null, ex);
         }

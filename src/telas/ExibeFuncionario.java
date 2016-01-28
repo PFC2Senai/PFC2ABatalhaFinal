@@ -51,18 +51,29 @@ public class ExibeFuncionario extends javax.swing.JFrame {
             rs = stmt.executeQuery(Sql);
 
             while (rs.next()) {
-                dados.add(new Object[]{rs.getObject("idfuncionario"), rs.getObject("funcionario"),
-                    rs.getObject("rg"), rs.getObject("cpf"), rs.getObject("cargo"),
+                dados.add(new Object[]{
+                    rs.getObject("idfuncionario"), 
+                    rs.getObject("funcionario"),
+                    rs.getObject("rg"), 
+                    rs.getObject("cpf"), 
+                    rs.getObject("cargo"),
                     rs.getObject("data_admissao")});
             }
 
             for (int i = 0; i < 6; i++) {
                 ModeloTabela modelo = new ModeloTabela(dados, Colunas);
                 jTableListarFuncionarios.setModel(modelo);
-                jTableListarFuncionarios.getColumnModel().getColumn(i).setPreferredWidth(150);
+                
+                jTableListarFuncionarios.getColumnModel().getColumn(0).setPreferredWidth(50);
+                jTableListarFuncionarios.getColumnModel().getColumn(1).setPreferredWidth(200);
+                jTableListarFuncionarios.getColumnModel().getColumn(2).setPreferredWidth(50);
+                jTableListarFuncionarios.getColumnModel().getColumn(3).setPreferredWidth(50);
+                jTableListarFuncionarios.getColumnModel().getColumn(4).setPreferredWidth(150);
+                jTableListarFuncionarios.getColumnModel().getColumn(5).setPreferredWidth(50);
+                
                 jTableListarFuncionarios.getColumnModel().getColumn(i).setResizable(false);
                 jTableListarFuncionarios.getTableHeader().setReorderingAllowed(false);
-                jTableListarFuncionarios.setAutoResizeMode(jTableListarFuncionarios.AUTO_RESIZE_OFF);
+               // jTableListarFuncionarios.setAutoResizeMode(jTableListarFuncionarios.AUTO_RESIZE_OFF);
                 jTableListarFuncionarios.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
             }
 

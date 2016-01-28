@@ -39,8 +39,11 @@ public class ExibeAuditoria extends javax.swing.JFrame {
             rs = stmt.executeQuery(Sql);            
             
                 while(rs.next()){
-                    dados.add(new Object[]{ rs.getObject("idtabDetAuditoria"),rs.getObject("dataModificacao"),
-                                            rs.getObject("usuario"),rs.getObject("descricao")});            
+                    dados.add(new Object[]{ 
+                        rs.getObject("idtabDetAuditoria"),
+                        rs.getObject("dataModificacao"),
+                        rs.getObject("usuario"),
+                        rs.getObject("descricao")});            
                 }
 
                     for (int i = 0; i < 4; i++) {

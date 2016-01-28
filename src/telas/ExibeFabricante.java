@@ -49,13 +49,19 @@ public class ExibeFabricante extends javax.swing.JFrame {
                dados.add(new Object[]{rs.getObject("idtabFabricante"),rs.getObject("fabricante")});            
             }
                         
-            for (int i = 0; i < 2; i++){
+            for (int i = 0; i < 2; i++) {
                 ModeloTabela modelo = new ModeloTabela(dados, Colunas);
                 jTableListarFabricantes.setModel(modelo);
-                jTableListarFabricantes.getColumnModel().getColumn(i).setPreferredWidth(150);
+                jTableListarFabricantes.getColumnModel().getColumn(0).setMaxWidth(0);
+                jTableListarFabricantes.getColumnModel().getColumn(0).setMinWidth(0);
+                jTableListarFabricantes.getTableHeader().getColumnModel().getColumn(0).setMaxWidth(0);
+                jTableListarFabricantes.getTableHeader().getColumnModel().getColumn(0).setMinWidth(0);
+                
+                jTableListarFabricantes.getColumnModel().getColumn(1).setPreferredWidth(200);
+                
                 jTableListarFabricantes.getColumnModel().getColumn(i).setResizable(false);
                 jTableListarFabricantes.getTableHeader().setReorderingAllowed(false);
-                jTableListarFabricantes.setAutoResizeMode(jTableListarFabricantes.AUTO_RESIZE_OFF);
+               // jTableListarFabricantes.setAutoResizeMode(jTableListarFabricantes.AUTO_RESIZE_OFF);
                 jTableListarFabricantes.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
             }
             

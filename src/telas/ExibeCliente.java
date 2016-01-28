@@ -82,18 +82,25 @@ public final class ExibeCliente extends javax.swing.JFrame {
             rs = stmt.executeQuery(Sql);
 
             while (rs.next()) {
-                dados.add(new Object[]{rs.getObject("idCliente"), rs.getObject("empresa"),
-                    rs.getObject("cnpj"), rs.getObject("setor"),
+                dados.add(new Object[]{
+                    rs.getObject("idCliente"), 
+                    rs.getObject("empresa"),
+                    rs.getObject("cnpj"), 
+                    rs.getObject("setor"),
                     rs.getObject("estado")});
             }
 
             for (int i = 0; i < 5; i++) {
                 ModeloTabela modelo = new ModeloTabela(dados, Colunas);
                 jTableListarClientes.setModel(modelo);
-                jTableListarClientes.getColumnModel().getColumn(i).setPreferredWidth(150);
+                jTableListarClientes.getColumnModel().getColumn(0).setPreferredWidth(50);
+                jTableListarClientes.getColumnModel().getColumn(1).setPreferredWidth(200);
+                jTableListarClientes.getColumnModel().getColumn(2).setPreferredWidth(80);
+                jTableListarClientes.getColumnModel().getColumn(3).setPreferredWidth(80);
+                jTableListarClientes.getColumnModel().getColumn(4).setPreferredWidth(10); 
                 jTableListarClientes.getColumnModel().getColumn(i).setResizable(false);
                 jTableListarClientes.getTableHeader().setReorderingAllowed(false);
-                jTableListarClientes.setAutoResizeMode(jTableListarClientes.AUTO_RESIZE_OFF);
+              //  jTableListarClientes.setAutoResizeMode(jTableListarClientes.AUTO_RESIZE_OFF);
                 jTableListarClientes.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
             }
 
@@ -304,13 +311,12 @@ public final class ExibeCliente extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(42, 42, 42)
                         .addComponent(jBtnEditar)
-                        .addGap(35, 35, 35)
+                        .addGap(41, 41, 41)
                         .addComponent(jBtnCadastrarNovoCliente)
-                        .addGap(26, 26, 26)
+                        .addGap(38, 38, 38)
                         .addComponent(jBtnLembrete)
-                        .addGap(18, 18, 18)
+                        .addGap(42, 42, 42)
                         .addComponent(jBtnRotinaContato)
                         .addGap(18, 18, 18)
                         .addComponent(jBtExcluirCliente)

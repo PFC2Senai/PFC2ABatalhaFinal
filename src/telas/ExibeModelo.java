@@ -38,6 +38,7 @@ public class ExibeModelo extends javax.swing.JFrame {
     public void TabelaModelo(String Sql) {
 
         try {
+            
             stmt = getConnection().createStatement();
             ArrayList dados = new ArrayList();
             String[] Colunas = {"Código", "Modelo"};
@@ -46,16 +47,26 @@ public class ExibeModelo extends javax.swing.JFrame {
             rs = stmt.executeQuery(Sql);
 
             while (rs.next()) {
-                dados.add(new Object[]{rs.getObject("idtabModelo"), rs.getObject("modelo")});
+                dados.add(new Object[]{
+                    rs.getObject("idtabModelo"), 
+                    rs.getObject("modelo")});
             }
 
             for (int i = 0; i < 2; i++) {
+                
                 ModeloTabela modelo = new ModeloTabela(dados, Colunas);
                 jTableListarUsuarios.setModel(modelo);
-                jTableListarUsuarios.getColumnModel().getColumn(i).setPreferredWidth(150);
+                
+                jTableListarUsuarios.getColumnModel().getColumn(0).setMaxWidth(0);
+                jTableListarUsuarios.getColumnModel().getColumn(0).setMinWidth(0);
+                jTableListarUsuarios.getTableHeader().getColumnModel().getColumn(0).setMaxWidth(0);
+                jTableListarUsuarios.getTableHeader().getColumnModel().getColumn(0).setMinWidth(0);
+                
+                jTableListarUsuarios.getColumnModel().getColumn(1).setPreferredWidth(200);
+                
                 jTableListarUsuarios.getColumnModel().getColumn(i).setResizable(false);
                 jTableListarUsuarios.getTableHeader().setReorderingAllowed(false);
-                jTableListarUsuarios.setAutoResizeMode(jTableListarUsuarios.AUTO_RESIZE_OFF);
+               // jTableListarUsuarios.setAutoResizeMode(jTableListarUsuarios.AUTO_RESIZE_OFF);
                 jTableListarUsuarios.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
             }
 
