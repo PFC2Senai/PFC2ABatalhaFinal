@@ -150,7 +150,9 @@
             </Property>
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
               <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
-                <TitledBorder title="Dados Gerais"/>
+                <TitledBorder title="Dados Gerais">
+                  <Font PropertyName="font" name="Tahoma" size="11" style="2"/>
+                </TitledBorder>
               </Border>
             </Property>
           </Properties>
@@ -333,7 +335,7 @@
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                   <Image iconType="3" name="/imagens/pesquisar.gif"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Carrega CEP"/>
+                <Property name="text" type="java.lang.String" value="Buscar"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jBtnCarregaCepActionPerformed"/>
@@ -348,7 +350,9 @@
             </Property>
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
               <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
-                <TitledBorder title="Contatos"/>
+                <TitledBorder title="Contatos">
+                  <Font PropertyName="font" name="Tahoma" size="11" style="2"/>
+                </TitledBorder>
               </Border>
             </Property>
           </Properties>

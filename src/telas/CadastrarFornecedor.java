@@ -131,7 +131,7 @@ public class CadastrarFornecedor extends javax.swing.JFrame {
         });
 
         jPanel2.setBackground(new java.awt.Color(223, 237, 253));
-        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Dados Gerais"));
+        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Dados Gerais", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 2, 11))); // NOI18N
 
         jLabel14.setText("Cidade:");
 
@@ -163,7 +163,7 @@ public class CadastrarFornecedor extends javax.swing.JFrame {
         txtPais.setText("Brasil");
 
         jBtnCarregaCep.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/pesquisar.gif"))); // NOI18N
-        jBtnCarregaCep.setText("Carrega CEP");
+        jBtnCarregaCep.setText("Buscar");
         jBtnCarregaCep.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jBtnCarregaCepActionPerformed(evt);
@@ -253,7 +253,7 @@ public class CadastrarFornecedor extends javax.swing.JFrame {
         );
 
         jPanel3.setBackground(new java.awt.Color(223, 237, 253));
-        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder("Contatos"));
+        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Contatos", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 2, 11))); // NOI18N
 
         jLabel5.setText("Contato:");
 
@@ -535,86 +535,11 @@ public class CadastrarFornecedor extends javax.swing.JFrame {
     }//GEN-LAST:event_formWindowClosed
 
     private void jBtnCarregaCepActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnCarregaCepActionPerformed
-
-        TelaEspera telaTeste = new TelaEspera();
-        this.setEnabled(false);
-        final Thread t1 = new Thread(new Runnable() {//cria uma thread pra gravar o seu arquivo
-
-            @Override
-            public void run() {
-
-                try {
-
-                    telaTeste.setVisible(true);
-
-                    CarregaCEP cep = new CarregaCEP();
-
-                    String ceptxt = txtCep.getText();
-                    txtCidade.setText(cep.getCidade(ceptxt));
-                    txtBairro.setText(cep.getBairro(ceptxt));
-                    txtRua.setText(cep.getEndereco(ceptxt));
-                    txtEstado.setText(cep.getUF(ceptxt));
-
-                } catch (IOException ex) {
-                    JOptionPane.showMessageDialog(null, ex);
-                }
-            }
-        });
-        t1.start();
-        new Thread(new Runnable() {//cria outra thread pra sua tela de espera
-            @Override
-            public void run() {
-                try {
-                    //cria a tela de espera e mostra ela
-                    t1.join();//fica esperando a primeira thread acabar
-                    telaForn.setEnabled(true);  // quando acabar fecha a janela de espera, podes fazer outras coisas aqui
-                    telaTeste.dispose();
-                } catch (InterruptedException ex) {
-                    Logger.getLogger(CadastrarCliente.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            }
-        }).start();
+        CarregaCEP();
     }//GEN-LAST:event_jBtnCarregaCepActionPerformed
 
     private void txtCepActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCepActionPerformed
-
-        TelaEspera telaTeste = new TelaEspera();
-        this.setEnabled(false);
-        final Thread t1 = new Thread(new Runnable() {//cria uma thread pra gravar o seu arquivo
-
-            @Override
-            public void run() {
-
-                try {
-
-                    telaTeste.setVisible(true);
-                    CarregaCEP cep = new CarregaCEP();
-
-                    String ceptxt = txtCep.getText();
-                    txtCidade.setText(cep.getCidade(ceptxt));
-                    txtBairro.setText(cep.getBairro(ceptxt));
-                    txtRua.setText(cep.getEndereco(ceptxt));
-                    txtEstado.setText(cep.getUF(ceptxt));
-
-                } catch (IOException ex) {
-                    JOptionPane.showMessageDialog(null, ex);
-                }
-            }
-        });
-        t1.start();
-        new Thread(new Runnable() {//cria outra thread pra sua tela de espera
-            @Override
-            public void run() {
-                try {
-                    //cria a tela de espera e mostra ela
-                    t1.join();//fica esperando a primeira thread acabar
-                    telaForn.setEnabled(true);  // quando acabar fecha a janela de espera, podes fazer outras coisas aqui
-                    telaTeste.dispose();
-                } catch (InterruptedException ex) {
-                    Logger.getLogger(CadastrarCliente.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            }
-        }).start();
+        CarregaCEP();
     }//GEN-LAST:event_txtCepActionPerformed
 
     private void txtEmailFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtEmailFocusLost
@@ -689,6 +614,46 @@ public class CadastrarFornecedor extends javax.swing.JFrame {
             txtEmail.requestFocus();
 
         }
+    }
+    
+    private void CarregaCEP(){
+        TelaEspera telaTeste = new TelaEspera();
+        this.setEnabled(false);
+        final Thread t1 = new Thread(new Runnable() {//cria uma thread pra gravar o seu arquivo
+
+            @Override
+            public void run() {
+
+                try {
+
+                    telaTeste.setVisible(true);
+                    CarregaCEP cep = new CarregaCEP();
+
+                    String ceptxt = txtCep.getText();
+                    txtCidade.setText(cep.getCidade(ceptxt));
+                    txtBairro.setText(cep.getBairro(ceptxt));
+                    txtRua.setText(cep.getEndereco(ceptxt));
+                    txtEstado.setText(cep.getUF(ceptxt));
+
+                } catch (IOException ex) {
+                    JOptionPane.showMessageDialog(null, ex);
+                }
+            }
+        });
+        t1.start();
+        new Thread(new Runnable() {//cria outra thread pra sua tela de espera
+            @Override
+            public void run() {
+                try {
+                    //cria a tela de espera e mostra ela
+                    t1.join();//fica esperando a primeira thread acabar
+                    telaForn.setEnabled(true);  // quando acabar fecha a janela de espera, podes fazer outras coisas aqui
+                    telaTeste.dispose();
+                } catch (InterruptedException ex) {
+                    Logger.getLogger(CadastrarCliente.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }).start();
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

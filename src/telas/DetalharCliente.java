@@ -36,7 +36,7 @@ import static telas.ExibeCliente.GetIndice;
 public class DetalharCliente extends javax.swing.JFrame {
 
     int idContato;
-    public static int codLembrete; 
+    public static int codLembrete;
     public static int codRotina;
     private int codEquipClie;
     private int codPessoaContato;
@@ -51,7 +51,7 @@ public class DetalharCliente extends javax.swing.JFrame {
      * Creates new form CadastrarCliente
      */
     public DetalharCliente() {
-        
+
         this.idContato = ClienteDAO.idContato(GetIndice());
         this.codCliente = GetIndice();
         telaDetalCli = this;
@@ -66,9 +66,9 @@ public class DetalharCliente extends javax.swing.JFrame {
         Color minhaCor = new Color(217, 228, 241);
         this.getContentPane().setBackground(minhaCor);
         //this.setExtendedState(this.getExtendedState()|JFrame.MAXIMIZED_BOTH);
-        TabelaLembrete2(GetIndice());         
-        TabelaContatos();      
-        
+        TabelaLembrete2(GetIndice());
+        TabelaContatos();
+
         jBtnCadastrarRotinaContato.setVerticalTextPosition(SwingConstants.BOTTOM);
         jBtnCadastrarRotinaContato.setHorizontalTextPosition(SwingConstants.CENTER);
         jBtnNovoLembrete.setVerticalTextPosition(SwingConstants.BOTTOM);
@@ -81,10 +81,9 @@ public class DetalharCliente extends javax.swing.JFrame {
         jBtnVerLembrete.setHorizontalTextPosition(SwingConstants.CENTER);
         jBtnVerRotina.setVerticalTextPosition(SwingConstants.BOTTOM);
         jBtnVerRotina.setHorizontalTextPosition(SwingConstants.CENTER);
-        
+
         //txtEmpresa.setDocument(new LimitarDigitos(45));
         //txtSetor.setDocument(new LimitarDigitos(50));
-        
     }
 
     private void CarregaCliente() {
@@ -147,7 +146,7 @@ public class DetalharCliente extends javax.swing.JFrame {
         jBtbCancelDadosP.setVisible(false);
         jBtnAltDadosP.setVisible(false);
     }
-    
+
     private void EditarDadosPessoais() {
         // customiza o textfild
         txtEmpresa.setOpaque(true);
@@ -155,7 +154,7 @@ public class DetalharCliente extends javax.swing.JFrame {
         txtEmpresa.setBorder(new LineBorder(Color.BLACK));
         txtCnpj.setOpaque(true);
         txtCnpj.setBackground(new Color(255, 255, 255));
-        txtCnpj.setBorder(new LineBorder(Color.BLACK));       
+        txtCnpj.setBorder(new LineBorder(Color.BLACK));
     }
 
     private void desabilitarEndereco() {
@@ -193,7 +192,7 @@ public class DetalharCliente extends javax.swing.JFrame {
         jBtbCancelEndereco.setVisible(false);
         jBtnAltEndereco.setVisible(false);
     }
-    
+
     private void EditarEndereco() {
 
         txtEndBairro.setOpaque(true);
@@ -239,8 +238,11 @@ public class DetalharCliente extends javax.swing.JFrame {
                     String.valueOf(lembrete.getIdLembrete()),
                     lembrete.getDescricao()});
             }
-
+            
+            TableCellRenderer renderer = new TabelaZebrada();
+            jTableLembretes.setDefaultRenderer(Object.class, renderer);
             //oculta coluna jtable
+
             jTableLembretes.getColumnModel().getColumn(0).setMaxWidth(0);
             jTableLembretes.getColumnModel().getColumn(0).setMinWidth(0);
             jTableLembretes.getTableHeader().getColumnModel().getColumn(0).setMaxWidth(0);
@@ -263,40 +265,44 @@ public class DetalharCliente extends javax.swing.JFrame {
             rs = stmt.executeQuery(Sql);
 
             while (rs.next()) {
-                dados.add(new Object[]{rs.getObject("id_contato"), rs.getObject("idPessoaContato"), rs.getObject("contato"),
-                    rs.getObject("telefone"), rs.getObject("celular"),
+                dados.add(new Object[]{
+                    rs.getObject("id_contato"),
+                    rs.getObject("idPessoaContato"),
+                    rs.getObject("contato"),
+                    rs.getObject("telefone"),
+                    rs.getObject("celular"),
                     rs.getObject("email")});
             }
-        
+
             for (int i = 0; i < 6; i++) {
-                
+
                 ModeloTabela modelo = new ModeloTabela(dados, Colunas);
-                
-                jTableContatos.setModel(modelo); 
+
+                jTableContatos.setModel(modelo);
                 TableCellRenderer renderer = new TabelaZebrada();
                 jTableContatos.setDefaultRenderer(Object.class, renderer);
                 jTableContatos.getColumnModel().getColumn(i).setResizable(false);
                 jTableContatos.getTableHeader().setReorderingAllowed(false);
-                
+
                 jTableContatos.getColumnModel().getColumn(0).setMaxWidth(0);
                 jTableContatos.getColumnModel().getColumn(0).setMinWidth(0);
                 jTableContatos.getTableHeader().getColumnModel().getColumn(0).setMaxWidth(0);
                 jTableContatos.getTableHeader().getColumnModel().getColumn(0).setMinWidth(0);
-                
+
                 jTableContatos.getColumnModel().getColumn(1).setMaxWidth(0);
                 jTableContatos.getColumnModel().getColumn(1).setMinWidth(0);
                 jTableContatos.getTableHeader().getColumnModel().getColumn(1).setMaxWidth(0);
                 jTableContatos.getTableHeader().getColumnModel().getColumn(1).setMinWidth(0);
-                
+
                 jTableContatos.getColumnModel().getColumn(2).setPreferredWidth(200);
                 jTableContatos.getColumnModel().getColumn(3).setPreferredWidth(80);
                 jTableContatos.getColumnModel().getColumn(4).setPreferredWidth(80);
                 jTableContatos.getColumnModel().getColumn(5).setPreferredWidth(200);
-                
+
                 jTableContatos.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
             }
-            
-                jTableContatos.setAutoscrolls(true);
+
+            jTableContatos.setAutoscrolls(true);
         } catch (SQLException ex) {
             Logger.getLogger(ExibeCliente.class.getName()).log(Level.SEVERE, null, ex);
 
@@ -319,8 +325,8 @@ public class DetalharCliente extends javax.swing.JFrame {
 
             while (rs.next()) {
                 dados.add(new Object[]{
-                    rs.getObject("iddetclienteequipamento"), 
-                    rs.getObject("equipamento"), 
+                    rs.getObject("iddetclienteequipamento"),
+                    rs.getObject("equipamento"),
                     rs.getObject("fabricante"),
                     rs.getObject("modelo")});
             }
@@ -328,16 +334,17 @@ public class DetalharCliente extends javax.swing.JFrame {
             for (int i = 0; i < 4; i++) {
                 ModeloTabela modelo = new ModeloTabela(dados, Colunas);
                 jTableEquipCliente.setModel(modelo);
-                jTableEquipCliente.setDefaultRenderer(Object.class, new TabelaZebrada());
+                TableCellRenderer renderer = new TabelaZebrada();
+                jTableEquipCliente.setDefaultRenderer(Object.class, renderer);
                 jTableEquipCliente.getColumnModel().getColumn(0).setMaxWidth(0);
                 jTableEquipCliente.getColumnModel().getColumn(0).setMinWidth(0);
                 jTableEquipCliente.getTableHeader().getColumnModel().getColumn(0).setMaxWidth(0);
                 jTableEquipCliente.getTableHeader().getColumnModel().getColumn(0).setMinWidth(0);
-                
+
                 jTableEquipCliente.getColumnModel().getColumn(1).setPreferredWidth(150);
                 jTableEquipCliente.getColumnModel().getColumn(2).setPreferredWidth(150);
                 jTableEquipCliente.getColumnModel().getColumn(3).setPreferredWidth(150);
-                
+
                 jTableEquipCliente.getColumnModel().getColumn(i).setResizable(false);
                 jTableEquipCliente.getTableHeader().setReorderingAllowed(false);
                 jTableEquipCliente.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
@@ -350,7 +357,7 @@ public class DetalharCliente extends javax.swing.JFrame {
             Logger.getLogger(ExibeCliente.class.getName()).log(Level.SEVERE, null, erro);
         }
     }
-    
+
     public void TabelaRotina(String Sql) {
 
         try {
@@ -362,27 +369,28 @@ public class DetalharCliente extends javax.swing.JFrame {
             ResultSet rs;
             rs = stmt.executeQuery(Sql);
 
-            while (rs.next()){
-                
+            while (rs.next()) {
+
                 dados.add(new Object[]{
                     rs.getObject("idRotinaContato"),
                     rs.getObject("dataRotina"),
-                    rs.getObject("horaRotina"), 
+                    rs.getObject("horaRotina"),
                     rs.getObject("descricaoRotina")});
             }
 
             for (int i = 0; i < 4; i++) {
                 ModeloTabela modelo = new ModeloTabela(dados, Colunas);
                 jTableListarRotinas.setModel(modelo);
-                jTableListarRotinas.setDefaultRenderer(Object.class, new TabelaZebrada());
+                TableCellRenderer renderer = new TabelaZebrada();
+                jTableListarRotinas.setDefaultRenderer(Object.class, renderer);
                 jTableListarRotinas.getColumnModel().getColumn(0).setMaxWidth(0);
                 jTableListarRotinas.getColumnModel().getColumn(0).setMinWidth(0);
                 jTableListarRotinas.getTableHeader().getColumnModel().getColumn(0).setMaxWidth(0);
                 jTableListarRotinas.getTableHeader().getColumnModel().getColumn(0).setMinWidth(0);
-                
+
                 jTableListarRotinas.getColumnModel().getColumn(1).setPreferredWidth(60);
                 jTableListarRotinas.getColumnModel().getColumn(2).setPreferredWidth(60);
-                jTableListarRotinas.getColumnModel().getColumn(3).setPreferredWidth(300);                
+                jTableListarRotinas.getColumnModel().getColumn(3).setPreferredWidth(300);
                 jTableListarRotinas.getColumnModel().getColumn(i).setResizable(false);
                 jTableListarRotinas.getTableHeader().setReorderingAllowed(false);
                 jTableListarRotinas.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
@@ -395,7 +403,7 @@ public class DetalharCliente extends javax.swing.JFrame {
             Logger.getLogger(ExibeCliente.class.getName()).log(Level.SEVERE, null, erro);
         }
     }
-    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -1088,7 +1096,7 @@ public class DetalharCliente extends javax.swing.JFrame {
         jBtnAltDadosP.setVisible(false);
         jBtbCancelDadosP.setVisible(false);
         jButtonAr1.setVisible(true);
-        
+
     }//GEN-LAST:event_jBtbCancelDadosPActionPerformed
 
     private void jBtnAltDadosPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnAltDadosPActionPerformed
@@ -1119,10 +1127,9 @@ public class DetalharCliente extends javax.swing.JFrame {
     private void jTableLembretesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableLembretesMouseClicked
 
         // codLembrete = Integer.parseInt(jTableLembretes.getModel().getValueAt(jTableLembretes.getSelectedRow(),0).toString());
-       
         int linha = jTableLembretes.getSelectedRow();
         codLembrete = (Integer.parseInt(jTableLembretes.getValueAt(linha, 0).toString()));
-       // new DetalharLembrete(this).setVisible(true);
+        // new DetalharLembrete(this).setVisible(true);
     }//GEN-LAST:event_jTableLembretesMouseClicked
 
     private void jButtonAr3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAr3ActionPerformed
@@ -1163,6 +1170,7 @@ public class DetalharCliente extends javax.swing.JFrame {
     }//GEN-LAST:event_jBtnCarregaCepActionPerformed
 
     private void jBtnAdicionarEquipamentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnAdicionarEquipamentoActionPerformed
+        this.setEnabled(false);
         new CadastrarEquipCliente(codCliente, this).setVisible(true);
     }//GEN-LAST:event_jBtnAdicionarEquipamentoActionPerformed
 
@@ -1223,7 +1231,7 @@ public class DetalharCliente extends javax.swing.JFrame {
             while (rs.next()) {
                 jComboBoxSetores.addItem(rs.getString("setor"));
             }
-            
+
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, ex);
         }
@@ -1249,12 +1257,12 @@ public class DetalharCliente extends javax.swing.JFrame {
 
     public static int GetIdLembrete() {
         return codLembrete;
-    } 
-    
+    }
+
     public static int GetIdRotina() {
         return codRotina;
     }
-    
+
     public void BuscarEndereco() {
         TelaEspera telaTeste = new TelaEspera();
         this.setEnabled(false);
@@ -1294,7 +1302,7 @@ public class DetalharCliente extends javax.swing.JFrame {
             }
         }).start();
     }
-    
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBtbCancelDadosP;
     private javax.swing.JButton jBtbCancelEndereco;

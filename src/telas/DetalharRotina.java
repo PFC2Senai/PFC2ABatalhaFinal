@@ -26,6 +26,7 @@ public class DetalharRotina extends javax.swing.JFrame {
      */
     public DetalharRotina() {
         initComponents();
+        CarregaRotina();
         DadosEmpresa();
     }
     
@@ -33,10 +34,9 @@ public class DetalharRotina extends javax.swing.JFrame {
         this();
         this.detalharCliente = detalharCliente; 
         codCli = GetIndice();
-        initComponents();
         DadosEmpresa();
-        CarregaRotina();
-        verificaPagina();
+        
+      //  verificaPagina();
     }
 
     /**
