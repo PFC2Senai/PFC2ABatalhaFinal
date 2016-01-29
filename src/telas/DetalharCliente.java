@@ -3,6 +3,7 @@ package telas;
 import atributos.Cliente;
 import atributos.Endereco;
 import atributos.Lembrete;
+import atributos.Setor;
 import funcoes.AuditoriaDAO;
 import funcoes.CarregaCEP;
 import funcoes.ClienteDAO;
@@ -14,8 +15,11 @@ import funcoes.LembreteDAO;
 import funcoes.LimitarDigitos;
 import funcoes.ModeloTabela;
 import funcoes.RotinaContatosDAO;
+import funcoes.SetorDAO;
 import funcoes.TabelaZebrada;
 import java.awt.Color;
+import java.awt.event.FocusAdapter;
+import java.awt.event.FocusEvent;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -57,7 +61,7 @@ public class DetalharCliente extends javax.swing.JFrame {
         telaDetalCli = this;
         initComponents();
         CarregaCliente();
-        populaComboBox();
+        carregarComboSegmento();
         TabelaLembrete2(GetIndice());
         TabelaContatos();
         TabelaEquipamentosCli();
@@ -69,6 +73,8 @@ public class DetalharCliente extends javax.swing.JFrame {
         TabelaLembrete2(GetIndice());
         TabelaContatos();
 
+        combobox();
+        
         jBtnCadastrarRotinaContato.setVerticalTextPosition(SwingConstants.BOTTOM);
         jBtnCadastrarRotinaContato.setHorizontalTextPosition(SwingConstants.CENTER);
         jBtnNovoLembrete.setVerticalTextPosition(SwingConstants.BOTTOM);
@@ -86,6 +92,21 @@ public class DetalharCliente extends javax.swing.JFrame {
         //txtSetor.setDocument(new LimitarDigitos(50));
     }
 
+    private void combobox() {
+
+        //Combobox clientes
+        jComboBoxSetores.getEditor().getEditorComponent().addFocusListener(new FocusAdapter() {
+            @Override
+            public void focusLost(FocusEvent e) {
+                if (codSetor == 0) {
+                    JOptionPane.showMessageDialog(null, "Esse registro não encontra-se cadastrado na base de dados.");
+                    jComboBoxSetores.getEditor().getEditorComponent().requestFocus();
+                }
+            }
+        });
+        jComboBoxSetores.setAutocompletar(true);
+    }
+    
     private void CarregaCliente() {
 
         jButtonEditarContato.setEnabled(false);
@@ -428,10 +449,10 @@ public class DetalharCliente extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         jBtbCancelDadosP = new javax.swing.JButton();
         txtSetor = new javax.swing.JTextField();
-        jComboBoxSetores = new javax.swing.JComboBox();
         jLabel6 = new javax.swing.JLabel();
         txtCnpj = new javax.swing.JFormattedTextField();
         jBtnAltDadosP = new javax.swing.JButton();
+        jComboBoxSetores = new componentes.UJComboBox();
         jPanel3 = new javax.swing.JPanel();
         jLabel14 = new javax.swing.JLabel();
         jLabel16 = new javax.swing.JLabel();
@@ -528,14 +549,7 @@ public class DetalharCliente extends javax.swing.JFrame {
         jPanel2.add(jBtbCancelDadosP, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 30, -1, -1));
 
         txtSetor.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jPanel2.add(txtSetor, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 70, 245, -1));
-
-        jComboBoxSetores.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBoxSetoresActionPerformed(evt);
-            }
-        });
-        jPanel2.add(jComboBoxSetores, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 70, 260, -1));
+        jPanel2.add(txtSetor, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 70, 260, -1));
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel6.setText("Setor:");
@@ -558,6 +572,19 @@ public class DetalharCliente extends javax.swing.JFrame {
         });
         jPanel2.add(jBtnAltDadosP, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 60, 94, -1));
 
+        jComboBoxSetores.setEditable(true);
+        jComboBoxSetores.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jComboBoxSetoresItemStateChanged(evt);
+            }
+        });
+        jComboBoxSetores.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBoxSetoresActionPerformed(evt);
+            }
+        });
+        jPanel2.add(jComboBoxSetores, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 70, 260, 20));
+
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 50, 840, 110));
 
         jPanel3.setBackground(new java.awt.Color(223, 237, 253));
@@ -578,7 +605,7 @@ public class DetalharCliente extends javax.swing.JFrame {
         jPanel3.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 30, -1, 20));
 
         txtEndPais.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jPanel3.add(txtEndPais, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 30, 220, -1));
+        jPanel3.add(txtEndPais, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 30, 260, -1));
 
         jLabel13.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel13.setText("Numero:");
@@ -588,10 +615,10 @@ public class DetalharCliente extends javax.swing.JFrame {
         jPanel3.add(txtEndBairro, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 60, 270, -1));
 
         txtEndRua.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jPanel3.add(txtEndRua, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 90, 220, -1));
+        jPanel3.add(txtEndRua, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 90, 260, -1));
 
         txtEndCidade.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jPanel3.add(txtEndCidade, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 60, 220, -1));
+        jPanel3.add(txtEndCidade, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 60, 260, -1));
 
         txtEndEstado.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jPanel3.add(txtEndEstado, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 30, 50, -1));
@@ -1154,11 +1181,6 @@ public class DetalharCliente extends javax.swing.JFrame {
 
     }//GEN-LAST:event_jBtnAltDadosPActionPerformed
 
-    private void jComboBoxSetoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxSetoresActionPerformed
-
-        idSetorComboBox();
-    }//GEN-LAST:event_jComboBoxSetoresActionPerformed
-
     private void jTableLembretesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableLembretesMouseClicked
 
         // codLembrete = Integer.parseInt(jTableLembretes.getModel().getValueAt(jTableLembretes.getSelectedRow(),0).toString());
@@ -1269,22 +1291,22 @@ public class DetalharCliente extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jBtnExcluirContatoActionPerformed
 
-    private void populaComboBox() {
+    private void jComboBoxSetoresItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jComboBoxSetoresItemStateChanged
 
-        Connection conexao = Conexao.getConnection();
-        ResultSet rs;
-        String sql = "select * from tabSetor";
+    }//GEN-LAST:event_jComboBoxSetoresItemStateChanged
 
-        try {
-            pst = conexao.prepareStatement(sql);
-            rs = pst.executeQuery();
+    private void jComboBoxSetoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxSetoresActionPerformed
+        idSetorComboBox();
+    }//GEN-LAST:event_jComboBoxSetoresActionPerformed
 
-            while (rs.next()) {
-                jComboBoxSetores.addItem(rs.getString("setor"));
-            }
+    private void carregarComboSegmento() {
 
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, ex);
+       // uJComboBoxPeca.clear();
+        ArrayList<Setor> setores = new ArrayList<Setor>();
+        setores = SetorDAO.ListarSetor();
+
+        for (Setor setor : setores) {
+            jComboBoxSetores.addItem(setor.getSetor(), setor);
         }
     }
 
@@ -1373,7 +1395,7 @@ public class DetalharCliente extends javax.swing.JFrame {
     private javax.swing.JButton jButtonAr1;
     private javax.swing.JButton jButtonAr3;
     private javax.swing.JButton jButtonEditarContato;
-    private javax.swing.JComboBox jComboBoxSetores;
+    private componentes.UJComboBox jComboBoxSetores;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;

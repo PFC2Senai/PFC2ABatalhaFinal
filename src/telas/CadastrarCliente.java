@@ -35,7 +35,6 @@ public class CadastrarCliente extends javax.swing.JFrame {
     private PreparedStatement pst;
     private String descricaoAudit;
     private int codSetor;
-    private static final int[] pesoCNPJ = {6, 5, 4, 3, 2, 9, 8, 7, 6, 5, 4, 3, 2};
 
     private CadastrarCliente telaCliente;
 
@@ -46,6 +45,7 @@ public class CadastrarCliente extends javax.swing.JFrame {
         txtSetor.setVisible(false);
         jBtnSalvarSetor.setVisible(false);
         jBtnCancelarSetor.setVisible(false);
+        combobox();
 
 //        txtEmpresa.setDocument(new LimitarDigitos(45));
 //        txtSetor.setDocument(new LimitarDigitos(50));
