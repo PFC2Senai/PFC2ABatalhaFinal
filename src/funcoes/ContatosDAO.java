@@ -102,35 +102,39 @@ public class ContatosDAO {
         }
     }
 
-    public static void ExcluirContato(int id) {
+    public static void ExcluirContato(int codContato, int codPessoaCont) {
 
-        PreparedStatement stmt;
+        CallableStatement stmt;
         try {
-            String sql = ("DELETE FROM  tabcontato WHERE idcontato = ?");
-            stmt = Conexao.getConnection().prepareStatement(sql);
-            stmt.setInt(1, id);
+            stmt = Conexao.getConnection().prepareCall("{call ExcluirContatoCliente(?,?)}");
+
+            stmt.setInt(1, codContato);
+            stmt.setInt(2, codPessoaCont);
+
             stmt.execute();
             stmt.close();
 
         } catch (SQLException ex) {
-            Logger.getLogger(ContatosDAO.class.getName()).log(Level.SEVERE, null, ex);
-            throw new RuntimeException("Erro ao excluir o Contato do Cliente: ", ex);
+            Logger.getLogger(ClienteDAO.class.getName()).log(Level.SEVERE, null, ex);
+            throw new RuntimeException("Erro ao excluir os dados do contato: ", ex);
         }
     }
 
-    public static void ExcluirTel(int id) {
+    public static void ExcluirContatoFornecedor(int codContato, int codPessoaCont) {
 
-        PreparedStatement stmt;
+        CallableStatement stmt;
         try {
-            String sql = ("DELETE FROM  tabTel WHERE contato_id = ?");
-            stmt = Conexao.getConnection().prepareStatement(sql);
-            stmt.setInt(1, id);
+            stmt = Conexao.getConnection().prepareCall("{call ExcluirContatoFornecedor(?,?)}");
+
+            stmt.setInt(1, codContato);
+            stmt.setInt(2, codPessoaCont);
+
             stmt.execute();
             stmt.close();
 
         } catch (SQLException ex) {
             Logger.getLogger(ContatosDAO.class.getName()).log(Level.SEVERE, null, ex);
-            throw new RuntimeException("Erro ao excluir o Telefone do Cliente: ", ex);
+            throw new RuntimeException("Erro ao excluir o contato do fornecedor: ", ex);
         }
     }
 

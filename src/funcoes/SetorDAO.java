@@ -113,8 +113,6 @@ public class SetorDAO {
             
             while(rs.next()){
                 Setor s = new Setor();
-                
-                s.setIdSetor(rs.getInt("idtabSetor"));
                 s.setSetor((rs.getString("setor")));              
                 setores.add(s);                
             }

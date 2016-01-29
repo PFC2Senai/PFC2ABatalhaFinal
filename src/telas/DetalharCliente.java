@@ -259,7 +259,7 @@ public class DetalharCliente extends javax.swing.JFrame {
 
             stmt = getConnection().createStatement();
             ArrayList dados = new ArrayList();
-            String[] Colunas = {"CodContato", "Código", "Contato", "Telefone", "Celular", "Email"};
+            String[] Colunas = {"CodContato", "Código", "Contato", "Telefone", "Celular", "Email","Setor"};
 
             ResultSet rs;
             rs = stmt.executeQuery(Sql);
@@ -271,10 +271,12 @@ public class DetalharCliente extends javax.swing.JFrame {
                     rs.getObject("contato"),
                     rs.getObject("telefone"),
                     rs.getObject("celular"),
-                    rs.getObject("email")});
+                    rs.getObject("email"),
+                    rs.getObject("setor")
+                });
             }
 
-            for (int i = 0; i < 6; i++) {
+            for (int i = 0; i < 7; i++) {
 
                 ModeloTabela modelo = new ModeloTabela(dados, Colunas);
 
@@ -298,6 +300,7 @@ public class DetalharCliente extends javax.swing.JFrame {
                 jTableContatos.getColumnModel().getColumn(3).setPreferredWidth(80);
                 jTableContatos.getColumnModel().getColumn(4).setPreferredWidth(80);
                 jTableContatos.getColumnModel().getColumn(5).setPreferredWidth(200);
+                jTableContatos.getColumnModel().getColumn(6).setPreferredWidth(200);
 
                 jTableContatos.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
             }
@@ -379,6 +382,7 @@ public class DetalharCliente extends javax.swing.JFrame {
             }
 
             for (int i = 0; i < 4; i++) {
+                
                 ModeloTabela modelo = new ModeloTabela(dados, Colunas);
                 jTableListarRotinas.setModel(modelo);
                 TableCellRenderer renderer = new TabelaZebrada();
@@ -451,6 +455,8 @@ public class DetalharCliente extends javax.swing.JFrame {
         jScrollPane3 = new javax.swing.JScrollPane();
         jTableContatos = new javax.swing.JTable();
         jButtonEditarContato = new javax.swing.JButton();
+        jBtnNovoContato = new javax.swing.JButton();
+        jBtnExcluirContato = new javax.swing.JButton();
         jPanel6 = new javax.swing.JPanel();
         jBtnAdicionarEquipamento = new javax.swing.JButton();
         jPanel8 = new javax.swing.JPanel();
@@ -569,7 +575,7 @@ public class DetalharCliente extends javax.swing.JFrame {
 
         jLabel11.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel11.setText("Cep:");
-        jPanel3.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 30, -1, -1));
+        jPanel3.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 30, -1, 20));
 
         txtEndPais.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jPanel3.add(txtEndPais, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 30, 220, -1));
@@ -664,11 +670,11 @@ public class DetalharCliente extends javax.swing.JFrame {
 
             },
             new String [] {
-                "CodContato", "codPessoa", "Contato", "Telefone", "Celular", "Email"
+                "CodContato", "codPessoa", "Contato", "Telefone", "Celular", "Email", "Setor"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false
+                false, false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -683,7 +689,7 @@ public class DetalharCliente extends javax.swing.JFrame {
         });
         jScrollPane3.setViewportView(jTableContatos);
 
-        jButtonEditarContato.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/editar.png"))); // NOI18N
+        jButtonEditarContato.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/page_edit.png"))); // NOI18N
         jButtonEditarContato.setText("Editar");
 
         org.jdesktop.beansbinding.Binding binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, jTableContatos, org.jdesktop.beansbinding.ELProperty.create("${selectedElement != null}"), jButtonEditarContato, org.jdesktop.beansbinding.BeanProperty.create("enabled"));
@@ -695,23 +701,51 @@ public class DetalharCliente extends javax.swing.JFrame {
             }
         });
 
+        jBtnNovoContato.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/page_add.png"))); // NOI18N
+        jBtnNovoContato.setText("Novo");
+        jBtnNovoContato.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnNovoContatoActionPerformed(evt);
+            }
+        });
+
+        jBtnExcluirContato.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/page_delete.png"))); // NOI18N
+        jBtnExcluirContato.setText("Remover");
+
+        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, jTableContatos, org.jdesktop.beansbinding.ELProperty.create("${selectedElement != null}"), jBtnExcluirContato, org.jdesktop.beansbinding.BeanProperty.create("enabled"));
+        bindingGroup.addBinding(binding);
+
+        jBtnExcluirContato.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnExcluirContatoActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 630, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jButtonEditarContato)
-                .addContainerGap(89, Short.MAX_VALUE))
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 707, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jButtonEditarContato)
+                    .addComponent(jBtnExcluirContato, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jBtnNovoContato, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButtonEditarContato)
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addComponent(jButtonEditarContato)
+                        .addGap(18, 18, 18)
+                        .addComponent(jBtnNovoContato)
+                        .addGap(21, 21, 21)
+                        .addComponent(jBtnExcluirContato))
                     .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(17, Short.MAX_VALUE))
         );
@@ -1050,8 +1084,9 @@ public class DetalharCliente extends javax.swing.JFrame {
             int linha = jTableContatos.getSelectedRow();
             codContato = (Integer.parseInt(jTableContatos.getValueAt(linha, 0).toString()));
             codPessoaContato = Integer.parseInt(jTableContatos.getValueAt(linha, 1).toString());
-        }
-        new AlterarContato(this, codCliente, codPessoaContato, codContato).setVisible(true);
+            this.setEnabled(false);
+            new AlterarContato(this, codCliente, codPessoaContato, codContato).setVisible(true);
+        }       
     }//GEN-LAST:event_jButtonEditarContatoActionPerformed
 
     private void jBtnNovoLembreteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnNovoLembreteActionPerformed
@@ -1218,6 +1253,22 @@ public class DetalharCliente extends javax.swing.JFrame {
         codEquipClie = (Integer.parseInt(jTableEquipCliente.getValueAt(linha, 0).toString()));
     }//GEN-LAST:event_jTableEquipClienteMouseClicked
 
+    private void jBtnNovoContatoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnNovoContatoActionPerformed
+        this.setEnabled(false);
+        new AdicionarContato(this, codCliente).setVisible(true);
+    }//GEN-LAST:event_jBtnNovoContatoActionPerformed
+
+    private void jBtnExcluirContatoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnExcluirContatoActionPerformed
+        
+        if (jTableContatos.getSelectedRow() != -1) {
+            int linha = jTableContatos.getSelectedRow();
+            codContato = (Integer.parseInt(jTableContatos.getValueAt(linha, 0).toString()));
+            codPessoaContato = Integer.parseInt(jTableContatos.getValueAt(linha, 1).toString()); 
+            ContatosDAO.ExcluirContato(codContato, codPessoaContato);
+            TabelaContatos();
+        }
+    }//GEN-LAST:event_jBtnExcluirContatoActionPerformed
+
     private void populaComboBox() {
 
         Connection conexao = Conexao.getConnection();
@@ -1312,8 +1363,10 @@ public class DetalharCliente extends javax.swing.JFrame {
     private javax.swing.JButton jBtnCadastrarRotinaContato;
     private javax.swing.JButton jBtnCarregaCep;
     private javax.swing.JButton jBtnExcluir;
+    private javax.swing.JButton jBtnExcluirContato;
     private javax.swing.JButton jBtnExcluirEquipCli;
     private javax.swing.JButton jBtnExcluirRotina;
+    private javax.swing.JButton jBtnNovoContato;
     private javax.swing.JButton jBtnNovoLembrete;
     private javax.swing.JButton jBtnVerLembrete;
     private javax.swing.JButton jBtnVerRotina;

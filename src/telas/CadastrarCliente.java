@@ -3,6 +3,7 @@ package telas;
 import atributos.Cliente;
 import atributos.Endereco;
 import atributos.PessoaContato;
+import atributos.Produto;
 import atributos.Setor;
 import atributos.Telefone;
 import static atributos.Usuario.idUsuario;
@@ -13,12 +14,17 @@ import funcoes.Conexao;
 import funcoes.ContatosDAO;
 import funcoes.LimitarDigitos;
 import funcoes.PessoaContatoDAO;
+import funcoes.ProdutoDAO;
 import funcoes.SetorDAO;
+import java.awt.Color;
+import java.awt.event.FocusAdapter;
+import java.awt.event.FocusEvent;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -29,13 +35,14 @@ public class CadastrarCliente extends javax.swing.JFrame {
     private PreparedStatement pst;
     private String descricaoAudit;
     private int codSetor;
+    private static final int[] pesoCNPJ = {6, 5, 4, 3, 2, 9, 8, 7, 6, 5, 4, 3, 2};
 
     private CadastrarCliente telaCliente;
 
     public CadastrarCliente() {
         initComponents();
         telaCliente = this;
-        this.populaComboBox();
+        carregarComboSegmento();
         txtSetor.setVisible(false);
         jBtnSalvarSetor.setVisible(false);
         jBtnCancelarSetor.setVisible(false);
@@ -56,6 +63,7 @@ public class CadastrarCliente extends javax.swing.JFrame {
     }
 
     private boolean VerificaCampos() {
+
         boolean valida = true;
 
         if (txtEmpresa.getText().trim().equals("")) {
@@ -64,36 +72,18 @@ public class CadastrarCliente extends javax.swing.JFrame {
             return valida;
         }
 
-        if (txtSetor.getText().trim().equals("")) {
+        if (jComboBoxSetores.getSelectedIndex() == 0) {
             JOptionPane.showMessageDialog(null, "Campo(s) vazio(s)!");
             valida = false;
             return valida;
         }
-
-        if (txtEndCep.getText().trim().equals("")) {
+        
+        if (txtCnpj.getText().trim().length() != 18) {
             JOptionPane.showMessageDialog(null, "Campo(s) vazio(s)!");
             valida = false;
             return valida;
         }
-
-        if (txtContato.getText().trim().equals("")) {
-            JOptionPane.showMessageDialog(null, "Campo(s) vazio(s)!");
-            valida = false;
-            return valida;
-        }
-
-        if (txtTelCel.getText().trim().equals("")) {
-            JOptionPane.showMessageDialog(null, "Campo(s) vazio(s)!");
-            valida = false;
-            return valida;
-        }
-
-        if (txtEmail.getText().trim().equals("")) {
-            JOptionPane.showMessageDialog(null, "Campo(s) vazio(s)!");
-            valida = false;
-            return valida;
-        }
-
+        
         if (txtPais.getText().trim().equals("")) {
             JOptionPane.showMessageDialog(null, "Campo(s) vazio(s)!");
             valida = false;
@@ -112,7 +102,7 @@ public class CadastrarCliente extends javax.swing.JFrame {
             return valida;
         }
 
-        if (txtCep.getText().trim().equals("")) {
+        if (txtCep.getText().trim().equals("-")) {
             JOptionPane.showMessageDialog(null, "Campo(s) vazio(s)!");
             valida = false;
             return valida;
@@ -141,6 +131,59 @@ public class CadastrarCliente extends javax.swing.JFrame {
             valida = false;
             return valida;
         }
+
+        if (jTableContatos.getRowCount() < 1) {
+            JOptionPane.showMessageDialog(null, "Campo(s) vazio(s)!");
+            valida = false;
+            return valida;
+        }
+        return valida;
+    }
+
+    private void combobox() {
+
+        //Combobox clientes
+        jComboBoxSetores.getEditor().getEditorComponent().addFocusListener(new FocusAdapter() {
+            @Override
+            public void focusLost(FocusEvent e) {
+                if (codSetor == 0) {
+                    JOptionPane.showMessageDialog(null, "Esse registro não encontra-se cadastrado na base de dados.");
+                    jComboBoxSetores.getEditor().getEditorComponent().requestFocus();
+                }
+            }
+        });
+        jComboBoxSetores.setAutocompletar(true);
+    }    
+    
+    private boolean VerificaCamposContato() {
+
+        boolean valida = true;
+
+        if (txtContato.getText().trim().equals("")) {
+            valida = false;
+            return valida;
+        }
+
+        if (txtTelCel.getText().trim().equals("")) {
+            valida = false;
+            return valida;
+        }
+
+        if (txtTel01.getText().trim().length() != 13) {
+            valida = false;
+            return valida;
+        }
+
+        if (ValidaEmail()) {
+            valida = false;
+            return valida;
+        }
+
+        if (jComboBoxSetorContato.getSelectedIndex() == 0) {
+            valida = false;
+            return valida;
+        }
+
         return valida;
     }
 
@@ -193,10 +236,10 @@ public class CadastrarCliente extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         txtEmpresa = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
-        txtEndCep = new javax.swing.JFormattedTextField();
+        txtCnpj = new javax.swing.JFormattedTextField();
         jLabel6 = new javax.swing.JLabel();
+        jComboBoxSetores = new componentes.UJComboBox();
         txtSetor = new javax.swing.JTextField();
-        jComboBoxSetores = new javax.swing.JComboBox();
         jBtnNovoSetor = new javax.swing.JButton();
         jBtnSalvarSetor = new javax.swing.JButton();
         jBtnCancelarSetor = new javax.swing.JButton();
@@ -292,7 +335,7 @@ public class CadastrarCliente extends javax.swing.JFrame {
 
         jLabel16.setText("Setor:");
 
-        jComboBoxSetorContato.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Manutenção", "Compras", "Suprimentos", "Projetos", "Engenharia", "Compras/Suprimentos", "Projetos/Engenharia" }));
+        jComboBoxSetorContato.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Selecione o Setor", "Manutenção", "Compras", "Suprimentos", "Projetos", "Engenharia", "Compras/Suprimentos", "Projetos/Engenharia" }));
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -366,7 +409,7 @@ public class CadastrarCliente extends javax.swing.JFrame {
                 .addGap(29, 29, 29))
         );
 
-        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(25, 258, 710, 280));
+        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 270, 710, 280));
 
         jPanel3.setBackground(new java.awt.Color(223, 237, 253));
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Endereço", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 2, 11))); // NOI18N
@@ -444,7 +487,7 @@ public class CadastrarCliente extends javax.swing.JFrame {
                     .addComponent(jLabel2)
                     .addComponent(jLabel12)
                     .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(21, 21, 21)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addComponent(txtCep, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -485,7 +528,7 @@ public class CadastrarCliente extends javax.swing.JFrame {
                 .addContainerGap(13, Short.MAX_VALUE))
         );
 
-        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(25, 130, 710, -1));
+        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 140, 710, -1));
 
         jPanel4.setBackground(new java.awt.Color(223, 237, 253));
         jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createTitledBorder(""), "Empresa", javax.swing.border.TitledBorder.LEFT, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 2, 11))); // NOI18N
@@ -501,13 +544,19 @@ public class CadastrarCliente extends javax.swing.JFrame {
         jLabel4.setText("CNPJ:");
 
         try {
-            txtEndCep.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##.###.###/####-##")));
+            txtCnpj.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##.###.###/####-##")));
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
 
         jLabel6.setText("Segmento:");
 
+        jComboBoxSetores.setEditable(true);
+        jComboBoxSetores.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jComboBoxSetoresItemStateChanged(evt);
+            }
+        });
         jComboBoxSetores.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jComboBoxSetoresActionPerformed(evt);
@@ -545,58 +594,59 @@ public class CadastrarCliente extends javax.swing.JFrame {
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addGap(16, 16, 16)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel3)
-                    .addComponent(jLabel6))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(txtEmpresa, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 229, Short.MAX_VALUE)
-                    .addComponent(jComboBoxSetores, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(txtSetor, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addComponent(jLabel3)
+                        .addGap(15, 15, 15)
+                        .addComponent(txtEmpresa, javax.swing.GroupLayout.PREFERRED_SIZE, 229, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(20, 20, 20)
                         .addComponent(jLabel4)
-                        .addGap(18, 18, 18)
-                        .addComponent(txtEndCep, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(30, 30, 30)
+                        .addComponent(txtCnpj, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addComponent(jBtnNovoSetor, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel6)
+                        .addGap(8, 8, 8)
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtSetor, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jComboBoxSetores, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(20, 20, 20)
+                        .addComponent(jBtnNovoSetor)
+                        .addGap(11, 11, 11)
                         .addComponent(jBtnCancelarSetor)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jBtnSalvarSetor)))
-                .addContainerGap(64, Short.MAX_VALUE))
+                        .addGap(5, 5, 5)
+                        .addComponent(jBtnSalvarSetor))))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(txtEmpresa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel4)
-                    .addComponent(txtEndCep, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(11, 11, 11)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txtCnpj, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGap(3, 3, 3)
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel3)
+                            .addComponent(txtEmpresa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel4))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel6)
                     .addComponent(txtSetor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jComboBoxSetores, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jBtnNovoSetor)
-                        .addComponent(jBtnSalvarSetor)
-                        .addComponent(jBtnCancelarSetor)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jComboBoxSetores, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jBtnNovoSetor)
+                    .addComponent(jBtnCancelarSetor)
+                    .addComponent(jBtnSalvarSetor)))
         );
 
-        jPanel1.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(25, 38, 710, 90));
+        jPanel1.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 40, 710, 100));
 
-        btnCadCliente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/cliente.png"))); // NOI18N
+        btnCadCliente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/disk.png"))); // NOI18N
         btnCadCliente.setText("Cadastrar");
         btnCadCliente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCadClienteActionPerformed(evt);
             }
         });
-        jPanel1.add(btnCadCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 550, -1, 30));
+        jPanel1.add(btnCadCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 560, -1, 30));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -606,7 +656,9 @@ public class CadastrarCliente extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 596, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 605, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         bindingGroup.bind();
@@ -627,20 +679,26 @@ public class CadastrarCliente extends javax.swing.JFrame {
 
     private void jBtnSalvarSetorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnSalvarSetorActionPerformed
 
-        Setor setor = new Setor();
+        if (txtSetor.getText().trim().equals("")) {
+            JOptionPane.showMessageDialog(null, "Campo vazio.");
 
-        setor.setSetor(txtSetor.getText());
-        SetorDAO.CadSetor(setor);
-        jBtnSalvarSetor.setVisible(false);
-        jBtnCancelarSetor.setVisible(false);
-        jBtnNovoSetor.setVisible(true);
-        txtSetor.setVisible(false);
-        txtSetor.setText("");
-        jComboBoxSetores.setVisible(true);
-        jComboBoxSetores.removeAllItems();
+        } else {
 
-        populaComboBox();
-        jComboBoxSetores.setSelectedItem(setor.getSetor());
+            Setor setor = new Setor();
+
+            setor.setSetor(txtSetor.getText());
+            SetorDAO.CadSetor(setor);
+            jBtnSalvarSetor.setVisible(false);
+            jBtnCancelarSetor.setVisible(false);
+            jBtnNovoSetor.setVisible(true);
+            txtSetor.setVisible(false);
+            txtSetor.setText("");
+            jComboBoxSetores.setVisible(true);
+            jComboBoxSetores.removeAllItems();
+
+            carregarComboSegmento();
+            jComboBoxSetores.setSelectedItem(setor.getSetor());
+        }
     }//GEN-LAST:event_jBtnSalvarSetorActionPerformed
 
     private void jBtnNovoSetorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnNovoSetorActionPerformed
@@ -652,12 +710,8 @@ public class CadastrarCliente extends javax.swing.JFrame {
         jBtnNovoSetor.setVisible(false);
     }//GEN-LAST:event_jBtnNovoSetorActionPerformed
 
-    private void jComboBoxSetoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxSetoresActionPerformed
-        idSetorComboBox();
-    }//GEN-LAST:event_jComboBoxSetoresActionPerformed
-
     private void txtEmpresaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtEmpresaKeyTyped
-        // TODO add your handling code here:
+
         String carac = "ç,.!?@:;/^~´`#$%¨&*()-_='+{[]}";
         if (carac.contains(evt.getKeyChar() + "")) {
             evt.consume();
@@ -669,7 +723,7 @@ public class CadastrarCliente extends javax.swing.JFrame {
     }//GEN-LAST:event_jBtnCarregaCepActionPerformed
 
     private void txtEstadoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtEstadoKeyTyped
-        // TODO add your handling code here:
+
         String caracteres = "0987654321";
 
         if (caracteres.contains(evt.getKeyChar() + "")) {
@@ -678,7 +732,7 @@ public class CadastrarCliente extends javax.swing.JFrame {
     }//GEN-LAST:event_txtEstadoKeyTyped
 
     private void txtCidadeKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCidadeKeyTyped
-        // TODO add your handling code here:
+
         String caracteres = "0987654321";
         if (caracteres.contains(evt.getKeyChar() + "")) {
             evt.consume();
@@ -686,17 +740,14 @@ public class CadastrarCliente extends javax.swing.JFrame {
     }//GEN-LAST:event_txtCidadeKeyTyped
 
     private void txtNumeroKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNumeroKeyTyped
-        // TODO add your handling code here:
 
         String caracteres = "0987654321";
         if (!caracteres.contains(evt.getKeyChar() + "")) {
             evt.consume();
         }
-
     }//GEN-LAST:event_txtNumeroKeyTyped
 
     private void txtCepActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCepActionPerformed
-
         CarregaCep();
     }//GEN-LAST:event_txtCepActionPerformed
 
@@ -710,12 +761,8 @@ public class CadastrarCliente extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jBtnRemoverContatoActionPerformed
 
-    private void txtEmailFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtEmailFocusLost
-        ValidaEmail();
-    }//GEN-LAST:event_txtEmailFocusLost
-
     private void txtTelCelKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTelCelKeyTyped
-        // TODO add your handling code here:
+
         String caracteres = "0987654321";
         if (!caracteres.contains(evt.getKeyChar() + "")) {
             evt.consume();
@@ -723,7 +770,11 @@ public class CadastrarCliente extends javax.swing.JFrame {
     }//GEN-LAST:event_txtTelCelKeyTyped
 
     private void jBtnOutroContatoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnOutroContatoActionPerformed
-        TabelaContatos();
+        if (VerificaCamposContato()) {
+            TabelaContatos();
+        } else {
+            JOptionPane.showMessageDialog(null, "Campo(s) vazio(s)!");
+        }
     }//GEN-LAST:event_jBtnOutroContatoActionPerformed
 
     private void btnLimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimparActionPerformed
@@ -731,75 +782,99 @@ public class CadastrarCliente extends javax.swing.JFrame {
     }//GEN-LAST:event_btnLimparActionPerformed
 
     private void btnCadClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadClienteActionPerformed
-        //  if (VerificaCampos() == true) {
+        if (VerificaCampos() == true) {
 
-        if (ClienteDAO.VerificarCliente(txtEndCep.getText()) == false) {
+            if (ClienteDAO.VerificarCliente(txtCnpj.getText()) == false) {
 
-            Cliente cli = new Cliente();
-            Telefone tel = new Telefone();
-            PessoaContato pContato = new PessoaContato();
-            String email;
-            Endereco endereco = new Endereco();
+                Cliente cli = new Cliente();
+                Telefone tel = new Telefone();
+                PessoaContato pContato = new PessoaContato();
+                String email;
+                Endereco endereco = new Endereco();
 
-            cli.setCodUser(idUsuario());
-            cli.setEmpresa(txtEmpresa.getText());
-            cli.setCnpj(txtEndCep.getText());
-            cli.setCodSetor(codSetor);
+                cli.setCodUser(idUsuario());
+                cli.setEmpresa(txtEmpresa.getText());
+                cli.setCnpj(txtCnpj.getText());
+                cli.setCodSetor(codSetor);
 
-            int i = ContatosDAO.CadContato();
+                int i = ContatosDAO.CadContato();
 
-            cli.setIdContato(i);
+                cli.setIdContato(i);
 
-            int codCli = ClienteDAO.CadCliente(cli);
+                int codCli = ClienteDAO.CadCliente(cli);
 
-            endereco.setPais(txtPais.getText());
-            endereco.setCep(txtCep.getText());
-            endereco.setRua(txtRua.getText());
-            endereco.setNumero(txtNumero.getText());
-            endereco.setBairro(txtBairro.getText());
-            endereco.setCidade(txtCidade.getText());
-            endereco.setEstado(txtEstado.getText());
-            endereco.setIdContato(i);
+                endereco.setPais(txtPais.getText());
+                endereco.setCep(txtCep.getText());
+                endereco.setRua(txtRua.getText());
+                endereco.setNumero(txtNumero.getText());
+                endereco.setBairro(txtBairro.getText());
+                endereco.setCidade(txtCidade.getText());
+                endereco.setEstado(txtEstado.getText());
+                endereco.setIdContato(i);
 
-            ContatosDAO.CadEndereco(endereco);
+                ContatosDAO.CadEndereco(endereco);
 
-            for (int j = 0; j < jTableContatos.getRowCount(); j++) {
+                for (int j = 0; j < jTableContatos.getRowCount(); j++) {
 
-                pContato.setNomeContato(jTableContatos.getValueAt(j, 0).toString());
-                tel.setTel(jTableContatos.getValueAt(j, 1).toString());
-                tel.setCel(jTableContatos.getValueAt(j, 2).toString());
-                email = jTableContatos.getValueAt(j, 3).toString();
-                pContato.setSetorContato(email);
+                    pContato.setNomeContato(jTableContatos.getValueAt(j, 0).toString());
+                    tel.setTel(jTableContatos.getValueAt(j, 1).toString());
+                    tel.setCel(jTableContatos.getValueAt(j, 2).toString());
+                    email = jTableContatos.getValueAt(j, 3).toString();
+                    pContato.setSetorContato(jTableContatos.getValueAt(j, 4).toString());
 
-                int codContato = ContatosDAO.CadContato();
+                    int codContato = ContatosDAO.CadContato();
 
-                ContatosDAO.CadTel(codContato, tel);
-                ContatosDAO.CadEmail(codContato, email);
-                pContato.setCodTabEstrangeira(codCli);
-                pContato.setCodContato(codContato);
+                    ContatosDAO.CadTel(codContato, tel);
+                    ContatosDAO.CadEmail(codContato, email);
+                    pContato.setCodTabEstrangeira(codCli);
+                    pContato.setCodContato(codContato);
 
-                PessoaContatoDAO.CadPessoaContato(pContato);
+                    PessoaContatoDAO.CadPessoaContato(pContato);
+
+                }
+
                 descricaoAudit = "Empresa " + cli.getEmpresa() + " /CNPJ: " + cli.getCnpj() + " foi cadastrada.";
                 AuditoriaDAO.CadDetAuditoria(descricaoAudit);
-            }
+                limparCampos();
+                ((DefaultTableModel) jTableContatos.getModel()).setNumRows(0);
+                jTableContatos.updateUI();
 
-            limparCampos();
-            ((DefaultTableModel) jTableContatos.getModel()).setNumRows(0);
-            jTableContatos.updateUI();
+                JOptionPane.showMessageDialog(null, "Cadastrado com sucesso!");
 
-            JOptionPane.showMessageDialog(null, "Cadastrado com sucesso!");
-
-            if (JOptionPane.showConfirmDialog(null, "Deseja continuar cadastrando?", "Confirmar Cadastro", JOptionPane.YES_NO_OPTION) == 1) {
-                this.dispose();
+                if (JOptionPane.showConfirmDialog(null, "Deseja continuar cadastrando?", "Confirmar Cadastro", JOptionPane.YES_NO_OPTION) == 1) {
+                    this.dispose();
+                } else {
+                    txtEmpresa.requestFocus();
+                }
             } else {
-                txtEmpresa.requestFocus();
+                JOptionPane.showMessageDialog(null, "Cliente ja cadastrado !");
             }
-        } else {
-            JOptionPane.showMessageDialog(null, "Cliente ja cadastrado !");
         }
-        // }
     }//GEN-LAST:event_btnCadClienteActionPerformed
 
+    private void txtEmailFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtEmailFocusLost
+        ValidaEmail();
+    }//GEN-LAST:event_txtEmailFocusLost
+
+    private void jComboBoxSetoresItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jComboBoxSetoresItemStateChanged
+       
+    }//GEN-LAST:event_jComboBoxSetoresItemStateChanged
+
+    private void jComboBoxSetoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxSetoresActionPerformed
+        idSetorComboBox();
+    }//GEN-LAST:event_jComboBoxSetoresActionPerformed
+
+    private void carregarComboSegmento() {
+
+       // uJComboBoxPeca.clear();
+        ArrayList<Setor> setores = new ArrayList<Setor>();
+        setores = SetorDAO.ListarSetor();
+
+        for (Setor setor : setores) {
+            jComboBoxSetores.addItem(setor.getSetor(), setor);
+        }
+    }
+    
     public void TabelaContatos() {
 
         try {
@@ -826,26 +901,24 @@ public class CadastrarCliente extends javax.swing.JFrame {
         }
     }
 
-    
-    
-    private void populaComboBox() {
-
-        Connection conexao = Conexao.getConnection();
-        ResultSet rs;
-        String sql = "select * from tabSetor";
-
-        try {
-            pst = conexao.prepareStatement(sql);
-            rs = pst.executeQuery();
-
-            while (rs.next()) {
-                jComboBoxSetores.addItem(rs.getString("setor"));
-            }
-
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, ex);
-        }
-    }
+//    private void populaComboBox() {
+//
+//        Connection conexao = Conexao.getConnection();
+//        ResultSet rs;
+//        String sql = "select * from tabSetor";
+//
+//        try {
+//            pst = conexao.prepareStatement(sql);
+//            rs = pst.executeQuery();
+//
+//            while (rs.next()) {
+//                jComboBoxSetores.addItem(rs.getString("setor"));
+//            }
+//
+//        } catch (SQLException ex) {
+//            JOptionPane.showMessageDialog(null, ex);
+//        }
+//    }
 
     private void idSetorComboBox() {
 
@@ -867,13 +940,12 @@ public class CadastrarCliente extends javax.swing.JFrame {
 
     private void limparCampos() {
         txtEmpresa.setText("");
-        txtEndCep.setText("");
+        txtCnpj.setText("");
         txtContato.setText("");
         jComboBoxSetores.setSelectedIndex(0);
         txtTel01.setText(null);
         txtTelCel.setText(null);
         txtEmail.setText("");
-        //  txtPais.setText("");
         txtCidade.setText("");
         txtCep.setText("");
         txtNumero.setText("");
@@ -882,7 +954,9 @@ public class CadastrarCliente extends javax.swing.JFrame {
         txtRua.setText("");
     }
 
-    public void ValidaEmail() {
+    public boolean ValidaEmail() {
+
+        boolean valida = false;
 
         if ((txtEmail.getText().contains("@"))
                 && (txtEmail.getText().contains("."))
@@ -902,16 +976,15 @@ public class CadastrarCliente extends javax.swing.JFrame {
             } else {
 
                 jLabelEmail.setText("E-mail Inválido");
-
-                // txtEmail.requestFocus();
+                valida = true;
             }
 
         } else {
 
             jLabelEmail.setText("E-mail Inválido");
-
-            //  txtEmail.requestFocus();
+            valida = true;
         }
+        return valida;
     }
 
     public void CarregaCep() {
@@ -944,9 +1017,8 @@ public class CadastrarCliente extends javax.swing.JFrame {
             @Override
             public void run() {
                 try {
-                    //cria a tela de espera e mostra ela
                     t1.join();//fica esperando a primeira thread acabar
-                    telaCliente.setEnabled(true);  // quando acabar fecha a janela de espera, podes fazer outras coisas aqui
+                    telaCliente.setEnabled(true);  // quando acabar fecha a janela de espera
                     telaTeste.dispose();
                 } catch (InterruptedException ex) {
                     Logger.getLogger(CadastrarCliente.class.getName()).log(Level.SEVERE, null, ex);
@@ -954,6 +1026,7 @@ public class CadastrarCliente extends javax.swing.JFrame {
             }
         }).start();
     }
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCadCliente;
@@ -965,7 +1038,7 @@ public class CadastrarCliente extends javax.swing.JFrame {
     private javax.swing.JButton jBtnRemoverContato;
     private javax.swing.JButton jBtnSalvarSetor;
     private javax.swing.JComboBox jComboBoxSetorContato;
-    private javax.swing.JComboBox jComboBoxSetores;
+    private componentes.UJComboBox jComboBoxSetores;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -992,10 +1065,10 @@ public class CadastrarCliente extends javax.swing.JFrame {
     private javax.swing.JTextField txtBairro;
     private javax.swing.JFormattedTextField txtCep;
     private javax.swing.JTextField txtCidade;
+    private javax.swing.JFormattedTextField txtCnpj;
     private javax.swing.JTextField txtContato;
     private javax.swing.JTextField txtEmail;
     private javax.swing.JTextField txtEmpresa;
-    private javax.swing.JFormattedTextField txtEndCep;
     private javax.swing.JTextField txtEstado;
     private javax.swing.JTextField txtNumero;
     private javax.swing.JTextField txtPais;
