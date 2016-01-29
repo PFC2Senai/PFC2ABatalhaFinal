@@ -23,7 +23,7 @@ public class Menu extends javax.swing.JFrame {
      */
     public Menu() {
         initComponents();
-
+//teste
         telaMenu = this;
         jBtnRotinaContato.setVerticalTextPosition(SwingConstants.BOTTOM);
         jBtnRotinaContato.setHorizontalTextPosition(SwingConstants.CENTER);
