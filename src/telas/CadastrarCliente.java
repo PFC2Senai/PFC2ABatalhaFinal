@@ -3,7 +3,6 @@ package telas;
 import atributos.Cliente;
 import atributos.Endereco;
 import atributos.PessoaContato;
-import atributos.Produto;
 import atributos.Setor;
 import atributos.Telefone;
 import static atributos.Usuario.idUsuario;
@@ -14,9 +13,7 @@ import funcoes.Conexao;
 import funcoes.ContatosDAO;
 import funcoes.LimitarDigitos;
 import funcoes.PessoaContatoDAO;
-import funcoes.ProdutoDAO;
 import funcoes.SetorDAO;
-import java.awt.Color;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 import java.io.IOException;
@@ -35,10 +32,16 @@ public class CadastrarCliente extends javax.swing.JFrame {
     private PreparedStatement pst;
     private String descricaoAudit;
     private int codSetor;
-
+    private Menu telaMenu;
     private CadastrarCliente telaCliente;
+    private ExibeCliente telaExibeCliente;
 
     public CadastrarCliente() {
+        initComponents();       
+    }
+    
+    public CadastrarCliente(Menu menu) {
+        telaMenu = menu;
         initComponents();
         telaCliente = this;
         carregarComboSegmento();
@@ -47,6 +50,30 @@ public class CadastrarCliente extends javax.swing.JFrame {
         jBtnCancelarSetor.setVisible(false);
         combobox();
 
+//        txtEmpresa.setDocument(new LimitarDigitos(45));
+//        txtSetor.setDocument(new LimitarDigitos(50));
+//        txtPais.setDocument(new LimitarDigitos(45));
+        txtEstado.setDocument(new LimitarDigitos(4));
+//        txtBairro.setDocument(new LimitarDigitos(45));
+//        txtCidade.setDocument(new LimitarDigitos(45));
+//        txtRua.setDocument(new LimitarDigitos(45));
+        //txtNumero.setDocument(new LimitarDigitos(10).insertInt(HEIGHT, descricaoAudit,  10));
+//
+//        txtContato.setDocument(new LimitarDigitos(45));
+//        txtEmail.setDocument(new LimitarDigitos(45));
+        txtNumero.setDocument(new LimitarDigitos(6));
+        txtTelCel.setDocument(new LimitarDigitos(20));
+    }
+    
+    public CadastrarCliente(ExibeCliente exibeCliente) {
+        telaExibeCliente = exibeCliente;
+        initComponents();
+        telaCliente = this;
+        carregarComboSegmento();
+        txtSetor.setVisible(false);
+        jBtnSalvarSetor.setVisible(false);
+        jBtnCancelarSetor.setVisible(false);
+        combobox();
 //        txtEmpresa.setDocument(new LimitarDigitos(45));
 //        txtSetor.setDocument(new LimitarDigitos(50));
 //        txtPais.setDocument(new LimitarDigitos(45));
@@ -142,7 +169,6 @@ public class CadastrarCliente extends javax.swing.JFrame {
 
     private void combobox() {
 
-        //Combobox clientes
         jComboBoxSetores.getEditor().getEditorComponent().addFocusListener(new FocusAdapter() {
             @Override
             public void focusLost(FocusEvent e) {
@@ -246,6 +272,11 @@ public class CadastrarCliente extends javax.swing.JFrame {
         btnCadCliente = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosed(java.awt.event.WindowEvent evt) {
+                formWindowClosed(evt);
+            }
+        });
 
         jPanel1.setBackground(new java.awt.Color(223, 237, 253));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -254,7 +285,8 @@ public class CadastrarCliente extends javax.swing.JFrame {
         jLabel1.setText("Cadastrar cliente");
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(25, 12, -1, -1));
 
-        btnLimpar.setText("Limpar");
+        btnLimpar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/stop2.png"))); // NOI18N
+        btnLimpar.setText("Cancelar");
         btnLimpar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnLimparActionPerformed(evt);
@@ -370,15 +402,15 @@ public class CadastrarCliente extends javax.swing.JFrame {
                                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addComponent(jLabelEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 250, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(jBtnOutroContato)
                                 .addGap(21, 21, 21))))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addGap(0, 520, Short.MAX_VALUE)
                                 .addComponent(jBtnRemoverContato))
-                            .addComponent(jScrollPane1))
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 658, Short.MAX_VALUE))
                         .addGap(21, 21, 21))))
         );
         jPanel2Layout.setVerticalGroup(
@@ -552,11 +584,6 @@ public class CadastrarCliente extends javax.swing.JFrame {
         jLabel6.setText("Segmento:");
 
         jComboBoxSetores.setEditable(true);
-        jComboBoxSetores.addItemListener(new java.awt.event.ItemListener() {
-            public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                jComboBoxSetoresItemStateChanged(evt);
-            }
-        });
         jComboBoxSetores.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jComboBoxSetoresActionPerformed(evt);
@@ -668,19 +695,20 @@ public class CadastrarCliente extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jBtnCancelarSetorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnCancelarSetorActionPerformed
-
-        jBtnSalvarSetor.setVisible(false);
-        jBtnCancelarSetor.setVisible(false);
-        jBtnNovoSetor.setVisible(true);
-        txtSetor.setVisible(false);
-        txtSetor.setText("");
-        jComboBoxSetores.setVisible(true);
+        if (JOptionPane.showConfirmDialog(null, "Tem certeza que deseja cancelar o cadastro?", "Confirmar Cancelamento", JOptionPane.YES_NO_OPTION) == 1 ) {       
+            jBtnSalvarSetor.setVisible(false);
+            jBtnCancelarSetor.setVisible(false);
+            jBtnNovoSetor.setVisible(true);
+            txtSetor.setVisible(false);
+            txtSetor.setText("");
+            jComboBoxSetores.setVisible(true);
+        }
     }//GEN-LAST:event_jBtnCancelarSetorActionPerformed
 
     private void jBtnSalvarSetorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnSalvarSetorActionPerformed
 
         if (txtSetor.getText().trim().equals("")) {
-            JOptionPane.showMessageDialog(null, "Campo vazio.");
+            JOptionPane.showMessageDialog(null, "Campo vazio!");
 
         } else {
 
@@ -698,10 +726,12 @@ public class CadastrarCliente extends javax.swing.JFrame {
 
             carregarComboSegmento();
             jComboBoxSetores.setSelectedItem(setor.getSetor());
+            JOptionPane.showMessageDialog(null, "Cadastrado com sucesso!");
         }
     }//GEN-LAST:event_jBtnSalvarSetorActionPerformed
 
     private void jBtnNovoSetorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnNovoSetorActionPerformed
+        txtSetor.setText("");
         txtSetor.requestFocus();
         txtSetor.setVisible(true);
         jComboBoxSetores.setVisible(false);
@@ -719,7 +749,11 @@ public class CadastrarCliente extends javax.swing.JFrame {
     }//GEN-LAST:event_txtEmpresaKeyTyped
 
     private void jBtnCarregaCepActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnCarregaCepActionPerformed
-        CarregaCep();
+        if (txtCep.getText().trim().equals("-")) {
+            JOptionPane.showMessageDialog(null, "Primeiro preencha o campo CEP!");
+        } else {
+            CarregaCep();
+        }
     }//GEN-LAST:event_jBtnCarregaCepActionPerformed
 
     private void txtEstadoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtEstadoKeyTyped
@@ -778,10 +812,14 @@ public class CadastrarCliente extends javax.swing.JFrame {
     }//GEN-LAST:event_jBtnOutroContatoActionPerformed
 
     private void btnLimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimparActionPerformed
-        limparCampos();
+        if (JOptionPane.showConfirmDialog(null, "Tem certeza que deseja sair? Os dados não serão salvos.", "Confirmar Cancelamento", JOptionPane.YES_NO_OPTION) == 0) {
+            verificaPagina();
+            this.dispose();
+        }
     }//GEN-LAST:event_btnLimparActionPerformed
 
     private void btnCadClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadClienteActionPerformed
+        
         if (VerificaCampos() == true) {
 
             if (ClienteDAO.VerificarCliente(txtCnpj.getText()) == false) {
@@ -842,6 +880,7 @@ public class CadastrarCliente extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "Cadastrado com sucesso!");
 
                 if (JOptionPane.showConfirmDialog(null, "Deseja continuar cadastrando?", "Confirmar Cadastro", JOptionPane.YES_NO_OPTION) == 1) {
+                    telaMenu.setEnabled(true);
                     this.dispose();
                 } else {
                     txtEmpresa.requestFocus();
@@ -856,13 +895,13 @@ public class CadastrarCliente extends javax.swing.JFrame {
         ValidaEmail();
     }//GEN-LAST:event_txtEmailFocusLost
 
-    private void jComboBoxSetoresItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jComboBoxSetoresItemStateChanged
-       
-    }//GEN-LAST:event_jComboBoxSetoresItemStateChanged
-
     private void jComboBoxSetoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxSetoresActionPerformed
         idSetorComboBox();
     }//GEN-LAST:event_jComboBoxSetoresActionPerformed
+
+    private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
+        verificaPagina();
+    }//GEN-LAST:event_formWindowClosed
 
     private void carregarComboSegmento() {
 
@@ -1008,6 +1047,17 @@ public class CadastrarCliente extends javax.swing.JFrame {
         }).start();
     }
 
+    
+    private void verificaPagina() {
+
+        if ((this.telaMenu != null)) {
+            this.telaMenu.setEnabled(true);
+            this.telaMenu.toFront();
+        }else if ((this.telaExibeCliente != null)) {
+            this.telaExibeCliente.setEnabled(true);
+            this.telaExibeCliente.toFront();
+        }
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCadCliente;

@@ -27,6 +27,7 @@ public class CadastrarLembrete extends javax.swing.JFrame {
     private int codCliCombo;
     private int codCli;
     private DetalharCliente detalharCliente;
+
     /**
      * Creates new form CadastrarLembrete
      */
@@ -35,37 +36,37 @@ public class CadastrarLembrete extends javax.swing.JFrame {
         jLabCodigo.setVisible(false);
         jLabEmpresa.setVisible(false);
         jLabNCodigo.setVisible(false);
-        carregarComboClientes();  
+        carregarComboClientes();
         combobox();
     }
-    
-    public CadastrarLembrete(int codCliente) {              
+
+    public CadastrarLembrete(int codCliente) {
         initComponents();
-        this.codCli = codCliente;        
-        uJComboBoxClientes.setVisible(false);           
+        this.codCli = codCliente;
+        uJComboBoxClientes.setVisible(false);
         DadosEmpresa();
     }
-    
-    public CadastrarLembrete(int codCliente, DetalharCliente detalharCliente) {        
-        initComponents();   
-        this.detalharCliente = detalharCliente;       
+
+    public CadastrarLembrete(int codCliente, DetalharCliente detalharCliente) {
+        initComponents();
+        this.detalharCliente = detalharCliente;
         this.codCli = codCliente;
-        uJComboBoxClientes.setVisible(false);     
+        uJComboBoxClientes.setVisible(false);
         DadosEmpresa();
     }
 
     private void DadosEmpresa() {
 
         ArrayList<Cliente> cliente = new ArrayList<Cliente>();
-        cliente = ClienteDAO.CarregaNomeCliente(codCli);       
+        cliente = ClienteDAO.CarregaNomeCliente(codCli);
 
-            for (Cliente cli : cliente) {
+        for (Cliente cli : cliente) {
 
-                jLabCodigo.setText(String.valueOf(cli.getId()));
-                jLabEmpresa.setText(cli.getEmpresa());
-            }
+            jLabCodigo.setText(String.valueOf(cli.getId()));
+            jLabEmpresa.setText(cli.getEmpresa());
+        }
     }
-    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -102,7 +103,7 @@ public class CadastrarLembrete extends javax.swing.JFrame {
 
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel1.setText("Lembrete");
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, -1, -1));
 
@@ -126,7 +127,7 @@ public class CadastrarLembrete extends javax.swing.JFrame {
         jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 200, -1, -1));
 
         jLabel4.setText("Descrição:");
-        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 240, -1, -1));
+        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 250, -1, -1));
 
         txtDescricaoLembrete.setColumns(20);
         txtDescricaoLembrete.setLineWrap(true);
@@ -135,7 +136,7 @@ public class CadastrarLembrete extends javax.swing.JFrame {
 
         jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 270, 360, 191));
 
-        jBtnSalvarLembrete.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/ok.png"))); // NOI18N
+        jBtnSalvarLembrete.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/disk.png"))); // NOI18N
         jBtnSalvarLembrete.setText("Salvar");
         jBtnSalvarLembrete.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -144,8 +145,8 @@ public class CadastrarLembrete extends javax.swing.JFrame {
         });
         jPanel1.add(jBtnSalvarLembrete, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 480, -1, -1));
 
-        jBtnSair.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/cancelar.png"))); // NOI18N
-        jBtnSair.setText("Sair");
+        jBtnSair.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/stop2.png"))); // NOI18N
+        jBtnSair.setText("Cancelar");
         jBtnSair.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jBtnSairActionPerformed(evt);
@@ -168,43 +169,44 @@ public class CadastrarLembrete extends javax.swing.JFrame {
         });
         jPanel1.add(uJComboBoxClientes, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 100, 290, -1));
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 430, 520));
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 420, 520));
 
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jBtnSalvarLembreteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnSalvarLembreteActionPerformed
-        
-        if (codCliCombo != 0) {
-            codCli = codCliCombo;
+        if (VerificaCampos() == true) {
+            if (codCliCombo != 0) {
+                codCli = codCliCombo;
+            }
+
+            try {
+                Lembrete lembrete = new Lembrete();
+                lembrete.setCodUsuario(Usuario.idUsuario());
+                lembrete.setDataLembrete(FormataData(txtDataLembrete.getDate()));
+                lembrete.setHora(FuncoesDiversas.ConverterHora(txtHoraLembrete.getText()));
+                lembrete.setDescricao(txtDescricaoLembrete.getText());
+                lembrete.setCodCliente(codCli);
+                LembreteDAO.CadLembrete(lembrete);
+                this.dispose();
+                verificaPagina();
+                JOptionPane.showMessageDialog(null, "Cadastrado com sucesso!");
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, "Campo data Inválido!");
+            }
         }
-        
-        try {
-            
-            Lembrete lembrete = new Lembrete();
-            lembrete.setCodUsuario(Usuario.idUsuario());
-            lembrete.setDataLembrete(FormataData(txtDataLembrete.getDate()));            
-            lembrete.setHora(FuncoesDiversas.ConverterHora(txtHoraLembrete.getText()));
-            lembrete.setDescricao(txtDescricaoLembrete.getText());                    
-            lembrete.setCodCliente(codCli);
-            LembreteDAO.CadLembrete(lembrete);      
-            this.dispose();
-            verificaPagina();
-            
-        }catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Campo data Inválido!");
-        }
-        
     }//GEN-LAST:event_jBtnSalvarLembreteActionPerformed
 
     private void jBtnSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnSairActionPerformed
-        verificaPagina();
-        this.dispose();
+        if (JOptionPane.showConfirmDialog(null, "Tem certeza que deseja sair? Os dados não serão salvos.", "Confirmar Cancelamento", JOptionPane.YES_NO_OPTION) == 0) {
+            verificaPagina();
+            this.dispose();
+        }       
     }//GEN-LAST:event_jBtnSairActionPerformed
 
     private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
-        verificaPagina();       
+        verificaPagina();
     }//GEN-LAST:event_formWindowClosed
 
     private void uJComboBoxClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_uJComboBoxClientesActionPerformed
@@ -212,22 +214,52 @@ public class CadastrarLembrete extends javax.swing.JFrame {
         idClienteComboBox();
     }//GEN-LAST:event_uJComboBoxClientesActionPerformed
 
-    private void verificaPagina(){
-        
+    private void verificaPagina() {
+
         if ((this.detalharCliente != null)) {
             this.detalharCliente.setEnabled(true);
             this.detalharCliente.toFront();
             this.detalharCliente.TabelaLembrete2(codCli);
         }
     }
-    
+
+    private boolean VerificaCampos() {
+
+        boolean valida = true;
+
+        if (txtDataLembrete.getDate() == null) {
+            JOptionPane.showMessageDialog(null, "Campo(s) vazio(s)!");
+            valida = false;
+            return valida;
+        }
+
+        if (txtHoraLembrete.getText().trim().equals(":")) {
+            JOptionPane.showMessageDialog(null, "Campo(s) vazio(s)!");
+            valida = false;
+            return valida;
+        }
+
+        if (uJComboBoxClientes.getSelectedIndex() == 0) {
+            JOptionPane.showMessageDialog(null, "Campo(s) vazio(s)!");
+            valida = false;
+            return valida;
+        }
+
+        if (txtDescricaoLembrete.getText().trim().equals("")) {
+            JOptionPane.showMessageDialog(null, "Campo(s) vazio(s)!");
+            valida = false;
+            return valida;
+        }
+
+        return valida;
+    }
+
 //    private void limparCampos(){
 //        txtDataLembrete = null;
 //        txtDescricaoLembrete.setText("");
 //        txtHoraLembrete.setText("");
 //        jComboBoxEmpresas.setSelectedIndex(0);
 //    }
-    
     private void carregarComboClientes() {
 
         uJComboBoxClientes.clear();
@@ -235,26 +267,27 @@ public class CadastrarLembrete extends javax.swing.JFrame {
         ArrayList<Cliente> cliente = new ArrayList<Cliente>();
         cliente = ClienteDAO.ComboCliente();
 
+        uJComboBoxClientes.addItem("Selecione o cliente");
         for (Cliente cli : cliente) {
             uJComboBoxClientes.addItem(cli.getEmpresa(), cli);
         }
     }
-    
+
     private void idClienteComboBox() {
-        
+
         Connection conexao = Conexao.getConnection();
         ResultSet rs;
-        String sql = "select * from tabcliente where empresa = '" + uJComboBoxClientes.getSelectedItem()+ "';";
-        
-        try{
+        String sql = "select * from tabcliente where empresa = '" + uJComboBoxClientes.getSelectedItem() + "';";
+
+        try {
             pst = conexao.prepareStatement(sql);
             rs = pst.executeQuery();
-            
-            while(rs.next()) {
+
+            while (rs.next()) {
                 codCliCombo = (rs.getInt("idcliente"));
             }
-            
-        }catch(SQLException ex) {
+
+        } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, ex);
         }
     }
@@ -271,10 +304,10 @@ public class CadastrarLembrete extends javax.swing.JFrame {
                 }
             }
         });
-        uJComboBoxClientes.setAutocompletar(true);    
+        uJComboBoxClientes.setAutocompletar(true);
     }
-    
-    
+
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBtnSair;
     private javax.swing.JButton jBtnSalvarLembrete;

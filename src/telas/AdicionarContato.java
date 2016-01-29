@@ -115,7 +115,7 @@ public class AdicionarContato extends javax.swing.JFrame {
             }
         });
 
-        jComboBoxSetorContato.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Manutenção", "Compras", "Suprimentos", "Projetos", "Engenharia", "Compras/Suprimentos", "Projetos/Engenharia" }));
+        jComboBoxSetorContato.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Selecione o setor", "Manutenção", "Compras", "Suprimentos", "Projetos", "Engenharia", "Compras/Suprimentos", "Projetos/Engenharia" }));
 
         txtTelCel.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
@@ -224,7 +224,7 @@ public class AdicionarContato extends javax.swing.JFrame {
                         .addComponent(jBtnOutroContato)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jBtnRemoverContato)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -232,6 +232,7 @@ public class AdicionarContato extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel1.setText("Adicionar Contato");
 
+        jBtnCadastrarContato.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/disk.png"))); // NOI18N
         jBtnCadastrarContato.setText("Cadastrar");
         jBtnCadastrarContato.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -239,6 +240,7 @@ public class AdicionarContato extends javax.swing.JFrame {
             }
         });
 
+        jBtnCancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/stop2.png"))); // NOI18N
         jBtnCancelar.setText("Cancelar");
         jBtnCancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -251,18 +253,16 @@ public class AdicionarContato extends javax.swing.JFrame {
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(28, 28, 28)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGap(30, 30, 30)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jBtnCancelar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jBtnCadastrarContato)
-                        .addGap(37, 37, 37))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1)
-                            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addContainerGap(27, Short.MAX_VALUE))))
+                        .addComponent(jBtnCadastrarContato))
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jLabel1)
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(28, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -282,7 +282,7 @@ public class AdicionarContato extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 798, Short.MAX_VALUE)
+            .addGap(0, 801, Short.MAX_VALUE)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -320,18 +320,27 @@ public class AdicionarContato extends javax.swing.JFrame {
     }//GEN-LAST:event_txtEmailFocusLost
 
     private void jBtnRemoverContatoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnRemoverContatoActionPerformed
-        DefaultTableModel dtm = (DefaultTableModel) jTableContatos.getModel();
-        int linha = jTableContatos.getSelectedRow();
+        if (JOptionPane.showConfirmDialog(null, "Deseja excluir o registro?", "Confirmar Exclusão", JOptionPane.YES_NO_OPTION) == 1) {
 
-        if (linha != -1) {
-            dtm.removeRow(linha);
+        } else {
+            DefaultTableModel dtm = (DefaultTableModel) jTableContatos.getModel();
+            int linha = jTableContatos.getSelectedRow();
+
+            if (linha != -1) {
+                dtm.removeRow(linha);
+            }
         }
     }//GEN-LAST:event_jBtnRemoverContatoActionPerformed
 
     private void jBtnCadastrarContatoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnCadastrarContatoActionPerformed
-        CadastrarContato();
-        ((DefaultTableModel) jTableContatos.getModel()).setNumRows(0);
-        jTableContatos.updateUI();
+        if (jTableContatos.getRowCount() < 1) {
+            JOptionPane.showMessageDialog(null, "Adicione um contato na Tabela!");
+        }else {
+            CadastrarContato();
+            ((DefaultTableModel) jTableContatos.getModel()).setNumRows(0);
+            jTableContatos.updateUI();
+            JOptionPane.showMessageDialog(null, "Cadastrado com sucesso!");
+        }
     }//GEN-LAST:event_jBtnCadastrarContatoActionPerformed
 
     private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
@@ -339,8 +348,11 @@ public class AdicionarContato extends javax.swing.JFrame {
     }//GEN-LAST:event_formWindowClosed
 
     private void jBtnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnCancelarActionPerformed
-        verificaPagina();
-        this.dispose();
+        if (JOptionPane.showConfirmDialog(null, "Tem certeza que deseja sair? Os dados não serão salvos.", "Confirmar Cancelamento", JOptionPane.YES_NO_OPTION) == 1 ) {           
+        }else {
+            verificaPagina();
+            this.dispose();
+        }
     }//GEN-LAST:event_jBtnCancelarActionPerformed
 
     private boolean VerificaCamposContato() {
@@ -374,7 +386,7 @@ public class AdicionarContato extends javax.swing.JFrame {
 
         return valida;
     }
-    
+
     private void CadastrarContato() {
 
         if ((this.telaDetCliente != null)) {
@@ -422,7 +434,7 @@ public class AdicionarContato extends javax.swing.JFrame {
 
                 PessoaContatoDAO.CadPesContatoFornecedor(pContato);
             }
-        }
+        } 
         this.dispose();
     }
 

@@ -93,6 +93,12 @@ public class DetalharCliente extends javax.swing.JFrame {
         jBtnVerLembrete.setHorizontalTextPosition(SwingConstants.CENTER);
         jBtnVerRotina.setVerticalTextPosition(SwingConstants.BOTTOM);
         jBtnVerRotina.setHorizontalTextPosition(SwingConstants.CENTER);
+        
+        jBtnExcluirEquipCli.setVerticalTextPosition(SwingConstants.BOTTOM);
+        jBtnExcluirEquipCli.setHorizontalTextPosition(SwingConstants.CENTER);
+        
+        jBtnAdicionarEquipamento.setVerticalTextPosition(SwingConstants.BOTTOM);
+        jBtnAdicionarEquipamento.setHorizontalTextPosition(SwingConstants.CENTER);
 
     }
 
@@ -322,8 +328,8 @@ public class DetalharCliente extends javax.swing.JFrame {
                 jTableContatos.getTableHeader().getColumnModel().getColumn(1).setMinWidth(0);
 
                 jTableContatos.getColumnModel().getColumn(2).setPreferredWidth(200);
-                jTableContatos.getColumnModel().getColumn(3).setPreferredWidth(80);
-                jTableContatos.getColumnModel().getColumn(4).setPreferredWidth(80);
+                jTableContatos.getColumnModel().getColumn(3).setPreferredWidth(90);
+                jTableContatos.getColumnModel().getColumn(4).setPreferredWidth(90);
                 jTableContatos.getColumnModel().getColumn(5).setPreferredWidth(200);
                 jTableContatos.getColumnModel().getColumn(6).setPreferredWidth(200);
 
@@ -508,6 +514,11 @@ public class DetalharCliente extends javax.swing.JFrame {
         setBackground(new java.awt.Color(238, 162, 162));
         setExtendedState(6);
         setName("j"); // NOI18N
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosed(java.awt.event.WindowEvent evt) {
+                formWindowClosed(evt);
+            }
+        });
 
         jTabbedPane1.setBackground(new java.awt.Color(223, 237, 253));
 
@@ -761,9 +772,9 @@ public class DetalharCliente extends javax.swing.JFrame {
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 707, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jButtonEditarContato)
                     .addComponent(jBtnExcluirContato, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jBtnNovoContato, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jBtnNovoContato, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButtonEditarContato, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
@@ -787,7 +798,9 @@ public class DetalharCliente extends javax.swing.JFrame {
 
         jPanel6.setBackground(new java.awt.Color(223, 237, 253));
 
-        jBtnAdicionarEquipamento.setText("Adicionar Equipamento");
+        jBtnAdicionarEquipamento.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jBtnAdicionarEquipamento.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/maquinaAdiciona.fw.png"))); // NOI18N
+        jBtnAdicionarEquipamento.setText("Equipamento");
         jBtnAdicionarEquipamento.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jBtnAdicionarEquipamentoActionPerformed(evt);
@@ -830,7 +843,9 @@ public class DetalharCliente extends javax.swing.JFrame {
                 .addContainerGap(36, Short.MAX_VALUE))
         );
 
-        jBtnExcluirEquipCli.setText("Remover Equipamento");
+        jBtnExcluirEquipCli.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jBtnExcluirEquipCli.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/maquina07remove.fw.png"))); // NOI18N
+        jBtnExcluirEquipCli.setText("Excluir Equipamento");
 
         binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, jTableEquipCliente, org.jdesktop.beansbinding.ELProperty.create("${selectedElement  != null}"), jBtnExcluirEquipCli, org.jdesktop.beansbinding.BeanProperty.create("enabled"));
         bindingGroup.addBinding(binding);
@@ -848,11 +863,11 @@ public class DetalharCliente extends javax.swing.JFrame {
             .addGroup(jPanel6Layout.createSequentialGroup()
                 .addGap(12, 12, 12)
                 .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jBtnAdicionarEquipamento)
-                    .addComponent(jBtnExcluirEquipCli))
-                .addGap(0, 41, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jBtnExcluirEquipCli, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jBtnAdicionarEquipamento, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                .addGap(0, 22, Short.MAX_VALUE))
         );
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -862,14 +877,14 @@ public class DetalharCliente extends javax.swing.JFrame {
                         .addGap(77, 77, 77)
                         .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel6Layout.createSequentialGroup()
-                        .addGap(138, 138, 138)
+                        .addGap(134, 134, 134)
                         .addComponent(jBtnAdicionarEquipamento)
                         .addGap(28, 28, 28)
                         .addComponent(jBtnExcluirEquipCli)))
                 .addContainerGap(92, Short.MAX_VALUE))
         );
 
-        jTabbedPane1.addTab("Equipamentos do Cliente", new javax.swing.ImageIcon(getClass().getResource("/imagens/equipamento.png")), jPanel6); // NOI18N
+        jTabbedPane1.addTab("Equipamentos do Cliente", new javax.swing.ImageIcon(getClass().getResource("/imagens/maquina02.png")), jPanel6); // NOI18N
 
         jPanel5.setBackground(new java.awt.Color(223, 237, 253));
 
@@ -927,6 +942,7 @@ public class DetalharCliente extends javax.swing.JFrame {
             }
         });
 
+        jBtnExcluir.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jBtnExcluir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/excluiLemb.fw.png"))); // NOI18N
         jBtnExcluir.setText("Excluir Lembrete");
 
@@ -964,7 +980,7 @@ public class DetalharCliente extends javax.swing.JFrame {
                     .addComponent(jBtnNovoLembrete, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jBtnExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                     .addComponent(jBtnVerLembrete, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
-                .addContainerGap(58, Short.MAX_VALUE))
+                .addContainerGap(45, Short.MAX_VALUE))
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1065,7 +1081,7 @@ public class DetalharCliente extends javax.swing.JFrame {
         jPanel7Layout.setHorizontalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel7Layout.createSequentialGroup()
-                .addContainerGap(23, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(59, 59, 59)
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -1126,71 +1142,78 @@ public class DetalharCliente extends javax.swing.JFrame {
     }//GEN-LAST:event_jBtnNovoLembreteActionPerformed
 
     private void jBtbCancelEnderecoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtbCancelEnderecoActionPerformed
-
-        jButtonAr3.setVisible(true);
-        jBtbCancelEndereco.setVisible(false);
-        jBtnAltEndereco.setVisible(false);
-        jBtnCarregaCep.setVisible(false);
-        desabilitarEndereco();
+        if (JOptionPane.showConfirmDialog(null, "Cancelar alteração?", "Confirmar Cancelamento", JOptionPane.YES_NO_OPTION) == 1) {
+           
+        }else {
+            jButtonAr3.setVisible(true);
+            jBtbCancelEndereco.setVisible(false);
+            jBtnAltEndereco.setVisible(false);
+            jBtnCarregaCep.setVisible(false);
+            CarregaCliente();
+            desabilitarEndereco();
+        }
     }//GEN-LAST:event_jBtbCancelEnderecoActionPerformed
 
     private void jBtnAltEnderecoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnAltEnderecoActionPerformed
+        if (VerificaCamposEndereco() == true) {
+            Endereco endereco = new Endereco();
 
-        Endereco endereco = new Endereco();
+            endereco.setPais(txtEndPais.getText());
+            endereco.setCep(txtCep.getText());
+            endereco.setRua(txtEndRua.getText());
+            endereco.setNumero(txtEndNum.getText());
+            endereco.setBairro(txtEndBairro.getText());
+            endereco.setCidade(txtEndCidade.getText());
+            endereco.setEstado(txtEndEstado.getText());
+            endereco.setIdContato(idContato);
 
-        endereco.setPais(txtEndPais.getText());
-        endereco.setCep(txtCep.getText());
-        endereco.setRua(txtEndRua.getText());
-        endereco.setNumero(txtEndNum.getText());
-        endereco.setBairro(txtEndBairro.getText());
-        endereco.setCidade(txtEndCidade.getText());
-        endereco.setEstado(txtEndEstado.getText());
-        endereco.setIdContato(idContato);
-
-        ContatosDAO.UpdateEndereco(idContato, endereco);
-        jButtonAr3.setVisible(true);
-        jBtbCancelEndereco.setVisible(false);
-        jBtnAltEndereco.setVisible(false);
-        jBtnCarregaCep.setVisible(false);
-        desabilitarEndereco();
+            ContatosDAO.UpdateEndereco(idContato, endereco);
+            jButtonAr3.setVisible(true);
+            jBtbCancelEndereco.setVisible(false);
+            jBtnAltEndereco.setVisible(false);
+            jBtnCarregaCep.setVisible(false);
+            desabilitarEndereco();
+            JOptionPane.showMessageDialog(null, "Alterado com sucesso!");
+        }
     }//GEN-LAST:event_jBtnAltEnderecoActionPerformed
 
     private void jBtbCancelDadosPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtbCancelDadosPActionPerformed
-
-        desabilitarDadosPessoais();
-        txtSetor.setVisible(true);
-        jBtnAltDadosP.setVisible(false);
-        jBtbCancelDadosP.setVisible(false);
-        jButtonAr1.setVisible(true);
-
+        if (JOptionPane.showConfirmDialog(null, "Cancelar alteração?", "Confirmar Cancelamento", JOptionPane.YES_NO_OPTION) == 1) {
+            
+        }else {
+            CarregaCliente();
+            desabilitarDadosPessoais();
+            txtSetor.setVisible(true);
+            jBtnAltDadosP.setVisible(false);
+            jBtbCancelDadosP.setVisible(false);
+            jButtonAr1.setVisible(true);
+        }
     }//GEN-LAST:event_jBtbCancelDadosPActionPerformed
 
     private void jBtnAltDadosPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnAltDadosPActionPerformed
 
-        Cliente cli = new Cliente();
-        cli.setEmpresa(txtEmpresa.getText());
-        cli.setCnpj(txtCnpj.getText());
-        cli.setCodSetor(codSetor);
-        cli.setIdContato(idContato);
-        ClienteDAO.UpdateCliente(cli, GetIndice());
-        desabilitarDadosPessoais();
-        txtSetor.setVisible(true);
-        jBtnAltDadosP.setVisible(false);
-        jBtbCancelDadosP.setVisible(false);
-        jButtonAr1.setVisible(true);
-        CarregaCliente();
-
-        String descricaoAudit = "Empresa " + cli.getEmpresa() + " /CNPJ: " + cli.getCnpj() + "teve os dados alterados.";
-        AuditoriaDAO.CadDetAuditoria(descricaoAudit);
-
+        if (VerificaCamposEmpresa() == true) {
+            Cliente cli = new Cliente();
+            cli.setEmpresa(txtEmpresa.getText());
+            cli.setCnpj(txtCnpj.getText());
+            cli.setCodSetor(codSetor);
+            cli.setIdContato(idContato);
+            ClienteDAO.UpdateCliente(cli, GetIndice());
+            desabilitarDadosPessoais();
+            txtSetor.setVisible(true);
+            jBtnAltDadosP.setVisible(false);
+            jBtbCancelDadosP.setVisible(false);
+            jButtonAr1.setVisible(true);
+            CarregaCliente();
+            JOptionPane.showMessageDialog(null, "Alterado com sucesso!");
+            String descricaoAudit = "Empresa " + cli.getEmpresa() + " /CNPJ: " + cli.getCnpj() + "teve os dados alterados.";
+            AuditoriaDAO.CadDetAuditoria(descricaoAudit);
+        }
     }//GEN-LAST:event_jBtnAltDadosPActionPerformed
 
     private void jTableLembretesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableLembretesMouseClicked
-
-        // codLembrete = Integer.parseInt(jTableLembretes.getModel().getValueAt(jTableLembretes.getSelectedRow(),0).toString());
         int linha = jTableLembretes.getSelectedRow();
         codLembrete = (Integer.parseInt(jTableLembretes.getValueAt(linha, 0).toString()));
-        // new DetalharLembrete(this).setVisible(true);
     }//GEN-LAST:event_jTableLembretesMouseClicked
 
     private void jButtonAr3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAr3ActionPerformed
@@ -1227,7 +1250,11 @@ public class DetalharCliente extends javax.swing.JFrame {
     }//GEN-LAST:event_jTableContatosMouseClicked
 
     private void jBtnCarregaCepActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnCarregaCepActionPerformed
-        BuscarEndereco();
+        if (txtCep.getText().trim().equals("-")) {
+            JOptionPane.showMessageDialog(null, "Primeiro preencha o campo CEP!");
+        } else {
+            BuscarEndereco();
+        }
     }//GEN-LAST:event_jBtnCarregaCepActionPerformed
 
     private void jBtnAdicionarEquipamentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnAdicionarEquipamentoActionPerformed
@@ -1242,7 +1269,7 @@ public class DetalharCliente extends javax.swing.JFrame {
 
     private void jBtnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnExcluirActionPerformed
         if (JOptionPane.showConfirmDialog(null, "Deseja excluir o registro?", "Confirmar Exclusão", JOptionPane.YES_NO_OPTION) == 1) {
-            
+
         } else {
             LembreteDAO.ExcluirLembrete(codLembrete);
             TabelaLembrete2(codCliente);
@@ -1251,8 +1278,7 @@ public class DetalharCliente extends javax.swing.JFrame {
 
     private void jBtnExcluirRotinaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnExcluirRotinaActionPerformed
         if (JOptionPane.showConfirmDialog(null, "Deseja excluir o registro?", "Confirmar Exclusão", JOptionPane.YES_NO_OPTION) == 1) {
-            
-        } else {        
+        } else {
             RotinaContatosDAO.ExcluirRotina(codRotina);
             TabelaRotina("select  * from tabrotinacontato where cliente_idcliente = " + codCliente + ";");
         }
@@ -1279,12 +1305,12 @@ public class DetalharCliente extends javax.swing.JFrame {
 
     private void jBtnExcluirEquipCliActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnExcluirEquipCliActionPerformed
         if (JOptionPane.showConfirmDialog(null, "Deseja excluir o registro?", "Confirmar Exclusão", JOptionPane.YES_NO_OPTION) == 1) {
-            
+
         } else {
             DetEquipamentoClienteDAO.ExcluirEquipCliente(codEquipClie);
             TabelaEquipamentosCli();
         }
-        
+
     }//GEN-LAST:event_jBtnExcluirEquipCliActionPerformed
 
     private void jTableEquipClienteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableEquipClienteMouseClicked
@@ -1299,7 +1325,7 @@ public class DetalharCliente extends javax.swing.JFrame {
 
     private void jBtnExcluirContatoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnExcluirContatoActionPerformed
         if (JOptionPane.showConfirmDialog(null, "Deseja excluir o registro?", "Confirmar Exclusão", JOptionPane.YES_NO_OPTION) == 1) {
-            
+
         } else {
             if (jTableContatos.getSelectedRow() != -1) {
                 int linha = jTableContatos.getSelectedRow();
@@ -1320,12 +1346,16 @@ public class DetalharCliente extends javax.swing.JFrame {
         idSetorComboBox();
     }//GEN-LAST:event_jComboBoxSetoresActionPerformed
 
+    private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_formWindowClosed
+
     private void carregarComboSegmento() {
 
-        // uJComboBoxPeca.clear();
         ArrayList<Setor> setores = new ArrayList<Setor>();
         setores = SetorDAO.ListarSetor();
 
+        jComboBoxSetores.addItem("Selecione o segmento");
         for (Setor setor : setores) {
             jComboBoxSetores.addItem(setor.getSetor(), setor);
         }
@@ -1395,6 +1425,78 @@ public class DetalharCliente extends javax.swing.JFrame {
                 }
             }
         }).start();
+    }
+
+    private boolean VerificaCamposEmpresa() {
+
+        boolean valida = true;
+
+        if (txtEmpresa.getText().trim().equals("")) {
+            JOptionPane.showMessageDialog(null, "Campo(s) vazio(s)!");
+            valida = false;
+            return valida;
+        }
+
+        if (jComboBoxSetores.getSelectedIndex() == 0) {
+            JOptionPane.showMessageDialog(null, "Campo(s) vazio(s)!");
+            valida = false;
+            return valida;
+        }
+
+        if (txtCnpj.getText().trim().length() != 18) {
+            JOptionPane.showMessageDialog(null, "Campo(s) vazio(s)!");
+            valida = false;
+            return valida;
+        }
+        return valida;
+    }
+
+    private boolean VerificaCamposEndereco() {
+
+        boolean valida = true;
+
+        if (txtEndPais.getText().trim().equals("")) {
+            JOptionPane.showMessageDialog(null, "Campo(s) vazio(s)!");
+            valida = false;
+            return valida;
+        }
+
+        if (txtEndCidade.getText().trim().equals("")) {
+            JOptionPane.showMessageDialog(null, "Campo(s) vazio(s)!");
+            valida = false;
+            return valida;
+        }
+
+        if (txtEndRua.getText().trim().equals("")) {
+            JOptionPane.showMessageDialog(null, "Campo(s) vazio(s)!");
+            valida = false;
+            return valida;
+        }
+
+        if (txtCep.getText().trim().equals("-")) {
+            JOptionPane.showMessageDialog(null, "Campo(s) vazio(s)!");
+            valida = false;
+            return valida;
+        }
+
+        if (txtEndEstado.getText().trim().equals("")) {
+            JOptionPane.showMessageDialog(null, "Campo(s) vazio(s)!");
+            valida = false;
+            return valida;
+        }
+
+        if (txtEndBairro.getText().trim().equals("")) {
+            JOptionPane.showMessageDialog(null, "Campo(s) vazio(s)!");
+            valida = false;
+            return valida;
+        }
+
+        if (txtEndNum.getText().trim().equals("")) {
+            JOptionPane.showMessageDialog(null, "Campo(s) vazio(s)!");
+            valida = false;
+            return valida;
+        }
+        return valida;
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
