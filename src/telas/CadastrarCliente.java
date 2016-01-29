@@ -702,7 +702,7 @@ public class CadastrarCliente extends javax.swing.JFrame {
     }//GEN-LAST:event_jBtnSalvarSetorActionPerformed
 
     private void jBtnNovoSetorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnNovoSetorActionPerformed
-
+        txtSetor.requestFocus();
         txtSetor.setVisible(true);
         jComboBoxSetores.setVisible(false);
         jBtnSalvarSetor.setVisible(true);
@@ -900,25 +900,6 @@ public class CadastrarCliente extends javax.swing.JFrame {
                     .getName()).log(Level.SEVERE, null, erro);
         }
     }
-
-//    private void populaComboBox() {
-//
-//        Connection conexao = Conexao.getConnection();
-//        ResultSet rs;
-//        String sql = "select * from tabSetor";
-//
-//        try {
-//            pst = conexao.prepareStatement(sql);
-//            rs = pst.executeQuery();
-//
-//            while (rs.next()) {
-//                jComboBoxSetores.addItem(rs.getString("setor"));
-//            }
-//
-//        } catch (SQLException ex) {
-//            JOptionPane.showMessageDialog(null, ex);
-//        }
-//    }
 
     private void idSetorComboBox() {
 

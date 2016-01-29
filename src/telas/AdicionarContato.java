@@ -6,6 +6,7 @@ import funcoes.ContatosDAO;
 import funcoes.PessoaContatoDAO;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -299,7 +300,11 @@ public class AdicionarContato extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jBtnOutroContatoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnOutroContatoActionPerformed
-        TabelaContatos();
+        if (VerificaCamposContato()) {
+            TabelaContatos();
+        } else {
+            JOptionPane.showMessageDialog(null, "Campo(s) vazio(s)!");
+        }
     }//GEN-LAST:event_jBtnOutroContatoActionPerformed
 
     private void txtTelCelKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTelCelKeyTyped
@@ -324,9 +329,7 @@ public class AdicionarContato extends javax.swing.JFrame {
     }//GEN-LAST:event_jBtnRemoverContatoActionPerformed
 
     private void jBtnCadastrarContatoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnCadastrarContatoActionPerformed
-
         CadastrarContato();
-
         ((DefaultTableModel) jTableContatos.getModel()).setNumRows(0);
         jTableContatos.updateUI();
     }//GEN-LAST:event_jBtnCadastrarContatoActionPerformed
@@ -340,6 +343,38 @@ public class AdicionarContato extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_jBtnCancelarActionPerformed
 
+    private boolean VerificaCamposContato() {
+
+        boolean valida = true;
+
+        if (txtContato.getText().trim().equals("")) {
+            valida = false;
+            return valida;
+        }
+
+        if (txtTelCel.getText().trim().equals("")) {
+            valida = false;
+            return valida;
+        }
+
+        if (txtTel01.getText().trim().length() != 13) {
+            valida = false;
+            return valida;
+        }
+
+        if (ValidaEmail()) {
+            valida = false;
+            return valida;
+        }
+
+        if (jComboBoxSetorContato.getSelectedIndex() == 0) {
+            valida = false;
+            return valida;
+        }
+
+        return valida;
+    }
+    
     private void CadastrarContato() {
 
         if ((this.telaDetCliente != null)) {
@@ -431,7 +466,9 @@ public class AdicionarContato extends javax.swing.JFrame {
         }
     }
 
-    public void ValidaEmail() {
+    public boolean ValidaEmail() {
+
+        boolean valida = false;
 
         if ((txtEmail.getText().contains("@"))
                 && (txtEmail.getText().contains("."))
@@ -451,11 +488,15 @@ public class AdicionarContato extends javax.swing.JFrame {
             } else {
 
                 jLabelEmail.setText("E-mail Inválido");
+                valida = true;
             }
 
         } else {
+
             jLabelEmail.setText("E-mail Inválido");
+            valida = true;
         }
+        return valida;
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

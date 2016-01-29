@@ -66,15 +66,21 @@ public class DetalharCliente extends javax.swing.JFrame {
         TabelaContatos();
         TabelaEquipamentosCli();
         TabelaRotina("select  * from tabrotinacontato where cliente_idcliente = " + codCliente + ";");
+        TabelaLembrete2(GetIndice());
+        TabelaContatos();
+        combobox();
+        botoes();
+
+        //txtEmpresa.setDocument(new LimitarDigitos(45));
+        //txtSetor.setDocument(new LimitarDigitos(50));
+    }
+
+    private void botoes() {
 
         Color minhaCor = new Color(217, 228, 241);
         this.getContentPane().setBackground(minhaCor);
         //this.setExtendedState(this.getExtendedState()|JFrame.MAXIMIZED_BOTH);
-        TabelaLembrete2(GetIndice());
-        TabelaContatos();
 
-        combobox();
-        
         jBtnCadastrarRotinaContato.setVerticalTextPosition(SwingConstants.BOTTOM);
         jBtnCadastrarRotinaContato.setHorizontalTextPosition(SwingConstants.CENTER);
         jBtnNovoLembrete.setVerticalTextPosition(SwingConstants.BOTTOM);
@@ -88,8 +94,6 @@ public class DetalharCliente extends javax.swing.JFrame {
         jBtnVerRotina.setVerticalTextPosition(SwingConstants.BOTTOM);
         jBtnVerRotina.setHorizontalTextPosition(SwingConstants.CENTER);
 
-        //txtEmpresa.setDocument(new LimitarDigitos(45));
-        //txtSetor.setDocument(new LimitarDigitos(50));
     }
 
     private void combobox() {
@@ -106,7 +110,7 @@ public class DetalharCliente extends javax.swing.JFrame {
         });
         jComboBoxSetores.setAutocompletar(true);
     }
-    
+
     private void CarregaCliente() {
 
         jButtonEditarContato.setEnabled(false);
@@ -259,7 +263,7 @@ public class DetalharCliente extends javax.swing.JFrame {
                     String.valueOf(lembrete.getIdLembrete()),
                     lembrete.getDescricao()});
             }
-            
+
             TableCellRenderer renderer = new TabelaZebrada();
             jTableLembretes.setDefaultRenderer(Object.class, renderer);
             //oculta coluna jtable
@@ -280,7 +284,7 @@ public class DetalharCliente extends javax.swing.JFrame {
 
             stmt = getConnection().createStatement();
             ArrayList dados = new ArrayList();
-            String[] Colunas = {"CodContato", "Código", "Contato", "Telefone", "Celular", "Email","Setor"};
+            String[] Colunas = {"CodContato", "Código", "Contato", "Telefone", "Celular", "Email", "Setor"};
 
             ResultSet rs;
             rs = stmt.executeQuery(Sql);
@@ -403,7 +407,7 @@ public class DetalharCliente extends javax.swing.JFrame {
             }
 
             for (int i = 0; i < 4; i++) {
-                
+
                 ModeloTabela modelo = new ModeloTabela(dados, Colunas);
                 jTableListarRotinas.setModel(modelo);
                 TableCellRenderer renderer = new TabelaZebrada();
@@ -1018,16 +1022,16 @@ public class DetalharCliente extends javax.swing.JFrame {
         jPanel9Layout.setHorizontalGroup(
             jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel9Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 659, Short.MAX_VALUE)
-                .addContainerGap())
+                .addGap(32, 32, 32)
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 552, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(46, Short.MAX_VALUE))
         );
         jPanel9Layout.setVerticalGroup(
             jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel9Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 425, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 319, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(26, Short.MAX_VALUE))
         );
 
         jBtnExcluirRotina.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
@@ -1063,7 +1067,7 @@ public class DetalharCliente extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel7Layout.createSequentialGroup()
                 .addContainerGap(23, Short.MAX_VALUE)
                 .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(59, 59, 59)
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jBtnCadastrarRotinaContato, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jBtnExcluirRotina, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
@@ -1075,16 +1079,16 @@ public class DetalharCliente extends javax.swing.JFrame {
             .addGroup(jPanel7Layout.createSequentialGroup()
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel7Layout.createSequentialGroup()
-                        .addGap(24, 24, 24)
-                        .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel7Layout.createSequentialGroup()
                         .addGap(51, 51, 51)
                         .addComponent(jBtnCadastrarRotinaContato)
                         .addGap(27, 27, 27)
                         .addComponent(jBtnVerRotina)
                         .addGap(27, 27, 27)
-                        .addComponent(jBtnExcluirRotina)))
-                .addContainerGap(43, Short.MAX_VALUE))
+                        .addComponent(jBtnExcluirRotina))
+                    .addGroup(jPanel7Layout.createSequentialGroup()
+                        .addGap(24, 24, 24)
+                        .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(134, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Rotina de Contato", new javax.swing.ImageIcon(getClass().getResource("/imagens/rotinacont.png")), jPanel7); // NOI18N
@@ -1113,7 +1117,7 @@ public class DetalharCliente extends javax.swing.JFrame {
             codPessoaContato = Integer.parseInt(jTableContatos.getValueAt(linha, 1).toString());
             this.setEnabled(false);
             new AlterarContato(this, codCliente, codPessoaContato, codContato).setVisible(true);
-        }       
+        }
     }//GEN-LAST:event_jButtonEditarContatoActionPerformed
 
     private void jBtnNovoLembreteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnNovoLembreteActionPerformed
@@ -1237,13 +1241,21 @@ public class DetalharCliente extends javax.swing.JFrame {
     }//GEN-LAST:event_jBtnCadastrarRotinaContatoActionPerformed
 
     private void jBtnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnExcluirActionPerformed
-        LembreteDAO.ExcluirLembrete(codLembrete);
-        TabelaLembrete2(codCliente);
+        if (JOptionPane.showConfirmDialog(null, "Deseja excluir o registro?", "Confirmar Exclusão", JOptionPane.YES_NO_OPTION) == 1) {
+            
+        } else {
+            LembreteDAO.ExcluirLembrete(codLembrete);
+            TabelaLembrete2(codCliente);
+        }
     }//GEN-LAST:event_jBtnExcluirActionPerformed
 
     private void jBtnExcluirRotinaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnExcluirRotinaActionPerformed
-        RotinaContatosDAO.ExcluirRotina(codRotina);
-        TabelaRotina("select  * from tabrotinacontato where cliente_idcliente = " + codCliente + ";");
+        if (JOptionPane.showConfirmDialog(null, "Deseja excluir o registro?", "Confirmar Exclusão", JOptionPane.YES_NO_OPTION) == 1) {
+            
+        } else {        
+            RotinaContatosDAO.ExcluirRotina(codRotina);
+            TabelaRotina("select  * from tabrotinacontato where cliente_idcliente = " + codCliente + ";");
+        }
     }//GEN-LAST:event_jBtnExcluirRotinaActionPerformed
 
     private void jBtnVerLembreteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnVerLembreteActionPerformed
@@ -1266,8 +1278,13 @@ public class DetalharCliente extends javax.swing.JFrame {
     }//GEN-LAST:event_txtCepActionPerformed
 
     private void jBtnExcluirEquipCliActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnExcluirEquipCliActionPerformed
-        DetEquipamentoClienteDAO.ExcluirEquipCliente(codEquipClie);
-        TabelaEquipamentosCli();
+        if (JOptionPane.showConfirmDialog(null, "Deseja excluir o registro?", "Confirmar Exclusão", JOptionPane.YES_NO_OPTION) == 1) {
+            
+        } else {
+            DetEquipamentoClienteDAO.ExcluirEquipCliente(codEquipClie);
+            TabelaEquipamentosCli();
+        }
+        
     }//GEN-LAST:event_jBtnExcluirEquipCliActionPerformed
 
     private void jTableEquipClienteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableEquipClienteMouseClicked
@@ -1281,14 +1298,18 @@ public class DetalharCliente extends javax.swing.JFrame {
     }//GEN-LAST:event_jBtnNovoContatoActionPerformed
 
     private void jBtnExcluirContatoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnExcluirContatoActionPerformed
-        
-        if (jTableContatos.getSelectedRow() != -1) {
-            int linha = jTableContatos.getSelectedRow();
-            codContato = (Integer.parseInt(jTableContatos.getValueAt(linha, 0).toString()));
-            codPessoaContato = Integer.parseInt(jTableContatos.getValueAt(linha, 1).toString()); 
-            ContatosDAO.ExcluirContato(codContato, codPessoaContato);
-            TabelaContatos();
+        if (JOptionPane.showConfirmDialog(null, "Deseja excluir o registro?", "Confirmar Exclusão", JOptionPane.YES_NO_OPTION) == 1) {
+            
+        } else {
+            if (jTableContatos.getSelectedRow() != -1) {
+                int linha = jTableContatos.getSelectedRow();
+                codContato = (Integer.parseInt(jTableContatos.getValueAt(linha, 0).toString()));
+                codPessoaContato = Integer.parseInt(jTableContatos.getValueAt(linha, 1).toString());
+                ContatosDAO.ExcluirContato(codContato, codPessoaContato);
+                TabelaContatos();
+            }
         }
+
     }//GEN-LAST:event_jBtnExcluirContatoActionPerformed
 
     private void jComboBoxSetoresItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jComboBoxSetoresItemStateChanged
@@ -1301,7 +1322,7 @@ public class DetalharCliente extends javax.swing.JFrame {
 
     private void carregarComboSegmento() {
 
-       // uJComboBoxPeca.clear();
+        // uJComboBoxPeca.clear();
         ArrayList<Setor> setores = new ArrayList<Setor>();
         setores = SetorDAO.ListarSetor();
 
