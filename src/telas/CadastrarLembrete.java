@@ -27,6 +27,7 @@ public class CadastrarLembrete extends javax.swing.JFrame {
     private int codCliCombo;
     private int codCli;
     private DetalharCliente detalharCliente;
+    private ExibeCliente telaExibeCliente;
 
     /**
      * Creates new form CadastrarLembrete
@@ -40,9 +41,10 @@ public class CadastrarLembrete extends javax.swing.JFrame {
         combobox();
     }
 
-    public CadastrarLembrete(int codCliente) {
-        initComponents();
+    public CadastrarLembrete(int codCliente, ExibeCliente exibeCli) {
         this.codCli = codCliente;
+        this.telaExibeCliente = exibeCli;
+        initComponents();        
         uJComboBoxClientes.setVisible(false);
         DadosEmpresa();
     }
@@ -220,6 +222,9 @@ public class CadastrarLembrete extends javax.swing.JFrame {
             this.detalharCliente.setEnabled(true);
             this.detalharCliente.toFront();
             this.detalharCliente.TabelaLembrete2(codCli);
+        }else if ((this.telaExibeCliente != null)) {
+            this.telaExibeCliente.setEnabled(true);
+            this.telaExibeCliente.toFront();
         }
     }
 

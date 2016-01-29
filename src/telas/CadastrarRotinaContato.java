@@ -25,6 +25,7 @@ public class CadastrarRotinaContato extends javax.swing.JFrame {
     private int codCliCombo;
     private int codCli;
     private DetalharCliente detalharCliente;
+    private ExibeCliente telaExibeCliente;
 
     public CadastrarRotinaContato() {
         initComponents();
@@ -35,9 +36,10 @@ public class CadastrarRotinaContato extends javax.swing.JFrame {
         jLabNCodigo.setVisible(false);
     }
 
-    public CadastrarRotinaContato(int codCliente) {
+    public CadastrarRotinaContato(int codCliente, ExibeCliente exibeCli) {
         initComponents();
         this.codCli = codCliente;
+        this.telaExibeCliente = exibeCli;
         uJComboBoxClientes.setVisible(false);
         DadosEmpresa();
     }
@@ -241,6 +243,9 @@ public class CadastrarRotinaContato extends javax.swing.JFrame {
             this.detalharCliente.setEnabled(true);
             this.detalharCliente.toFront();
             this.detalharCliente.TabelaRotina("select  * from tabrotinacontato where cliente_idcliente = " + codCli + ";");
+        }else if ((this.telaExibeCliente != null)) {
+            this.telaExibeCliente.setEnabled(true);
+            this.telaExibeCliente.toFront();
         }
     }
 

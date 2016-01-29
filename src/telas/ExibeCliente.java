@@ -359,7 +359,8 @@ public final class ExibeCliente extends javax.swing.JFrame {
     private void jBtnLembreteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnLembreteActionPerformed
 
         if (CodigoCliente()) {
-            new CadastrarLembrete(indice).setVisible(true);
+            this.setEnabled(false);
+            new CadastrarLembrete(indice, this).setVisible(true);
         }
     }//GEN-LAST:event_jBtnLembreteActionPerformed
 
@@ -476,7 +477,8 @@ public final class ExibeCliente extends javax.swing.JFrame {
 
     private void jBtnRotinaContatoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnRotinaContatoActionPerformed
         if (CodigoCliente()) {
-            new CadastrarRotinaContato(indice).setVisible(true);
+            this.setEnabled(false);
+            new CadastrarRotinaContato(indice, this).setVisible(true);
         }             
     }//GEN-LAST:event_jBtnRotinaContatoActionPerformed
 
