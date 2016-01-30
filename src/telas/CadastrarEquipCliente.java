@@ -188,7 +188,7 @@ public class CadastrarEquipCliente extends javax.swing.JFrame {
             }
         });
 
-        jBtnNovoEquipamento.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/equipamento.png"))); // NOI18N
+        jBtnNovoEquipamento.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/maquina02.png"))); // NOI18N
         jBtnNovoEquipamento.setText("Novo Equipamento");
         jBtnNovoEquipamento.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -605,8 +605,8 @@ public class CadastrarEquipCliente extends javax.swing.JFrame {
             this.telaDetCliente.setEnabled(true);
             this.telaDetCliente.toFront();
         }
-    }
-
+    } 
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCadEquipCliente;
     private javax.swing.JButton btnCancelar;

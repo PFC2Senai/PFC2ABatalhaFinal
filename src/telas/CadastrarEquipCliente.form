@@ -298,7 +298,7 @@
             <Component class="javax.swing.JButton" name="jBtnNovoEquipamento">
               <Properties>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/imagens/equipamento.png"/>
+                  <Image iconType="3" name="/imagens/maquina02.png"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Novo Equipamento"/>
               </Properties>

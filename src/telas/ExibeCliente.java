@@ -148,7 +148,7 @@ public final class ExibeCliente extends javax.swing.JFrame {
         jTableListarClientes = new javax.swing.JTable();
         jBtnCadastrarNovoCliente = new javax.swing.JButton();
         jBtnEditar = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
+        jBtnVoltarMenu = new javax.swing.JButton();
         jBtnLembrete = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         txtBuscar = new javax.swing.JTextField();
@@ -161,6 +161,7 @@ public final class ExibeCliente extends javax.swing.JFrame {
         jBtnRotinaContato = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setResizable(false);
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosed(java.awt.event.WindowEvent evt) {
                 formWindowClosed(evt);
@@ -200,11 +201,11 @@ public final class ExibeCliente extends javax.swing.JFrame {
             }
         });
 
-        jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/arrow_rotate_clockwise.png"))); // NOI18N
-        jButton4.setText("Voltar");
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
+        jBtnVoltarMenu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/arrow_rotate_clockwise.png"))); // NOI18N
+        jBtnVoltarMenu.setText("Voltar");
+        jBtnVoltarMenu.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
+                jBtnVoltarMenuActionPerformed(evt);
             }
         });
 
@@ -280,7 +281,7 @@ public final class ExibeCliente extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap(53, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton4)
+                    .addComponent(jBtnVoltarMenu)
                     .addComponent(jLabel1)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -339,7 +340,7 @@ public final class ExibeCliente extends javax.swing.JFrame {
                         .addComponent(jBtnRotinaContato))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 425, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 20, Short.MAX_VALUE)
-                .addComponent(jButton4)
+                .addComponent(jBtnVoltarMenu)
                 .addGap(28, 28, 28))
         );
 
@@ -350,9 +351,9 @@ public final class ExibeCliente extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jBtnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnEditarActionPerformed
-
         if (CodigoCliente()) {
-            new DetalharCliente().setVisible(true);
+            this.setVisible(false);
+            new DetalharCliente(this).setVisible(true);
         }
     }//GEN-LAST:event_jBtnEditarActionPerformed
 
@@ -365,7 +366,8 @@ public final class ExibeCliente extends javax.swing.JFrame {
     }//GEN-LAST:event_jBtnLembreteActionPerformed
 
     private void jBtnCadastrarNovoClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnCadastrarNovoClienteActionPerformed
-        this.setEnabled(false);
+        this.setVisible(false);
+      //  this.setVisible(false);
         new CadastrarCliente(this).setVisible(true);
     }//GEN-LAST:event_jBtnCadastrarNovoClienteActionPerformed
 
@@ -486,10 +488,10 @@ public final class ExibeCliente extends javax.swing.JFrame {
         verificaPagina();
     }//GEN-LAST:event_formWindowClosed
 
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+    private void jBtnVoltarMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnVoltarMenuActionPerformed
         verificaPagina();
         this.dispose();
-    }//GEN-LAST:event_jButton4ActionPerformed
+    }//GEN-LAST:event_jBtnVoltarMenuActionPerformed
 
     private void populaComboBox() {
 
@@ -514,8 +516,8 @@ public final class ExibeCliente extends javax.swing.JFrame {
     private void verificaPagina() {
 
         if ((this.telaMenu != null)) {
-            this.telaMenu.setEnabled(true);
-            this.telaMenu.toFront();
+            this.telaMenu.setVisible(true);
+           // this.telaMenu.toFront();
         }
     }
 
@@ -525,7 +527,7 @@ public final class ExibeCliente extends javax.swing.JFrame {
     private javax.swing.JButton jBtnEditar;
     private javax.swing.JButton jBtnLembrete;
     private javax.swing.JButton jBtnRotinaContato;
-    private javax.swing.JButton jButton4;
+    private javax.swing.JButton jBtnVoltarMenu;
     private javax.swing.JComboBox jComboBoxOpcaoPesquisa;
     private javax.swing.JComboBox jComboBoxSetores;
     private javax.swing.JComboBox jComboUf;

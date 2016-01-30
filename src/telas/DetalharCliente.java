@@ -50,12 +50,18 @@ public class DetalharCliente extends javax.swing.JFrame {
     private final int codCliente;
     private int codContato;
     private DetalharCliente telaDetalCli;
+    private ExibeCliente telaExibeCliente;
 
     /**
      * Creates new form CadastrarCliente
      */
     public DetalharCliente() {
-
+        initComponents();
+        this.codCliente = GetIndice();
+    }
+    
+    public DetalharCliente(ExibeCliente exibeCli) {
+        this.telaExibeCliente = exibeCli;
         this.idContato = ClienteDAO.idContato(GetIndice());
         this.codCliente = GetIndice();
         telaDetalCli = this;
@@ -513,14 +519,14 @@ public class DetalharCliente extends javax.swing.JFrame {
         jTableListarRotinas = new javax.swing.JTable();
         jBtnExcluirRotina = new javax.swing.JButton();
         jBtnVerRotina = new javax.swing.JButton();
-        jBtnVoltarParaDadosCli1 = new javax.swing.JButton();
-        jBtnIrParaLembrete1 = new javax.swing.JButton();
+        jBtnVoltarParaLembrete = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Cadastrar Cliente");
         setBackground(new java.awt.Color(238, 162, 162));
         setExtendedState(6);
         setName("j"); // NOI18N
+        setResizable(false);
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosed(java.awt.event.WindowEvent evt) {
                 formWindowClosed(evt);
@@ -1138,17 +1144,10 @@ public class DetalharCliente extends javax.swing.JFrame {
             }
         });
 
-        jBtnVoltarParaDadosCli1.setText("Próximo");
-        jBtnVoltarParaDadosCli1.addActionListener(new java.awt.event.ActionListener() {
+        jBtnVoltarParaLembrete.setText("Próximo");
+        jBtnVoltarParaLembrete.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jBtnVoltarParaDadosCli1ActionPerformed(evt);
-            }
-        });
-
-        jBtnIrParaLembrete1.setText("Próximo");
-        jBtnIrParaLembrete1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jBtnIrParaLembrete1ActionPerformed(evt);
+                jBtnVoltarParaLembreteActionPerformed(evt);
             }
         });
 
@@ -1158,11 +1157,8 @@ public class DetalharCliente extends javax.swing.JFrame {
             jPanelRotinaContatoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelRotinaContatoLayout.createSequentialGroup()
                 .addGap(30, 30, 30)
-                .addGroup(jPanelRotinaContatoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addGroup(jPanelRotinaContatoLayout.createSequentialGroup()
-                        .addComponent(jBtnVoltarParaDadosCli1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jBtnIrParaLembrete1))
+                .addGroup(jPanelRotinaContatoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jBtnVoltarParaLembrete, javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 23, Short.MAX_VALUE)
                 .addGroup(jPanelRotinaContatoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -1187,9 +1183,7 @@ public class DetalharCliente extends javax.swing.JFrame {
                         .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(3, 3, 3)))
                 .addGap(50, 50, 50)
-                .addGroup(jPanelRotinaContatoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jBtnIrParaLembrete1)
-                    .addComponent(jBtnVoltarParaDadosCli1))
+                .addComponent(jBtnVoltarParaLembrete)
                 .addContainerGap(58, Short.MAX_VALUE))
         );
 
@@ -1433,7 +1427,7 @@ public class DetalharCliente extends javax.swing.JFrame {
     }//GEN-LAST:event_jComboBoxSetoresActionPerformed
 
     private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
-        // TODO add your handling code here:
+        verificaPagina();
     }//GEN-LAST:event_formWindowClosed
 
     private void jBtnIrParaEquipamentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnIrParaEquipamentoActionPerformed
@@ -1448,13 +1442,9 @@ public class DetalharCliente extends javax.swing.JFrame {
         jTabbedPane1.setSelectedComponent(this.jPanelDadosCliente);
     }//GEN-LAST:event_jBtnVoltarParaDadosCliActionPerformed
 
-    private void jBtnVoltarParaDadosCli1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnVoltarParaDadosCli1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jBtnVoltarParaDadosCli1ActionPerformed
-
-    private void jBtnIrParaLembrete1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnIrParaLembrete1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jBtnIrParaLembrete1ActionPerformed
+    private void jBtnVoltarParaLembreteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnVoltarParaLembreteActionPerformed
+        jTabbedPane1.setSelectedComponent(this.jPanelLembrete);
+    }//GEN-LAST:event_jBtnVoltarParaLembreteActionPerformed
 
     private void jBtnVoltarParaEquipamentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnVoltarParaEquipamentoActionPerformed
         jTabbedPane1.setSelectedComponent(this.jPanelEquipamento);
@@ -1612,7 +1602,15 @@ public class DetalharCliente extends javax.swing.JFrame {
         }
         return valida;
     }
+   
+    private void verificaPagina() {
 
+        if ((this.telaExibeCliente != null)) {
+            this.telaExibeCliente.setVisible(true);
+         //   this.telaExibeCliente.toFront();
+        }
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBtbCancelDadosP;
     private javax.swing.JButton jBtbCancelEndereco;
@@ -1627,15 +1625,14 @@ public class DetalharCliente extends javax.swing.JFrame {
     private javax.swing.JButton jBtnExcluirRotina;
     private javax.swing.JButton jBtnIrParaEquipamento;
     private javax.swing.JButton jBtnIrParaLembrete;
-    private javax.swing.JButton jBtnIrParaLembrete1;
     private javax.swing.JButton jBtnIrParaRotina;
     private javax.swing.JButton jBtnNovoContato;
     private javax.swing.JButton jBtnNovoLembrete;
     private javax.swing.JButton jBtnVerLembrete;
     private javax.swing.JButton jBtnVerRotina;
     private javax.swing.JButton jBtnVoltarParaDadosCli;
-    private javax.swing.JButton jBtnVoltarParaDadosCli1;
     private javax.swing.JButton jBtnVoltarParaEquipamento;
+    private javax.swing.JButton jBtnVoltarParaLembrete;
     private javax.swing.JButton jButtonAr1;
     private javax.swing.JButton jButtonAr3;
     private javax.swing.JButton jButtonEditarContato;

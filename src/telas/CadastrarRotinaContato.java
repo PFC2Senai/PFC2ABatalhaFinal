@@ -90,6 +90,7 @@ public class CadastrarRotinaContato extends javax.swing.JFrame {
         jLabel4.setText("jLabel4");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setResizable(false);
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosed(java.awt.event.WindowEvent evt) {
                 formWindowClosed(evt);
@@ -241,11 +242,11 @@ public class CadastrarRotinaContato extends javax.swing.JFrame {
     private void verificaPagina() {
         if ((this.detalharCliente != null)) {
             this.detalharCliente.setEnabled(true);
-            this.detalharCliente.toFront();
+           // this.detalharCliente.toFront();
             this.detalharCliente.TabelaRotina("select  * from tabrotinacontato where cliente_idcliente = " + codCli + ";");
         }else if ((this.telaExibeCliente != null)) {
             this.telaExibeCliente.setEnabled(true);
-            this.telaExibeCliente.toFront();
+          //  this.telaExibeCliente.toFront();
         }
     }
 

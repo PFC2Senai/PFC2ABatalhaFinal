@@ -272,6 +272,7 @@ public class CadastrarCliente extends javax.swing.JFrame {
         btnCadCliente = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setResizable(false);
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosed(java.awt.event.WindowEvent evt) {
                 formWindowClosed(evt);
@@ -1051,11 +1052,11 @@ public class CadastrarCliente extends javax.swing.JFrame {
     private void verificaPagina() {
 
         if ((this.telaMenu != null)) {
-            this.telaMenu.setEnabled(true);
-            this.telaMenu.toFront();
+            this.telaMenu.setVisible(true);
+           // this.telaMenu.toFront();
         }else if ((this.telaExibeCliente != null)) {
-            this.telaExibeCliente.setEnabled(true);
-            this.telaExibeCliente.toFront();
+            this.telaExibeCliente.setVisible(true);
+           // this.telaExibeCliente.toFront();
         }
     }
 
