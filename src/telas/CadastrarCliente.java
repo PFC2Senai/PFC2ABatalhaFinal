@@ -172,7 +172,7 @@ public class CadastrarCliente extends javax.swing.JFrame {
         jComboBoxSetores.getEditor().getEditorComponent().addFocusListener(new FocusAdapter() {
             @Override
             public void focusLost(FocusEvent e) {
-                if (codSetor == 0) {
+                if (codSetor == 0 && jComboBoxSetores.getSelectedIndex()!=0) {
                     JOptionPane.showMessageDialog(null, "Esse registro não encontra-se cadastrado na base de dados.");
                     jComboBoxSetores.getEditor().getEditorComponent().requestFocus();
                 }
@@ -696,7 +696,7 @@ public class CadastrarCliente extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jBtnCancelarSetorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnCancelarSetorActionPerformed
-        if (JOptionPane.showConfirmDialog(null, "Tem certeza que deseja cancelar o cadastro?", "Confirmar Cancelamento", JOptionPane.YES_NO_OPTION) == 1 ) {       
+        if (JOptionPane.showConfirmDialog(null, "Cancelar novo segmento?", "Confirmar Cancelamento", JOptionPane.YES_NO_OPTION) == 0 ) {       
             jBtnSalvarSetor.setVisible(false);
             jBtnCancelarSetor.setVisible(false);
             jBtnNovoSetor.setVisible(true);
@@ -909,7 +909,7 @@ public class CadastrarCliente extends javax.swing.JFrame {
        // uJComboBoxPeca.clear();
         ArrayList<Setor> setores = new ArrayList<Setor>();
         setores = SetorDAO.ListarSetor();
-
+       jComboBoxSetores.addItem("Selecione o segmento da empresa");
         for (Setor setor : setores) {
             jComboBoxSetores.addItem(setor.getSetor(), setor);
         }
