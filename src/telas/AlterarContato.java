@@ -11,6 +11,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -18,27 +19,25 @@ import java.util.logging.Logger;
  */
 public final class AlterarContato extends javax.swing.JFrame {
 
-    Statement stmt ;
+    Statement stmt;
     private int codCliente = 0;
     private int codPessoaContato = 0;
     private int codContato = 0;
     private DetalharCliente telaDetCliente = null;
     private int codFornecedor = 0;
     private DetalharFornecedor telaDetFornecedor = null;
-    
+
     /**
      * Creates new form AlterarContato
      */
-    
- 
-    public AlterarContato() {       
-        initComponents(); 
+    public AlterarContato() {
+        initComponents();
         txtContato.setDocument(new LimitarDigitos(45));
         txtEmail.setDocument(new LimitarDigitos(45));
         txtTel.setDocument(new LimitarDigitos(45));
         txtTelCel.setDocument(new LimitarDigitos(45));
     }
-    
+
     public AlterarContato(DetalharCliente telaDetCli, int codCliente, int codPessoaCont, int codCont) {
         this.telaDetCliente = telaDetCli;
         this.codContato = codCont;
@@ -53,11 +52,13 @@ public final class AlterarContato extends javax.swing.JFrame {
         this.telaDetFornecedor = telaDetForn;
         this.codContato = codCont;
         this.codFornecedor = codfornecedor;
-        this.codPessoaContato = codPessoaCont;        
-        initComponents(); 
+        this.codPessoaContato = codPessoaCont;
+        initComponents();
         CarregaContatosFornecedor();
+        jLabelSetorContato.setVisible(false);
+        jComboBoxSetorContato.setVisible(false);
     }
-    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -79,8 +80,16 @@ public final class AlterarContato extends javax.swing.JFrame {
         jBtbCancelContato = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jLabelEmail1 = new javax.swing.JLabel();
+        jLabelSetorContato = new javax.swing.JLabel();
+        jComboBoxSetorContato = new javax.swing.JComboBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setResizable(false);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosed(java.awt.event.WindowEvent evt) {
+                formWindowClosed(evt);
+            }
+        });
 
         jLabelContato.setText("Contato:");
 
@@ -124,12 +133,16 @@ public final class AlterarContato extends javax.swing.JFrame {
         jLabelEmail1.setFont(new java.awt.Font("Tahoma", 3, 11)); // NOI18N
         jLabelEmail1.setForeground(new java.awt.Color(255, 0, 0));
 
+        jLabelSetorContato.setText("Setor:");
+
+        jComboBoxSetorContato.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Selecione o setor", "Manutenção", "Compras", "Suprimentos", "Projetos", "Engenharia", "Compras/Suprimentos", "Projetos/Engenharia" }));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(46, 46, 46)
+                .addGap(34, 34, 34)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel1)
                     .addGroup(layout.createSequentialGroup()
@@ -140,54 +153,60 @@ public final class AlterarContato extends javax.swing.JFrame {
                         .addComponent(jLabelTelefone)
                         .addGap(14, 14, 14)
                         .addComponent(txtTel, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabelCelular)
-                        .addGap(23, 23, 23)
-                        .addComponent(txtTelCel, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabelEmail)
-                        .addGap(32, 32, 32)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabelEmail1, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 235, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jBtnAltContato)
-                                .addGap(26, 26, 26)
-                                .addComponent(jBtbCancelContato)))))
-                .addContainerGap(61, Short.MAX_VALUE))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                            .addComponent(jBtbCancelContato)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jBtnAltContato))
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jLabelCelular)
+                                .addComponent(jLabelEmail)
+                                .addComponent(jLabelSetorContato))
+                            .addGap(23, 23, 23)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jComboBoxSetorContato, javax.swing.GroupLayout.PREFERRED_SIZE, 235, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 235, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(txtTelCel, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabelEmail1, javax.swing.GroupLayout.PREFERRED_SIZE, 235, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addContainerGap(47, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(33, 33, 33)
                 .addComponent(jLabel1)
-                .addGap(18, 18, 18)
+                .addGap(24, 24, 24)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(3, 3, 3)
                         .addComponent(jLabelContato))
                     .addComponent(txtContato, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(6, 6, 6)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabelTelefone)
                     .addComponent(txtTel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(6, 6, 6)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(3, 3, 3)
                         .addComponent(jLabelCelular))
                     .addComponent(txtTelCel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(6, 6, 6)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabelEmail)
                     .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(10, 10, 10)
                 .addComponent(jLabelEmail1, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabelSetorContato)
+                    .addComponent(jComboBoxSetorContato, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(31, 31, 31)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jBtnAltContato)
                     .addComponent(jBtbCancelContato))
-                .addContainerGap(29, Short.MAX_VALUE))
+                .addContainerGap(19, Short.MAX_VALUE))
         );
 
         pack();
@@ -195,90 +214,176 @@ public final class AlterarContato extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jBtnAltContatoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnAltContatoActionPerformed
-        Telefone tel = new Telefone();
+       
+        if (VerificaCamposContatoCli() || VerificaCamposContatoForn()) {
+            Telefone tel = new Telefone();
 
-        PessoaContato p = new PessoaContato();
+            PessoaContato p = new PessoaContato();
 
-        tel.setTel(txtTel.getText());
-        tel.setCel(txtTelCel.getText());
-        p.setNomeContato(txtContato.getText());
-        ContatosDAO.UpdateTel2(codContato, tel);
-        
-        ContatosDAO.UpdateEmail2(codContato, txtEmail.getText());
-        
-        if (codCliente != 0) {
-            PessoaContatoDAO.UpdatePessoaContato(p, codPessoaContato);
-            telaDetCliente.TabelaContatos();
+            tel.setTel(txtTel.getText());
+            tel.setCel(txtTelCel.getText());
+            p.setNomeContato(txtContato.getText());
+            ContatosDAO.UpdateTel2(codContato, tel);
+
+            ContatosDAO.UpdateEmail2(codContato, txtEmail.getText());
+
+            if (codCliente != 0) {
+                p.setSetorContato(jComboBoxSetorContato.getSelectedItem().toString());
+                PessoaContatoDAO.UpdatePessoaContato(p, codPessoaContato);
+                telaDetCliente.TabelaContatos();
+            }
+
+            if (codFornecedor != 0) {
+                PessoaContatoDAO.UpdatePessoaContFornecedor(p, codPessoaContato);
+                telaDetFornecedor.TabelaContatos();
+            }
+            this.dispose();
+
+        } else {
+            JOptionPane.showMessageDialog(null, "Campo(s) vazio(s)!");
         }
-        
-        if (codFornecedor != 0) {
-            PessoaContatoDAO.UpdatePessoaContFornecedor(p, codPessoaContato);
-            telaDetFornecedor.TabelaContatos();
-        }
-                
-        this.dispose();
     }//GEN-LAST:event_jBtnAltContatoActionPerformed
 
     private void jBtbCancelContatoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtbCancelContatoActionPerformed
-        this.dispose();
+        if (JOptionPane.showConfirmDialog(null, "Tem certeza que deseja sair? Os dados não serão salvos.", "Confirmar Cancelamento", JOptionPane.YES_NO_OPTION) == 0 ) {
+            verificaPagina();
+            this.dispose();
+        }
     }//GEN-LAST:event_jBtbCancelContatoActionPerformed
 
     private void txtEmailFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtEmailFocusLost
         ValidaEmail();
     }//GEN-LAST:event_txtEmailFocusLost
 
+    private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
+        verificaPagina();
+    }//GEN-LAST:event_formWindowClosed
+
+    private boolean VerificaCamposContatoCli() {
+
+        boolean valida = true;
+
+        if (txtContato.getText().trim().equals("")) {
+            valida = false;
+            return valida;
+        }
+
+        if (txtTelCel.getText().trim().equals("")) {
+            valida = false;
+            return valida;
+        }
+
+        if (txtTel.getText().trim().length() != 13) {
+            valida = false;
+            return valida;
+        }
+
+        if (ValidaEmail()) {
+            valida = false;
+            return valida;
+        }
+
+        if (jComboBoxSetorContato.getSelectedIndex() == 0) {
+            valida = false;
+            return valida;
+        }
+
+        return valida;
+    }
+
+    private boolean VerificaCamposContatoForn() {
+
+        boolean valida = true;
+
+        if (txtContato.getText().trim().equals("")) {
+            valida = false;
+            return valida;
+        }
+
+        if (txtTelCel.getText().trim().equals("")) {
+            valida = false;
+            return valida;
+        }
+
+        if (txtTel.getText().trim().length() != 13) {
+            valida = false;
+            return valida;
+        }
+
+        if (ValidaEmail()) {
+            valida = false;
+            return valida;
+        }
+        return valida;
+    }
+
+    private void verificaPagina() {
+
+        if ((this.telaDetCliente != null)) {
+            this.telaDetCliente.setEnabled(true);
+            this.telaDetCliente.toFront();
+            this.telaDetCliente.TabelaContatos();
+
+        } else if (this.telaDetFornecedor != null) {
+            this.telaDetFornecedor.setEnabled(true);
+            this.telaDetFornecedor.toFront();
+            this.telaDetFornecedor.TabelaContatos();
+        }
+    }
+
     public void CarregaContatoCliente() {
-        
-        try { 
+
+        try {
             String Sql = "SELECT * FROM vw_contatos WHERE id_contato = " + codContato + ";";
-            
-            stmt = getConnection().createStatement();  
-               
+
+            stmt = getConnection().createStatement();
+
             ResultSet rs;
-            rs = stmt.executeQuery(Sql);            
-            
-                while(rs.next()){
-                    txtContato.setText(String.valueOf(rs.getObject("contato")));
-                    txtTel.setText(String.valueOf(rs.getObject("telefone")));
-                    txtTelCel.setText(String.valueOf(rs.getObject("celular")));
-                    txtEmail.setText(String.valueOf(rs.getObject("email")));                                                      
-                }
-                    
+            rs = stmt.executeQuery(Sql);
+
+            while (rs.next()) {
+                txtContato.setText(String.valueOf(rs.getObject("contato")));
+                txtTel.setText(String.valueOf(rs.getObject("telefone")));
+                txtTelCel.setText(String.valueOf(rs.getObject("celular")));
+                txtEmail.setText(String.valueOf(rs.getObject("email")));
+            }
+
         } catch (SQLException ex) {
             Logger.getLogger(AlterarContato.class.getName()).log(Level.SEVERE, null, ex);
-            
-        } catch (Exception erro){
+
+        } catch (Exception erro) {
             Logger.getLogger(ExibeCliente.class.getName()).log(Level.SEVERE, null, erro);
-        }          
+        }
     }
-    
+
     public void CarregaContatosFornecedor() {
-        
-        try { 
+
+        try {
             String Sql = "SELECT * FROM vw_contatofornecedor WHERE id_contato = " + codContato + ";";
-            
-            stmt = getConnection().createStatement();  
-               
+
+            stmt = getConnection().createStatement();
+
             ResultSet rs;
-            rs = stmt.executeQuery(Sql);            
-            
-                while(rs.next()) {
-                    txtContato.setText(String.valueOf(rs.getObject("contato")));
-                    txtTel.setText(String.valueOf(rs.getObject("telefone")));
-                    txtTelCel.setText(String.valueOf(rs.getObject("celular")));
-                    txtEmail.setText(String.valueOf(rs.getObject("email")));                                                      
-                }
-                    
+            rs = stmt.executeQuery(Sql);
+
+            while (rs.next()) {
+                txtContato.setText(String.valueOf(rs.getObject("contato")));
+                txtTel.setText(String.valueOf(rs.getObject("telefone")));
+                txtTelCel.setText(String.valueOf(rs.getObject("celular")));
+                txtEmail.setText(String.valueOf(rs.getObject("email")));
+            }
+
         } catch (SQLException ex) {
             Logger.getLogger(AlterarContato.class.getName()).log(Level.SEVERE, null, ex);
-            
-        } catch (Exception erro){
+
+        } catch (Exception erro) {
             Logger.getLogger(ExibeCliente.class.getName()).log(Level.SEVERE, null, erro);
-        }          
+        }
     }
-    
-    
-    public void ValidaEmail() {
+
+    public boolean ValidaEmail() {
+
+        boolean valida = false;
 
         if ((txtEmail.getText().contains("@"))
                 && (txtEmail.getText().contains("."))
@@ -293,32 +398,31 @@ public final class AlterarContato extends javax.swing.JFrame {
                     && (dominio.contains(".")) && (!dominio.contains("@")) && (dominio.indexOf(".")
                     >= 1) && (dominio.lastIndexOf(".") < dominio.length() - 1)) {
 
-                jLabelEmail1.setText("");
+                jLabelEmail.setText("");
 
             } else {
 
-                jLabelEmail1.setText("E-mail Inválido");
-
-                txtEmail.requestFocus();
-
+                jLabelEmail.setText("E-mail Inválido");
+                valida = true;
             }
 
         } else {
 
-            jLabelEmail1.setText("E-mail Inválido");
-
-            txtEmail.requestFocus();
-
+            jLabelEmail.setText("E-mail Inválido");
+            valida = true;
         }
+        return valida;
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBtbCancelContato;
     private javax.swing.JButton jBtnAltContato;
+    private javax.swing.JComboBox jComboBoxSetorContato;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabelCelular;
     private javax.swing.JLabel jLabelContato;
     private javax.swing.JLabel jLabelEmail;
     private javax.swing.JLabel jLabelEmail1;
+    private javax.swing.JLabel jLabelSetorContato;
     private javax.swing.JLabel jLabelTelefone;
     private javax.swing.JTextField txtContato;
     private javax.swing.JTextField txtEmail;

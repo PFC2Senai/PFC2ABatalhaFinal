@@ -5,6 +5,8 @@ import atributos.Equipamento;
 import funcoes.Conexao;
 import funcoes.DetEquipamentoClienteDAO;
 import funcoes.EquipamentoDAO;
+import java.awt.event.FocusAdapter;
+import java.awt.event.FocusEvent;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -22,7 +24,7 @@ import javax.swing.table.DefaultTableModel;
 public class CadastrarEquipCliente extends javax.swing.JFrame {
 
     private int codCliente;
-    
+
     private int codEquipamento;
     private int codModeloEqui;
     private int codDetEquipamento;
@@ -31,20 +33,36 @@ public class CadastrarEquipCliente extends javax.swing.JFrame {
     private String equipamento;
     private String fabricanteEqui;
     private DetalharCliente telaDetCliente;
-    
+
     private PreparedStatement pst;
-    
-    
+
     public CadastrarEquipCliente() {
         initComponents();
     }
-    
+
     public CadastrarEquipCliente(int codCli, DetalharCliente detClie) {
         codCliente = codCli;
         this.telaDetCliente = detClie;
         initComponents();
         carregarComboEquipamento();
-       // ocultaColunaTabelas();
+        combobox();
+        ocultaColunaTabelas();
+        // ocultaColunaTabelas();
+    }
+
+    private void combobox() {
+        //Combobox equipamento
+        uJComboBoxEquipamento.getEditor().getEditorComponent().addFocusListener(new FocusAdapter() {
+            @Override
+            public void focusLost(FocusEvent e) {
+                if (codEquipamento == 0 && uJComboBoxEquipamento.getSelectedIndex() != 0) {
+                    JOptionPane.showMessageDialog(null, "Esse registro não encontra-se cadastrado na base de dados.");
+                   // uJComboBoxEquipamento.getEditor().getEditorComponent().requestFocus();
+                    uJComboBoxEquipamento.setSelectedIndex(0);
+                }
+            }
+        });
+        uJComboBoxEquipamento.setAutocompletar(true);
     }
 
     /**
@@ -58,7 +76,7 @@ public class CadastrarEquipCliente extends javax.swing.JFrame {
         bindingGroup = new org.jdesktop.beansbinding.BindingGroup();
 
         jPanel5 = new javax.swing.JPanel();
-        btnCadCliente = new javax.swing.JButton();
+        btnCadEquipCliente = new javax.swing.JButton();
         jPanel6 = new javax.swing.JPanel();
         jLabel17 = new javax.swing.JLabel();
         jBtnRemoveEquipamento = new javax.swing.JButton();
@@ -70,17 +88,24 @@ public class CadastrarEquipCliente extends javax.swing.JFrame {
         jLabel38 = new javax.swing.JLabel();
         jComboBoxFabricanteEquip = new javax.swing.JComboBox();
         uJComboBoxEquipamento = new componentes.UJComboBox();
+        jBtnNovoEquipamento = new javax.swing.JButton();
         btnCancelar = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosed(java.awt.event.WindowEvent evt) {
+                formWindowClosed(evt);
+            }
+        });
 
         jPanel5.setBackground(new java.awt.Color(223, 237, 253));
 
-        btnCadCliente.setText("Cadastrar");
-        btnCadCliente.addActionListener(new java.awt.event.ActionListener() {
+        btnCadEquipCliente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/disk.png"))); // NOI18N
+        btnCadEquipCliente.setText("Cadastrar");
+        btnCadEquipCliente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCadClienteActionPerformed(evt);
+                btnCadEquipClienteActionPerformed(evt);
             }
         });
 
@@ -163,6 +188,14 @@ public class CadastrarEquipCliente extends javax.swing.JFrame {
             }
         });
 
+        jBtnNovoEquipamento.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/maquina02.png"))); // NOI18N
+        jBtnNovoEquipamento.setText("Novo Equipamento");
+        jBtnNovoEquipamento.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnNovoEquipamentoActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
         jPanel6Layout.setHorizontalGroup(
@@ -186,7 +219,9 @@ public class CadastrarEquipCliente extends javax.swing.JFrame {
                                         .addComponent(jComboBoxModeloEquip, javax.swing.GroupLayout.PREFERRED_SIZE, 264, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addGroup(jPanel6Layout.createSequentialGroup()
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(uJComboBoxEquipamento, javax.swing.GroupLayout.PREFERRED_SIZE, 261, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                                        .addComponent(uJComboBoxEquipamento, javax.swing.GroupLayout.PREFERRED_SIZE, 261, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                        .addGap(18, 18, 18)
+                        .addComponent(jBtnNovoEquipamento))
                     .addGroup(jPanel6Layout.createSequentialGroup()
                         .addGap(23, 23, 23)
                         .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -198,10 +233,11 @@ public class CadastrarEquipCliente extends javax.swing.JFrame {
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel6Layout.createSequentialGroup()
-                .addGap(23, 23, 23)
+                .addGap(22, 22, 22)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel17)
-                    .addComponent(uJComboBoxEquipamento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(uJComboBoxEquipamento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jBtnNovoEquipamento))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel37)
@@ -210,7 +246,7 @@ public class CadastrarEquipCliente extends javax.swing.JFrame {
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel38)
                     .addComponent(jComboBoxFabricanteEquip, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 22, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jBtbIncluirEquipamento)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -219,7 +255,13 @@ public class CadastrarEquipCliente extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
+        btnCancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/stop2.png"))); // NOI18N
         btnCancelar.setText("Cancelar");
+        btnCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCancelarActionPerformed(evt);
+            }
+        });
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel1.setText("Cadastrar Equipamento do Cliente");
@@ -229,18 +271,16 @@ public class CadastrarEquipCliente extends javax.swing.JFrame {
         jPanel5Layout.setHorizontalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel5Layout.createSequentialGroup()
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGap(32, 32, 32)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel5Layout.createSequentialGroup()
-                        .addGap(588, 588, 588)
                         .addComponent(btnCancelar)
-                        .addGap(31, 31, 31)
-                        .addComponent(btnCadCliente))
-                    .addGroup(jPanel5Layout.createSequentialGroup()
-                        .addGap(32, 32, 32)
-                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 247, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(34, Short.MAX_VALUE))
+                        .addGap(559, 559, 559)
+                        .addComponent(btnCadEquipCliente))
+                    .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 247, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(42, Short.MAX_VALUE))
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -251,7 +291,7 @@ public class CadastrarEquipCliente extends javax.swing.JFrame {
                 .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnCadCliente)
+                    .addComponent(btnCadEquipCliente)
                     .addComponent(btnCancelar))
                 .addGap(19, 19, 19))
         );
@@ -260,7 +300,7 @@ public class CadastrarEquipCliente extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 821, Short.MAX_VALUE)
+            .addGap(0, 829, Short.MAX_VALUE)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -268,7 +308,7 @@ public class CadastrarEquipCliente extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 512, Short.MAX_VALUE)
+            .addGap(0, 518, Short.MAX_VALUE)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -278,34 +318,41 @@ public class CadastrarEquipCliente extends javax.swing.JFrame {
         bindingGroup.bind();
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnCadClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadClienteActionPerformed
+    private void btnCadEquipClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadEquipClienteActionPerformed
         
-        DetEquipamentoCliente detEqCli = new DetEquipamentoCliente();
-        
-        for (int j = 0; j < jTableEquipamento.getRowCount(); j++) {
-  
-            detEqCli.setCodEquipamento(Integer.parseInt(jTableEquipamento.getValueAt(j, 0).toString()));
-            detEqCli.setCodCliente(codCliente);
+        if (VerificaEquipamentoTable() == true) {
+            DetEquipamentoCliente detEqCli = new DetEquipamentoCliente();
 
-            DetEquipamentoClienteDAO.CadEquipCliente(detEqCli);
+            for (int j = 0; j < jTableEquipamento.getRowCount(); j++) {
+
+                detEqCli.setCodEquipamento(Integer.parseInt(jTableEquipamento.getValueAt(j, 0).toString()));
+                detEqCli.setCodCliente(codCliente);
+
+                DetEquipamentoClienteDAO.CadEquipCliente(detEqCli);
+            }
+            telaDetCliente.TabelaEquipamentosCli();
+            JOptionPane.showMessageDialog(null, "Cadastrado com sucesso!");
+            this.dispose();
         }
-        
-    }//GEN-LAST:event_btnCadClienteActionPerformed
+    }//GEN-LAST:event_btnCadEquipClienteActionPerformed
 
     private void jBtnRemoveEquipamentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnRemoveEquipamentoActionPerformed
-
-        DefaultTableModel dtm = (DefaultTableModel) jTableEquipamento.getModel();
-        int linha = jTableEquipamento.getSelectedRow();
-
-        if (linha != -1) {
-            dtm.removeRow(linha);
+        if (JOptionPane.showConfirmDialog(null, "Deseja excluir o registro?", "Confirmar Exclusão", JOptionPane.YES_NO_OPTION) == 0 ) {
+            DefaultTableModel dtm = (DefaultTableModel) jTableEquipamento.getModel();
+            int linha = jTableEquipamento.getSelectedRow();
+            if (linha != -1) {
+                dtm.removeRow(linha);
+            }
         }
     }//GEN-LAST:event_jBtnRemoveEquipamentoActionPerformed
 
     private void jBtbIncluirEquipamentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtbIncluirEquipamentoActionPerformed
-        TabelaEquipamento();
+        if (VerificaCampos() == true) {
+            TabelaEquipamento();
+        }
     }//GEN-LAST:event_jBtbIncluirEquipamentoActionPerformed
 
     private void jComboBoxModeloEquipItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jComboBoxModeloEquipItemStateChanged
@@ -341,7 +388,9 @@ public class CadastrarEquipCliente extends javax.swing.JFrame {
         codEquipamento = 0;
         idEquipamentoComboBox();
         populaComboBoxModeloEqui();
-        equipamento = uJComboBoxEquipamento.getSelectedItem().toString();
+        if (uJComboBoxEquipamento.getSelectedItem() != null) {
+            equipamento = uJComboBoxEquipamento.getSelectedItem().toString();
+        }
     }//GEN-LAST:event_uJComboBoxEquipamentoItemStateChanged
 
     private void uJComboBoxEquipamentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_uJComboBoxEquipamentoActionPerformed
@@ -350,6 +399,51 @@ public class CadastrarEquipCliente extends javax.swing.JFrame {
             equipamento = uJComboBoxEquipamento.getSelectedItem().toString();
         }
     }//GEN-LAST:event_uJComboBoxEquipamentoActionPerformed
+
+    private void jBtnNovoEquipamentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnNovoEquipamentoActionPerformed
+        this.setEnabled(false);
+        new CadastrarEquipamento(this).setVisible(true);
+    }//GEN-LAST:event_jBtnNovoEquipamentoActionPerformed
+
+    private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
+        if (JOptionPane.showConfirmDialog(null, "Tem certeza que deseja sair? Os dados não serão salvos.", "Confirmar Cancelamento", JOptionPane.YES_NO_OPTION) == 0 ) {
+            verificaPagina();
+            this.dispose();
+        }
+    }//GEN-LAST:event_btnCancelarActionPerformed
+
+    private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
+        verificaPagina();
+    }//GEN-LAST:event_formWindowClosed
+
+    private boolean VerificaEquipamentoTable() {
+
+        boolean valida = true;
+
+        if (jTableEquipamento.getRowCount() < 1) {
+            JOptionPane.showMessageDialog(null, "Adicione um equipamento na Tabela!");
+            valida = false;
+            return valida;
+        }
+        return valida;
+    }
+    
+    private boolean VerificaCampos() {
+
+        boolean valida = true;
+       
+        if (uJComboBoxEquipamento.getSelectedIndex() == 0) {
+            JOptionPane.showMessageDialog(null, "Campo(s) vazio(s)!");
+            valida = false;
+            return valida;
+        }
+        
+        return valida;
+    }
+
+    public void ComboEquipamento(String item) {
+        uJComboBoxEquipamento.setSelectedItem(item);
+    }
 
     public void TabelaEquipamento() {
 
@@ -372,19 +466,19 @@ public class CadastrarEquipCliente extends javax.swing.JFrame {
         }
     }
 
-    private void carregarComboEquipamento() {
+    public void carregarComboEquipamento() {
 
-     //   uJComboBoxEquipamento.clear();
+        uJComboBoxEquipamento.removeAllItems();
 
         ArrayList<Equipamento> equipamentos = new ArrayList<Equipamento>();
         equipamentos = EquipamentoDAO.ListarEquipamentos();
 
+        uJComboBoxEquipamento.addItem("Selecione o equipamento");
         for (Equipamento equi : equipamentos) {
             uJComboBoxEquipamento.addItem(equi.getEquipamento(), equi);
         }
     }
 
-    
     private void populaComboBoxModeloEqui() {
 
         Connection conexao = Conexao.getConnection();
@@ -408,7 +502,7 @@ public class CadastrarEquipCliente extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, ex);
         }
     }
-    
+
     private void idModeloEquiComboBox() {
 
         Connection conexao = Conexao.getConnection();
@@ -427,7 +521,7 @@ public class CadastrarEquipCliente extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, ex);
         }
     }
-    
+
     private void idEquipamentoComboBox() {
 
         Connection conexao = Conexao.getConnection();
@@ -445,7 +539,7 @@ public class CadastrarEquipCliente extends javax.swing.JFrame {
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, ex);
         }
-    }    
+    }
 
     private void populaComboBoxFabricanteEquip() {
 
@@ -467,7 +561,7 @@ public class CadastrarEquipCliente extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, ex);
         }
     }
-    
+
     private void idFabricanteEquiComboBox() {
 
         Connection conexao = Conexao.getConnection();
@@ -486,9 +580,8 @@ public class CadastrarEquipCliente extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, ex);
         }
     }
-    
-    private void ocultaColunaTabelas() {
-//        
+
+    private void ocultaColunaTabelas() {        
         //oculta coluna equipamento
         jTableEquipamento.getColumnModel().getColumn(0).setMaxWidth(0);
         jTableEquipamento.getColumnModel().getColumn(0).setMinWidth(0);
@@ -505,11 +598,20 @@ public class CadastrarEquipCliente extends javax.swing.JFrame {
         jTableEquipamento.getTableHeader().getColumnModel().getColumn(2).setMaxWidth(0);
         jTableEquipamento.getTableHeader().getColumnModel().getColumn(2).setMinWidth(0);
     }
+
+    private void verificaPagina() {
+
+        if ((this.telaDetCliente != null)) {
+            this.telaDetCliente.setEnabled(true);
+            this.telaDetCliente.toFront();
+        }
+    } 
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnCadCliente;
+    private javax.swing.JButton btnCadEquipCliente;
     private javax.swing.JButton btnCancelar;
     private javax.swing.JButton jBtbIncluirEquipamento;
+    private javax.swing.JButton jBtnNovoEquipamento;
     private javax.swing.JButton jBtnRemoveEquipamento;
     private javax.swing.JComboBox jComboBoxFabricanteEquip;
     private javax.swing.JComboBox jComboBoxModeloEquip;

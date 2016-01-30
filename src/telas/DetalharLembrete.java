@@ -1,6 +1,5 @@
 package telas;
 
-
 import atributos.Cliente;
 import atributos.Lembrete;
 import funcoes.ClienteDAO;
@@ -15,13 +14,12 @@ import javax.swing.JOptionPane;
 import static telas.DetalharCliente.GetIdLembrete;
 import static telas.ExibeCliente.GetIndice;
 
-
-
 public class DetalharLembrete extends javax.swing.JFrame {
 
     private DetalharCliente detalharCliente;
     private PreparedStatement pst;
     private int codCli;
+
     /**
      * Creates new form DetalheLembrete
      */
@@ -31,23 +29,22 @@ public class DetalharLembrete extends javax.swing.JFrame {
         DesabilitarCampos();
         DadosEmpresa();
     }
-    
+
     public DetalharLembrete(DetalharCliente detalharCliente) {
         this();
-        this.detalharCliente = detalharCliente; 
+        this.detalharCliente = detalharCliente;
         codCli = GetIndice(); //GetIndice está no form exibecliente, retorna o id do cliente selecionado na tabela
         DadosEmpresa();
     }
-    
+
     private void DesabilitarCampos() {
-        
+
         jBtnAlterarLembrete.setVisible(false);
         txtDataLembrete.setVisible(false);
         txtDescricaoLembrete.setEnabled(false);
         txtHoraLembrete.setVisible(false);
         jBtnCancel.setVisible(false);
     }
-   
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -83,6 +80,7 @@ public class DetalharLembrete extends javax.swing.JFrame {
         jButton1.setText("jButton1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Lembrete");
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosed(java.awt.event.WindowEvent evt) {
@@ -118,6 +116,7 @@ public class DetalharLembrete extends javax.swing.JFrame {
 
         jLbDataLembrete.setText("Exibe Data");
 
+        jBtnExcluir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/excluir.png"))); // NOI18N
         jBtnExcluir.setText("Excluir");
         jBtnExcluir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -125,6 +124,7 @@ public class DetalharLembrete extends javax.swing.JFrame {
             }
         });
 
+        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/sair.gif"))); // NOI18N
         jButton2.setText("Sair");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -135,6 +135,7 @@ public class DetalharLembrete extends javax.swing.JFrame {
         jLabel5.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel5.setText("Empresa:");
 
+        jBtnAlterarLembrete.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/ok.png"))); // NOI18N
         jBtnAlterarLembrete.setText("Salvar");
         jBtnAlterarLembrete.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -151,6 +152,7 @@ public class DetalharLembrete extends javax.swing.JFrame {
         jLbHoraLembrete.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLbHoraLembrete.setText("Exibe Hora");
 
+        jBtnCancel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/cancelar.png"))); // NOI18N
         jBtnCancel.setText("Cancelar");
         jBtnCancel.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -158,6 +160,7 @@ public class DetalharLembrete extends javax.swing.JFrame {
             }
         });
 
+        jBtnEditarLembrete.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/editar.png"))); // NOI18N
         jBtnEditarLembrete.setText("Editar");
         jBtnEditarLembrete.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -170,52 +173,41 @@ public class DetalharLembrete extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGap(21, 21, 21)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jButton2)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(jPanel1Layout.createSequentialGroup()
-                            .addGap(30, 30, 30)
-                            .addComponent(jLabel1))
-                        .addGroup(jPanel1Layout.createSequentialGroup()
-                            .addGap(30, 30, 30)
-                            .addComponent(jLabel4)
-                            .addGap(19, 19, 19)
-                            .addComponent(jLabCodigo))
-                        .addGroup(jPanel1Layout.createSequentialGroup()
-                            .addGap(30, 30, 30)
-                            .addComponent(jLabel5)
-                            .addGap(10, 10, 10)
-                            .addComponent(jLabEmpresa, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(jPanel1Layout.createSequentialGroup()
-                            .addGap(30, 30, 30)
-                            .addComponent(jLabel2)
-                            .addGap(31, 31, 31)
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(txtDataLembrete, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jLbDataLembrete, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGroup(jPanel1Layout.createSequentialGroup()
-                            .addGap(30, 30, 30)
-                            .addComponent(jLabel3)
-                            .addGap(31, 31, 31)
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jLbHoraLembrete, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(txtHoraLembrete, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGroup(jPanel1Layout.createSequentialGroup()
-                            .addGap(30, 30, 30)
-                            .addComponent(jLabel6))
-                        .addGroup(jPanel1Layout.createSequentialGroup()
-                            .addGap(30, 30, 30)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 342, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(jPanel1Layout.createSequentialGroup()
-                            .addGap(30, 30, 30)
-                            .addComponent(jBtnEditarLembrete)
-                            .addGap(9, 9, 9)
-                            .addComponent(jBtnAlterarLembrete)
-                            .addGap(7, 7, 7)
-                            .addComponent(jBtnCancel)
-                            .addGap(65, 65, 65)
-                            .addComponent(jBtnExcluir))))
-                .addContainerGap(33, Short.MAX_VALUE))
+                    .addComponent(jLabel1)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel4)
+                        .addGap(19, 19, 19)
+                        .addComponent(jLabCodigo))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel5)
+                        .addGap(10, 10, 10)
+                        .addComponent(jLabEmpresa, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel2)
+                        .addGap(31, 31, 31)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLbDataLembrete, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtDataLembrete, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(48, 48, 48)
+                        .addComponent(jLabel3)
+                        .addGap(21, 21, 21)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLbHoraLembrete, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtHoraLembrete, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(jLabel6)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 372, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jBtnEditarLembrete)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jBtnCancel)
+                        .addGap(10, 10, 10)
+                        .addComponent(jBtnAlterarLembrete)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jBtnExcluir)))
+                .addContainerGap(23, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -226,34 +218,35 @@ public class DetalharLembrete extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel5)
-                    .addComponent(jLabEmpresa, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(24, 24, 24)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtDataLembrete, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLbDataLembrete, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(20, 20, 20)
+                .addGap(11, 11, 11)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabEmpresa, javax.swing.GroupLayout.DEFAULT_SIZE, 20, Short.MAX_VALUE)
+                    .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(txtHoraLembrete, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLbHoraLembrete, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(24, 24, 24)
-                .addComponent(jLabel6)
+                    .addComponent(jLbHoraLembrete, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtHoraLembrete, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(1, 1, 1)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLbDataLembrete, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtDataLembrete, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(25, 25, 25)
+                .addComponent(jLabel6)
+                .addGap(11, 11, 11)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(30, 30, 30)
+                .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jBtnEditarLembrete)
-                    .addComponent(jBtnAlterarLembrete)
                     .addComponent(jBtnCancel)
-                    .addComponent(jBtnExcluir))
-                .addGap(18, 18, 18)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jBtnExcluir)
+                        .addComponent(jBtnAlterarLembrete)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 39, Short.MAX_VALUE)
                 .addComponent(jButton2)
-                .addContainerGap(22, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -273,81 +266,86 @@ public class DetalharLembrete extends javax.swing.JFrame {
     private void CarregaLembrete() {
 
         ArrayList<Lembrete> lembretes = new ArrayList<Lembrete>();
-        lembretes = LembreteDAO.CarregaLembrete(GetIdLembrete());       
+        lembretes = LembreteDAO.CarregaLembrete(GetIdLembrete());
 
-            for (Lembrete lem : lembretes) {
+        for (Lembrete lem : lembretes) {
 
-                jLbDataLembrete.setText(String.valueOf(lem.getDataLembrete()));
-                jLbHoraLembrete.setText(String.valueOf(lem.getHora()));
-                txtDescricaoLembrete.setText(lem.getDescricao());
-            }
+            jLbDataLembrete.setText(String.valueOf(lem.getDataLembrete()));
+            jLbHoraLembrete.setText(String.valueOf(lem.getHora()));
+            txtDescricaoLembrete.setText(lem.getDescricao());
+        }
     }
-    
+
     private void DadosEmpresa() {
 
         ArrayList<Cliente> cliente = new ArrayList<Cliente>();
-        cliente = ClienteDAO.CarregaNomeCliente(codCli);       
+        cliente = ClienteDAO.CarregaNomeCliente(codCli);
 
-            for (Cliente cli : cliente) {
+        for (Cliente cli : cliente) {
 
-                jLabCodigo.setText(String.valueOf(cli.getId()));
-                jLabEmpresa.setText(cli.getEmpresa());
-            }
+            jLabCodigo.setText(String.valueOf(cli.getId()));
+            jLabEmpresa.setText(cli.getEmpresa());
+        }
     }
-    
+
     private void jBtnEditarLembreteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnEditarLembreteActionPerformed
-        
+
+        txtDataLembrete.requestFocus();
         txtHoraLembrete.setText(jLbHoraLembrete.getText());
-        
         Date d = ConverterData(jLbDataLembrete.getText());
         txtDataLembrete.setDate(d);
-        txtDataLembrete.setVisible(true);        
+        txtDataLembrete.setVisible(true);
         txtHoraLembrete.setVisible(true);
-        jLbDataLembrete.setVisible(false);       
-        jLbHoraLembrete.setVisible(false);             
+        jLbDataLembrete.setVisible(false);
+        jLbHoraLembrete.setVisible(false);
         jBtnAlterarLembrete.setVisible(true);
         jBtnEditarLembrete.setVisible(false);
-        txtDescricaoLembrete.setEnabled(true);  
-        jBtnCancel.setVisible(true);     
-        
+        txtDescricaoLembrete.setEnabled(true);
+        jBtnCancel.setVisible(true);
+
     }//GEN-LAST:event_jBtnEditarLembreteActionPerformed
 
     private void jBtnAlterarLembreteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnAlterarLembreteActionPerformed
-               
-        try {
-            Lembrete lembrete = new Lembrete();
-            
-            lembrete.setDataLembrete(FormataData(txtDataLembrete.getDate()));            
-            lembrete.setHora(FuncoesDiversas.ConverterHora(txtHoraLembrete.getText()));
-            lembrete.setDescricao(txtDescricaoLembrete.getText());                    
-            lembrete.setCodCliente(ExibeCliente.GetIndice());
-            LembreteDAO.UpdateLembrete(lembrete, GetIdLembrete());                       
-            
-            jLbHoraLembrete.setVisible(true);
-            jLbDataLembrete.setVisible(true);
-            CarregaLembrete();
-            DesabilitarCampos();    
-            jBtnEditarLembrete.setVisible(true);
-            
-            this.detalharCliente.TabelaLembrete2(codCli);
-        }catch (Exception e){
-            JOptionPane.showMessageDialog(null, "Campo data Inválido!");
-        }        
+        if (VerificaCampos() == true) {
+            try {
+                Lembrete lembrete = new Lembrete();
+
+                lembrete.setDataLembrete(FormataData(txtDataLembrete.getDate()));
+                lembrete.setHora(FuncoesDiversas.ConverterHora(txtHoraLembrete.getText()));
+                lembrete.setDescricao(txtDescricaoLembrete.getText());
+                lembrete.setCodCliente(ExibeCliente.GetIndice());
+                LembreteDAO.UpdateLembrete(lembrete, GetIdLembrete());
+
+                jLbHoraLembrete.setVisible(true);
+                jLbDataLembrete.setVisible(true);
+                CarregaLembrete();
+                DesabilitarCampos();
+                jBtnEditarLembrete.setVisible(true);
+
+                this.detalharCliente.TabelaLembrete2(codCli);
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, "Campo data Inválido!");
+            }
+        }
     }//GEN-LAST:event_jBtnAlterarLembreteActionPerformed
-                                                     
+
 
     private void jBtnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnExcluirActionPerformed
-        LembreteDAO.ExcluirLembrete(GetIdLembrete());
-        this.detalharCliente.TabelaLembrete2(codCli);
-        this.dispose();
+        if (JOptionPane.showConfirmDialog(null, "Deseja excluir o registro?", "Confirmar Exclusão", JOptionPane.YES_NO_OPTION) == 0) {
+            LembreteDAO.ExcluirLembrete(GetIdLembrete());
+            this.detalharCliente.TabelaLembrete2(codCli);
+            this.dispose();
+        }
     }//GEN-LAST:event_jBtnExcluirActionPerformed
 
     private void jBtnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnCancelActionPerformed
-        jLbHoraLembrete.setVisible(true);
-        jLbDataLembrete.setVisible(true);
-        CarregaLembrete();
-        DesabilitarCampos();    
-        jBtnEditarLembrete.setVisible(true);
+        if (JOptionPane.showConfirmDialog(null, "Cancelar alteração?", "Confirmar Cancelamento", JOptionPane.YES_NO_OPTION) == 0) {
+            jLbHoraLembrete.setVisible(true);
+            jLbDataLembrete.setVisible(true);
+            CarregaLembrete();
+            DesabilitarCampos();
+            jBtnEditarLembrete.setVisible(true);
+        }
     }//GEN-LAST:event_jBtnCancelActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -364,7 +362,31 @@ public class DetalharLembrete extends javax.swing.JFrame {
         this.detalharCliente.toFront();
     }//GEN-LAST:event_formWindowClosed
 
-    
+    private boolean VerificaCampos() {
+
+        boolean valida = true;
+
+        if (txtDataLembrete.getDate() == null) {
+            JOptionPane.showMessageDialog(null, "Campo(s) vazio(s)!");
+            valida = false;
+            return valida;
+        }
+
+        if (txtHoraLembrete.getText().trim().equals(":")) {
+            JOptionPane.showMessageDialog(null, "Campo(s) vazio(s)!");
+            valida = false;
+            return valida;
+        }
+        
+        if (txtDescricaoLembrete.getText().trim().equals("")) {
+            JOptionPane.showMessageDialog(null, "Campo(s) vazio(s)!");
+            valida = false;
+            return valida;
+        }
+
+        return valida;
+    }
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBtnAlterarLembrete;
     private javax.swing.JButton jBtnCancel;

@@ -5,6 +5,7 @@ import atributos.Fornecedor;
 import atributos.PessoaContato;
 import atributos.Telefone;
 import static atributos.Usuario.idUsuario;
+import funcoes.AuditoriaDAO;
 import funcoes.CarregaCEP;
 import funcoes.ContatosDAO;
 import funcoes.FornecedorDAO;
@@ -20,6 +21,9 @@ public class CadastrarFornecedor extends javax.swing.JFrame {
 
     private CadastrarProduto telaCadastrarProduto;
     private CadastrarFornecedor telaForn;
+    private String descricaoAudit;
+    private Menu telaMenu;
+    private ExibeFornecedor telaExibeForn;
 
     /**
      * Creates new form CadastrarFornecedor
@@ -47,6 +51,18 @@ public class CadastrarFornecedor extends javax.swing.JFrame {
         telaForn = this;
         initComponents();
     }
+    
+    public CadastrarFornecedor(Menu menu) {
+        this.telaMenu = menu;
+        telaForn = this;
+        initComponents();
+    }
+    
+    public CadastrarFornecedor(ExibeFornecedor exibeForn) {
+        this.telaExibeForn = exibeForn;
+        telaForn = this;
+        initComponents();
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -62,7 +78,6 @@ public class CadastrarFornecedor extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         btnCadFornecedor = new javax.swing.JButton();
         btnCancelar = new javax.swing.JButton();
-        btnLimpar = new javax.swing.JButton();
         lblCodigo = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         txtNumero = new javax.swing.JTextField();
@@ -98,6 +113,7 @@ public class CadastrarFornecedor extends javax.swing.JFrame {
         jLabelEmail = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setResizable(false);
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosed(java.awt.event.WindowEvent evt) {
                 formWindowClosed(evt);
@@ -109,6 +125,7 @@ public class CadastrarFornecedor extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel1.setText("Cadastrar fornecedor");
 
+        btnCadFornecedor.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/disk.png"))); // NOI18N
         btnCadFornecedor.setText("Cadastrar");
         btnCadFornecedor.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -116,6 +133,7 @@ public class CadastrarFornecedor extends javax.swing.JFrame {
             }
         });
 
+        btnCancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/stop2.png"))); // NOI18N
         btnCancelar.setText("Cancelar");
         btnCancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -123,15 +141,8 @@ public class CadastrarFornecedor extends javax.swing.JFrame {
             }
         });
 
-        btnLimpar.setText("Limpar");
-        btnLimpar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnLimparActionPerformed(evt);
-            }
-        });
-
         jPanel2.setBackground(new java.awt.Color(223, 237, 253));
-        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Dados Gerais"));
+        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Dados Gerais", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 2, 11))); // NOI18N
 
         jLabel14.setText("Cidade:");
 
@@ -163,7 +174,7 @@ public class CadastrarFornecedor extends javax.swing.JFrame {
         txtPais.setText("Brasil");
 
         jBtnCarregaCep.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/pesquisar.gif"))); // NOI18N
-        jBtnCarregaCep.setText("Carrega CEP");
+        jBtnCarregaCep.setText("Buscar");
         jBtnCarregaCep.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jBtnCarregaCepActionPerformed(evt);
@@ -253,7 +264,7 @@ public class CadastrarFornecedor extends javax.swing.JFrame {
         );
 
         jPanel3.setBackground(new java.awt.Color(223, 237, 253));
-        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder("Contatos"));
+        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Contatos", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 2, 11))); // NOI18N
 
         jLabel5.setText("Contato:");
 
@@ -375,7 +386,7 @@ public class CadastrarFornecedor extends javax.swing.JFrame {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jBtnOutroContato)
                     .addComponent(jLabelEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(13, 13, 13)
                 .addComponent(jBtnRemoverContato)
@@ -398,8 +409,6 @@ public class CadastrarFornecedor extends javax.swing.JFrame {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(btnCancelar)
-                                .addGap(36, 36, 36)
-                                .addComponent(btnLimpar)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(btnCadFornecedor))
                             .addGroup(jPanel1Layout.createSequentialGroup()
@@ -423,12 +432,10 @@ public class CadastrarFornecedor extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnCadFornecedor)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(btnCancelar)
-                        .addComponent(btnLimpar)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(btnCadFornecedor, javax.swing.GroupLayout.DEFAULT_SIZE, 32, Short.MAX_VALUE)
+                    .addComponent(btnCancelar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(27, 27, 27))
         );
 
@@ -451,175 +458,238 @@ public class CadastrarFornecedor extends javax.swing.JFrame {
 
     private void btnCadFornecedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadFornecedorActionPerformed
 
-        if (FornecedorDAO.VerificarFornecedor(txtFornecedor.getText()) == false) {
+        if (VerificaCampos() == true) {
+            if (FornecedorDAO.VerificarFornecedor(txtFornecedor.getText()) == false) {
 
-            Fornecedor forn = new Fornecedor();
-            Telefone tel = new Telefone();
-            Endereco endereco = new Endereco();
-            PessoaContato pContato = new PessoaContato();
-            String email;
+                Fornecedor forn = new Fornecedor();
+                Telefone tel = new Telefone();
+                Endereco endereco = new Endereco();
+                PessoaContato pContato = new PessoaContato();
+                String email;
 
-            forn.setFornecedor(txtFornecedor.getText());
-            forn.setCodUsuario(idUsuario());
-            tel.setTel(txtTel01.getText());
-            tel.setCel(txtTelCel.getText());
+                forn.setFornecedor(txtFornecedor.getText());
+                forn.setCodUsuario(idUsuario());
+                tel.setTel(txtTel01.getText());
+                tel.setCel(txtTelCel.getText());
 
-            int i = ContatosDAO.CadContato();
+                int i = ContatosDAO.CadContato();
 
-            forn.setCodContato(i);
+                forn.setCodContato(i);
 
-            int codForn = FornecedorDAO.CadFornecedor(forn);
+                int codForn = FornecedorDAO.CadFornecedor(forn);
 
-            endereco.setPais(txtPais.getText());
-            endereco.setCep(txtCep.getText());
-            endereco.setRua(txtRua.getText());
-            endereco.setNumero(txtNumero.getText());
-            endereco.setBairro(txtBairro.getText());
-            endereco.setCidade(txtCidade.getText());
-            endereco.setEstado(txtEstado.getText());
-            endereco.setIdContato(i);
+                endereco.setPais(txtPais.getText());
+                endereco.setCep(txtCep.getText());
+                endereco.setRua(txtRua.getText());
+                endereco.setNumero(txtNumero.getText());
+                endereco.setBairro(txtBairro.getText());
+                endereco.setCidade(txtCidade.getText());
+                endereco.setEstado(txtEstado.getText());
+                endereco.setIdContato(i);
 
-            ContatosDAO.CadEndereco(endereco);
+                ContatosDAO.CadEndereco(endereco);
 
-            for (int j = 0; j < jTableContatos.getRowCount(); j++) {
+                for (int j = 0; j < jTableContatos.getRowCount(); j++) {
 
-                pContato.setNomeContato(jTableContatos.getValueAt(j, 0).toString());
-                tel.setTel(jTableContatos.getValueAt(j, 1).toString());
-                tel.setCel(jTableContatos.getValueAt(j, 2).toString());
-                email = jTableContatos.getValueAt(j, 3).toString();
+                    pContato.setNomeContato(jTableContatos.getValueAt(j, 0).toString());
+                    tel.setTel(jTableContatos.getValueAt(j, 1).toString());
+                    tel.setCel(jTableContatos.getValueAt(j, 2).toString());
+                    email = jTableContatos.getValueAt(j, 3).toString();
 
-                int codContato = ContatosDAO.CadContato();
+                    int codContato = ContatosDAO.CadContato();
 
-                ContatosDAO.CadTel(codContato, tel);
-                ContatosDAO.CadEmail(codContato, email);
-                pContato.setCodTabEstrangeira(codForn);
-                pContato.setCodContato(codContato);
+                    ContatosDAO.CadTel(codContato, tel);
+                    ContatosDAO.CadEmail(codContato, email);
+                    pContato.setCodTabEstrangeira(codForn);
+                    pContato.setCodContato(codContato);
 
-                PessoaContatoDAO.CadPesContatoFornecedor(pContato);
+                    PessoaContatoDAO.CadPesContatoFornecedor(pContato);
+                }
+                descricaoAudit = "Fornecedor " + forn.getFornecedor() + " foi cadastrado.";
+                AuditoriaDAO.CadDetAuditoria(descricaoAudit);
+                limparCampos();
+                
+                JOptionPane.showMessageDialog(null, "Cadastrado com sucesso!");
+                
+                if (JOptionPane.showConfirmDialog(null, "Deseja continuar cadastrando?", "Confirmar Cadastro", JOptionPane.YES_NO_OPTION) == 1) {
+                    if (telaExibeForn!= null) {
+                        this.telaExibeForn.TabelaFornecedor("select  * from vw_fornecedores;");
+                    }                   
+                    verificaPagina();
+                    this.dispose();
+                } else {
+                    txtFornecedor.requestFocus();
+                }
+            } else {
+                JOptionPane.showMessageDialog(this, "Fornecedor ja cadastrado");
             }
-
-            limparCampos();
-        } else {
-            JOptionPane.showMessageDialog(this, "Fornecedor ja cadastrado");
         }
     }//GEN-LAST:event_btnCadFornecedorActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
-        this.dispose();
+        if (JOptionPane.showConfirmDialog(null, "Tem certeza que deseja sair? Os dados não serão salvos.", "Confirmar Cancelamento", JOptionPane.YES_NO_OPTION) == 0) {
+            verificaPagina();
+            this.dispose();
+        }
     }//GEN-LAST:event_btnCancelarActionPerformed
 
-    private void btnLimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimparActionPerformed
-        limparCampos();
-    }//GEN-LAST:event_btnLimparActionPerformed
-
     private void jBtnOutroContatoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnOutroContatoActionPerformed
-
-        TabelaContatos();
+        if (VerificaCamposContato()) {
+            TabelaContatos();
+        } else {
+            JOptionPane.showMessageDialog(null, "Campo(s) vazio(s)!");
+        }
     }//GEN-LAST:event_jBtnOutroContatoActionPerformed
 
     private void jBtnRemoverContatoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnRemoverContatoActionPerformed
+        if (JOptionPane.showConfirmDialog(null, "Deseja excluir o registro?", "Confirmar Exclusão", JOptionPane.YES_NO_OPTION) == 0) {
+            DefaultTableModel dtm = (DefaultTableModel) jTableContatos.getModel();
+            int linha = jTableContatos.getSelectedRow();
 
-        DefaultTableModel dtm = (DefaultTableModel) jTableContatos.getModel();
-        int linha = jTableContatos.getSelectedRow();
-
-        if (linha != -1) {
-            dtm.removeRow(linha);
+            if (linha != -1) {
+                dtm.removeRow(linha);
+            }
         }
     }//GEN-LAST:event_jBtnRemoverContatoActionPerformed
 
     private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
-
-        if (telaCadastrarProduto != null) {
-            telaCadastrarProduto.populaComboBoxFornecedor();
-        }
+        verificaPagina();
     }//GEN-LAST:event_formWindowClosed
 
     private void jBtnCarregaCepActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnCarregaCepActionPerformed
-
-        TelaEspera telaTeste = new TelaEspera();
-        this.setEnabled(false);
-        final Thread t1 = new Thread(new Runnable() {//cria uma thread pra gravar o seu arquivo
-
-            @Override
-            public void run() {
-
-                try {
-
-                    telaTeste.setVisible(true);
-
-                    CarregaCEP cep = new CarregaCEP();
-
-                    String ceptxt = txtCep.getText();
-                    txtCidade.setText(cep.getCidade(ceptxt));
-                    txtBairro.setText(cep.getBairro(ceptxt));
-                    txtRua.setText(cep.getEndereco(ceptxt));
-                    txtEstado.setText(cep.getUF(ceptxt));
-
-                } catch (IOException ex) {
-                    JOptionPane.showMessageDialog(null, ex);
-                }
-            }
-        });
-        t1.start();
-        new Thread(new Runnable() {//cria outra thread pra sua tela de espera
-            @Override
-            public void run() {
-                try {
-                    //cria a tela de espera e mostra ela
-                    t1.join();//fica esperando a primeira thread acabar
-                    telaForn.setEnabled(true);  // quando acabar fecha a janela de espera, podes fazer outras coisas aqui
-                    telaTeste.dispose();
-                } catch (InterruptedException ex) {
-                    Logger.getLogger(CadastrarCliente.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            }
-        }).start();
+        if (txtCep.getText().trim().equals("-")) {
+            JOptionPane.showMessageDialog(null, "Primeiro preencha o campo CEP!");
+        } else {
+            CarregaCEP();
+        }
     }//GEN-LAST:event_jBtnCarregaCepActionPerformed
 
     private void txtCepActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCepActionPerformed
-
-        TelaEspera telaTeste = new TelaEspera();
-        this.setEnabled(false);
-        final Thread t1 = new Thread(new Runnable() {//cria uma thread pra gravar o seu arquivo
-
-            @Override
-            public void run() {
-
-                try {
-
-                    telaTeste.setVisible(true);
-                    CarregaCEP cep = new CarregaCEP();
-
-                    String ceptxt = txtCep.getText();
-                    txtCidade.setText(cep.getCidade(ceptxt));
-                    txtBairro.setText(cep.getBairro(ceptxt));
-                    txtRua.setText(cep.getEndereco(ceptxt));
-                    txtEstado.setText(cep.getUF(ceptxt));
-
-                } catch (IOException ex) {
-                    JOptionPane.showMessageDialog(null, ex);
-                }
-            }
-        });
-        t1.start();
-        new Thread(new Runnable() {//cria outra thread pra sua tela de espera
-            @Override
-            public void run() {
-                try {
-                    //cria a tela de espera e mostra ela
-                    t1.join();//fica esperando a primeira thread acabar
-                    telaForn.setEnabled(true);  // quando acabar fecha a janela de espera, podes fazer outras coisas aqui
-                    telaTeste.dispose();
-                } catch (InterruptedException ex) {
-                    Logger.getLogger(CadastrarCliente.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            }
-        }).start();
+        CarregaCEP();
     }//GEN-LAST:event_txtCepActionPerformed
 
     private void txtEmailFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtEmailFocusLost
         ValidaEmail();
     }//GEN-LAST:event_txtEmailFocusLost
+
+    private boolean VerificaCampos() {
+
+        boolean valida = true;
+
+        if (txtFornecedor.getText().trim().equals("")) {
+            JOptionPane.showMessageDialog(null, "Campo(s) vazio(s)!");
+            valida = false;
+            return valida;
+        }
+
+        if (txtPais.getText().trim().equals("")) {
+            JOptionPane.showMessageDialog(null, "Campo(s) vazio(s)!");
+            valida = false;
+            return valida;
+        }
+
+        if (txtCidade.getText().trim().equals("")) {
+            JOptionPane.showMessageDialog(null, "Campo(s) vazio(s)!");
+            valida = false;
+            return valida;
+        }
+
+        if (txtRua.getText().trim().equals("")) {
+            JOptionPane.showMessageDialog(null, "Campo(s) vazio(s)!");
+            valida = false;
+            return valida;
+        }
+
+        if (txtCep.getText().trim().equals("-")) {
+            JOptionPane.showMessageDialog(null, "Campo(s) vazio(s)!");
+            valida = false;
+            return valida;
+        }
+
+        if (txtEstado.getText().trim().equals("")) {
+            JOptionPane.showMessageDialog(null, "Campo(s) vazio(s)!");
+            valida = false;
+            return valida;
+        }
+
+        if (txtBairro.getText().trim().equals("")) {
+            JOptionPane.showMessageDialog(null, "Campo(s) vazio(s)!");
+            valida = false;
+            return valida;
+        }
+
+        if (txtNumero.getText().trim().equals("")) {
+            JOptionPane.showMessageDialog(null, "Campo(s) vazio(s)!");
+            valida = false;
+            return valida;
+        }
+
+        if (jTableContatos.getRowCount() < 1) {
+            JOptionPane.showMessageDialog(null, "Campo(s) vazio(s)!");
+            valida = false;
+            return valida;
+        }
+        return valida;
+    }
+
+    private boolean VerificaCamposContato() {
+
+        boolean valida = true;
+
+        if (txtContato.getText().trim().equals("")) {
+            valida = false;
+            return valida;
+        }
+
+        if (txtTelCel.getText().trim().equals("")) {
+            valida = false;
+            return valida;
+        }
+
+        if (txtTel01.getText().trim().length() != 13) {
+            valida = false;
+            return valida;
+        }
+
+        if (ValidaEmail()) {
+            valida = false;
+            return valida;
+        }
+        return valida;
+    }
+
+    public boolean ValidaEmail() {
+
+        boolean valida = false;
+
+        if ((txtEmail.getText().contains("@"))
+                && (txtEmail.getText().contains("."))
+                && (!txtEmail.getText().contains(" "))) {
+
+            String usuario = new String(txtEmail.getText().substring(0,
+                    txtEmail.getText().lastIndexOf('@')));
+
+            String dominio = new String(txtEmail.getText().substring(txtEmail.getText().lastIndexOf('@') + 1, txtEmail.getText().length()));
+
+            if ((usuario.length() >= 1) && (!usuario.contains("@"))
+                    && (dominio.contains(".")) && (!dominio.contains("@")) && (dominio.indexOf(".")
+                    >= 1) && (dominio.lastIndexOf(".") < dominio.length() - 1)) {
+
+                jLabelEmail.setText("");
+
+            } else {
+
+                jLabelEmail.setText("E-mail Inválido");
+                valida = true;
+            }
+
+        } else {
+
+            jLabelEmail.setText("E-mail Inválido");
+            valida = true;
+        }
+        return valida;
+    }
 
     public void TabelaContatos() {
 
@@ -646,7 +716,6 @@ public class CadastrarFornecedor extends javax.swing.JFrame {
         txtTel01.setText("");
         txtTelCel.setText("");
         txtEmail.setText("");
-        txtPais.setText("");
         txtCidade.setText("");
         txtCep.setText("");
         txtNumero.setText("");
@@ -657,44 +726,61 @@ public class CadastrarFornecedor extends javax.swing.JFrame {
         jTableContatos.updateUI();
     }
 
-    public void ValidaEmail() {
+    private void CarregaCEP() {
+        TelaEspera telaTeste = new TelaEspera();
+        this.setEnabled(false);
+        final Thread t1 = new Thread(new Runnable() {//cria uma thread pra gravar o seu arquivo
 
-        if ((txtEmail.getText().contains("@"))
-                && (txtEmail.getText().contains("."))
-                && (!txtEmail.getText().contains(" "))) {
+            @Override
+            public void run() {
 
-            String usuario = new String(txtEmail.getText().substring(0,
-                    txtEmail.getText().lastIndexOf('@')));
+                try {
 
-            String dominio = new String(txtEmail.getText().substring(txtEmail.getText().lastIndexOf('@') + 1, txtEmail.getText().length()));
+                    telaTeste.setVisible(true);
+                    CarregaCEP cep = new CarregaCEP();
 
-            if ((usuario.length() >= 1) && (!usuario.contains("@"))
-                    && (dominio.contains(".")) && (!dominio.contains("@")) && (dominio.indexOf(".")
-                    >= 1) && (dominio.lastIndexOf(".") < dominio.length() - 1)) {
+                    String ceptxt = txtCep.getText();
+                    txtCidade.setText(cep.getCidade(ceptxt));
+                    txtBairro.setText(cep.getBairro(ceptxt));
+                    txtRua.setText(cep.getEndereco(ceptxt));
+                    txtEstado.setText(cep.getUF(ceptxt));
 
-                jLabelEmail.setText("");
-
-            } else {
-
-                jLabelEmail.setText("E-mail Inválido");
-
-                txtEmail.requestFocus();
-
+                } catch (IOException ex) {
+                    JOptionPane.showMessageDialog(null, ex);
+                }
             }
-
-        } else {
-
-            jLabelEmail.setText("E-mail Inválido");
-
-            txtEmail.requestFocus();
-
-        }
+        });
+        t1.start();
+        new Thread(new Runnable() {//cria outra thread pra sua tela de espera
+            @Override
+            public void run() {
+                try {
+                    //cria a tela de espera e mostra ela
+                    t1.join();//fica esperando a primeira thread acabar
+                    telaForn.setEnabled(true);  // quando acabar fecha a janela de espera, podes fazer outras coisas aqui
+                    telaTeste.dispose();
+                } catch (InterruptedException ex) {
+                    Logger.getLogger(CadastrarCliente.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }).start();
     }
 
+    private void verificaPagina() {
+
+        if ((this.telaMenu != null)) {
+            this.telaMenu.setVisible(true);
+        }else if (telaCadastrarProduto != null) {
+            telaCadastrarProduto.setEnabled(true);
+            telaCadastrarProduto.populaComboBoxFornecedor();
+        }else if (telaExibeForn != null) {
+            telaExibeForn.setVisible(true);
+        }
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCadFornecedor;
     private javax.swing.JButton btnCancelar;
-    private javax.swing.JButton btnLimpar;
     private javax.swing.JButton jBtnCarregaCep;
     private javax.swing.JButton jBtnOutroContato;
     private javax.swing.JButton jBtnRemoverContato;
