@@ -34,6 +34,7 @@ public class TelaLogin extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jButton1 = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
         login = new javax.swing.JTextField();
         txtSenha = new javax.swing.JPasswordField();
@@ -48,6 +49,17 @@ public class TelaLogin extends javax.swing.JFrame {
         setTitle("LOGIN");
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/sair.gif"))); // NOI18N
+        jButton1.setText("Sair");
+        jButton1.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        jButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 270, -1, -1));
         getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 260, -1, -1));
 
         login.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, null, new java.awt.Color(0, 204, 153), null, null));
@@ -128,6 +140,12 @@ public class TelaLogin extends javax.swing.JFrame {
         
        
     }//GEN-LAST:event_jButtonAcessoActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        if (JOptionPane.showConfirmDialog(null, "Tem certeza que deseja sair?", "Confirmar Cancelamento", JOptionPane.YES_NO_OPTION) == 0) {
+            this.dispose();
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
     
 
     private void registraAuditoria() {
@@ -175,6 +193,7 @@ public class TelaLogin extends javax.swing.JFrame {
 //    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButtonAcesso;
     private javax.swing.JComboBox jComBTipoUser;
     private javax.swing.JLabel jLabel1;
