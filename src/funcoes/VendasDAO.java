@@ -229,7 +229,7 @@ public class VendasDAO {
         }
     }*/
     
-    public static void UpdateUsuario(Vendas venda, int id){
+    public static void UpdateVenda(Vendas venda, int id){
         
         PreparedStatement stmt;
         

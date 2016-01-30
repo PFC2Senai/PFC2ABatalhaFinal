@@ -111,7 +111,7 @@ public class ExibeVenda extends javax.swing.JFrame {
 
         jLabel1 = new javax.swing.JLabel();
         jButton3 = new javax.swing.JButton();
-        jBtnEditarUsuario = new javax.swing.JButton();
+        jBtnEditarVenda = new javax.swing.JButton();
         jButton7 = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTableListarVendas = new javax.swing.JTable();
@@ -129,10 +129,10 @@ public class ExibeVenda extends javax.swing.JFrame {
             }
         });
 
-        jBtnEditarUsuario.setText("Editar");
-        jBtnEditarUsuario.addActionListener(new java.awt.event.ActionListener() {
+        jBtnEditarVenda.setText("Editar");
+        jBtnEditarVenda.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jBtnEditarUsuarioActionPerformed(evt);
+                jBtnEditarVendaActionPerformed(evt);
             }
         });
 
@@ -188,7 +188,7 @@ public class ExibeVenda extends javax.swing.JFrame {
                 .addContainerGap(327, Short.MAX_VALUE)
                 .addComponent(jButton3)
                 .addGap(51, 51, 51)
-                .addComponent(jBtnEditarUsuario)
+                .addComponent(jBtnEditarVenda)
                 .addGap(46, 46, 46)
                 .addComponent(jButton7)
                 .addGap(288, 288, 288))
@@ -207,7 +207,7 @@ public class ExibeVenda extends javax.swing.JFrame {
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jButton7)
                         .addComponent(jButton3))
-                    .addComponent(jBtnEditarUsuario, javax.swing.GroupLayout.Alignment.TRAILING))
+                    .addComponent(jBtnEditarVenda, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addGap(19, 19, 19))
         );
 
@@ -219,7 +219,7 @@ public class ExibeVenda extends javax.swing.JFrame {
         new CadastrarVenda().setVisible(true);
     }//GEN-LAST:event_jButton3ActionPerformed
 
-    private void jBtnEditarUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnEditarUsuarioActionPerformed
+    private void jBtnEditarVendaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnEditarVendaActionPerformed
         if(jTableListarVendas.getSelectedRow() != -1){
             this.dispose();
             int linha = jTableListarVendas.getSelectedRow();
@@ -228,7 +228,7 @@ public class ExibeVenda extends javax.swing.JFrame {
         }else{
             JOptionPane.showMessageDialog(null, "Primeiro selecione um registro.");
         }
-    }//GEN-LAST:event_jBtnEditarUsuarioActionPerformed
+    }//GEN-LAST:event_jBtnEditarVendaActionPerformed
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
         this.dispose();
@@ -236,15 +236,13 @@ public class ExibeVenda extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         if (CodigoVenda()) {
+            this.dispose();
             new ExibeDetVenda().setVisible(true);
         }
-        
-        //this.dispose();
-        //new ExibeDetVenda().setVisible(true);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jBtnEditarUsuario;
+    private javax.swing.JButton jBtnEditarVenda;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton7;
