@@ -20,17 +20,18 @@ public class Splash extends javax.swing.JFrame {
      * Creates new form Splash
      */
     public Splash() {
-        try {
-            UIManager.setLookAndFeel(UIManager.getCrossPlatformLookAndFeelClassName());
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(Splash.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            Logger.getLogger(Splash.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            Logger.getLogger(Splash.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (UnsupportedLookAndFeelException ex) {
-            Logger.getLogger(Splash.class.getName()).log(Level.SEVERE, null, ex);
-        }
+//      muda a cor do progressbar        
+//        try {
+//            UIManager.setLookAndFeel(UIManager.getCrossPlatformLookAndFeelClassName());
+//        } catch (ClassNotFoundException ex) {
+//            Logger.getLogger(Splash.class.getName()).log(Level.SEVERE, null, ex);
+//        } catch (InstantiationException ex) {
+//            Logger.getLogger(Splash.class.getName()).log(Level.SEVERE, null, ex);
+//        } catch (IllegalAccessException ex) {
+//            Logger.getLogger(Splash.class.getName()).log(Level.SEVERE, null, ex);
+//        } catch (UnsupportedLookAndFeelException ex) {
+//            Logger.getLogger(Splash.class.getName()).log(Level.SEVERE, null, ex);
+//        }
         initComponents();
         carregar();
     }
