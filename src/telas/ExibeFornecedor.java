@@ -28,8 +28,8 @@ public class ExibeFornecedor extends javax.swing.JFrame {
     }
     
     public ExibeFornecedor(Menu menu) {
-        initComponents();
         this.telaMenu = menu;
+        initComponents();        
         TabelaFornecedor("select  * from vw_fornecedores;");
     }
 
@@ -57,6 +57,11 @@ public class ExibeFornecedor extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setResizable(false);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosed(java.awt.event.WindowEvent evt) {
+                formWindowClosed(evt);
+            }
+        });
 
         jBtnNovoFornecedor.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jBtnNovoFornecedor.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/fornecedoradd2.fw.png"))); // NOI18N
@@ -81,6 +86,11 @@ public class ExibeFornecedor extends javax.swing.JFrame {
         });
 
         jBtnVoltar.setText("Voltar");
+        jBtnVoltar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnVoltarActionPerformed(evt);
+            }
+        });
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel1.setText("Fornecedores");
@@ -186,7 +196,7 @@ public class ExibeFornecedor extends javax.swing.JFrame {
         return indice;
     }
     
-    public void CodigoFornecedor(){
+    public void CodigoFornecedor() {
         if(jTableListarFornecedores.getSelectedRow() != -1){
             this.dispose();
             int linha = jTableListarFornecedores.getSelectedRow();        
@@ -240,13 +250,14 @@ public class ExibeFornecedor extends javax.swing.JFrame {
     }
     
     private void jBtnNovoFornecedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnNovoFornecedorActionPerformed
-
-        // TODO add your handling code here:
+        this.setVisible(false);
+        new CadastrarFornecedor(this).setVisible(true);
     }//GEN-LAST:event_jBtnNovoFornecedorActionPerformed
 
     private void jBtnDetalharActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnDetalharActionPerformed
         CodigoFornecedor();
-        new DetalharFornecedor().setVisible(true);
+        this.setVisible(false);
+        new DetalharFornecedor(this).setVisible(true);
     }//GEN-LAST:event_jBtnDetalharActionPerformed
 
     private void jComboBoxOpcaoPesquisaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxOpcaoPesquisaActionPerformed
@@ -281,7 +292,22 @@ public class ExibeFornecedor extends javax.swing.JFrame {
             + " like '%" + txtBuscar.getText() + "%';");
     }//GEN-LAST:event_txtBuscarKeyReleased
 
+    private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
+        verificaPagina();
+    }//GEN-LAST:event_formWindowClosed
 
+    private void jBtnVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnVoltarActionPerformed
+        verificaPagina();
+        this.dispose();
+    }//GEN-LAST:event_jBtnVoltarActionPerformed
+
+    private void verificaPagina() {
+
+        if ((this.telaMenu != null)) {
+            this.telaMenu.setVisible(true);
+        }
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBtnDetalhar;
     private javax.swing.JButton jBtnNovoFornecedor;

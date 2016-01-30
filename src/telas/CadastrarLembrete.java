@@ -304,7 +304,7 @@ public class CadastrarLembrete extends javax.swing.JFrame {
         uJComboBoxClientes.getEditor().getEditorComponent().addFocusListener(new FocusAdapter() {
             @Override
             public void focusLost(FocusEvent e) {
-                if (codCliCombo == 0) {
+                if (codCliCombo == 0 && uJComboBoxClientes.getSelectedIndex() != 0) {
                     JOptionPane.showMessageDialog(null, "Esse registro não encontra-se cadastrado na base de dados.");
                     uJComboBoxClientes.getEditor().getEditorComponent().requestFocus();
                 }

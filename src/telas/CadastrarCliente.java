@@ -881,6 +881,9 @@ public class CadastrarCliente extends javax.swing.JFrame {
 
                 if (JOptionPane.showConfirmDialog(null, "Deseja continuar cadastrando?", "Confirmar Cadastro", JOptionPane.YES_NO_OPTION) == 1) {
                     verificaPagina();
+                    if (telaExibeCliente != null) {
+                        this.telaExibeCliente.TabelaCliente("select  * from vw_cliente;");
+                    }
                     this.dispose();
                 } else {
                     txtEmpresa.requestFocus();

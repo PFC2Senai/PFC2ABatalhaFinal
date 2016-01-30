@@ -23,6 +23,7 @@ public class CadastrarFornecedor extends javax.swing.JFrame {
     private CadastrarFornecedor telaForn;
     private String descricaoAudit;
     private Menu telaMenu;
+    private ExibeFornecedor telaExibeForn;
 
     /**
      * Creates new form CadastrarFornecedor
@@ -53,6 +54,12 @@ public class CadastrarFornecedor extends javax.swing.JFrame {
     
     public CadastrarFornecedor(Menu menu) {
         this.telaMenu = menu;
+        telaForn = this;
+        initComponents();
+    }
+    
+    public CadastrarFornecedor(ExibeFornecedor exibeForn) {
+        this.telaExibeForn = exibeForn;
         telaForn = this;
         initComponents();
     }
@@ -505,6 +512,9 @@ public class CadastrarFornecedor extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "Cadastrado com sucesso!");
                 
                 if (JOptionPane.showConfirmDialog(null, "Deseja continuar cadastrando?", "Confirmar Cadastro", JOptionPane.YES_NO_OPTION) == 1) {
+                    if (telaExibeForn!= null) {
+                        this.telaExibeForn.TabelaFornecedor("select  * from vw_fornecedores;");
+                    }                   
                     verificaPagina();
                     this.dispose();
                 } else {
@@ -763,6 +773,8 @@ public class CadastrarFornecedor extends javax.swing.JFrame {
         }else if (telaCadastrarProduto != null) {
             telaCadastrarProduto.setEnabled(true);
             telaCadastrarProduto.populaComboBoxFornecedor();
+        }else if (telaExibeForn != null) {
+            telaExibeForn.setVisible(true);
         }
     }
     

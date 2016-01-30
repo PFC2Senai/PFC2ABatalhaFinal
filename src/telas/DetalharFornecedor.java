@@ -31,11 +31,22 @@ public class DetalharFornecedor extends javax.swing.JFrame {
     private int codContato;
     private final int codFornecedor;
     private DetalharFornecedor telaDetFornec;
+    private ExibeFornecedor telaExibeForn;
 
     /**
      * Creates new form DetalharFornecedor
      */
     public DetalharFornecedor() {
+        this.codFornecedor = GetIndiceForn();
+        this.idContato = FornecedorDAO.idContato(GetIndiceForn());
+        telaDetFornec = this;
+        initComponents();
+        CarregaFornecedor();
+        TabelaContatos();
+    }
+    
+    public DetalharFornecedor(ExibeFornecedor exibeForn) {
+        this.telaExibeForn = exibeForn;
         this.codFornecedor = GetIndiceForn();
         this.idContato = FornecedorDAO.idContato(GetIndiceForn());
         telaDetFornec = this;
@@ -94,6 +105,11 @@ public class DetalharFornecedor extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setResizable(false);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosed(java.awt.event.WindowEvent evt) {
+                formWindowClosed(evt);
+            }
+        });
 
         jPanel1.setBackground(new java.awt.Color(223, 237, 253));
 
@@ -446,6 +462,7 @@ public class DetalharFornecedor extends javax.swing.JFrame {
     }
 
     private void btnVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltarActionPerformed
+        verificaPagina();
         this.dispose();
     }//GEN-LAST:event_btnVoltarActionPerformed
 
@@ -551,6 +568,10 @@ public class DetalharFornecedor extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_jBtnExcluirContatoActionPerformed
+
+    private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
+        verificaPagina();
+    }//GEN-LAST:event_formWindowClosed
 
     private boolean VerificaCamposFornecedor() {
 
@@ -778,6 +799,13 @@ public class DetalharFornecedor extends javax.swing.JFrame {
         }).start();
     }
 
+    private void verificaPagina() {
+
+        if (telaExibeForn != null) {
+            telaExibeForn.setVisible(true);
+        }
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnVoltar;
     private javax.swing.JButton jBtnAltEnd;
