@@ -1079,7 +1079,7 @@
             </Component>
             <Component class="javax.swing.JButton" name="jBtnVoltarParaEquipamento">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Pr&#xf3;ximo"/>
+                <Property name="text" type="java.lang.String" value="Voltar"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jBtnVoltarParaEquipamentoActionPerformed"/>
@@ -1263,7 +1263,7 @@
             </Component>
             <Component class="javax.swing.JButton" name="jBtnVoltarParaLembrete">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Pr&#xf3;ximo"/>
+                <Property name="text" type="java.lang.String" value="Voltar"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jBtnVoltarParaLembreteActionPerformed"/>

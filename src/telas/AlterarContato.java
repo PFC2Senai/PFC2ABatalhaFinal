@@ -84,6 +84,7 @@ public final class AlterarContato extends javax.swing.JFrame {
         jComboBoxSetorContato = new javax.swing.JComboBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setResizable(false);
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosed(java.awt.event.WindowEvent evt) {
                 formWindowClosed(evt);
@@ -213,6 +214,7 @@ public final class AlterarContato extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jBtnAltContatoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnAltContatoActionPerformed
+       
         if (VerificaCamposContatoCli() || VerificaCamposContatoForn()) {
             Telefone tel = new Telefone();
 
@@ -235,7 +237,6 @@ public final class AlterarContato extends javax.swing.JFrame {
                 PessoaContatoDAO.UpdatePessoaContFornecedor(p, codPessoaContato);
                 telaDetFornecedor.TabelaContatos();
             }
-
             this.dispose();
 
         } else {
@@ -244,7 +245,7 @@ public final class AlterarContato extends javax.swing.JFrame {
     }//GEN-LAST:event_jBtnAltContatoActionPerformed
 
     private void jBtbCancelContatoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtbCancelContatoActionPerformed
-        if (JOptionPane.showConfirmDialog(null, "Tem certeza que deseja sair? Os dados não serão salvos.", "Confirmar Cancelamento", JOptionPane.YES_NO_OPTION) == 1 ) {
+        if (JOptionPane.showConfirmDialog(null, "Tem certeza que deseja sair? Os dados não serão salvos.", "Confirmar Cancelamento", JOptionPane.YES_NO_OPTION) == 0 ) {
             verificaPagina();
             this.dispose();
         }

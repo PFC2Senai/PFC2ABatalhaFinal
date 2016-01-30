@@ -23,7 +23,6 @@ public class Menu extends javax.swing.JFrame {
      */
     public Menu() {
         initComponents();
-//teste
         telaMenu = this;
         jBtnRotinaContato.setVerticalTextPosition(SwingConstants.BOTTOM);
         jBtnRotinaContato.setHorizontalTextPosition(SwingConstants.CENTER);
@@ -105,7 +104,7 @@ public class Menu extends javax.swing.JFrame {
                 jBtnRotinaContatoActionPerformed(evt);
             }
         });
-        getContentPane().add(jBtnRotinaContato, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 99, 140, -1));
+        getContentPane().add(jBtnRotinaContato, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 80, 140, -1));
 
         jBtnCadastrarLembrete.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jBtnCadastrarLembrete.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/CadastrarLembrete.png"))); // NOI18N
@@ -166,7 +165,7 @@ public class Menu extends javax.swing.JFrame {
                 jBtnFazerBackupActionPerformed(evt);
             }
         });
-        getContentPane().add(jBtnFazerBackup, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 350, 140, -1));
+        getContentPane().add(jBtnFazerBackup, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 360, 140, -1));
 
         jMenu4.setBackground(new java.awt.Color(204, 153, 255));
         jMenu4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/menu.png"))); // NOI18N
@@ -536,7 +535,8 @@ public class Menu extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem21ActionPerformed
 
     private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
-        new CadastrarFornecedor().setVisible(true);
+        this.setVisible(false);
+        new CadastrarFornecedor(this).setVisible(true);
     }//GEN-LAST:event_jMenuItem5ActionPerformed
 
     private void jMenuItem26ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem26ActionPerformed

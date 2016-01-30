@@ -37,9 +37,9 @@ public class CadastrarCliente extends javax.swing.JFrame {
     private ExibeCliente telaExibeCliente;
 
     public CadastrarCliente() {
-        initComponents();       
+        initComponents();
     }
-    
+
     public CadastrarCliente(Menu menu) {
         telaMenu = menu;
         initComponents();
@@ -64,7 +64,7 @@ public class CadastrarCliente extends javax.swing.JFrame {
         txtNumero.setDocument(new LimitarDigitos(6));
         txtTelCel.setDocument(new LimitarDigitos(20));
     }
-    
+
     public CadastrarCliente(ExibeCliente exibeCliente) {
         telaExibeCliente = exibeCliente;
         initComponents();
@@ -104,13 +104,13 @@ public class CadastrarCliente extends javax.swing.JFrame {
             valida = false;
             return valida;
         }
-        
+
         if (txtCnpj.getText().trim().length() != 18) {
             JOptionPane.showMessageDialog(null, "Campo(s) vazio(s)!");
             valida = false;
             return valida;
         }
-        
+
         if (txtPais.getText().trim().equals("")) {
             JOptionPane.showMessageDialog(null, "Campo(s) vazio(s)!");
             valida = false;
@@ -172,15 +172,15 @@ public class CadastrarCliente extends javax.swing.JFrame {
         jComboBoxSetores.getEditor().getEditorComponent().addFocusListener(new FocusAdapter() {
             @Override
             public void focusLost(FocusEvent e) {
-                if (codSetor == 0) {
+                if (codSetor == 0 && jComboBoxSetores.getSelectedIndex() != 0) {
                     JOptionPane.showMessageDialog(null, "Esse registro não encontra-se cadastrado na base de dados.");
                     jComboBoxSetores.getEditor().getEditorComponent().requestFocus();
                 }
             }
         });
         jComboBoxSetores.setAutocompletar(true);
-    }    
-    
+    }
+
     private boolean VerificaCamposContato() {
 
         boolean valida = true;
@@ -293,7 +293,7 @@ public class CadastrarCliente extends javax.swing.JFrame {
                 btnLimparActionPerformed(evt);
             }
         });
-        jPanel1.add(btnLimpar, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 560, -1, -1));
+        jPanel1.add(btnLimpar, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 560, -1, 30));
 
         jPanel2.setBackground(new java.awt.Color(223, 237, 253));
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Contatos", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 2, 11))); // NOI18N
@@ -532,7 +532,7 @@ public class CadastrarCliente extends javax.swing.JFrame {
                         .addComponent(txtEstado, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(txtNumero, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtBairro))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(31, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -696,7 +696,7 @@ public class CadastrarCliente extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jBtnCancelarSetorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnCancelarSetorActionPerformed
-        if (JOptionPane.showConfirmDialog(null, "Tem certeza que deseja cancelar o cadastro?", "Confirmar Cancelamento", JOptionPane.YES_NO_OPTION) == 1 ) {       
+        if (JOptionPane.showConfirmDialog(null, "Tem certeza que deseja cancelar o cadastro?", "Confirmar Cancelamento", JOptionPane.YES_NO_OPTION) == 0) {
             jBtnSalvarSetor.setVisible(false);
             jBtnCancelarSetor.setVisible(false);
             jBtnNovoSetor.setVisible(true);
@@ -787,12 +787,13 @@ public class CadastrarCliente extends javax.swing.JFrame {
     }//GEN-LAST:event_txtCepActionPerformed
 
     private void jBtnRemoverContatoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnRemoverContatoActionPerformed
+        if (JOptionPane.showConfirmDialog(null, "Deseja excluir o registro?", "Confirmar Exclusão", JOptionPane.YES_NO_OPTION) == 0) {
+            DefaultTableModel dtm = (DefaultTableModel) jTableContatos.getModel();
+            int linha = jTableContatos.getSelectedRow();
 
-        DefaultTableModel dtm = (DefaultTableModel) jTableContatos.getModel();
-        int linha = jTableContatos.getSelectedRow();
-
-        if (linha != -1) {
-            dtm.removeRow(linha);
+            if (linha != -1) {
+                dtm.removeRow(linha);
+            }
         }
     }//GEN-LAST:event_jBtnRemoverContatoActionPerformed
 
@@ -820,7 +821,7 @@ public class CadastrarCliente extends javax.swing.JFrame {
     }//GEN-LAST:event_btnLimparActionPerformed
 
     private void btnCadClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadClienteActionPerformed
-        
+
         if (VerificaCampos() == true) {
 
             if (ClienteDAO.VerificarCliente(txtCnpj.getText()) == false) {
@@ -875,13 +876,11 @@ public class CadastrarCliente extends javax.swing.JFrame {
                 descricaoAudit = "Empresa " + cli.getEmpresa() + " /CNPJ: " + cli.getCnpj() + " foi cadastrada.";
                 AuditoriaDAO.CadDetAuditoria(descricaoAudit);
                 limparCampos();
-                ((DefaultTableModel) jTableContatos.getModel()).setNumRows(0);
-                jTableContatos.updateUI();
 
                 JOptionPane.showMessageDialog(null, "Cadastrado com sucesso!");
 
                 if (JOptionPane.showConfirmDialog(null, "Deseja continuar cadastrando?", "Confirmar Cadastro", JOptionPane.YES_NO_OPTION) == 1) {
-                    telaMenu.setEnabled(true);
+                    verificaPagina();
                     this.dispose();
                 } else {
                     txtEmpresa.requestFocus();
@@ -906,15 +905,16 @@ public class CadastrarCliente extends javax.swing.JFrame {
 
     private void carregarComboSegmento() {
 
-       // uJComboBoxPeca.clear();
+        // uJComboBoxPeca.clear();
         ArrayList<Setor> setores = new ArrayList<Setor>();
         setores = SetorDAO.ListarSetor();
 
+        jComboBoxSetores.addItem("Selecione o segmento");
         for (Setor setor : setores) {
             jComboBoxSetores.addItem(setor.getSetor(), setor);
         }
     }
-    
+
     public void TabelaContatos() {
 
         try {
@@ -973,6 +973,8 @@ public class CadastrarCliente extends javax.swing.JFrame {
         txtBairro.setText("");
         txtEstado.setText("");
         txtRua.setText("");
+        ((DefaultTableModel) jTableContatos.getModel()).setNumRows(0);
+        jTableContatos.updateUI();
     }
 
     public boolean ValidaEmail() {
@@ -1048,15 +1050,14 @@ public class CadastrarCliente extends javax.swing.JFrame {
         }).start();
     }
 
-    
     private void verificaPagina() {
 
         if ((this.telaMenu != null)) {
             this.telaMenu.setVisible(true);
-           // this.telaMenu.toFront();
-        }else if ((this.telaExibeCliente != null)) {
+            // this.telaMenu.toFront();
+        } else if ((this.telaExibeCliente != null)) {
             this.telaExibeCliente.setVisible(true);
-           // this.telaExibeCliente.toFront();
+            // this.telaExibeCliente.toFront();
         }
     }
 

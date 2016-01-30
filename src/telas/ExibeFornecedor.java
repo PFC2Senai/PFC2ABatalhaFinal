@@ -2,8 +2,8 @@ package telas;
 
 
 import static funcoes.Conexao.getConnection;
-import funcoes.FornecedorDAO;
 import funcoes.ModeloTabela;
+import funcoes.TabelaZebrada;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -12,6 +12,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.ListSelectionModel;
+import javax.swing.table.TableCellRenderer;
 
 
 public class ExibeFornecedor extends javax.swing.JFrame {
@@ -19,11 +20,16 @@ public class ExibeFornecedor extends javax.swing.JFrame {
     private static int indice;
     Statement stmt ;
     private String opcaoPesquisa = "fornecedor";
-    /**
-     * Creates new form ExibeFornecedor
-     */
+    private Menu telaMenu;
+    
     public ExibeFornecedor() {
         initComponents();
+        TabelaFornecedor("select  * from vw_fornecedores;");
+    }
+    
+    public ExibeFornecedor(Menu menu) {
+        initComponents();
+        this.telaMenu = menu;
         TabelaFornecedor("select  * from vw_fornecedores;");
     }
 
@@ -39,7 +45,6 @@ public class ExibeFornecedor extends javax.swing.JFrame {
 
         jBtnNovoFornecedor = new javax.swing.JButton();
         jBtnDetalhar = new javax.swing.JButton();
-        jBtExcluirFornecedor = new javax.swing.JButton();
         jBtnVoltar = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -51,7 +56,10 @@ public class ExibeFornecedor extends javax.swing.JFrame {
         jComboUf = new javax.swing.JComboBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setResizable(false);
 
+        jBtnNovoFornecedor.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jBtnNovoFornecedor.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/fornecedoradd2.fw.png"))); // NOI18N
         jBtnNovoFornecedor.setText("Novo");
         jBtnNovoFornecedor.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -59,6 +67,8 @@ public class ExibeFornecedor extends javax.swing.JFrame {
             }
         });
 
+        jBtnDetalhar.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jBtnDetalhar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/fornecedorConsulta.fw.png"))); // NOI18N
         jBtnDetalhar.setText("Detalhar");
 
         org.jdesktop.beansbinding.Binding binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, jTableListarFornecedores, org.jdesktop.beansbinding.ELProperty.create("${selectedElement != null}"), jBtnDetalhar, org.jdesktop.beansbinding.BeanProperty.create("enabled"));
@@ -67,13 +77,6 @@ public class ExibeFornecedor extends javax.swing.JFrame {
         jBtnDetalhar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jBtnDetalharActionPerformed(evt);
-            }
-        });
-
-        jBtExcluirFornecedor.setText("Excluir");
-        jBtExcluirFornecedor.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jBtExcluirFornecedorActionPerformed(evt);
             }
         });
 
@@ -121,34 +124,31 @@ public class ExibeFornecedor extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(24, 24, 24)
+                .addGap(48, 48, 48)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jBtnVoltar)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jBtnNovoFornecedor)
-                                .addGap(77, 77, 77)
-                                .addComponent(jBtnDetalhar)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jBtExcluirFornecedor)
-                                .addGap(77, 77, 77)
-                                .addComponent(jBtnVoltar))
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 636, Short.MAX_VALUE))
-                        .addGap(22, 22, 22))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel3))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jComboBoxOpcaoPesquisa, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jComboUf, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(18, 18, 18)
-                        .addComponent(txtBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 296, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(61, 61, 61))))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel2)
+                                    .addComponent(jLabel3))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jComboBoxOpcaoPesquisa, 0, 270, Short.MAX_VALUE)
+                                    .addComponent(jComboUf, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(txtBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 255, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 708, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(49, 49, 49)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jBtnDetalhar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jBtnNovoFornecedor, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addGap(0, 47, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -160,18 +160,19 @@ public class ExibeFornecedor extends javax.swing.JFrame {
                     .addComponent(txtBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2)
                     .addComponent(jComboBoxOpcaoPesquisa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 25, Short.MAX_VALUE)
+                .addGap(26, 26, 26)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(jComboUf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(28, 28, 28)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 40, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 365, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jBtnNovoFornecedor)
+                        .addGap(65, 65, 65)
+                        .addComponent(jBtnDetalhar)))
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jBtnNovoFornecedor)
-                    .addComponent(jBtnDetalhar)
-                    .addComponent(jBtExcluirFornecedor)
-                    .addComponent(jBtnVoltar))
+                .addComponent(jBtnVoltar)
                 .addGap(20, 20, 20))
         );
 
@@ -218,13 +219,15 @@ public class ExibeFornecedor extends javax.swing.JFrame {
                         
                         ModeloTabela modelo = new ModeloTabela(dados, Colunas);
                         jTableListarFornecedores.setModel(modelo);
+                        TableCellRenderer renderer = new TabelaZebrada();
+                        jTableListarFornecedores.setDefaultRenderer(Object.class, renderer);
+                        
                         jTableListarFornecedores.getColumnModel().getColumn(0).setPreferredWidth(50);
                         jTableListarFornecedores.getColumnModel().getColumn(1).setPreferredWidth(200);
                         jTableListarFornecedores.getColumnModel().getColumn(2).setPreferredWidth(80);
                         jTableListarFornecedores.getColumnModel().getColumn(3).setPreferredWidth(15);
                         jTableListarFornecedores.getColumnModel().getColumn(i).setResizable(false);
                         jTableListarFornecedores.getTableHeader().setReorderingAllowed(false);
-                       // jTableListarFornecedores.setAutoResizeMode(jTableListarFornecedores.AUTO_RESIZE_OFF);
                         jTableListarFornecedores.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
                     }
                     
@@ -245,14 +248,6 @@ public class ExibeFornecedor extends javax.swing.JFrame {
         CodigoFornecedor();
         new DetalharFornecedor().setVisible(true);
     }//GEN-LAST:event_jBtnDetalharActionPerformed
-
-    private void jBtExcluirFornecedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtExcluirFornecedorActionPerformed
-
-        CodigoFornecedor();
-        int codContato = FornecedorDAO.idContato(indice);
-        FornecedorDAO.ExcluirFornecedor(codContato);
-        TabelaFornecedor("select  * from vw_fornecedores;");
-    }//GEN-LAST:event_jBtExcluirFornecedorActionPerformed
 
     private void jComboBoxOpcaoPesquisaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxOpcaoPesquisaActionPerformed
         switch (jComboBoxOpcaoPesquisa.getSelectedItem().toString()) {
@@ -288,7 +283,6 @@ public class ExibeFornecedor extends javax.swing.JFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jBtExcluirFornecedor;
     private javax.swing.JButton jBtnDetalhar;
     private javax.swing.JButton jBtnNovoFornecedor;
     private javax.swing.JButton jBtnVoltar;

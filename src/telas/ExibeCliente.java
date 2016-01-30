@@ -168,7 +168,7 @@ public final class ExibeCliente extends javax.swing.JFrame {
             }
         });
 
-        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel1.setText("Cadastro de Clientes");
 
         jTableListarClientes.setModel(new javax.swing.table.DefaultTableModel(
@@ -322,7 +322,7 @@ public final class ExibeCliente extends javax.swing.JFrame {
                     .addComponent(jComboBoxOpcaoPesquisa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jBtnBuscar)
                     .addComponent(jLabel2))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 22, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 20, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jComboBoxSetores, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel5)
@@ -367,7 +367,6 @@ public final class ExibeCliente extends javax.swing.JFrame {
 
     private void jBtnCadastrarNovoClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnCadastrarNovoClienteActionPerformed
         this.setVisible(false);
-      //  this.setVisible(false);
         new CadastrarCliente(this).setVisible(true);
     }//GEN-LAST:event_jBtnCadastrarNovoClienteActionPerformed
 

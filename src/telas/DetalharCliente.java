@@ -1012,7 +1012,7 @@ public class DetalharCliente extends javax.swing.JFrame {
             }
         });
 
-        jBtnVoltarParaEquipamento.setText("Próximo");
+        jBtnVoltarParaEquipamento.setText("Voltar");
         jBtnVoltarParaEquipamento.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jBtnVoltarParaEquipamentoActionPerformed(evt);
@@ -1144,7 +1144,7 @@ public class DetalharCliente extends javax.swing.JFrame {
             }
         });
 
-        jBtnVoltarParaLembrete.setText("Próximo");
+        jBtnVoltarParaLembrete.setText("Voltar");
         jBtnVoltarParaLembrete.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jBtnVoltarParaLembreteActionPerformed(evt);

@@ -76,7 +76,7 @@
           </Events>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="30" y="560" width="-1" height="-1"/>
+              <AbsoluteConstraints x="30" y="560" width="-1" height="30"/>
             </Constraint>
           </Constraints>
         </Component>
@@ -397,7 +397,7 @@
                           <Component id="txtNumero" min="-2" pref="79" max="-2" attributes="0"/>
                           <Component id="txtBairro" alignment="0" max="32767" attributes="0"/>
                       </Group>
-                      <EmptySpace max="32767" attributes="0"/>
+                      <EmptySpace pref="31" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
