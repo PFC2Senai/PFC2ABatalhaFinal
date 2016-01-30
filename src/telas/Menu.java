@@ -252,7 +252,7 @@ public class Menu extends javax.swing.JFrame {
         jMenu14.add(jMenuItemCadastrarServico);
 
         jMenuItem13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/setor.png"))); // NOI18N
-        jMenuItem13.setText("Setor");
+        jMenuItem13.setText("Segmento");
         jMenuItem13.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem13ActionPerformed(evt);
@@ -359,7 +359,7 @@ public class Menu extends javax.swing.JFrame {
         jMenu10.add(jMenuItem1);
 
         jMenuItem14.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/setor.png"))); // NOI18N
-        jMenuItem14.setText("Setor");
+        jMenuItem14.setText("Segmento");
         jMenuItem14.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem14ActionPerformed(evt);

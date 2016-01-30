@@ -7,6 +7,7 @@ import atributos.Usuario;
 import funcoes.CarregaCEP;
 import funcoes.ContatosDAO;
 import funcoes.FuncionarioDAO;
+import funcoes.FuncoesDiversas;
 import funcoes.LimitarDigitos;
 import java.io.IOException;
 import java.sql.PreparedStatement;
@@ -52,7 +53,7 @@ public class CadastrarFuncionario extends javax.swing.JFrame {
         jTextCpf.setText("");
         jTextCargo.setText("");
         jTextSalario.setText("");
-        jTextDataAdmicao.setText("");
+        txtDataAdmissao.setDate(null);
         jTextCtps.setText("");
         txtTel01.setText("");
         txtTelCel.setText("");
@@ -119,7 +120,6 @@ public class CadastrarFuncionario extends javax.swing.JFrame {
         jTextCpf = new javax.swing.JFormattedTextField();
         jTextSalario = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
-        jTextDataAdmicao = new javax.swing.JFormattedTextField();
         jTextCargo = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
@@ -128,6 +128,7 @@ public class CadastrarFuncionario extends javax.swing.JFrame {
         jLabel10 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
+        txtDataAdmissao = new com.toedter.calendar.JDateChooser();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -218,6 +219,7 @@ public class CadastrarFuncionario extends javax.swing.JFrame {
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Contato"));
 
+        jLabel13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/phone.png"))); // NOI18N
         jLabel13.setText("Celular:");
 
         txtEmail.addFocusListener(new java.awt.event.FocusAdapter() {
@@ -226,8 +228,10 @@ public class CadastrarFuncionario extends javax.swing.JFrame {
             }
         });
 
+        jLabel12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/email.png"))); // NOI18N
         jLabel12.setText("Email:");
 
+        jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/telephone.png"))); // NOI18N
         jLabel11.setText("Telefone:");
 
         try {
@@ -265,7 +269,7 @@ public class CadastrarFuncionario extends javax.swing.JFrame {
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(44, 44, 44)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtTel01, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel13)
@@ -277,7 +281,7 @@ public class CadastrarFuncionario extends javax.swing.JFrame {
                     .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabelEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Endereço"));
@@ -310,7 +314,7 @@ public class CadastrarFuncionario extends javax.swing.JFrame {
         jLabel15.setText("Nº");
 
         jBtnCarregaCep.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/pesquisar.gif"))); // NOI18N
-        jBtnCarregaCep.setText("Carrega CEP");
+        jBtnCarregaCep.setText("Buscar");
         jBtnCarregaCep.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jBtnCarregaCepActionPerformed(evt);
@@ -359,7 +363,7 @@ public class CadastrarFuncionario extends javax.swing.JFrame {
                                 .addComponent(jLabel17)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(txtBairro, javax.swing.GroupLayout.PREFERRED_SIZE, 272, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addContainerGap(39, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -400,12 +404,6 @@ public class CadastrarFuncionario extends javax.swing.JFrame {
 
         jLabel7.setText("Salário:");
 
-        try {
-            jTextDataAdmicao.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
-        } catch (java.text.ParseException ex) {
-            ex.printStackTrace();
-        }
-
         jLabel3.setText("Nome:");
 
         jLabel6.setText("RG:");
@@ -416,7 +414,7 @@ public class CadastrarFuncionario extends javax.swing.JFrame {
             ex.printStackTrace();
         }
 
-        jLabel10.setText("Data de admição:");
+        jLabel10.setText("Data de admissão:");
 
         jLabel4.setText("CPF:");
 
@@ -452,9 +450,9 @@ public class CadastrarFuncionario extends javax.swing.JFrame {
                             .addComponent(jLabel10)
                             .addComponent(jLabel7))))
                 .addGap(18, 18, 18)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jTextDataAdmicao, javax.swing.GroupLayout.DEFAULT_SIZE, 98, Short.MAX_VALUE)
-                    .addComponent(jTextSalario))
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txtDataAdmissao, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextSalario, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
@@ -465,9 +463,8 @@ public class CadastrarFuncionario extends javax.swing.JFrame {
                     .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel3)
                         .addComponent(jTextNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel10)
-                        .addComponent(jTextDataAdmicao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(jLabel10)
+                    .addComponent(txtDataAdmissao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addGap(11, 11, 11)
@@ -510,7 +507,7 @@ public class CadastrarFuncionario extends javax.swing.JFrame {
                         .addGap(40, 40, 40)
                         .addComponent(jButton2))
                     .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(26, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -522,7 +519,7 @@ public class CadastrarFuncionario extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
@@ -530,7 +527,7 @@ public class CadastrarFuncionario extends javax.swing.JFrame {
                     .addComponent(jBtnCadastrarFuncionario)
                     .addComponent(jButton3)
                     .addComponent(jButton2))
-                .addContainerGap(17, Short.MAX_VALUE))
+                .addGap(17, 17, 17))
         );
 
         pack();
@@ -553,7 +550,7 @@ public class CadastrarFuncionario extends javax.swing.JFrame {
                 func.setSalario(Double.parseDouble(jTextSalario.getText()));
 
                 func.setIdUsuario(Usuario.idUsuario());
-                func.setDataAdmicao(jTextDataAdmicao.getText());
+                func.setDataAdmicao(FuncoesDiversas.FormataData(txtDataAdmissao.getDate()));
 
                 func.setCtps(jTextCtps.getText());
                 func.setSerieCtps(jTextSerieCtps.getText());
@@ -716,7 +713,7 @@ public class CadastrarFuncionario extends javax.swing.JFrame {
             return valida;
         }
 
-        if (jTextDataAdmicao.getText().trim().equals("")) {
+        if (txtDataAdmissao.getDate() == null) {
             JOptionPane.showMessageDialog(null, "Campo(s) vazio(s)!");
             valida = false;
             return valida;
@@ -811,8 +808,6 @@ public class CadastrarFuncionario extends javax.swing.JFrame {
             valida = false;
             return valida;
         }
-
-        // valida = false;
         return valida;
     }
 
@@ -885,7 +880,6 @@ public class CadastrarFuncionario extends javax.swing.JFrame {
     private javax.swing.JTextField jTextCargo;
     private javax.swing.JFormattedTextField jTextCpf;
     private javax.swing.JFormattedTextField jTextCtps;
-    private javax.swing.JFormattedTextField jTextDataAdmicao;
     private javax.swing.JTextField jTextNome;
     private javax.swing.JTextField jTextNumCtps;
     private javax.swing.JFormattedTextField jTextRg;
@@ -894,6 +888,7 @@ public class CadastrarFuncionario extends javax.swing.JFrame {
     private javax.swing.JTextField txtBairro;
     private javax.swing.JFormattedTextField txtCep;
     private javax.swing.JTextField txtCidade;
+    private com.toedter.calendar.JDateChooser txtDataAdmissao;
     private javax.swing.JTextField txtEmail;
     private javax.swing.JTextField txtEstado;
     private javax.swing.JTextField txtNumero;

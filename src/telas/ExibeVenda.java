@@ -63,7 +63,7 @@ public class ExibeVenda extends javax.swing.JFrame {
                    rs.getObject("totalVenda")});            
             }
                         
-            for (int i = 0; i < 7; i++){
+            for (int i = 0; i < 7; i++) {
                 ModeloTabela modelo = new ModeloTabela(dados, Colunas);
                 jTableListarVendas.setModel(modelo);
                 jTableListarVendas.getColumnModel().getColumn(0).setPreferredWidth(200);

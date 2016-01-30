@@ -1,9 +1,6 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package atributos;
+
+import java.util.Date;
 
 /**
  *
@@ -18,7 +15,7 @@ public class Funcionario {
     private double salario;
     private int idContato;
     private int idUsuario;
-    private String dataAdmicao;
+    private Date dataAdmicao;
     private String ctps;
     private String numCtps;
     private String serieCtps;
@@ -121,11 +118,11 @@ public class Funcionario {
         this.idUsuario = idUsuario;
     }
 
-    public String getDataAdmicao() {
+    public Date getDataAdmicao() {
         return dataAdmicao;
     }
 
-    public void setDataAdmicao(String dataAdmicao) {
+    public void setDataAdmicao(Date dataAdmicao) {
         this.dataAdmicao = dataAdmicao;
     }
     

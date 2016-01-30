@@ -42,7 +42,7 @@
                   </Group>
                   <Component id="jPanel4" alignment="0" max="32767" attributes="0"/>
               </Group>
-              <EmptySpace max="32767" attributes="0"/>
+              <EmptySpace pref="26" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -56,7 +56,7 @@
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="jPanel1" min="-2" max="-2" attributes="0"/>
-                  <Component id="jPanel2" min="-2" max="-2" attributes="0"/>
+                  <Component id="jPanel2" max="32767" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="jPanel3" min="-2" max="-2" attributes="0"/>
@@ -66,7 +66,7 @@
                   <Component id="jButton3" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jButton2" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace pref="17" max="32767" attributes="0"/>
+              <EmptySpace min="-2" pref="17" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -284,7 +284,7 @@
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" attributes="0">
-                  <EmptySpace max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="44" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="txtTel01" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jLabel13" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -298,7 +298,7 @@
                   </Group>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Component id="jLabelEmail" min="-2" pref="20" max="-2" attributes="0"/>
-                  <EmptySpace max="-2" attributes="0"/>
+                  <EmptySpace max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -306,6 +306,9 @@
       <SubComponents>
         <Component class="javax.swing.JLabel" name="jLabel13">
           <Properties>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/imagens/phone.png"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="Celular:"/>
           </Properties>
         </Component>
@@ -316,11 +319,17 @@
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel12">
           <Properties>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/imagens/email.png"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="Email:"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel11">
           <Properties>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/imagens/telephone.png"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="Telefone:"/>
           </Properties>
         </Component>
@@ -408,7 +417,7 @@
                           </Group>
                       </Group>
                   </Group>
-                  <EmptySpace pref="39" max="32767" attributes="0"/>
+                  <EmptySpace max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -514,7 +523,7 @@
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
               <Image iconType="3" name="/imagens/pesquisar.gif"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="Carrega CEP"/>
+            <Property name="text" type="java.lang.String" value="Buscar"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jBtnCarregaCepActionPerformed"/>
@@ -572,9 +581,9 @@
                       </Group>
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                      <Component id="jTextDataAdmicao" pref="98" max="32767" attributes="0"/>
-                      <Component id="jTextSalario" max="32767" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Component id="txtDataAdmissao" min="-2" pref="120" max="-2" attributes="0"/>
+                      <Component id="jTextSalario" min="-2" pref="98" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="32767" attributes="0"/>
               </Group>
@@ -589,10 +598,8 @@
                           <Component id="jLabel3" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jTextNome" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="jLabel10" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jTextDataAdmicao" alignment="3" min="-2" max="-2" attributes="0"/>
-                      </Group>
+                      <Component id="jLabel10" min="-2" max="-2" attributes="0"/>
+                      <Component id="txtDataAdmissao" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" attributes="0">
@@ -640,13 +647,6 @@
             <Property name="text" type="java.lang.String" value="Sal&#xe1;rio:"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JFormattedTextField" name="jTextDataAdmicao">
-          <Properties>
-            <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor" preCode="try {" postCode="} catch (java.text.ParseException ex) {&#xa;ex.printStackTrace();&#xa;}">
-              <Format format="##/##/####" subtype="-1" type="5"/>
-            </Property>
-          </Properties>
-        </Component>
         <Component class="javax.swing.JTextField" name="jTextCargo">
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel3">
@@ -670,7 +670,7 @@
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel10">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Data de admi&#xe7;&#xe3;o:"/>
+            <Property name="text" type="java.lang.String" value="Data de admiss&#xe3;o:"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel4">
@@ -682,6 +682,8 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="Cargo:"/>
           </Properties>
+        </Component>
+        <Component class="com.toedter.calendar.JDateChooser" name="txtDataAdmissao">
         </Component>
       </SubComponents>
     </Container>
