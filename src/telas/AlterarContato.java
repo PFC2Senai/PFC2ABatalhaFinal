@@ -92,8 +92,10 @@ public final class AlterarContato extends javax.swing.JFrame {
             }
         });
 
+        jLabelContato.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/funcionario.png"))); // NOI18N
         jLabelContato.setText("Contato:");
 
+        jLabelTelefone.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/telephone.png"))); // NOI18N
         jLabelTelefone.setText("Telefone:");
 
         try {
@@ -102,8 +104,10 @@ public final class AlterarContato extends javax.swing.JFrame {
             ex.printStackTrace();
         }
 
+        jLabelCelular.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/phone.png"))); // NOI18N
         jLabelCelular.setText("Celular:");
 
+        jLabelEmail.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/email.png"))); // NOI18N
         jLabelEmail.setText("Email:");
 
         txtEmail.addFocusListener(new java.awt.event.FocusAdapter() {
@@ -134,6 +138,7 @@ public final class AlterarContato extends javax.swing.JFrame {
         jLabelEmail1.setFont(new java.awt.Font("Tahoma", 3, 11)); // NOI18N
         jLabelEmail1.setForeground(new java.awt.Color(255, 0, 0));
 
+        jLabelSetorContato.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/setor.png"))); // NOI18N
         jLabelSetorContato.setText("Setor:");
 
         jComboBoxSetorContato.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Selecione o setor", "Manutenção", "Compras", "Suprimentos", "Projetos", "Engenharia", "Compras/Suprimentos", "Projetos/Engenharia" }));
@@ -170,7 +175,7 @@ public final class AlterarContato extends javax.swing.JFrame {
                                 .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 235, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(txtTelCel, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(jLabelEmail1, javax.swing.GroupLayout.PREFERRED_SIZE, 235, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addContainerGap(47, Short.MAX_VALUE))
+                .addContainerGap(27, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

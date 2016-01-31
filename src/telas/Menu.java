@@ -216,7 +216,7 @@ public class Menu extends javax.swing.JFrame {
         });
         jMenu14.add(jMenuItem5);
 
-        jMenuItem21.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/funcionario.png"))); // NOI18N
+        jMenuItem21.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/4.png"))); // NOI18N
         jMenuItem21.setText("Funcionário");
         jMenuItem21.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -323,7 +323,7 @@ public class Menu extends javax.swing.JFrame {
         });
         jMenu10.add(jMenuItem6);
 
-        jMenuItem18.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/funcionario.png"))); // NOI18N
+        jMenuItem18.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/4.png"))); // NOI18N
         jMenuItem18.setText("Funcionário");
         jMenuItem18.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

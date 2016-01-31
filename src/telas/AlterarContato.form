@@ -63,7 +63,7 @@
                       </Group>
                   </Group>
               </Group>
-              <EmptySpace pref="47" max="32767" attributes="0"/>
+              <EmptySpace pref="27" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -118,6 +118,9 @@
   <SubComponents>
     <Component class="javax.swing.JLabel" name="jLabelContato">
       <Properties>
+        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+          <Image iconType="3" name="/imagens/funcionario.png"/>
+        </Property>
         <Property name="text" type="java.lang.String" value="Contato:"/>
       </Properties>
     </Component>
@@ -125,6 +128,9 @@
     </Component>
     <Component class="javax.swing.JLabel" name="jLabelTelefone">
       <Properties>
+        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+          <Image iconType="3" name="/imagens/telephone.png"/>
+        </Property>
         <Property name="text" type="java.lang.String" value="Telefone:"/>
       </Properties>
     </Component>
@@ -139,11 +145,17 @@
     </Component>
     <Component class="javax.swing.JLabel" name="jLabelCelular">
       <Properties>
+        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+          <Image iconType="3" name="/imagens/phone.png"/>
+        </Property>
         <Property name="text" type="java.lang.String" value="Celular:"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabelEmail">
       <Properties>
+        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+          <Image iconType="3" name="/imagens/email.png"/>
+        </Property>
         <Property name="text" type="java.lang.String" value="Email:"/>
       </Properties>
     </Component>
@@ -194,6 +206,9 @@
     </Component>
     <Component class="javax.swing.JLabel" name="jLabelSetorContato">
       <Properties>
+        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+          <Image iconType="3" name="/imagens/setor.png"/>
+        </Property>
         <Property name="text" type="java.lang.String" value="Setor:"/>
       </Properties>
     </Component>

@@ -266,6 +266,7 @@ public class CadastrarFornecedor extends javax.swing.JFrame {
         jPanel3.setBackground(new java.awt.Color(223, 237, 253));
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Contatos", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 2, 11))); // NOI18N
 
+        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/funcionario.png"))); // NOI18N
         jLabel5.setText("Contato:");
 
         jBtnOutroContato.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/add.png"))); // NOI18N
@@ -276,6 +277,7 @@ public class CadastrarFornecedor extends javax.swing.JFrame {
             }
         });
 
+        jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/telephone.png"))); // NOI18N
         jLabel7.setText("Telefone:");
 
         try {
@@ -284,8 +286,10 @@ public class CadastrarFornecedor extends javax.swing.JFrame {
             ex.printStackTrace();
         }
 
+        jLabel13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/phone.png"))); // NOI18N
         jLabel13.setText("Celular:");
 
+        jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/email.png"))); // NOI18N
         jLabel9.setText("Email:");
 
         txtEmail.addFocusListener(new java.awt.event.FocusAdapter() {
