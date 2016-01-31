@@ -157,11 +157,10 @@ public class FuncionarioDAO {
         PreparedStatement stmt;
 
         try {
-            String sql = ("UPDATE tabfuncionario SET "
-                    + " ctps='" + func.getCtps()
-                    + "', serie='" + func.getSerieCtps()
-                    + "', numeroCtps='" + func.getNumCtps()
-                    + "', uf='" + func.getUfCtps()
+            String sql = ("UPDATE tabfuncionario SET ctps = '" + func.getCtps()
+                    + "', serie = '" + func.getSerieCtps()
+                    + "', numeroCtps = '" + func.getNumCtps()
+                    + "', uf= '" + func.getUfCtps()
                     + "' where idfuncionario = '" + id + "';");
             
             stmt = Conexao.getConnection().prepareStatement(sql);

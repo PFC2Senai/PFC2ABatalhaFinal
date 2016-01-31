@@ -257,6 +257,32 @@ public class ContatosDAO {
         }
         return telefones;
     }
+    
+    public static String CarregaEmail(int id) {
+
+        Statement stmt;
+        String email = "";
+
+        try {
+            String Sql = "SELECT email FROM tabemail where contato_id_contato = " + id + ";";
+
+            ResultSet rs;
+            stmt = Conexao.getConnection().createStatement();
+            rs = stmt.executeQuery(Sql);
+
+            while (rs.next()) {
+                email = (rs.getString("email"));
+            }
+
+            rs.close();
+            stmt.close();
+
+        } catch (SQLException ex) {
+            Logger.getLogger(ContatosDAO.class.getName()).log(Level.SEVERE, null, ex);
+            throw new RuntimeException("Erro ao carregar telefones: ", ex);
+        }
+        return email;
+    }
 
 //    public static int CodTel(String tel, int codContato) {
 //        
@@ -312,9 +338,6 @@ public class ContatosDAO {
 //        }    
 //        return codTel;
 //    }
-    public static void CadTel(int i, String telefone) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
 
     public static ArrayList Telefones(int id) {
 

@@ -2,6 +2,7 @@ package telas;
 
 import atributos.PessoaContato;
 import atributos.Telefone;
+import funcoes.AuditoriaDAO;
 import static funcoes.Conexao.getConnection;
 import funcoes.ContatosDAO;
 import funcoes.LimitarDigitos;
@@ -230,11 +231,18 @@ public final class AlterarContato extends javax.swing.JFrame {
             if (codCliente != 0) {
                 p.setSetorContato(jComboBoxSetorContato.getSelectedItem().toString());
                 PessoaContatoDAO.UpdatePessoaContato(p, codPessoaContato);
+                
+                String descricaoAudit = "O contato: " + p.getNomeContato() + " da empresa de código: " + codCliente
+                        +" teve dado(s) alterados(s).";
+                AuditoriaDAO.CadDetAuditoria(descricaoAudit);
                 telaDetCliente.TabelaContatos();
             }
 
             if (codFornecedor != 0) {
                 PessoaContatoDAO.UpdatePessoaContFornecedor(p, codPessoaContato);
+                String descricaoAudit = "O contato: " + p.getNomeContato() + " do fornecedor de código: " + codFornecedor
+                        +" teve dado(s) alterados(s).";
+                AuditoriaDAO.CadDetAuditoria(descricaoAudit);
                 telaDetFornecedor.TabelaContatos();
             }
             this.dispose();

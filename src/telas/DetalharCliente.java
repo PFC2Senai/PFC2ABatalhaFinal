@@ -1254,6 +1254,8 @@ public class DetalharCliente extends javax.swing.JFrame {
             jBtnCarregaCep.setVisible(false);
             desabilitarEndereco();
             JOptionPane.showMessageDialog(null, "Alterado com sucesso!");
+            String descricaoAudit = "Empresa " + txtEmpresa.getText() + " /CNPJ: " + txtCnpj.getText() + "teve o endereço alterado.";
+            AuditoriaDAO.CadDetAuditoria(descricaoAudit);
         }
     }//GEN-LAST:event_jBtnAltEnderecoActionPerformed
 
