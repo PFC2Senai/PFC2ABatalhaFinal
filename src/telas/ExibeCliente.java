@@ -44,6 +44,7 @@ public final class ExibeCliente extends javax.swing.JFrame {
         initComponents();
         populaComboBox();
         botoes();
+        txtCnpj.setVisible(false);
         TabelaCliente("select  * from vw_cliente;");
     }
     
@@ -52,6 +53,7 @@ public final class ExibeCliente extends javax.swing.JFrame {
         initComponents();
         populaComboBox();
         botoes();
+        txtCnpj.setVisible(false);
         TabelaCliente("select  * from vw_cliente;");
     }
 
@@ -92,7 +94,7 @@ public final class ExibeCliente extends javax.swing.JFrame {
 
             stmt = getConnection().createStatement();
             ArrayList dados = new ArrayList();
-            String[] Colunas = {"Código", "Empresa", "CNPJ", "Setor", "Estado"};
+            String[] Colunas = {"Código", "Empresa", "CNPJ", "Segmento", "Estado"};
 
             ResultSet rs;
             rs = stmt.executeQuery(Sql);
@@ -150,12 +152,12 @@ public final class ExibeCliente extends javax.swing.JFrame {
         jBtnCadastrarNovoCliente = new javax.swing.JButton();
         jBtnRotinaContato = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
+        txtCnpj = new javax.swing.JFormattedTextField();
         txtBuscar = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jComboBoxSetores = new javax.swing.JComboBox();
         jBtnVoltarMenu = new javax.swing.JButton();
-        jBtnBuscar = new javax.swing.JButton();
         jComboUf = new javax.swing.JComboBox();
         jLabel1 = new javax.swing.JLabel();
         jBtnLembrete = new javax.swing.JButton();
@@ -170,6 +172,7 @@ public final class ExibeCliente extends javax.swing.JFrame {
         });
 
         jPanel1.setBackground(new java.awt.Color(223, 237, 253));
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jComboBoxOpcaoPesquisa.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Selecione a opção de pesquisa", "Código", "Nome", "CNPJ" }));
         jComboBoxOpcaoPesquisa.addActionListener(new java.awt.event.ActionListener() {
@@ -177,6 +180,7 @@ public final class ExibeCliente extends javax.swing.JFrame {
                 jComboBoxOpcaoPesquisaActionPerformed(evt);
             }
         });
+        jPanel1.add(jComboBoxOpcaoPesquisa, new org.netbeans.lib.awtextra.AbsoluteConstraints(94, 58, 254, -1));
 
         jTableListarClientes.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -188,6 +192,8 @@ public final class ExibeCliente extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(jTableListarClientes);
 
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(34, 155, 717, 425));
+
         jBtnCadastrarNovoCliente.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jBtnCadastrarNovoCliente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/cliente2.fw.png"))); // NOI18N
         jBtnCadastrarNovoCliente.setText("Novo");
@@ -196,6 +202,7 @@ public final class ExibeCliente extends javax.swing.JFrame {
                 jBtnCadastrarNovoClienteActionPerformed(evt);
             }
         });
+        jPanel1.add(jBtnCadastrarNovoCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(778, 155, 140, -1));
 
         jBtnRotinaContato.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jBtnRotinaContato.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/1452414361_kontact_1.png"))); // NOI18N
@@ -209,24 +216,42 @@ public final class ExibeCliente extends javax.swing.JFrame {
                 jBtnRotinaContatoActionPerformed(evt);
             }
         });
+        jPanel1.add(jBtnRotinaContato, new org.netbeans.lib.awtextra.AbsoluteConstraints(778, 523, 140, -1));
 
         jLabel5.setText("Estado:");
+        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(366, 110, -1, -1));
+
+        try {
+            txtCnpj.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##.###.###/####-##")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+        txtCnpj.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtCnpjKeyReleased(evt);
+            }
+        });
+        jPanel1.add(txtCnpj, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 60, 122, -1));
 
         txtBuscar.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 txtBuscarKeyReleased(evt);
             }
         });
+        jPanel1.add(txtBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 60, 256, -1));
 
         jLabel2.setText("Pesquisar:");
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(34, 61, -1, -1));
 
         jLabel4.setText("Filtrar:");
+        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(34, 110, -1, -1));
 
         jComboBoxSetores.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jComboBoxSetoresActionPerformed(evt);
             }
         });
+        jPanel1.add(jComboBoxSetores, new org.netbeans.lib.awtextra.AbsoluteConstraints(94, 107, 254, -1));
 
         jBtnVoltarMenu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/arrow_rotate_clockwise.png"))); // NOI18N
         jBtnVoltarMenu.setText("Voltar");
@@ -235,14 +260,7 @@ public final class ExibeCliente extends javax.swing.JFrame {
                 jBtnVoltarMenuActionPerformed(evt);
             }
         });
-
-        jBtnBuscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/pesquisar.gif"))); // NOI18N
-        jBtnBuscar.setText("Buscar");
-        jBtnBuscar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jBtnBuscarActionPerformed(evt);
-            }
-        });
+        jPanel1.add(jBtnVoltarMenu, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 600, -1, -1));
 
         jComboUf.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Selecione", "AC", "AL", "AP", "AM", "BA", "CE", "DF", "ES", "GO", "MA", "MT", "MS", "MG", "PA", "PB", "PR", "PE", "PI", "RJ", "RN", "RS", "RO", "RR", "SC", "SP", "SE", "TO" }));
         jComboUf.addActionListener(new java.awt.event.ActionListener() {
@@ -250,9 +268,11 @@ public final class ExibeCliente extends javax.swing.JFrame {
                 jComboUfActionPerformed(evt);
             }
         });
+        jPanel1.add(jComboUf, new org.netbeans.lib.awtextra.AbsoluteConstraints(407, 107, 215, -1));
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel1.setText("CLIENTES");
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(34, 30, -1, -1));
 
         jBtnLembrete.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jBtnLembrete.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/CadastrarLembrete.png"))); // NOI18N
@@ -266,6 +286,7 @@ public final class ExibeCliente extends javax.swing.JFrame {
                 jBtnLembreteActionPerformed(evt);
             }
         });
+        jPanel1.add(jBtnLembrete, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 390, 140, -1));
 
         jBtnEditar.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jBtnEditar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/cliente3.fw.png"))); // NOI18N
@@ -279,89 +300,19 @@ public final class ExibeCliente extends javax.swing.JFrame {
                 jBtnEditarActionPerformed(evt);
             }
         });
-
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(34, 34, 34)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 717, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel4)
-                                    .addComponent(jLabel2))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jComboBoxSetores, javax.swing.GroupLayout.PREFERRED_SIZE, 254, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jComboBoxOpcaoPesquisa, javax.swing.GroupLayout.PREFERRED_SIZE, 254, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(18, 18, 18)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addComponent(txtBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 256, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(jBtnBuscar))
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addComponent(jLabel5)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jComboUf, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                        .addGap(18, 27, Short.MAX_VALUE)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jBtnRotinaContato, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jBtnLembrete, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jBtnEditar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jBtnCadastrarNovoCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jBtnVoltarMenu)
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addGap(34, 34, 34))
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(30, 30, 30)
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jComboBoxOpcaoPesquisa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jBtnBuscar)
-                    .addComponent(jLabel2))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jComboBoxSetores, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel5)
-                    .addComponent(jComboUf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel4))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jBtnCadastrarNovoCliente)
-                        .addGap(63, 63, 63)
-                        .addComponent(jBtnEditar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jBtnLembrete)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jBtnRotinaContato))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 425, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
-                .addComponent(jBtnVoltarMenu)
-                .addContainerGap())
-        );
+        jPanel1.add(jBtnEditar, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 260, 140, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 959, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 655, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         bindingGroup.bind();
@@ -395,14 +346,14 @@ public final class ExibeCliente extends javax.swing.JFrame {
         if (jComboUf.getSelectedIndex() != 0) {
             
             TabelaCliente("select  * from vw_cliente where " + opcaoPesquisa
-                    + " like '%" + txtBuscar.getText() + "%' "
+                    + " like '%" + txtBuscar.getText().trim() + "%' "
                     + "and setor = '" + jComboBoxSetores.getSelectedItem().toString() + "' "
                     + "and estado = '" + jComboUf.getSelectedItem().toString() + "';");
         
         }else if (jComboUf.getSelectedIndex() == 0) {
             
             TabelaCliente("select  * from vw_cliente where " + opcaoPesquisa
-                    + " like '%" + txtBuscar.getText() + "%' "
+                    + " like '%" + txtBuscar.getText().trim() + "%' "
                     + "and setor = '" + jComboBoxSetores.getSelectedItem().toString() + "' ;");
         
         }
@@ -410,14 +361,14 @@ public final class ExibeCliente extends javax.swing.JFrame {
         if (jComboUf.getSelectedIndex() != 0 && jComboBoxSetores.getSelectedIndex() == 0) {
             
             TabelaCliente("select  * from vw_cliente where " + opcaoPesquisa
-                    + " like '%" + txtBuscar.getText() + "%' "
+                    + " like '%" + txtBuscar.getText().trim() + "%' "
                     + "and estado = '" + jComboUf.getSelectedItem().toString() + "';");
         }
         
         if (jComboUf.getSelectedIndex() == 0 && jComboBoxSetores.getSelectedIndex() == 0) {
             
             TabelaCliente("select  * from vw_cliente where " + opcaoPesquisa
-                    + " like '%" + txtBuscar.getText() + "%';");
+                    + " like '%" + txtBuscar.getText().trim() + "%';");
         }
 
     }//GEN-LAST:event_jComboBoxSetoresActionPerformed
@@ -427,53 +378,42 @@ public final class ExibeCliente extends javax.swing.JFrame {
             case "Código":
                 opcaoPesquisa = "idcliente";
                 linhaTabela = 0;
+                txtCnpj.setVisible(false);
+                txtBuscar.setVisible(true);
                 break;
             case "Nome":
                 opcaoPesquisa = "empresa";
                 linhaTabela = 1;
+                txtCnpj.setVisible(false);
+                txtBuscar.setVisible(true);
                 break;
             case "CNPJ":
                 opcaoPesquisa = "cnpj";
                 linhaTabela = 2;
+                txtCnpj.setVisible(true);
+                txtBuscar.setVisible(false);
+                break;
+            case "Selecione a opção de pesquisa":
+                txtCnpj.setVisible(false);
+                txtBuscar.setVisible(true);
+                TabelaCliente("select  * from vw_cliente;");
                 break;
         }
     }//GEN-LAST:event_jComboBoxOpcaoPesquisaActionPerformed
-
-    private void jBtnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnBuscarActionPerformed
-
-        int posi = 0;
-        boolean valida = false;
-
-        for (int j = 0; j < jTableListarClientes.getRowCount(); j++) {
-
-            if (jComboBoxSetores.getSelectedItem().toString().equalsIgnoreCase(jTableListarClientes.getValueAt(j, 3).toString())) {
-                valida = true;
-                posi = j;
-                break;
-            } else {
-                valida = false;
-            }
-        }
-
-        if (valida) {
-            jTableListarClientes.getSelectionModel().setSelectionInterval(posi, posi);
-            jTableListarClientes.setSelectionBackground(Color.green);
-        }
-    }//GEN-LAST:event_jBtnBuscarActionPerformed
 
     private void jComboUfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboUfActionPerformed
 
         if (jComboBoxSetores.getSelectedIndex() != 0) {
             
             TabelaCliente("select  * from vw_cliente where " + opcaoPesquisa
-                    + " like '%" + txtBuscar.getText() + "%' "
+                    + " like '%" + txtBuscar.getText().trim() + "%' "
                     + "and setor = '" + jComboBoxSetores.getSelectedItem().toString() + "' "
                     + "and estado = '" + jComboUf.getSelectedItem().toString() + "';");
             
         } else if (jComboBoxSetores.getSelectedIndex() == 0) {
             
             TabelaCliente("select  * from vw_cliente where " + opcaoPesquisa
-                    + " like '%" + txtBuscar.getText() + "%' "
+                    + " like '%" + txtBuscar.getText().trim() + "%' "
                     + "and estado = '" + jComboUf.getSelectedItem().toString() + "';");
             
         }
@@ -481,19 +421,19 @@ public final class ExibeCliente extends javax.swing.JFrame {
         if (jComboBoxSetores.getSelectedIndex() != 0 && jComboUf.getSelectedIndex() == 0) {
             
             TabelaCliente("select  * from vw_cliente where " + opcaoPesquisa
-                    + " like '%" + txtBuscar.getText() + "%' "
+                    + " like '%" + txtBuscar.getText().trim() + "%' "
                     + "and setor = '" + jComboBoxSetores.getSelectedItem().toString() + "' ;");
         }
         if (jComboBoxSetores.getSelectedIndex() == 0 && jComboUf.getSelectedIndex() == 0) {
             
             TabelaCliente("select  * from vw_cliente where " + opcaoPesquisa
-                    + " like '%" + txtBuscar.getText() + "%';");
+                    + " like '%" + txtBuscar.getText().trim() + "%';");
         }
     }//GEN-LAST:event_jComboUfActionPerformed
 
     private void txtBuscarKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBuscarKeyReleased
         TabelaCliente("select  * from vw_cliente where " + opcaoPesquisa
-                + " like '%" + txtBuscar.getText() + "%';");
+                + " like '%" + txtBuscar.getText().trim() + "%';");
     }//GEN-LAST:event_txtBuscarKeyReleased
 
     private void jBtnRotinaContatoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnRotinaContatoActionPerformed
@@ -511,6 +451,15 @@ public final class ExibeCliente extends javax.swing.JFrame {
         verificaPagina();
         this.dispose();
     }//GEN-LAST:event_jBtnVoltarMenuActionPerformed
+
+    private void txtCnpjKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCnpjKeyReleased
+        if (txtCnpj.getText().trim().length() == 18) {
+            TabelaCliente("select  * from vw_cliente where cnpj "
+                    + "like '%" + txtCnpj.getText().trim() + "%';");
+        }else {
+            TabelaCliente("select  * from vw_cliente;");
+        }
+    }//GEN-LAST:event_txtCnpjKeyReleased
 
     private void populaComboBox() {
 
@@ -541,7 +490,6 @@ public final class ExibeCliente extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jBtnBuscar;
     private javax.swing.JButton jBtnCadastrarNovoCliente;
     private javax.swing.JButton jBtnEditar;
     private javax.swing.JButton jBtnLembrete;
@@ -558,6 +506,7 @@ public final class ExibeCliente extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTableListarClientes;
     private javax.swing.JTextField txtBuscar;
+    private javax.swing.JFormattedTextField txtCnpj;
     private org.jdesktop.beansbinding.BindingGroup bindingGroup;
     // End of variables declaration//GEN-END:variables
 }

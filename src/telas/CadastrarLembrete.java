@@ -221,11 +221,11 @@ public class CadastrarLembrete extends javax.swing.JFrame {
 
         if ((this.detalharCliente != null)) {
             this.detalharCliente.setEnabled(true);
-          //  this.detalharCliente.toFront();
+            this.detalharCliente.toFront();
             this.detalharCliente.TabelaLembrete2(codCli);
         }else if ((this.telaExibeCliente != null)) {
             this.telaExibeCliente.setEnabled(true);
-         //   this.telaExibeCliente.toFront();
+            this.telaExibeCliente.toFront();
         }
     }
 

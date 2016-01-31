@@ -194,7 +194,7 @@ public class ExibeFuncionario extends javax.swing.JFrame {
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel1.setText("FUNCIONÁRIOS");
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(27, 21, -1, -1));
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 20, -1, -1));
 
         try {
             txtRg.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##.###.###-##")));
@@ -257,7 +257,6 @@ public class ExibeFuncionario extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jBtnDetalharFuncionarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnDetalharFuncionarioActionPerformed
-
         if (jTableListarFuncionarios.getSelectedRow() != -1) {
             int linha = jTableListarFuncionarios.getSelectedRow();
             indice = (Integer.parseInt(jTableListarFuncionarios.getValueAt(linha, 0).toString()));
@@ -293,20 +292,31 @@ public class ExibeFuncionario extends javax.swing.JFrame {
                 txtRg.setVisible(true);
                 txtCpf.setVisible(false);
                 break;
+            case "Selecione a opção de pesquisa":
+                TabelaFuncionario("select * from tabfuncionario;");
+                break;
         }
     }//GEN-LAST:event_jComboBoxOpcaoPesquisaActionPerformed
 
     private void txtBuscarKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBuscarKeyReleased
         TabelaFuncionario("select  * from tabfuncionario where " + opcaoPesquisa
-                + " like '%" + txtBuscar.getText() + "%';");
+                + " like '%" + txtBuscar.getText().trim() + "%';");
     }//GEN-LAST:event_txtBuscarKeyReleased
 
     private void txtRgKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtRgKeyReleased
-        TabelaFuncionario("select  * from tabfuncionario where rg like '%" + txtRg.getText() + "%';");
+        if (txtRg.getText().trim().length() == 13) {
+            TabelaFuncionario("select  * from tabfuncionario where rg like '%" + txtRg.getText().trim() + "%';");
+        }else{
+            TabelaFuncionario("select * from tabfuncionario;");
+        }                
     }//GEN-LAST:event_txtRgKeyReleased
 
     private void txtCpfKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCpfKeyReleased
-        TabelaFuncionario("select  * from tabfuncionario where cpf like '%" + txtCpf.getText() + "%';");
+        if (txtCpf.getText().trim().length() == 14) {
+            TabelaFuncionario("select  * from tabfuncionario where cpf like '%" + txtCpf.getText().trim() + "%';");
+        }else {
+            TabelaFuncionario("select * from tabfuncionario;");
+        }     
     }//GEN-LAST:event_txtCpfKeyReleased
 
     private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed

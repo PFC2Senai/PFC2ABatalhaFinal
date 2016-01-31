@@ -17,18 +17,13 @@ public class TabelaZebrada extends DefaultTableCellRenderer {
         Component comp = super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
        
                 
-        if (isSelected) {           
-           // comp.setBackground(new Color(9,144,247));
-           
-         //   setForeground(isSelected ? Color.white : Color.black);
-      
+        if (isSelected) {     
             table.setSelectionBackground(new Color(9,144,247));
         } else if (row % 2 == 0) {
             comp.setBackground(new Color(238,255,205));
         } else {
             comp.setBackground(new Color(243,252,224));
         }
-
         return comp;		 
     }
 }
