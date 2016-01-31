@@ -1,7 +1,6 @@
 package telas;
 
 import atributos.Funcionario;
-import funcoes.FuncionarioDAO;
 import static funcoes.Conexao.getConnection;
 import funcoes.ModeloTabela;
 import funcoes.TabelaZebrada;
@@ -16,10 +15,7 @@ import javax.swing.ListSelectionModel;
 import javax.swing.SwingConstants;
 import javax.swing.table.TableCellRenderer;
 
-/**
- *
- * @author S015365
- */
+
 public class ExibeFuncionario extends javax.swing.JFrame {
 
     Statement stmt;
@@ -27,11 +23,19 @@ public class ExibeFuncionario extends javax.swing.JFrame {
     private static int indice;
     private static int idContato;
     String opcaoPesquisa = "funcionario";
+    private Menu telaMenu;
 
-    /**
-     * Creates new form CadastroDeFuncionarios
-     */
     public ExibeFuncionario() {
+        initComponents();
+        TabelaFuncionario("select * from tabfuncionario;");
+        txtBuscar.setVisible(true);
+        txtRg.setVisible(false);
+        txtCpf.setVisible(false);
+        botoes();
+    }
+    
+    public ExibeFuncionario(Menu menu) {
+        this.telaMenu = menu;
         initComponents();
         TabelaFuncionario("select * from tabfuncionario;");
         txtBuscar.setVisible(true);
@@ -121,6 +125,11 @@ public class ExibeFuncionario extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setResizable(false);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosed(java.awt.event.WindowEvent evt) {
+                formWindowClosed(evt);
+            }
+        });
 
         jPanel1.setBackground(new java.awt.Color(235, 235, 253));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -238,20 +247,22 @@ public class ExibeFuncionario extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jBtnNovoFuncionarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnNovoFuncionarioActionPerformed
-        //new CadastrarFuncionario().setVisible(true);
+        this.setVisible(false);
+        new CadastrarFuncionario(this).setVisible(true);
     }//GEN-LAST:event_jBtnNovoFuncionarioActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        verificaPagina();
         this.dispose();
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jBtnDetalharFuncionarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnDetalharFuncionarioActionPerformed
 
         if (jTableListarFuncionarios.getSelectedRow() != -1) {
-            this.dispose();
             int linha = jTableListarFuncionarios.getSelectedRow();
             indice = (Integer.parseInt(jTableListarFuncionarios.getValueAt(linha, 0).toString()));
-            new AlterarFuncionario().setVisible(true);
+            this.setVisible(false);
+            new AlterarFuncionario(this).setVisible(true);
         } else {
             JOptionPane.showMessageDialog(null, "Primeiro selecione um registro.");
         }
@@ -298,7 +309,16 @@ public class ExibeFuncionario extends javax.swing.JFrame {
         TabelaFuncionario("select  * from tabfuncionario where cpf like '%" + txtCpf.getText() + "%';");
     }//GEN-LAST:event_txtCpfKeyReleased
 
+    private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
+        verificaPagina();
+    }//GEN-LAST:event_formWindowClosed
 
+    private void verificaPagina() {
+        if ((this.telaMenu != null)) {
+            this.telaMenu.setVisible(true);
+        }
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBtnDetalharFuncionario;
     private javax.swing.JButton jBtnNovoFuncionario;

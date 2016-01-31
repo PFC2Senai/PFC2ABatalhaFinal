@@ -26,12 +26,31 @@ public class CadastrarFuncionario extends javax.swing.JFrame {
     private CadastrarFuncionario telaFunc;
     int posicao = 10;
     private String descricaoAudit;
+    private ExibeFuncionario telaExibeFunc;
+    private Menu telaMenu;
 
     public CadastrarFuncionario() {
         telaFunc = this;
         initComponents();
-        //labelCodFuncionario.setVisible(false);
-//        jTextNome.setDocument(new LimitarDigitos(45));
+        limitarDigitos();
+    }
+    
+    public CadastrarFuncionario(ExibeFuncionario exibeFunc) {
+        this.telaExibeFunc = exibeFunc;
+        telaFunc = this;
+        initComponents();
+        limitarDigitos();
+    }
+    
+    public CadastrarFuncionario(Menu menu) {
+        this.telaMenu = menu;
+        telaFunc = this;
+        initComponents();
+        limitarDigitos();
+    }
+
+    private void limitarDigitos() {
+        //        jTextNome.setDocument(new LimitarDigitos(45));
 //        jTextCargo.setDocument(new LimitarDigitos(45));
 //        jTextSalario.setDocument(new LimitarDigitos(45));
 //
@@ -45,9 +64,8 @@ public class CadastrarFuncionario extends javax.swing.JFrame {
 //        txtRua.setDocument(new LimitarDigitos(45));
 //        txtNumero.setDocument(new LimitarDigitos(5));
         txtEstado.setDocument(new LimitarDigitos(2));
-
     }
-
+    
     private void limparCampos() {
         jTextNome.setText("");
         jTextRg.setText("");
@@ -132,6 +150,11 @@ public class CadastrarFuncionario extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setResizable(false);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosed(java.awt.event.WindowEvent evt) {
+                formWindowClosed(evt);
+            }
+        });
 
         jPanel5.setBackground(new java.awt.Color(235, 235, 253));
 
@@ -526,7 +549,7 @@ public class CadastrarFuncionario extends javax.swing.JFrame {
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jBtnCadastrarFuncionario, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap())
+                .addGap(23, 23, 23))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -537,9 +560,7 @@ public class CadastrarFuncionario extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+            .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -602,9 +623,9 @@ public class CadastrarFuncionario extends javax.swing.JFrame {
 
                 if (JOptionPane.showConfirmDialog(null, "Deseja continuar cadastrando?", "Confirmar Cadastro", JOptionPane.YES_NO_OPTION) == 1) {
                     verificaPagina();
-//                        if (telaExibeCliente != null) {
-//                            this.telaExibeCliente.TabelaCliente("select  * from vw_cliente;");
-//                        }
+                        if (telaExibeFunc != null) {
+                            this.telaExibeFunc.TabelaFuncionario("select * from tabfuncionario;");
+                        }
                     this.dispose();
                 } else {
                     jTextNome.requestFocus();
@@ -641,6 +662,10 @@ public class CadastrarFuncionario extends javax.swing.JFrame {
     private void txtEmailFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtEmailFocusLost
         ValidaEmail();
     }//GEN-LAST:event_txtEmailFocusLost
+
+    private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
+        verificaPagina();
+    }//GEN-LAST:event_formWindowClosed
 
     private boolean VerificaCampos() {
 
@@ -844,13 +869,13 @@ public class CadastrarFuncionario extends javax.swing.JFrame {
 
     private void verificaPagina() {
 
-//        if ((this.telaMenu != null)) {
-//            this.telaMenu.setVisible(true);
-//            // this.telaMenu.toFront();
-//        } else if ((this.telaExibeCliente != null)) {
-//            this.telaExibeCliente.setVisible(true);
-//            // this.telaExibeCliente.toFront();
-//        }
+        if ((this.telaMenu != null)) {
+            this.telaMenu.setVisible(true);
+            // this.telaMenu.toFront();
+        } else if ((this.telaExibeFunc != null)) {
+            this.telaExibeFunc.setVisible(true);
+            // this.telaExibeCliente.toFront();
+        }
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

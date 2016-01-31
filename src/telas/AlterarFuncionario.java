@@ -21,12 +21,12 @@ import javax.swing.border.LineBorder;
 import static telas.ExibeFuncionario.GetIndice;
 
 
-
 public class AlterarFuncionario extends javax.swing.JFrame {
     
     private int idContato;
     private AlterarFuncionario telaFunc;
     private int idFuncionario;
+    private ExibeFuncionario telaExibeFunc;
 
     /**
      * Creates new form AlterarFuncionario
@@ -34,11 +34,19 @@ public class AlterarFuncionario extends javax.swing.JFrame {
     public AlterarFuncionario() {
         telaFunc = this;
         this.idFuncionario = GetIndice();       
+        this.idContato = FuncionarioDAO.idContato(idFuncionario);        
+        initComponents();
+        CarregaFuncionario();        
+    }
+    
+    public AlterarFuncionario(ExibeFuncionario exibeFunc) {
+        this.telaExibeFunc = exibeFunc;
+        telaFunc = this;
+        this.idFuncionario = GetIndice();       
         this.idContato = FuncionarioDAO.idContato(idFuncionario);
         
         initComponents();
-        CarregaFuncionario();
-        
+        CarregaFuncionario();       
     }
 
     private void CarregaFuncionario() {
@@ -409,6 +417,11 @@ public class AlterarFuncionario extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setResizable(false);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosed(java.awt.event.WindowEvent evt) {
+                formWindowClosed(evt);
+            }
+        });
 
         jPanel5.setBackground(new java.awt.Color(235, 235, 253));
 
@@ -617,24 +630,26 @@ public class AlterarFuncionario extends javax.swing.JFrame {
                             .addComponent(jBtnEditarEndereco)))
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addGap(10, 10, 10)
-                        .addComponent(jLabel15)
-                        .addGap(8, 8, 8)
-                        .addComponent(txtEndCidade, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(57, 57, 57)
-                        .addComponent(jLabel18)
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel4Layout.createSequentialGroup()
+                                .addComponent(jLabel15)
+                                .addGap(8, 8, 8)
+                                .addComponent(txtEndCidade, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(57, 57, 57)
+                                .addComponent(jLabel18))
+                            .addGroup(jPanel4Layout.createSequentialGroup()
+                                .addComponent(jLabel20)
+                                .addGap(22, 22, 22)
+                                .addComponent(txtEndRua, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(57, 57, 57)
+                                .addComponent(jLabel21)))
                         .addGap(18, 18, 18)
-                        .addComponent(txtEndBairro, javax.swing.GroupLayout.PREFERRED_SIZE, 268, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(58, 58, 58)
-                        .addComponent(jBtnSalvarEndereco))
-                    .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addGap(10, 10, 10)
-                        .addComponent(jLabel20)
-                        .addGap(22, 22, 22)
-                        .addComponent(txtEndRua, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(57, 57, 57)
-                        .addComponent(jLabel21)
-                        .addGap(9, 9, 9)
-                        .addComponent(txtEndNum, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtEndNum, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel4Layout.createSequentialGroup()
+                                .addComponent(txtEndBairro, javax.swing.GroupLayout.PREFERRED_SIZE, 268, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(58, 58, 58)
+                                .addComponent(jBtnSalvarEndereco)))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
@@ -661,7 +676,7 @@ public class AlterarFuncionario extends javax.swing.JFrame {
                                 .addGap(1, 1, 1)
                                 .addComponent(txtEndEstado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jLabel16))
-                        .addGap(14, 14, 14))
+                        .addGap(18, 18, 18))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -677,18 +692,15 @@ public class AlterarFuncionario extends javax.swing.JFrame {
                         .addGap(4, 4, 4)
                         .addComponent(jLabel18))
                     .addComponent(txtEndBairro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addGap(0, 0, 0)
-                        .addComponent(jBtnSalvarEndereco)))
+                    .addComponent(jBtnSalvarEndereco))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel20)
                     .addComponent(txtEndRua, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel21)
-                    .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addGap(1, 1, 1)
+                    .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel21)
                         .addComponent(txtEndNum, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(13, Short.MAX_VALUE))
+                .addContainerGap(14, Short.MAX_VALUE))
         );
 
         jPanel2.setBackground(new java.awt.Color(235, 235, 253));
@@ -820,15 +832,9 @@ public class AlterarFuncionario extends javax.swing.JFrame {
                             .addComponent(jBtnEditarFuncionairo))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(0, 0, 0)
-                        .addComponent(jLabel4))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(0, 0, 0)
-                        .addComponent(jTextCargo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(0, 0, 0)
-                        .addComponent(jLabel5))
+                    .addComponent(jLabel4)
+                    .addComponent(jTextCargo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel5)
                     .addComponent(jBtnSalvarFuncionario)
                     .addComponent(jTextSalario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -1153,8 +1159,12 @@ public class AlterarFuncionario extends javax.swing.JFrame {
     }//GEN-LAST:event_jBtbCancelCarteiraActionPerformed
 
     private void jBtnVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnVoltarActionPerformed
-        // TODO add your handling code here:
+        verificaPagina();
     }//GEN-LAST:event_jBtnVoltarActionPerformed
+
+    private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
+        verificaPagina();
+    }//GEN-LAST:event_formWindowClosed
 
     public boolean ValidaEmail() {
 
@@ -1371,6 +1381,13 @@ public class AlterarFuncionario extends javax.swing.JFrame {
             return valida;
         }    
         return valida;
+    }
+    
+    private void verificaPagina() {
+        if ((this.telaExibeFunc != null)) {
+            this.telaExibeFunc.setVisible(true);
+            telaExibeFunc.TabelaFuncionario("select * from tabfuncionario;");
+        }
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
