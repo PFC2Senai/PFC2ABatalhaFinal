@@ -94,8 +94,10 @@ public class CadastrarLembrete extends javax.swing.JFrame {
         jBtnSair = new javax.swing.JButton();
         txtHoraLembrete = new javax.swing.JFormattedTextField();
         uJComboBoxClientes = new componentes.UJComboBox();
+        jLabel5 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("LEMBRETE");
         setResizable(false);
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosed(java.awt.event.WindowEvent evt) {
@@ -119,7 +121,7 @@ public class CadastrarLembrete extends javax.swing.JFrame {
         jLabNomeEmpresa.setText("Empresa:");
         jPanel1.add(jLabNomeEmpresa, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 100, -1, 20));
 
-        jLabEmpresa.setText("empresa");
+        jLabEmpresa.setText("Empresa");
         jPanel1.add(jLabEmpresa, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 100, 200, 20));
 
         jLabel2.setText("Data:");
@@ -171,6 +173,11 @@ public class CadastrarLembrete extends javax.swing.JFrame {
             }
         });
         jPanel1.add(uJComboBoxClientes, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 100, 290, -1));
+
+        jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/lembretes.png"))); // NOI18N
+        jLabel5.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 430, 270));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 420, 520));
 
@@ -325,6 +332,7 @@ public class CadastrarLembrete extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private com.toedter.calendar.JDateChooser txtDataLembrete;

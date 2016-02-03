@@ -85,6 +85,7 @@ public final class AlterarContato extends javax.swing.JFrame {
         jComboBoxSetorContato = new javax.swing.JComboBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("ALTERAR CONTATO");
         setResizable(false);
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosed(java.awt.event.WindowEvent evt) {
@@ -116,7 +117,7 @@ public final class AlterarContato extends javax.swing.JFrame {
             }
         });
 
-        jBtnAltContato.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/ok.png"))); // NOI18N
+        jBtnAltContato.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/salvar.png"))); // NOI18N
         jBtnAltContato.setText("Salvar");
         jBtnAltContato.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

@@ -112,7 +112,7 @@
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Tahoma" size="18" style="0"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="Produto"/>
+            <Property name="text" type="java.lang.String" value="Alterar Estoque"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JComboBox" name="jComboBoxTipoAlteracao">
@@ -221,7 +221,7 @@
             </Component>
             <Component class="javax.swing.JLabel" name="txtProduto">
               <Properties>
-                <Property name="text" type="java.lang.String" value="produto"/>
+                <Property name="text" type="java.lang.String" value="Pe&#xe7;a"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="txtFabricante">
@@ -236,7 +236,7 @@
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel2">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Produto:"/>
+                <Property name="text" type="java.lang.String" value="Pe&#xe7;a:"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel11">
@@ -407,7 +407,7 @@
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel8">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Pre&#xe7;o de Sa&#xed;da:"/>
+                <Property name="text" type="java.lang.String" value="Valor de Sa&#xed;da:"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JComboBox" name="jComboBoxFornecedor">
@@ -424,7 +424,7 @@
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel7">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Pre&#xe7;o de Entrada:"/>
+                <Property name="text" type="java.lang.String" value="Valor de Entrada:"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JButton" name="jBtnCalcular">

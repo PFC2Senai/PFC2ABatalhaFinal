@@ -130,7 +130,7 @@ public final class AlterarEstoque extends javax.swing.JFrame {
         jBtnCancelar.setText("Cancelar");
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jLabel1.setText("Produto");
+        jLabel1.setText("Alterar Estoque");
 
         jComboBoxTipoAlteracao.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Selecione o tipo de alteração", "Entrada", "Saída" }));
         jComboBoxTipoAlteracao.addActionListener(new java.awt.event.ActionListener() {
@@ -151,13 +151,13 @@ public final class AlterarEstoque extends javax.swing.JFrame {
 
         txtModelo.setText("modelo");
 
-        txtProduto.setText("produto");
+        txtProduto.setText("Peça");
 
         txtFabricante.setText("fabricante");
 
         jLabel6.setText("Fabricante:");
 
-        jLabel2.setText("Produto:");
+        jLabel2.setText("Peça:");
 
         jLabel11.setText("Estoque Mínimo:");
 
@@ -237,7 +237,7 @@ public final class AlterarEstoque extends javax.swing.JFrame {
 
         txtPrecoSaida.setEnabled(false);
 
-        jLabel8.setText("Preço de Saída:");
+        jLabel8.setText("Valor de Saída:");
 
         jComboBoxFornecedor.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Selecione o fornecedor" }));
         jComboBoxFornecedor.addActionListener(new java.awt.event.ActionListener() {
@@ -246,7 +246,7 @@ public final class AlterarEstoque extends javax.swing.JFrame {
             }
         });
 
-        jLabel7.setText("Preço de Entrada:");
+        jLabel7.setText("Valor de Entrada:");
 
         jBtnCalcular.setText("Calcular");
         jBtnCalcular.addActionListener(new java.awt.event.ActionListener() {
