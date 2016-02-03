@@ -607,7 +607,7 @@ public class CadastrarCliente extends javax.swing.JFrame {
             }
         });
 
-        jBtnSalvarSetor.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/ok.png"))); // NOI18N
+        jBtnSalvarSetor.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/salvar.png"))); // NOI18N
         jBtnSalvarSetor.setText("Salvar");
         jBtnSalvarSetor.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
