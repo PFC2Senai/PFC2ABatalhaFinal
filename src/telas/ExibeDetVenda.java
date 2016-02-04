@@ -85,24 +85,28 @@ public class ExibeDetVenda extends javax.swing.JFrame {
     public void TabelaVendas() {
 
         try {
-            String Sql = "select * from tabvendas v inner join tabdetvendas dtV on "
-                    + "v.idtabVendas = dtV.tabVendas_idtabVendas where v.idtabVendas = " + codVenda + ";";
+            String Sql = "select * from vw_venda where idtabVendas = " + codVenda + ";";
 
             stmt = getConnection().createStatement();
             ArrayList dados = new ArrayList();
-            String[] Colunas = {"Código do Detalhe da Venda", "Quantidade", "Código do Detalhe do Produto"};
+            String[] Colunas = {"Código do Detalhe da Venda", "Quantidade", "Código do Detalhe do Produto",
+            "Código do Produto", "Produto", "Modelo", "Fabricante"};
 
             ResultSet rs;
             rs = stmt.executeQuery(Sql);
 
             while (rs.next()) {
                 dados.add(new Object[]{ 
-                    rs.getObject("idtabDetVendas"), 
-                    rs.getObject("quantidade"), 
-                    rs.getObject("tabdetproduto_idDetProduto")});
+                    rs.getObject("idtabVendas"), 
+                    rs.getObject("quant"), 
+                    rs.getObject("tabdetproduto_idDetProduto"),
+                    rs.getObject("id_prod"),
+                    rs.getObject("produto"),
+                    rs.getObject("modelo"),
+                    rs.getObject("fabricante")});
             }
 
-            for (int i = 0; i < 3; i++) {
+            for (int i = 0; i < 7; i++) {
                 ModeloTabela modelo = new ModeloTabela(dados, Colunas);
                 jTableListarVendas.setModel(modelo);
                 jTableListarVendas.getColumnModel().getColumn(0).setPreferredWidth(200);
@@ -177,10 +181,10 @@ public class ExibeDetVenda extends javax.swing.JFrame {
         jTextCodCliente.setEditable(false);
         jTextCodServ.setEditable(false);
         jTextCodUsuario.setEditable(false);
-        jTextCodVenda.setVisible(false);
-        jTextDataVenda.setVisible(false);
-        jTextHoraVenda.setVisible(false);
-        jTextTotalVenda.setVisible(false);
+        jTextCodVenda.setEditable(false);
+        jTextDataVenda.setEditable(false);
+        jTextHoraVenda.setEditable(false);
+        jTextTotalVenda.setEditable(false);
         // customiza o textfild
         jTextCodCliente.setOpaque(false);
         jTextCodCliente.setBackground(new Color(0, 0, 0, 0));
@@ -254,7 +258,7 @@ public class ExibeDetVenda extends javax.swing.JFrame {
                 jButton3ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 570, -1, -1));
+        getContentPane().add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 570, -1, -1));
 
         jBtnEditarVenda.setText("Editar");
         jBtnEditarVenda.addActionListener(new java.awt.event.ActionListener() {
@@ -262,7 +266,7 @@ public class ExibeDetVenda extends javax.swing.JFrame {
                 jBtnEditarVendaActionPerformed(evt);
             }
         });
-        getContentPane().add(jBtnEditarVenda, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 570, -1, -1));
+        getContentPane().add(jBtnEditarVenda, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 570, -1, -1));
 
         jButtonVoltar.setText("Voltar");
         jButtonVoltar.addActionListener(new java.awt.event.ActionListener() {
@@ -270,7 +274,7 @@ public class ExibeDetVenda extends javax.swing.JFrame {
                 jButtonVoltarActionPerformed(evt);
             }
         });
-        getContentPane().add(jButtonVoltar, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 570, -1, -1));
+        getContentPane().add(jButtonVoltar, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 570, -1, -1));
 
         jTableListarVendas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -286,7 +290,7 @@ public class ExibeDetVenda extends javax.swing.JFrame {
         jTableListarVendas.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
         jScrollPane2.setViewportView(jTableListarVendas);
 
-        getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(139, 313, 570, 230));
+        getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(9, 313, 990, 230));
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Venda", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 2, 18))); // NOI18N
         jPanel1.setName(""); // NOI18N
@@ -326,7 +330,6 @@ public class ExibeDetVenda extends javax.swing.JFrame {
                         .addComponent(jLabel5)
                         .addGap(18, 18, 18)
                         .addComponent(jTextDataVenda, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(109, 109, 109)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jLabel6)
                         .addGap(18, 18, 18)
@@ -371,7 +374,7 @@ public class ExibeDetVenda extends javax.swing.JFrame {
                 .addGap(21, 21, 21))
         );
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 60, 850, 180));
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 60, 850, 180));
 
         jButtonAr1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/editar.png"))); // NOI18N
         jButtonAr1.setText("Editar");
@@ -380,7 +383,7 @@ public class ExibeDetVenda extends javax.swing.JFrame {
                 jButtonAr1ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButtonAr1, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 260, -1, -1));
+        getContentPane().add(jButtonAr1, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 260, -1, -1));
 
         jBtbCancelDadosP.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/cancelar.png"))); // NOI18N
         jBtbCancelDadosP.setText("Cancelar");
@@ -389,7 +392,7 @@ public class ExibeDetVenda extends javax.swing.JFrame {
                 jBtbCancelDadosPActionPerformed(evt);
             }
         });
-        getContentPane().add(jBtbCancelDadosP, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 260, -1, -1));
+        getContentPane().add(jBtbCancelDadosP, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 260, -1, -1));
 
         jBtnAltDadosP.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/ok.png"))); // NOI18N
         jBtnAltDadosP.setText("Salvar");
@@ -398,7 +401,7 @@ public class ExibeDetVenda extends javax.swing.JFrame {
                 jBtnAltDadosPActionPerformed(evt);
             }
         });
-        getContentPane().add(jBtnAltDadosP, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 260, 94, -1));
+        getContentPane().add(jBtnAltDadosP, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 260, 94, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -426,8 +429,11 @@ public class ExibeDetVenda extends javax.swing.JFrame {
     private void jButtonAr1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAr1ActionPerformed
         EditarVendas();
         jTextCodServ.setEditable(true);
-        jTextCodUsuario.setEditable(true);
-        jTextCodCliente.setVisible(true);
+        jTextCodCliente.setEditable(true);
+        jTextDataVenda.setEditable(true);
+        jTextHoraVenda.setEditable(true);
+        jTextTotalVenda.setEditable(true);
+        jTextCodUsuario.setVisible(true);        
         jTextCodVenda.setVisible(true);
 
         jButtonAr1.setVisible(false);
