@@ -57,10 +57,12 @@ public class AdicionarDetServFuncionario extends javax.swing.JFrame {
         jBtnRemoverFunc = new javax.swing.JButton();
         jBtbIncluirFunc = new javax.swing.JButton();
         jBtnSalvarDetServFuncionario = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jPanel5.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jPanel5.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jTableFuncionario.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -81,14 +83,18 @@ public class AdicionarDetServFuncionario extends javax.swing.JFrame {
         jTableFuncionario.getTableHeader().setReorderingAllowed(false);
         jScrollPane3.setViewportView(jTableFuncionario);
 
+        jPanel5.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 240, 514, 190));
+
         jComboBoxFuncionarios.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Selecione o Funcionário" }));
         jComboBoxFuncionarios.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jComboBoxFuncionariosActionPerformed(evt);
             }
         });
+        jPanel5.add(jComboBoxFuncionarios, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 140, 274, -1));
 
         jLabel7.setText("Funcionário:");
+        jPanel5.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 140, -1, -1));
 
         jBtnRemoverFunc.setText("Remover");
         jBtnRemoverFunc.addActionListener(new java.awt.event.ActionListener() {
@@ -96,6 +102,7 @@ public class AdicionarDetServFuncionario extends javax.swing.JFrame {
                 jBtnRemoverFuncActionPerformed(evt);
             }
         });
+        jPanel5.add(jBtnRemoverFunc, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 190, -1, -1));
 
         jBtbIncluirFunc.setText("Incluir Funcionário");
         jBtbIncluirFunc.addActionListener(new java.awt.event.ActionListener() {
@@ -103,6 +110,7 @@ public class AdicionarDetServFuncionario extends javax.swing.JFrame {
                 jBtbIncluirFuncActionPerformed(evt);
             }
         });
+        jPanel5.add(jBtbIncluirFunc, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 190, -1, -1));
 
         jBtnSalvarDetServFuncionario.setText("Salvar");
         jBtnSalvarDetServFuncionario.addActionListener(new java.awt.event.ActionListener() {
@@ -110,54 +118,20 @@ public class AdicionarDetServFuncionario extends javax.swing.JFrame {
                 jBtnSalvarDetServFuncionarioActionPerformed(evt);
             }
         });
+        jPanel5.add(jBtnSalvarDetServFuncionario, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 450, -1, -1));
 
-        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
-        jPanel5.setLayout(jPanel5Layout);
-        jPanel5Layout.setHorizontalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel5Layout.createSequentialGroup()
-                .addGap(77, 77, 77)
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel5Layout.createSequentialGroup()
-                        .addComponent(jBtbIncluirFunc)
-                        .addGap(28, 28, 28)
-                        .addComponent(jBtnRemoverFunc))
-                    .addGroup(jPanel5Layout.createSequentialGroup()
-                        .addComponent(jLabel7)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jComboBoxFuncionarios, javax.swing.GroupLayout.PREFERRED_SIZE, 274, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(jBtnSalvarDetServFuncionario)
-                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 514, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(77, Short.MAX_VALUE))
-        );
-        jPanel5Layout.setVerticalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel5Layout.createSequentialGroup()
-                .addGap(66, 66, 66)
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel7)
-                    .addComponent(jComboBoxFuncionarios, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(30, 30, 30)
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jBtnRemoverFunc)
-                    .addComponent(jBtbIncluirFunc))
-                .addGap(33, 33, 33)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jBtnSalvarDetServFuncionario)
-                .addContainerGap(55, Short.MAX_VALUE))
-        );
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/leiaute/img2.png"))); // NOI18N
+        jPanel5.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -10, 670, 620));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -256,6 +230,7 @@ public class AdicionarDetServFuncionario extends javax.swing.JFrame {
     private javax.swing.JButton jBtnRemoverFunc;
     private javax.swing.JButton jBtnSalvarDetServFuncionario;
     private javax.swing.JComboBox jComboBoxFuncionarios;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JScrollPane jScrollPane3;

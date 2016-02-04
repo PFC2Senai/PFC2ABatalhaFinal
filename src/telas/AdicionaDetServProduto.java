@@ -96,12 +96,12 @@ public class AdicionaDetServProduto extends javax.swing.JFrame {
                 jBtnInserirPecaActionPerformed(evt);
             }
         });
-        getContentPane().add(jBtnInserirPeca, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 410, -1, -1));
-        getContentPane().add(txtTotalPecas, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 410, 172, -1));
+        getContentPane().add(jBtnInserirPeca, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 500, -1, -1));
+        getContentPane().add(txtTotalPecas, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 500, 172, -1));
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/money.png"))); // NOI18N
         jLabel2.setText("Valor total de peças:");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 410, -1, -1));
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 500, -1, -1));
 
         jBtnRemoverPeca.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/excluir.png"))); // NOI18N
         jBtnRemoverPeca.setText("Remover");
@@ -114,7 +114,7 @@ public class AdicionaDetServProduto extends javax.swing.JFrame {
                 jBtnRemoverPecaActionPerformed(evt);
             }
         });
-        getContentPane().add(jBtnRemoverPeca, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 350, -1, -1));
+        getContentPane().add(jBtnRemoverPeca, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 440, -1, -1));
 
         jTablePecas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -135,7 +135,7 @@ public class AdicionaDetServProduto extends javax.swing.JFrame {
         jTablePecas.getTableHeader().setReorderingAllowed(false);
         jScrollPane1.setViewportView(jTablePecas);
 
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 200, 650, 130));
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 290, 650, 130));
 
         jBtbIncluirPeca.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/add.png"))); // NOI18N
         jBtbIncluirPeca.setText("Incluir Peça");
@@ -144,15 +144,15 @@ public class AdicionaDetServProduto extends javax.swing.JFrame {
                 jBtbIncluirPecaActionPerformed(evt);
             }
         });
-        getContentPane().add(jBtbIncluirPeca, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 170, 110, -1));
-        getContentPane().add(txtValorUnit, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 120, 90, -1));
+        getContentPane().add(jBtbIncluirPeca, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 260, 110, -1));
+        getContentPane().add(txtValorUnit, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 210, 90, -1));
 
         jLabel39.setText("Valor Unit.");
-        getContentPane().add(jLabel39, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 120, -1, -1));
-        getContentPane().add(txtQuantidade, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 120, 117, -1));
+        getContentPane().add(jLabel39, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 210, -1, -1));
+        getContentPane().add(txtQuantidade, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 210, 117, -1));
 
         jLabel34.setText("Quant.:");
-        getContentPane().add(jLabel34, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 120, -1, -1));
+        getContentPane().add(jLabel34, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 210, -1, -1));
 
         jComboBoxFabricante.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Selecione o Fabricante" }));
         jComboBoxFabricante.addActionListener(new java.awt.event.ActionListener() {
@@ -160,10 +160,10 @@ public class AdicionaDetServProduto extends javax.swing.JFrame {
                 jComboBoxFabricanteActionPerformed(evt);
             }
         });
-        getContentPane().add(jComboBoxFabricante, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 120, 280, -1));
+        getContentPane().add(jComboBoxFabricante, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 210, 280, -1));
 
         jLabel36.setText("Fab.:");
-        getContentPane().add(jLabel36, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 120, -1, -1));
+        getContentPane().add(jLabel36, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 210, -1, -1));
 
         jComboBoxModelo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Selecione o Modelo" }));
         jComboBoxModelo.addItemListener(new java.awt.event.ItemListener() {
@@ -176,10 +176,10 @@ public class AdicionaDetServProduto extends javax.swing.JFrame {
                 jComboBoxModeloActionPerformed(evt);
             }
         });
-        getContentPane().add(jComboBoxModelo, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 80, 280, -1));
+        getContentPane().add(jComboBoxModelo, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 170, 280, -1));
 
         jLabel35.setText("Modelo:");
-        getContentPane().add(jLabel35, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 80, -1, -1));
+        getContentPane().add(jLabel35, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 170, -1, -1));
 
         jComboBoxProduto.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Selecione a Peça" }));
         jComboBoxProduto.addItemListener(new java.awt.event.ItemListener() {
@@ -192,21 +192,21 @@ public class AdicionaDetServProduto extends javax.swing.JFrame {
                 jComboBoxProdutoActionPerformed(evt);
             }
         });
-        getContentPane().add(jComboBoxProduto, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 80, 280, -1));
+        getContentPane().add(jComboBoxProduto, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 170, 280, -1));
 
         jLabel33.setText("Peça:");
-        getContentPane().add(jLabel33, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 80, -1, -1));
+        getContentPane().add(jLabel33, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 170, -1, -1));
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel1.setText("Alterar Peças");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 30, -1, -1));
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 30, -1, -1));
 
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/troc calor.png"))); // NOI18N
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/leiaute/img2.png"))); // NOI18N
         jLabel3.setToolTipText("");
         jLabel3.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
         jLabel3.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
-        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 680, 450));
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -10, 670, -1));
 
         bindingGroup.bind();
 
