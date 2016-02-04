@@ -45,6 +45,8 @@ public class Menu extends javax.swing.JFrame {
         jBtnRotinaContato = new javax.swing.JButton();
         jBtnCadastrarLembrete = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
+        labelAlerta2 = new javax.swing.JLabel();
+        labelAlerta1 = new javax.swing.JLabel();
         jBtnProposta = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTextArea1 = new javax.swing.JTextArea();
@@ -104,7 +106,7 @@ public class Menu extends javax.swing.JFrame {
                 jBtnRotinaContatoActionPerformed(evt);
             }
         });
-        getContentPane().add(jBtnRotinaContato, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 80, 140, -1));
+        getContentPane().add(jBtnRotinaContato, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 80, 150, -1));
 
         jBtnCadastrarLembrete.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jBtnCadastrarLembrete.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/CadastrarLembrete.png"))); // NOI18N
@@ -114,22 +116,42 @@ public class Menu extends javax.swing.JFrame {
                 jBtnCadastrarLembreteActionPerformed(evt);
             }
         });
-        getContentPane().add(jBtnCadastrarLembrete, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 174, 140, -1));
+        getContentPane().add(jBtnCadastrarLembrete, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 174, 150, -1));
 
         jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+
+        labelAlerta2.setText("Label");
+
+        labelAlerta1.setText("label");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 117, Short.MAX_VALUE)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(labelAlerta2, javax.swing.GroupLayout.DEFAULT_SIZE, 306, Short.MAX_VALUE)
+                .addContainerGap())
+            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel1Layout.createSequentialGroup()
+                    .addContainerGap()
+                    .addComponent(labelAlerta1, javax.swing.GroupLayout.DEFAULT_SIZE, 306, Short.MAX_VALUE)
+                    .addContainerGap()))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 88, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(104, Short.MAX_VALUE)
+                .addComponent(labelAlerta2, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(35, 35, 35))
+            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel1Layout.createSequentialGroup()
+                    .addGap(32, 32, 32)
+                    .addComponent(labelAlerta1, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(107, Short.MAX_VALUE)))
         );
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(611, 11, -1, -1));
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(651, 11, 330, 190));
 
         jBtnProposta.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jBtnProposta.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/1452415489_icon-57.fw_1.png"))); // NOI18N
@@ -139,14 +161,14 @@ public class Menu extends javax.swing.JFrame {
                 jBtnPropostaActionPerformed(evt);
             }
         });
-        getContentPane().add(jBtnProposta, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 265, 140, -1));
+        getContentPane().add(jBtnProposta, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 265, 150, -1));
 
         jTextArea1.setColumns(20);
         jTextArea1.setRows(5);
         jTextArea1.setText("Lista mineração:\n\n- cliente mais atendido\n- tipo de serviço mais realizado\n(tipo definido, ex: troca de placa e \ntipo serviço ex: venda aluguel, ou manutenção)\n- peça com mais saída\n- peça com menos saída\n- periodo do ano com mais movimento\n- periodo do ano com menos mevimento\n- qual o período do ano que \ndeterminado setor está em alta\n- qual funcionário realizou mais serviços");
         jScrollPane1.setViewportView(jTextArea1);
 
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 240, 380, 246));
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 240, 370, 246));
 
         jTextArea2.setColumns(20);
         jTextArea2.setFont(new java.awt.Font("Monospaced", 1, 13)); // NOI18N
@@ -155,7 +177,7 @@ public class Menu extends javax.swing.JFrame {
         jTextArea2.setText("Pendências do sistema:\n\n- tela de mineração\n- formatação dos campos(caracteres)\n- verificar campos para evitar dados duplicados\n- Aviso de estoque baixo\n- gerenciamento de telas\n- permissões dos usuários\n- campos que recebem números decimais \naceitar apenas ponto e não vírgula\n- não deixar cadastrar lembrete em data que já passou\n- cadastrar em auditoria tudo que for feito no sistema\n- mensagens para confirmar ações dos usuários : \n\"Deseja excluir?\" \"Cadastrado com sucesso\" algo assim \n- Formato da data\n- testar o sistema e corrigir bugs");
         jScrollPane2.setViewportView(jTextArea2);
 
-        getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 10, 440, 340));
+        getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 10, 440, 340));
 
         jBtnFazerBackup.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jBtnFazerBackup.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/backup (2).png"))); // NOI18N
@@ -167,17 +189,21 @@ public class Menu extends javax.swing.JFrame {
         });
         getContentPane().add(jBtnFazerBackup, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 360, 140, -1));
 
+        jMenuBar1.setPreferredSize(new java.awt.Dimension(106, 35));
+
         jMenu4.setBackground(new java.awt.Color(204, 153, 255));
         jMenu4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/menu.png"))); // NOI18N
         jMenu4.setText("Menu");
+        jMenu4.setPreferredSize(new java.awt.Dimension(70, 25));
 
         jMenu14.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/add.png"))); // NOI18N
         jMenu14.setText("Cadastrar");
         jMenu14.setMaximumSize(new java.awt.Dimension(35767, 35767));
-        jMenu14.setPreferredSize(new java.awt.Dimension(130, 25));
+        jMenu14.setPreferredSize(new java.awt.Dimension(130, 35));
 
         jMenuItem10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/cliente3.png"))); // NOI18N
         jMenuItem10.setText("Cliente");
+        jMenuItem10.setPreferredSize(new java.awt.Dimension(130, 35));
         jMenuItem10.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem10ActionPerformed(evt);
@@ -187,6 +213,7 @@ public class Menu extends javax.swing.JFrame {
 
         jMenuItem29.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/equipamento.png"))); // NOI18N
         jMenuItem29.setText("Equipamento");
+        jMenuItem29.setPreferredSize(new java.awt.Dimension(130, 35));
         jMenuItem29.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem29ActionPerformed(evt);
@@ -196,10 +223,12 @@ public class Menu extends javax.swing.JFrame {
 
         jMenuItem22.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/estoque2.png"))); // NOI18N
         jMenuItem22.setText("Estoque");
+        jMenuItem22.setPreferredSize(new java.awt.Dimension(130, 35));
         jMenu14.add(jMenuItem22);
 
         jMenuItem26.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/fabricante.png"))); // NOI18N
         jMenuItem26.setText("Fabricante");
+        jMenuItem26.setPreferredSize(new java.awt.Dimension(130, 35));
         jMenuItem26.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem26ActionPerformed(evt);
@@ -209,6 +238,7 @@ public class Menu extends javax.swing.JFrame {
 
         jMenuItem5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/fornecedor.png"))); // NOI18N
         jMenuItem5.setText("Fornecedor");
+        jMenuItem5.setPreferredSize(new java.awt.Dimension(130, 35));
         jMenuItem5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem5ActionPerformed(evt);
@@ -218,6 +248,7 @@ public class Menu extends javax.swing.JFrame {
 
         jMenuItem21.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/4.png"))); // NOI18N
         jMenuItem21.setText("Funcionário");
+        jMenuItem21.setPreferredSize(new java.awt.Dimension(130, 35));
         jMenuItem21.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem21ActionPerformed(evt);
@@ -226,6 +257,7 @@ public class Menu extends javax.swing.JFrame {
         jMenu14.add(jMenuItem21);
 
         jMenuItem15.setText("Modelo");
+        jMenuItem15.setPreferredSize(new java.awt.Dimension(130, 35));
         jMenuItem15.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem15ActionPerformed(evt);
@@ -235,6 +267,7 @@ public class Menu extends javax.swing.JFrame {
 
         jMenuItem17.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/prod.png"))); // NOI18N
         jMenuItem17.setText("Peça");
+        jMenuItem17.setPreferredSize(new java.awt.Dimension(130, 35));
         jMenuItem17.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem17ActionPerformed(evt);
@@ -244,6 +277,7 @@ public class Menu extends javax.swing.JFrame {
 
         jMenuItemCadastrarServico.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/servicos.png"))); // NOI18N
         jMenuItemCadastrarServico.setText("Serviços");
+        jMenuItemCadastrarServico.setPreferredSize(new java.awt.Dimension(130, 35));
         jMenuItemCadastrarServico.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItemCadastrarServicoActionPerformed(evt);
@@ -253,6 +287,7 @@ public class Menu extends javax.swing.JFrame {
 
         jMenuItem13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/setor.png"))); // NOI18N
         jMenuItem13.setText("Segmento");
+        jMenuItem13.setPreferredSize(new java.awt.Dimension(130, 35));
         jMenuItem13.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem13ActionPerformed(evt);
@@ -262,6 +297,7 @@ public class Menu extends javax.swing.JFrame {
 
         jMenuItem8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/user.gif"))); // NOI18N
         jMenuItem8.setText("Usuário");
+        jMenuItem8.setPreferredSize(new java.awt.Dimension(130, 35));
         jMenuItem8.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem8ActionPerformed(evt);
@@ -271,6 +307,7 @@ public class Menu extends javax.swing.JFrame {
 
         jMenuItem31.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/vendas1.gif"))); // NOI18N
         jMenuItem31.setText("Vendas");
+        jMenuItem31.setPreferredSize(new java.awt.Dimension(130, 35));
         jMenuItem31.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem31ActionPerformed(evt);
@@ -282,9 +319,11 @@ public class Menu extends javax.swing.JFrame {
 
         jMenu10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/pesquisar.gif"))); // NOI18N
         jMenu10.setText("Consultar");
+        jMenu10.setPreferredSize(new java.awt.Dimension(130, 35));
 
         jMenuItem9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/cliente3.png"))); // NOI18N
         jMenuItem9.setText("Cliente");
+        jMenuItem9.setPreferredSize(new java.awt.Dimension(130, 35));
         jMenuItem9.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem9ActionPerformed(evt);
@@ -294,6 +333,7 @@ public class Menu extends javax.swing.JFrame {
 
         jMenuItem30.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/equipamento.png"))); // NOI18N
         jMenuItem30.setText("Equipamento");
+        jMenuItem30.setPreferredSize(new java.awt.Dimension(130, 35));
         jMenuItem30.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem30ActionPerformed(evt);
@@ -303,10 +343,12 @@ public class Menu extends javax.swing.JFrame {
 
         jMenuItem19.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/estoque2.png"))); // NOI18N
         jMenuItem19.setText("Estoque");
+        jMenuItem19.setPreferredSize(new java.awt.Dimension(130, 35));
         jMenu10.add(jMenuItem19);
 
         jMenuItem23.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/fabricante.png"))); // NOI18N
         jMenuItem23.setText("Fabricante");
+        jMenuItem23.setPreferredSize(new java.awt.Dimension(130, 35));
         jMenuItem23.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem23ActionPerformed(evt);
@@ -316,6 +358,7 @@ public class Menu extends javax.swing.JFrame {
 
         jMenuItem6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/fornecedor.png"))); // NOI18N
         jMenuItem6.setText("Fornecedor");
+        jMenuItem6.setPreferredSize(new java.awt.Dimension(130, 35));
         jMenuItem6.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem6ActionPerformed(evt);
@@ -325,6 +368,7 @@ public class Menu extends javax.swing.JFrame {
 
         jMenuItem18.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/4.png"))); // NOI18N
         jMenuItem18.setText("Funcionário");
+        jMenuItem18.setPreferredSize(new java.awt.Dimension(130, 35));
         jMenuItem18.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem18ActionPerformed(evt);
@@ -333,6 +377,7 @@ public class Menu extends javax.swing.JFrame {
         jMenu10.add(jMenuItem18);
 
         jMenuItem16.setText("Modelo");
+        jMenuItem16.setPreferredSize(new java.awt.Dimension(130, 35));
         jMenuItem16.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem16ActionPerformed(evt);
@@ -342,6 +387,7 @@ public class Menu extends javax.swing.JFrame {
 
         jMenuItem20.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/prod.png"))); // NOI18N
         jMenuItem20.setText("Produto");
+        jMenuItem20.setPreferredSize(new java.awt.Dimension(130, 35));
         jMenuItem20.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem20ActionPerformed(evt);
@@ -351,6 +397,7 @@ public class Menu extends javax.swing.JFrame {
 
         jMenuItem1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/servicos.png"))); // NOI18N
         jMenuItem1.setText("Serviços");
+        jMenuItem1.setPreferredSize(new java.awt.Dimension(130, 35));
         jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem1ActionPerformed(evt);
@@ -360,6 +407,7 @@ public class Menu extends javax.swing.JFrame {
 
         jMenuItem14.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/setor.png"))); // NOI18N
         jMenuItem14.setText("Segmento");
+        jMenuItem14.setPreferredSize(new java.awt.Dimension(130, 35));
         jMenuItem14.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem14ActionPerformed(evt);
@@ -369,6 +417,7 @@ public class Menu extends javax.swing.JFrame {
 
         jMenuItem7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/user.gif"))); // NOI18N
         jMenuItem7.setText("Usuário");
+        jMenuItem7.setPreferredSize(new java.awt.Dimension(130, 35));
         jMenuItem7.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem7ActionPerformed(evt);
@@ -378,6 +427,7 @@ public class Menu extends javax.swing.JFrame {
 
         jMenuItem32.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/vendas1.gif"))); // NOI18N
         jMenuItem32.setText("Vendas");
+        jMenuItem32.setPreferredSize(new java.awt.Dimension(130, 35));
         jMenuItem32.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem32ActionPerformed(evt);
@@ -389,34 +439,44 @@ public class Menu extends javax.swing.JFrame {
 
         jMenu15.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/editar.png"))); // NOI18N
         jMenu15.setText("Editar");
+        jMenu15.setPreferredSize(new java.awt.Dimension(130, 35));
 
         jMenuItem11.setText("Cliente");
+        jMenuItem11.setPreferredSize(new java.awt.Dimension(130, 35));
         jMenu15.add(jMenuItem11);
 
         jMenuItem25.setText("Estoque");
+        jMenuItem25.setPreferredSize(new java.awt.Dimension(130, 35));
         jMenu15.add(jMenuItem25);
 
         jMenuItem24.setText("Funcionário");
+        jMenuItem24.setPreferredSize(new java.awt.Dimension(130, 35));
         jMenu15.add(jMenuItem24);
 
         jMenuItem3.setText("Serviços");
+        jMenuItem3.setPreferredSize(new java.awt.Dimension(130, 35));
         jMenu15.add(jMenuItem3);
 
         jMenu4.add(jMenu15);
 
         jMenu16.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/excluir.png"))); // NOI18N
         jMenu16.setText("Excluir");
+        jMenu16.setPreferredSize(new java.awt.Dimension(130, 35));
 
         jMenuItem12.setText("Cliente");
+        jMenuItem12.setPreferredSize(new java.awt.Dimension(130, 35));
         jMenu16.add(jMenuItem12);
 
         jMenuItem28.setText("Estoque");
+        jMenuItem28.setPreferredSize(new java.awt.Dimension(130, 35));
         jMenu16.add(jMenuItem28);
 
         jMenuItem27.setText("Funcionário");
+        jMenuItem27.setPreferredSize(new java.awt.Dimension(130, 35));
         jMenu16.add(jMenuItem27);
 
         jMenuItem4.setText("Serviços");
+        jMenuItem4.setPreferredSize(new java.awt.Dimension(130, 35));
         jMenu16.add(jMenuItem4);
 
         jMenu4.add(jMenu16);
@@ -426,6 +486,7 @@ public class Menu extends javax.swing.JFrame {
         jMenu6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/sair.gif"))); // NOI18N
         jMenu6.setText("Sair");
         jMenu6.setActionCommand("System.exit();");
+        jMenu6.setPreferredSize(new java.awt.Dimension(55, 25));
         jMenu6.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jMenu6MouseClicked(evt);
@@ -712,6 +773,8 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTextArea jTextArea1;
     private javax.swing.JTextArea jTextArea2;
+    private javax.swing.JLabel labelAlerta1;
+    private javax.swing.JLabel labelAlerta2;
     // End of variables declaration//GEN-END:variables
 
 }

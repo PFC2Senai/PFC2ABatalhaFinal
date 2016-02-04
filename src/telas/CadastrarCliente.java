@@ -54,15 +54,8 @@ public class CadastrarCliente extends javax.swing.JFrame {
 //        txtSetor.setDocument(new LimitarDigitos(50));
 //        txtPais.setDocument(new LimitarDigitos(45));
         txtEstado.setDocument(new LimitarDigitos(4));
-//        txtBairro.setDocument(new LimitarDigitos(45));
-//        txtCidade.setDocument(new LimitarDigitos(45));
-//        txtRua.setDocument(new LimitarDigitos(45));
-        //txtNumero.setDocument(new LimitarDigitos(10).insertInt(HEIGHT, descricaoAudit,  10));
-//
-//        txtContato.setDocument(new LimitarDigitos(45));
-//        txtEmail.setDocument(new LimitarDigitos(45));
         txtNumero.setDocument(new LimitarDigitos(6));
-        txtTelCel.setDocument(new LimitarDigitos(20));
+        txtTelCel.setDocument(new LimitarDigitos(12));
     }
 
     public CadastrarCliente(ExibeCliente exibeCliente) {
@@ -172,7 +165,7 @@ public class CadastrarCliente extends javax.swing.JFrame {
         jComboBoxSetores.getEditor().getEditorComponent().addFocusListener(new FocusAdapter() {
             @Override
             public void focusLost(FocusEvent e) {
-                if (codSetor == 0 && jComboBoxSetores.getSelectedIndex()!=0) {
+                if (codSetor == 0 && jComboBoxSetores.getSelectedIndex() != 0) {
                     JOptionPane.showMessageDialog(null, "Esse registro não encontra-se cadastrado na base de dados.");
                     jComboBoxSetores.getEditor().getEditorComponent().requestFocus();
                 }
@@ -702,7 +695,7 @@ public class CadastrarCliente extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jBtnCancelarSetorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnCancelarSetorActionPerformed
-        if (JOptionPane.showConfirmDialog(null, "Cancelar novo segmento?", "Confirmar Cancelamento", JOptionPane.YES_NO_OPTION) == 0 ) {       
+        if (JOptionPane.showConfirmDialog(null, "Cancelar novo segmento?", "Confirmar Cancelamento", JOptionPane.YES_NO_OPTION) == 0) {
             jBtnSalvarSetor.setVisible(false);
             jBtnCancelarSetor.setVisible(false);
             jBtnNovoSetor.setVisible(true);
@@ -782,7 +775,8 @@ public class CadastrarCliente extends javax.swing.JFrame {
 
     private void txtNumeroKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNumeroKeyTyped
 
-        String caracteres = "0987654321";
+        String caracteres = "0987654321snSN/";
+        String car = txtNumero.getText().toUpperCase();
         if (!caracteres.contains(evt.getKeyChar() + "")) {
             evt.consume();
         }
@@ -830,6 +824,10 @@ public class CadastrarCliente extends javax.swing.JFrame {
 
         if (VerificaCampos() == true) {
 
+  //          if (ClienteDAO.VerificarNome(txtEmpresa.getText()) == true) {
+//                JOptionPane.showMessageDialog(this, "Ja existe uma empresa com este nome registrada, tente outra !");
+            
+            
             if (ClienteDAO.VerificarCliente(txtCnpj.getText()) == false) {
 
                 Cliente cli = new Cliente();
@@ -852,7 +850,7 @@ public class CadastrarCliente extends javax.swing.JFrame {
                 endereco.setPais(txtPais.getText());
                 endereco.setCep(txtCep.getText());
                 endereco.setRua(txtRua.getText());
-                endereco.setNumero(txtNumero.getText());
+                endereco.setNumero(txtNumero.getText().toUpperCase());
                 endereco.setBairro(txtBairro.getText());
                 endereco.setCidade(txtCidade.getText());
                 endereco.setEstado(txtEstado.getText());
@@ -898,6 +896,7 @@ public class CadastrarCliente extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "Cliente ja cadastrado !");
             }
         }
+    //    }//
     }//GEN-LAST:event_btnCadClienteActionPerformed
 
     private void txtEmailFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtEmailFocusLost
@@ -917,7 +916,7 @@ public class CadastrarCliente extends javax.swing.JFrame {
         // uJComboBoxPeca.clear();
         ArrayList<Setor> setores = new ArrayList<Setor>();
         setores = SetorDAO.ListarSetor();
-       jComboBoxSetores.addItem("Selecione o segmento da empresa");
+        jComboBoxSetores.addItem("Selecione o segmento da empresa");
         for (Setor setor : setores) {
             jComboBoxSetores.addItem(setor.getSetor(), setor);
         }

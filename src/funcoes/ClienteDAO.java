@@ -235,6 +235,42 @@ public class ClienteDAO {
         return cliente;
     }
 
+        public static boolean VerificarNome(String nome) {
+
+        Statement stmt;
+        boolean achou = true;
+        int cli = 0;
+
+        //"SELECT * FROM tabcliente WHERE empresa IN (SELECT E.equipamento FROM tabequipamento E GROUP BY E.equipamento HAVING COUNT(*) > 1) ORDER BY equipamento";
+        String Sql = "SELECT COUNT(0) empresa FROM tabcliente WHERE empresa = '" + nome + "';";
+
+        try {
+
+            ResultSet rs;
+            stmt = Conexao.getConnection().createStatement();
+            rs = stmt.executeQuery(Sql);
+
+            rs.first();
+            do {
+                cli = rs.getInt("COUNT(0)");
+            } while (rs.next());
+
+            if (cli == 0) {
+                achou = false;
+            }
+
+            rs.close();
+            stmt.close();
+
+        } catch (SQLException ex) {
+
+            Logger.getLogger(ClienteDAO.class.getName()).log(Level.SEVERE, null, ex);
+            throw new RuntimeException("Erro ao Carregar os dados do cliente: ", ex);
+        }
+        return achou;
+    }
+    
+    
     public static boolean VerificarCliente(String cliente) {
 
         Statement stmt;
@@ -242,7 +278,7 @@ public class ClienteDAO {
         int cli = 0;
 
         //"SELECT * FROM tabcliente WHERE empresa IN (SELECT E.equipamento FROM tabequipamento E GROUP BY E.equipamento HAVING COUNT(*) > 1) ORDER BY equipamento";
-        String Sql = "SELECT COUNT(0), empresa, cnpj FROM tabcliente WHERE empresa = '" + cliente + "';";
+        String Sql = "SELECT COUNT(0) cnpj FROM tabcliente WHERE cnpj = '" + cliente + "';";
 
         try {
 
