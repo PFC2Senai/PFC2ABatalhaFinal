@@ -77,73 +77,87 @@ public class CadastrarCliente extends javax.swing.JFrame {
         boolean valida = true;
 
         if (txtEmpresa.getText().trim().equals("")) {
-            JOptionPane.showMessageDialog(null, "Campo(s) vazio(s)!");
+
             txtEmpresa.setBackground(Color.yellow);
+            JOptionPane.showMessageDialog(null, "Preencha o campo EMPRESA!");
+            txtEmpresa.requestFocus();
             valida = false;
             return valida;
         }
 
         if (jComboBoxSetores.getSelectedIndex() == 0) {
-            JOptionPane.showMessageDialog(null, "Campo(s) vazio(s)!");
+            JOptionPane.showMessageDialog(null, "Preencha o campo SEGMENTO!");
+            jComboBoxSetores.requestFocus();
             valida = false;
             return valida;
         }
 
         if (txtCnpj.getText().trim().length() != 18) {
-            JOptionPane.showMessageDialog(null, "Campo(s) vazio(s)!");
+            JOptionPane.showMessageDialog(null, "Preencha o campo CNPJ!");
+            txtCnpj.requestFocus();
             valida = false;
             return valida;
         }
 
         if (txtPais.getText().trim().equals("")) {
-            JOptionPane.showMessageDialog(null, "Campo(s) vazio(s)!");
+            JOptionPane.showMessageDialog(null, "Preencha o campo PAÍS!");
+            txtPais.requestFocus();
             valida = false;
             return valida;
         }
 
         if (txtCidade.getText().trim().equals("")) {
-            JOptionPane.showMessageDialog(null, "Campo(s) vazio(s)!");
+            JOptionPane.showMessageDialog(null, "Preencha o campo CIDADE!");
+            txtCidade.requestFocus();
             valida = false;
             return valida;
         }
 
         if (txtRua.getText().trim().equals("")) {
-            JOptionPane.showMessageDialog(null, "Campo(s) vazio(s)!");
+            JOptionPane.showMessageDialog(null, "Preencha o campo RUA!");
+            txtRua.requestFocus();
             valida = false;
             return valida;
         }
 
         if (txtCep.getText().trim().equals("-")) {
-            JOptionPane.showMessageDialog(null, "Campo(s) vazio(s)!");
+            JOptionPane.showMessageDialog(null, "Preencha o campo CEP!");
+            txtCep.requestFocus();
             valida = false;
             return valida;
         }
 
         if (txtEstado.getText().trim().equals("")) {
-            JOptionPane.showMessageDialog(null, "Campo(s) vazio(s)!");
+            JOptionPane.showMessageDialog(null, "Preencha o campo ESTADO!");
+            txtEstado.requestFocus();
             valida = false;
             return valida;
         }
 
         if (txtBairro.getText().trim().equals("")) {
-            JOptionPane.showMessageDialog(null, "Campo(s) vazio(s)!");
+            JOptionPane.showMessageDialog(null, "Preencha o campo BAIRRO!");
+            txtBairro.requestFocus();
             valida = false;
             return valida;
         }
 
         if (txtNumero.getText().trim().equals("")) {
-            JOptionPane.showMessageDialog(null, "Campo de numero vazio");
+
+            JOptionPane.showMessageDialog(null, "Preencha o campo NÚMERO!");
+            txtNumero.requestFocus();
             valida = false;
             return valida;
         }
 
         if (jComboBoxSetores.getSelectedIndex() == 0) {
-            JOptionPane.showMessageDialog(null, "Campo(s) vazio(s)!");
+            JOptionPane.showMessageDialog(null, "Preencha o campo SETOR!");
+            jComboBoxSetores.requestFocus();
             valida = false;
             return valida;
         }
 
         if (jTableContatos.getRowCount() < 1) {
+
             JOptionPane.showMessageDialog(null, "Adicione um contato na tabela");
             valida = false;
             return valida;
@@ -935,10 +949,9 @@ public class CadastrarCliente extends javax.swing.JFrame {
         //boolean val = false;
 
         if (ClienteDAO.VerificarCliente(txtCnpj.getText()) == true) {
-        
-                jLabelCnpjExistente.setText("Cnpj ja existe");
-            }
-        else{
+
+            jLabelCnpjExistente.setText("Cnpj ja existe");
+        } else {
             jLabelCnpjExistente.setText("");
         }
 

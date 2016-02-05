@@ -84,6 +84,67 @@ public class CadastrarProduto extends javax.swing.JFrame {
     public void formatar() {
         
     }
+    
+    
+    private boolean VerificaCampos(){
+        boolean valida = true;
+        
+         if (jComboBoxFabricante.getSelectedIndex() == 0) {
+            JOptionPane.showMessageDialog(null, "Selecione um item!");
+            valida = false;
+            return valida;
+        }
+
+        if (jComboBoxFornecedor.getSelectedIndex() == 0) {
+            JOptionPane.showMessageDialog(null, "Selecione um item!");
+            valida = false;
+            return valida;
+        }
+
+        if (jComboBoxModelo.getSelectedIndex() == 0) {
+            JOptionPane.showMessageDialog(null, "Selecione um item!");
+            valida = false;
+            return valida;
+        }
+        
+        if (txtDataCadProduto.getDate()== null) {
+            JOptionPane.showMessageDialog(null, "Campo(s) vazio(s)!");
+            valida = false;
+            return valida;
+        }
+        
+        if (txtQuantidade.getText().equals("")) {
+            JOptionPane.showMessageDialog(null, "Campo(s) vazio(s)!");
+            valida = false;
+            return valida;
+        }
+        
+        if (txtPrecoEntrada.getText().equals("")) {
+            JOptionPane.showMessageDialog(null, "Campo(s) vazio(s)!");
+            valida = false;
+            return valida;
+        }
+        
+        if (txtPercentual.getText().equals("")) {
+            JOptionPane.showMessageDialog(null, "Campo(s) vazio(s)!");
+            valida = false;
+            return valida;
+        }
+        
+        if (txtQuantMinima.getText().equals("")) {
+            JOptionPane.showMessageDialog(null, "Campo(s) vazio(s)!");
+            valida = false;
+            return valida;
+        }
+        
+        
+        if (txtPrecoSaida.getText().equals("")) {
+            JOptionPane.showMessageDialog(null, "Campo(s) vazio(s)!");
+            valida = false;
+            return valida;
+        }
+        return valida;
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -511,6 +572,7 @@ public class CadastrarProduto extends javax.swing.JFrame {
 
     private void jBtnCadastrarProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnCadastrarProdutoActionPerformed
 
+        if(VerificaCampos() == true){
         HistoricoProduto histProduto = new HistoricoProduto();
 
         prod.setCodModelo(codModelo);
@@ -538,6 +600,7 @@ public class CadastrarProduto extends javax.swing.JFrame {
         jComboBoxProdutos.removeAllItems();
         populaComboBoxProduto();
         jBtbNovoProduto.setVisible(true);
+        }
     }//GEN-LAST:event_jBtnCadastrarProdutoActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed

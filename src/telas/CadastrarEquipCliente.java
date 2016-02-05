@@ -302,7 +302,8 @@ public class CadastrarEquipCliente extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnCadEquipClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadEquipClienteActionPerformed
-        
+
+        if(jTableEquipamento.getRowCount()>0){
         if (VerificaEquipamentoTable() == true) {
             DetEquipamentoCliente detEqCli = new DetEquipamentoCliente();
 
@@ -317,6 +318,9 @@ public class CadastrarEquipCliente extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Cadastrado com sucesso!");
             this.dispose();
         }
+        }else{
+            JOptionPane.showMessageDialog(null, "Por favor, insira um registro na tabela!");
+        }
     }//GEN-LAST:event_btnCadEquipClienteActionPerformed
 
     private void jBtnRemoveEquipamentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnRemoveEquipamentoActionPerformed
@@ -330,6 +334,21 @@ public class CadastrarEquipCliente extends javax.swing.JFrame {
     }//GEN-LAST:event_jBtnRemoveEquipamentoActionPerformed
 
     private void jBtbIncluirEquipamentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtbIncluirEquipamentoActionPerformed
+
+         if (uJComboBoxEquipamento.getSelectedIndex() == 0){
+    JOptionPane.showMessageDialog(null, "Selecione um item!");
+    return;
+        }
+        if (jComboBoxModeloEquip.getSelectedIndex() == 0){
+    JOptionPane.showMessageDialog(null, "Selecione um item!");
+    return;
+        }
+        
+        if (jComboBoxFabricanteEquip.getSelectedIndex() == 0){
+    JOptionPane.showMessageDialog(null, "Selecione um item!");
+    return;
+        }
+        
         if (VerificaCampos() == true) {
             TabelaEquipamento();
         }
