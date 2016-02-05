@@ -115,10 +115,12 @@ public final class AlterarEstoque extends javax.swing.JFrame {
         jLabel7 = new javax.swing.JLabel();
         jBtnCalcular = new javax.swing.JButton();
         txtPercentual = new javax.swing.JTextField();
+        jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jPanel2.setBackground(new java.awt.Color(229, 229, 253));
+        jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jBtnConfirmarBaixa.setText("Confirmar Baixa");
         jBtnConfirmarBaixa.addActionListener(new java.awt.event.ActionListener() {
@@ -126,11 +128,14 @@ public final class AlterarEstoque extends javax.swing.JFrame {
                 jBtnConfirmarBaixaActionPerformed(evt);
             }
         });
+        jPanel2.add(jBtnConfirmarBaixa, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 530, -1, -1));
 
         jBtnCancelar.setText("Cancelar");
+        jPanel2.add(jBtnCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 530, -1, -1));
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel1.setText("Alterar Estoque");
+        jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 40, -1, -1));
 
         jComboBoxTipoAlteracao.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Selecione o tipo de alteração", "Entrada", "Saída" }));
         jComboBoxTipoAlteracao.addActionListener(new java.awt.event.ActionListener() {
@@ -138,6 +143,7 @@ public final class AlterarEstoque extends javax.swing.JFrame {
                 jComboBoxTipoAlteracaoActionPerformed(evt);
             }
         });
+        jPanel2.add(jComboBoxTipoAlteracao, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 160, 211, -1));
 
         jBtnAdicionar.setText("Adicionar");
         jBtnAdicionar.addActionListener(new java.awt.event.ActionListener() {
@@ -145,6 +151,7 @@ public final class AlterarEstoque extends javax.swing.JFrame {
                 jBtnAdicionarActionPerformed(evt);
             }
         });
+        jPanel2.add(jBtnAdicionar, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 530, -1, -1));
 
         jPanel1.setBackground(new java.awt.Color(229, 229, 253));
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
@@ -188,7 +195,7 @@ public final class AlterarEstoque extends javax.swing.JFrame {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(txtProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 347, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtQuantMinima, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 40, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel10)
                             .addComponent(jLabel5))
@@ -219,6 +226,8 @@ public final class AlterarEstoque extends javax.swing.JFrame {
                     .addComponent(jLabel11))
                 .addContainerGap())
         );
+
+        jPanel2.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 190, 790, -1));
 
         jPanel3.setBackground(new java.awt.Color(229, 229, 253));
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
@@ -324,58 +333,20 @@ public final class AlterarEstoque extends javax.swing.JFrame {
                 .addContainerGap(20, Short.MAX_VALUE))
         );
 
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(30, 30, 30)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1)
-                            .addComponent(jComboBoxTipoAlteracao, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(29, 29, 29)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(jBtnCancelar)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jBtnAdicionar)
-                                .addGap(18, 18, 18)
-                                .addComponent(jBtnConfirmarBaixa))
-                            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                .addContainerGap(32, Short.MAX_VALUE))
-        );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(16, 16, 16)
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jComboBoxTipoAlteracao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(27, 27, 27)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jBtnConfirmarBaixa)
-                    .addComponent(jBtnAdicionar)
-                    .addComponent(jBtnCancelar))
-                .addGap(29, 29, 29))
-        );
+        jPanel2.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 330, 790, -1));
+
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/leiaute/img3-5.png"))); // NOI18N
+        jPanel2.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -10, 910, 670));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 852, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 659, Short.MAX_VALUE)
         );
 
         pack();
@@ -544,6 +515,7 @@ public final class AlterarEstoque extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;

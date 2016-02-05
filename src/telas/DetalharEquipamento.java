@@ -56,69 +56,27 @@ public final class DetalharEquipamento extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        txtEquipamento = new javax.swing.JTextField();
-        jLabel8 = new javax.swing.JLabel();
-        txtFornecedor = new javax.swing.JTextField();
-        jComboBoxFornecedor = new javax.swing.JComboBox();
-        jLabel9 = new javax.swing.JLabel();
-        jLabel10 = new javax.swing.JLabel();
-        txtModelo = new javax.swing.JTextField();
-        jComboBoxModelo = new javax.swing.JComboBox();
-        jBtnSair = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         jBtnCancelarAltEquipamento = new javax.swing.JButton();
         jBtnAlterarEquipamento = new javax.swing.JButton();
         jBtbEditarEquipamento = new javax.swing.JButton();
         txtFabricante = new javax.swing.JTextField();
         jComboBoxFabricante = new javax.swing.JComboBox();
+        txtModelo = new javax.swing.JTextField();
+        jComboBoxModelo = new javax.swing.JComboBox();
+        jLabel10 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        txtFornecedor = new javax.swing.JTextField();
+        jComboBoxFornecedor = new javax.swing.JComboBox();
+        jLabel8 = new javax.swing.JLabel();
+        txtEquipamento = new javax.swing.JTextField();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
+        jBtnSair = new javax.swing.JButton();
+        jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel1.setText("Equipamento");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(31, 21, -1, 23));
-
-        jLabel2.setText("Equipamento:");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(31, 72, -1, -1));
-        getContentPane().add(txtEquipamento, new org.netbeans.lib.awtextra.AbsoluteConstraints(101, 69, 240, -1));
-
-        jLabel8.setText("Fornecedor:");
-        getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 140, -1, -1));
-        getContentPane().add(txtFornecedor, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 140, 220, -1));
-
-        jComboBoxFornecedor.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Selecione o fornecedor" }));
-        jComboBoxFornecedor.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBoxFornecedorActionPerformed(evt);
-            }
-        });
-        getContentPane().add(jComboBoxFornecedor, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 140, 240, -1));
-
-        jLabel9.setText("Fabricante:");
-        getContentPane().add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 220, -1, -1));
-
-        jLabel10.setText("Modelo:");
-        getContentPane().add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 290, -1, -1));
-        getContentPane().add(txtModelo, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 290, 220, -1));
-
-        jComboBoxModelo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Selecione o modelo" }));
-        jComboBoxModelo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBoxModeloActionPerformed(evt);
-            }
-        });
-        getContentPane().add(jComboBoxModelo, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 290, 240, -1));
-
-        jBtnSair.setText("Sair");
-        jBtnSair.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jBtnSairActionPerformed(evt);
-            }
-        });
-        getContentPane().add(jBtnSair, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 340, -1, -1));
 
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -128,7 +86,7 @@ public final class DetalharEquipamento extends javax.swing.JFrame {
                 jBtnCancelarAltEquipamentoActionPerformed(evt);
             }
         });
-        jPanel1.add(jBtnCancelarAltEquipamento, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 200, -1, -1));
+        jPanel1.add(jBtnCancelarAltEquipamento, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 240, -1, -1));
 
         jBtnAlterarEquipamento.setText("Salvar");
         jBtnAlterarEquipamento.addActionListener(new java.awt.event.ActionListener() {
@@ -136,7 +94,7 @@ public final class DetalharEquipamento extends javax.swing.JFrame {
                 jBtnAlterarEquipamentoActionPerformed(evt);
             }
         });
-        jPanel1.add(jBtnAlterarEquipamento, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 150, -1, -1));
+        jPanel1.add(jBtnAlterarEquipamento, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 190, -1, -1));
 
         jBtbEditarEquipamento.setText("Editar Equipamento");
         jBtbEditarEquipamento.addActionListener(new java.awt.event.ActionListener() {
@@ -144,8 +102,14 @@ public final class DetalharEquipamento extends javax.swing.JFrame {
                 jBtbEditarEquipamentoActionPerformed(evt);
             }
         });
-        jPanel1.add(jBtbEditarEquipamento, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 100, -1, 23));
-        jPanel1.add(txtFabricante, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 220, 220, -1));
+        jPanel1.add(jBtbEditarEquipamento, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 140, -1, 23));
+
+        txtFabricante.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtFabricanteActionPerformed(evt);
+            }
+        });
+        jPanel1.add(txtFabricante, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 210, 220, -1));
 
         jComboBoxFabricante.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Selecione o fabricante" }));
         jComboBoxFabricante.addActionListener(new java.awt.event.ActionListener() {
@@ -153,9 +117,55 @@ public final class DetalharEquipamento extends javax.swing.JFrame {
                 jComboBoxFabricanteActionPerformed(evt);
             }
         });
-        jPanel1.add(jComboBoxFabricante, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 220, 240, -1));
+        jPanel1.add(jComboBoxFabricante, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 210, 240, -1));
+        jPanel1.add(txtModelo, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 240, 220, -1));
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 580, 380));
+        jComboBoxModelo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Selecione o modelo" }));
+        jComboBoxModelo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBoxModeloActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jComboBoxModelo, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 240, 240, -1));
+
+        jLabel10.setText("Modelo:");
+        jPanel1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 240, -1, -1));
+
+        jLabel9.setText("Fabricante:");
+        jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 210, -1, -1));
+        jPanel1.add(txtFornecedor, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 180, 220, -1));
+
+        jComboBoxFornecedor.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Selecione o fornecedor" }));
+        jComboBoxFornecedor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBoxFornecedorActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jComboBoxFornecedor, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 180, 240, -1));
+
+        jLabel8.setText("Fornecedor:");
+        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 180, -1, -1));
+        jPanel1.add(txtEquipamento, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 140, 240, -1));
+
+        jLabel2.setText("Equipamento:");
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 140, -1, -1));
+
+        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel1.setText("Equipamento");
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 40, -1, 23));
+
+        jBtnSair.setText("Sair");
+        jBtnSair.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnSairActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jBtnSair, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 290, -1, -1));
+
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/leiaute/img1.png"))); // NOI18N
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 670, 370));
+
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 670, 380));
 
         pack();
         setLocationRelativeTo(null);
@@ -240,6 +250,10 @@ public final class DetalharEquipamento extends javax.swing.JFrame {
     private void jBtnSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnSairActionPerformed
         this.dispose();
     }//GEN-LAST:event_jBtnSairActionPerformed
+
+    private void txtFabricanteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtFabricanteActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtFabricanteActionPerformed
 
     private void limparCampos() {
         
@@ -411,6 +425,7 @@ public final class DetalharEquipamento extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;

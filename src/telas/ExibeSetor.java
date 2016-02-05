@@ -109,12 +109,14 @@ public class ExibeSetor extends javax.swing.JFrame {
         jBtnCancelarCadSetor = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         txtBuscar = new javax.swing.JTextField();
+        jLabel4 = new javax.swing.JLabel();
 
         jButton2.setText("jButton2");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jPanel1.setBackground(new java.awt.Color(252, 252, 230));
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jTableListarSetores.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -144,12 +146,15 @@ public class ExibeSetor extends javax.swing.JFrame {
             jTableListarSetores.getColumnModel().getColumn(1).setPreferredWidth(50);
         }
 
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 340, 473, 260));
+
         jBtnAlterarSetor.setText("Alterar");
         jBtnAlterarSetor.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jBtnAlterarSetorActionPerformed(evt);
             }
         });
+        jPanel1.add(jBtnAlterarSetor, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 230, -1, -1));
 
         jBtnNovoSetor.setText("Novo");
         jBtnNovoSetor.addActionListener(new java.awt.event.ActionListener() {
@@ -157,6 +162,7 @@ public class ExibeSetor extends javax.swing.JFrame {
                 jBtnNovoSetorActionPerformed(evt);
             }
         });
+        jPanel1.add(jBtnNovoSetor, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 190, -1, -1));
 
         jBtnCadastrarSetor.setText("Cadastrar");
         jBtnCadastrarSetor.addActionListener(new java.awt.event.ActionListener() {
@@ -164,11 +170,14 @@ public class ExibeSetor extends javax.swing.JFrame {
                 jBtnCadastrarSetorActionPerformed(evt);
             }
         });
+        jPanel1.add(jBtnCadastrarSetor, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 190, -1, -1));
 
         jLabel3.setText("Setor:");
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 130, -1, -1));
 
-        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel1.setText("Setores");
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 40, -1, -1));
 
         jBtnExcluirSetor.setText("Excluir");
         jBtnExcluirSetor.addActionListener(new java.awt.event.ActionListener() {
@@ -176,6 +185,7 @@ public class ExibeSetor extends javax.swing.JFrame {
                 jBtnExcluirSetorActionPerformed(evt);
             }
         });
+        jPanel1.add(jBtnExcluirSetor, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 260, -1, -1));
 
         jBtnSair.setText("Sair");
         jBtnSair.addActionListener(new java.awt.event.ActionListener() {
@@ -183,6 +193,7 @@ public class ExibeSetor extends javax.swing.JFrame {
                 jBtnSairActionPerformed(evt);
             }
         });
+        jPanel1.add(jBtnSair, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 570, -1, -1));
 
         jBtnEditarSetor.setText("Editar");
 
@@ -194,6 +205,8 @@ public class ExibeSetor extends javax.swing.JFrame {
                 jBtnEditarSetorActionPerformed(evt);
             }
         });
+        jPanel1.add(jBtnEditarSetor, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 230, -1, -1));
+        jPanel1.add(txtSetor, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 130, 410, -1));
 
         jBtnCancelarAlterarSetor.setText("Cancelar");
         jBtnCancelarAlterarSetor.addActionListener(new java.awt.event.ActionListener() {
@@ -201,6 +214,7 @@ public class ExibeSetor extends javax.swing.JFrame {
                 jBtnCancelarAlterarSetorActionPerformed(evt);
             }
         });
+        jPanel1.add(jBtnCancelarAlterarSetor, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 230, -1, -1));
 
         jBtnCancelarCadSetor.setText("Cancelar");
         jBtnCancelarCadSetor.addActionListener(new java.awt.event.ActionListener() {
@@ -208,88 +222,20 @@ public class ExibeSetor extends javax.swing.JFrame {
                 jBtnCancelarCadSetorActionPerformed(evt);
             }
         });
+        jPanel1.add(jBtnCancelarCadSetor, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 190, -1, -1));
 
         jLabel2.setText("Pesquisar:");
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 300, -1, -1));
 
         txtBuscar.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 txtBuscarKeyReleased(evt);
             }
         });
+        jPanel1.add(txtBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 300, 421, -1));
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(26, 26, 26)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel2)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 421, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jBtnExcluirSetor)
-                            .addComponent(jBtnEditarSetor)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jBtnNovoSetor)
-                                .addGap(18, 18, 18)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addGap(4, 4, 4)
-                                        .addComponent(jBtnAlterarSetor)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(jBtnCancelarAlterarSetor))
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addComponent(jBtnCadastrarSetor)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(jBtnCancelarCadSetor)
-                                        .addGap(2, 2, 2))))
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(jBtnSair)
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 473, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(24, 24, 24)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel3)
-                                .addGap(32, 32, 32)
-                                .addComponent(txtSetor, javax.swing.GroupLayout.PREFERRED_SIZE, 410, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jLabel1))))
-                .addContainerGap(28, Short.MAX_VALUE))
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(26, 26, 26)
-                .addComponent(jLabel1)
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(txtSetor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jBtnNovoSetor)
-                    .addComponent(jBtnCadastrarSetor)
-                    .addComponent(jBtnCancelarCadSetor))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jBtnEditarSetor)
-                    .addComponent(jBtnAlterarSetor)
-                    .addComponent(jBtnCancelarAlterarSetor))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jBtnExcluirSetor)
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(txtBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 361, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jBtnSair)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
+        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/leiaute/img3-5.png"))); // NOI18N
+        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -10, 850, 670));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -299,7 +245,7 @@ public class ExibeSetor extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         bindingGroup.bind();
@@ -414,6 +360,7 @@ public class ExibeSetor extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTableListarSetores;

@@ -66,10 +66,12 @@ public class AdicionarDetServEquipamento extends javax.swing.JFrame {
         jLabel38 = new javax.swing.JLabel();
         jComboBoxFabricanteEquip = new javax.swing.JComboBox();
         jBtnInserirDetServEquipamento = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jPanel4.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jComboBoxEquipamentos.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Selecione o Equipamento" }));
         jComboBoxEquipamentos.addItemListener(new java.awt.event.ItemListener() {
@@ -82,8 +84,10 @@ public class AdicionarDetServEquipamento extends javax.swing.JFrame {
                 jComboBoxEquipamentosActionPerformed(evt);
             }
         });
+        jPanel4.add(jComboBoxEquipamentos, new org.netbeans.lib.awtextra.AbsoluteConstraints(156, 99, 261, -1));
 
         jLabel1.setText("Equipamento:");
+        jPanel4.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 102, -1, -1));
 
         jBtnRemoveEquipamento.setText("Remover");
         jBtnRemoveEquipamento.addActionListener(new java.awt.event.ActionListener() {
@@ -91,6 +95,7 @@ public class AdicionarDetServEquipamento extends javax.swing.JFrame {
                 jBtnRemoveEquipamentoActionPerformed(evt);
             }
         });
+        jPanel4.add(jBtnRemoveEquipamento, new org.netbeans.lib.awtextra.AbsoluteConstraints(243, 264, -1, -1));
 
         jBtbIncluirEquipamento.setText("IncluirEquipamento");
         jBtbIncluirEquipamento.addActionListener(new java.awt.event.ActionListener() {
@@ -98,6 +103,7 @@ public class AdicionarDetServEquipamento extends javax.swing.JFrame {
                 jBtbIncluirEquipamentoActionPerformed(evt);
             }
         });
+        jPanel4.add(jBtbIncluirEquipamento, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 264, -1, -1));
 
         jTableEquipamento.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -118,7 +124,10 @@ public class AdicionarDetServEquipamento extends javax.swing.JFrame {
         jTableEquipamento.getTableHeader().setReorderingAllowed(false);
         jScrollPane2.setViewportView(jTableEquipamento);
 
+        jPanel4.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 305, 476, 130));
+
         jLabel37.setText("Modelo:");
+        jPanel4.add(jLabel37, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 140, -1, -1));
 
         jComboBoxModeloEquip.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Selecione o Modelo" }));
         jComboBoxModeloEquip.addItemListener(new java.awt.event.ItemListener() {
@@ -126,8 +135,10 @@ public class AdicionarDetServEquipamento extends javax.swing.JFrame {
                 jComboBoxModeloEquipItemStateChanged(evt);
             }
         });
+        jPanel4.add(jComboBoxModeloEquip, new org.netbeans.lib.awtextra.AbsoluteConstraints(153, 137, 264, -1));
 
         jLabel38.setText("Fabricante:");
+        jPanel4.add(jLabel38, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 178, -1, -1));
 
         jComboBoxFabricanteEquip.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Selecione o Fabricante" }));
         jComboBoxFabricanteEquip.addActionListener(new java.awt.event.ActionListener() {
@@ -135,6 +146,7 @@ public class AdicionarDetServEquipamento extends javax.swing.JFrame {
                 jComboBoxFabricanteEquipActionPerformed(evt);
             }
         });
+        jPanel4.add(jComboBoxFabricanteEquip, new org.netbeans.lib.awtextra.AbsoluteConstraints(153, 175, 264, -1));
 
         jBtnInserirDetServEquipamento.setText("Salvar");
         jBtnInserirDetServEquipamento.addActionListener(new java.awt.event.ActionListener() {
@@ -142,76 +154,20 @@ public class AdicionarDetServEquipamento extends javax.swing.JFrame {
                 jBtnInserirDetServEquipamentoActionPerformed(evt);
             }
         });
+        jPanel4.add(jBtnInserirDetServEquipamento, new org.netbeans.lib.awtextra.AbsoluteConstraints(493, 465, -1, -1));
 
-        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
-        jPanel4.setLayout(jPanel4Layout);
-        jPanel4Layout.setHorizontalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel4Layout.createSequentialGroup()
-                .addGap(79, 79, 79)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jBtnInserirDetServEquipamento)
-                    .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(jPanel4Layout.createSequentialGroup()
-                                .addComponent(jBtbIncluirEquipamento)
-                                .addGap(40, 40, 40)
-                                .addComponent(jBtnRemoveEquipamento))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
-                                .addComponent(jLabel38)
-                                .addGap(18, 18, 18)
-                                .addComponent(jComboBoxFabricanteEquip, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addGroup(jPanel4Layout.createSequentialGroup()
-                                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel1)
-                                    .addComponent(jLabel37))
-                                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(jPanel4Layout.createSequentialGroup()
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(jComboBoxEquipamentos, javax.swing.GroupLayout.PREFERRED_SIZE, 261, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
-                                        .addGap(7, 7, 7)
-                                        .addComponent(jComboBoxModeloEquip, javax.swing.GroupLayout.PREFERRED_SIZE, 264, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 476, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(195, Short.MAX_VALUE))
-        );
-        jPanel4Layout.setVerticalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel4Layout.createSequentialGroup()
-                .addGap(98, 98, 98)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jComboBoxEquipamentos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel37)
-                    .addComponent(jComboBoxModeloEquip, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel38)
-                    .addComponent(jComboBoxFabricanteEquip, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 69, Short.MAX_VALUE)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jBtbIncluirEquipamento)
-                    .addComponent(jBtnRemoveEquipamento))
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(34, 34, 34)
-                .addComponent(jBtnInserirDetServEquipamento)
-                .addGap(35, 35, 35))
-        );
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/leiaute/img2.png"))); // NOI18N
+        jPanel4.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 670, 600));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 1, Short.MAX_VALUE))
+            .addComponent(jPanel4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jPanel4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -432,6 +388,7 @@ public class AdicionarDetServEquipamento extends javax.swing.JFrame {
     private javax.swing.JComboBox jComboBoxFabricanteEquip;
     private javax.swing.JComboBox jComboBoxModeloEquip;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel37;
     private javax.swing.JLabel jLabel38;
     private javax.swing.JPanel jPanel4;

@@ -65,10 +65,6 @@ public class CadastrarEquipamento extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        txtEquipamento = new javax.swing.JTextField();
-        jComboBoxEquipamento = new javax.swing.JComboBox();
         jPanel1 = new javax.swing.JPanel();
         jBtnCadEquipamento = new javax.swing.JButton();
         jBtbNovoEquipamento = new javax.swing.JButton();
@@ -81,6 +77,11 @@ public class CadastrarEquipamento extends javax.swing.JFrame {
         jComboBoxModelo = new javax.swing.JComboBox();
         jBtnSair = new javax.swing.JButton();
         jBtnCadastrarEquipamento = new javax.swing.JButton();
+        jComboBoxEquipamento = new javax.swing.JComboBox();
+        jLabel2 = new javax.swing.JLabel();
+        txtEquipamento = new javax.swing.JTextField();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -90,21 +91,7 @@ public class CadastrarEquipamento extends javax.swing.JFrame {
         });
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel1.setText("Cadastrar Equipamento");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(31, 21, -1, 23));
-
-        jLabel2.setText("Equipamento:");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(31, 72, -1, -1));
-        getContentPane().add(txtEquipamento, new org.netbeans.lib.awtextra.AbsoluteConstraints(101, 69, 240, -1));
-
-        jComboBoxEquipamento.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Selecione o produto" }));
-        jComboBoxEquipamento.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBoxEquipamentoActionPerformed(evt);
-            }
-        });
-        getContentPane().add(jComboBoxEquipamento, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 70, 260, -1));
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jBtnCadEquipamento.setText("Salvar");
         jBtnCadEquipamento.addActionListener(new java.awt.event.ActionListener() {
@@ -112,6 +99,7 @@ public class CadastrarEquipamento extends javax.swing.JFrame {
                 jBtnCadEquipamentoActionPerformed(evt);
             }
         });
+        jPanel1.add(jBtnCadEquipamento, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 160, -1, -1));
 
         jBtbNovoEquipamento.setText("Novo");
         jBtbNovoEquipamento.addActionListener(new java.awt.event.ActionListener() {
@@ -119,6 +107,7 @@ public class CadastrarEquipamento extends javax.swing.JFrame {
                 jBtbNovoEquipamentoActionPerformed(evt);
             }
         });
+        jPanel1.add(jBtbNovoEquipamento, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 160, -1, -1));
 
         jBtnCancelarCadEquipamento.setText("Cancelar");
         jBtnCancelarCadEquipamento.addActionListener(new java.awt.event.ActionListener() {
@@ -126,8 +115,10 @@ public class CadastrarEquipamento extends javax.swing.JFrame {
                 jBtnCancelarCadEquipamentoActionPerformed(evt);
             }
         });
+        jPanel1.add(jBtnCancelarCadEquipamento, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 160, -1, -1));
 
         jLabel8.setText("Fornecedor:");
+        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 210, -1, -1));
 
         jComboBoxFornecedor.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Selecione o fornecedor" }));
         jComboBoxFornecedor.addActionListener(new java.awt.event.ActionListener() {
@@ -135,8 +126,10 @@ public class CadastrarEquipamento extends javax.swing.JFrame {
                 jComboBoxFornecedorActionPerformed(evt);
             }
         });
+        jPanel1.add(jComboBoxFornecedor, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 210, 200, -1));
 
         jLabel9.setText("Fabricante:");
+        jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 260, -1, -1));
 
         jComboBoxFabricante.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Selecione o fabricante" }));
         jComboBoxFabricante.addActionListener(new java.awt.event.ActionListener() {
@@ -144,8 +137,10 @@ public class CadastrarEquipamento extends javax.swing.JFrame {
                 jComboBoxFabricanteActionPerformed(evt);
             }
         });
+        jPanel1.add(jComboBoxFabricante, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 250, 260, -1));
 
         jLabel10.setText("Modelo:");
+        jPanel1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 290, -1, -1));
 
         jComboBoxModelo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Selecione o modelo" }));
         jComboBoxModelo.addActionListener(new java.awt.event.ActionListener() {
@@ -153,6 +148,7 @@ public class CadastrarEquipamento extends javax.swing.JFrame {
                 jComboBoxModeloActionPerformed(evt);
             }
         });
+        jPanel1.add(jComboBoxModelo, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 290, 200, -1));
 
         jBtnSair.setText("Sair");
         jBtnSair.addActionListener(new java.awt.event.ActionListener() {
@@ -160,6 +156,7 @@ public class CadastrarEquipamento extends javax.swing.JFrame {
                 jBtnSairActionPerformed(evt);
             }
         });
+        jPanel1.add(jBtnSair, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 340, -1, -1));
 
         jBtnCadastrarEquipamento.setText("Cadastrar");
         jBtnCadastrarEquipamento.addActionListener(new java.awt.event.ActionListener() {
@@ -167,74 +164,28 @@ public class CadastrarEquipamento extends javax.swing.JFrame {
                 jBtnCadastrarEquipamentoActionPerformed(evt);
             }
         });
+        jPanel1.add(jBtnCadastrarEquipamento, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 330, -1, -1));
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(30, 30, 30)
-                        .addComponent(jLabel8)
-                        .addGap(11, 11, 11)
-                        .addComponent(jComboBoxFornecedor, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(30, 30, 30)
-                        .addComponent(jLabel9)
-                        .addGap(15, 15, 15)
-                        .addComponent(jComboBoxFabricante, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(30, 30, 30)
-                        .addComponent(jLabel10)
-                        .addGap(32, 32, 32)
-                        .addComponent(jComboBoxModelo, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(20, 20, 20)
-                        .addComponent(jBtnSair)
-                        .addGap(419, 419, 419)
-                        .addComponent(jBtnCadastrarEquipamento))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(370, 370, 370)
-                        .addComponent(jBtbNovoEquipamento)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jBtnCadEquipamento)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jBtnCancelarCadEquipamento)))
-                .addContainerGap(29, Short.MAX_VALUE))
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(70, 70, 70)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jBtbNovoEquipamento)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jBtnCadEquipamento)
-                        .addComponent(jBtnCancelarCadEquipamento)))
-                .addGap(47, 47, 47)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel8)
-                    .addComponent(jComboBoxFornecedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(50, 50, 50)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(10, 10, 10)
-                        .addComponent(jLabel9))
-                    .addComponent(jComboBoxFabricante, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(56, 56, 56)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel10)
-                    .addComponent(jComboBoxModelo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(20, 20, 20)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(10, 10, 10)
-                        .addComponent(jBtnSair))
-                    .addComponent(jBtnCadastrarEquipamento)))
-        );
+        jComboBoxEquipamento.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Selecione o produto" }));
+        jComboBoxEquipamento.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBoxEquipamentoActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jComboBoxEquipamento, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 170, 260, -1));
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 610, 380));
+        jLabel2.setText("Equipamento:");
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 170, -1, -1));
+        jPanel1.add(txtEquipamento, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 170, 240, -1));
+
+        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel1.setText("Cadastrar Equipamento");
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 40, -1, 23));
+
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/leiaute/img2.png"))); // NOI18N
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -10, 670, 620));
+
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 380));
 
         pack();
         setLocationRelativeTo(null);
@@ -513,6 +464,7 @@ public class CadastrarEquipamento extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;

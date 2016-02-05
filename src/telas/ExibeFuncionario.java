@@ -122,6 +122,7 @@ public class ExibeFuncionario extends javax.swing.JFrame {
         txtRg = new javax.swing.JFormattedTextField();
         txtCpf = new javax.swing.JFormattedTextField();
         txtBuscar = new javax.swing.JTextField();
+        jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setResizable(false);
@@ -142,7 +143,7 @@ public class ExibeFuncionario extends javax.swing.JFrame {
                 jBtnNovoFuncionarioActionPerformed(evt);
             }
         });
-        jPanel1.add(jBtnNovoFuncionario, new org.netbeans.lib.awtextra.AbsoluteConstraints(900, 120, 120, -1));
+        jPanel1.add(jBtnNovoFuncionario, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 210, 120, -1));
 
         jBtnDetalharFuncionario.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jBtnDetalharFuncionario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/funcionarioConsulta.fw.png"))); // NOI18N
@@ -156,7 +157,7 @@ public class ExibeFuncionario extends javax.swing.JFrame {
                 jBtnDetalharFuncionarioActionPerformed(evt);
             }
         });
-        jPanel1.add(jBtnDetalharFuncionario, new org.netbeans.lib.awtextra.AbsoluteConstraints(900, 200, 120, -1));
+        jPanel1.add(jBtnDetalharFuncionario, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 290, 120, -1));
 
         jButton4.setText("Voltar");
         jButton4.addActionListener(new java.awt.event.ActionListener() {
@@ -164,7 +165,7 @@ public class ExibeFuncionario extends javax.swing.JFrame {
                 jButton4ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 580, -1, -1));
+        jPanel1.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 600, -1, -1));
 
         jTableListarFuncionarios.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -179,7 +180,7 @@ public class ExibeFuncionario extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(jTableListarFuncionarios);
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 120, 810, 430));
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 200, 580, 370));
 
         jComboBoxOpcaoPesquisa.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Selecione a opção de pesquisa", "Código", "Funcionário", "CPF", "RG" }));
         jComboBoxOpcaoPesquisa.addActionListener(new java.awt.event.ActionListener() {
@@ -187,14 +188,14 @@ public class ExibeFuncionario extends javax.swing.JFrame {
                 jComboBoxOpcaoPesquisaActionPerformed(evt);
             }
         });
-        jPanel1.add(jComboBoxOpcaoPesquisa, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 70, -1, -1));
+        jPanel1.add(jComboBoxOpcaoPesquisa, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 140, -1, -1));
 
         jLabel2.setText("Pesquisar:");
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 70, -1, -1));
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 140, -1, -1));
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel1.setText("FUNCIONÁRIOS");
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 20, -1, -1));
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 30, -1, 20));
 
         try {
             txtRg.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##.###.###-##")));
@@ -206,7 +207,7 @@ public class ExibeFuncionario extends javax.swing.JFrame {
                 txtRgKeyReleased(evt);
             }
         });
-        jPanel1.add(txtRg, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 70, 103, -1));
+        jPanel1.add(txtRg, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 140, 103, -1));
 
         try {
             txtCpf.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("###.###.###-##")));
@@ -218,26 +219,29 @@ public class ExibeFuncionario extends javax.swing.JFrame {
                 txtCpfKeyReleased(evt);
             }
         });
-        jPanel1.add(txtCpf, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 70, 101, -1));
+        jPanel1.add(txtCpf, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 140, 101, -1));
 
         txtBuscar.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 txtBuscarKeyReleased(evt);
             }
         });
-        jPanel1.add(txtBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 70, 300, -1));
+        jPanel1.add(txtBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 140, 300, -1));
+
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/leiaute/img3-5.png"))); // NOI18N
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(-10, -20, 850, 680));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 1071, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 630, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         bindingGroup.bind();
@@ -336,6 +340,7 @@ public class ExibeFuncionario extends javax.swing.JFrame {
     private javax.swing.JComboBox jComboBoxOpcaoPesquisa;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTableListarFuncionarios;

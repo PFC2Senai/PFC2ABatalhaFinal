@@ -99,6 +99,7 @@ public class Proposta extends javax.swing.JFrame {
         jTableTipodeServico = new javax.swing.JTable();
         jBtnAdicionarTipo = new javax.swing.JButton();
         jBtnRemoverTipo = new javax.swing.JButton();
+        jLabel15 = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
         jPanel14 = new javax.swing.JPanel();
         jComboBoxProduto = new javax.swing.JComboBox();
@@ -168,11 +169,11 @@ public class Proposta extends javax.swing.JFrame {
 
         jLabel10.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel10.setText("Escopo do Fornecimento");
-        jPanel3.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 20, -1, -1));
-        jPanel3.add(txtTipoServico, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 90, 370, -1));
+        jPanel3.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 40, -1, -1));
+        jPanel3.add(txtTipoServico, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 180, 370, -1));
 
         jLabel11.setText("Tipo de serviço:");
-        jPanel3.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 70, -1, -1));
+        jPanel3.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 160, -1, -1));
 
         jComboBoxTipoServico.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Selecione o Tipo de Serviço" }));
         jComboBoxTipoServico.addActionListener(new java.awt.event.ActionListener() {
@@ -180,7 +181,7 @@ public class Proposta extends javax.swing.JFrame {
                 jComboBoxTipoServicoActionPerformed(evt);
             }
         });
-        jPanel3.add(jComboBoxTipoServico, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 90, 390, -1));
+        jPanel3.add(jComboBoxTipoServico, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 180, 390, -1));
 
         jBtbNovoTipoServico.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/page.png"))); // NOI18N
         jBtbNovoTipoServico.setText("Novo");
@@ -189,7 +190,7 @@ public class Proposta extends javax.swing.JFrame {
                 jBtbNovoTipoServicoActionPerformed(evt);
             }
         });
-        jPanel3.add(jBtbNovoTipoServico, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 90, -1, -1));
+        jPanel3.add(jBtbNovoTipoServico, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 180, -1, -1));
 
         jBtnCadTipoServico.setText("Salvar");
         jBtnCadTipoServico.addActionListener(new java.awt.event.ActionListener() {
@@ -197,7 +198,7 @@ public class Proposta extends javax.swing.JFrame {
                 jBtnCadTipoServicoActionPerformed(evt);
             }
         });
-        jPanel3.add(jBtnCadTipoServico, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 90, 70, -1));
+        jPanel3.add(jBtnCadTipoServico, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 490, 90, -1));
 
         jBtnCancelarCadTipoServico.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/cancelar.png"))); // NOI18N
         jBtnCancelarCadTipoServico.setText("Cancelar");
@@ -206,7 +207,7 @@ public class Proposta extends javax.swing.JFrame {
                 jBtnCancelarCadTipoServicoActionPerformed(evt);
             }
         });
-        jPanel3.add(jBtnCancelarCadTipoServico, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 90, -1, -1));
+        jPanel3.add(jBtnCancelarCadTipoServico, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 180, -1, -1));
 
         jTableTipodeServico.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -219,7 +220,7 @@ public class Proposta extends javax.swing.JFrame {
         jTableTipodeServico.getTableHeader().setReorderingAllowed(false);
         jScrollPane6.setViewportView(jTableTipodeServico);
 
-        jPanel3.add(jScrollPane6, new org.netbeans.lib.awtextra.AbsoluteConstraints(28, 175, 570, 249));
+        jPanel3.add(jScrollPane6, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 260, 570, 210));
 
         jBtnAdicionarTipo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/adicionar.gif"))); // NOI18N
         jBtnAdicionarTipo.setText("Adicionar Tipo");
@@ -228,7 +229,7 @@ public class Proposta extends javax.swing.JFrame {
                 jBtnAdicionarTipoActionPerformed(evt);
             }
         });
-        jPanel3.add(jBtnAdicionarTipo, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 140, -1, -1));
+        jPanel3.add(jBtnAdicionarTipo, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 230, -1, -1));
 
         jBtnRemoverTipo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/delete.png"))); // NOI18N
         jBtnRemoverTipo.setText("Remover Tipo");
@@ -237,7 +238,10 @@ public class Proposta extends javax.swing.JFrame {
                 jBtnRemoverTipoActionPerformed(evt);
             }
         });
-        jPanel3.add(jBtnRemoverTipo, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 140, -1, -1));
+        jPanel3.add(jBtnRemoverTipo, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 230, -1, -1));
+
+        jLabel15.setIcon(new javax.swing.ImageIcon(getClass().getResource("/leiaute/img2.png"))); // NOI18N
+        jPanel3.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 670, 600));
 
         jTabbedPane1.addTab("Fornecimento", jPanel3);
 
@@ -394,7 +398,7 @@ public class Proposta extends javax.swing.JFrame {
                 .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel16)
                     .addComponent(txtTotalGeral, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(130, Short.MAX_VALUE))
+                .addContainerGap(118, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
@@ -410,7 +414,7 @@ public class Proposta extends javax.swing.JFrame {
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 547, Short.MAX_VALUE)
+            .addGap(0, 535, Short.MAX_VALUE)
             .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel4Layout.createSequentialGroup()
                     .addContainerGap()
@@ -442,7 +446,7 @@ public class Proposta extends javax.swing.JFrame {
                     .addComponent(jLabel12)
                     .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 658, Short.MAX_VALUE)
                     .addComponent(jScrollPane4))
-                .addContainerGap(44, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -455,7 +459,7 @@ public class Proposta extends javax.swing.JFrame {
                 .addComponent(jLabel13)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(98, Short.MAX_VALUE))
+                .addContainerGap(86, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Observações", jPanel5);
@@ -563,7 +567,7 @@ public class Proposta extends javax.swing.JFrame {
                 .addComponent(jLabel24)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 38, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
                 .addComponent(jButton1)
                 .addGap(29, 29, 29))
         );
@@ -629,7 +633,7 @@ public class Proposta extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addComponent(jComboBoxFuncionarios, 0, 387, Short.MAX_VALUE))
                     .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 241, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(245, Short.MAX_VALUE))
+                .addContainerGap(186, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -654,7 +658,7 @@ public class Proposta extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
                     .addComponent(jComboBoxFuncionarios, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(250, Short.MAX_VALUE))
+                .addContainerGap(238, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Dados da Empresa", jPanel1);
@@ -678,7 +682,7 @@ public class Proposta extends javax.swing.JFrame {
                     .addComponent(jLabel8)
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 657, Short.MAX_VALUE)
                     .addComponent(txtReferencia))
-                .addContainerGap(44, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -691,7 +695,7 @@ public class Proposta extends javax.swing.JFrame {
                 .addComponent(jLabel9)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 310, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(106, Short.MAX_VALUE))
+                .addContainerGap(94, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Descrição", jPanel2);
@@ -700,11 +704,11 @@ public class Proposta extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 732, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 673, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane1, javax.swing.GroupLayout.Alignment.TRAILING)
+            .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 563, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
@@ -1290,6 +1294,7 @@ public class Proposta extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
