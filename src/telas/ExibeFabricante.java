@@ -111,7 +111,7 @@ public class ExibeFabricante extends javax.swing.JFrame {
         ));
         jScrollPane2.setViewportView(jTableListarFabricantes);
 
-        getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(26, 151, 495, 320));
+        getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 140, 495, 320));
 
         jButton5.setText("Novo");
         jButton5.addActionListener(new java.awt.event.ActionListener() {
@@ -156,7 +156,7 @@ public class ExibeFabricante extends javax.swing.JFrame {
         getContentPane().add(txtBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 110, 280, -1));
 
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/leiaute/img2.png"))); // NOI18N
-        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -20, 670, 630));
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 670, 600));
 
         pack();
         setLocationRelativeTo(null);
