@@ -127,6 +127,11 @@ public class CadastrarFabricante extends javax.swing.JFrame {
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
 
+        if (jTextFabricante.getText().equals("")){
+    JOptionPane.showMessageDialog(null, "Campo vazio!");
+    return;
+        }
+        
         if (FabricanteDAO.VerificarFabricante(jTextFabricante.getText()) == false) {
             Fabricante fab = new Fabricante();
 
