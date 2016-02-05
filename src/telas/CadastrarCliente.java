@@ -164,7 +164,7 @@ public class CadastrarCliente extends javax.swing.JFrame {
         }
 
         if (jTableContatos.getRowCount() < 1) {
-            JOptionPane.showMessageDialog(null, "Campo(s) vazio(s)!");
+            JOptionPane.showMessageDialog(null, "Tabela de CONTATOS vazia!");
             valida = false;
             return valida;
         }
