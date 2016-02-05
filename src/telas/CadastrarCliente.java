@@ -850,7 +850,7 @@ public class CadastrarCliente extends javax.swing.JFrame {
                 endereco.setPais(txtPais.getText());
                 endereco.setCep(txtCep.getText());
                 endereco.setRua(txtRua.getText());
-                endereco.setNumero(txtNumero.getText().toUpperCase());
+                endereco.setNumero(txtNumero.getText());
                 endereco.setBairro(txtBairro.getText());
                 endereco.setCidade(txtCidade.getText());
                 endereco.setEstado(txtEstado.getText());
