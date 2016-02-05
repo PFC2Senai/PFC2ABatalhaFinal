@@ -14,6 +14,7 @@ import funcoes.ContatosDAO;
 import funcoes.LimitarDigitos;
 import funcoes.PessoaContatoDAO;
 import funcoes.SetorDAO;
+import java.awt.Color;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 import java.io.IOException;
@@ -41,6 +42,8 @@ public class CadastrarCliente extends javax.swing.JFrame {
     }
 
     public CadastrarCliente(Menu menu) {
+        //setExtendedState(CadastrarCliente.MAXIMIZED_HORIZ);
+
         telaMenu = menu;
         initComponents();
         telaCliente = this;
@@ -50,9 +53,6 @@ public class CadastrarCliente extends javax.swing.JFrame {
         jBtnCancelarSetor.setVisible(false);
         combobox();
 
-//        txtEmpresa.setDocument(new LimitarDigitos(45));
-//        txtSetor.setDocument(new LimitarDigitos(50));
-//        txtPais.setDocument(new LimitarDigitos(45));
         txtEstado.setDocument(new LimitarDigitos(4));
         txtNumero.setDocument(new LimitarDigitos(6));
         txtTelCel.setDocument(new LimitarDigitos(12));
@@ -67,17 +67,7 @@ public class CadastrarCliente extends javax.swing.JFrame {
         jBtnSalvarSetor.setVisible(false);
         jBtnCancelarSetor.setVisible(false);
         combobox();
-//        txtEmpresa.setDocument(new LimitarDigitos(45));
-//        txtSetor.setDocument(new LimitarDigitos(50));
-//        txtPais.setDocument(new LimitarDigitos(45));
         txtEstado.setDocument(new LimitarDigitos(4));
-//        txtBairro.setDocument(new LimitarDigitos(45));
-//        txtCidade.setDocument(new LimitarDigitos(45));
-//        txtRua.setDocument(new LimitarDigitos(45));
-        //txtNumero.setDocument(new LimitarDigitos(10).insertInt(HEIGHT, descricaoAudit,  10));
-//
-//        txtContato.setDocument(new LimitarDigitos(45));
-//        txtEmail.setDocument(new LimitarDigitos(45));
         txtNumero.setDocument(new LimitarDigitos(6));
         txtTelCel.setDocument(new LimitarDigitos(20));
     }
@@ -88,6 +78,7 @@ public class CadastrarCliente extends javax.swing.JFrame {
 
         if (txtEmpresa.getText().trim().equals("")) {
             JOptionPane.showMessageDialog(null, "Campo(s) vazio(s)!");
+            txtEmpresa.setBackground(Color.yellow);
             valida = false;
             return valida;
         }
@@ -141,7 +132,7 @@ public class CadastrarCliente extends javax.swing.JFrame {
         }
 
         if (txtNumero.getText().trim().equals("")) {
-            JOptionPane.showMessageDialog(null, "Campo(s) vazio(s)!");
+            JOptionPane.showMessageDialog(null, "Campo de numero vazio");
             valida = false;
             return valida;
         }
@@ -153,7 +144,7 @@ public class CadastrarCliente extends javax.swing.JFrame {
         }
 
         if (jTableContatos.getRowCount() < 1) {
-            JOptionPane.showMessageDialog(null, "Campo(s) vazio(s)!");
+            JOptionPane.showMessageDialog(null, "Adicione um contato na tabela");
             valida = false;
             return valida;
         }
@@ -262,6 +253,7 @@ public class CadastrarCliente extends javax.swing.JFrame {
         jBtnNovoSetor = new javax.swing.JButton();
         jBtnSalvarSetor = new javax.swing.JButton();
         jBtnCancelarSetor = new javax.swing.JButton();
+        jLabelCnpjExistente = new javax.swing.JLabel();
         btnCadCliente = new javax.swing.JButton();
         jLabel17 = new javax.swing.JLabel();
 
@@ -288,7 +280,7 @@ public class CadastrarCliente extends javax.swing.JFrame {
                 btnLimparActionPerformed(evt);
             }
         });
-        jPanel1.add(btnLimpar, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 700, -1, 30));
+        jPanel1.add(btnLimpar, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 680, -1, 30));
 
         jPanel2.setBackground(new java.awt.Color(223, 237, 253));
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Contatos", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 2, 11))); // NOI18N
@@ -328,6 +320,16 @@ public class CadastrarCliente extends javax.swing.JFrame {
         txtEmail.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
                 txtEmailFocusLost(evt);
+            }
+        });
+        txtEmail.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtEmailActionPerformed(evt);
+            }
+        });
+        txtEmail.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtEmailKeyTyped(evt);
             }
         });
 
@@ -444,7 +446,7 @@ public class CadastrarCliente extends javax.swing.JFrame {
                 .addGap(29, 29, 29))
         );
 
-        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 410, 730, 280));
+        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 380, 730, 280));
 
         jPanel3.setBackground(new java.awt.Color(223, 237, 253));
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Endereço", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 2, 11))); // NOI18N
@@ -563,7 +565,7 @@ public class CadastrarCliente extends javax.swing.JFrame {
                 .addContainerGap(13, Short.MAX_VALUE))
         );
 
-        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 280, 730, -1));
+        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 250, 730, -1));
 
         jPanel4.setBackground(new java.awt.Color(223, 237, 253));
         jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createTitledBorder(""), "Empresa", javax.swing.border.TitledBorder.LEFT, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 2, 11))); // NOI18N
@@ -583,6 +585,11 @@ public class CadastrarCliente extends javax.swing.JFrame {
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
+        txtCnpj.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtCnpjFocusLost(evt);
+            }
+        });
 
         jLabel6.setText("Segmento:");
 
@@ -617,13 +624,15 @@ public class CadastrarCliente extends javax.swing.JFrame {
             }
         });
 
+        jLabelCnpjExistente.setForeground(new java.awt.Color(255, 0, 0));
+
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addGap(16, 16, 16)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addComponent(jLabel3)
                         .addGap(15, 15, 15)
@@ -631,7 +640,9 @@ public class CadastrarCliente extends javax.swing.JFrame {
                         .addGap(20, 20, 20)
                         .addComponent(jLabel4)
                         .addGap(30, 30, 30)
-                        .addComponent(txtCnpj, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(txtCnpj, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabelCnpjExistente, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addComponent(jLabel6)
                         .addGap(8, 8, 8)
@@ -650,7 +661,9 @@ public class CadastrarCliente extends javax.swing.JFrame {
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addGap(11, 11, 11)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtCnpj, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(txtCnpj, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabelCnpjExistente, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addGap(3, 3, 3)
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -667,7 +680,7 @@ public class CadastrarCliente extends javax.swing.JFrame {
                     .addComponent(jBtnSalvarSetor)))
         );
 
-        jPanel1.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 180, 730, 100));
+        jPanel1.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 150, 730, 100));
 
         btnCadCliente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/disk.png"))); // NOI18N
         btnCadCliente.setText("Cadastrar");
@@ -676,7 +689,7 @@ public class CadastrarCliente extends javax.swing.JFrame {
                 btnCadClienteActionPerformed(evt);
             }
         });
-        jPanel1.add(btnCadCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 700, -1, 30));
+        jPanel1.add(btnCadCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 680, -1, 30));
 
         jLabel17.setIcon(new javax.swing.ImageIcon(getClass().getResource("/leiaute/img3.png"))); // NOI18N
         jPanel1.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 860, 900));
@@ -781,7 +794,7 @@ public class CadastrarCliente extends javax.swing.JFrame {
 
     private void txtNumeroKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNumeroKeyTyped
 
-        String caracteres = "0987654321snSN/";
+        String caracteres = "0987654321snSN";
         String car = txtNumero.getText().toUpperCase();
         if (!caracteres.contains(evt.getKeyChar() + "")) {
             evt.consume();
@@ -830,10 +843,6 @@ public class CadastrarCliente extends javax.swing.JFrame {
 
         if (VerificaCampos() == true) {
 
-  //          if (ClienteDAO.VerificarNome(txtEmpresa.getText()) == true) {
-//                JOptionPane.showMessageDialog(this, "Ja existe uma empresa com este nome registrada, tente outra !");
-            
-            
             if (ClienteDAO.VerificarCliente(txtCnpj.getText()) == false) {
 
                 Cliente cli = new Cliente();
@@ -856,7 +865,7 @@ public class CadastrarCliente extends javax.swing.JFrame {
                 endereco.setPais(txtPais.getText());
                 endereco.setCep(txtCep.getText());
                 endereco.setRua(txtRua.getText());
-                endereco.setNumero(txtNumero.getText());
+                endereco.setNumero(txtNumero.getText().toUpperCase());
                 endereco.setBairro(txtBairro.getText());
                 endereco.setCidade(txtCidade.getText());
                 endereco.setEstado(txtEstado.getText());
@@ -902,7 +911,7 @@ public class CadastrarCliente extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "Cliente ja cadastrado !");
             }
         }
-    //    }//
+        //    }//
     }//GEN-LAST:event_btnCadClienteActionPerformed
 
     private void txtEmailFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtEmailFocusLost
@@ -916,6 +925,32 @@ public class CadastrarCliente extends javax.swing.JFrame {
     private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
         verificaPagina();
     }//GEN-LAST:event_formWindowClosed
+
+    private void txtEmailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtEmailActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtEmailActionPerformed
+
+    private void txtCnpjFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtCnpjFocusLost
+        // TODO add your handling code here:
+        //boolean val = false;
+
+        if (ClienteDAO.VerificarCliente(txtCnpj.getText()) == true) {
+        
+                jLabelCnpjExistente.setText("Cnpj ja existe");
+            }
+        else{
+            jLabelCnpjExistente.setText("");
+        }
+
+    }//GEN-LAST:event_txtCnpjFocusLost
+
+    private void txtEmailKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtEmailKeyTyped
+        // TODO add your handling code here:
+        String caracteres = "´`{}[]:;<>'()";
+        if (caracteres.contains(evt.getKeyChar() + "")) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtEmailKeyTyped
 
     private void carregarComboSegmento() {
 
@@ -1023,6 +1058,21 @@ public class CadastrarCliente extends javax.swing.JFrame {
         return valida;
     }
 
+//    public boolean validarCnpj() {
+//        boolean val = false;
+//
+//        if (txtCnpj.getText().contains("1234567890")) {
+//            
+//            String cn = new String(txtCnpj.getText().substring(txtCnpj.getText().length()));
+//            
+//            if (cn.equals(ClienteDAO.VerificarCliente(txtCnpj.getText()) == true)) {
+//
+//                JOptionPane.showMessageDialog(this, "Ja existe");
+//                jLabelCnpjExistente.setText("Cnpj ja existe");
+//            }
+//        }
+//        return val;
+//    }
     public void CarregaCep() {
 
         TelaEspera telaTeste = new TelaEspera();
@@ -1102,6 +1152,7 @@ public class CadastrarCliente extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
+    private javax.swing.JLabel jLabelCnpjExistente;
     private javax.swing.JLabel jLabelEmail;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;

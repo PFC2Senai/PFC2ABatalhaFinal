@@ -278,7 +278,7 @@ public class ClienteDAO {
         int cli = 0;
 
         //"SELECT * FROM tabcliente WHERE empresa IN (SELECT E.equipamento FROM tabequipamento E GROUP BY E.equipamento HAVING COUNT(*) > 1) ORDER BY equipamento";
-        String Sql = "SELECT COUNT(0) cnpj FROM tabcliente WHERE cnpj = '" + cliente + "';";
+        String Sql = "SELECT COUNT(0), empresa, cnpj FROM tabcliente WHERE cnpj = '" + cliente + "';";
 
         try {
 
