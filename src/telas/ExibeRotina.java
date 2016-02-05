@@ -122,7 +122,7 @@ public class ExibeRotina extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(jTableListarRotinas);
 
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 150, 543, 190));
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 120, 543, 190));
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel1.setText("Rotinas Cadastradas");
