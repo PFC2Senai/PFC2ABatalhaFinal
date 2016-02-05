@@ -6,6 +6,7 @@ import atributos.Telefone;
 import atributos.Usuario;
 import funcoes.AuditoriaDAO;
 import funcoes.CarregaCEP;
+import funcoes.ClienteDAO;
 import funcoes.ContatosDAO;
 import funcoes.FuncionarioDAO;
 import funcoes.FuncoesDiversas;
@@ -34,14 +35,14 @@ public class CadastrarFuncionario extends javax.swing.JFrame {
         initComponents();
         limitarDigitos();
     }
-    
+
     public CadastrarFuncionario(ExibeFuncionario exibeFunc) {
         this.telaExibeFunc = exibeFunc;
         telaFunc = this;
         initComponents();
         limitarDigitos();
     }
-    
+
     public CadastrarFuncionario(Menu menu) {
         this.telaMenu = menu;
         telaFunc = this;
@@ -50,22 +51,16 @@ public class CadastrarFuncionario extends javax.swing.JFrame {
     }
 
     private void limitarDigitos() {
-        //        jTextNome.setDocument(new LimitarDigitos(45));
-//        jTextCargo.setDocument(new LimitarDigitos(45));
-//        jTextSalario.setDocument(new LimitarDigitos(45));
-//
-//        txtTelCel.setDocument(new LimitarDigitos(25));
-//        txtEmail.setDocument(new LimitarDigitos(45));
+
+        jTextSalario.setDocument(new LimitarDigitos(15));
         jTextCtps.setDocument(new LimitarDigitos(14));
         jTextNumCtps.setDocument(new LimitarDigitos(7));
         jTextSerieCtps.setDocument(new LimitarDigitos(4));
-//        txtCidade.setDocument(new LimitarDigitos(45));
-//        txtBairro.setDocument(new LimitarDigitos(45));
-//        txtRua.setDocument(new LimitarDigitos(45));
-//        txtNumero.setDocument(new LimitarDigitos(5));
+        txtTelCel.setDocument(new LimitarDigitos(12));
+        txtNumero.setDocument(new LimitarDigitos(7));
         txtEstado.setDocument(new LimitarDigitos(2));
     }
-    
+
     private void limparCampos() {
         jTextNome.setText("");
         jTextRg.setText("");
@@ -76,7 +71,7 @@ public class CadastrarFuncionario extends javax.swing.JFrame {
         jTextCtps.setText("");
         txtTel01.setText("");
         txtTelCel.setText("");
-        txtEmail.setText("");       
+        txtEmail.setText("");
         txtCep.setText("");
         txtRua.setText("");
         txtNumero.setText("");
@@ -119,6 +114,8 @@ public class CadastrarFuncionario extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         txtDataAdmissao = new com.toedter.calendar.JDateChooser();
+        jLabel9 = new javax.swing.JLabel();
+        labelCpfExistente = new javax.swing.JLabel();
         jBtnCadastrarFuncionario = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
@@ -238,6 +235,17 @@ public class CadastrarFuncionario extends javax.swing.JFrame {
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
+        jTextCpf.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                jTextCpfFocusLost(evt);
+            }
+        });
+
+        jTextSalario.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTextSalarioKeyTyped(evt);
+            }
+        });
 
         jLabel7.setText("Salário:");
 
@@ -251,11 +259,19 @@ public class CadastrarFuncionario extends javax.swing.JFrame {
             ex.printStackTrace();
         }
 
+        jTextNome.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTextNomeKeyTyped(evt);
+            }
+        });
+
         jLabel10.setText("Data de admissão:");
 
         jLabel4.setText("CPF:");
 
         jLabel5.setText("Cargo:");
+
+        labelCpfExistente.setForeground(new java.awt.Color(255, 0, 0));
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -276,12 +292,16 @@ public class CadastrarFuncionario extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jTextCargo)
-                                    .addGroup(jPanel4Layout.createSequentialGroup()
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
                                         .addComponent(jTextRg)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                         .addComponent(jLabel4)
                                         .addGap(18, 18, 18)
-                                        .addComponent(jTextCpf, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                            .addComponent(labelCpfExistente, javax.swing.GroupLayout.DEFAULT_SIZE, 129, Short.MAX_VALUE)
+                                            .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                                .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                .addComponent(jTextCpf, javax.swing.GroupLayout.DEFAULT_SIZE, 129, Short.MAX_VALUE)))))))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel10)
@@ -321,10 +341,13 @@ public class CadastrarFuncionario extends javax.swing.JFrame {
                     .addComponent(jTextRg, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel4)
                     .addComponent(jTextCpf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(labelCpfExistente, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel9))
         );
 
-        jPanel5.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 130, -1, -1));
+        jPanel5.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 130, -1, 140));
 
         jBtnCadastrarFuncionario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/disk.png"))); // NOI18N
         jBtnCadastrarFuncionario.setText("Cadastrar");
@@ -360,6 +383,12 @@ public class CadastrarFuncionario extends javax.swing.JFrame {
         }
 
         jLabel21.setText("Nº:");
+
+        jTextNumCtps.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTextNumCtpsKeyTyped(evt);
+            }
+        });
 
         jLabel22.setText("Série:");
 
@@ -433,6 +462,12 @@ public class CadastrarFuncionario extends javax.swing.JFrame {
         jLabel19.setText("Estado:");
 
         jLabel18.setText("Cidade:");
+
+        txtNumero.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtNumeroKeyTyped(evt);
+            }
+        });
 
         jLabel2.setText("CEP:");
 
@@ -581,7 +616,7 @@ public class CadastrarFuncionario extends javax.swing.JFrame {
                 endereco.setPais(txtPais.getText());
                 endereco.setCep(txtCep.getText());
                 endereco.setRua(txtRua.getText());
-                endereco.setNumero(txtNumero.getText());
+                endereco.setNumero(txtNumero.getText().toUpperCase());
                 endereco.setBairro(txtBairro.getText());
                 endereco.setCidade(txtCidade.getText());
                 endereco.setEstado(txtEstado.getText());
@@ -599,9 +634,9 @@ public class CadastrarFuncionario extends javax.swing.JFrame {
 
                 if (JOptionPane.showConfirmDialog(null, "Deseja continuar cadastrando?", "Confirmar Cadastro", JOptionPane.YES_NO_OPTION) == 1) {
                     verificaPagina();
-                        if (telaExibeFunc != null) {
-                            this.telaExibeFunc.TabelaFuncionario("select * from tabfuncionario;");
-                        }
+                    if (telaExibeFunc != null) {
+                        this.telaExibeFunc.TabelaFuncionario("select * from tabfuncionario;");
+                    }
                     this.dispose();
                 } else {
                     jTextNome.requestFocus();
@@ -643,42 +678,87 @@ public class CadastrarFuncionario extends javax.swing.JFrame {
         verificaPagina();
     }//GEN-LAST:event_formWindowClosed
 
+    private void jTextSalarioKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextSalarioKeyTyped
+        // TODO add your handling code here:
+        String caracteres = "0987654321rR$:.,%£¢;";
+
+        if (!caracteres.contains(evt.getKeyChar() + "")) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_jTextSalarioKeyTyped
+
+    private void jTextNumCtpsKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextNumCtpsKeyTyped
+        // TODO add your handling code here:
+        String caracteres = "0987654321.,-";
+        if (!caracteres.contains(evt.getKeyChar() + "")) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_jTextNumCtpsKeyTyped
+
+    private void txtNumeroKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNumeroKeyTyped
+        // TODO add your handling code here:
+        String caracteres = "0987654321snSN";
+        String car = txtNumero.getText().toUpperCase();
+        if (!caracteres.contains(evt.getKeyChar() + "")) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtNumeroKeyTyped
+
+    private void jTextNomeKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextNomeKeyTyped
+        // TODO add your handling code here:
+        String carac = "ç,.!?@:;/^~´`#$%¨&*()-_='+{[]}0987654321";
+        if (carac.contains(evt.getKeyChar() + "")) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_jTextNomeKeyTyped
+
+    private void jTextCpfFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextCpfFocusLost
+        // TODO add your handling code here:
+        if (ClienteDAO.VerificarCliente(jTextCpf.getText()) == true) {
+
+            labelCpfExistente.setText("Cpf ja cadastrado");
+        } else {
+            labelCpfExistente.setText("");
+        }
+
+    }//GEN-LAST:event_jTextCpfFocusLost
+
     private boolean VerificaCampos() {
 
         boolean valida = true;
 
         if (jTextNome.getText().trim().equals("")) {
-            JOptionPane.showMessageDialog(null, "Campo(s) vazio(s)!");
+            JOptionPane.showMessageDialog(null, "Campo(s) NOME vazio(s)!");
             valida = false;
             return valida;
         }
 
         if (jTextCargo.getText().trim().equals("")) {
-            JOptionPane.showMessageDialog(null, "Campo(s) vazio(s)!");
+            JOptionPane.showMessageDialog(null, "Campo(s) CARGO vazio(s)!");
             valida = false;
             return valida;
         }
 
         if (jTextRg.getText().trim().length() != 13) {
-            JOptionPane.showMessageDialog(null, "Campo(s) vazio(s)!");
+            JOptionPane.showMessageDialog(null, "Campo(s) RG vazio(s)!");
             valida = false;
             return valida;
         }
 
         if (jTextCpf.getText().trim().length() != 14) {
-            JOptionPane.showMessageDialog(null, "Campo(s) vazio(s)!");
+            JOptionPane.showMessageDialog(null, "Campo(s) CPF vazio(s)!");
             valida = false;
             return valida;
         }
 
         if (txtDataAdmissao.getDate() == null) {
-            JOptionPane.showMessageDialog(null, "Campo(s) vazio(s)!");
+            JOptionPane.showMessageDialog(null, "Campo(s) DATA vazio(s)!");
             valida = false;
             return valida;
         }
 
         if (jTextSalario.getText().trim().equals("")) {
-            JOptionPane.showMessageDialog(null, "Campo(s) vazio(s)!");
+            JOptionPane.showMessageDialog(null, "Campo(s) SALARIO vazio(s)!");
             valida = false;
             return valida;
         }
@@ -708,13 +788,13 @@ public class CadastrarFuncionario extends javax.swing.JFrame {
         }
 
         if (jTextNumCtps.getText().trim().equals("")) {
-            JOptionPane.showMessageDialog(null, "Campo(s) vazio(s)!");
+            JOptionPane.showMessageDialog(null, "Campo(s) N° CTPS vazio(s)!");
             valida = false;
             return valida;
         }
 
         if (jTextSerieCtps.getText().trim().equals("")) {
-            JOptionPane.showMessageDialog(null, "Campo(s) vazio(s)!");
+            JOptionPane.showMessageDialog(null, "Campo(s) SERIE CTPS vazio(s)!");
             valida = false;
             return valida;
         }
@@ -881,6 +961,7 @@ public class CadastrarFuncionario extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JLabel jLabelEmail;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
@@ -895,6 +976,7 @@ public class CadastrarFuncionario extends javax.swing.JFrame {
     private javax.swing.JFormattedTextField jTextRg;
     private javax.swing.JTextField jTextSalario;
     private javax.swing.JTextField jTextSerieCtps;
+    private javax.swing.JLabel labelCpfExistente;
     private javax.swing.JTextField txtBairro;
     private javax.swing.JFormattedTextField txtCep;
     private javax.swing.JTextField txtCidade;

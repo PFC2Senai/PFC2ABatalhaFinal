@@ -950,7 +950,7 @@ public class CadastrarCliente extends javax.swing.JFrame {
 
         if (ClienteDAO.VerificarCliente(txtCnpj.getText()) == true) {
 
-            jLabelCnpjExistente.setText("Cnpj ja existe");
+            jLabelCnpjExistente.setText("Cnpj ja cadastrado");
         } else {
             jLabelCnpjExistente.setText("");
         }

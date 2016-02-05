@@ -41,9 +41,7 @@ public class CadastrarFornecedor extends javax.swing.JFrame {
 //        txtNumero.setDocument(new LimitarDigitos(10));
 //        
 //        txtContato.setDocument(new LimitarDigitos(45));
-//        txtEmail.setDocument(new LimitarDigitos(45));
-//        txtTelCel.setDocument(new LimitarDigitos(25));
-//        
+        txtTelCel.setDocument(new LimitarDigitos(20));
     }
 
     public CadastrarFornecedor(CadastrarProduto telaCadProduto) {
@@ -51,13 +49,13 @@ public class CadastrarFornecedor extends javax.swing.JFrame {
         telaForn = this;
         initComponents();
     }
-    
+
     public CadastrarFornecedor(Menu menu) {
         this.telaMenu = menu;
         telaForn = this;
         initComponents();
     }
-    
+
     public CadastrarFornecedor(ExibeFornecedor exibeForn) {
         this.telaExibeForn = exibeForn;
         telaForn = this;
@@ -149,6 +147,12 @@ public class CadastrarFornecedor extends javax.swing.JFrame {
 
         jPanel2.setBackground(new java.awt.Color(223, 237, 253));
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Dados Gerais", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 2, 11))); // NOI18N
+
+        txtNumero.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtNumeroKeyTyped(evt);
+            }
+        });
 
         jLabel14.setText("Cidade:");
 
@@ -479,13 +483,13 @@ public class CadastrarFornecedor extends javax.swing.JFrame {
                 descricaoAudit = "Fornecedor " + forn.getFornecedor() + " foi cadastrado.";
                 AuditoriaDAO.CadDetAuditoria(descricaoAudit);
                 limparCampos();
-                
+
                 JOptionPane.showMessageDialog(null, "Cadastrado com sucesso!");
-                
+
                 if (JOptionPane.showConfirmDialog(null, "Deseja continuar cadastrando?", "Confirmar Cadastro", JOptionPane.YES_NO_OPTION) == 1) {
-                    if (telaExibeForn!= null) {
+                    if (telaExibeForn != null) {
                         this.telaExibeForn.TabelaFornecedor("select  * from vw_fornecedores;");
-                    }                   
+                    }
                     verificaPagina();
                     this.dispose();
                 } else {
@@ -543,6 +547,16 @@ public class CadastrarFornecedor extends javax.swing.JFrame {
         ValidaEmail();
     }//GEN-LAST:event_txtEmailFocusLost
 
+    private void txtNumeroKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNumeroKeyTyped
+        // TODO add your handling code here:
+        String caracteres = "0987654321snSN";
+        String car = txtNumero.getText().toUpperCase();
+        if (!caracteres.contains(evt.getKeyChar() + "")) {
+            evt.consume();
+        }
+
+    }//GEN-LAST:event_txtNumeroKeyTyped
+
     private boolean VerificaCampos() {
 
         boolean valida = true;
@@ -596,7 +610,7 @@ public class CadastrarFornecedor extends javax.swing.JFrame {
         }
 
         if (jTableContatos.getRowCount() < 1) {
-            JOptionPane.showMessageDialog(null, "Campo(s) vazio(s)!");
+            JOptionPane.showMessageDialog(null, "Adicione um contato na tabela");
             valida = false;
             return valida;
         }
@@ -741,14 +755,14 @@ public class CadastrarFornecedor extends javax.swing.JFrame {
 
         if ((this.telaMenu != null)) {
             this.telaMenu.setVisible(true);
-        }else if (telaCadastrarProduto != null) {
+        } else if (telaCadastrarProduto != null) {
             telaCadastrarProduto.setEnabled(true);
             telaCadastrarProduto.populaComboBoxFornecedor();
-        }else if (telaExibeForn != null) {
+        } else if (telaExibeForn != null) {
             telaExibeForn.setVisible(true);
         }
     }
-    
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCadFornecedor;
     private javax.swing.JButton btnCancelar;

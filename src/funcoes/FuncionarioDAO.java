@@ -212,7 +212,7 @@ public class FuncionarioDAO {
         boolean achou = true;
         int fu = 0;
 
-        String Sql = "SELECT COUNT(0), funcionario FROM tabfuncionario WHERE funcionario = '" + funcionario + "';";
+        String Sql = "SELECT COUNT(0), funcionario, cpf  FROM tabfuncionario WHERE funcionario = '" + funcionario + "';";
 
         try {
 
