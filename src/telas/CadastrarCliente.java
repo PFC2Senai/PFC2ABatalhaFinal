@@ -87,7 +87,8 @@ public class CadastrarCliente extends javax.swing.JFrame {
         boolean valida = true;
 
         if (txtEmpresa.getText().trim().equals("")) {
-            JOptionPane.showMessageDialog(null, "Campo(s) vazio(s)!");
+            JOptionPane.showMessageDialog(null, "Preencha o campo EMPRESA!");
+            txtEmpresa.requestFocus();
             valida = false;
             return valida;
         }
