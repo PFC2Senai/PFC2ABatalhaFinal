@@ -254,6 +254,26 @@ public class CadastrarEquipamento extends javax.swing.JFrame {
 
     private void jBtnCadastrarEquipamentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnCadastrarEquipamentoActionPerformed
 
+        if (jComboBoxFornecedor.getSelectedIndex() == 0){
+    JOptionPane.showMessageDialog(null, "Selecione um item!");
+    return;
+        }  
+        
+           if (jComboBoxEquipamento.getSelectedIndex() == 0){
+    JOptionPane.showMessageDialog(null, "Selecione um item!");
+    return;
+        }
+           
+              if (jComboBoxFabricante.getSelectedIndex() == 0){
+    JOptionPane.showMessageDialog(null, "Selecione um item!");
+    return;
+        }
+              
+                 if (jComboBoxModelo.getSelectedIndex() == 0){
+    JOptionPane.showMessageDialog(null, "Selecione um item!");
+    return;
+        } 
+                 
         equi.setTabusuarioIdUsuario(idUsuario());
         equi.setCodFornecedor(codFornecedor);
         equi.setCodModelo(codModelo);
