@@ -129,31 +129,36 @@ public class CadastrarCliente extends javax.swing.JFrame {
         }
 
         if (txtCep.getText().trim().equals("-")) {
-            JOptionPane.showMessageDialog(null, "Campo(s) vazio(s)!");
+            JOptionPane.showMessageDialog(null, "Preencha o campo CEP!");
+            txtCep.requestFocus();
             valida = false;
             return valida;
         }
 
         if (txtEstado.getText().trim().equals("")) {
-            JOptionPane.showMessageDialog(null, "Campo(s) vazio(s)!");
+            JOptionPane.showMessageDialog(null, "Preencha o campo ESTADO!");
+            txtEstado.requestFocus();
             valida = false;
             return valida;
         }
 
         if (txtBairro.getText().trim().equals("")) {
-            JOptionPane.showMessageDialog(null, "Campo(s) vazio(s)!");
+            JOptionPane.showMessageDialog(null, "Preencha o campo BAIRRO!");
+            txtBairro.requestFocus();
             valida = false;
             return valida;
         }
 
         if (txtNumero.getText().trim().equals("")) {
-            JOptionPane.showMessageDialog(null, "Campo(s) vazio(s)!");
+            JOptionPane.showMessageDialog(null, "Preencha o campo NÚMERO!");
+            txtNumero.requestFocus();
             valida = false;
             return valida;
         }
 
         if (jComboBoxSetores.getSelectedIndex() == 0) {
-            JOptionPane.showMessageDialog(null, "Campo(s) vazio(s)!");
+            JOptionPane.showMessageDialog(null, "Preencha o campo SETOR!");
+            jComboBoxSetores.requestFocus();
             valida = false;
             return valida;
         }
