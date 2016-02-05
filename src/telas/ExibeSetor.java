@@ -175,9 +175,10 @@ public class ExibeSetor extends javax.swing.JFrame {
         jLabel3.setText("Setor:");
         jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 130, -1, -1));
 
-        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Raavi", 1, 18)); // NOI18N
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/setor.png"))); // NOI18N
         jLabel1.setText("Setores");
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 40, -1, -1));
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 40, -1, -1));
 
         jBtnExcluirSetor.setText("Excluir");
         jBtnExcluirSetor.addActionListener(new java.awt.event.ActionListener() {
@@ -206,6 +207,8 @@ public class ExibeSetor extends javax.swing.JFrame {
             }
         });
         jPanel1.add(jBtnEditarSetor, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 230, -1, -1));
+
+        txtSetor.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jPanel1.add(txtSetor, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 130, 410, -1));
 
         jBtnCancelarAlterarSetor.setText("Cancelar");

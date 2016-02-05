@@ -132,9 +132,10 @@ public class DetalharServico extends javax.swing.JFrame {
         jPanel13.setPreferredSize(new java.awt.Dimension(860, 800));
         jPanel13.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel32.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel32.setFont(new java.awt.Font("Raavi", 1, 18)); // NOI18N
+        jLabel32.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/servicos.png"))); // NOI18N
         jLabel32.setText("Serviço");
-        jPanel13.add(jLabel32, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 40, -1, 20));
+        jPanel13.add(jLabel32, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 50, -1, 20));
 
         jPanel14.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true), "Peças"));
 

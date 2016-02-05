@@ -82,15 +82,15 @@ public class Splash extends javax.swing.JFrame {
         jProgressBar1.setForeground(new java.awt.Color(153, 204, 255));
         jProgressBar1.setBorderPainted(false);
         jProgressBar1.setOpaque(true);
-        getContentPane().add(jProgressBar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 210, 380, 20));
+        getContentPane().add(jProgressBar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 210, 400, 30));
 
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/ICT1 - Cópia2.jpg"))); // NOI18N
         jLabel2.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
         jLabel2.setOpaque(true);
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -20, 380, 230));
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -20, 400, 230));
 
-        setSize(new java.awt.Dimension(380, 229));
+        setSize(new java.awt.Dimension(397, 241));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 

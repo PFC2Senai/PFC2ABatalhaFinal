@@ -103,7 +103,8 @@ public class DetalharLembrete extends javax.swing.JFrame {
         txtHoraLembrete.setText("00:00");
         jPanel1.add(txtHoraLembrete, new org.netbeans.lib.awtextra.AbsoluteConstraints(321, 131, 42, -1));
 
-        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Raavi", 1, 18)); // NOI18N
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/lembrete.png"))); // NOI18N
         jLabel1.setText("Lembrete:");
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(21, 29, -1, -1));
 

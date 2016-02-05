@@ -64,18 +64,20 @@ public class TelaLogin extends javax.swing.JFrame {
         getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 260, -1, -1));
         getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 260, -1, -1));
 
+        login.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         login.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, null, new java.awt.Color(0, 204, 153), null, null));
         login.setSelectionColor(new java.awt.Color(0, 0, 0));
-        getContentPane().add(login, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 120, 160, -1));
+        getContentPane().add(login, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 120, 160, 20));
 
         txtSenha.setToolTipText("");
         txtSenha.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, null, new java.awt.Color(0, 204, 153), null, null));
         txtSenha.setSelectionColor(new java.awt.Color(0, 0, 0));
         getContentPane().add(txtSenha, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 170, 160, -1));
 
+        jComBTipoUser.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jComBTipoUser.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Usuário", "Administrador", "Funcionário" }));
         jComBTipoUser.setToolTipText("");
-        getContentPane().add(jComBTipoUser, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 200, 90, -1));
+        getContentPane().add(jComBTipoUser, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 200, 90, 20));
 
         jButtonAcesso.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jButtonAcesso.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/ok.png"))); // NOI18N

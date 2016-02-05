@@ -271,9 +271,10 @@ public final class ExibeCliente extends javax.swing.JFrame {
         });
         jPanel1.add(jComboUf, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 210, 215, -1));
 
-        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Raavi", 1, 18)); // NOI18N
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/cliente3.png"))); // NOI18N
         jLabel1.setText("CLIENTES");
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(34, 30, -1, -1));
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 50, -1, -1));
 
         jBtnLembrete.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jBtnLembrete.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/CadastrarLembrete.png"))); // NOI18N

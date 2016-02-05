@@ -108,7 +108,8 @@ public class CadastrarLembrete extends javax.swing.JFrame {
 
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Raavi", 1, 18)); // NOI18N
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/lembrete.png"))); // NOI18N
         jLabel1.setText("Lembrete");
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 40, -1, -1));
 
@@ -121,6 +122,7 @@ public class CadastrarLembrete extends javax.swing.JFrame {
         jLabNomeEmpresa.setText("Empresa:");
         jPanel1.add(jLabNomeEmpresa, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 130, -1, 20));
 
+        jLabEmpresa.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabEmpresa.setText("Empresa");
         jPanel1.add(jLabEmpresa, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 130, 200, 20));
 

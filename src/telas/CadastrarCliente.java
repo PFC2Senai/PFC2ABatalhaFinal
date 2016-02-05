@@ -283,9 +283,10 @@ public class CadastrarCliente extends javax.swing.JFrame {
         jPanel1.setBackground(new java.awt.Color(223, 237, 253));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Raavi", 1, 18)); // NOI18N
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/cliente3.png"))); // NOI18N
         jLabel1.setText("CADASTRAR CLIENTE");
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 40, -1, -1));
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 60, 210, 50));
 
         btnLimpar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/stop2.png"))); // NOI18N
         btnLimpar.setText("Cancelar");
@@ -950,7 +951,7 @@ public class CadastrarCliente extends javax.swing.JFrame {
 
         if (ClienteDAO.VerificarCliente(txtCnpj.getText()) == true) {
 
-            jLabelCnpjExistente.setText("Cnpj ja cadastrado");
+            jLabelCnpjExistente.setText("Cnpj ja cadastrado no sistema");
         } else {
             jLabelCnpjExistente.setText("");
         }

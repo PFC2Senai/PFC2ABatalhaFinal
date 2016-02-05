@@ -1,7 +1,6 @@
 package telas;
 
 import funcoes.ControleBackup;
-import java.awt.Toolkit;
 import java.io.File;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -33,6 +32,7 @@ public class Menu extends javax.swing.JFrame {
         jBtnFazerBackup.setVerticalTextPosition(SwingConstants.BOTTOM);
         jBtnFazerBackup.setHorizontalTextPosition(SwingConstants.CENTER);
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -45,8 +45,9 @@ public class Menu extends javax.swing.JFrame {
         jBtnRotinaContato = new javax.swing.JButton();
         jBtnCadastrarLembrete = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
-        labelAlerta2 = new javax.swing.JLabel();
         labelAlerta1 = new javax.swing.JLabel();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        jTableEstoque = new javax.swing.JTable();
         jBtnProposta = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTextArea1 = new javax.swing.JTextArea();
@@ -120,38 +121,52 @@ public class Menu extends javax.swing.JFrame {
 
         jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        labelAlerta2.setText("Label");
+        labelAlerta1.setFont(new java.awt.Font("Raavi", 1, 14)); // NOI18N
+        labelAlerta1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/basket_delete.png"))); // NOI18N
+        labelAlerta1.setText("Estoque baixo:");
 
-        labelAlerta1.setText("label");
+        jTableEstoque.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Produto", "Quantidade"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                true, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane3.setViewportView(jTableEstoque);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(labelAlerta2, javax.swing.GroupLayout.DEFAULT_SIZE, 306, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(labelAlerta1, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 176, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)))
                 .addContainerGap())
-            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jPanel1Layout.createSequentialGroup()
-                    .addContainerGap()
-                    .addComponent(labelAlerta1, javax.swing.GroupLayout.DEFAULT_SIZE, 306, Short.MAX_VALUE)
-                    .addContainerGap()))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(104, Short.MAX_VALUE)
-                .addComponent(labelAlerta2, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(35, 35, 35))
-            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jPanel1Layout.createSequentialGroup()
-                    .addGap(32, 32, 32)
-                    .addComponent(labelAlerta1, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(107, Short.MAX_VALUE)))
+                .addComponent(labelAlerta1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 163, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(651, 11, 330, 190));
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(651, 11, 320, 210));
 
         jBtnProposta.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jBtnProposta.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/1452415489_icon-57.fw_1.png"))); // NOI18N
@@ -626,7 +641,7 @@ public class Menu extends javax.swing.JFrame {
         file.mkdir();
         String caminho = file.getAbsolutePath();
         ControleBackup app = new ControleBackup(caminho);
-        
+
         System.exit(0);
     }//GEN-LAST:event_jMenu6ActionPerformed
 
@@ -640,7 +655,7 @@ public class Menu extends javax.swing.JFrame {
         int res = fc.showOpenDialog(null);
 
         if (res == JFileChooser.APPROVE_OPTION) {
-              
+
             File diretorio = fc.getSelectedFile();
             caminho = diretorio.getAbsolutePath();
             ControleBackup app = new ControleBackup(caminho);
@@ -651,7 +666,7 @@ public class Menu extends javax.swing.JFrame {
     }//GEN-LAST:event_jBtnFazerBackupActionPerformed
 
     private void jMenu6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu6MouseClicked
-        Backup();        
+        Backup();
     }//GEN-LAST:event_jMenu6MouseClicked
 
     public void Backup() {
@@ -685,6 +700,14 @@ public class Menu extends javax.swing.JFrame {
                 }
             }
         }).start();
+    }
+
+    
+    
+    public void tabelaEstoque() {
+    
+        //
+        
     }
     
 //    /**
@@ -771,10 +794,11 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JTable jTableEstoque;
     private javax.swing.JTextArea jTextArea1;
     private javax.swing.JTextArea jTextArea2;
     private javax.swing.JLabel labelAlerta1;
-    private javax.swing.JLabel labelAlerta2;
     // End of variables declaration//GEN-END:variables
 
 }

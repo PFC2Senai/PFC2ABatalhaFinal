@@ -150,21 +150,24 @@ public class CadastrarEquipamento extends javax.swing.JFrame {
         });
         jPanel1.add(jComboBoxModelo, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 290, 200, -1));
 
-        jBtnSair.setText("Sair");
+        jBtnSair.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/stop2.png"))); // NOI18N
+        jBtnSair.setText("Cancelar");
         jBtnSair.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jBtnSairActionPerformed(evt);
             }
         });
-        jPanel1.add(jBtnSair, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 340, -1, -1));
+        jPanel1.add(jBtnSair, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 340, -1, -1));
 
+        jBtnCadastrarEquipamento.setFont(new java.awt.Font("Raavi", 0, 12)); // NOI18N
+        jBtnCadastrarEquipamento.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/disk.png"))); // NOI18N
         jBtnCadastrarEquipamento.setText("Cadastrar");
         jBtnCadastrarEquipamento.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jBtnCadastrarEquipamentoActionPerformed(evt);
             }
         });
-        jPanel1.add(jBtnCadastrarEquipamento, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 330, -1, -1));
+        jPanel1.add(jBtnCadastrarEquipamento, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 330, -1, -1));
 
         jComboBoxEquipamento.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Selecione o produto" }));
         jComboBoxEquipamento.addActionListener(new java.awt.event.ActionListener() {
@@ -178,9 +181,10 @@ public class CadastrarEquipamento extends javax.swing.JFrame {
         jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 170, -1, -1));
         jPanel1.add(txtEquipamento, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 170, 240, -1));
 
-        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Raavi", 1, 18)); // NOI18N
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/maquina02.png"))); // NOI18N
         jLabel1.setText("Cadastrar Equipamento");
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 40, -1, 23));
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 50, -1, 23));
 
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/leiaute/img2.png"))); // NOI18N
         jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -10, 670, 620));

@@ -145,7 +145,7 @@ public final class AlterarContato extends javax.swing.JFrame {
         });
         getContentPane().add(jBtbCancelContato, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 300, -1, -1));
 
-        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Raavi", 1, 18)); // NOI18N
         jLabel1.setText("Alterar Contato");
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(34, 33, -1, -1));
 

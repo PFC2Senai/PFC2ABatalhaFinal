@@ -101,7 +101,8 @@ public class CadastrarRotinaContato extends javax.swing.JFrame {
 
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel5.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel5.setFont(new java.awt.Font("Raavi", 1, 18)); // NOI18N
+        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/rotinacont.png"))); // NOI18N
         jLabel5.setText("Rotina de Contato");
         jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 50, -1, -1));
 
@@ -145,6 +146,7 @@ public class CadastrarRotinaContato extends javax.swing.JFrame {
         jLabNCodigo.setText("Código:");
         jPanel1.add(jLabNCodigo, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 80, -1, 20));
 
+        jLabEmpresa.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabEmpresa.setText("empresa");
         jPanel1.add(jLabEmpresa, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 110, 260, 20));
 

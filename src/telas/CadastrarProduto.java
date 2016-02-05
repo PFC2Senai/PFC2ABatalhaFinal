@@ -204,13 +204,15 @@ public class CadastrarProduto extends javax.swing.JFrame {
         jPanel1.setBackground(new java.awt.Color(222, 253, 222));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        jButton2.setFont(new java.awt.Font("Raavi", 0, 14)); // NOI18N
+        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/stop2.png"))); // NOI18N
         jButton2.setText("Cancelar");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 620, -1, -1));
+        jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 510, -1, -1));
 
         jButton3.setText("Limpar");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
@@ -218,21 +220,24 @@ public class CadastrarProduto extends javax.swing.JFrame {
                 jButton3ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 620, -1, -1));
+        jPanel1.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 510, 80, 30));
 
+        jBtnCadastrarProduto.setFont(new java.awt.Font("Raavi", 0, 14)); // NOI18N
+        jBtnCadastrarProduto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/disk.png"))); // NOI18N
         jBtnCadastrarProduto.setText("Cadastrar");
         jBtnCadastrarProduto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jBtnCadastrarProdutoActionPerformed(evt);
             }
         });
-        jPanel1.add(jBtnCadastrarProduto, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 620, -1, -1));
+        jPanel1.add(jBtnCadastrarProduto, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 510, -1, -1));
 
-        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Raavi", 1, 18)); // NOI18N
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/prod.png"))); // NOI18N
         jLabel1.setText("Cadastrar Peça");
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 50, -1, -1));
 
-        jPanel2.setBackground(new java.awt.Color(222, 253, 222));
+        jPanel2.setBackground(new java.awt.Color(223, 237, 253));
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
 
         jLabel6.setText("Fabricante:");
@@ -417,9 +422,9 @@ public class CadastrarProduto extends javax.swing.JFrame {
                     .addComponent(jBtnCancelarModelo)))
         );
 
-        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 200, 800, 160));
+        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 150, 800, 150));
 
-        jPanel3.setBackground(new java.awt.Color(222, 253, 222));
+        jPanel3.setBackground(new java.awt.Color(223, 237, 253));
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
 
         txtPrecoEntrada.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -556,10 +561,10 @@ public class CadastrarProduto extends javax.swing.JFrame {
                         .addComponent(jLabel11)
                         .addComponent(jLabel12))
                     .addComponent(txtDataCadProduto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(37, Short.MAX_VALUE))
+                .addContainerGap(17, Short.MAX_VALUE))
         );
 
-        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 370, 800, 190));
+        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 310, 800, 170));
 
         jLabel13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/leiaute/img3.png"))); // NOI18N
         jPanel1.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -30, 850, 940));
