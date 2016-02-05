@@ -51,6 +51,7 @@ public class Menu extends javax.swing.JFrame {
         jScrollPane2 = new javax.swing.JScrollPane();
         jTextArea2 = new javax.swing.JTextArea();
         jBtnFazerBackup = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu4 = new javax.swing.JMenu();
         jMenu14 = new javax.swing.JMenu();
@@ -129,7 +130,7 @@ public class Menu extends javax.swing.JFrame {
             .addGap(0, 88, Short.MAX_VALUE)
         );
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(611, 11, -1, -1));
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 400, -1, -1));
 
         jBtnProposta.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jBtnProposta.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/1452415489_icon-57.fw_1.png"))); // NOI18N
@@ -146,7 +147,7 @@ public class Menu extends javax.swing.JFrame {
         jTextArea1.setText("Lista mineração:\n\n- cliente mais atendido\n- tipo de serviço mais realizado\n(tipo definido, ex: troca de placa e \ntipo serviço ex: venda aluguel, ou manutenção)\n- peça com mais saída\n- peça com menos saída\n- periodo do ano com mais movimento\n- periodo do ano com menos mevimento\n- qual o período do ano que \ndeterminado setor está em alta\n- qual funcionário realizou mais serviços");
         jScrollPane1.setViewportView(jTextArea1);
 
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 240, 380, 246));
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 370, 130, 130));
 
         jTextArea2.setColumns(20);
         jTextArea2.setFont(new java.awt.Font("Monospaced", 1, 13)); // NOI18N
@@ -155,7 +156,7 @@ public class Menu extends javax.swing.JFrame {
         jTextArea2.setText("Pendências do sistema:\n\n- tela de mineração\n- formatação dos campos(caracteres)\n- verificar campos para evitar dados duplicados\n- Aviso de estoque baixo\n- gerenciamento de telas\n- permissões dos usuários\n- campos que recebem números decimais \naceitar apenas ponto e não vírgula\n- não deixar cadastrar lembrete em data que já passou\n- cadastrar em auditoria tudo que for feito no sistema\n- mensagens para confirmar ações dos usuários : \n\"Deseja excluir?\" \"Cadastrado com sucesso\" algo assim \n- Formato da data\n- testar o sistema e corrigir bugs");
         jScrollPane2.setViewportView(jTextArea2);
 
-        getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 10, 440, 340));
+        getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 370, 160, 120));
 
         jBtnFazerBackup.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jBtnFazerBackup.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/backup (2).png"))); // NOI18N
@@ -166,6 +167,10 @@ public class Menu extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jBtnFazerBackup, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 360, 140, -1));
+
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/leiaute/img3-5.png"))); // NOI18N
+        jLabel1.setText("jLabel1");
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 860, 660));
 
         jMenu4.setBackground(new java.awt.Color(204, 153, 255));
         jMenu4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/menu.png"))); // NOI18N
@@ -668,6 +673,7 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JButton jBtnFazerBackup;
     private javax.swing.JButton jBtnProposta;
     private javax.swing.JButton jBtnRotinaContato;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JMenu jMenu10;
     private javax.swing.JMenu jMenu14;
     private javax.swing.JMenu jMenu15;

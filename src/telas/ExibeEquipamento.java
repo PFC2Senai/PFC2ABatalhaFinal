@@ -60,11 +60,14 @@ public class ExibeEquipamento extends javax.swing.JFrame {
         jComboBoxModelo = new javax.swing.JComboBox();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTableListarEquipamento = new javax.swing.JTable();
+        jLabel4 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel1.setText("Equipamentos");
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 40, -1, -1));
 
         jBtnNovo.setText("Novo");
         jBtnNovo.addActionListener(new java.awt.event.ActionListener() {
@@ -72,6 +75,7 @@ public class ExibeEquipamento extends javax.swing.JFrame {
                 jBtnNovoActionPerformed(evt);
             }
         });
+        getContentPane().add(jBtnNovo, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 620, -1, -1));
 
         jBtnEditar.setText("Detalhar Equipamento");
 
@@ -83,6 +87,7 @@ public class ExibeEquipamento extends javax.swing.JFrame {
                 jBtnEditarActionPerformed(evt);
             }
         });
+        getContentPane().add(jBtnEditar, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 620, -1, -1));
 
         jBtnExcluirEquipamento.setText("Excluir");
         jBtnExcluirEquipamento.addActionListener(new java.awt.event.ActionListener() {
@@ -90,6 +95,7 @@ public class ExibeEquipamento extends javax.swing.JFrame {
                 jBtnExcluirEquipamentoActionPerformed(evt);
             }
         });
+        getContentPane().add(jBtnExcluirEquipamento, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 620, -1, -1));
 
         jBtnSair.setText("Sair");
         jBtnSair.addActionListener(new java.awt.event.ActionListener() {
@@ -97,16 +103,20 @@ public class ExibeEquipamento extends javax.swing.JFrame {
                 jBtnSairActionPerformed(evt);
             }
         });
+        getContentPane().add(jBtnSair, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 620, -1, -1));
 
         jLabel2.setText("Pesquisar Equipamento:");
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 160, -1, -1));
 
         txtBuscar.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 txtBuscarKeyReleased(evt);
             }
         });
+        getContentPane().add(txtBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 160, 210, -1));
 
         jLabel3.setText("Filtrar:");
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 200, -1, -1));
 
         jComboBoxFornecedor.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Selecione o fornecedor" }));
         jComboBoxFornecedor.addActionListener(new java.awt.event.ActionListener() {
@@ -114,6 +124,7 @@ public class ExibeEquipamento extends javax.swing.JFrame {
                 jComboBoxFornecedorActionPerformed(evt);
             }
         });
+        getContentPane().add(jComboBoxFornecedor, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 200, 210, -1));
 
         jComboBoxFabricante.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Selecione o fabricante" }));
         jComboBoxFabricante.addActionListener(new java.awt.event.ActionListener() {
@@ -121,6 +132,7 @@ public class ExibeEquipamento extends javax.swing.JFrame {
                 jComboBoxFabricanteActionPerformed(evt);
             }
         });
+        getContentPane().add(jComboBoxFabricante, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 200, 200, -1));
 
         jComboBoxModelo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Selecione o modelo" }));
         jComboBoxModelo.addActionListener(new java.awt.event.ActionListener() {
@@ -128,6 +140,7 @@ public class ExibeEquipamento extends javax.swing.JFrame {
                 jComboBoxModeloActionPerformed(evt);
             }
         });
+        getContentPane().add(jComboBoxModelo, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 200, 200, -1));
 
         jTableListarEquipamento.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -140,63 +153,10 @@ public class ExibeEquipamento extends javax.swing.JFrame {
         jTableListarEquipamento.getTableHeader().setReorderingAllowed(false);
         jScrollPane2.setViewportView(jTableListarEquipamento);
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(35, 35, 35)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jBtnNovo)
-                        .addGap(74, 74, 74)
-                        .addComponent(jBtnEditar)
-                        .addGap(97, 97, 97)
-                        .addComponent(jBtnExcluirEquipamento)
-                        .addGap(221, 221, 221)
-                        .addComponent(jBtnSair))
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jLabel2)
-                                .addComponent(jLabel3))
-                            .addGap(18, 18, 18)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(jComboBoxFornecedor, 0, 210, Short.MAX_VALUE)
-                                .addComponent(txtBuscar))
-                            .addGap(18, 18, 18)
-                            .addComponent(jComboBoxFabricante, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(18, 18, 18)
-                            .addComponent(jComboBoxModelo, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(33, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(26, 26, 26)
-                .addComponent(jLabel1)
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(txtBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(21, 21, 21)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(jComboBoxFornecedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jComboBoxFabricante, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jComboBoxModelo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 356, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jBtnSair)
-                    .addComponent(jBtnNovo)
-                    .addComponent(jBtnEditar)
-                    .addComponent(jBtnExcluirEquipamento))
-                .addGap(27, 27, 27))
-        );
+        getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 240, 730, 356));
+
+        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/leiaute/img3-5.png"))); // NOI18N
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -40, 850, 740));
 
         bindingGroup.bind();
 
@@ -519,6 +479,7 @@ public class ExibeEquipamento extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTableListarEquipamento;
     private javax.swing.JTextField txtBuscar;
