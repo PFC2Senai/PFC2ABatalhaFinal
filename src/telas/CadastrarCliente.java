@@ -94,31 +94,36 @@ public class CadastrarCliente extends javax.swing.JFrame {
         }
 
         if (jComboBoxSetores.getSelectedIndex() == 0) {
-            JOptionPane.showMessageDialog(null, "Campo(s) vazio(s)!");
+            JOptionPane.showMessageDialog(null, "Preencha o campo SEGMENTO!");
+            jComboBoxSetores.requestFocus();
             valida = false;
             return valida;
         }
 
         if (txtCnpj.getText().trim().length() != 18) {
-            JOptionPane.showMessageDialog(null, "Campo(s) vazio(s)!");
+            JOptionPane.showMessageDialog(null, "Preencha o campo CNPJ!");
+            txtCnpj.requestFocus();
             valida = false;
             return valida;
         }
 
         if (txtPais.getText().trim().equals("")) {
-            JOptionPane.showMessageDialog(null, "Campo(s) vazio(s)!");
+            JOptionPane.showMessageDialog(null, "Preencha o campo PAÍS!");
+            txtPais.requestFocus();
             valida = false;
             return valida;
         }
 
         if (txtCidade.getText().trim().equals("")) {
-            JOptionPane.showMessageDialog(null, "Campo(s) vazio(s)!");
+            JOptionPane.showMessageDialog(null, "Preencha o campo CIDADE!");
+            txtCidade.requestFocus();
             valida = false;
             return valida;
         }
 
         if (txtRua.getText().trim().equals("")) {
-            JOptionPane.showMessageDialog(null, "Campo(s) vazio(s)!");
+            JOptionPane.showMessageDialog(null, "Preencha o campo RUA!");
+            txtRua.requestFocus();
             valida = false;
             return valida;
         }
