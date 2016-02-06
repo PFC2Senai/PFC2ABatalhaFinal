@@ -57,7 +57,7 @@ public class AlterarFabricante extends javax.swing.JFrame {
         getContentPane().add(jTextFabricante, new org.netbeans.lib.awtextra.AbsoluteConstraints(106, 92, 200, -1));
 
         jLabel1.setFont(new java.awt.Font("Raavi", 1, 18)); // NOI18N
-        jLabel1.setText("Editar Modelo");
+        jLabel1.setText("Editar Fabricante");
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 11, -1, -1));
 
         jButtonCancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/stop2.png"))); // NOI18N

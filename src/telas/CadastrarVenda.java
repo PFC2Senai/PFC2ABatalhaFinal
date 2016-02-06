@@ -5,11 +5,13 @@
  */
 package telas;
 
+import atributos.Cliente;
 import atributos.DetServicoProduto;
 import atributos.DetServicoTipoServ;
 import atributos.OrdemServico;
 import atributos.Produto;
 import atributos.Vendas;
+import funcoes.ClienteDAO;
 import funcoes.Conexao;
 import static funcoes.Conexao.getConnection;
 import funcoes.DetServicoProdutoDAO;
@@ -20,6 +22,8 @@ import funcoes.OrdemServicoDAO;
 import funcoes.ProdutoDAO;
 import funcoes.ServicoDAO;
 import funcoes.VendasDAO;
+import java.awt.event.FocusAdapter;
+import java.awt.event.FocusEvent;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -46,10 +50,12 @@ public class CadastrarVenda extends javax.swing.JFrame {
     private int codModelo;
     private int codDetProduto;
     private int codFabricante;
+    private int codCliente;
 
     private String produto;
     private String fabricante;
     private String modelo;
+    private String cliente;
     Statement stmt;
 
     private double totalPeca = 0;
@@ -64,10 +70,34 @@ public class CadastrarVenda extends javax.swing.JFrame {
         //TabelaVendas("select * from tabvendas;");
         populaComboBoxProdutos();
         jTextTotal.setEditable(false);
+        carregarComboClientes();
+        combobox();
+    }
+    
+    
+    private void combobox() {
+
+        //Combobox clientes
+        uJComboBoxCliente.getEditor().getEditorComponent().addFocusListener(new FocusAdapter() {
+            @Override
+            public void focusLost(FocusEvent e) {
+                if (codCliente == 0) {
+                    Mensangem();
+                    uJComboBoxCliente.getEditor().getEditorComponent().requestFocus();
+                }
+            }
+        });
+        uJComboBoxCliente.setAutocompletar(true);
+    }
+    
+    
+    
+    private void Mensangem() {
+        JOptionPane.showMessageDialog(null, "Esse registro não encontra-se cadastrado na base de dados.");
     }
 
     private void limparCampos() {
-        jTextCodCli.setText("");
+//        jTextCodCli.setText("");
         jTextCodUser.setText("");
         jTextHora.setText("");
         JDataVenda.setDate(null);
@@ -237,6 +267,108 @@ public class CadastrarVenda extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, ex);
         }
     }
+    
+    
+    
+    private boolean VerificaCampos(){
+        boolean valida = true;
+        
+         if (jComboBoxProdutos.getSelectedItem().equals("Selecione")) {
+            JOptionPane.showMessageDialog(null, "Selecione um item!");
+            valida = false;
+            return valida;
+        }
+
+        if (jComboModelo.getSelectedItem().equals("Selecione")) {
+            JOptionPane.showMessageDialog(null, "Selecione um item!");
+            valida = false;
+            return valida;
+        }
+
+        if (jComboFabricante.getSelectedItem().equals("Selecione")) {
+            JOptionPane.showMessageDialog(null, "Selecione um item!");
+            valida = false;
+            return valida;
+        }
+        
+        if (JDataVenda.getDate()== null) {
+            JOptionPane.showMessageDialog(null, "Campo(s) vazio(s)!");
+            valida = false;
+            return valida;
+        }
+        
+//        if (jTextCodCli.getText().equals("")) {
+  //          JOptionPane.showMessageDialog(null, "Campo(s) vazio(s)!");
+    //        valida = false;
+      //      return valida;
+        //}
+        
+        if (jTextCodUser.getText().equals("")) {
+            JOptionPane.showMessageDialog(null, "Campo(s) vazio(s)!");
+            valida = false;
+            return valida;
+        }
+        
+        if (jTextValorUnit.getText().equals("")) {
+            JOptionPane.showMessageDialog(null, "Campo(s) vazio(s)!");
+            valida = false;
+            return valida;
+        }
+        
+        if (jTextHora.getText().equals("")) {
+            JOptionPane.showMessageDialog(null, "Campo(s) vazio(s)!");
+            valida = false;
+            return valida;
+        }
+        
+        
+        if (jTextQuantidadeProduto.getText().equals("")) {
+            JOptionPane.showMessageDialog(null, "Campo(s) vazio(s)!");
+            valida = false;
+            return valida;
+        }
+        
+        if (jTextTotal.getText().equals("")) {
+            JOptionPane.showMessageDialog(null, "Campo(s) vazio(s)!");
+            valida = false;
+            return valida;
+        }
+        return valida;
+    }
+    
+    
+    
+    private void idClienteComboBox() {
+
+        Connection conexao = Conexao.getConnection();
+        ResultSet rs;
+        String sql = "select idcliente from tabcliente where empresa = '" + uJComboBoxCliente.getSelectedItem() + "';";
+
+        try {
+            pst = conexao.prepareStatement(sql);
+            rs = pst.executeQuery();
+
+            while (rs.next()) {
+                codCliente = (rs.getInt("idcliente"));
+            }
+
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, ex);
+        }
+    }
+    
+    
+   private void carregarComboClientes() {
+
+        uJComboBoxCliente.clear();
+
+        ArrayList<Cliente> cliente = new ArrayList<Cliente>();
+        cliente = ClienteDAO.ComboCliente();
+
+        for (Cliente cli : cliente) {
+            uJComboBoxCliente.addItem(cli.getEmpresa(), cli);
+        }
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -248,9 +380,10 @@ public class CadastrarVenda extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
+        uJComboBoxCliente = new componentes.UJComboBox();
+        jButton6 = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jTextCodCli = new javax.swing.JTextField();
         jTextCodUser = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
@@ -285,18 +418,32 @@ public class CadastrarVenda extends javax.swing.JFrame {
         jLabel1.setText("Cadastrar Venda");
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 40, -1, -1));
 
-        jLabel2.setText("Cód Cliente");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 120, -1, 29));
+        uJComboBoxCliente.setEditable(true);
+        uJComboBoxCliente.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                uJComboBoxClienteItemStateChanged(evt);
+            }
+        });
+        uJComboBoxCliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                uJComboBoxClienteActionPerformed(evt);
+            }
+        });
+        getContentPane().add(uJComboBoxCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 160, -1, -1));
+
+        jButton6.setText("Calcular");
+        jButton6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton6ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButton6, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 370, -1, -1));
+
+        jLabel2.setText("Cliente");
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 130, -1, 29));
 
         jLabel3.setText("Cod Usuario");
         getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 140, -1, -1));
-
-        jTextCodCli.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextCodCliActionPerformed(evt);
-            }
-        });
-        getContentPane().add(jTextCodCli, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 160, 85, -1));
         getContentPane().add(jTextCodUser, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 160, 83, -1));
 
         jLabel4.setText("Produto:");
@@ -416,8 +563,8 @@ public class CadastrarVenda extends javax.swing.JFrame {
         getContentPane().add(jTextQuantidadeProduto, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 370, 98, -1));
 
         jLabel11.setText("Total:");
-        getContentPane().add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 370, -1, -1));
-        getContentPane().add(jTextTotal, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 370, 79, -1));
+        getContentPane().add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 410, -1, -1));
+        getContentPane().add(jTextTotal, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 410, 79, -1));
 
         jTextValorUnit.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
@@ -436,15 +583,12 @@ public class CadastrarVenda extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextCodCliActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextCodCliActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextCodCliActionPerformed
-
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+if(jTableProduto.getRowCount() >0){
         OrdemServico oS = new OrdemServico();
      //  Produto p = new Produto();
 
@@ -456,7 +600,7 @@ public class CadastrarVenda extends javax.swing.JFrame {
         Vendas vendas = new Vendas();
         Vendas v = new Vendas();
 
-        vendas.setClienteIdcliente(Integer.parseInt(jTextCodCli.getText()));
+        vendas.setClienteIdcliente(codCliente);
         vendas.setTabusuarioIdUsuario(Integer.parseInt(jTextCodUser.getText()));
         vendas.setIdOrdemServico(codOrdemS);
         vendas.setDataVenda(FormataData(JDataVenda.getDate()));
@@ -478,6 +622,9 @@ public class CadastrarVenda extends javax.swing.JFrame {
 
         }
         limparCampos();
+}else{
+    JOptionPane.showMessageDialog(null, "É necessário inserir um registro na tabela!");
+}
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
@@ -507,7 +654,10 @@ public class CadastrarVenda extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        TabelaProduto();
+
+        if(VerificaCampos() == true){
+    TabelaProduto();
+}
 
         CarregaValorUnit();
 
@@ -548,12 +698,12 @@ public class CadastrarVenda extends javax.swing.JFrame {
     }//GEN-LAST:event_jComboBoxProdutosItemStateChanged
 
     private void jComboModeloItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jComboModeloItemStateChanged
-        jComboFabricante.removeAllItems();
+       jComboFabricante.removeAllItems();
         idModeloComboBox();
         populaComboBoxFabricante();
         if (jComboModelo.getSelectedItem() != null) {
             modelo = jComboModelo.getSelectedItem().toString();
-        }
+        } 
     }//GEN-LAST:event_jComboModeloItemStateChanged
 
     private void jTextValorUnitKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextValorUnitKeyTyped
@@ -564,6 +714,20 @@ public class CadastrarVenda extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jTextValorUnitKeyTyped
 
+    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+        double total = totalPeca + Double.parseDouble(jTextQuantidadeProduto.getText());
+        jTextTotal.setText(String.valueOf(total));
+    }//GEN-LAST:event_jButton6ActionPerformed
+
+    private void uJComboBoxClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_uJComboBoxClienteActionPerformed
+        codCliente = 0;
+        idClienteComboBox();
+    }//GEN-LAST:event_uJComboBoxClienteActionPerformed
+
+    private void uJComboBoxClienteItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_uJComboBoxClienteItemStateChanged
+        
+    }//GEN-LAST:event_uJComboBoxClienteItemStateChanged
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private com.toedter.calendar.JDateChooser JDataVenda;
     private javax.swing.JButton jButton1;
@@ -571,6 +735,7 @@ public class CadastrarVenda extends javax.swing.JFrame {
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
+    private javax.swing.JButton jButton6;
     private javax.swing.JComboBox jComboBoxProdutos;
     private javax.swing.JComboBox jComboFabricante;
     private javax.swing.JComboBox jComboModelo;
@@ -588,11 +753,11 @@ public class CadastrarVenda extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTableProduto;
-    private javax.swing.JTextField jTextCodCli;
     private javax.swing.JTextField jTextCodUser;
     private javax.swing.JFormattedTextField jTextHora;
     private javax.swing.JTextField jTextQuantidadeProduto;
     private javax.swing.JTextField jTextTotal;
     private javax.swing.JTextField jTextValorUnit;
+    private componentes.UJComboBox uJComboBoxCliente;
     // End of variables declaration//GEN-END:variables
 }
