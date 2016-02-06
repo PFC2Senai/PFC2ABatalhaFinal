@@ -77,92 +77,154 @@ public class CadastrarCliente extends javax.swing.JFrame {
         boolean valida = true;
 
         if (txtEmpresa.getText().trim().equals("")) {
-
-            txtEmpresa.setBackground(Color.yellow);
             JOptionPane.showMessageDialog(null, "Preencha o campo EMPRESA!");
             txtEmpresa.requestFocus();
+            txtEmpresa.setBackground(Color.yellow);
             valida = false;
             return valida;
+        }else{
+            txtEmpresa.setBackground(Color.white);
         }
 
+        if (txtCnpj.getText().trim().length() != 18) {
+            JOptionPane.showMessageDialog(null, "Preencha o campo CNPJ!");
+            txtCnpj.requestFocus();
+            txtCnpj.setBackground(Color.yellow);
+            valida = false;
+            return valida;
+        }else{
+            txtCnpj.setBackground(Color.white);
+        }
+        
         if (jComboBoxSetores.getSelectedIndex() == 0) {
             JOptionPane.showMessageDialog(null, "Preencha o campo SEGMENTO!");
             jComboBoxSetores.requestFocus();
             valida = false;
             return valida;
         }
-
-        if (txtCnpj.getText().trim().length() != 18) {
-            JOptionPane.showMessageDialog(null, "Preencha o campo CNPJ!");
-            txtCnpj.requestFocus();
-            valida = false;
-            return valida;
-        }
-
+                
         if (txtPais.getText().trim().equals("")) {
             JOptionPane.showMessageDialog(null, "Preencha o campo PAÍS!");
             txtPais.requestFocus();
+            txtPais.setBackground(Color.yellow);
             valida = false;
             return valida;
+        }else{
+            txtPais.setBackground(Color.white);
         }
-
+        
+        if (txtCep.getText().trim().equals("-")) {
+            JOptionPane.showMessageDialog(null, "Preencha o campo CEP!");
+            txtCep.requestFocus();
+            txtCep.setBackground(Color.yellow);
+            valida = false;
+            return valida;
+        }else{
+            txtCep.setBackground(Color.white);
+        }
+        
         if (txtCidade.getText().trim().equals("")) {
             JOptionPane.showMessageDialog(null, "Preencha o campo CIDADE!");
             txtCidade.requestFocus();
+            txtCidade.setBackground(Color.yellow);
             valida = false;
             return valida;
+        }else{
+            txtCidade.setBackground(Color.white);
         }
 
         if (txtRua.getText().trim().equals("")) {
             JOptionPane.showMessageDialog(null, "Preencha o campo RUA!");
             txtRua.requestFocus();
+            txtRua.setBackground(Color.yellow);
             valida = false;
             return valida;
-        }
-
-        if (txtCep.getText().trim().equals("-")) {
-            JOptionPane.showMessageDialog(null, "Preencha o campo CEP!");
-            txtCep.requestFocus();
-            valida = false;
-            return valida;
+        }else{
+            txtRua.setBackground(Color.white);
         }
 
         if (txtEstado.getText().trim().equals("")) {
             JOptionPane.showMessageDialog(null, "Preencha o campo ESTADO!");
             txtEstado.requestFocus();
+            txtEstado.setBackground(Color.yellow);
             valida = false;
             return valida;
+        }else{
+            txtEstado.setBackground(Color.white);
         }
 
         if (txtBairro.getText().trim().equals("")) {
             JOptionPane.showMessageDialog(null, "Preencha o campo BAIRRO!");
             txtBairro.requestFocus();
+            txtBairro.setBackground(Color.yellow);
             valida = false;
             return valida;
+        }else{
+            txtBairro.setBackground(Color.white);
         }
 
         if (txtNumero.getText().trim().equals("")) {
 
             JOptionPane.showMessageDialog(null, "Preencha o campo NÚMERO!");
             txtNumero.requestFocus();
+            txtNumero.setBackground(Color.yellow);
             valida = false;
             return valida;
-        }
-
-        if (jComboBoxSetores.getSelectedIndex() == 0) {
-            JOptionPane.showMessageDialog(null, "Preencha o campo SETOR!");
-            jComboBoxSetores.requestFocus();
-            valida = false;
-            return valida;
+        }else{
+            txtNumero.setBackground(Color.white);
         }
 
         if (jTableContatos.getRowCount() < 1) {
-
-            JOptionPane.showMessageDialog(null, "Adicione um contato na tabela");
+            JOptionPane.showMessageDialog(null, "Adicione um CONTATO");
             valida = false;
             return valida;
         }
         return valida;
+    }
+    
+    private boolean VerificaItensContato() {
+
+        boolean validar = true;
+
+        if (txtContato.getText().trim().equals("")) {
+            JOptionPane.showMessageDialog(null, "Preencha o nome do CONTATO!");
+            txtContato.requestFocus();
+            txtContato.setBackground(Color.yellow);
+            validar = false;
+            return validar;
+        }
+
+       if (txtTel01.getText().trim().length() != 13) {
+            JOptionPane.showMessageDialog(null, "Preencha o campo TELEFONE!");
+            txtTel01.requestFocus();
+            txtTel01.setBackground(Color.yellow);
+            validar = false;
+            return validar;
+        }
+       
+       if (txtTelCel.getText().trim().equals("")) {
+            JOptionPane.showMessageDialog(null, "Preencha o campo CELULAR!");
+            txtTelCel.requestFocus();
+            txtTelCel.setBackground(Color.yellow);
+            validar = false;
+            return validar;
+        }
+       
+        if (txtEmail.getText().trim().equals("")) {
+            JOptionPane.showMessageDialog(null, "Preencha o campo EMAIL");
+            txtEmail.requestFocus();
+            txtEmail.setBackground(Color.yellow);
+            validar = false;
+            return validar;
+        }
+
+        if (jComboBoxSetorContato.getSelectedIndex() == 0) {
+            JOptionPane.showMessageDialog(null, "Preencha o campo SETOR!");
+            jComboBoxSetorContato.requestFocus();
+            validar = false;
+            return validar;
+        }
+        return validar;
     }
 
     private void combobox() {
@@ -727,7 +789,8 @@ public class CadastrarCliente extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jBtnCancelarSetorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnCancelarSetorActionPerformed
-        if (JOptionPane.showConfirmDialog(null, "Cancelar novo segmento?", "Confirmar Cancelamento", JOptionPane.YES_NO_OPTION) == 0) {
+        if (JOptionPane.showConfirmDialog(null, "Cancelar NOVO segmento?", "Confirmar Cancelamento", JOptionPane.YES_NO_OPTION) == 0) {
+            txtSetor.setBackground(Color.white);
             jBtnSalvarSetor.setVisible(false);
             jBtnCancelarSetor.setVisible(false);
             jBtnNovoSetor.setVisible(true);
@@ -740,10 +803,11 @@ public class CadastrarCliente extends javax.swing.JFrame {
     private void jBtnSalvarSetorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnSalvarSetorActionPerformed
 
         if (txtSetor.getText().trim().equals("")) {
-            JOptionPane.showMessageDialog(null, "Campo vazio!");
-
+            JOptionPane.showMessageDialog(null, "Preencha o SEGMENTO!");
+            txtSetor.requestFocus();
+            txtSetor.setBackground(Color.yellow);
         } else {
-
+            txtSetor.setBackground(Color.white);
             Setor setor = new Setor();
 
             setor.setSetor(txtSetor.getText());
@@ -840,8 +904,12 @@ public class CadastrarCliente extends javax.swing.JFrame {
     private void jBtnOutroContatoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnOutroContatoActionPerformed
         if (VerificaCamposContato()) {
             TabelaContatos();
+            txtContato.setBackground(Color.white);
+            txtTel01.setBackground(Color.white);
+            txtTelCel.setBackground(Color.white);
+            txtEmail.setBackground(Color.white);
         } else {
-            JOptionPane.showMessageDialog(null, "Campo(s) vazio(s)!");
+            VerificaItensContato();
         }
     }//GEN-LAST:event_jBtnOutroContatoActionPerformed
 
