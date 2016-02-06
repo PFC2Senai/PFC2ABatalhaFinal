@@ -5,10 +5,7 @@
  */
 package telas;
 
-import atributos.Modelo;
 import funcoes.LimitarDigitos;
-import funcoes.ModeloDAO;
-import javax.swing.JOptionPane;
 
 /**
  *
@@ -127,17 +124,7 @@ public class CadastrarModelo extends javax.swing.JFrame {
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
 
-        if (ModeloDAO.VerificarModelo(jTextModelo.getText()) == false) {
-            Modelo model = new Modelo();
-
-            model.setModelo(jTextModelo.getText());
-
-            ModeloDAO.CadModelo(model);
-            JOptionPane.showMessageDialog(this, "Cadastrado com sucesso");
-            limparCampos();
-        } else {
-            JOptionPane.showMessageDialog(this, "Modelo ja cadastrado");
-        }
+        
     }//GEN-LAST:event_jButton4ActionPerformed
 
 

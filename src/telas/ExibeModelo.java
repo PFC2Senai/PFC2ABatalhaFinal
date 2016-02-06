@@ -22,6 +22,8 @@ public class ExibeModelo extends javax.swing.JFrame {
     Statement stmt;
     Modelo modelo = new Modelo();
     private static int indice;
+    
+    
 
     /**
      * Creates new form ExibeModelo
@@ -29,12 +31,21 @@ public class ExibeModelo extends javax.swing.JFrame {
     public ExibeModelo() {
         initComponents();
         TabelaModelo("select * from tabmodelo;");
+        ocultaCampos();
     }
 
     public static int GetIndice() {
         return indice;
     }
-
+    
+    private void ocultaCampos() {
+        jBtnCadastrarModelo.setVisible(false);
+        jBtnAlterarModelo.setVisible(false);
+        jBtnCancelarAlterarModelo.setVisible(false);
+        jBtnCancelarCadModelo.setVisible(false);
+        txtModelo.setEnabled(false);
+    }
+    
     public void TabelaModelo(String Sql) {
 
         try {
@@ -55,19 +66,19 @@ public class ExibeModelo extends javax.swing.JFrame {
             for (int i = 0; i < 2; i++) {
                 
                 ModeloTabela modelo = new ModeloTabela(dados, Colunas);
-                jTableListarUsuarios.setModel(modelo);
+                jTableListarModelo.setModel(modelo);
                 
-                jTableListarUsuarios.getColumnModel().getColumn(0).setMaxWidth(0);
-                jTableListarUsuarios.getColumnModel().getColumn(0).setMinWidth(0);
-                jTableListarUsuarios.getTableHeader().getColumnModel().getColumn(0).setMaxWidth(0);
-                jTableListarUsuarios.getTableHeader().getColumnModel().getColumn(0).setMinWidth(0);
+                jTableListarModelo.getColumnModel().getColumn(0).setMaxWidth(0);
+                jTableListarModelo.getColumnModel().getColumn(0).setMinWidth(0);
+                jTableListarModelo.getTableHeader().getColumnModel().getColumn(0).setMaxWidth(0);
+                jTableListarModelo.getTableHeader().getColumnModel().getColumn(0).setMinWidth(0);
                 
-                jTableListarUsuarios.getColumnModel().getColumn(1).setPreferredWidth(200);
+                jTableListarModelo.getColumnModel().getColumn(1).setPreferredWidth(200);
                 
-                jTableListarUsuarios.getColumnModel().getColumn(i).setResizable(false);
-                jTableListarUsuarios.getTableHeader().setReorderingAllowed(false);
+                jTableListarModelo.getColumnModel().getColumn(i).setResizable(false);
+                jTableListarModelo.getTableHeader().setReorderingAllowed(false);
                // jTableListarUsuarios.setAutoResizeMode(jTableListarUsuarios.AUTO_RESIZE_OFF);
-                jTableListarUsuarios.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+                jTableListarModelo.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
             }
 
         } catch (SQLException ex) {
@@ -83,10 +94,11 @@ public class ExibeModelo extends javax.swing.JFrame {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
+        bindingGroup = new org.jdesktop.beansbinding.BindingGroup();
 
         jLabel1 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTableListarUsuarios = new javax.swing.JTable();
+        jTableListarModelo = new javax.swing.JTable();
         jButton3 = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
         jButton6 = new javax.swing.JButton();
@@ -94,6 +106,14 @@ public class ExibeModelo extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         txtBuscar = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
+        jBtnNovoModelo = new javax.swing.JButton();
+        jBtnCancelarCadModelo = new javax.swing.JButton();
+        jBtnCadastrarModelo = new javax.swing.JButton();
+        jBtnAlterarModelo = new javax.swing.JButton();
+        jBtnCancelarAlterarModelo = new javax.swing.JButton();
+        jBtnEditarModelo = new javax.swing.JButton();
+        jLabel4 = new javax.swing.JLabel();
+        txtModelo = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -102,7 +122,7 @@ public class ExibeModelo extends javax.swing.JFrame {
         jLabel1.setText("Modelos");
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 40, -1, -1));
 
-        jTableListarUsuarios.setModel(new javax.swing.table.DefaultTableModel(
+        jTableListarModelo.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -110,9 +130,14 @@ public class ExibeModelo extends javax.swing.JFrame {
 
             }
         ));
-        jScrollPane2.setViewportView(jTableListarUsuarios);
+        jTableListarModelo.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTableListarModeloMouseClicked(evt);
+            }
+        });
+        jScrollPane2.setViewportView(jTableListarModelo);
 
-        getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(38, 176, 479, 270));
+        getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 330, 479, 270));
 
         jButton3.setText("Novo");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
@@ -120,7 +145,7 @@ public class ExibeModelo extends javax.swing.JFrame {
                 jButton3ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(35, 464, -1, -1));
+        getContentPane().add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 620, -1, -1));
 
         jButton5.setText("Editar");
         jButton5.addActionListener(new java.awt.event.ActionListener() {
@@ -128,7 +153,7 @@ public class ExibeModelo extends javax.swing.JFrame {
                 jButton5ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(149, 464, -1, -1));
+        getContentPane().add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 620, -1, -1));
 
         jButton6.setText("Excluir");
         jButton6.addActionListener(new java.awt.event.ActionListener() {
@@ -136,7 +161,7 @@ public class ExibeModelo extends javax.swing.JFrame {
                 jButton6ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton6, new org.netbeans.lib.awtextra.AbsoluteConstraints(277, 464, -1, -1));
+        getContentPane().add(jButton6, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 620, -1, -1));
 
         jButton7.setText("Cancelar");
         jButton7.addActionListener(new java.awt.event.ActionListener() {
@@ -144,20 +169,80 @@ public class ExibeModelo extends javax.swing.JFrame {
                 jButton7ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton7, new org.netbeans.lib.awtextra.AbsoluteConstraints(427, 464, -1, -1));
+        getContentPane().add(jButton7, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 620, -1, -1));
 
         jLabel2.setText("Pesquisar:");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 140, -1, -1));
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 290, -1, -1));
 
         txtBuscar.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 txtBuscarKeyReleased(evt);
             }
         });
-        getContentPane().add(txtBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 140, 421, -1));
+        getContentPane().add(txtBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 290, 421, -1));
 
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/leiaute/img2.png"))); // NOI18N
         getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -10, 670, 110));
+
+        jBtnNovoModelo.setText("Novo");
+        jBtnNovoModelo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnNovoModeloActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jBtnNovoModelo, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 200, -1, -1));
+
+        jBtnCancelarCadModelo.setText("Cancelar");
+        jBtnCancelarCadModelo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnCancelarCadModeloActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jBtnCancelarCadModelo, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 200, -1, -1));
+
+        jBtnCadastrarModelo.setText("Cadastrar");
+        jBtnCadastrarModelo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnCadastrarModeloActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jBtnCadastrarModelo, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 200, -1, -1));
+
+        jBtnAlterarModelo.setText("Alterar");
+        jBtnAlterarModelo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnAlterarModeloActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jBtnAlterarModelo, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 240, -1, -1));
+
+        jBtnCancelarAlterarModelo.setText("Cancelar");
+        jBtnCancelarAlterarModelo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnCancelarAlterarModeloActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jBtnCancelarAlterarModelo, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 240, -1, -1));
+
+        jBtnEditarModelo.setText("Editar");
+
+        org.jdesktop.beansbinding.Binding binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, jTableListarModelo, org.jdesktop.beansbinding.ELProperty.create("${selectedElement != null}"), jBtnEditarModelo, org.jdesktop.beansbinding.BeanProperty.create("enabled"));
+        bindingGroup.addBinding(binding);
+
+        jBtnEditarModelo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnEditarModeloActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jBtnEditarModelo, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 240, -1, -1));
+
+        jLabel4.setText("Modelo:");
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 150, -1, -1));
+
+        txtModelo.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        getContentPane().add(txtModelo, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 150, 410, -1));
+
+        bindingGroup.bind();
 
         pack();
         setLocationRelativeTo(null);
@@ -169,10 +254,10 @@ public class ExibeModelo extends javax.swing.JFrame {
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
        
-        if (jTableListarUsuarios.getSelectedRow() != -1) {
+        if (jTableListarModelo.getSelectedRow() != -1) {
             this.dispose();
-            int linha = jTableListarUsuarios.getSelectedRow();
-            indice = (Integer.parseInt(jTableListarUsuarios.getValueAt(linha, 0).toString()));
+            int linha = jTableListarModelo.getSelectedRow();
+            indice = (Integer.parseInt(jTableListarModelo.getValueAt(linha, 0).toString()));
             new AlterarModelo().setVisible(true);
             
         } else {
@@ -182,10 +267,10 @@ public class ExibeModelo extends javax.swing.JFrame {
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
         
-        if (jTableListarUsuarios.getSelectedRow() != -1) {
+        if (jTableListarModelo.getSelectedRow() != -1) {
 
-            int linha = jTableListarUsuarios.getSelectedRow();
-            modelo.setIdModelo(Integer.parseInt(jTableListarUsuarios.getValueAt(linha, 0).toString()));
+            int linha = jTableListarModelo.getSelectedRow();
+            modelo.setIdModelo(Integer.parseInt(jTableListarModelo.getValueAt(linha, 0).toString()));
 
             int cod = ModeloDAO.idModelo(modelo.getIdModelo());
             ModeloDAO.ExcluirModelo(cod);
@@ -205,7 +290,97 @@ public class ExibeModelo extends javax.swing.JFrame {
                 + "like '%" + txtBuscar.getText() + "%';");
     }//GEN-LAST:event_txtBuscarKeyReleased
 
+    private void jBtnNovoModeloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnNovoModeloActionPerformed
+        txtModelo.setText("");
+        txtModelo.setEnabled(true);
+        jBtnCadastrarModelo.setVisible(true);
+        jBtnCancelarCadModelo.setVisible(true);
+        jBtnNovoModelo.setVisible(false);
+        jBtnEditarModelo.setEnabled(false);
+        jTableListarModelo.setEnabled(false);
+    }//GEN-LAST:event_jBtnNovoModeloActionPerformed
+
+    private void jBtnCancelarCadModeloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnCancelarCadModeloActionPerformed
+        limparCampos();
+        jBtnCancelarCadModelo.setVisible(false);
+        jBtnCadastrarModelo.setVisible(false);
+        jBtnNovoModelo.setVisible(true);
+        jBtnEditarModelo.setEnabled(true);
+        jTableListarModelo.setEnabled(true);
+        TabelaModelo("select * from tabmodelo;");
+    }//GEN-LAST:event_jBtnCancelarCadModeloActionPerformed
+
+    private void jBtnCadastrarModeloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnCadastrarModeloActionPerformed
+
+        if (ModeloDAO.VerificarModelo(txtModelo.getText()) == false) {
+            Modelo model = new Modelo();
+
+            model.setModelo(txtModelo.getText());
+
+            ModeloDAO.CadModelo(model);
+            JOptionPane.showMessageDialog(this, "Cadastrado com sucesso");
+            limparCampos();
+        } else {
+            JOptionPane.showMessageDialog(this, "Modelo ja cadastrado");
+        }
+        TabelaModelo("select * from tabmodelo;");
+        ocultaCampos();
+        jBtnEditarModelo.setEnabled(true);
+        jTableListarModelo.setEnabled(true);
+        jBtnNovoModelo.setVisible(true);
+    }//GEN-LAST:event_jBtnCadastrarModeloActionPerformed
+
+    private void jBtnAlterarModeloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnAlterarModeloActionPerformed
+
+        Modelo model = new Modelo();
+        model.setModelo(txtModelo.getText());
+        ModeloDAO.UpdateModelo(model, GetIndice());
+        TabelaModelo("select * from tabmodelo");
+        limparCampos();
+        jBtnAlterarModelo.setVisible(false);
+        jBtnCancelarAlterarModelo.setVisible(false);
+        jBtnEditarModelo.setVisible(true);
+        jBtnNovoModelo.setEnabled(true);
+
+    }//GEN-LAST:event_jBtnAlterarModeloActionPerformed
+
+    private void jBtnCancelarAlterarModeloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnCancelarAlterarModeloActionPerformed
+
+        jTableListarModelo.getSelectionModel().clearSelection();
+        limparCampos();
+        jBtnAlterarModelo.setVisible(false);
+        jBtnCancelarAlterarModelo.setVisible(false);
+        jBtnEditarModelo.setVisible(true);
+        jBtnNovoModelo.setEnabled(true);
+
+    }//GEN-LAST:event_jBtnCancelarAlterarModeloActionPerformed
+
+    private void jBtnEditarModeloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnEditarModeloActionPerformed
+
+        txtModelo.setEnabled(true);
+        jBtnEditarModelo.setVisible(false);
+        jBtnCancelarAlterarModelo.setVisible(true);
+        jBtnAlterarModelo.setVisible(true);
+        jBtnNovoModelo.setEnabled(false);
+    }//GEN-LAST:event_jBtnEditarModeloActionPerformed
+
+    private void jTableListarModeloMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableListarModeloMouseClicked
+        int linha = jTableListarModelo.getSelectedRow();
+        txtModelo.setText(jTableListarModelo.getValueAt(linha, 1).toString());        
+        indice = Integer.parseInt(jTableListarModelo.getValueAt(linha, 0).toString());
+    }//GEN-LAST:event_jTableListarModeloMouseClicked
+
+    private void limparCampos() {
+        txtModelo.setText("");
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jBtnAlterarModelo;
+    private javax.swing.JButton jBtnCadastrarModelo;
+    private javax.swing.JButton jBtnCancelarAlterarModelo;
+    private javax.swing.JButton jBtnCancelarCadModelo;
+    private javax.swing.JButton jBtnEditarModelo;
+    private javax.swing.JButton jBtnNovoModelo;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
@@ -213,8 +388,11 @@ public class ExibeModelo extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTable jTableListarUsuarios;
+    private javax.swing.JTable jTableListarModelo;
     private javax.swing.JTextField txtBuscar;
+    private javax.swing.JTextField txtModelo;
+    private org.jdesktop.beansbinding.BindingGroup bindingGroup;
     // End of variables declaration//GEN-END:variables
 }
