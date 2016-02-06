@@ -75,6 +75,52 @@ public final class AlterarEstoque extends javax.swing.JFrame {
         jLabQuantidade.setVisible(true);
     }
 
+    private boolean VerificaCampos(){
+        boolean valida = true;
+        
+         if (jComboBoxTipoAlteracao.getSelectedIndex() == 0) {
+            JOptionPane.showMessageDialog(null, "Selecione um item!");
+            valida = false;
+            return valida;
+        }
+
+        if (jComboBoxFornecedor.getSelectedIndex() == 0) {
+            JOptionPane.showMessageDialog(null, "Selecione um item!");
+            valida = false;
+            return valida;
+        }
+        
+        if (txtDataCadProduto.getDate()== null) {
+            JOptionPane.showMessageDialog(null, "Campo(s) vazio(s)!");
+            valida = false;
+            return valida;
+        }
+        
+        if (txtQuantidade.getText().equals("")) {
+            JOptionPane.showMessageDialog(null, "Campo(s) vazio(s)!");
+            valida = false;
+            return valida;
+        }
+        
+        if (txtPrecoEntrada.getText().equals("")) {
+            JOptionPane.showMessageDialog(null, "Campo(s) vazio(s)!");
+            valida = false;
+            return valida;
+        }
+        
+        if (txtPercentual.getText().equals("")) {
+            JOptionPane.showMessageDialog(null, "Campo(s) vazio(s)!");
+            valida = false;
+            return valida;
+        }        
+        
+        if (txtPrecoSaida.getText().equals("")) {
+            JOptionPane.showMessageDialog(null, "Campo(s) vazio(s)!");
+            valida = false;
+            return valida;
+        }
+        return valida;
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -363,7 +409,7 @@ public final class AlterarEstoque extends javax.swing.JFrame {
     }//GEN-LAST:event_jBtnCalcularActionPerformed
 
     private void jBtnAdicionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnAdicionarActionPerformed
-
+if(VerificaCampos() == true){
         Produto prod = new Produto();
 
         int quantAtual = Integer.parseInt(txtQuantEstoque.getText());
@@ -386,6 +432,7 @@ public final class AlterarEstoque extends javax.swing.JFrame {
         HistoricoProdutoDAO.CadHistoricoProd(histProduto);
         CarregarDadosProduto();
         telaExibeProdutos.TabelaProduto("SELECT * FROM vw_produtos WHERE id_prod = " + codProduto + ";");
+}
     }//GEN-LAST:event_jBtnAdicionarActionPerformed
 
     private void jComboBoxTipoAlteracaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxTipoAlteracaoActionPerformed
