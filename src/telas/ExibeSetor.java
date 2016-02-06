@@ -79,9 +79,7 @@ public class ExibeSetor extends javax.swing.JFrame {
                 jTableListarSetores.setAutoResizeMode(jTableListarSetores.AUTO_RESIZE_OFF);
                 jTableListarSetores.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
             }
-
-            
-            
+                  
         } catch (SQLException ex) {
             Logger.getLogger(ExibeModelo.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -154,7 +152,7 @@ public class ExibeSetor extends javax.swing.JFrame {
                 jBtnAlterarSetorActionPerformed(evt);
             }
         });
-        jPanel1.add(jBtnAlterarSetor, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 230, -1, -1));
+        jPanel1.add(jBtnAlterarSetor, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 230, -1, -1));
 
         jBtnNovoSetor.setText("Novo");
         jBtnNovoSetor.addActionListener(new java.awt.event.ActionListener() {
@@ -170,9 +168,9 @@ public class ExibeSetor extends javax.swing.JFrame {
                 jBtnCadastrarSetorActionPerformed(evt);
             }
         });
-        jPanel1.add(jBtnCadastrarSetor, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 190, -1, -1));
+        jPanel1.add(jBtnCadastrarSetor, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 190, -1, -1));
 
-        jLabel3.setText("Setor:");
+        jLabel3.setText("Segmento:");
         jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 130, -1, -1));
 
         jLabel1.setFont(new java.awt.Font("Raavi", 1, 18)); // NOI18N
@@ -194,7 +192,7 @@ public class ExibeSetor extends javax.swing.JFrame {
                 jBtnSairActionPerformed(evt);
             }
         });
-        jPanel1.add(jBtnSair, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 570, -1, -1));
+        jPanel1.add(jBtnSair, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 620, -1, -1));
 
         jBtnEditarSetor.setText("Editar");
 
@@ -268,8 +266,7 @@ public class ExibeSetor extends javax.swing.JFrame {
         SetorDAO.CadSetor(setor);
         limparCampos();
         TabelaSetor("SELECT * FROM tabsetor;");
-        jBtnCadastrarSetor.setVisible(false);
-        jBtnCancelarCadSetor.setVisible(false);
+        ocultaCampos();
         jBtnNovoSetor.setVisible(true);
     }//GEN-LAST:event_jBtnCadastrarSetorActionPerformed
 
@@ -302,13 +299,12 @@ public class ExibeSetor extends javax.swing.JFrame {
     }//GEN-LAST:event_jTableListarSetoresMouseClicked
 
     private void jBtnNovoSetorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnNovoSetorActionPerformed
-        
         txtSetor.setText("");
         txtSetor.setEnabled(true);
         jBtnCadastrarSetor.setVisible(true);
         jBtnCancelarCadSetor.setVisible(true);
-        jBtnNovoSetor.setVisible(false);
-        
+        jBtnNovoSetor.setVisible(false);  
+        jTableListarSetores.setEnabled(false);
     }//GEN-LAST:event_jBtnNovoSetorActionPerformed
 
     private void jBtnEditarSetorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnEditarSetorActionPerformed

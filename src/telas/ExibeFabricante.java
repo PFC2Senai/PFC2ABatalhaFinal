@@ -1,5 +1,6 @@
 package telas;
 
+
 import atributos.Fabricante;
 import static funcoes.Conexao.getConnection;
 import funcoes.FabricanteDAO;
@@ -28,13 +29,22 @@ public class ExibeFabricante extends javax.swing.JFrame {
     public ExibeFabricante() {
         initComponents();
         TabelaFabricante("select * from tabfabricante;");
+        ocultaCampos();
     }
     
     public static int GetIndice() {         
         return indice;
     }
     
-    public void TabelaFabricante(String Sql){
+    private void ocultaCampos() {
+        jBtnCadastrarFabricante.setVisible(false);
+        jBtnAlterarFabricante.setVisible(false);
+        jBtnCancelarCadFabricante.setVisible(false);
+        jBtnCancelarAlterarFabricante.setVisible(false);
+        txtFabricante.setEnabled(false);
+    }
+    
+    public void TabelaFabricante(String Sql) {
         
         try {
             stmt = getConnection().createStatement();
@@ -70,7 +80,6 @@ public class ExibeFabricante extends javax.swing.JFrame {
         }             
     }
 
-
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -83,12 +92,17 @@ public class ExibeFabricante extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTableListarFabricantes = new javax.swing.JTable();
-        jButton5 = new javax.swing.JButton();
-        jButton6 = new javax.swing.JButton();
-        jButton7 = new javax.swing.JButton();
         jButton8 = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         txtBuscar = new javax.swing.JTextField();
+        jBtnNovoFabricante = new javax.swing.JButton();
+        jBtnCancelarCadFabricante = new javax.swing.JButton();
+        jBtnCadastrarFabricante = new javax.swing.JButton();
+        jBtnAlterarFabricante = new javax.swing.JButton();
+        jBtnCancelarAlterarFabricante = new javax.swing.JButton();
+        txtFabricante = new javax.swing.JTextField();
+        jLabel4 = new javax.swing.JLabel();
+        jBtnEditarFabricante = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -110,36 +124,14 @@ public class ExibeFabricante extends javax.swing.JFrame {
 
             }
         ));
+        jTableListarFabricantes.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTableListarFabricantesMouseClicked(evt);
+            }
+        });
         jScrollPane2.setViewportView(jTableListarFabricantes);
 
-        getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 140, 495, 320));
-
-        jButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/add.png"))); // NOI18N
-        jButton5.setText("Novo");
-        jButton5.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton5ActionPerformed(evt);
-            }
-        });
-        getContentPane().add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(35, 489, -1, -1));
-
-        jButton6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/editar.png"))); // NOI18N
-        jButton6.setText("Editar");
-        jButton6.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton6ActionPerformed(evt);
-            }
-        });
-        getContentPane().add(jButton6, new org.netbeans.lib.awtextra.AbsoluteConstraints(149, 489, -1, -1));
-
-        jButton7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/excluir.png"))); // NOI18N
-        jButton7.setText("Excluir");
-        jButton7.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton7ActionPerformed(evt);
-            }
-        });
-        getContentPane().add(jButton7, new org.netbeans.lib.awtextra.AbsoluteConstraints(251, 489, -1, -1));
+        getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 280, 540, 260));
 
         jButton8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/stop2.png"))); // NOI18N
         jButton8.setText("Cancelar");
@@ -148,56 +140,78 @@ public class ExibeFabricante extends javax.swing.JFrame {
                 jButton8ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton8, new org.netbeans.lib.awtextra.AbsoluteConstraints(446, 489, -1, -1));
+        getContentPane().add(jButton8, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 560, -1, -1));
 
         jLabel2.setText("Pesquisar:");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 110, -1, -1));
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 240, -1, -1));
 
         txtBuscar.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 txtBuscarKeyReleased(evt);
             }
         });
-        getContentPane().add(txtBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 110, 280, -1));
+        getContentPane().add(txtBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 240, 280, -1));
+
+        jBtnNovoFabricante.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/add.png"))); // NOI18N
+        jBtnNovoFabricante.setText("Novo");
+        jBtnNovoFabricante.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnNovoFabricanteActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jBtnNovoFabricante, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 170, -1, -1));
+
+        jBtnCancelarCadFabricante.setText("Cancelar");
+        jBtnCancelarCadFabricante.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnCancelarCadFabricanteActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jBtnCancelarCadFabricante, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 170, -1, -1));
+
+        jBtnCadastrarFabricante.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/disk.png"))); // NOI18N
+        jBtnCadastrarFabricante.setText("Cadastrar");
+        jBtnCadastrarFabricante.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnCadastrarFabricanteActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jBtnCadastrarFabricante, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 170, -1, -1));
+
+        jBtnAlterarFabricante.setText("Alterar");
+        jBtnAlterarFabricante.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnAlterarFabricanteActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jBtnAlterarFabricante, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 200, -1, -1));
+
+        jBtnCancelarAlterarFabricante.setText("Cancelar");
+        jBtnCancelarAlterarFabricante.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnCancelarAlterarFabricanteActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jBtnCancelarAlterarFabricante, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 200, -1, -1));
+        getContentPane().add(txtFabricante, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 130, 280, -1));
+
+        jLabel4.setText("Fabiricante:");
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 130, -1, 20));
+
+        jBtnEditarFabricante.setText("Editar");
+        jBtnEditarFabricante.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnEditarFabricanteActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jBtnEditarFabricante, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 200, -1, -1));
 
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/leiaute/img2.png"))); // NOI18N
-        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 670, 600));
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -10, 670, 620));
 
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-
-    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-        new CadastrarFabricante().setVisible(true);
-    }//GEN-LAST:event_jButton5ActionPerformed
-
-    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
-        if(jTableListarFabricantes.getSelectedRow() != -1){
-            this.dispose();
-            int linha = jTableListarFabricantes.getSelectedRow();
-            indice = (Integer.parseInt(jTableListarFabricantes.getValueAt(linha, 0).toString()));
-            new AlterarFabricante().setVisible(true);
-        }else{
-            JOptionPane.showMessageDialog(null, "Primeiro selecione um registro.");
-        }
-    }//GEN-LAST:event_jButton6ActionPerformed
-
-    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
-        if(jTableListarFabricantes.getSelectedRow() != -1) {
-
-            int linha = jTableListarFabricantes.getSelectedRow();
-            fab.setIdFabricante(Integer.parseInt(jTableListarFabricantes.getValueAt(linha, 0).toString()));
-
-            int cod = FabricanteDAO.idFabricante(fab.getIdFabricante());
-            FabricanteDAO.ExcluirFabricante(cod);
-            //            ContatosDAO.ExcluirEndereco(codContato);
-            //            ContatosDAO.ExcluirTel(codContato);
-            //            ContatosDAO.ExcluirEmail(codContato);
-        } else {
-            JOptionPane.showMessageDialog(null, "Primeiro selecione um registro.");
-        }
-        TabelaFabricante("select  * from tabfabricante;");
-    }//GEN-LAST:event_jButton7ActionPerformed
 
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
         this.dispose();
@@ -208,16 +222,108 @@ public class ExibeFabricante extends javax.swing.JFrame {
             + "like '%" + txtBuscar.getText() + "%';");
     }//GEN-LAST:event_txtBuscarKeyReleased
 
+    private void jBtnNovoFabricanteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnNovoFabricanteActionPerformed
+
+        txtFabricante.setText("");
+        txtFabricante.setEnabled(true);
+        jBtnCadastrarFabricante.setVisible(true);
+        jBtnCancelarCadFabricante.setVisible(true);
+        jBtnNovoFabricante.setVisible(false);
+        
+        jBtnEditarFabricante.setEnabled(false);
+        jTableListarFabricantes.setEnabled(false);
+    }//GEN-LAST:event_jBtnNovoFabricanteActionPerformed
+
+    private void jBtnCancelarCadFabricanteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnCancelarCadFabricanteActionPerformed
+
+        limparCampos();
+        jBtnCancelarCadFabricante.setVisible(false);
+        jBtnCadastrarFabricante.setVisible(false);
+        jBtnNovoFabricante.setVisible(true);
+        jBtnEditarFabricante.setEnabled(true);
+        jTableListarFabricantes.setEnabled(true);
+    }//GEN-LAST:event_jBtnCancelarCadFabricanteActionPerformed
+
+    private void jBtnCadastrarFabricanteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnCadastrarFabricanteActionPerformed
+
+        if (FabricanteDAO.VerificarFabricante(txtFabricante.getText()) == false) {
+
+            Fabricante fab = new Fabricante();
+            fab.setFabricante(txtFabricante.getText());
+
+            FabricanteDAO.CadFabricante(fab);
+            limparCampos();
+
+            TabelaFabricante("select * from tabfabricante;");
+            jBtnCadastrarFabricante.setVisible(false);
+            jBtnCancelarCadFabricante.setVisible(false);
+            jBtnNovoFabricante.setVisible(true);
+            jBtnEditarFabricante.setEnabled(true);
+            jTableListarFabricantes.setEnabled(true);
+        }
+        else
+        {
+            JOptionPane.showMessageDialog(this, "Fabricante ja cadastrado");
+        }
+    }//GEN-LAST:event_jBtnCadastrarFabricanteActionPerformed
+
+    private void jBtnAlterarFabricanteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnAlterarFabricanteActionPerformed
+
+        Fabricante fab = new Fabricante();
+        fab.setFabricante(txtFabricante.getText());
+        FabricanteDAO.UpdateFabricante(fab, GetIndice());
+        jBtnCadastrarFabricante.setVisible(false);
+        jBtnCancelarCadFabricante.setVisible(false);
+        jBtnNovoFabricante.setVisible(true);
+        TabelaFabricante("select * from tabfabricante;");
+
+    }//GEN-LAST:event_jBtnAlterarFabricanteActionPerformed
+
+    private void jBtnCancelarAlterarFabricanteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnCancelarAlterarFabricanteActionPerformed
+
+        jTableListarFabricantes.getSelectionModel().clearSelection();
+        limparCampos();
+        jBtnAlterarFabricante.setVisible(false);
+        jBtnCancelarAlterarFabricante.setVisible(false);
+        jBtnEditarFabricante.setVisible(true);
+        jBtnNovoFabricante.setEnabled(true); 
+        TabelaFabricante("select * from tabfabricante;");
+        
+    }//GEN-LAST:event_jBtnCancelarAlterarFabricanteActionPerformed
+
+    private void jTableListarFabricantesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableListarFabricantesMouseClicked
+        int linha = jTableListarFabricantes.getSelectedRow();
+        txtFabricante.setText(jTableListarFabricantes.getValueAt(linha, 1).toString());        
+        indice = Integer.parseInt(jTableListarFabricantes.getValueAt(linha, 0).toString());
+    }//GEN-LAST:event_jTableListarFabricantesMouseClicked
+
+    private void jBtnEditarFabricanteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnEditarFabricanteActionPerformed
+        txtFabricante.setEnabled(true);
+        jBtnEditarFabricante.setVisible(false);
+        jBtnCancelarAlterarFabricante.setVisible(true);
+        jBtnAlterarFabricante.setVisible(true);
+        jBtnNovoFabricante.setEnabled(false);
+    }//GEN-LAST:event_jBtnEditarFabricanteActionPerformed
+
+    private void limparCampos() {
+        txtFabricante.setText("");
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton5;
-    private javax.swing.JButton jButton6;
-    private javax.swing.JButton jButton7;
+    private javax.swing.JButton jBtnAlterarFabricante;
+    private javax.swing.JButton jBtnCadastrarFabricante;
+    private javax.swing.JButton jBtnCancelarAlterarFabricante;
+    private javax.swing.JButton jBtnCancelarCadFabricante;
+    private javax.swing.JButton jBtnEditarFabricante;
+    private javax.swing.JButton jBtnNovoFabricante;
     private javax.swing.JButton jButton8;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTableListarFabricantes;
     private javax.swing.JTextField txtBuscar;
+    private javax.swing.JTextField txtFabricante;
     // End of variables declaration//GEN-END:variables
 }
