@@ -85,7 +85,7 @@ public class AdicionarContato extends javax.swing.JFrame {
         jPanel2.setBackground(new java.awt.Color(223, 237, 253));
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanel1.setBackground(new java.awt.Color(223, 237, 253));
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
 
         jLabel13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/phone.png"))); // NOI18N
@@ -237,7 +237,7 @@ public class AdicionarContato extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        jPanel2.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 210, -1, -1));
+        jPanel2.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 180, 790, -1));
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel1.setText("Adicionar Contato");
@@ -250,7 +250,7 @@ public class AdicionarContato extends javax.swing.JFrame {
                 jBtnCadastrarContatoActionPerformed(evt);
             }
         });
-        jPanel2.add(jBtnCadastrarContato, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 540, -1, -1));
+        jPanel2.add(jBtnCadastrarContato, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 510, -1, -1));
 
         jBtnCancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/stop2.png"))); // NOI18N
         jBtnCancelar.setText("Cancelar");
@@ -259,24 +259,26 @@ public class AdicionarContato extends javax.swing.JFrame {
                 jBtnCancelarActionPerformed(evt);
             }
         });
-        jPanel2.add(jBtnCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 520, -1, -1));
+        jPanel2.add(jBtnCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 510, -1, -1));
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/leiaute/img3-5.png"))); // NOI18N
-        jPanel2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -10, 840, 670));
+        jPanel2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 850, 650));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 843, Short.MAX_VALUE)
+            .addGap(0, 850, Short.MAX_VALUE)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 660, Short.MAX_VALUE)
+            .addGap(0, 587, Short.MAX_VALUE)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(layout.createSequentialGroup()
+                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 587, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 0, Short.MAX_VALUE)))
         );
 
         bindingGroup.bind();
