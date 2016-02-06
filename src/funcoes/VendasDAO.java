@@ -237,8 +237,7 @@ public class VendasDAO {
             String sql = ("UPDATE tabvendas SET cliente_idcliente='" + venda.getClienteIdcliente() +
                                                                "', dataVenda='" + venda.getDataVenda() + 
                                                                "', hora='" + venda.getHora() + 
-                                                               "', tabordemserv_idtabOrdemServ='" + venda.getIdOrdemServico() +
-                                                               "', tabordemserv_idtabOrdemServ='" + venda.getTotal() +
+                                                               "', totalVenda='" + venda.getTotal() +
                                                                "' where idtabVendas = '" + id + "';");
             
             stmt = Conexao.getConnection().prepareStatement(sql);                              

@@ -75,6 +75,52 @@ public final class AlterarEstoque extends javax.swing.JFrame {
         jLabQuantidade.setVisible(true);
     }
 
+    private boolean VerificaCampos(){
+        boolean valida = true;
+        
+         if (jComboBoxTipoAlteracao.getSelectedIndex() == 0) {
+            JOptionPane.showMessageDialog(null, "Selecione um item!");
+            valida = false;
+            return valida;
+        }
+
+        if (jComboBoxFornecedor.getSelectedIndex() == 0) {
+            JOptionPane.showMessageDialog(null, "Selecione um item!");
+            valida = false;
+            return valida;
+        }
+        
+        if (txtDataCadProduto.getDate()== null) {
+            JOptionPane.showMessageDialog(null, "Campo(s) vazio(s)!");
+            valida = false;
+            return valida;
+        }
+        
+        if (txtQuantidade.getText().equals("")) {
+            JOptionPane.showMessageDialog(null, "Campo(s) vazio(s)!");
+            valida = false;
+            return valida;
+        }
+        
+        if (txtPrecoEntrada.getText().equals("")) {
+            JOptionPane.showMessageDialog(null, "Campo(s) vazio(s)!");
+            valida = false;
+            return valida;
+        }
+        
+        if (txtPercentual.getText().equals("")) {
+            JOptionPane.showMessageDialog(null, "Campo(s) vazio(s)!");
+            valida = false;
+            return valida;
+        }        
+        
+        if (txtPrecoSaida.getText().equals("")) {
+            JOptionPane.showMessageDialog(null, "Campo(s) vazio(s)!");
+            valida = false;
+            return valida;
+        }
+        return valida;
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -128,15 +174,15 @@ public final class AlterarEstoque extends javax.swing.JFrame {
                 jBtnConfirmarBaixaActionPerformed(evt);
             }
         });
-        jPanel2.add(jBtnConfirmarBaixa, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 500, -1, -1));
+        jPanel2.add(jBtnConfirmarBaixa, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 530, -1, -1));
 
         jBtnCancelar.setText("Cancelar");
-        jPanel2.add(jBtnCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 500, -1, -1));
+        jPanel2.add(jBtnCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 530, -1, -1));
 
         jLabel1.setFont(new java.awt.Font("Raavi", 1, 18)); // NOI18N
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/estoque2.png"))); // NOI18N
         jLabel1.setText("Alterar Estoque");
-        jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 40, -1, -1));
+        jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 30, -1, -1));
 
         jComboBoxTipoAlteracao.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Selecione o tipo de alteração", "Entrada", "Saída" }));
         jComboBoxTipoAlteracao.addActionListener(new java.awt.event.ActionListener() {
@@ -144,7 +190,7 @@ public final class AlterarEstoque extends javax.swing.JFrame {
                 jComboBoxTipoAlteracaoActionPerformed(evt);
             }
         });
-        jPanel2.add(jComboBoxTipoAlteracao, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 130, 211, -1));
+        jPanel2.add(jComboBoxTipoAlteracao, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 160, 211, -1));
 
         jBtnAdicionar.setText("Adicionar");
         jBtnAdicionar.addActionListener(new java.awt.event.ActionListener() {
@@ -152,7 +198,7 @@ public final class AlterarEstoque extends javax.swing.JFrame {
                 jBtnAdicionarActionPerformed(evt);
             }
         });
-        jPanel2.add(jBtnAdicionar, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 500, -1, -1));
+        jPanel2.add(jBtnAdicionar, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 530, -1, -1));
 
         jPanel1.setBackground(new java.awt.Color(229, 229, 253));
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
@@ -228,7 +274,7 @@ public final class AlterarEstoque extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        jPanel2.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 160, 790, -1));
+        jPanel2.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 190, 790, -1));
 
         jPanel3.setBackground(new java.awt.Color(229, 229, 253));
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
@@ -334,10 +380,10 @@ public final class AlterarEstoque extends javax.swing.JFrame {
                 .addContainerGap(20, Short.MAX_VALUE))
         );
 
-        jPanel2.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 300, 790, -1));
+        jPanel2.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 330, 790, -1));
 
-        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/leiaute/img3-5.png"))); // NOI18N
-        jPanel2.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 910, 650));
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/leiaute/img3.png"))); // NOI18N
+        jPanel2.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 910, 140));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -363,7 +409,7 @@ public final class AlterarEstoque extends javax.swing.JFrame {
     }//GEN-LAST:event_jBtnCalcularActionPerformed
 
     private void jBtnAdicionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnAdicionarActionPerformed
-
+if(VerificaCampos() == true){
         Produto prod = new Produto();
 
         int quantAtual = Integer.parseInt(txtQuantEstoque.getText());
@@ -386,6 +432,7 @@ public final class AlterarEstoque extends javax.swing.JFrame {
         HistoricoProdutoDAO.CadHistoricoProd(histProduto);
         CarregarDadosProduto();
         telaExibeProdutos.TabelaProduto("SELECT * FROM vw_produtos WHERE id_prod = " + codProduto + ";");
+}
     }//GEN-LAST:event_jBtnAdicionarActionPerformed
 
     private void jComboBoxTipoAlteracaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxTipoAlteracaoActionPerformed

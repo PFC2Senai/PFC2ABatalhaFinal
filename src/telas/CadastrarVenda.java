@@ -286,35 +286,35 @@ public class CadastrarVenda extends javax.swing.JFrame {
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 40, -1, -1));
 
         jLabel2.setText("Cód Cliente");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 80, -1, 29));
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 120, -1, 29));
 
         jLabel3.setText("Cod Usuario");
-        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 100, -1, -1));
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 140, -1, -1));
 
         jTextCodCli.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextCodCliActionPerformed(evt);
             }
         });
-        getContentPane().add(jTextCodCli, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 120, 85, -1));
-        getContentPane().add(jTextCodUser, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 120, 83, -1));
+        getContentPane().add(jTextCodCli, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 160, 85, -1));
+        getContentPane().add(jTextCodUser, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 160, 83, -1));
 
         jLabel4.setText("Produto:");
-        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 150, -1, -1));
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 190, -1, -1));
 
         jLabel5.setText("Data da Venda:");
-        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 300, -1, -1));
-        getContentPane().add(JDataVenda, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 290, 121, -1));
+        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 340, -1, -1));
+        getContentPane().add(JDataVenda, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 330, 121, -1));
 
         jLabel6.setText("Hora:");
-        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 290, -1, -1));
+        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 330, -1, -1));
 
         try {
             jTextHora.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##:##")));
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
-        getContentPane().add(jTextHora, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 290, 98, -1));
+        getContentPane().add(jTextHora, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 330, 98, -1));
 
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/stop2.png"))); // NOI18N
         jButton1.setText("Cancelar");
@@ -323,7 +323,7 @@ public class CadastrarVenda extends javax.swing.JFrame {
                 jButton1ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(362, 428, -1, -1));
+        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 470, -1, -1));
 
         jButton3.setText("Limpar");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
@@ -331,7 +331,7 @@ public class CadastrarVenda extends javax.swing.JFrame {
                 jButton3ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 428, -1, -1));
+        getContentPane().add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 470, -1, -1));
 
         jButton4.setFont(new java.awt.Font("Raavi", 1, 14)); // NOI18N
         jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/disk.png"))); // NOI18N
@@ -341,7 +341,7 @@ public class CadastrarVenda extends javax.swing.JFrame {
                 jButton4ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(201, 416, -1, 42));
+        getContentPane().add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 460, -1, 42));
 
         jComboBoxProdutos.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Selecione" }));
         jComboBoxProdutos.addItemListener(new java.awt.event.ItemListener() {
@@ -354,7 +354,7 @@ public class CadastrarVenda extends javax.swing.JFrame {
                 jComboBoxProdutosActionPerformed(evt);
             }
         });
-        getContentPane().add(jComboBoxProdutos, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 150, 260, -1));
+        getContentPane().add(jComboBoxProdutos, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 190, 260, -1));
 
         jTableProduto.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -366,7 +366,7 @@ public class CadastrarVenda extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(jTableProduto);
 
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 476, 490, 110));
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 520, 490, 110));
 
         jButton2.setText("Adicionar");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -374,7 +374,7 @@ public class CadastrarVenda extends javax.swing.JFrame {
                 jButton2ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(162, 375, -1, -1));
+        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 410, -1, -1));
 
         jButton5.setText("Remover");
         jButton5.addActionListener(new java.awt.event.ActionListener() {
@@ -382,13 +382,13 @@ public class CadastrarVenda extends javax.swing.JFrame {
                 jButton5ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(257, 375, 77, -1));
+        getContentPane().add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 410, 77, -1));
 
         jLabel7.setText("Modelo:");
-        getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 200, -1, -1));
+        getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 240, -1, -1));
 
         jLabel8.setText("Fabricante:");
-        getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 240, -1, -1));
+        getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 280, -1, -1));
 
         jComboModelo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Selecione" }));
         jComboModelo.addItemListener(new java.awt.event.ItemListener() {
@@ -401,7 +401,7 @@ public class CadastrarVenda extends javax.swing.JFrame {
                 jComboModeloActionPerformed(evt);
             }
         });
-        getContentPane().add(jComboModelo, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 190, 260, -1));
+        getContentPane().add(jComboModelo, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 230, 260, -1));
 
         jComboFabricante.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Selecione" }));
         jComboFabricante.addActionListener(new java.awt.event.ActionListener() {
@@ -409,28 +409,28 @@ public class CadastrarVenda extends javax.swing.JFrame {
                 jComboFabricanteActionPerformed(evt);
             }
         });
-        getContentPane().add(jComboFabricante, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 230, 260, -1));
+        getContentPane().add(jComboFabricante, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 270, 260, -1));
 
         jLabel10.setText("Quantidade:");
-        getContentPane().add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 340, -1, -1));
-        getContentPane().add(jTextQuantidadeProduto, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 330, 98, -1));
+        getContentPane().add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 380, -1, -1));
+        getContentPane().add(jTextQuantidadeProduto, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 370, 98, -1));
 
         jLabel11.setText("Total:");
-        getContentPane().add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 330, -1, -1));
-        getContentPane().add(jTextTotal, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 330, 79, -1));
+        getContentPane().add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 370, -1, -1));
+        getContentPane().add(jTextTotal, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 370, 79, -1));
 
         jTextValorUnit.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 jTextValorUnitKeyTyped(evt);
             }
         });
-        getContentPane().add(jTextValorUnit, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 330, 97, -1));
+        getContentPane().add(jTextValorUnit, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 370, 97, -1));
 
         jLabel12.setText("Valor Unitário:");
-        getContentPane().add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 340, -1, -1));
+        getContentPane().add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 380, -1, -1));
 
         jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/leiaute/img2.png"))); // NOI18N
-        getContentPane().add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 670, 600));
+        getContentPane().add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 680, 110));
 
         pack();
         setLocationRelativeTo(null);

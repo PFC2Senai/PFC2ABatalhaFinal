@@ -537,7 +537,7 @@ public class DetalharServico extends javax.swing.JFrame {
         jPanel13.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 150, 430, 208));
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/leiaute/img3.png"))); // NOI18N
-        jPanel13.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -10, 880, 900));
+        jPanel13.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 880, 140));
 
         jScrollPane5.setViewportView(jPanel13);
 

@@ -111,7 +111,6 @@ public class ExibeVenda extends javax.swing.JFrame {
 
         jLabel1 = new javax.swing.JLabel();
         jButton3 = new javax.swing.JButton();
-        jBtnEditarVenda = new javax.swing.JButton();
         jButton7 = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTableListarVendas = new javax.swing.JTable();
@@ -133,15 +132,7 @@ public class ExibeVenda extends javax.swing.JFrame {
                 jButton3ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 500, -1, -1));
-
-        jBtnEditarVenda.setText("Editar");
-        jBtnEditarVenda.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jBtnEditarVendaActionPerformed(evt);
-            }
-        });
-        getContentPane().add(jBtnEditarVenda, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 500, -1, -1));
+        getContentPane().add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 490, -1, 30));
 
         jButton7.setText("Voltar");
         jButton7.addActionListener(new java.awt.event.ActionListener() {
@@ -149,7 +140,7 @@ public class ExibeVenda extends javax.swing.JFrame {
                 jButton7ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton7, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 500, -1, -1));
+        getContentPane().add(jButton7, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 490, -1, 30));
 
         jTableListarVendas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -176,8 +167,8 @@ public class ExibeVenda extends javax.swing.JFrame {
         });
         getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 440, 111, 32));
 
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/leiaute/img3-5.png"))); // NOI18N
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 840, 670));
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/leiaute/img3.png"))); // NOI18N
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 840, 140));
 
         pack();
         setLocationRelativeTo(null);
@@ -186,17 +177,6 @@ public class ExibeVenda extends javax.swing.JFrame {
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         new CadastrarVenda().setVisible(true);
     }//GEN-LAST:event_jButton3ActionPerformed
-
-    private void jBtnEditarVendaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnEditarVendaActionPerformed
-        if(jTableListarVendas.getSelectedRow() != -1){
-            this.dispose();
-            int linha = jTableListarVendas.getSelectedRow();
-            indice = (Integer.parseInt(jTableListarVendas.getValueAt(linha, 0).toString()));
-            new AlterarUsuario().setVisible(true);
-        }else{
-            JOptionPane.showMessageDialog(null, "Primeiro selecione um registro.");
-        }
-    }//GEN-LAST:event_jBtnEditarVendaActionPerformed
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
         this.dispose();
@@ -210,7 +190,6 @@ public class ExibeVenda extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jBtnEditarVenda;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton7;

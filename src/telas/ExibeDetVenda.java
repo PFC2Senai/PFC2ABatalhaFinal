@@ -162,9 +162,9 @@ public class ExibeDetVenda extends javax.swing.JFrame {
         jTextCodCliente.setOpaque(true);
         jTextCodCliente.setBackground(new Color(255, 255, 255));
         jTextCodCliente.setBorder(new LineBorder(Color.BLACK));
-        jTextCodServ.setOpaque(true);
-        jTextCodServ.setBackground(new Color(255, 255, 255));
-        jTextCodServ.setBorder(new LineBorder(Color.BLACK));   
+        //jTextCodServ.setOpaque(true);
+        //jTextCodServ.setBackground(new Color(255, 255, 255));
+        //jTextCodServ.setBorder(new LineBorder(Color.BLACK));   
         jTextDataVenda.setOpaque(true);
         jTextDataVenda.setBackground(new Color(255, 255, 255));
         jTextDataVenda.setBorder(new LineBorder(Color.BLACK));  
@@ -403,8 +403,8 @@ public class ExibeDetVenda extends javax.swing.JFrame {
         });
         getContentPane().add(jBtnAltDadosP, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 340, 94, -1));
 
-        jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/leiaute/img3-5.png"))); // NOI18N
-        getContentPane().add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -10, 860, 670));
+        jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/leiaute/img3.png"))); // NOI18N
+        getContentPane().add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 860, 140));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -431,7 +431,7 @@ public class ExibeDetVenda extends javax.swing.JFrame {
 
     private void jButtonAr1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAr1ActionPerformed
         EditarVendas();
-        jTextCodServ.setEditable(true);
+ //       jTextCodServ.setEditable(true);
         jTextCodCliente.setEditable(true);
         jTextDataVenda.setEditable(true);
         jTextHoraVenda.setEditable(true);
@@ -458,7 +458,7 @@ public class ExibeDetVenda extends javax.swing.JFrame {
 
         Vendas v = new Vendas();
         v.setClienteIdcliente(Integer.parseInt(jTextCodCliente.getText()));
-        v.setIdOrdemServico(Integer.parseInt(jTextCodServ.getText()));
+        //v.setIdOrdemServico(Integer.parseInt(jTextCodServ.getText()));
         v.setDataVenda(Date.valueOf(jTextDataVenda.getText()));
         v.setHora(Time.valueOf(jTextHoraVenda.getText()));
         v.setTotal(Double.parseDouble(jTextTotalVenda.getText()));
