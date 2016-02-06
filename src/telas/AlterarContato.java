@@ -97,35 +97,35 @@ public final class AlterarContato extends javax.swing.JFrame {
 
         jLabelContato.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/funcionario.png"))); // NOI18N
         jLabelContato.setText("Contato:");
-        getContentPane().add(jLabelContato, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 100, -1, -1));
-        getContentPane().add(txtContato, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 100, 235, -1));
+        getContentPane().add(jLabelContato, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 120, -1, -1));
+        getContentPane().add(txtContato, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 120, 235, -1));
 
         jLabelTelefone.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/telephone.png"))); // NOI18N
         jLabelTelefone.setText("Telefone:");
-        getContentPane().add(jLabelTelefone, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 130, -1, -1));
+        getContentPane().add(jLabelTelefone, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 150, -1, -1));
 
         try {
             txtTel.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("(##)####-####")));
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
-        getContentPane().add(txtTel, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 130, 120, -1));
-        getContentPane().add(txtTelCel, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 160, 120, -1));
+        getContentPane().add(txtTel, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 150, 120, -1));
+        getContentPane().add(txtTelCel, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 180, 120, -1));
 
         jLabelCelular.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/phone.png"))); // NOI18N
         jLabelCelular.setText("Celular:");
-        getContentPane().add(jLabelCelular, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 160, -1, -1));
+        getContentPane().add(jLabelCelular, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 180, -1, -1));
 
         jLabelEmail.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/email.png"))); // NOI18N
         jLabelEmail.setText("Email:");
-        getContentPane().add(jLabelEmail, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 190, -1, -1));
+        getContentPane().add(jLabelEmail, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 210, -1, -1));
 
         txtEmail.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
                 txtEmailFocusLost(evt);
             }
         });
-        getContentPane().add(txtEmail, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 190, 235, -1));
+        getContentPane().add(txtEmail, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 210, 235, -1));
 
         jBtnAltContato.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/salvar.png"))); // NOI18N
         jBtnAltContato.setText("Salvar");
@@ -161,7 +161,7 @@ public final class AlterarContato extends javax.swing.JFrame {
         getContentPane().add(jComboBoxSetorContato, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 250, 235, -1));
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/leiaute/img1.png"))); // NOI18N
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -10, 670, 370));
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 670, 100));
 
         pack();
         setLocationRelativeTo(null);

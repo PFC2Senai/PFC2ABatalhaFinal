@@ -768,8 +768,8 @@ public class CadastrarCliente extends javax.swing.JFrame {
         });
         jPanel1.add(btnCadCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 630, -1, 30));
 
-        jLabel17.setIcon(new javax.swing.ImageIcon(getClass().getResource("/leiaute/img3-5.png"))); // NOI18N
-        jPanel1.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -120, 860, 900));
+        jLabel17.setIcon(new javax.swing.ImageIcon(getClass().getResource("/leiaute/img3.png"))); // NOI18N
+        jPanel1.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 860, 130));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);

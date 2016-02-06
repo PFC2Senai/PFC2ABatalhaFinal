@@ -84,10 +84,10 @@ public class AdicionarDetServEquipamento extends javax.swing.JFrame {
                 jComboBoxEquipamentosActionPerformed(evt);
             }
         });
-        jPanel4.add(jComboBoxEquipamentos, new org.netbeans.lib.awtextra.AbsoluteConstraints(156, 99, 261, -1));
+        jPanel4.add(jComboBoxEquipamentos, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 130, 261, -1));
 
         jLabel1.setText("Equipamento:");
-        jPanel4.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 102, -1, -1));
+        jPanel4.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 140, -1, -1));
 
         jBtnRemoveEquipamento.setText("Remover");
         jBtnRemoveEquipamento.addActionListener(new java.awt.event.ActionListener() {
@@ -127,7 +127,7 @@ public class AdicionarDetServEquipamento extends javax.swing.JFrame {
         jPanel4.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 305, 476, 130));
 
         jLabel37.setText("Modelo:");
-        jPanel4.add(jLabel37, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 140, -1, -1));
+        jPanel4.add(jLabel37, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 170, -1, -1));
 
         jComboBoxModeloEquip.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Selecione o Modelo" }));
         jComboBoxModeloEquip.addItemListener(new java.awt.event.ItemListener() {
@@ -135,10 +135,10 @@ public class AdicionarDetServEquipamento extends javax.swing.JFrame {
                 jComboBoxModeloEquipItemStateChanged(evt);
             }
         });
-        jPanel4.add(jComboBoxModeloEquip, new org.netbeans.lib.awtextra.AbsoluteConstraints(153, 137, 264, -1));
+        jPanel4.add(jComboBoxModeloEquip, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 170, 264, -1));
 
         jLabel38.setText("Fabricante:");
-        jPanel4.add(jLabel38, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 178, -1, -1));
+        jPanel4.add(jLabel38, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 210, -1, -1));
 
         jComboBoxFabricanteEquip.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Selecione o Fabricante" }));
         jComboBoxFabricanteEquip.addActionListener(new java.awt.event.ActionListener() {
@@ -146,7 +146,7 @@ public class AdicionarDetServEquipamento extends javax.swing.JFrame {
                 jComboBoxFabricanteEquipActionPerformed(evt);
             }
         });
-        jPanel4.add(jComboBoxFabricanteEquip, new org.netbeans.lib.awtextra.AbsoluteConstraints(153, 175, 264, -1));
+        jPanel4.add(jComboBoxFabricanteEquip, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 210, 264, -1));
 
         jBtnInserirDetServEquipamento.setText("Salvar");
         jBtnInserirDetServEquipamento.addActionListener(new java.awt.event.ActionListener() {
@@ -156,8 +156,8 @@ public class AdicionarDetServEquipamento extends javax.swing.JFrame {
         });
         jPanel4.add(jBtnInserirDetServEquipamento, new org.netbeans.lib.awtextra.AbsoluteConstraints(493, 465, -1, -1));
 
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/leiaute/img2.png"))); // NOI18N
-        jPanel4.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -10, 670, 620));
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/leiaute/imag2.png"))); // NOI18N
+        jPanel4.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 670, 110));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
