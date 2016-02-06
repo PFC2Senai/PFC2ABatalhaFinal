@@ -86,7 +86,8 @@ public class CadastrarProduto extends javax.swing.JFrame {
     }
     
     
-    private boolean VerificaCampos(){
+    private boolean VerificaCampos() {
+        
         boolean valida = true;
         
          if (jComboBoxFabricante.getSelectedIndex() == 0) {

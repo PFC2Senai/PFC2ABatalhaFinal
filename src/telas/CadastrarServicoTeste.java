@@ -159,72 +159,6 @@ public class CadastrarServicoTeste extends javax.swing.JFrame {
         uJComboBoxFuncionario.setAutocompletar(true);
     }
 
-    
-    
-    private boolean VerificaCamposPecas(){
-        boolean valida = true;
-                
-        if (txtQuantidade.getText().equals("")) {
-            JOptionPane.showMessageDialog(null, "Campo(s) vazio(s)!");
-            valida = false;
-            return valida;
-        }
-        
-        if (txtValorUnit.getText().equals("")) {
-            JOptionPane.showMessageDialog(null, "Campo(s) vazio(s)!");
-            valida = false;
-            return valida;
-        }
-        return valida;
-    }
-    
-    
-    private boolean VerificaCamposValor(){
-        boolean valida = true;
-                
-        if (txtTotalPecas.getText().equals("")) {
-            JOptionPane.showMessageDialog(null, "Campo(s) Vazio(s)!");
-            valida = false;
-            return valida;
-        }
-        
-        if (txtMaoObra.getText().equals("")) {
-            JOptionPane.showMessageDialog(null, "Campo(s) Vazio(s)!");
-            valida = false;
-            return valida;
-        }
-        
-        if (txtTotalGeral.getText().equals("")) {
-            JOptionPane.showMessageDialog(null, "Campo(s) Vazio(s)!");
-            valida = false;
-            return valida;
-        }
-        return valida;
-    }
-    
-    
-    private boolean VerificaCamposServico(){
-        boolean valida = true;
-                
-        if (txtDataCadProduto.getDate() == null) {
-            JOptionPane.showMessageDialog(null, "Campo(s) Vazio(s)!");
-            valida = false;
-            return valida;
-        }
-        
-        if (txtDescricao.getText().equals("")) {
-            JOptionPane.showMessageDialog(null, "Campo(s) Vazio(s)!");
-            valida = false;
-            return valida;
-        }
-        
-        if (jComboBoxTipoServico.getSelectedIndex() == 0){
-            JOptionPane.showMessageDialog(null, "Selecione um item!");
-            valida = false;
-            return valida;
-        }
-        return valida;
-    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -237,6 +171,26 @@ public class CadastrarServicoTeste extends javax.swing.JFrame {
 
         jPanel6 = new javax.swing.JPanel();
         jTabbedPaneServico = new javax.swing.JTabbedPane();
+        jPanelServico = new javax.swing.JPanel();
+        jPanel7 = new javax.swing.JPanel();
+        jLabel6 = new javax.swing.JLabel();
+        txtTipoServico = new javax.swing.JTextField();
+        jLabel10 = new javax.swing.JLabel();
+        jLabel12 = new javax.swing.JLabel();
+        txtDataCadProduto = new com.toedter.calendar.JDateChooser();
+        jBtbNovoTipoServico = new javax.swing.JButton();
+        jBtnCadTipoServico = new javax.swing.JButton();
+        jBtnCancelarCadTipoServico = new javax.swing.JButton();
+        jBtnAdicionarTipo = new javax.swing.JButton();
+        jLabel5 = new javax.swing.JLabel();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        txtDescricao = new javax.swing.JTextArea();
+        jScrollPane6 = new javax.swing.JScrollPane();
+        jTableTipodeServico = new javax.swing.JTable();
+        jBtnRemoverTipo = new javax.swing.JButton();
+        uJComboBoxClientes = new componentes.UJComboBox();
+        jComboBoxTipoServico = new componentes.UJComboBox();
+        jBtnAvancarPainelPecas = new javax.swing.JButton();
         jPanelPecas = new javax.swing.JPanel();
         jPanel14 = new javax.swing.JPanel();
         jLabel33 = new javax.swing.JLabel();
@@ -290,26 +244,6 @@ public class CadastrarServicoTeste extends javax.swing.JFrame {
         jBtnCalcularTotalServico = new javax.swing.JButton();
         jBtnCadastrarServico3 = new javax.swing.JButton();
         jBtnVoltarPainelFuncionario = new javax.swing.JButton();
-        jPanelServico = new javax.swing.JPanel();
-        jPanel7 = new javax.swing.JPanel();
-        jLabel6 = new javax.swing.JLabel();
-        txtTipoServico = new javax.swing.JTextField();
-        jLabel10 = new javax.swing.JLabel();
-        jLabel12 = new javax.swing.JLabel();
-        txtDataCadProduto = new com.toedter.calendar.JDateChooser();
-        jBtbNovoTipoServico = new javax.swing.JButton();
-        jBtnCadTipoServico = new javax.swing.JButton();
-        jBtnCancelarCadTipoServico = new javax.swing.JButton();
-        jBtnAdicionarTipo = new javax.swing.JButton();
-        jLabel5 = new javax.swing.JLabel();
-        jScrollPane4 = new javax.swing.JScrollPane();
-        txtDescricao = new javax.swing.JTextArea();
-        jScrollPane6 = new javax.swing.JScrollPane();
-        jTableTipodeServico = new javax.swing.JTable();
-        jBtnRemoverTipo = new javax.swing.JButton();
-        uJComboBoxClientes = new componentes.UJComboBox();
-        jComboBoxTipoServico = new componentes.UJComboBox();
-        jBtnAvancarPainelPecas = new javax.swing.JButton();
         jLabel8 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -318,15 +252,145 @@ public class CadastrarServicoTeste extends javax.swing.JFrame {
 
         jTabbedPaneServico.setBackground(new java.awt.Color(249, 238, 238));
         jTabbedPaneServico.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        jTabbedPaneServico.addAncestorListener(new javax.swing.event.AncestorListener() {
-            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
-            }
-            public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
-                jTabbedPaneServicoAncestorAdded(evt);
-            }
-            public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
+
+        jPanel7.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jPanel7.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel6.setText("Empresa:");
+        jPanel7.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 60, -1, 20));
+        jPanel7.add(txtTipoServico, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 270, 240, -1));
+
+        jLabel10.setText("Tipo:");
+        jPanel7.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 250, -1, -1));
+
+        jLabel12.setText("Data:");
+        jPanel7.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 60, 30, 20));
+        jPanel7.add(txtDataCadProduto, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 60, 120, -1));
+
+        jBtbNovoTipoServico.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/ferramenta.png"))); // NOI18N
+        jBtbNovoTipoServico.setText("Novo");
+        jBtbNovoTipoServico.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtbNovoTipoServicoActionPerformed(evt);
             }
         });
+        jPanel7.add(jBtbNovoTipoServico, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 270, -1, -1));
+
+        jBtnCadTipoServico.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/ok.png"))); // NOI18N
+        jBtnCadTipoServico.setText("Salvar");
+        jBtnCadTipoServico.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnCadTipoServicoActionPerformed(evt);
+            }
+        });
+        jPanel7.add(jBtnCadTipoServico, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 270, 90, -1));
+
+        jBtnCancelarCadTipoServico.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/cancelar.png"))); // NOI18N
+        jBtnCancelarCadTipoServico.setText("Cancelar");
+        jBtnCancelarCadTipoServico.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnCancelarCadTipoServicoActionPerformed(evt);
+            }
+        });
+        jPanel7.add(jBtnCancelarCadTipoServico, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 270, -1, -1));
+
+        jBtnAdicionarTipo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/add.png"))); // NOI18N
+        jBtnAdicionarTipo.setText("Inserir Tipo");
+        jBtnAdicionarTipo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnAdicionarTipoActionPerformed(evt);
+            }
+        });
+        jPanel7.add(jBtnAdicionarTipo, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 270, -1, -1));
+
+        jLabel5.setText("Descrição:");
+        jPanel7.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 100, -1, 20));
+
+        txtDescricao.setColumns(20);
+        txtDescricao.setLineWrap(true);
+        txtDescricao.setRows(5);
+        jScrollPane4.setViewportView(txtDescricao);
+
+        jPanel7.add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 130, 610, 100));
+
+        jTableTipodeServico.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Código", "Tipo Serviço"
+            }
+        ));
+        jTableTipodeServico.getTableHeader().setReorderingAllowed(false);
+        jScrollPane6.setViewportView(jTableTipodeServico);
+
+        jPanel7.add(jScrollPane6, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 310, 610, 140));
+
+        jBtnRemoverTipo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/excluir.png"))); // NOI18N
+        jBtnRemoverTipo.setText("Remover Tipo");
+
+        org.jdesktop.beansbinding.Binding binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, jTableTipodeServico, org.jdesktop.beansbinding.ELProperty.create("${selectedElement != null}"), jBtnRemoverTipo, org.jdesktop.beansbinding.BeanProperty.create("enabled"));
+        bindingGroup.addBinding(binding);
+
+        jBtnRemoverTipo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnRemoverTipoActionPerformed(evt);
+            }
+        });
+        jPanel7.add(jBtnRemoverTipo, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 460, -1, -1));
+
+        uJComboBoxClientes.setEditable(true);
+        uJComboBoxClientes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                uJComboBoxClientesActionPerformed(evt);
+            }
+        });
+        jPanel7.add(uJComboBoxClientes, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 60, 340, -1));
+
+        jComboBoxTipoServico.setEditable(true);
+        jComboBoxTipoServico.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jComboBoxTipoServicoItemStateChanged(evt);
+            }
+        });
+        jComboBoxTipoServico.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBoxTipoServicoActionPerformed(evt);
+            }
+        });
+        jPanel7.add(jComboBoxTipoServico, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 270, 260, -1));
+
+        jBtnAvancarPainelPecas.setText("Avançar");
+        jBtnAvancarPainelPecas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnAvancarPainelPecasActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanelServicoLayout = new javax.swing.GroupLayout(jPanelServico);
+        jPanelServico.setLayout(jPanelServicoLayout);
+        jPanelServicoLayout.setHorizontalGroup(
+            jPanelServicoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelServicoLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jBtnAvancarPainelPecas)
+                .addGap(133, 133, 133))
+            .addGroup(jPanelServicoLayout.createSequentialGroup()
+                .addGap(65, 65, 65)
+                .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, 678, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(82, Short.MAX_VALUE))
+        );
+        jPanelServicoLayout.setVerticalGroup(
+            jPanelServicoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelServicoLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, 500, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jBtnAvancarPainelPecas)
+                .addContainerGap())
+        );
+
+        jTabbedPaneServico.addTab("Serviço", new javax.swing.ImageIcon(getClass().getResource("/imagens/servicos.png")), jPanelServico); // NOI18N
 
         jPanel14.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         jPanel14.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -388,7 +452,7 @@ public class CadastrarServicoTeste extends javax.swing.JFrame {
         jBtnRemoverPeca.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/excluir.png"))); // NOI18N
         jBtnRemoverPeca.setText("Remover");
 
-        org.jdesktop.beansbinding.Binding binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, jTablePecas, org.jdesktop.beansbinding.ELProperty.create("${selectedElement != null}"), jBtnRemoverPeca, org.jdesktop.beansbinding.BeanProperty.create("enabled"));
+        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, jTablePecas, org.jdesktop.beansbinding.ELProperty.create("${selectedElement != null}"), jBtnRemoverPeca, org.jdesktop.beansbinding.BeanProperty.create("enabled"));
         bindingGroup.addBinding(binding);
 
         jBtnRemoverPeca.addActionListener(new java.awt.event.ActionListener() {
@@ -445,15 +509,13 @@ public class CadastrarServicoTeste extends javax.swing.JFrame {
         jPanelPecasLayout.setHorizontalGroup(
             jPanelPecasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelPecasLayout.createSequentialGroup()
+                .addGap(18, 18, 18)
                 .addGroup(jPanelPecasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanelPecasLayout.createSequentialGroup()
-                        .addGap(46, 46, 46)
                         .addComponent(jBtnVoltarPainelServico)
-                        .addGap(588, 588, 588)
+                        .addGap(616, 616, 616)
                         .addComponent(jBtnAvancarPainelEquipamento))
-                    .addGroup(jPanelPecasLayout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addComponent(jPanel14, javax.swing.GroupLayout.PREFERRED_SIZE, 765, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(jPanel14, javax.swing.GroupLayout.PREFERRED_SIZE, 765, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(42, Short.MAX_VALUE))
         );
         jPanelPecasLayout.setVerticalGroup(
@@ -465,7 +527,7 @@ public class CadastrarServicoTeste extends javax.swing.JFrame {
                 .addGroup(jPanelPecasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jBtnVoltarPainelServico)
                     .addComponent(jBtnAvancarPainelEquipamento))
-                .addContainerGap(59, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jTabbedPaneServico.addTab("Peças", new javax.swing.ImageIcon(getClass().getResource("/imagens/prod.png")), jPanelPecas); // NOI18N
@@ -728,9 +790,9 @@ public class CadastrarServicoTeste extends javax.swing.JFrame {
                 .addComponent(jBtbIncluirFunc)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(26, 26, 26)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jBtnRemoverFunc)
-                .addContainerGap(83, Short.MAX_VALUE))
+                .addContainerGap(47, Short.MAX_VALUE))
         );
 
         jBtnVoltarPainelEquipamento.setText("Voltar");
@@ -768,7 +830,7 @@ public class CadastrarServicoTeste extends javax.swing.JFrame {
             .addGroup(jPanelFuncionarioLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addGap(41, 41, 41)
                 .addGroup(jPanelFuncionarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jBtnVoltarPainelEquipamento)
                     .addComponent(jBtnAvancarPainelValorTotal))
@@ -851,173 +913,33 @@ public class CadastrarServicoTeste extends javax.swing.JFrame {
         jPanelValorTotalServicoLayout.setHorizontalGroup(
             jPanelValorTotalServicoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelValorTotalServicoLayout.createSequentialGroup()
-                .addContainerGap(52, Short.MAX_VALUE)
-                .addComponent(jBtnVoltarPainelFuncionario)
-                .addGap(551, 551, 551)
-                .addComponent(jBtnCadastrarServico3)
-                .addContainerGap(52, Short.MAX_VALUE))
-            .addGroup(jPanelValorTotalServicoLayout.createSequentialGroup()
                 .addGap(41, 41, 41)
-                .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(jPanelValorTotalServicoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanelValorTotalServicoLayout.createSequentialGroup()
+                        .addComponent(jBtnVoltarPainelFuncionario)
+                        .addGap(536, 536, 536)
+                        .addComponent(jBtnCadastrarServico3))
+                    .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(63, Short.MAX_VALUE))
         );
         jPanelValorTotalServicoLayout.setVerticalGroup(
             jPanelValorTotalServicoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelValorTotalServicoLayout.createSequentialGroup()
                 .addGap(65, 65, 65)
                 .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(162, 162, 162)
+                .addGap(128, 128, 128)
                 .addGroup(jPanelValorTotalServicoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jBtnCadastrarServico3)
                     .addComponent(jBtnVoltarPainelFuncionario))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(32, Short.MAX_VALUE))
         );
 
         jTabbedPaneServico.addTab("Valor", new javax.swing.ImageIcon(getClass().getResource("/imagens/dinheiro.png")), jPanelValorTotalServico); // NOI18N
 
-        jPanel7.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        jPanel7.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jLabel6.setText("Empresa:");
-        jPanel7.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 60, -1, 20));
-        jPanel7.add(txtTipoServico, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 270, 240, -1));
-
-        jLabel10.setText("Tipo:");
-        jPanel7.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 250, -1, -1));
-
-        jLabel12.setText("Data:");
-        jPanel7.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 60, 30, 20));
-        jPanel7.add(txtDataCadProduto, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 60, 120, -1));
-
-        jBtbNovoTipoServico.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/ferramenta.png"))); // NOI18N
-        jBtbNovoTipoServico.setText("Novo");
-        jBtbNovoTipoServico.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jBtbNovoTipoServicoActionPerformed(evt);
-            }
-        });
-        jPanel7.add(jBtbNovoTipoServico, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 270, -1, -1));
-
-        jBtnCadTipoServico.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/ok.png"))); // NOI18N
-        jBtnCadTipoServico.setText("Salvar");
-        jBtnCadTipoServico.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jBtnCadTipoServicoActionPerformed(evt);
-            }
-        });
-        jPanel7.add(jBtnCadTipoServico, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 270, 90, -1));
-
-        jBtnCancelarCadTipoServico.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/cancelar.png"))); // NOI18N
-        jBtnCancelarCadTipoServico.setText("Cancelar");
-        jBtnCancelarCadTipoServico.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jBtnCancelarCadTipoServicoActionPerformed(evt);
-            }
-        });
-        jPanel7.add(jBtnCancelarCadTipoServico, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 270, -1, -1));
-
-        jBtnAdicionarTipo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/add.png"))); // NOI18N
-        jBtnAdicionarTipo.setText("Inserir Tipo");
-        jBtnAdicionarTipo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jBtnAdicionarTipoActionPerformed(evt);
-            }
-        });
-        jPanel7.add(jBtnAdicionarTipo, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 270, -1, -1));
-
-        jLabel5.setText("Descrição:");
-        jPanel7.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 100, -1, 20));
-
-        txtDescricao.setColumns(20);
-        txtDescricao.setLineWrap(true);
-        txtDescricao.setRows(5);
-        jScrollPane4.setViewportView(txtDescricao);
-
-        jPanel7.add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 130, 610, 100));
-
-        jTableTipodeServico.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-                "Código", "Tipo Serviço"
-            }
-        ));
-        jTableTipodeServico.getTableHeader().setReorderingAllowed(false);
-        jScrollPane6.setViewportView(jTableTipodeServico);
-
-        jPanel7.add(jScrollPane6, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 310, 610, 140));
-
-        jBtnRemoverTipo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/excluir.png"))); // NOI18N
-        jBtnRemoverTipo.setText("Remover Tipo");
-
-        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, jTableTipodeServico, org.jdesktop.beansbinding.ELProperty.create("${selectedElement != null}"), jBtnRemoverTipo, org.jdesktop.beansbinding.BeanProperty.create("enabled"));
-        bindingGroup.addBinding(binding);
-
-        jBtnRemoverTipo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jBtnRemoverTipoActionPerformed(evt);
-            }
-        });
-        jPanel7.add(jBtnRemoverTipo, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 460, -1, -1));
-
-        uJComboBoxClientes.setEditable(true);
-        uJComboBoxClientes.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                uJComboBoxClientesActionPerformed(evt);
-            }
-        });
-        jPanel7.add(uJComboBoxClientes, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 60, 340, -1));
-
-        jComboBoxTipoServico.setEditable(true);
-        jComboBoxTipoServico.addItemListener(new java.awt.event.ItemListener() {
-            public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                jComboBoxTipoServicoItemStateChanged(evt);
-            }
-        });
-        jComboBoxTipoServico.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBoxTipoServicoActionPerformed(evt);
-            }
-        });
-        jPanel7.add(jComboBoxTipoServico, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 270, 260, -1));
-
-        jBtnAvancarPainelPecas.setText("Avançar");
-        jBtnAvancarPainelPecas.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jBtnAvancarPainelPecasActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout jPanelServicoLayout = new javax.swing.GroupLayout(jPanelServico);
-        jPanelServico.setLayout(jPanelServicoLayout);
-        jPanelServicoLayout.setHorizontalGroup(
-            jPanelServicoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelServicoLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jBtnAvancarPainelPecas)
-                .addGap(133, 133, 133))
-            .addGroup(jPanelServicoLayout.createSequentialGroup()
-                .addGap(65, 65, 65)
-                .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, 678, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(85, Short.MAX_VALUE))
-        );
-        jPanelServicoLayout.setVerticalGroup(
-            jPanelServicoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanelServicoLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, 500, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jBtnAvancarPainelPecas)
-                .addContainerGap())
-        );
-
-        jTabbedPaneServico.addTab("Serviço", new javax.swing.ImageIcon(getClass().getResource("/imagens/servicos.png")), jPanelServico); // NOI18N
-
-        jPanel6.add(jTabbedPaneServico, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 130, 830, 580));
+        jPanel6.add(jTabbedPaneServico, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 100, 830, 600));
 
         jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/leiaute/img3.png"))); // NOI18N
-        jPanel6.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -20, 850, 150));
+        jPanel6.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -30, 850, 940));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -1032,14 +954,12 @@ public class CadastrarServicoTeste extends javax.swing.JFrame {
 
         bindingGroup.bind();
 
-        setSize(new java.awt.Dimension(866, 777));
+        setSize(new java.awt.Dimension(866, 743));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jBtnAdicionarTipoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnAdicionarTipoActionPerformed
-if(VerificaCamposServico()== true){
         TabelaTipoServico();
-}
     }//GEN-LAST:event_jBtnAdicionarTipoActionPerformed
 
     private void jBtnRemoverTipoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnRemoverTipoActionPerformed
@@ -1063,9 +983,7 @@ if(VerificaCamposServico()== true){
     }//GEN-LAST:event_jBtnCancelarCadTipoServicoActionPerformed
 
     private void jBtnCadTipoServicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnCadTipoServicoActionPerformed
-if (txtTipoServico.getText().equals("")){
-    JOptionPane.showMessageDialog(null, "Campo vazio!");
-}else{
+
         TipoServico tServ = new TipoServico();
 
         tServ.setTipo(txtTipoServico.getText());
@@ -1084,7 +1002,6 @@ if (txtTipoServico.getText().equals("")){
         carregarComboTipoServico();
         
         jComboBoxTipoServico.setSelectedItem(tServ.getTipo());
-}
     }//GEN-LAST:event_jBtnCadTipoServicoActionPerformed
 
     private void jBtbNovoTipoServicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtbNovoTipoServicoActionPerformed
@@ -1099,9 +1016,7 @@ if (txtTipoServico.getText().equals("")){
     }//GEN-LAST:event_jBtbNovoTipoServicoActionPerformed
 
     private void jBtbIncluirPecaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtbIncluirPecaActionPerformed
-if(VerificaCamposPecas() == true){
         TabelaProduto();
-}
     }//GEN-LAST:event_jBtbIncluirPecaActionPerformed
 
     private void jBtnRemoverPecaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnRemoverPecaActionPerformed
@@ -1120,15 +1035,11 @@ if(VerificaCamposPecas() == true){
     }//GEN-LAST:event_jBtnRemoverPecaActionPerformed
 
     private void jBtnAvancarPainelPecasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnAvancarPainelPecasActionPerformed
-if (jTableTipodeServico.getRowCount() > 0){
         jTabbedPaneServico.setSelectedComponent(this.jPanelPecas);
-}      else{
-    JOptionPane.showMessageDialog(null, "É necessário inserir um registro na tabela!");
-}
     }//GEN-LAST:event_jBtnAvancarPainelPecasActionPerformed
 
     private void jBtnVoltarPainelServicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnVoltarPainelServicoActionPerformed
-        jTabbedPaneServico.setSelectedComponent(this.jPanelServico);
+        jTabbedPaneServico.setSelectedComponent(this.jPanelServico);       
     }//GEN-LAST:event_jBtnVoltarPainelServicoActionPerformed
 
     private void jBtnRemoveEquipamentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnRemoveEquipamentoActionPerformed
@@ -1183,7 +1094,7 @@ if (jTableTipodeServico.getRowCount() > 0){
     }//GEN-LAST:event_jBtnCalcularTotalServicoActionPerformed
 
     private void jBtnCadastrarServico3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnCadastrarServico3ActionPerformed
-if(VerificaCamposValor() == true){
+
         OrdemServico oS = new OrdemServico();
         DetServicoProduto dtServ = new DetServicoProduto();
         DetServicoEquipamento dtServEqui = new DetServicoEquipamento();
@@ -1242,7 +1153,6 @@ if(VerificaCamposValor() == true){
         JOptionPane.showMessageDialog(null, "Serviço finalizado com sucesso!");
         limparCampos();
 
-}
     }//GEN-LAST:event_jBtnCadastrarServico3ActionPerformed
 
     private void jComboBoxModeloEquipActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxModeloEquipActionPerformed
@@ -1250,19 +1160,11 @@ if(VerificaCamposValor() == true){
     }//GEN-LAST:event_jComboBoxModeloEquipActionPerformed
 
     private void jBtnAvancarPainelEquipamentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnAvancarPainelEquipamentoActionPerformed
-if (jTablePecas.getRowCount() > 0){
         jTabbedPaneServico.setSelectedComponent(this.jPanelEquipamento);
-}else{
-    JOptionPane.showMessageDialog(null, "É necessário inserir um registro na tabela!");
-}
     }//GEN-LAST:event_jBtnAvancarPainelEquipamentoActionPerformed
 
     private void jBtnAvancarPainelFuncionarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnAvancarPainelFuncionarioActionPerformed
-        if (jTableEquipamento.getRowCount() > 0){
         jTabbedPaneServico.setSelectedComponent(this.jPanelFuncionario);
-        }else{
-    JOptionPane.showMessageDialog(null, "É necessário inserir um registro na tabela!");
-}
     }//GEN-LAST:event_jBtnAvancarPainelFuncionarioActionPerformed
 
     private void jBtnVoltarPainelPecasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnVoltarPainelPecasActionPerformed
@@ -1274,11 +1176,7 @@ if (jTablePecas.getRowCount() > 0){
     }//GEN-LAST:event_jBtnVoltarPainelEquipamentoActionPerformed
 
     private void jBtnAvancarPainelValorTotalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnAvancarPainelValorTotalActionPerformed
-if (jTableFuncionario.getRowCount() > 0){
         jTabbedPaneServico.setSelectedComponent(this.jPanelValorTotalServico);
-        }else{
-    JOptionPane.showMessageDialog(null, "É necessário inserir um registro na tabela!");
-}
     }//GEN-LAST:event_jBtnAvancarPainelValorTotalActionPerformed
 
     private void jBtnVoltarPainelFuncionarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnVoltarPainelFuncionarioActionPerformed
@@ -1383,10 +1281,6 @@ if (jTableFuncionario.getRowCount() > 0){
             tipoServico = jComboBoxTipoServico.getSelectedItem().toString();
         }
     }//GEN-LAST:event_jComboBoxTipoServicoItemStateChanged
-
-    private void jTabbedPaneServicoAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_jTabbedPaneServicoAncestorAdded
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTabbedPaneServicoAncestorAdded
 
     private void limparCampos() {
 

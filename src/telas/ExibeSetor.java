@@ -79,9 +79,7 @@ public class ExibeSetor extends javax.swing.JFrame {
                 jTableListarSetores.setAutoResizeMode(jTableListarSetores.AUTO_RESIZE_OFF);
                 jTableListarSetores.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
             }
-
-            
-            
+                  
         } catch (SQLException ex) {
             Logger.getLogger(ExibeModelo.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -101,7 +99,6 @@ public class ExibeSetor extends javax.swing.JFrame {
         jBtnCadastrarSetor = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
-        jBtnExcluirSetor = new javax.swing.JButton();
         jBtnSair = new javax.swing.JButton();
         jBtnEditarSetor = new javax.swing.JButton();
         txtSetor = new javax.swing.JTextField();
@@ -146,7 +143,7 @@ public class ExibeSetor extends javax.swing.JFrame {
             jTableListarSetores.getColumnModel().getColumn(1).setPreferredWidth(50);
         }
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 390, 473, 260));
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 320, 473, 260));
 
         jBtnAlterarSetor.setText("Alterar");
         jBtnAlterarSetor.addActionListener(new java.awt.event.ActionListener() {
@@ -154,7 +151,7 @@ public class ExibeSetor extends javax.swing.JFrame {
                 jBtnAlterarSetorActionPerformed(evt);
             }
         });
-        jPanel1.add(jBtnAlterarSetor, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 280, -1, -1));
+        jPanel1.add(jBtnAlterarSetor, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 230, -1, -1));
 
         jBtnNovoSetor.setText("Novo");
         jBtnNovoSetor.addActionListener(new java.awt.event.ActionListener() {
@@ -162,7 +159,7 @@ public class ExibeSetor extends javax.swing.JFrame {
                 jBtnNovoSetorActionPerformed(evt);
             }
         });
-        jPanel1.add(jBtnNovoSetor, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 240, -1, -1));
+        jPanel1.add(jBtnNovoSetor, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 190, -1, -1));
 
         jBtnCadastrarSetor.setText("Cadastrar");
         jBtnCadastrarSetor.addActionListener(new java.awt.event.ActionListener() {
@@ -170,23 +167,15 @@ public class ExibeSetor extends javax.swing.JFrame {
                 jBtnCadastrarSetorActionPerformed(evt);
             }
         });
-        jPanel1.add(jBtnCadastrarSetor, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 240, -1, -1));
+        jPanel1.add(jBtnCadastrarSetor, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 190, -1, -1));
 
-        jLabel3.setText("Setor:");
-        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 180, -1, -1));
+        jLabel3.setText("Segmento:");
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 130, -1, -1));
 
         jLabel1.setFont(new java.awt.Font("Raavi", 1, 18)); // NOI18N
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/setor.png"))); // NOI18N
         jLabel1.setText("Setores");
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 40, -1, -1));
-
-        jBtnExcluirSetor.setText("Excluir");
-        jBtnExcluirSetor.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jBtnExcluirSetorActionPerformed(evt);
-            }
-        });
-        jPanel1.add(jBtnExcluirSetor, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 310, -1, -1));
 
         jBtnSair.setText("Sair");
         jBtnSair.addActionListener(new java.awt.event.ActionListener() {
@@ -194,7 +183,7 @@ public class ExibeSetor extends javax.swing.JFrame {
                 jBtnSairActionPerformed(evt);
             }
         });
-        jPanel1.add(jBtnSair, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 620, -1, -1));
+        jPanel1.add(jBtnSair, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 600, -1, -1));
 
         jBtnEditarSetor.setText("Editar");
 
@@ -206,10 +195,10 @@ public class ExibeSetor extends javax.swing.JFrame {
                 jBtnEditarSetorActionPerformed(evt);
             }
         });
-        jPanel1.add(jBtnEditarSetor, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 280, -1, -1));
+        jPanel1.add(jBtnEditarSetor, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 230, -1, -1));
 
         txtSetor.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jPanel1.add(txtSetor, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 180, 410, -1));
+        jPanel1.add(txtSetor, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 130, 410, -1));
 
         jBtnCancelarAlterarSetor.setText("Cancelar");
         jBtnCancelarAlterarSetor.addActionListener(new java.awt.event.ActionListener() {
@@ -217,7 +206,7 @@ public class ExibeSetor extends javax.swing.JFrame {
                 jBtnCancelarAlterarSetorActionPerformed(evt);
             }
         });
-        jPanel1.add(jBtnCancelarAlterarSetor, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 280, -1, -1));
+        jPanel1.add(jBtnCancelarAlterarSetor, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 230, -1, -1));
 
         jBtnCancelarCadSetor.setText("Cancelar");
         jBtnCancelarCadSetor.addActionListener(new java.awt.event.ActionListener() {
@@ -225,20 +214,20 @@ public class ExibeSetor extends javax.swing.JFrame {
                 jBtnCancelarCadSetorActionPerformed(evt);
             }
         });
-        jPanel1.add(jBtnCancelarCadSetor, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 240, -1, -1));
+        jPanel1.add(jBtnCancelarCadSetor, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 190, -1, -1));
 
         jLabel2.setText("Pesquisar:");
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 350, -1, -1));
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 280, -1, -1));
 
         txtBuscar.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 txtBuscarKeyReleased(evt);
             }
         });
-        jPanel1.add(txtBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 350, 421, -1));
+        jPanel1.add(txtBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 280, 410, -1));
 
-        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/leiaute/img3.png"))); // NOI18N
-        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 850, 140));
+        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/leiaute/img3-5.png"))); // NOI18N
+        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -290, 670, 670));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -268,17 +257,11 @@ public class ExibeSetor extends javax.swing.JFrame {
         SetorDAO.CadSetor(setor);
         limparCampos();
         TabelaSetor("SELECT * FROM tabsetor;");
-        jBtnCadastrarSetor.setVisible(false);
-        jBtnCancelarCadSetor.setVisible(false);
+        ocultaCampos();
+        jBtnEditarSetor.setEnabled(true);
+        jTableListarSetores.setEnabled(true);
         jBtnNovoSetor.setVisible(true);
     }//GEN-LAST:event_jBtnCadastrarSetorActionPerformed
-
-    private void jBtnExcluirSetorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnExcluirSetorActionPerformed
-
-        SetorDAO.ExcluirSetor(indice);  
-        TabelaSetor("SELECT * FROM tabsetor;");
-        limparCampos();
-    }//GEN-LAST:event_jBtnExcluirSetorActionPerformed
 
     private void jBtnAlterarSetorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnAlterarSetorActionPerformed
         
@@ -290,6 +273,7 @@ public class ExibeSetor extends javax.swing.JFrame {
         jBtnAlterarSetor.setVisible(false);
         jBtnCancelarAlterarSetor.setVisible(false);
         jBtnEditarSetor.setVisible(true);
+        jBtnNovoSetor.setEnabled(true);
         
     }//GEN-LAST:event_jBtnAlterarSetorActionPerformed
 
@@ -302,13 +286,13 @@ public class ExibeSetor extends javax.swing.JFrame {
     }//GEN-LAST:event_jTableListarSetoresMouseClicked
 
     private void jBtnNovoSetorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnNovoSetorActionPerformed
-        
         txtSetor.setText("");
         txtSetor.setEnabled(true);
         jBtnCadastrarSetor.setVisible(true);
         jBtnCancelarCadSetor.setVisible(true);
-        jBtnNovoSetor.setVisible(false);
-        
+        jBtnNovoSetor.setVisible(false);  
+        jBtnEditarSetor.setEnabled(false);
+        jTableListarSetores.setEnabled(false);
     }//GEN-LAST:event_jBtnNovoSetorActionPerformed
 
     private void jBtnEditarSetorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnEditarSetorActionPerformed
@@ -317,14 +301,16 @@ public class ExibeSetor extends javax.swing.JFrame {
         jBtnEditarSetor.setVisible(false);
         jBtnCancelarAlterarSetor.setVisible(true);
         jBtnAlterarSetor.setVisible(true);
+        jBtnNovoSetor.setEnabled(false);
     }//GEN-LAST:event_jBtnEditarSetorActionPerformed
 
     private void jBtnCancelarCadSetorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnCancelarCadSetorActionPerformed
-        
         limparCampos();
         jBtnCancelarCadSetor.setVisible(false);
         jBtnCadastrarSetor.setVisible(false);
         jBtnNovoSetor.setVisible(true);
+        jBtnEditarSetor.setEnabled(true);
+        jTableListarSetores.setEnabled(true);
     }//GEN-LAST:event_jBtnCancelarCadSetorActionPerformed
 
     private void jBtnCancelarAlterarSetorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnCancelarAlterarSetorActionPerformed
@@ -334,6 +320,7 @@ public class ExibeSetor extends javax.swing.JFrame {
         jBtnAlterarSetor.setVisible(false);
         jBtnCancelarAlterarSetor.setVisible(false);
         jBtnEditarSetor.setVisible(true);
+        jBtnNovoSetor.setEnabled(true);
         
     }//GEN-LAST:event_jBtnCancelarAlterarSetorActionPerformed
 
@@ -356,7 +343,6 @@ public class ExibeSetor extends javax.swing.JFrame {
     private javax.swing.JButton jBtnCancelarAlterarSetor;
     private javax.swing.JButton jBtnCancelarCadSetor;
     private javax.swing.JButton jBtnEditarSetor;
-    private javax.swing.JButton jBtnExcluirSetor;
     private javax.swing.JButton jBtnNovoSetor;
     private javax.swing.JButton jBtnSair;
     private javax.swing.JButton jButton2;
