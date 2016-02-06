@@ -77,7 +77,7 @@ public class DetalharRotina extends javax.swing.JFrame {
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel4.setText("Código:");
-        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 100, -1, 20));
+        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 130, -1, 20));
 
         jLabel1.setFont(new java.awt.Font("Raavi", 1, 18)); // NOI18N
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/rotinacont.png"))); // NOI18N
@@ -86,25 +86,25 @@ public class DetalharRotina extends javax.swing.JFrame {
 
         jLabCodigo.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabCodigo.setText("codigo");
-        jPanel1.add(jLabCodigo, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 100, -1, 20));
+        jPanel1.add(jLabCodigo, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 130, -1, 20));
 
         jLabEmpresa.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabEmpresa.setText("empresa");
-        jPanel1.add(jLabEmpresa, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 130, 176, 20));
+        jPanel1.add(jLabEmpresa, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 160, 176, 20));
 
         txtDescricaoLembrete.setEditable(false);
         txtDescricaoLembrete.setColumns(20);
         txtDescricaoLembrete.setRows(5);
         jScrollPane1.setViewportView(txtDescricaoLembrete);
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 240, 342, 195));
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 270, 342, 195));
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel6.setText("Descrição:");
-        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 210, -1, -1));
+        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 240, -1, -1));
 
         jLbDataLembrete.setText("Exibe Data");
-        jPanel1.add(jLbDataLembrete, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 160, 130, 23));
+        jPanel1.add(jLbDataLembrete, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 190, 130, 23));
 
         jBtnExcluirRotinaContato.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/excluir.png"))); // NOI18N
         jBtnExcluirRotinaContato.setText("Excluir");
@@ -113,7 +113,7 @@ public class DetalharRotina extends javax.swing.JFrame {
                 jBtnExcluirRotinaContatoActionPerformed(evt);
             }
         });
-        jPanel1.add(jBtnExcluirRotinaContato, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 440, -1, -1));
+        jPanel1.add(jBtnExcluirRotinaContato, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 470, -1, -1));
 
         jBtnSairDetRotina.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/sair.gif"))); // NOI18N
         jBtnSairDetRotina.setText("Sair");
@@ -122,23 +122,23 @@ public class DetalharRotina extends javax.swing.JFrame {
                 jBtnSairDetRotinaActionPerformed(evt);
             }
         });
-        jPanel1.add(jBtnSairDetRotina, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 490, 83, -1));
+        jPanel1.add(jBtnSairDetRotina, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 520, 83, -1));
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel5.setText("Empresa:");
-        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 130, -1, -1));
+        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 160, -1, -1));
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel2.setText("Data:");
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 160, -1, 20));
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 190, -1, 20));
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel3.setText("Hora:");
-        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 160, -1, 20));
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 190, -1, 20));
 
         jLbHoraLembrete.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLbHoraLembrete.setText("Exibe Hora");
-        jPanel1.add(jLbHoraLembrete, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 160, 95, 20));
+        jPanel1.add(jLbHoraLembrete, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 190, 95, 20));
 
         jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/leiaute/img2.png"))); // NOI18N
         jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 670, 110));
@@ -153,7 +153,7 @@ public class DetalharRotina extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 538, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addGap(0, 69, Short.MAX_VALUE))
         );
 
         pack();
