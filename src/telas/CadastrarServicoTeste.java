@@ -201,6 +201,30 @@ public class CadastrarServicoTeste extends javax.swing.JFrame {
         }
         return valida;
     }
+    
+    
+    private boolean VerificaCamposServico(){
+        boolean valida = true;
+                
+        if (txtDataCadProduto.getDate() == null) {
+            JOptionPane.showMessageDialog(null, "Campo(s) Vazio(s)!");
+            valida = false;
+            return valida;
+        }
+        
+        if (txtDescricao.getText().equals("")) {
+            JOptionPane.showMessageDialog(null, "Campo(s) Vazio(s)!");
+            valida = false;
+            return valida;
+        }
+        
+        if (jComboBoxTipoServico.getSelectedIndex() == 0){
+            JOptionPane.showMessageDialog(null, "Selecione um item!");
+            valida = false;
+            return valida;
+        }
+        return valida;
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -1013,7 +1037,9 @@ public class CadastrarServicoTeste extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jBtnAdicionarTipoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnAdicionarTipoActionPerformed
+if(VerificaCamposServico()== true){
         TabelaTipoServico();
+}
     }//GEN-LAST:event_jBtnAdicionarTipoActionPerformed
 
     private void jBtnRemoverTipoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnRemoverTipoActionPerformed
@@ -1037,7 +1063,9 @@ public class CadastrarServicoTeste extends javax.swing.JFrame {
     }//GEN-LAST:event_jBtnCancelarCadTipoServicoActionPerformed
 
     private void jBtnCadTipoServicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnCadTipoServicoActionPerformed
-
+if (txtTipoServico.getText().equals("")){
+    JOptionPane.showMessageDialog(null, "Campo vazio!");
+}else{
         TipoServico tServ = new TipoServico();
 
         tServ.setTipo(txtTipoServico.getText());
@@ -1056,6 +1084,7 @@ public class CadastrarServicoTeste extends javax.swing.JFrame {
         carregarComboTipoServico();
         
         jComboBoxTipoServico.setSelectedItem(tServ.getTipo());
+}
     }//GEN-LAST:event_jBtnCadTipoServicoActionPerformed
 
     private void jBtbNovoTipoServicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtbNovoTipoServicoActionPerformed
@@ -1091,7 +1120,11 @@ if(VerificaCamposPecas() == true){
     }//GEN-LAST:event_jBtnRemoverPecaActionPerformed
 
     private void jBtnAvancarPainelPecasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnAvancarPainelPecasActionPerformed
+if (jTableTipodeServico.getRowCount() > 0){
         jTabbedPaneServico.setSelectedComponent(this.jPanelPecas);
+}      else{
+    JOptionPane.showMessageDialog(null, "É necessário inserir um registro na tabela!");
+}
     }//GEN-LAST:event_jBtnAvancarPainelPecasActionPerformed
 
     private void jBtnVoltarPainelServicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnVoltarPainelServicoActionPerformed
