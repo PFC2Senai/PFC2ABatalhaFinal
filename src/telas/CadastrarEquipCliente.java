@@ -274,8 +274,8 @@ public class CadastrarEquipCliente extends javax.swing.JFrame {
         jLabel1.setText("Cadastrar Equipamento do Cliente");
         jPanel5.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 70, 300, 23));
 
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/leiaute/img3-5.png"))); // NOI18N
-        jPanel5.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(-10, 0, 850, 660));
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/leiaute/img3.png"))); // NOI18N
+        jPanel5.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -10, 850, 140));
 
         getContentPane().add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 610));
 

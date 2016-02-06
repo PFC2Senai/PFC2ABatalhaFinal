@@ -1000,7 +1000,7 @@ public class CadastrarServicoTeste extends javax.swing.JFrame {
             .addGroup(jPanelServicoLayout.createSequentialGroup()
                 .addGap(65, 65, 65)
                 .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, 678, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(82, Short.MAX_VALUE))
+                .addContainerGap(85, Short.MAX_VALUE))
         );
         jPanelServicoLayout.setVerticalGroup(
             jPanelServicoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1014,10 +1014,10 @@ public class CadastrarServicoTeste extends javax.swing.JFrame {
 
         jTabbedPaneServico.addTab("Serviço", new javax.swing.ImageIcon(getClass().getResource("/imagens/servicos.png")), jPanelServico); // NOI18N
 
-        jPanel6.add(jTabbedPaneServico, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 100, 830, 580));
+        jPanel6.add(jTabbedPaneServico, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 130, 830, 580));
 
         jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/leiaute/img3.png"))); // NOI18N
-        jPanel6.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -30, 850, 940));
+        jPanel6.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -20, 850, 150));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -1032,7 +1032,7 @@ public class CadastrarServicoTeste extends javax.swing.JFrame {
 
         bindingGroup.bind();
 
-        setSize(new java.awt.Dimension(866, 743));
+        setSize(new java.awt.Dimension(866, 777));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 

@@ -748,12 +748,12 @@
         <Component class="javax.swing.JLabel" name="jLabel8">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/leiaute/img3-5.png"/>
+              <Image iconType="3" name="/leiaute/img3.png"/>
             </Property>
           </Properties>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="0" y="0" width="850" height="670"/>
+              <AbsoluteConstraints x="0" y="-10" width="850" height="140"/>
             </Constraint>
           </Constraints>
         </Component>

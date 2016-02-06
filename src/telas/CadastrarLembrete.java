@@ -114,10 +114,10 @@ public class CadastrarLembrete extends javax.swing.JFrame {
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 40, -1, -1));
 
         jLabNCodigo.setText("Código:");
-        jPanel1.add(jLabNCodigo, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 100, -1, -1));
+        jPanel1.add(jLabNCodigo, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 110, -1, -1));
 
         jLabCodigo.setText("codigo");
-        jPanel1.add(jLabCodigo, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 100, -1, -1));
+        jPanel1.add(jLabCodigo, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 110, -1, -1));
 
         jLabNomeEmpresa.setText("Empresa:");
         jPanel1.add(jLabNomeEmpresa, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 130, -1, 20));

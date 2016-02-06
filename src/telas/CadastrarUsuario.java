@@ -58,13 +58,13 @@ public class CadastrarUsuario extends javax.swing.JFrame {
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 50, 190, 30));
 
         jLabel3.setText("Nome:");
-        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 100, -1, 20));
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 120, -1, 20));
 
         jLabel4.setText("Senha:");
-        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 140, -1, 20));
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 160, -1, 20));
 
         jLabel5.setText("Confirmar senha:");
-        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 170, -1, 20));
+        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 190, -1, 20));
 
         jTextNome.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jTextNome.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -72,13 +72,13 @@ public class CadastrarUsuario extends javax.swing.JFrame {
                 jTextNomeKeyTyped(evt);
             }
         });
-        getContentPane().add(jTextNome, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 100, 216, 20));
+        getContentPane().add(jTextNome, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 120, 216, 20));
 
         jLabel6.setText("Tipo de Usuário:");
-        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 210, -1, -1));
+        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 230, -1, -1));
 
         jComboTipoUser.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Selecione", "Administrador", "Funcionário" }));
-        getContentPane().add(jComboTipoUser, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 210, -1, -1));
+        getContentPane().add(jComboTipoUser, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 230, -1, -1));
 
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/disk.png"))); // NOI18N
         jButton1.setText("Cadastrar");
@@ -87,7 +87,7 @@ public class CadastrarUsuario extends javax.swing.JFrame {
                 jButton1ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(255, 257, -1, -1));
+        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 280, -1, -1));
 
         jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/stop2.png"))); // NOI18N
         jButton2.setText("Cancelar");
@@ -96,15 +96,15 @@ public class CadastrarUsuario extends javax.swing.JFrame {
                 jButton2ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 260, -1, -1));
+        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 280, -1, -1));
 
         jButton3.setText("Limpar");
-        getContentPane().add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(166, 257, -1, -1));
-        getContentPane().add(jPasswordSenha, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 130, 216, 20));
-        getContentPane().add(jPasswordConfirmaSenha, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 170, 216, 20));
+        getContentPane().add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 280, -1, -1));
+        getContentPane().add(jPasswordSenha, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 150, 216, 20));
+        getContentPane().add(jPasswordConfirmaSenha, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 190, 216, 20));
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/leiaute/img1.png"))); // NOI18N
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 670, 360));
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 680, 100));
 
         pack();
         setLocationRelativeTo(null);
