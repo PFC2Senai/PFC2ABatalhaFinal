@@ -162,9 +162,9 @@ public class ExibeDetVenda extends javax.swing.JFrame {
         jTextCodCliente.setOpaque(true);
         jTextCodCliente.setBackground(new Color(255, 255, 255));
         jTextCodCliente.setBorder(new LineBorder(Color.BLACK));
-        jTextCodServ.setOpaque(true);
-        jTextCodServ.setBackground(new Color(255, 255, 255));
-        jTextCodServ.setBorder(new LineBorder(Color.BLACK));   
+        //jTextCodServ.setOpaque(true);
+        //jTextCodServ.setBackground(new Color(255, 255, 255));
+        //jTextCodServ.setBorder(new LineBorder(Color.BLACK));   
         jTextDataVenda.setOpaque(true);
         jTextDataVenda.setBackground(new Color(255, 255, 255));
         jTextDataVenda.setBorder(new LineBorder(Color.BLACK));  
@@ -431,7 +431,7 @@ public class ExibeDetVenda extends javax.swing.JFrame {
 
     private void jButtonAr1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAr1ActionPerformed
         EditarVendas();
-        jTextCodServ.setEditable(true);
+ //       jTextCodServ.setEditable(true);
         jTextCodCliente.setEditable(true);
         jTextDataVenda.setEditable(true);
         jTextHoraVenda.setEditable(true);
@@ -458,7 +458,7 @@ public class ExibeDetVenda extends javax.swing.JFrame {
 
         Vendas v = new Vendas();
         v.setClienteIdcliente(Integer.parseInt(jTextCodCliente.getText()));
-        v.setIdOrdemServico(Integer.parseInt(jTextCodServ.getText()));
+        //v.setIdOrdemServico(Integer.parseInt(jTextCodServ.getText()));
         v.setDataVenda(Date.valueOf(jTextDataVenda.getText()));
         v.setHora(Time.valueOf(jTextHoraVenda.getText()));
         v.setTotal(Double.parseDouble(jTextTotalVenda.getText()));

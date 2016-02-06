@@ -98,6 +98,10 @@ public class CadastrarSetor extends javax.swing.JFrame {
 
     private void jBtnCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnCadastrarActionPerformed
 
+        if (txtSetor.getText().equals("")){
+            JOptionPane.showMessageDialog(null, "Campo vazio!");
+        }   else{
+        
         if (SetorDAO.VerificarSetor(txtSetor.getText()) == false) {
             Setor setor = new Setor();
             setor.setSetor(txtSetor.getText());
@@ -107,6 +111,7 @@ public class CadastrarSetor extends javax.swing.JFrame {
 
         } else {
             JOptionPane.showMessageDialog(this, "Setor ja cadastrado");
+        }
         }
     }//GEN-LAST:event_jBtnCadastrarActionPerformed
 
