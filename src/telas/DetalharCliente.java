@@ -615,7 +615,7 @@ public class DetalharCliente extends javax.swing.JFrame {
         });
         jPanel2.add(jComboBoxSetores, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 70, 260, 20));
 
-        jPanelDadosCliente.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 50, 840, 110));
+        jPanelDadosCliente.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 10, 840, 110));
 
         jPanel3.setBackground(new java.awt.Color(223, 237, 253));
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Endereço", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 2, 11))); // NOI18N
@@ -717,7 +717,7 @@ public class DetalharCliente extends javax.swing.JFrame {
         });
         jPanel3.add(jBtnCarregaCep, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 30, -1, -1));
 
-        jPanelDadosCliente.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 170, 840, 130));
+        jPanelDadosCliente.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 130, 840, 130));
 
         jPanel4.setBackground(new java.awt.Color(223, 237, 253));
         jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Contatos", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 2, 11))); // NOI18N
@@ -807,7 +807,7 @@ public class DetalharCliente extends javax.swing.JFrame {
                 .addContainerGap(17, Short.MAX_VALUE))
         );
 
-        jPanelDadosCliente.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 320, 840, 190));
+        jPanelDadosCliente.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 280, 840, 190));
 
         jBtnIrParaEquipamento.setText("Próximo");
         jBtnIrParaEquipamento.addActionListener(new java.awt.event.ActionListener() {
@@ -815,7 +815,7 @@ public class DetalharCliente extends javax.swing.JFrame {
                 jBtnIrParaEquipamentoActionPerformed(evt);
             }
         });
-        jPanelDadosCliente.add(jBtnIrParaEquipamento, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 510, -1, -1));
+        jPanelDadosCliente.add(jBtnIrParaEquipamento, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 470, -1, -1));
 
         jTabbedPane1.addTab("Dados do Cliente", new javax.swing.ImageIcon(getClass().getResource("/imagens/cliente3.png")), jPanelDadosCliente); // NOI18N
 
@@ -927,7 +927,7 @@ public class DetalharCliente extends javax.swing.JFrame {
                 .addGroup(jPanelEquipamentoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jBtnIrParaLembrete)
                     .addComponent(jBtnVoltarParaDadosCli))
-                .addContainerGap(104, Short.MAX_VALUE))
+                .addContainerGap(14, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Equipamentos do Cliente", new javax.swing.ImageIcon(getClass().getResource("/imagens/maquina02.png")), jPanelEquipamento); // NOI18N
@@ -1068,7 +1068,7 @@ public class DetalharCliente extends javax.swing.JFrame {
                 .addGroup(jPanelLembreteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jBtnVoltarParaEquipamento)
                     .addComponent(jBtnIrParaRotina))
-                .addContainerGap(122, Short.MAX_VALUE))
+                .addContainerGap(32, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Lembrete", new javax.swing.ImageIcon(getClass().getResource("/imagens/lembrete1.png")), jPanelLembrete); // NOI18N
@@ -1191,15 +1191,15 @@ public class DetalharCliente extends javax.swing.JFrame {
                         .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jBtnVoltarParaLembrete)
-                .addContainerGap(126, Short.MAX_VALUE))
+                .addContainerGap(36, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Rotina de Contato", new javax.swing.ImageIcon(getClass().getResource("/imagens/rotinacont.png")), jPanelRotinaContato); // NOI18N
 
-        getContentPane().add(jTabbedPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 130, 840, 630));
+        getContentPane().add(jTabbedPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 120, 840, 540));
 
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/leiaute/img3.png"))); // NOI18N
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -10, 860, 900));
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/leiaute/img3-5.png"))); // NOI18N
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -120, 860, 900));
 
         bindingGroup.bind();
 
