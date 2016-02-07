@@ -76,7 +76,7 @@ public class ExibeFabricante extends javax.swing.JFrame {
             }
             
         } catch (SQLException ex) {
-            Logger.getLogger(ExibeModelo.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ExibeFabricante.class.getName()).log(Level.SEVERE, null, ex);
         }             
     }
 
