@@ -19,10 +19,9 @@ import javax.swing.ListSelectionModel;
  */
 public class Segmento extends javax.swing.JFrame {
 
-    
-    Statement stmt ;
+    Statement stmt;
     private static int indice;
-    
+
     public Segmento() {
         initComponents();
         TabelaSetor("SELECT * FROM tabsetor;");
@@ -42,18 +41,18 @@ public class Segmento extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTableListarSetores = new javax.swing.JTable();
-        jBtnAlterarSetor = new javax.swing.JButton();
-        jBtnNovoSetor = new javax.swing.JButton();
-        jBtnCadastrarSetor = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         jBtnSair = new javax.swing.JButton();
-        jBtnEditarSetor = new javax.swing.JButton();
         txtSetor = new javax.swing.JTextField();
-        jBtnCancelarAlterarSetor = new javax.swing.JButton();
-        jBtnCancelarCadSetor = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         txtBuscar = new javax.swing.JTextField();
+        jBtnCancelarCadSegmento = new javax.swing.JButton();
+        jBtnCadastrarSegmento = new javax.swing.JButton();
+        jBtnNovoSegmento = new javax.swing.JButton();
+        jBtnEditarSegmento = new javax.swing.JButton();
+        jBtnCancelarAlterarSegmento = new javax.swing.JButton();
+        jBtnAlterarSegmento = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -87,30 +86,6 @@ public class Segmento extends javax.swing.JFrame {
 
         jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 320, 473, 260));
 
-        jBtnAlterarSetor.setText("Alterar");
-        jBtnAlterarSetor.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jBtnAlterarSetorActionPerformed(evt);
-            }
-        });
-        jPanel1.add(jBtnAlterarSetor, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 230, -1, -1));
-
-        jBtnNovoSetor.setText("Novo");
-        jBtnNovoSetor.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jBtnNovoSetorActionPerformed(evt);
-            }
-        });
-        jPanel1.add(jBtnNovoSetor, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 190, -1, -1));
-
-        jBtnCadastrarSetor.setText("Cadastrar");
-        jBtnCadastrarSetor.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jBtnCadastrarSetorActionPerformed(evt);
-            }
-        });
-        jPanel1.add(jBtnCadastrarSetor, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 190, -1, -1));
-
         jLabel3.setText("Segmento:");
         jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 130, -1, -1));
 
@@ -127,36 +102,8 @@ public class Segmento extends javax.swing.JFrame {
         });
         jPanel1.add(jBtnSair, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 590, -1, -1));
 
-        jBtnEditarSetor.setText("Editar");
-
-        org.jdesktop.beansbinding.Binding binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, jTableListarSetores, org.jdesktop.beansbinding.ELProperty.create("${selectedElement !=null}"), jBtnEditarSetor, org.jdesktop.beansbinding.BeanProperty.create("enabled"));
-        bindingGroup.addBinding(binding);
-
-        jBtnEditarSetor.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jBtnEditarSetorActionPerformed(evt);
-            }
-        });
-        jPanel1.add(jBtnEditarSetor, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 230, -1, -1));
-
         txtSetor.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jPanel1.add(txtSetor, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 130, 410, -1));
-
-        jBtnCancelarAlterarSetor.setText("Cancelar");
-        jBtnCancelarAlterarSetor.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jBtnCancelarAlterarSetorActionPerformed(evt);
-            }
-        });
-        jPanel1.add(jBtnCancelarAlterarSetor, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 230, -1, -1));
-
-        jBtnCancelarCadSetor.setText("Cancelar");
-        jBtnCancelarCadSetor.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jBtnCancelarCadSetorActionPerformed(evt);
-            }
-        });
-        jPanel1.add(jBtnCancelarCadSetor, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 190, -1, -1));
 
         jLabel2.setText("Pesquisar:");
         jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 280, -1, -1));
@@ -167,6 +114,60 @@ public class Segmento extends javax.swing.JFrame {
             }
         });
         jPanel1.add(txtBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 280, 410, -1));
+
+        jBtnCancelarCadSegmento.setText("Cancelar");
+        jBtnCancelarCadSegmento.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnCancelarCadSegmentoActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jBtnCancelarCadSegmento, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 180, -1, -1));
+
+        jBtnCadastrarSegmento.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/disk.png"))); // NOI18N
+        jBtnCadastrarSegmento.setText("Cadastrar");
+        jBtnCadastrarSegmento.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnCadastrarSegmentoActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jBtnCadastrarSegmento, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 180, -1, -1));
+
+        jBtnNovoSegmento.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/add.png"))); // NOI18N
+        jBtnNovoSegmento.setText("Novo");
+        jBtnNovoSegmento.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnNovoSegmentoActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jBtnNovoSegmento, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 180, -1, -1));
+
+        jBtnEditarSegmento.setText("Editar");
+
+        org.jdesktop.beansbinding.Binding binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, jTableListarSetores, org.jdesktop.beansbinding.ELProperty.create("${selectedElement != null}"), jBtnEditarSegmento, org.jdesktop.beansbinding.BeanProperty.create("enabled"));
+        bindingGroup.addBinding(binding);
+
+        jBtnEditarSegmento.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnEditarSegmentoActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jBtnEditarSegmento, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 210, -1, -1));
+
+        jBtnCancelarAlterarSegmento.setText("Cancelar");
+        jBtnCancelarAlterarSegmento.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnCancelarAlterarSegmentoActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jBtnCancelarAlterarSegmento, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 210, -1, -1));
+
+        jBtnAlterarSegmento.setText("Alterar");
+        jBtnAlterarSegmento.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnAlterarSegmentoActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jBtnAlterarSegmento, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 210, -1, -1));
 
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/leiaute/img3-5.png"))); // NOI18N
         jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -290, 670, 670));
@@ -190,102 +191,106 @@ public class Segmento extends javax.swing.JFrame {
 
     private void jTableListarSetoresMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableListarSetoresMouseClicked
         int linha = jTableListarSetores.getSelectedRow();
-        if (linha != -1) {           
+        if (linha != -1) {
             txtSetor.setText(jTableListarSetores.getValueAt(linha, 1).toString());
             indice = Integer.parseInt(jTableListarSetores.getValueAt(linha, 0).toString());
         }
 
     }//GEN-LAST:event_jTableListarSetoresMouseClicked
 
-    private void jBtnAlterarSetorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnAlterarSetorActionPerformed
+    private void jBtnSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnSairActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_jBtnSairActionPerformed
 
-        Setor setor = new Setor();
-        setor.setSetor(txtSetor.getText());
-        SetorDAO.UpdateSetor(setor, indice);
-        TabelaSetor("SELECT * FROM tabsetor;");
-        limparCampos();
-        jBtnAlterarSetor.setVisible(false);
-        jBtnCancelarAlterarSetor.setVisible(false);
-        jBtnEditarSetor.setVisible(true);
-        jBtnNovoSetor.setEnabled(true);
+    private void txtBuscarKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBuscarKeyReleased
 
-    }//GEN-LAST:event_jBtnAlterarSetorActionPerformed
+        TabelaSetor("select  * from tabsetor where setor "
+                + "like '%" + txtBuscar.getText() + "%';");
 
-    private void jBtnNovoSetorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnNovoSetorActionPerformed
+    }//GEN-LAST:event_txtBuscarKeyReleased
+
+    private void jBtnCancelarCadSegmentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnCancelarCadSegmentoActionPerformed
+
         txtSetor.setText("");
-        txtSetor.setEnabled(true);
-        jBtnCadastrarSetor.setVisible(true);
-        jBtnCancelarCadSetor.setVisible(true);
-        jBtnNovoSetor.setVisible(false);
-        jBtnEditarSetor.setEnabled(false);
-        jTableListarSetores.setEnabled(false);
-    }//GEN-LAST:event_jBtnNovoSetorActionPerformed
+        txtSetor.setEnabled(false);
+        limparCampos();
+        jBtnCancelarCadSegmento.setVisible(false);
+        jBtnCadastrarSegmento.setVisible(false);
+        jBtnNovoSegmento.setVisible(true);
+        jTableListarSetores.setEnabled(true);
+    }//GEN-LAST:event_jBtnCancelarCadSegmentoActionPerformed
 
-    private void jBtnCadastrarSetorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnCadastrarSetorActionPerformed
-
+    private void jBtnCadastrarSegmentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnCadastrarSegmentoActionPerformed
         Setor setor = new Setor();
         setor.setSetor(txtSetor.getText());
         SetorDAO.CadSetor(setor);
         limparCampos();
         TabelaSetor("SELECT * FROM tabsetor;");
-        ocultaCampos();
-        jBtnEditarSetor.setEnabled(true);
+        jBtnCadastrarSegmento.setVisible(false);
+        jBtnCancelarCadSegmento.setVisible(false);
+        jBtnNovoSegmento.setVisible(true);
         jTableListarSetores.setEnabled(true);
-        jBtnNovoSetor.setVisible(true);
-    }//GEN-LAST:event_jBtnCadastrarSetorActionPerformed
+        txtSetor.setText("");
+        txtSetor.setEnabled(false);
+    }//GEN-LAST:event_jBtnCadastrarSegmentoActionPerformed
 
-    private void jBtnSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnSairActionPerformed
-        this.dispose();
-    }//GEN-LAST:event_jBtnSairActionPerformed
-
-    private void jBtnEditarSetorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnEditarSetorActionPerformed
-
+    private void jBtnNovoSegmentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnNovoSegmentoActionPerformed
+        jTableListarSetores.getSelectionModel().clearSelection();
+        txtSetor.setText("");
         txtSetor.setEnabled(true);
-        jBtnEditarSetor.setVisible(false);
-        jBtnCancelarAlterarSetor.setVisible(true);
-        jBtnAlterarSetor.setVisible(true);
-        jBtnNovoSetor.setEnabled(false);
-    }//GEN-LAST:event_jBtnEditarSetorActionPerformed
+        jBtnCadastrarSegmento.setVisible(true);
+        jBtnCancelarCadSegmento.setVisible(true);
+        jBtnNovoSegmento.setVisible(false);
 
-    private void jBtnCancelarAlterarSetorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnCancelarAlterarSetorActionPerformed
+        jBtnEditarSegmento.setEnabled(false);
+        jTableListarSetores.setEnabled(false);
+    }//GEN-LAST:event_jBtnNovoSegmentoActionPerformed
 
+    private void jBtnEditarSegmentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnEditarSegmentoActionPerformed
+        txtSetor.setEnabled(true);
+        jBtnEditarSegmento.setVisible(false);
+        jBtnCancelarAlterarSegmento.setVisible(true);
+        jBtnAlterarSegmento.setVisible(true);
+        jBtnNovoSegmento.setEnabled(false);
+    }//GEN-LAST:event_jBtnEditarSegmentoActionPerformed
+
+    private void jBtnCancelarAlterarSegmentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnCancelarAlterarSegmentoActionPerformed
+        txtSetor.setText("");
+        txtSetor.setEnabled(false);
         jTableListarSetores.getSelectionModel().clearSelection();
         limparCampos();
-        jBtnAlterarSetor.setVisible(false);
-        jBtnCancelarAlterarSetor.setVisible(false);
-        jBtnEditarSetor.setVisible(true);
-        jBtnNovoSetor.setEnabled(true);
+        jBtnAlterarSegmento.setVisible(false);
+        jBtnCancelarAlterarSegmento.setVisible(false);
+        jBtnEditarSegmento.setVisible(true);
+        jBtnNovoSegmento.setEnabled(true);
+    }//GEN-LAST:event_jBtnCancelarAlterarSegmentoActionPerformed
 
-    }//GEN-LAST:event_jBtnCancelarAlterarSetorActionPerformed
-
-    private void jBtnCancelarCadSetorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnCancelarCadSetorActionPerformed
-        limparCampos();
-        jBtnCancelarCadSetor.setVisible(false);
-        jBtnCadastrarSetor.setVisible(false);
-        jBtnNovoSetor.setVisible(true);
-        jBtnEditarSetor.setEnabled(true);
-        jTableListarSetores.setEnabled(true);
-    }//GEN-LAST:event_jBtnCancelarCadSetorActionPerformed
-
-    private void txtBuscarKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBuscarKeyReleased
-
-        TabelaSetor("select  * from tabsetor where setor "
-            + "like '%" + txtBuscar.getText() + "%';");
-
-    }//GEN-LAST:event_txtBuscarKeyReleased
+    private void jBtnAlterarSegmentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnAlterarSegmentoActionPerformed
+        Setor setor = new Setor();
+        setor.setSetor(txtSetor.getText());
+        SetorDAO.UpdateSetor(setor, indice);
+       
+        jBtnAlterarSegmento.setVisible(false);
+        jBtnCancelarAlterarSegmento.setVisible(false);
+        jBtnEditarSegmento.setVisible(true);
+        jBtnNovoSegmento.setEnabled(true);
+        txtSetor.setText("");
+        txtSetor.setEnabled(false);
+        TabelaSetor("SELECT * FROM tabsetor;");
+    }//GEN-LAST:event_jBtnAlterarSegmentoActionPerformed
 
     private void ocultaCampos() {
-        jBtnCadastrarSetor.setVisible(false);
-        jBtnAlterarSetor.setVisible(false);
-        jBtnCancelarCadSetor.setVisible(false);
-        jBtnCancelarAlterarSetor.setVisible(false);
+        jBtnCadastrarSegmento.setVisible(false);
+        jBtnAlterarSegmento.setVisible(false);
+        jBtnCancelarCadSegmento.setVisible(false);
+        jBtnCancelarAlterarSegmento.setVisible(false);
         txtSetor.setEnabled(false);
     }
-    
-    public static int GetIndiceSetor() {         
+
+    public static int GetIndiceSetor() {
         return indice;
     }
-    
+
     public void TabelaSetor(String Sql) {
 
         try {
@@ -301,42 +306,41 @@ public class Segmento extends javax.swing.JFrame {
             }
 
             for (int i = 0; i < 2; i++) {
-                
+
                 ModeloTabela modelo = new ModeloTabela(dados, Colunas);
                 jTableListarSetores.setModel(modelo);
-                jTableListarSetores.setDefaultRenderer(Object.class, new TabelaZebrada()); 
-                
+                jTableListarSetores.setDefaultRenderer(Object.class, new TabelaZebrada());
+
                 jTableListarSetores.getColumnModel().getColumn(0).setMaxWidth(0);
                 jTableListarSetores.getColumnModel().getColumn(0).setMinWidth(0);
                 jTableListarSetores.getTableHeader().getColumnModel().getColumn(0).setMaxWidth(0);
                 jTableListarSetores.getTableHeader().getColumnModel().getColumn(0).setMinWidth(0);
-                
+
                 jTableListarSetores.getColumnModel().getColumn(1).setPreferredWidth(200);
-                
+
                 jTableListarSetores.getColumnModel().getColumn(i).setResizable(false);
                 jTableListarSetores.getTableHeader().setReorderingAllowed(false);
                 jTableListarSetores.setAutoResizeMode(jTableListarSetores.AUTO_RESIZE_OFF);
                 jTableListarSetores.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
             }
-                  
+
         } catch (SQLException ex) {
             Logger.getLogger(Segmento.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-     
-    
-    private void limparCampos() {       
+
+    private void limparCampos() {
         txtSetor.setText("");
         txtSetor.setEnabled(false);
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jBtnAlterarSetor;
-    private javax.swing.JButton jBtnCadastrarSetor;
-    private javax.swing.JButton jBtnCancelarAlterarSetor;
-    private javax.swing.JButton jBtnCancelarCadSetor;
-    private javax.swing.JButton jBtnEditarSetor;
-    private javax.swing.JButton jBtnNovoSetor;
+    private javax.swing.JButton jBtnAlterarSegmento;
+    private javax.swing.JButton jBtnCadastrarSegmento;
+    private javax.swing.JButton jBtnCancelarAlterarSegmento;
+    private javax.swing.JButton jBtnCancelarCadSegmento;
+    private javax.swing.JButton jBtnEditarSegmento;
+    private javax.swing.JButton jBtnNovoSegmento;
     private javax.swing.JButton jBtnSair;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

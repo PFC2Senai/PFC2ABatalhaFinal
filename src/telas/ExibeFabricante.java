@@ -88,6 +88,7 @@ public class ExibeFabricante extends javax.swing.JFrame {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
+        bindingGroup = new org.jdesktop.beansbinding.BindingGroup();
 
         jLabel1 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
@@ -199,6 +200,10 @@ public class ExibeFabricante extends javax.swing.JFrame {
         getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 130, -1, 20));
 
         jBtnEditarFabricante.setText("Editar");
+
+        org.jdesktop.beansbinding.Binding binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, jTableListarFabricantes, org.jdesktop.beansbinding.ELProperty.create("${selectedElement  !=null}"), jBtnEditarFabricante, org.jdesktop.beansbinding.BeanProperty.create("enabled"));
+        bindingGroup.addBinding(binding);
+
         jBtnEditarFabricante.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jBtnEditarFabricanteActionPerformed(evt);
@@ -208,6 +213,8 @@ public class ExibeFabricante extends javax.swing.JFrame {
 
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/leiaute/img2.png"))); // NOI18N
         getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -260, 670, 620));
+
+        bindingGroup.bind();
 
         pack();
         setLocationRelativeTo(null);
@@ -223,7 +230,7 @@ public class ExibeFabricante extends javax.swing.JFrame {
     }//GEN-LAST:event_txtBuscarKeyReleased
 
     private void jBtnNovoFabricanteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnNovoFabricanteActionPerformed
-
+        jTableListarFabricantes.getSelectionModel().clearSelection();
         txtFabricante.setText("");
         txtFabricante.setEnabled(true);
         jBtnCadastrarFabricante.setVisible(true);
@@ -236,11 +243,13 @@ public class ExibeFabricante extends javax.swing.JFrame {
 
     private void jBtnCancelarCadFabricanteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnCancelarCadFabricanteActionPerformed
 
+        txtFabricante.setText("");
+        txtFabricante.setEnabled(false);
         limparCampos();
         jBtnCancelarCadFabricante.setVisible(false);
         jBtnCadastrarFabricante.setVisible(false);
         jBtnNovoFabricante.setVisible(true);
-        jBtnEditarFabricante.setEnabled(true);
+       // jBtnEditarFabricante.setEnabled(true);
         jTableListarFabricantes.setEnabled(true);
     }//GEN-LAST:event_jBtnCancelarCadFabricanteActionPerformed
 
@@ -258,8 +267,10 @@ public class ExibeFabricante extends javax.swing.JFrame {
             jBtnCadastrarFabricante.setVisible(false);
             jBtnCancelarCadFabricante.setVisible(false);
             jBtnNovoFabricante.setVisible(true);
-            jBtnEditarFabricante.setEnabled(true);
+           // jBtnEditarFabricante.setEnabled(true);
             jTableListarFabricantes.setEnabled(true);
+            txtFabricante.setText("");
+            txtFabricante.setEnabled(false);
         }
         else
         {
@@ -268,33 +279,35 @@ public class ExibeFabricante extends javax.swing.JFrame {
     }//GEN-LAST:event_jBtnCadastrarFabricanteActionPerformed
 
     private void jBtnAlterarFabricanteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnAlterarFabricanteActionPerformed
-
         Fabricante fab = new Fabricante();
         fab.setFabricante(txtFabricante.getText());
         FabricanteDAO.UpdateFabricante(fab, GetIndice());
-        jBtnCadastrarFabricante.setVisible(false);
-        jBtnCancelarCadFabricante.setVisible(false);
-        jBtnNovoFabricante.setVisible(true);
+        jBtnAlterarFabricante.setVisible(false);
+        jBtnCancelarAlterarFabricante.setVisible(false);
+        jBtnEditarFabricante.setVisible(true);
+        jBtnNovoFabricante.setEnabled(true);
+        txtFabricante.setText("");
+        txtFabricante.setEnabled(false);
         TabelaFabricante("select * from tabfabricante;");
-
     }//GEN-LAST:event_jBtnAlterarFabricanteActionPerformed
 
     private void jBtnCancelarAlterarFabricanteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnCancelarAlterarFabricanteActionPerformed
-
+        txtFabricante.setText("");
+        txtFabricante.setEnabled(false);
         jTableListarFabricantes.getSelectionModel().clearSelection();
         limparCampos();
         jBtnAlterarFabricante.setVisible(false);
         jBtnCancelarAlterarFabricante.setVisible(false);
         jBtnEditarFabricante.setVisible(true);
-        jBtnNovoFabricante.setEnabled(true); 
-        TabelaFabricante("select * from tabfabricante;");
-        
+        jBtnNovoFabricante.setEnabled(true);        
     }//GEN-LAST:event_jBtnCancelarAlterarFabricanteActionPerformed
 
     private void jTableListarFabricantesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableListarFabricantesMouseClicked
         int linha = jTableListarFabricantes.getSelectedRow();
-        txtFabricante.setText(jTableListarFabricantes.getValueAt(linha, 1).toString());        
-        indice = Integer.parseInt(jTableListarFabricantes.getValueAt(linha, 0).toString());
+        if (linha != -1) {    
+            txtFabricante.setText(jTableListarFabricantes.getValueAt(linha, 1).toString());        
+            indice = Integer.parseInt(jTableListarFabricantes.getValueAt(linha, 0).toString());
+        }
     }//GEN-LAST:event_jTableListarFabricantesMouseClicked
 
     private void jBtnEditarFabricanteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnEditarFabricanteActionPerformed
@@ -325,5 +338,6 @@ public class ExibeFabricante extends javax.swing.JFrame {
     private javax.swing.JTable jTableListarFabricantes;
     private javax.swing.JTextField txtBuscar;
     private javax.swing.JTextField txtFabricante;
+    private org.jdesktop.beansbinding.BindingGroup bindingGroup;
     // End of variables declaration//GEN-END:variables
 }

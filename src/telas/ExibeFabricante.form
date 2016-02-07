@@ -193,6 +193,9 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Editar"/>
       </Properties>
+      <BindingProperties>
+        <BindingProperty name="enabled" source="jTableListarFabricantes" sourcePath="${selectedElement  !=null}" target="jBtnEditarFabricante" targetPath="enabled" updateStrategy="0" immediately="false"/>
+      </BindingProperties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jBtnEditarFabricanteActionPerformed"/>
       </Events>

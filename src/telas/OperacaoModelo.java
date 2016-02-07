@@ -39,8 +39,8 @@ public class OperacaoModelo extends javax.swing.JFrame {
     private void ocultaCampos() {
         jBtnCadastrarModelo.setVisible(false);
         jBtnAlterarModelo.setVisible(false);
-        jBtnCancelarAlterarModelo.setVisible(false);
         jBtnCancelarCadModelo.setVisible(false);
+        jBtnCancelarAlterarModelo.setVisible(false);
         txtModelo.setEnabled(false);
     }
     
@@ -94,13 +94,8 @@ public class OperacaoModelo extends javax.swing.JFrame {
     private void initComponents() {
         bindingGroup = new org.jdesktop.beansbinding.BindingGroup();
 
-        jBtnCadastrarModelo = new javax.swing.JButton();
-        jBtnEditarModelo = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTableListarModelo = new javax.swing.JTable();
-        jBtnCancelarCadModelo = new javax.swing.JButton();
-        jBtnCancelarAlterarModelo = new javax.swing.JButton();
-        jBtnNovoModelo = new javax.swing.JButton();
         txtBuscar = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         txtModelo = new javax.swing.JTextField();
@@ -108,27 +103,14 @@ public class OperacaoModelo extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jButton7 = new javax.swing.JButton();
+        jBtnNovoModelo = new javax.swing.JButton();
+        jBtnCancelarCadModelo = new javax.swing.JButton();
+        jBtnCadastrarModelo = new javax.swing.JButton();
         jBtnAlterarModelo = new javax.swing.JButton();
+        jBtnCancelarAlterarModelo = new javax.swing.JButton();
+        jBtnEditarModelo = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-
-        jBtnCadastrarModelo.setText("Cadastrar");
-        jBtnCadastrarModelo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jBtnCadastrarModeloActionPerformed(evt);
-            }
-        });
-
-        jBtnEditarModelo.setText("Editar");
-
-        org.jdesktop.beansbinding.Binding binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, jTableListarModelo, org.jdesktop.beansbinding.ELProperty.create("${selectedElement != null}"), jBtnEditarModelo, org.jdesktop.beansbinding.BeanProperty.create("enabled"));
-        bindingGroup.addBinding(binding);
-
-        jBtnEditarModelo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jBtnEditarModeloActionPerformed(evt);
-            }
-        });
 
         jTableListarModelo.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -144,27 +126,6 @@ public class OperacaoModelo extends javax.swing.JFrame {
             }
         });
         jScrollPane2.setViewportView(jTableListarModelo);
-
-        jBtnCancelarCadModelo.setText("Cancelar");
-        jBtnCancelarCadModelo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jBtnCancelarCadModeloActionPerformed(evt);
-            }
-        });
-
-        jBtnCancelarAlterarModelo.setText("Cancelar");
-        jBtnCancelarAlterarModelo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jBtnCancelarAlterarModeloActionPerformed(evt);
-            }
-        });
-
-        jBtnNovoModelo.setText("Novo");
-        jBtnNovoModelo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jBtnNovoModeloActionPerformed(evt);
-            }
-        });
 
         txtBuscar.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
@@ -190,6 +151,29 @@ public class OperacaoModelo extends javax.swing.JFrame {
             }
         });
 
+        jBtnNovoModelo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/add.png"))); // NOI18N
+        jBtnNovoModelo.setText("Novo");
+        jBtnNovoModelo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnNovoModeloActionPerformed(evt);
+            }
+        });
+
+        jBtnCancelarCadModelo.setText("Cancelar");
+        jBtnCancelarCadModelo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnCancelarCadModeloActionPerformed(evt);
+            }
+        });
+
+        jBtnCadastrarModelo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/disk.png"))); // NOI18N
+        jBtnCadastrarModelo.setText("Cadastrar");
+        jBtnCadastrarModelo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnCadastrarModeloActionPerformed(evt);
+            }
+        });
+
         jBtnAlterarModelo.setText("Alterar");
         jBtnAlterarModelo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -197,78 +181,95 @@ public class OperacaoModelo extends javax.swing.JFrame {
             }
         });
 
+        jBtnCancelarAlterarModelo.setText("Cancelar");
+        jBtnCancelarAlterarModelo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnCancelarAlterarModeloActionPerformed(evt);
+            }
+        });
+
+        jBtnEditarModelo.setText("Editar");
+
+        org.jdesktop.beansbinding.Binding binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, jTableListarModelo, org.jdesktop.beansbinding.ELProperty.create("${selectedElement  !=null}"), jBtnEditarModelo, org.jdesktop.beansbinding.BeanProperty.create("enabled"));
+        bindingGroup.addBinding(binding);
+
+        jBtnEditarModelo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnEditarModeloActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap(17, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap(58, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(jLabel4)
-                                    .addGap(22, 22, 22)
-                                    .addComponent(txtModelo, javax.swing.GroupLayout.PREFERRED_SIZE, 410, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(jBtnNovoModelo)
-                                    .addGap(13, 13, 13)
-                                    .addComponent(jBtnCancelarCadModelo)
-                                    .addGap(15, 15, 15)
-                                    .addComponent(jBtnCadastrarModelo))
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(jBtnEditarModelo)
-                                    .addGap(9, 9, 9)
-                                    .addComponent(jBtnCancelarAlterarModelo)
-                                    .addGap(15, 15, 15)
-                                    .addComponent(jBtnAlterarModelo)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel2)
                                 .addGap(10, 10, 10)
-                                .addComponent(txtBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 421, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addComponent(txtBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 421, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jBtnEditarModelo)
+                                .addGap(18, 18, 18)
+                                .addComponent(jBtnCancelarAlterarModelo)
+                                .addGap(18, 18, 18)
+                                .addComponent(jBtnAlterarModelo)
+                                .addGap(233, 233, 233))
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jButton7)
+                                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 479, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jLabel4)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(txtModelo, javax.swing.GroupLayout.PREFERRED_SIZE, 330, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jButton7)
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 479, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(131, 131, 131))
+                            .addComponent(jBtnCadastrarModelo)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jBtnNovoModelo)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jBtnCancelarCadModelo)))
+                        .addGap(0, 109, Short.MAX_VALUE))))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 670, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGroup(layout.createSequentialGroup()
-                            .addGap(40, 40, 40)
-                            .addComponent(jLabel1)))
+                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel1)
+                    .addGap(0, 0, Short.MAX_VALUE))
+                .addGroup(layout.createSequentialGroup()
+                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 676, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGap(0, 0, Short.MAX_VALUE)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(136, 136, 136)
+                .addGap(135, 135, 135)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel4)
-                    .addComponent(txtModelo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(txtModelo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jBtnNovoModelo)
+                        .addComponent(jBtnCancelarCadModelo)))
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jBtnNovoModelo)
-                    .addComponent(jBtnCancelarCadModelo)
-                    .addComponent(jBtnCadastrarModelo))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jBtnCadastrarModelo)
+                .addGap(5, 5, 5)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jBtnEditarModelo)
                     .addComponent(jBtnCancelarAlterarModelo)
                     .addComponent(jBtnAlterarModelo))
-                .addGap(18, 18, 18)
+                .addGap(22, 22, 22)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel2)
                     .addComponent(txtBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 62, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 264, Short.MAX_VALUE)
+                .addGap(27, 27, 27)
                 .addComponent(jButton7)
-                .addGap(40, 40, 40))
+                .addGap(31, 31, 31))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addGap(0, 0, Short.MAX_VALUE)
@@ -277,7 +278,7 @@ public class OperacaoModelo extends javax.swing.JFrame {
                         .addGroup(layout.createSequentialGroup()
                             .addGap(50, 50, 50)
                             .addComponent(jLabel1)))
-                    .addGap(0, 543, Short.MAX_VALUE)))
+                    .addGap(0, 526, Short.MAX_VALUE)))
         );
 
         bindingGroup.bind();
@@ -285,6 +286,47 @@ public class OperacaoModelo extends javax.swing.JFrame {
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jTableListarModeloMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableListarModeloMouseClicked
+        int linha = jTableListarModelo.getSelectedRow();
+        if (linha != -1) {
+            txtModelo.setText(jTableListarModelo.getValueAt(linha, 1).toString());
+            indice = Integer.parseInt(jTableListarModelo.getValueAt(linha, 0).toString());
+        }
+    }//GEN-LAST:event_jTableListarModeloMouseClicked
+
+    private void txtBuscarKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBuscarKeyReleased
+        TabelaModelo("select  * from tabmodelo where modelo "
+            + "like '%" + txtBuscar.getText() + "%';");
+    }//GEN-LAST:event_txtBuscarKeyReleased
+
+    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_jButton7ActionPerformed
+
+    private void jBtnNovoModeloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnNovoModeloActionPerformed
+        jTableListarModelo.getSelectionModel().clearSelection();
+        txtModelo.setText("");
+        txtModelo.setEnabled(true);
+        jBtnCadastrarModelo.setVisible(true);
+        jBtnCancelarCadModelo.setVisible(true);
+        jBtnNovoModelo.setVisible(false);
+
+        jBtnEditarModelo.setEnabled(false);
+        jTableListarModelo.setEnabled(false);
+    }//GEN-LAST:event_jBtnNovoModeloActionPerformed
+
+    private void jBtnCancelarCadModeloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnCancelarCadModeloActionPerformed
+
+        txtModelo.setText("");
+        txtModelo.setEnabled(false);
+        limparCampos();
+        jBtnCancelarCadModelo.setVisible(false);
+        jBtnCadastrarModelo.setVisible(false);
+        jBtnNovoModelo.setVisible(true);
+        // jBtnEditarFabricante.setEnabled(true);
+        jTableListarModelo.setEnabled(true);
+    }//GEN-LAST:event_jBtnCancelarCadModeloActionPerformed
 
     private void jBtnCadastrarModeloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnCadastrarModeloActionPerformed
 
@@ -296,82 +338,50 @@ public class OperacaoModelo extends javax.swing.JFrame {
             ModeloDAO.CadModelo(model);
             JOptionPane.showMessageDialog(this, "Cadastrado com sucesso");
             limparCampos();
+            TabelaModelo("select * from tabmodelo;");
+            
+            jBtnCadastrarModelo.setVisible(false);
+            jBtnCancelarCadModelo.setVisible(false);
+            jBtnNovoModelo.setVisible(true);
+            jTableListarModelo.setEnabled(true);
+            txtModelo.setText("");
+            txtModelo.setEnabled(false);
         } else {
             JOptionPane.showMessageDialog(this, "Modelo ja cadastrado");
         }
-        TabelaModelo("select * from tabmodelo;");
-        ocultaCampos();
-        jBtnEditarModelo.setEnabled(true);
-      //  jTableListarModelo.setEnabled(true);
-        jBtnNovoModelo.setVisible(true);
     }//GEN-LAST:event_jBtnCadastrarModeloActionPerformed
 
-    private void jBtnEditarModeloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnEditarModeloActionPerformed
+    private void jBtnAlterarModeloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnAlterarModeloActionPerformed
+        Modelo model = new Modelo();
+        model.setModelo(txtModelo.getText());
+        ModeloDAO.UpdateModelo(model, GetIndice());        
+        jBtnAlterarModelo.setVisible(false);
+        jBtnCancelarAlterarModelo.setVisible(false);
+        jBtnEditarModelo.setVisible(true);
+        jBtnNovoModelo.setEnabled(true);
+        txtModelo.setText("");
+        txtModelo.setEnabled(false);
+        TabelaModelo("select * from tabmodelo");
+    }//GEN-LAST:event_jBtnAlterarModeloActionPerformed
 
+    private void jBtnCancelarAlterarModeloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnCancelarAlterarModeloActionPerformed
+        txtModelo.setText("");
+        txtModelo.setEnabled(false);
+        jTableListarModelo.getSelectionModel().clearSelection();
+        limparCampos();
+        jBtnAlterarModelo.setVisible(false);
+        jBtnCancelarAlterarModelo.setVisible(false);
+        jBtnEditarModelo.setVisible(true);
+        jBtnNovoModelo.setEnabled(true);       
+    }//GEN-LAST:event_jBtnCancelarAlterarModeloActionPerformed
+
+    private void jBtnEditarModeloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnEditarModeloActionPerformed
         txtModelo.setEnabled(true);
         jBtnEditarModelo.setVisible(false);
         jBtnCancelarAlterarModelo.setVisible(true);
         jBtnAlterarModelo.setVisible(true);
         jBtnNovoModelo.setEnabled(false);
     }//GEN-LAST:event_jBtnEditarModeloActionPerformed
-
-    private void jTableListarModeloMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableListarModeloMouseClicked
-        int linha = jTableListarModelo.getSelectedRow();
-        txtModelo.setText(jTableListarModelo.getValueAt(linha, 1).toString());
-        indice = Integer.parseInt(jTableListarModelo.getValueAt(linha, 0).toString());
-    }//GEN-LAST:event_jTableListarModeloMouseClicked
-
-    private void jBtnCancelarCadModeloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnCancelarCadModeloActionPerformed
-        limparCampos();
-        jBtnCancelarCadModelo.setVisible(false);
-        jBtnCadastrarModelo.setVisible(false);
-        jBtnNovoModelo.setVisible(true);
-        jBtnEditarModelo.setEnabled(true);
-       // jTableListarModelo.setEnabled(true);
-       // TabelaModelo("select * from tabmodelo;");
-    }//GEN-LAST:event_jBtnCancelarCadModeloActionPerformed
-
-    private void jBtnCancelarAlterarModeloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnCancelarAlterarModeloActionPerformed
-
-        jTableListarModelo.getSelectionModel().clearSelection();
-        limparCampos();
-        jBtnAlterarModelo.setVisible(false);
-        jBtnCancelarAlterarModelo.setVisible(false);
-        jBtnEditarModelo.setVisible(true);
-        jBtnNovoModelo.setEnabled(true);
-    }//GEN-LAST:event_jBtnCancelarAlterarModeloActionPerformed
-
-    private void jBtnNovoModeloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnNovoModeloActionPerformed
-        txtModelo.setText("");
-        txtModelo.setEnabled(true);
-        jBtnCadastrarModelo.setVisible(true);
-        jBtnCancelarCadModelo.setVisible(true);
-        jBtnNovoModelo.setVisible(false);
-        jBtnEditarModelo.setEnabled(false);
-      //  jTableListarModelo.setEnabled(false);
-    }//GEN-LAST:event_jBtnNovoModeloActionPerformed
-
-    private void txtBuscarKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBuscarKeyReleased
-        TabelaModelo("select  * from tabmodelo where modelo "
-            + "like '%" + txtBuscar.getText() + "%';");
-    }//GEN-LAST:event_txtBuscarKeyReleased
-
-    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
-        this.dispose();
-    }//GEN-LAST:event_jButton7ActionPerformed
-
-    private void jBtnAlterarModeloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnAlterarModeloActionPerformed
-
-         Modelo model = new Modelo();
-        model.setModelo(txtModelo.getText());
-        ModeloDAO.UpdateModelo(model, GetIndice());
-        TabelaModelo("select * from tabmodelo");
-        limparCampos();
-        jBtnAlterarModelo.setVisible(false);
-        jBtnCancelarAlterarModelo.setVisible(false);
-        jBtnEditarModelo.setVisible(true);
-        jBtnNovoModelo.setEnabled(true);
-    }//GEN-LAST:event_jBtnAlterarModeloActionPerformed
 
     private void limparCampos() {
         txtModelo.setText("");
