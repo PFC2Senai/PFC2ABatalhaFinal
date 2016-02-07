@@ -70,7 +70,7 @@ public class ExibeServico extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(jTableListarServicos);
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 220, 752, 372));
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 220, 752, 320));
 
         txtBuscar.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
@@ -94,7 +94,7 @@ public class ExibeServico extends javax.swing.JFrame {
                 jBtnDetalharActionPerformed(evt);
             }
         });
-        jPanel1.add(jBtnDetalhar, new org.netbeans.lib.awtextra.AbsoluteConstraints(117, 525, -1, -1));
+        jPanel1.add(jBtnDetalhar, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 570, -1, -1));
 
         jBtnSair.setText("Sair");
         jBtnSair.addActionListener(new java.awt.event.ActionListener() {
@@ -102,7 +102,7 @@ public class ExibeServico extends javax.swing.JFrame {
                 jBtnSairActionPerformed(evt);
             }
         });
-        jPanel1.add(jBtnSair, new org.netbeans.lib.awtextra.AbsoluteConstraints(33, 525, -1, -1));
+        jPanel1.add(jBtnSair, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 570, -1, -1));
 
         jLabel2.setText("Pesquisar:");
         jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 170, -1, -1));

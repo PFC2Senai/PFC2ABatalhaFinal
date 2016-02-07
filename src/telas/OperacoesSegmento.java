@@ -17,12 +17,20 @@ import javax.swing.ListSelectionModel;
  *
  * @author Josy
  */
-public class Segmento extends javax.swing.JFrame {
+public class OperacoesSegmento extends javax.swing.JFrame {
 
     Statement stmt;
     private static int indice;
+    private Menu telaMenu;
 
-    public Segmento() {
+    public OperacoesSegmento() {
+        initComponents();
+        TabelaSetor("SELECT * FROM tabsetor;");
+        ocultaCampos();
+    }
+    
+    public OperacoesSegmento(Menu menu) {
+        this.telaMenu = menu;
         initComponents();
         TabelaSetor("SELECT * FROM tabsetor;");
         ocultaCampos();
@@ -56,8 +64,13 @@ public class Segmento extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setResizable(false);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosed(java.awt.event.WindowEvent evt) {
+                formWindowClosed(evt);
+            }
+        });
 
-        jPanel1.setBackground(new java.awt.Color(252, 252, 230));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jTableListarSetores.setModel(new javax.swing.table.DefaultTableModel(
@@ -84,36 +97,36 @@ public class Segmento extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(jTableListarSetores);
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 320, 473, 260));
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 160, 590, 260));
 
         jLabel3.setText("Segmento:");
-        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 130, -1, -1));
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 490, -1, -1));
 
         jLabel1.setFont(new java.awt.Font("Raavi", 1, 18)); // NOI18N
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/setor.png"))); // NOI18N
         jLabel1.setText("SEGMENTO");
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 40, -1, -1));
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 40, -1, -1));
 
-        jBtnSair.setText("Sair");
+        jBtnSair.setText("Voltar");
         jBtnSair.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jBtnSairActionPerformed(evt);
             }
         });
-        jPanel1.add(jBtnSair, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 590, -1, -1));
+        jPanel1.add(jBtnSair, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 550, -1, -1));
 
         txtSetor.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jPanel1.add(txtSetor, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 130, 410, -1));
+        jPanel1.add(txtSetor, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 490, 320, -1));
 
         jLabel2.setText("Pesquisar:");
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 280, -1, -1));
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 120, -1, -1));
 
         txtBuscar.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 txtBuscarKeyReleased(evt);
             }
         });
-        jPanel1.add(txtBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 280, 410, -1));
+        jPanel1.add(txtBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 120, 310, -1));
 
         jBtnCancelarCadSegmento.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/cancelar.png"))); // NOI18N
         jBtnCancelarCadSegmento.setText("Cancelar");
@@ -122,25 +135,24 @@ public class Segmento extends javax.swing.JFrame {
                 jBtnCancelarCadSegmentoActionPerformed(evt);
             }
         });
-        jPanel1.add(jBtnCancelarCadSegmento, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 180, -1, -1));
+        jPanel1.add(jBtnCancelarCadSegmento, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 490, -1, -1));
 
-        jBtnCadastrarSegmento.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/disk.png"))); // NOI18N
-        jBtnCadastrarSegmento.setText("Cadastrar");
+        jBtnCadastrarSegmento.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/salvar.png"))); // NOI18N
+        jBtnCadastrarSegmento.setText("Salvar");
         jBtnCadastrarSegmento.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jBtnCadastrarSegmentoActionPerformed(evt);
             }
         });
-        jPanel1.add(jBtnCadastrarSegmento, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 180, -1, -1));
+        jPanel1.add(jBtnCadastrarSegmento, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 490, -1, -1));
 
-        jBtnNovoSegmento.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/add.png"))); // NOI18N
         jBtnNovoSegmento.setText("Novo");
         jBtnNovoSegmento.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jBtnNovoSegmentoActionPerformed(evt);
             }
         });
-        jPanel1.add(jBtnNovoSegmento, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 180, -1, -1));
+        jPanel1.add(jBtnNovoSegmento, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 440, -1, -1));
 
         jBtnEditarSegmento.setText("Editar");
 
@@ -152,7 +164,7 @@ public class Segmento extends javax.swing.JFrame {
                 jBtnEditarSegmentoActionPerformed(evt);
             }
         });
-        jPanel1.add(jBtnEditarSegmento, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 210, -1, -1));
+        jPanel1.add(jBtnEditarSegmento, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 440, -1, -1));
 
         jBtnCancelarAlterarSegmento.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/cancelar.png"))); // NOI18N
         jBtnCancelarAlterarSegmento.setText("Cancelar");
@@ -161,15 +173,16 @@ public class Segmento extends javax.swing.JFrame {
                 jBtnCancelarAlterarSegmentoActionPerformed(evt);
             }
         });
-        jPanel1.add(jBtnCancelarAlterarSegmento, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 210, -1, -1));
+        jPanel1.add(jBtnCancelarAlterarSegmento, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 490, -1, -1));
 
-        jBtnAlterarSegmento.setText("Alterar");
+        jBtnAlterarSegmento.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/salvar.png"))); // NOI18N
+        jBtnAlterarSegmento.setText("Salvar");
         jBtnAlterarSegmento.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jBtnAlterarSegmentoActionPerformed(evt);
             }
         });
-        jPanel1.add(jBtnAlterarSegmento, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 210, -1, -1));
+        jPanel1.add(jBtnAlterarSegmento, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 490, -1, -1));
 
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/leiaute/img3-5.png"))); // NOI18N
         jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -290, 670, 670));
@@ -182,7 +195,7 @@ public class Segmento extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 623, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 598, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         bindingGroup.bind();
@@ -201,13 +214,14 @@ public class Segmento extends javax.swing.JFrame {
     }//GEN-LAST:event_jTableListarSetoresMouseClicked
 
     private void jBtnSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnSairActionPerformed
-        this.dispose();
+        verificaPagina();
+        this.dispose();        
     }//GEN-LAST:event_jBtnSairActionPerformed
 
     private void txtBuscarKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBuscarKeyReleased
 
         TabelaSetor("select  * from tabsetor where setor "
-                + "like '%" + txtBuscar.getText() + "%';");
+                + "like '%" + txtBuscar.getText().trim() + "%';");
 
     }//GEN-LAST:event_txtBuscarKeyReleased
 
@@ -281,6 +295,10 @@ public class Segmento extends javax.swing.JFrame {
         TabelaSetor("SELECT * FROM tabsetor;");
     }//GEN-LAST:event_jBtnAlterarSegmentoActionPerformed
 
+    private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
+        verificaPagina();
+    }//GEN-LAST:event_formWindowClosed
+
     private void ocultaCampos() {
         jBtnCadastrarSegmento.setVisible(false);
         jBtnAlterarSegmento.setVisible(false);
@@ -327,7 +345,7 @@ public class Segmento extends javax.swing.JFrame {
             }
 
         } catch (SQLException ex) {
-            Logger.getLogger(Segmento.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(OperacoesSegmento.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -335,6 +353,16 @@ public class Segmento extends javax.swing.JFrame {
         txtSetor.setText("");
         txtSetor.setEnabled(false);
     }
+    
+    private void verificaPagina() {
+
+        if ((this.telaMenu != null)) {
+            this.telaMenu.setVisible(true);
+            // this.telaMenu.toFront();
+        }
+    }
+    
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBtnAlterarSegmento;
