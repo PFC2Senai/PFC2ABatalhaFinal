@@ -236,6 +236,8 @@ public class OperacaoModelo extends javax.swing.JFrame {
         });
         getContentPane().add(jBtnEditarModelo, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 480, -1, -1));
 
+        jPanel1.setBackground(new java.awt.Color(207, 222, 252));
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -244,10 +246,10 @@ public class OperacaoModelo extends javax.swing.JFrame {
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 650, Short.MAX_VALUE)
+            .addGap(0, 630, Short.MAX_VALUE)
         );
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 680, 650));
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 680, 630));
 
         bindingGroup.bind();
 
