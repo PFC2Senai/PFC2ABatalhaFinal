@@ -576,7 +576,8 @@ public class Menu extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem6ActionPerformed
 
     private void jMenuItem23ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem23ActionPerformed
-        new ExibeFabricante().setVisible(true);
+        this.setVisible(false);
+        new ExibeFabricante(this).setVisible(true);
     }//GEN-LAST:event_jMenuItem23ActionPerformed
 
     private void jMenuItem30ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem30ActionPerformed
@@ -623,7 +624,8 @@ public class Menu extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem5ActionPerformed
 
     private void jMenuItem26ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem26ActionPerformed
-        new ExibeFabricante().setVisible(true);
+        this.setVisible(false);
+        new ExibeFabricante(this).setVisible(true);
     }//GEN-LAST:event_jMenuItem26ActionPerformed
 
     private void jMenuItem29ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem29ActionPerformed

@@ -115,6 +115,7 @@ public class Segmento extends javax.swing.JFrame {
         });
         jPanel1.add(txtBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 280, 410, -1));
 
+        jBtnCancelarCadSegmento.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/cancelar.png"))); // NOI18N
         jBtnCancelarCadSegmento.setText("Cancelar");
         jBtnCancelarCadSegmento.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -130,7 +131,7 @@ public class Segmento extends javax.swing.JFrame {
                 jBtnCadastrarSegmentoActionPerformed(evt);
             }
         });
-        jPanel1.add(jBtnCadastrarSegmento, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 180, -1, -1));
+        jPanel1.add(jBtnCadastrarSegmento, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 180, -1, -1));
 
         jBtnNovoSegmento.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/add.png"))); // NOI18N
         jBtnNovoSegmento.setText("Novo");
@@ -153,6 +154,7 @@ public class Segmento extends javax.swing.JFrame {
         });
         jPanel1.add(jBtnEditarSegmento, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 210, -1, -1));
 
+        jBtnCancelarAlterarSegmento.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/cancelar.png"))); // NOI18N
         jBtnCancelarAlterarSegmento.setText("Cancelar");
         jBtnCancelarAlterarSegmento.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -167,7 +169,7 @@ public class Segmento extends javax.swing.JFrame {
                 jBtnAlterarSegmentoActionPerformed(evt);
             }
         });
-        jPanel1.add(jBtnAlterarSegmento, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 210, -1, -1));
+        jPanel1.add(jBtnAlterarSegmento, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 210, -1, -1));
 
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/leiaute/img3-5.png"))); // NOI18N
         jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -290, 670, 670));
