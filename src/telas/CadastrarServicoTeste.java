@@ -1465,6 +1465,7 @@ public class CadastrarServicoTeste extends javax.swing.JFrame {
 
         uJComboBoxClientes.clear();
 
+        uJComboBoxClientes.addItem("Selecione o Cliente");
         ArrayList<Cliente> cliente = new ArrayList<Cliente>();
         cliente = ClienteDAO.ComboCliente();
 
@@ -1491,6 +1492,7 @@ public class CadastrarServicoTeste extends javax.swing.JFrame {
         ArrayList<Produto> pecas = new ArrayList<Produto>();
         pecas = ProdutoDAO.ListarProdutos();
 
+        uJComboBoxPeca.addItem("Selecione a Peça");
         for (Produto prod : pecas) {
             uJComboBoxPeca.addItem(prod.getProduto(), prod);
         }

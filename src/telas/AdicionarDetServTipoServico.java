@@ -64,7 +64,6 @@ public class AdicionarDetServTipoServico extends javax.swing.JFrame {
         jBtnCancelarCadTipoServico = new javax.swing.JButton();
         txtTipoServico = new javax.swing.JTextField();
         jBtnSalvarDetServTipoServico = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -143,18 +142,13 @@ public class AdicionarDetServTipoServico extends javax.swing.JFrame {
         });
         jPanel1.add(jBtnSalvarDetServTipoServico, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 290, -1, -1));
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/leiaute/imag01.png"))); // NOI18N
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 680, 100));
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 680, Short.MAX_VALUE)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 0, Short.MAX_VALUE)))
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 680, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -303,7 +297,6 @@ public class AdicionarDetServTipoServico extends javax.swing.JFrame {
     private javax.swing.JButton jBtnRemoverTipo;
     private javax.swing.JButton jBtnSalvarDetServTipoServico;
     private javax.swing.JComboBox jComboBoxTipoServico;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane6;

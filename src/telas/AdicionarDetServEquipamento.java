@@ -66,7 +66,6 @@ public class AdicionarDetServEquipamento extends javax.swing.JFrame {
         jLabel38 = new javax.swing.JLabel();
         jComboBoxFabricanteEquip = new javax.swing.JComboBox();
         jBtnInserirDetServEquipamento = new javax.swing.JButton();
-        jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -155,9 +154,6 @@ public class AdicionarDetServEquipamento extends javax.swing.JFrame {
             }
         });
         jPanel4.add(jBtnInserirDetServEquipamento, new org.netbeans.lib.awtextra.AbsoluteConstraints(493, 465, -1, -1));
-
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/leiaute/imag2.png"))); // NOI18N
-        jPanel4.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 670, 110));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -388,7 +384,6 @@ public class AdicionarDetServEquipamento extends javax.swing.JFrame {
     private javax.swing.JComboBox jComboBoxFabricanteEquip;
     private javax.swing.JComboBox jComboBoxModeloEquip;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel37;
     private javax.swing.JLabel jLabel38;
     private javax.swing.JPanel jPanel4;
