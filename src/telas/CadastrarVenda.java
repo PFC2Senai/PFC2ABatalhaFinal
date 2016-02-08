@@ -265,54 +265,79 @@ public class CadastrarVenda extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, ex);
         }
     }
-
+    private boolean ValidaHora() {
+                boolean valide = true;
+		String hora = jTextHora.getText();
+		String[] hm = hora.split(":"); 
+		int horas = Integer.parseInt( hm[0]);
+		int minutos = Integer.parseInt( hm[1]);
+		if( horas > 24 || minutos > 59 ){
+			JOptionPane.showMessageDialog(null, "Digite uma HORA VÁLIDA!");
+                valide = false;
+                return valide;
+		}
+                return valide;
+	}
+    
     private boolean VerificaCampos() {
         boolean valida = true;
 
         if (jComboBoxProdutos.getSelectedItem().equals("Selecione")) {
-            JOptionPane.showMessageDialog(null, "Selecione um item!");
+            JOptionPane.showMessageDialog(null, "Selecione a PEÇA!");
+            jComboBoxProdutos.requestFocus();
+            jComboBoxProdutos.setBackground(Color.yellow);
             valida = false;
             return valida;
         }
 
         if (jComboModelo.getSelectedItem().equals("Selecione")) {
-            JOptionPane.showMessageDialog(null, "Selecione um item!");
+            JOptionPane.showMessageDialog(null, "Selecione o MODELO!");
+            jComboModelo.requestFocus();
+            jComboModelo.setBackground(Color.yellow);
             valida = false;
             return valida;
         }
 
         if (jComboFabricante.getSelectedItem().equals("Selecione")) {
-            JOptionPane.showMessageDialog(null, "Selecione um item!");
+            JOptionPane.showMessageDialog(null, "Selecione o FABRICANTE!");
+            jComboFabricante.requestFocus();
+            jComboFabricante.setBackground(Color.yellow);
             valida = false;
             return valida;
         }
 
         if (JDataVenda.getDate() == null) {
-            JOptionPane.showMessageDialog(null, "Campo(s) vazio(s)!");
+            JOptionPane.showMessageDialog(null, "Preencha o campo DATA!");
+            valida = false;
+            return valida;
+        }
+        
+        if (jTextHora.getText() == null || jTextHora.getText().trim().equals( ":" )) {
+            JOptionPane.showMessageDialog(null, "Preencha o campo DATA!");
             valida = false;
             return valida;
         }
 
         if (jTextValorUnit.getText().equals("")) {
-            JOptionPane.showMessageDialog(null, "Campo(s) vazio(s)!");
+            JOptionPane.showMessageDialog(null, "Preencha o campo VALOR!");
             valida = false;
             return valida;
         }
 
         if (jTextHora.getText().equals("")) {
-            JOptionPane.showMessageDialog(null, "Campo(s) vazio(s)!");
+            JOptionPane.showMessageDialog(null, "Preencha o campo HORA!");
             valida = false;
             return valida;
         }
 
         if (jTextQuantidadeProduto.getText().equals("")) {
-            JOptionPane.showMessageDialog(null, "Campo(s) vazio(s)!");
+            JOptionPane.showMessageDialog(null, "Preencha o campo QUANTIDADE!");
             valida = false;
             return valida;
         }
 
         if (jTextTotal.getText().equals("")) {
-            JOptionPane.showMessageDialog(null, "Campo(s) vazio(s)!");
+            JOptionPane.showMessageDialog(null, "Preencha o campo TOTAL!");
             valida = false;
             return valida;
         }
@@ -645,7 +670,7 @@ public class CadastrarVenda extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
 
-        if (VerificaCampos() == true) {
+        if (VerificaCampos() && ValidaHora() == true) {
             TabelaProduto();
         }
 
