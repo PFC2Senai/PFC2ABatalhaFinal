@@ -375,9 +375,9 @@ public class CadastrarServicoTeste extends javax.swing.JFrame {
                 .addComponent(jBtnAvancarPainelPecas)
                 .addGap(133, 133, 133))
             .addGroup(jPanelServicoLayout.createSequentialGroup()
-                .addGap(65, 65, 65)
+                .addGap(62, 62, 62)
                 .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, 678, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(82, Short.MAX_VALUE))
+                .addContainerGap(105, Short.MAX_VALUE))
         );
         jPanelServicoLayout.setVerticalGroup(
             jPanelServicoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -404,7 +404,7 @@ public class CadastrarServicoTeste extends javax.swing.JFrame {
                 jBtbIncluirPecaActionPerformed(evt);
             }
         });
-        jPanel14.add(jBtbIncluirPeca, new org.netbeans.lib.awtextra.AbsoluteConstraints(615, 159, -1, -1));
+        jPanel14.add(jBtbIncluirPeca, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 380, -1, -1));
 
         jLabel34.setText("Quantidade:");
         jPanel14.add(jLabel34, new org.netbeans.lib.awtextra.AbsoluteConstraints(367, 110, -1, -1));
@@ -526,7 +526,7 @@ public class CadastrarServicoTeste extends javax.swing.JFrame {
                         .addGap(616, 616, 616)
                         .addComponent(jBtnAvancarPainelEquipamento))
                     .addComponent(jPanel14, javax.swing.GroupLayout.PREFERRED_SIZE, 765, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(42, Short.MAX_VALUE))
+                .addContainerGap(62, Short.MAX_VALUE))
         );
         jPanelPecasLayout.setVerticalGroup(
             jPanelPecasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -703,7 +703,7 @@ public class CadastrarServicoTeste extends javax.swing.JFrame {
                     .addGroup(jPanelEquipamentoLayout.createSequentialGroup()
                         .addGap(27, 27, 27)
                         .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(23, Short.MAX_VALUE))
+                .addContainerGap(43, Short.MAX_VALUE))
         );
         jPanelEquipamentoLayout.setVerticalGroup(
             jPanelEquipamentoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -833,7 +833,7 @@ public class CadastrarServicoTeste extends javax.swing.JFrame {
                     .addGroup(jPanelFuncionarioLayout.createSequentialGroup()
                         .addGap(27, 27, 27)
                         .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(28, Short.MAX_VALUE))
+                .addContainerGap(48, Short.MAX_VALUE))
         );
         jPanelFuncionarioLayout.setVerticalGroup(
             jPanelFuncionarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -942,7 +942,7 @@ public class CadastrarServicoTeste extends javax.swing.JFrame {
                         .addGap(536, 536, 536)
                         .addComponent(jBtnCadastrarServico3))
                     .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(63, Short.MAX_VALUE))
+                .addContainerGap(83, Short.MAX_VALUE))
         );
         jPanelValorTotalServicoLayout.setVerticalGroup(
             jPanelValorTotalServicoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -958,10 +958,10 @@ public class CadastrarServicoTeste extends javax.swing.JFrame {
 
         jTabbedPaneServico.addTab("Valor", new javax.swing.ImageIcon(getClass().getResource("/imagens/dinheiro.png")), jPanelValorTotalServico); // NOI18N
 
-        jPanel6.add(jTabbedPaneServico, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 100, 830, 600));
+        jPanel6.add(jTabbedPaneServico, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 100, 850, 600));
 
         jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/leiaute/img3.png"))); // NOI18N
-        jPanel6.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -30, 850, 940));
+        jPanel6.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -400, 850, 940));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -1208,7 +1208,6 @@ public class CadastrarServicoTeste extends javax.swing.JFrame {
     private void uJComboBoxClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_uJComboBoxClientesActionPerformed
         codCliente = 0;
         idClienteComboBox();
-
     }//GEN-LAST:event_uJComboBoxClientesActionPerformed
 
     private void jComboBoxTipoServicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxTipoServicoActionPerformed
@@ -1645,7 +1644,7 @@ public class CadastrarServicoTeste extends javax.swing.JFrame {
 
         Connection conexao = Conexao.getConnection();
         ResultSet rs;
-        String sql = "select idtabTipo_serv from tabtipo_serv where Tipo_serv = '" + jComboBoxTipoServico.getSelectedObject() + "';";
+        String sql = "select idtabTipo_serv from tabtipo_serv where Tipo_serv = '" + jComboBoxTipoServico.getSelectedItem() + "';";
 
         try {
             pst = conexao.prepareStatement(sql);
@@ -1832,6 +1831,42 @@ public class CadastrarServicoTeste extends javax.swing.JFrame {
     private void Mensangem() {
         JOptionPane.showMessageDialog(null, "Esse registro não encontra-se cadastrado na base de dados.");
     }
+ 
+    
+//     public static void main(String args[]) {
+//        /* Set the Nimbus look and feel */
+//        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+//        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+//         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+//         */
+//        try {
+//            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+//                if ("Windows".equals(info.getName())) {
+//                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+//                    break;
+//                }
+//            }
+//        } catch (ClassNotFoundException ex) {
+//            java.util.logging.Logger.getLogger(Menu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (InstantiationException ex) {
+//            java.util.logging.Logger.getLogger(Menu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (IllegalAccessException ex) {
+//            java.util.logging.Logger.getLogger(Menu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+//            java.util.logging.Logger.getLogger(Menu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        }
+//        //</editor-fold>
+//        /* Create and display the form */
+//        java.awt.EventQueue.invokeLater(new Runnable() {
+//            @Override
+//            public void run() {
+//                new CadastrarServicoTeste().setVisible(true);
+////                Agendamentos a = new Agendamentos(); 
+////                a.terceiraTarefa(21);
+//            }
+//        });   
+//    }
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBtbIncluirEquipamento;

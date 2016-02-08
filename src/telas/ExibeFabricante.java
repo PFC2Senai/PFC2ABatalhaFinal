@@ -37,6 +37,7 @@ public class ExibeFabricante extends javax.swing.JFrame {
     }
     
     public ExibeFabricante(Menu menu) {
+        this.telaMenu = menu;
         initComponents();
         TabelaFabricante("select * from tabfabricante;");
         ocultaCampos();
@@ -257,7 +258,7 @@ public class ExibeFabricante extends javax.swing.JFrame {
 
     private void txtBuscarKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBuscarKeyReleased
         TabelaFabricante("select  * from tabfabricante where fabricante "
-            + "like '%" + txtBuscar.getText() + "%';");
+            + "like '%" + txtBuscar.getText().trim() + "%';");
     }//GEN-LAST:event_txtBuscarKeyReleased
 
     private void jBtnNovoFabricanteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnNovoFabricanteActionPerformed
