@@ -45,6 +45,7 @@ public class CadastrarUsuario extends javax.swing.JFrame {
         jPasswordSenha = new javax.swing.JPasswordField();
         jPasswordConfirmaSenha = new javax.swing.JPasswordField();
         jLabel2 = new javax.swing.JLabel();
+        jTextField1 = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
@@ -117,6 +118,14 @@ public class CadastrarUsuario extends javax.swing.JFrame {
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/leiaute/img1.png"))); // NOI18N
         getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 680, 100));
+
+        jTextField1.setBackground(new java.awt.Color(223, 237, 253));
+        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField1ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(-1, 100, 680, 260));
 
         pack();
         setLocationRelativeTo(null);
@@ -195,6 +204,10 @@ public class CadastrarUsuario extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jPasswordConfirmaSenhaKeyTyped
 
+    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField1ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
@@ -209,6 +222,7 @@ public class CadastrarUsuario extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JPasswordField jPasswordConfirmaSenha;
     private javax.swing.JPasswordField jPasswordSenha;
+    private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextNome;
     // End of variables declaration//GEN-END:variables
 }

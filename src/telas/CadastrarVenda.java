@@ -369,6 +369,7 @@ public class CadastrarVenda extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jTextField1 = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         uJComboBoxCliente = new componentes.UJComboBox();
         jButton6 = new javax.swing.JButton();
@@ -399,8 +400,12 @@ public class CadastrarVenda extends javax.swing.JFrame {
         jTextValorUnit = new javax.swing.JTextField();
         jLabel12 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
+        jTextField2 = new javax.swing.JTextField();
+
+        jTextField1.setText("jTextField1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setBackground(new java.awt.Color(223, 237, 253));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setFont(new java.awt.Font("Raavi", 1, 18)); // NOI18N
@@ -580,6 +585,9 @@ public class CadastrarVenda extends javax.swing.JFrame {
 
         jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/leiaute/img2.png"))); // NOI18N
         getContentPane().add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 680, 110));
+
+        jTextField2.setBackground(new java.awt.Color(223, 237, 253));
+        getContentPane().add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(-4, 110, 680, 550));
 
         pack();
         setLocationRelativeTo(null);
@@ -772,6 +780,8 @@ public class CadastrarVenda extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTableProduto;
     private javax.swing.JTextField jTextCodUser;
+    private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField jTextField2;
     private javax.swing.JFormattedTextField jTextHora;
     private javax.swing.JTextField jTextQuantidadeProduto;
     private javax.swing.JTextField jTextTotal;
