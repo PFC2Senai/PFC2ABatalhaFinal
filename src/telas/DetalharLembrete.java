@@ -89,11 +89,12 @@ public class DetalharLembrete extends javax.swing.JFrame {
             }
         });
 
+        jPanel1.setBackground(new java.awt.Color(223, 237, 253));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel4.setText("Código:");
-        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(21, 69, -1, 20));
+        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 120, -1, 20));
 
         try {
             txtHoraLembrete.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##:##")));
@@ -101,7 +102,7 @@ public class DetalharLembrete extends javax.swing.JFrame {
             ex.printStackTrace();
         }
         txtHoraLembrete.setText("00:00");
-        jPanel1.add(txtHoraLembrete, new org.netbeans.lib.awtextra.AbsoluteConstraints(321, 131, 42, -1));
+        jPanel1.add(txtHoraLembrete, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 180, 42, -1));
 
         jLabel1.setFont(new java.awt.Font("Raavi", 1, 18)); // NOI18N
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/lembrete.png"))); // NOI18N
@@ -110,22 +111,22 @@ public class DetalharLembrete extends javax.swing.JFrame {
 
         jLabCodigo.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabCodigo.setText("codigo");
-        jPanel1.add(jLabCodigo, new org.netbeans.lib.awtextra.AbsoluteConstraints(81, 69, -1, 20));
+        jPanel1.add(jLabCodigo, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 120, -1, 20));
 
         jLabEmpresa.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabEmpresa.setText("empresa");
-        jPanel1.add(jLabEmpresa, new org.netbeans.lib.awtextra.AbsoluteConstraints(81, 100, 176, 20));
+        jPanel1.add(jLabEmpresa, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 150, 176, 20));
 
         txtDescricaoLembrete.setColumns(20);
         txtDescricaoLembrete.setRows(5);
         jScrollPane1.setViewportView(txtDescricaoLembrete);
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(21, 206, 372, 160));
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 260, 372, 160));
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel6.setText("Descrição:");
-        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(21, 180, -1, -1));
-        jPanel1.add(txtDataLembrete, new org.netbeans.lib.awtextra.AbsoluteConstraints(81, 132, 140, -1));
+        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 230, -1, -1));
+        jPanel1.add(txtDataLembrete, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 180, 140, -1));
 
         jLbDataLembrete.setText("Exibe Data");
         jPanel1.add(jLbDataLembrete, new org.netbeans.lib.awtextra.AbsoluteConstraints(81, 132, 142, 23));
@@ -137,7 +138,7 @@ public class DetalharLembrete extends javax.swing.JFrame {
                 jBtnExcluirActionPerformed(evt);
             }
         });
-        jPanel1.add(jBtnExcluir, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 384, -1, -1));
+        jPanel1.add(jBtnExcluir, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 440, -1, -1));
 
         jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/sair.gif"))); // NOI18N
         jButton2.setText("Sair");
@@ -146,11 +147,11 @@ public class DetalharLembrete extends javax.swing.JFrame {
                 jButton2ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(21, 448, -1, -1));
+        jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 500, -1, -1));
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel5.setText("Empresa:");
-        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(21, 100, -1, 20));
+        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 150, -1, 20));
 
         jBtnAlterarLembrete.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/ok.png"))); // NOI18N
         jBtnAlterarLembrete.setText("Salvar");
@@ -159,19 +160,19 @@ public class DetalharLembrete extends javax.swing.JFrame {
                 jBtnAlterarLembreteActionPerformed(evt);
             }
         });
-        jPanel1.add(jBtnAlterarLembrete, new org.netbeans.lib.awtextra.AbsoluteConstraints(217, 384, -1, -1));
+        jPanel1.add(jBtnAlterarLembrete, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 440, -1, -1));
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel2.setText("Data:");
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(21, 132, -1, 20));
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 180, -1, 20));
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel3.setText("Hora:");
-        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(271, 131, -1, 20));
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 180, -1, 20));
 
         jLbHoraLembrete.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLbHoraLembrete.setText("Exibe Hora");
-        jPanel1.add(jLbHoraLembrete, new org.netbeans.lib.awtextra.AbsoluteConstraints(321, 131, 60, 20));
+        jPanel1.add(jLbHoraLembrete, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 180, 60, 20));
 
         jBtnCancel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/cancelar.png"))); // NOI18N
         jBtnCancel.setText("Cancelar");
@@ -180,7 +181,7 @@ public class DetalharLembrete extends javax.swing.JFrame {
                 jBtnCancelActionPerformed(evt);
             }
         });
-        jPanel1.add(jBtnCancel, new org.netbeans.lib.awtextra.AbsoluteConstraints(112, 384, -1, -1));
+        jPanel1.add(jBtnCancel, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 440, -1, -1));
 
         jBtnEditarLembrete.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/editar.png"))); // NOI18N
         jBtnEditarLembrete.setText("Editar");
@@ -189,7 +190,7 @@ public class DetalharLembrete extends javax.swing.JFrame {
                 jBtnEditarLembreteActionPerformed(evt);
             }
         });
-        jPanel1.add(jBtnEditarLembrete, new org.netbeans.lib.awtextra.AbsoluteConstraints(21, 384, -1, -1));
+        jPanel1.add(jBtnEditarLembrete, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 440, -1, -1));
 
         jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/leiaute/img2.png"))); // NOI18N
         jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 670, 100));
@@ -202,7 +203,7 @@ public class DetalharLembrete extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 521, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 552, Short.MAX_VALUE)
         );
 
         pack();

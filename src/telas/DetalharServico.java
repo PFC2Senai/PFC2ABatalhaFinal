@@ -148,9 +148,11 @@ public final class DetalharServico extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        jPanel13.setBackground(new java.awt.Color(223, 237, 253));
         jPanel13.setPreferredSize(new java.awt.Dimension(860, 800));
         jPanel13.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        jPanel3.setBackground(new java.awt.Color(223, 237, 253));
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true), "Serviço"));
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -297,6 +299,9 @@ public final class DetalharServico extends javax.swing.JFrame {
 
         jTabbedPane1.addTab("Serviço", new javax.swing.ImageIcon(getClass().getResource("/imagens/servicos.png")), jPanel13); // NOI18N
 
+        jPanelPecaEEquip.setBackground(new java.awt.Color(223, 237, 253));
+
+        jPanelPecas.setBackground(new java.awt.Color(223, 237, 253));
         jPanelPecas.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Peças"));
 
         jTablePecas.setModel(new javax.swing.table.DefaultTableModel(
@@ -442,6 +447,9 @@ public final class DetalharServico extends javax.swing.JFrame {
 
         jTabbedPane1.addTab("Peças e Equipamento", jPanelPecaEEquip);
 
+        jPanelFuncionarioValor.setBackground(new java.awt.Color(223, 237, 253));
+
+        jPanelFuncionario.setBackground(new java.awt.Color(223, 237, 253));
         jPanelFuncionario.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Valores"));
 
         jTableFuncionario.setModel(new javax.swing.table.DefaultTableModel(
@@ -596,7 +604,7 @@ public final class DetalharServico extends javax.swing.JFrame {
 
         jTabbedPane1.addTab("Funionário e Valor", jPanelFuncionarioValor);
 
-        getContentPane().add(jTabbedPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 120, -1, 520));
+        getContentPane().add(jTabbedPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 110, -1, 520));
 
         jLabel32.setFont(new java.awt.Font("Raavi", 1, 18)); // NOI18N
         jLabel32.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/servicos.png"))); // NOI18N
