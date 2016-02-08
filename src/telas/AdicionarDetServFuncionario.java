@@ -57,7 +57,6 @@ public class AdicionarDetServFuncionario extends javax.swing.JFrame {
         jBtnRemoverFunc = new javax.swing.JButton();
         jBtbIncluirFunc = new javax.swing.JButton();
         jBtnSalvarDetServFuncionario = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -119,9 +118,6 @@ public class AdicionarDetServFuncionario extends javax.swing.JFrame {
             }
         });
         jPanel5.add(jBtnSalvarDetServFuncionario, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 450, -1, -1));
-
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/leiaute/imag2.png"))); // NOI18N
-        jPanel5.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 670, 110));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -230,7 +226,6 @@ public class AdicionarDetServFuncionario extends javax.swing.JFrame {
     private javax.swing.JButton jBtnRemoverFunc;
     private javax.swing.JButton jBtnSalvarDetServFuncionario;
     private javax.swing.JComboBox jComboBoxFuncionarios;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JScrollPane jScrollPane3;
