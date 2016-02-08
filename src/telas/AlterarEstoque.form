@@ -424,6 +424,9 @@
               </Events>
             </Component>
             <Component class="javax.swing.JTextField" name="txtPercentual">
+              <Events>
+                <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtPercentualKeyTyped"/>
+              </Events>
             </Component>
           </SubComponents>
         </Container>

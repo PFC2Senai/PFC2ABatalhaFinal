@@ -1,6 +1,5 @@
 package telas;
 
-
 import atributos.Cliente;
 import atributos.DetServicoEquipamento;
 import atributos.DetServicoFuncionario;
@@ -415,6 +414,11 @@ public class CadastrarServicoTeste extends javax.swing.JFrame {
                 txtQuantidadeActionPerformed(evt);
             }
         });
+        txtQuantidade.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtQuantidadeKeyTyped(evt);
+            }
+        });
         jPanel14.add(txtQuantidade, new org.netbeans.lib.awtextra.AbsoluteConstraints(437, 107, 107, -1));
 
         jComboBoxModelo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Selecione o Modelo" }));
@@ -475,6 +479,12 @@ public class CadastrarServicoTeste extends javax.swing.JFrame {
 
         jLabel39.setText("Valor Unit.");
         jPanel14.add(jLabel39, new org.netbeans.lib.awtextra.AbsoluteConstraints(554, 110, -1, -1));
+
+        txtValorUnit.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtValorUnitKeyTyped(evt);
+            }
+        });
         jPanel14.add(txtValorUnit, new org.netbeans.lib.awtextra.AbsoluteConstraints(614, 107, 108, -1));
 
         uJComboBoxPeca.setEditable(true);
@@ -847,7 +857,19 @@ public class CadastrarServicoTeste extends javax.swing.JFrame {
 
         jLabel3.setText("Mão de obra:");
 
+        txtMaoObra.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtMaoObraKeyTyped(evt);
+            }
+        });
+
         jLabel4.setText("Total serviço:");
+
+        txtTotalGeral.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtTotalGeralKeyTyped(evt);
+            }
+        });
 
         jBtnCalcularTotalServico.setText("Calcular Total");
         jBtnCalcularTotalServico.addActionListener(new java.awt.event.ActionListener() {
@@ -963,7 +985,7 @@ public class CadastrarServicoTeste extends javax.swing.JFrame {
     }//GEN-LAST:event_jBtnAdicionarTipoActionPerformed
 
     private void jBtnRemoverTipoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnRemoverTipoActionPerformed
-        
+
         DefaultTableModel dtm = (DefaultTableModel) jTableTipodeServico.getModel();
         int linha = jTableTipodeServico.getSelectedRow();
 
@@ -973,7 +995,7 @@ public class CadastrarServicoTeste extends javax.swing.JFrame {
     }//GEN-LAST:event_jBtnRemoverTipoActionPerformed
 
     private void jBtnCancelarCadTipoServicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnCancelarCadTipoServicoActionPerformed
-        
+
         jBtnCadTipoServico.setVisible(false);
         jBtnCancelarCadTipoServico.setVisible(false);
 
@@ -998,9 +1020,9 @@ public class CadastrarServicoTeste extends javax.swing.JFrame {
         jBtbNovoTipoServico.setVisible(true);
 
         jComboBoxTipoServico.removeAllItems();
-        
+
         carregarComboTipoServico();
-        
+
         jComboBoxTipoServico.setSelectedItem(tServ.getTipo());
     }//GEN-LAST:event_jBtnCadTipoServicoActionPerformed
 
@@ -1039,7 +1061,7 @@ public class CadastrarServicoTeste extends javax.swing.JFrame {
     }//GEN-LAST:event_jBtnAvancarPainelPecasActionPerformed
 
     private void jBtnVoltarPainelServicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnVoltarPainelServicoActionPerformed
-        jTabbedPaneServico.setSelectedComponent(this.jPanelServico);       
+        jTabbedPaneServico.setSelectedComponent(this.jPanelServico);
     }//GEN-LAST:event_jBtnVoltarPainelServicoActionPerformed
 
     private void jBtnRemoveEquipamentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnRemoveEquipamentoActionPerformed
@@ -1190,7 +1212,7 @@ public class CadastrarServicoTeste extends javax.swing.JFrame {
     }//GEN-LAST:event_uJComboBoxClientesActionPerformed
 
     private void jComboBoxTipoServicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxTipoServicoActionPerformed
-        
+
     }//GEN-LAST:event_jComboBoxTipoServicoActionPerformed
 
     private void uJComboBoxPecaItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_uJComboBoxPecaItemStateChanged
@@ -1282,6 +1304,38 @@ public class CadastrarServicoTeste extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jComboBoxTipoServicoItemStateChanged
 
+    private void txtQuantidadeKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtQuantidadeKeyTyped
+        // TODO add your handling code here:
+        String caracteres = "0987654321,.";
+        if (!caracteres.contains(evt.getKeyChar() + "")) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtQuantidadeKeyTyped
+
+    private void txtValorUnitKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtValorUnitKeyTyped
+        // TODO add your handling code here:
+        String caracteres = "0987654321,.";
+        if (!caracteres.contains(evt.getKeyChar() + "")) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtValorUnitKeyTyped
+
+    private void txtMaoObraKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtMaoObraKeyTyped
+        // TODO add your handling code here:
+        String caracteres = "0987654321,.";
+        if (!caracteres.contains(evt.getKeyChar() + "")) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtMaoObraKeyTyped
+
+    private void txtTotalGeralKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTotalGeralKeyTyped
+        // TODO add your handling code here:
+        String caracteres = "0987654321,.";
+        if (!caracteres.contains(evt.getKeyChar() + "")) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtTotalGeralKeyTyped
+
     private void limparCampos() {
 
         txtDataCadProduto.setDate(null);
@@ -1342,7 +1396,7 @@ public class CadastrarServicoTeste extends javax.swing.JFrame {
             txtTotalPecas.setText(String.valueOf(totalPeca));
 
             txtQuantidade.setText("");
-         //   txtValorUnit.setText("");
+            //   txtValorUnit.setText("");
 
         } catch (Exception erro) {
             Logger.getLogger(CadastrarCliente.class
@@ -1422,8 +1476,7 @@ public class CadastrarServicoTeste extends javax.swing.JFrame {
 
     private void carregarComboTipoServico() {
 
-       // jComboBoxTipoServico.clear();
-
+        // jComboBoxTipoServico.clear();
         ArrayList<TipoServico> tipoServico = new ArrayList<TipoServico>();
         tipoServico = TipoServicoDAO.ListarTipoServico();
 
@@ -1435,7 +1488,7 @@ public class CadastrarServicoTeste extends javax.swing.JFrame {
 
     private void carregarComboPeca() {
 
-       // uJComboBoxPeca.clear();
+        // uJComboBoxPeca.clear();
         ArrayList<Produto> pecas = new ArrayList<Produto>();
         pecas = ProdutoDAO.ListarProdutos();
 
@@ -1446,8 +1499,7 @@ public class CadastrarServicoTeste extends javax.swing.JFrame {
 
     private void carregarComboEquipamento() {
 
-     //   uJComboBoxEquipamento.clear();
-
+        //   uJComboBoxEquipamento.clear();
         ArrayList<Equipamento> equipamentos = new ArrayList<Equipamento>();
         equipamentos = EquipamentoDAO.ListarEquipamentos();
 
@@ -1458,8 +1510,7 @@ public class CadastrarServicoTeste extends javax.swing.JFrame {
 
     private void carregarComboFuncionario() {
 
-    //    uJComboBoxFuncionario.clear();
-
+        //    uJComboBoxFuncionario.clear();
         ArrayList<Funcionario> funcionarios = new ArrayList<Funcionario>();
         funcionarios = FuncionarioDAO.ListarFuncionario();
 
@@ -1781,7 +1832,7 @@ public class CadastrarServicoTeste extends javax.swing.JFrame {
     private void Mensangem() {
         JOptionPane.showMessageDialog(null, "Esse registro não encontra-se cadastrado na base de dados.");
     }
-    
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBtbIncluirEquipamento;
     private javax.swing.JButton jBtbIncluirFunc;

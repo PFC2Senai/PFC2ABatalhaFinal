@@ -311,6 +311,12 @@ public final class AlterarEstoque extends javax.swing.JFrame {
             }
         });
 
+        txtPercentual.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtPercentualKeyTyped(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -479,6 +485,14 @@ if(VerificaCampos() == true){
     private void jComboBoxFornecedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxFornecedorActionPerformed
         idFornecedorComboBox();
     }//GEN-LAST:event_jComboBoxFornecedorActionPerformed
+
+    private void txtPercentualKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPercentualKeyTyped
+        // TODO add your handling code here:
+        String caracteres = "0987654321,.";
+        if (!caracteres.contains(evt.getKeyChar() + "")) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtPercentualKeyTyped
 
     public void CarregarDadosProduto() {
 

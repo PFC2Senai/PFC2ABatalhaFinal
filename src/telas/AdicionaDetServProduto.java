@@ -31,28 +31,27 @@ public class AdicionaDetServProduto extends javax.swing.JFrame {
     private double valorUnit;
     private double valor;
     private double totalPeca = 0;
-    
+
     private String produto;
     private String modelo;
     private String fabricante;
-    
+
     private int idServico;
     private DetalharServico telaDatalharServico;
-    
+
     /**
      * Creates new form AlteraServicoProduto
      */
-    
     public AdicionaDetServProduto() {
-        initComponents();       
+        initComponents();
         txtQuantidade.setDocument(new LimitarDigitos(5));
     }
-    
+
     public AdicionaDetServProduto(int idServ, DetalharServico telaDetalharServ) {
         this.idServico = idServ;
         this.telaDatalharServico = telaDetalharServ;
         initComponents();
-        populaComboBoxProduto();        
+        populaComboBoxProduto();
     }
 
     /**
@@ -97,6 +96,12 @@ public class AdicionaDetServProduto extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jBtnInserirPeca, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 500, -1, -1));
+
+        txtTotalPecas.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtTotalPecasKeyTyped(evt);
+            }
+        });
         getContentPane().add(txtTotalPecas, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 500, 172, -1));
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/money.png"))); // NOI18N
@@ -145,10 +150,22 @@ public class AdicionaDetServProduto extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jBtbIncluirPeca, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 260, 110, -1));
+
+        txtValorUnit.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtValorUnitKeyTyped(evt);
+            }
+        });
         getContentPane().add(txtValorUnit, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 210, 90, -1));
 
         jLabel39.setText("Valor Unit.");
         getContentPane().add(jLabel39, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 210, -1, -1));
+
+        txtQuantidade.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtQuantidadeKeyTyped(evt);
+            }
+        });
         getContentPane().add(txtQuantidade, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 210, 117, -1));
 
         jLabel34.setText("Quant.:");
@@ -218,7 +235,7 @@ public class AdicionaDetServProduto extends javax.swing.JFrame {
 
         DetServicoProduto dtServ = new DetServicoProduto();
 
-        for(int j = 0; j < jTablePecas.getRowCount(); j++) {
+        for (int j = 0; j < jTablePecas.getRowCount(); j++) {
 
             dtServ.setCodServico(idServico);
             dtServ.setCodDetProduto(Integer.parseInt(jTablePecas.getValueAt(j, 0).toString()));
@@ -230,7 +247,7 @@ public class AdicionaDetServProduto extends javax.swing.JFrame {
         double resultado = totalGeral + totalPeca;
         ServicoDAO.UpdateTotalServico(idServico, resultado);
 
-        telaDatalharServico.TabelaProduto("SELECT * FROM vw_detservicoproduto where idservico = " + idServico +";");
+        telaDatalharServico.TabelaProduto("SELECT * FROM vw_detservicoproduto where idservico = " + idServico + ";");
         telaDatalharServico.CarregaServico();
         this.dispose();
     }//GEN-LAST:event_jBtnInserirPecaActionPerformed
@@ -253,7 +270,7 @@ public class AdicionaDetServProduto extends javax.swing.JFrame {
         totalPeca -= totalParcial;
         txtTotalPecas.setText(String.valueOf(totalPeca));
 
-        if(linha != -1) {
+        if (linha != -1) {
             dtm.removeRow(linha);
         }
     }//GEN-LAST:event_jBtnRemoverPecaActionPerformed
@@ -296,162 +313,186 @@ public class AdicionaDetServProduto extends javax.swing.JFrame {
         populaComboBoxModelo();
         produto = jComboBoxProduto.getSelectedItem().toString();
     }//GEN-LAST:event_jComboBoxProdutoItemStateChanged
-    
+
+    private void txtQuantidadeKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtQuantidadeKeyTyped
+        // TODO add your handling code here:
+        String caracteres = "0987654321,.";
+        if (!caracteres.contains(evt.getKeyChar() + "")) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtQuantidadeKeyTyped
+
+    private void txtValorUnitKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtValorUnitKeyTyped
+        // TODO add your handling code here:
+        String caracteres = "0987654321,.";
+        if (!caracteres.contains(evt.getKeyChar() + "")) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtValorUnitKeyTyped
+
+    private void txtTotalPecasKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTotalPecasKeyTyped
+        // TODO add your handling code here:
+        String caracteres = "0987654321,.";
+        if (!caracteres.contains(evt.getKeyChar() + "")) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtTotalPecasKeyTyped
+
     public void TabelaProduto() {
-               
+
         codDetProduto = ProdutoDAO.codDetProduto();
         int quantidade = Integer.parseInt(txtQuantidade.getText());
         valorUnit = Double.parseDouble(txtValorUnit.getText());
         double total = valorUnit * quantidade;
-        try { 
-            
+        try {
+
             DefaultTableModel dtm = (DefaultTableModel) jTablePecas.getModel();
-                   
-                dtm.addRow(new Object[] {codDetProduto, codModelo, 
-                                         codFabricante, produto, 
-                                         modelo, fabricante,                                         
-                                         valorUnit,
-                                         quantidade,
-                                         total});
-                totalPeca += total;
-                txtTotalPecas.setEditable(false);
-                txtTotalPecas.setText(String.valueOf(totalPeca));
-                
-                txtQuantidade.setText("");      
-                
+
+            dtm.addRow(new Object[]{codDetProduto, codModelo,
+                codFabricante, produto,
+                modelo, fabricante,
+                valorUnit,
+                quantidade,
+                total});
+            totalPeca += total;
+            txtTotalPecas.setEditable(false);
+            txtTotalPecas.setText(String.valueOf(totalPeca));
+
+            txtQuantidade.setText("");
+
         } catch (Exception erro) {
             Logger.getLogger(CadastrarCliente.class.getName()).log(Level.SEVERE, null, erro);
-        }          
+        }
     }
-    
-    public void CarregaValorUnit() { 
-        
+
+    public void CarregaValorUnit() {
+
         valor = ProdutoDAO.ExisteProduto(codProduto, codModelo, codFabricante);
-        
-        if (valor != 0) {            
+
+        if (valor != 0) {
             txtValorUnit.setText(String.valueOf(valor));
-        }        
+        }
     }
-    
+
     private void populaComboBoxModelo() {
-        
+
         Connection conexao = Conexao.getConnection();
         ResultSet rs;
-        String sql = "select modelo " +
-                                    " from tabdetproduto inner join " +
-                                    " tabproduto inner join " +
-                                    " tabmodelo on tabmodelo_idtabModelo = idtabModelo and " +
-                                    " tabproduto_id_prod = id_prod"
-                                +   " where id_prod = " + codProduto + " group by modelo;";
+        String sql = "select modelo "
+                + " from tabdetproduto inner join "
+                + " tabproduto inner join "
+                + " tabmodelo on tabmodelo_idtabModelo = idtabModelo and "
+                + " tabproduto_id_prod = id_prod"
+                + " where id_prod = " + codProduto + " group by modelo;";
         System.out.println(codProduto);
-        
-        try{
+
+        try {
             pst = conexao.prepareStatement(sql);
             rs = pst.executeQuery();
-            
-            while(rs.next()) {
+
+            while (rs.next()) {
                 jComboBoxModelo.addItem(rs.getString("modelo"));
             }
-            
-        }catch(SQLException ex) {
+
+        } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, ex);
         }
     }
-    
+
     private void idModeloComboBox() {
-        
+
         Connection conexao = Conexao.getConnection();
         ResultSet rs;
-        String sql = "select * from tabmodelo where modelo = '" + jComboBoxModelo.getSelectedItem()+ "';";
-        
-        try{
+        String sql = "select * from tabmodelo where modelo = '" + jComboBoxModelo.getSelectedItem() + "';";
+
+        try {
             pst = conexao.prepareStatement(sql);
             rs = pst.executeQuery();
-            
-            while(rs.next()) {
+
+            while (rs.next()) {
                 codModelo = (rs.getInt("idtabModelo"));
             }
-            
-        }catch(SQLException ex) {
+
+        } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, ex);
         }
     }
-    
+
     private void populaComboBoxFabricante() {
-        
+
         Connection conexao = Conexao.getConnection();
         ResultSet rs;
         String sql = "SELECT * FROM vw_combofabricanteproduto "
-                   + " WHERE id_prod = " + codProduto 
-                   + " AND tabmodelo_idtabModelo = " + codModelo + " group by fabricante;";
-        
-        try{
+                + " WHERE id_prod = " + codProduto
+                + " AND tabmodelo_idtabModelo = " + codModelo + " group by fabricante;";
+
+        try {
             pst = conexao.prepareStatement(sql);
             rs = pst.executeQuery();
-            
-            while(rs.next()) {
+
+            while (rs.next()) {
                 jComboBoxFabricante.addItem(rs.getString("fabricante"));
             }
-            
-        }catch(SQLException ex) {
+
+        } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, ex);
         }
     }
-    
+
     private void idFabricanteComboBox() {
-        
+
         Connection conexao = Conexao.getConnection();
         ResultSet rs;
-        String sql = "select * from tabfabricante where fabricante = '" + jComboBoxFabricante.getSelectedItem()+ "';";
-        
-        try{
+        String sql = "select * from tabfabricante where fabricante = '" + jComboBoxFabricante.getSelectedItem() + "';";
+
+        try {
             pst = conexao.prepareStatement(sql);
             rs = pst.executeQuery();
-            
-            while(rs.next()) {
+
+            while (rs.next()) {
                 codFabricante = (rs.getInt("idtabFabricante"));
             }
-            
-        }catch(SQLException ex) {
+
+        } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, ex);
         }
     }
-    
+
     private void populaComboBoxProduto() {
-        
+
         Connection conexao = Conexao.getConnection();
         ResultSet rs;
         String sql = "select * from tabproduto;";
-        
-        try{
+
+        try {
             pst = conexao.prepareStatement(sql);
             rs = pst.executeQuery();
-            
-            while(rs.next()) {
+
+            while (rs.next()) {
                 jComboBoxProduto.addItem(rs.getString("produto"));
             }
-            
-        }catch(SQLException ex) {
+
+        } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, ex);
         }
     }
-    
+
     private void idProdutoComboBox() {
-        
+
         Connection conexao = Conexao.getConnection();
         ResultSet rs;
         String sql = "select * from tabproduto inner join tabdetproduto on tabproduto_id_prod = id_prod"
-                    + " where produto = '" + jComboBoxProduto.getSelectedItem()+ "';";
-        
-        try{
+                + " where produto = '" + jComboBoxProduto.getSelectedItem() + "';";
+
+        try {
             pst = conexao.prepareStatement(sql);
             rs = pst.executeQuery();
-            
-            while(rs.next()) {
+
+            while (rs.next()) {
                 codProduto = (rs.getInt("id_prod"));
             }
-            
-        }catch(SQLException ex) {
+
+        } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, ex);
         }
     }

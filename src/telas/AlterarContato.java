@@ -36,7 +36,7 @@ public final class AlterarContato extends javax.swing.JFrame {
         txtContato.setDocument(new LimitarDigitos(45));
         txtEmail.setDocument(new LimitarDigitos(45));
         txtTel.setDocument(new LimitarDigitos(45));
-        txtTelCel.setDocument(new LimitarDigitos(45));
+        txtTelCel.setDocument(new LimitarDigitos(12));
     }
 
     public AlterarContato(DetalharCliente telaDetCli, int codCliente, int codPessoaCont, int codCont) {
@@ -110,6 +110,12 @@ public final class AlterarContato extends javax.swing.JFrame {
             ex.printStackTrace();
         }
         getContentPane().add(txtTel, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 150, 120, -1));
+
+        txtTelCel.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtTelCelKeyTyped(evt);
+            }
+        });
         getContentPane().add(txtTelCel, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 180, 120, -1));
 
         jLabelCelular.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/phone.png"))); // NOI18N
@@ -168,7 +174,7 @@ public final class AlterarContato extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jBtnAltContatoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnAltContatoActionPerformed
-       
+
         if (VerificaCamposContatoCli() || VerificaCamposContatoForn()) {
             Telefone tel = new Telefone();
 
@@ -184,9 +190,9 @@ public final class AlterarContato extends javax.swing.JFrame {
             if (codCliente != 0) {
                 p.setSetorContato(jComboBoxSetorContato.getSelectedItem().toString());
                 PessoaContatoDAO.UpdatePessoaContato(p, codPessoaContato);
-                
+
                 String descricaoAudit = "O contato: " + p.getNomeContato() + " da empresa de código: " + codCliente
-                        +" teve dado(s) alterados(s).";
+                        + " teve dado(s) alterados(s).";
                 AuditoriaDAO.CadDetAuditoria(descricaoAudit);
                 telaDetCliente.TabelaContatos();
             }
@@ -194,7 +200,7 @@ public final class AlterarContato extends javax.swing.JFrame {
             if (codFornecedor != 0) {
                 PessoaContatoDAO.UpdatePessoaContFornecedor(p, codPessoaContato);
                 String descricaoAudit = "O contato: " + p.getNomeContato() + " do fornecedor de código: " + codFornecedor
-                        +" teve dado(s) alterados(s).";
+                        + " teve dado(s) alterados(s).";
                 AuditoriaDAO.CadDetAuditoria(descricaoAudit);
                 telaDetFornecedor.TabelaContatos();
             }
@@ -206,7 +212,7 @@ public final class AlterarContato extends javax.swing.JFrame {
     }//GEN-LAST:event_jBtnAltContatoActionPerformed
 
     private void jBtbCancelContatoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtbCancelContatoActionPerformed
-        if (JOptionPane.showConfirmDialog(null, "Tem certeza que deseja sair? Os dados não serão salvos.", "Confirmar Cancelamento", JOptionPane.YES_NO_OPTION) == 0 ) {
+        if (JOptionPane.showConfirmDialog(null, "Tem certeza que deseja sair? Os dados não serão salvos.", "Confirmar Cancelamento", JOptionPane.YES_NO_OPTION) == 0) {
             verificaPagina();
             this.dispose();
         }
@@ -219,6 +225,15 @@ public final class AlterarContato extends javax.swing.JFrame {
     private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
         verificaPagina();
     }//GEN-LAST:event_formWindowClosed
+
+    private void txtTelCelKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTelCelKeyTyped
+        // TODO add your handling code here:
+
+        String caracteres = "0987654321";
+        if (!caracteres.contains(evt.getKeyChar() + "")) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtTelCelKeyTyped
 
     private boolean VerificaCamposContatoCli() {
 

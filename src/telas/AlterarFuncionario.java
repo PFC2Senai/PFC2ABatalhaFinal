@@ -10,6 +10,7 @@ import funcoes.ContatosDAO;
 import funcoes.FuncionarioDAO;
 import funcoes.FuncoesDiversas;
 import static funcoes.FuncoesDiversas.ConverterData;
+import funcoes.LimitarDigitos;
 import java.awt.Color;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -20,65 +21,80 @@ import javax.swing.JOptionPane;
 import javax.swing.border.LineBorder;
 import static telas.ExibeFuncionario.GetIndice;
 
-
 public class AlterarFuncionario extends javax.swing.JFrame {
-    
+
     private int idContato;
     private AlterarFuncionario telaFunc;
     private int idFuncionario;
     private ExibeFuncionario telaExibeFunc;
 
+    public static String fun;
+
     /**
      * Creates new form AlterarFuncionario
      */
+    private void limitarDigitos() {
+
+        //    jTextSalario.setDocument(new LimitarDigitos(15));
+        //    jTextCtps.setDocument(new LimitarDigitos(14));
+        //    jTextNumCtps.setDocument(new LimitarDigitos(7));
+        //    jTextSerieCtps.setDocument(new LimitarDigitos(4));
+        //    txtTelCel.setDocument(new LimitarDigitos(12));
+        //    txtEndNum.setDocument(new LimitarDigitos(7));
+        //    txtEndEstado.setDocument(new LimitarDigitos(2));
+    }
+
     public AlterarFuncionario() {
         telaFunc = this;
-        this.idFuncionario = GetIndice();       
-        this.idContato = FuncionarioDAO.idContato(idFuncionario);        
+        this.idFuncionario = GetIndice();
+        this.idContato = FuncionarioDAO.idContato(idFuncionario);
         initComponents();
-        CarregaFuncionario();        
+        CarregaFuncionario();
+        limitarDigitos();
     }
-    
+
     public AlterarFuncionario(ExibeFuncionario exibeFunc) {
         this.telaExibeFunc = exibeFunc;
         telaFunc = this;
-        this.idFuncionario = GetIndice();       
+        this.idFuncionario = GetIndice();
         this.idContato = FuncionarioDAO.idContato(idFuncionario);
-        
+
         initComponents();
-        CarregaFuncionario();       
+        CarregaFuncionario();
+        limitarDigitos();
     }
 
     private void CarregaFuncionario() {
-        
+
+        limitarDigitos();
         OcultaBotoes();
         desabilitarEndereco();
         desabilitarContato();
         desabilitarDadosPessoais();
         desabilitarCarteira();
-        
+
         ArrayList<Endereco> endereco = new ArrayList<Endereco>();
         endereco = ContatosDAO.CarregaEndereco(idContato);
-        
+
         ArrayList<Funcionario> funcionario = new ArrayList<Funcionario>();
         funcionario = FuncionarioDAO.CarregaFuncionario(GetIndice());
-               
+
         for (Funcionario func : funcionario) {
-            
+
             id.setText(String.valueOf(func.getId()));
             jTextNome.setText(func.getFuncionario());
             jTextRg.setText(func.getRg());
             jTextCpf.setText(func.getCpf());
             jTextCargo.setText(func.getCargo());
-            jTextSalario.setText(String.valueOf(func.getSalario()));                          
+            jTextSalario.setText(String.valueOf(func.getSalario()));
             jLbDataAdmissao.setText(String.valueOf(func.getDataAdmicao()));
             jTextCtps.setText(String.valueOf(func.getCtps()));
             jTextNumCtps.setText(String.valueOf(func.getNumCtps()));
             jTextSerieCtps.setText(func.getSerieCtps());
-            jComboUf.setSelectedItem(func.getUfCtps());            
-           // idContato = func.getId();
-         }
-        
+            jComboUf.setSelectedItem(func.getUfCtps());
+            // idContato = func.getId();
+        }
+
         for (Endereco end : endereco) {
             txtEndRua.setText(end.getRua());
             txtEndBairro.setText(end.getBairro());
@@ -88,54 +104,54 @@ public class AlterarFuncionario extends javax.swing.JFrame {
             txtEndCidade.setText(end.getCidade());
             txtEndPais.setText(end.getPais());
         }
-        
+
         ArrayList<Telefone> telefones = new ArrayList<Telefone>();
         telefones = ContatosDAO.CarregaTelefones(idContato);
-        
+
         String email = ContatosDAO.CarregaEmail(idContato);
-        
+
         for (Telefone tel : telefones) {
             txtTel.setText(tel.getTel());
             txtTelCel.setText(tel.getCel());
-        }     
-        txtEmail.setText(email);      
+        }
+        txtEmail.setText(email);
     }
-    
-     private void OcultaBotoes() {
-        
-       jBtbCancelContato.setVisible(false);
-       jBtbCancelEndereco.setVisible(false);
-       jBtnSalvarContato.setVisible(false);
-       jBtnSalvarEndereco.setVisible(false);
+
+    private void OcultaBotoes() {
+
+        jBtbCancelContato.setVisible(false);
+        jBtbCancelEndereco.setVisible(false);
+        jBtnSalvarContato.setVisible(false);
+        jBtnSalvarEndereco.setVisible(false);
     }
-     
-     private void desabilitarCarteira() {
-        
+
+    private void desabilitarCarteira() {
+
         jTextCtps.setEditable(false);
         jTextNumCtps.setEditable(false);
         jTextSerieCtps.setEditable(false);
         jComboUf.setEnabled(false);
-        
+
         jTextCtps.setOpaque(false);
         jTextCtps.setBackground(new Color(0, 0, 0, 0));
-        jTextCtps.setBorder(null);        
+        jTextCtps.setBorder(null);
         jTextNumCtps.setOpaque(false);
         jTextNumCtps.setBackground(new Color(0, 0, 0, 0));
-        jTextNumCtps.setBorder(null);        
+        jTextNumCtps.setBorder(null);
         jTextSerieCtps.setOpaque(false);
         jTextSerieCtps.setBackground(new Color(0, 0, 0, 0));
-        jTextSerieCtps.setBorder(null);        
+        jTextSerieCtps.setBorder(null);
         jComboUf.setOpaque(false);
         jComboUf.setBackground(new Color(0, 0, 0, 0));
         jComboUf.setBorder(null);
-        
+
         jBtnEditarCarteira.setVisible(true);
         jBtbCancelCarteira.setVisible(false);
         jBtnSalvarCarteira.setVisible(false);
     }
-    
-    private void EditarCarteira() {    
-        
+
+    private void EditarCarteira() {
+
         jTextCtps.setEditable(true);
         jTextNumCtps.setEditable(true);
         jTextSerieCtps.setEditable(true);
@@ -144,13 +160,13 @@ public class AlterarFuncionario extends javax.swing.JFrame {
         jBtnEditarCarteira.setVisible(false);
         jBtbCancelCarteira.setVisible(true);
         jBtnSalvarCarteira.setVisible(true);
-        
+
         jTextCtps.setOpaque(true);
         jTextCtps.setBackground(new Color(255, 255, 255));
-        jTextCtps.setBorder(new LineBorder(Color.BLACK));        
+        jTextCtps.setBorder(new LineBorder(Color.BLACK));
         jTextNumCtps.setOpaque(true);
         jTextNumCtps.setBackground(new Color(255, 255, 255));
-        jTextNumCtps.setBorder(new LineBorder(Color.BLACK));       
+        jTextNumCtps.setBorder(new LineBorder(Color.BLACK));
         jTextSerieCtps.setOpaque(true);
         jTextSerieCtps.setBackground(new Color(255, 255, 255));
         jTextSerieCtps.setBorder(new LineBorder(Color.BLACK));
@@ -158,17 +174,17 @@ public class AlterarFuncionario extends javax.swing.JFrame {
         jComboUf.setBackground(new Color(255, 255, 255));
         jComboUf.setBorder(new LineBorder(Color.BLACK));
     }
-     
+
     private void desabilitarDadosPessoais() {
         //desabilita campos dados pessoais        
-        jTextNome.setEditable(false);        
+        jTextNome.setEditable(false);
         jTextRg.setEditable(false);
         jTextCpf.setEditable(false);
         jTextCargo.setEditable(false);
         jTextSalario.setEditable(false);
-        txtDataAdmissao.setVisible(false); 
+        txtDataAdmissao.setVisible(false);
         jLbDataAdmissao.setVisible(true);
-      // customiza o textfild
+        // customiza o textfild
         jTextNome.setOpaque(false);
         jTextNome.setBackground(new Color(0, 0, 0, 0));
         jTextNome.setBorder(null);
@@ -177,22 +193,22 @@ public class AlterarFuncionario extends javax.swing.JFrame {
         jTextRg.setBorder(null);
         jTextCpf.setOpaque(false);
         jTextCpf.setBackground(new Color(0, 0, 0, 0));
-        jTextCpf.setBorder(null);        
+        jTextCpf.setBorder(null);
         jTextCargo.setOpaque(false);
         jTextCargo.setBackground(new Color(0, 0, 0, 0));
         jTextCargo.setBorder(null);
         jTextSalario.setOpaque(false);
         jTextSalario.setBackground(new Color(0, 0, 0, 0));
         jTextSalario.setBorder(null);
-      //oculta botoes  
+        //oculta botoes  
         jBtnCancelarFuncionario.setVisible(false);
         jBtnSalvarFuncionario.setVisible(false);
         jBtnEditarFuncionairo.setVisible(true);
     }
-    
+
     private void EditarDadosPessoais() {
         //desabilita campos dados pessoais
-        
+
         jTextNome.setEditable(true);
         jTextRg.setEditable(true);
         jTextCpf.setEditable(true);
@@ -203,16 +219,16 @@ public class AlterarFuncionario extends javax.swing.JFrame {
 
         jBtnEditarFuncionairo.setVisible(false);
         jBtnCancelarFuncionario.setVisible(true);
-        jBtnSalvarFuncionario.setVisible(true); 
+        jBtnSalvarFuncionario.setVisible(true);
         Date d = ConverterData(jLbDataAdmissao.getText());
         txtDataAdmissao.setDate(d);
-      
+
         jTextNome.setOpaque(true);
         jTextNome.setBackground(new Color(255, 255, 255));
         jTextNome.setBorder(new LineBorder(Color.BLACK));
         jTextRg.setOpaque(true);
         jTextRg.setBackground(new Color(255, 255, 255));
-        jTextRg.setBorder(new LineBorder(Color.BLACK));        
+        jTextRg.setBorder(new LineBorder(Color.BLACK));
         jTextCpf.setOpaque(true);
         jTextCpf.setBackground(new Color(255, 255, 255));
         jTextCpf.setBorder(new LineBorder(Color.BLACK));
@@ -221,32 +237,32 @@ public class AlterarFuncionario extends javax.swing.JFrame {
         jTextCargo.setBorder(new LineBorder(Color.BLACK));
         jTextSalario.setOpaque(true);
         jTextSalario.setBackground(new Color(255, 255, 255));
-        jTextSalario.setBorder(new LineBorder(Color.BLACK));       
+        jTextSalario.setBorder(new LineBorder(Color.BLACK));
     }
-    
-    private void desabilitarContato() {    
-        
+
+    private void desabilitarContato() {
+
         txtTelCel.setEditable(false);
         txtTel.setEditable(false);
         txtEmail.setEditable(false);
-        
+
         txtTel.setOpaque(false);
-        txtTel.setBackground(new Color(0,0,0,0));
+        txtTel.setBackground(new Color(0, 0, 0, 0));
         txtTel.setBorder(null);
         txtTelCel.setOpaque(false);
-        txtTelCel.setBackground(new Color(0,0,0,0));
-        txtTelCel.setBorder(null);        
+        txtTelCel.setBackground(new Color(0, 0, 0, 0));
+        txtTelCel.setBorder(null);
         txtEmail.setOpaque(false);
-        txtEmail.setBackground(new Color(0,0,0,0));
+        txtEmail.setBackground(new Color(0, 0, 0, 0));
         txtEmail.setBorder(null);
-        
+
         jBtbCancelContato.setVisible(false);
         jBtnSalvarContato.setVisible(false);
         jBtnEditarContato.setVisible(true);
     }
-    
-    private void EditarContato() {    
-        
+
+    private void EditarContato() {
+
         txtTel.setEditable(true);
         txtTelCel.setEditable(true);
         txtEmail.setEditable(true);
@@ -254,18 +270,18 @@ public class AlterarFuncionario extends javax.swing.JFrame {
         jBtnEditarContato.setVisible(false);
         jBtbCancelContato.setVisible(true);
         jBtnSalvarContato.setVisible(true);
-        
+
         txtTel.setOpaque(true);
         txtTel.setBackground(new Color(255, 255, 255));
-        txtTel.setBorder(new LineBorder(Color.BLACK));        
+        txtTel.setBorder(new LineBorder(Color.BLACK));
         txtTelCel.setOpaque(true);
         txtTelCel.setBackground(new Color(255, 255, 255));
-        txtTelCel.setBorder(new LineBorder(Color.BLACK));       
+        txtTelCel.setBorder(new LineBorder(Color.BLACK));
         txtEmail.setOpaque(true);
         txtEmail.setBackground(new Color(255, 255, 255));
         txtEmail.setBorder(new LineBorder(Color.BLACK));
     }
-    
+
     private void desabilitarEndereco() {
 
         txtEndBairro.setOpaque(false);
@@ -302,7 +318,7 @@ public class AlterarFuncionario extends javax.swing.JFrame {
         jBtnSalvarEndereco.setVisible(false);
         jBtnEditarEndereco.setVisible(true);
     }
-    
+
     private void EditarEndereco() {
 
         txtEndBairro.setEditable(true);
@@ -312,7 +328,7 @@ public class AlterarFuncionario extends javax.swing.JFrame {
         txtEndNum.setEditable(true);
         txtEndPais.setEditable(true);
         txtEndRua.setEditable(true);
-        
+
         txtEndBairro.setOpaque(true);
         txtEndBairro.setBackground(new Color(255, 255, 255));
         txtEndBairro.setBorder(new LineBorder(Color.BLACK));
@@ -340,7 +356,7 @@ public class AlterarFuncionario extends javax.swing.JFrame {
         jBtnEditarEndereco.setVisible(false);
         jBtnCarregaCep.setVisible(true);
     }
-    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -454,6 +470,11 @@ public class AlterarFuncionario extends javax.swing.JFrame {
         jLabel19.setText("Celular:");
 
         txtTelCel.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        txtTelCel.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtTelCelKeyTyped(evt);
+            }
+        });
 
         jBtnEditarContato.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/editar.png"))); // NOI18N
         jBtnEditarContato.setText("Editar");
@@ -545,6 +566,11 @@ public class AlterarFuncionario extends javax.swing.JFrame {
         jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Endereço", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 2, 11))); // NOI18N
 
         txtEndNum.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        txtEndNum.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtEndNumKeyTyped(evt);
+            }
+        });
 
         jLabel21.setText("Nº:");
 
@@ -593,6 +619,11 @@ public class AlterarFuncionario extends javax.swing.JFrame {
         txtEndPais.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
 
         txtEndEstado.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        txtEndEstado.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtEndEstadoKeyTyped(evt);
+            }
+        });
 
         try {
             txtEndCep.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("#####-###")));
@@ -715,6 +746,11 @@ public class AlterarFuncionario extends javax.swing.JFrame {
         jTextNome.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
 
         jTextSalario.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jTextSalario.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTextSalarioKeyTyped(evt);
+            }
+        });
 
         jTextCargo.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
 
@@ -873,10 +909,20 @@ public class AlterarFuncionario extends javax.swing.JFrame {
         jLabel23.setText("Nº:");
 
         jTextNumCtps.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jTextNumCtps.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTextNumCtpsKeyTyped(evt);
+            }
+        });
 
         jLabel24.setText("Série:");
 
         jTextSerieCtps.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jTextSerieCtps.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTextSerieCtpsKeyTyped(evt);
+            }
+        });
 
         jLabel25.setText("UF:");
 
@@ -972,6 +1018,7 @@ public class AlterarFuncionario extends javax.swing.JFrame {
         jLabel6.setText("Código do funcionário:");
         jPanel5.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 130, -1, -1));
 
+        jBtnVoltar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/resultset_previous.png"))); // NOI18N
         jBtnVoltar.setText("Voltar");
         jBtnVoltar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1001,21 +1048,45 @@ public class AlterarFuncionario extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jBtnSalvarFuncionarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnSalvarFuncionarioActionPerformed
-        if (VerificaCamposFunc()) {           
-            Funcionario func = new Funcionario();
-            func.setFuncionario(jTextNome.getText());
-            func.setRg(jTextRg.getText());
-            func.setCpf(jTextCpf.getText());
-            func.setCargo(jTextCargo.getText());
-            func.setSalario(Double.parseDouble(jTextSalario.getText()));
-            func.setDataAdmicao(FuncoesDiversas.FormataData(txtDataAdmissao.getDate()));
-            FuncionarioDAO.UpdateFuncionario(func, idFuncionario);
-            CarregaFuncionario();
-            desabilitarDadosPessoais();
-            JOptionPane.showMessageDialog(null, "Alterado com sucesso!");
-            String descricaoAudit = "Funcionário(a) " + func.getFuncionario() + " /CPF: " + func.getCpf() + "teve dado(s) alterado(s).";
-            AuditoriaDAO.CadDetAuditoria(descricaoAudit);
-        }       
+        
+        if (VerificaCamposFunc()) {
+
+            if (FuncionarioDAO.VerificarFuncionario(jTextCpf.getText()) == false) {
+
+                Funcionario func = new Funcionario();
+                func.setFuncionario(jTextNome.getText());
+                func.setRg(jTextRg.getText());
+                func.setCpf(jTextCpf.getText());
+                func.setCargo(jTextCargo.getText());
+                func.setSalario(Double.parseDouble(jTextSalario.getText()));
+                func.setDataAdmicao(FuncoesDiversas.FormataData(txtDataAdmissao.getDate()));
+                FuncionarioDAO.UpdateFuncionario(func, idFuncionario);
+                CarregaFuncionario();
+                desabilitarDadosPessoais();
+                JOptionPane.showMessageDialog(null, "Alterado com sucesso!");
+                String descricaoAudit = "Funcionário(a) " + func.getFuncionario() + " /CPF: " + func.getCpf() + "teve dado(s) alterado(s).";
+                AuditoriaDAO.CadDetAuditoria(descricaoAudit);
+                
+            } else if (jTextCpf.getText() == null ? fun == null : jTextCpf.getText().equals(fun)) {
+
+                Funcionario func = new Funcionario();
+                func.setFuncionario(jTextNome.getText());
+                func.setRg(jTextRg.getText());
+                func.setCpf(jTextCpf.getText());
+                func.setCargo(jTextCargo.getText());
+                func.setSalario(Double.parseDouble(jTextSalario.getText()));
+                func.setDataAdmicao(FuncoesDiversas.FormataData(txtDataAdmissao.getDate()));
+                FuncionarioDAO.UpdateFuncionario(func, idFuncionario);
+                CarregaFuncionario();
+                desabilitarDadosPessoais();
+                JOptionPane.showMessageDialog(null, "Alterado com sucesso!");
+                String descricaoAudit = "Funcionário(a) " + func.getFuncionario() + " /CPF: " + func.getCpf() + "teve dado(s) alterado(s).";
+                AuditoriaDAO.CadDetAuditoria(descricaoAudit);
+
+            } else {
+                JOptionPane.showMessageDialog(null, "Este Funcionario ja está cadastrado !");
+            }
+        }
     }//GEN-LAST:event_jBtnSalvarFuncionarioActionPerformed
 
     private void jBtnCancelarFuncionarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnCancelarFuncionarioActionPerformed
@@ -1026,7 +1097,7 @@ public class AlterarFuncionario extends javax.swing.JFrame {
     }//GEN-LAST:event_jBtnCancelarFuncionarioActionPerformed
 
     private void jBtnEditarContatoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnEditarContatoActionPerformed
-        EditarContato();        
+        EditarContato();
     }//GEN-LAST:event_jBtnEditarContatoActionPerformed
 
     private void jBtnSalvarContatoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnSalvarContatoActionPerformed
@@ -1034,8 +1105,8 @@ public class AlterarFuncionario extends javax.swing.JFrame {
             Telefone tel = new Telefone();
             tel.setTel(txtTel.getText());
             tel.setCel(txtTelCel.getText());
-            ContatosDAO.UpdateTel2(idContato, tel);       
-            ContatosDAO.UpdateEmail2(idContato, txtEmail.getText()); 
+            ContatosDAO.UpdateTel2(idContato, tel);
+            ContatosDAO.UpdateEmail2(idContato, txtEmail.getText());
             desabilitarContato();
             jBtnEditarContato.setVisible(true);
             JOptionPane.showMessageDialog(null, "Alterado com sucesso!");
@@ -1082,14 +1153,17 @@ public class AlterarFuncionario extends javax.swing.JFrame {
     }//GEN-LAST:event_jBtnSalvarEnderecoActionPerformed
 
     private void jBtbCancelEnderecoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtbCancelEnderecoActionPerformed
-       if (JOptionPane.showConfirmDialog(null, "Cancelar alteração?", "Confirmar Cancelamento", JOptionPane.YES_NO_OPTION) == 0) {
+        if (JOptionPane.showConfirmDialog(null, "Cancelar alteração?", "Confirmar Cancelamento", JOptionPane.YES_NO_OPTION) == 0) {
             desabilitarEndereco();
             CarregaFuncionario();
-       }
+        }
     }//GEN-LAST:event_jBtbCancelEnderecoActionPerformed
 
     private void jBtnEditarFuncionairoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnEditarFuncionairoActionPerformed
-        EditarDadosPessoais();         
+        EditarDadosPessoais();
+
+        fun = jTextCpf.getText();
+
     }//GEN-LAST:event_jBtnEditarFuncionairoActionPerformed
 
     private void jBtnCarregaCepActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnCarregaCepActionPerformed
@@ -1106,7 +1180,7 @@ public class AlterarFuncionario extends javax.swing.JFrame {
 
     private void jBtnSalvarCarteiraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnSalvarCarteiraActionPerformed
         if (VerificaCamposCarteira()) {
-            
+
             Funcionario func = new Funcionario();
 
             func.setCtps(jTextCtps.getText());
@@ -1116,7 +1190,7 @@ public class AlterarFuncionario extends javax.swing.JFrame {
 
             FuncionarioDAO.UpdateCarteiraFuncionario(func, idFuncionario);
 
-            desabilitarCarteira();  
+            desabilitarCarteira();
             CarregaFuncionario();
             JOptionPane.showMessageDialog(null, "Alterado com sucesso!");
             String descricaoAudit = "Funcionário(a) " + jTextNome.getText() + " /CPF: " + jTextCpf.getText() + "teve o(s) dado(s) da carteira alterado(s).";
@@ -1138,6 +1212,57 @@ public class AlterarFuncionario extends javax.swing.JFrame {
     private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
         verificaPagina();
     }//GEN-LAST:event_formWindowClosed
+
+    private void jTextSalarioKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextSalarioKeyTyped
+        // TODO add your handling code here:
+        String caracteres = "0987654321rR$:.,%£¢;";
+
+        if (!caracteres.contains(evt.getKeyChar() + "")) {
+            evt.consume();
+        }
+
+    }//GEN-LAST:event_jTextSalarioKeyTyped
+
+    private void jTextNumCtpsKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextNumCtpsKeyTyped
+        // TODO add your handling code here:
+        String caracteres = "0987654321.,-";
+        if (!caracteres.contains(evt.getKeyChar() + "")) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_jTextNumCtpsKeyTyped
+
+    private void jTextSerieCtpsKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextSerieCtpsKeyTyped
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextSerieCtpsKeyTyped
+
+    private void txtEndNumKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtEndNumKeyTyped
+        // TODO add your handling code here:
+
+        String caracteres = "0987654321snSN";
+        String car = txtEndNum.getText().toUpperCase();
+        if (!caracteres.contains(evt.getKeyChar() + "")) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtEndNumKeyTyped
+
+    private void txtEndEstadoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtEndEstadoKeyTyped
+        // TODO add your handling code here:
+
+        String caracteres = "0987654321";
+
+        if (caracteres.contains(evt.getKeyChar() + "")) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtEndEstadoKeyTyped
+
+    private void txtTelCelKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTelCelKeyTyped
+        // TODO add your handling code here:
+
+        String caracteres = "0987654321";
+        if (!caracteres.contains(evt.getKeyChar() + "")) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtTelCelKeyTyped
 
     public boolean ValidaEmail() {
 
@@ -1171,7 +1296,7 @@ public class AlterarFuncionario extends javax.swing.JFrame {
         }
         return valida;
     }
-    
+
     public void CarregaCep() {
 
         TelaEspera telaTeste = new TelaEspera();
@@ -1211,7 +1336,7 @@ public class AlterarFuncionario extends javax.swing.JFrame {
             }
         }).start();
     }
-    
+
     private boolean VerificaCamposFunc() {
 
         boolean valida = true;
@@ -1250,10 +1375,10 @@ public class AlterarFuncionario extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Campo(s) vazio(s)!");
             valida = false;
             return valida;
-        }  
+        }
         return valida;
     }
-    
+
     private boolean VerificaCamposContato() {
 
         boolean valida = true;
@@ -1274,14 +1399,14 @@ public class AlterarFuncionario extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Campo(s) vazio(s)!");
             valida = false;
             return valida;
-        }    
+        }
         return valida;
     }
-    
+
     private boolean VerificaCamposEndereco() {
 
         boolean valida = true;
-       
+
         if (txtEndPais.getText().trim().equals("")) {
             JOptionPane.showMessageDialog(null, "Campo(s) vazio(s)!");
             valida = false;
@@ -1325,7 +1450,7 @@ public class AlterarFuncionario extends javax.swing.JFrame {
         }
         return valida;
     }
-    
+
     private boolean VerificaCamposCarteira() {
 
         boolean valida = true;
@@ -1352,17 +1477,17 @@ public class AlterarFuncionario extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Selecione um item!");
             valida = false;
             return valida;
-        }    
+        }
         return valida;
     }
-    
+
     private void verificaPagina() {
         if ((this.telaExibeFunc != null)) {
             this.telaExibeFunc.setVisible(true);
             telaExibeFunc.TabelaFuncionario("select * from tabfuncionario;");
         }
     }
-    
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel id;
     private javax.swing.JButton jBtbCancelCarteira;

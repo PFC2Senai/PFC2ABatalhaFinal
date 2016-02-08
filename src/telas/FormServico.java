@@ -61,6 +61,11 @@ private int codig;
 
         desconto.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         desconto.setForeground(new java.awt.Color(11, 101, 132));
+        desconto.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                descontoKeyTyped(evt);
+            }
+        });
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(11, 101, 132));
@@ -90,6 +95,11 @@ private int codig;
 
         valor.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         valor.setForeground(new java.awt.Color(11, 101, 132));
+        valor.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                valorKeyTyped(evt);
+            }
+        });
 
         formPag.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         formPag.setForeground(new java.awt.Color(11, 101, 132));
@@ -280,6 +290,22 @@ private int codig;
     private void formPagActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_formPagActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_formPagActionPerformed
+
+    private void valorKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_valorKeyTyped
+        // TODO add your handling code here:
+        String caracteres = "0987654321,.";
+        if (!caracteres.contains(evt.getKeyChar() + "")) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_valorKeyTyped
+
+    private void descontoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_descontoKeyTyped
+        // TODO add your handling code here:
+        String caracteres = "0987654321,.";
+        if (!caracteres.contains(evt.getKeyChar() + "")) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_descontoKeyTyped
     public void descontos(){
         
             String fPag = (String.valueOf(formPag.getSelectedItem()));

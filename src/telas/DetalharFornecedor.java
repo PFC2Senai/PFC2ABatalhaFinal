@@ -32,6 +32,7 @@ public class DetalharFornecedor extends javax.swing.JFrame {
     private final int codFornecedor;
     private DetalharFornecedor telaDetFornec;
     private ExibeFornecedor telaExibeForn;
+    public static String forn;
 
     /**
      * Creates new form DetalharFornecedor
@@ -44,7 +45,7 @@ public class DetalharFornecedor extends javax.swing.JFrame {
         CarregaFornecedor();
         TabelaContatos();
     }
-    
+
     public DetalharFornecedor(ExibeFornecedor exibeForn) {
         this.telaExibeForn = exibeForn;
         this.codFornecedor = GetIndiceForn();
@@ -112,7 +113,7 @@ public class DetalharFornecedor extends javax.swing.JFrame {
             }
         });
 
-        jPanel1.setBackground(new java.awt.Color(223, 237, 253));
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setFont(new java.awt.Font("Raavi", 1, 18)); // NOI18N
@@ -161,6 +162,11 @@ public class DetalharFornecedor extends javax.swing.JFrame {
         jLabel16.setText("Estado:");
 
         txtEndEstado.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        txtEndEstado.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtEndEstadoKeyTyped(evt);
+            }
+        });
 
         jLabel14.setText("Bairro:");
 
@@ -171,6 +177,11 @@ public class DetalharFornecedor extends javax.swing.JFrame {
         txtEndRua.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
 
         txtEndNum.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        txtEndNum.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtEndNumKeyTyped(evt);
+            }
+        });
 
         jLabel13.setText("Numero:");
 
@@ -384,15 +395,15 @@ public class DetalharFornecedor extends javax.swing.JFrame {
                 .addComponent(jBtnNovoContato)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jBtnExcluirContato)
-                .addContainerGap(44, Short.MAX_VALUE))
+                .addContainerGap(60, Short.MAX_VALUE))
             .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                    .addContainerGap(18, Short.MAX_VALUE)
+                    .addContainerGap(22, Short.MAX_VALUE)
                     .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
 
-        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 330, 834, -1));
+        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 321, 834, 200));
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/leiaute/img3.png"))); // NOI18N
         jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 890, 140));
@@ -426,7 +437,7 @@ public class DetalharFornecedor extends javax.swing.JFrame {
 
         ArrayList<Fornecedor> fornecedor = new ArrayList<Fornecedor>();
         fornecedor = FornecedorDAO.CarregaFornecedor(codFornecedor);
-        
+
         for (Fornecedor forn : fornecedor) {
             lblCodigo.setText(String.valueOf(forn.getIdForn()));
             txtFornecedor.setText(forn.getFornecedor());
@@ -466,42 +477,81 @@ public class DetalharFornecedor extends javax.swing.JFrame {
 
         //nome fornecedor
         txtFornecedor.setEditable(true);
+        forn = txtFornecedor.getText();
     }//GEN-LAST:event_jBtnAltEndActionPerformed
 
     private void jBtnSalvarEndActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnSalvarEndActionPerformed
-       
+
         if (VerificaCamposFornecedor() == true) {
-            Fornecedor forn = new Fornecedor();
-            forn.setFornecedor(txtFornecedor.getText());
-            FornecedorDAO.UpdateFornecedor(forn, GetIndiceForn());
-            txtFornecedor.setEditable(false);
 
-            Endereco endereco = new Endereco();
+            if (FornecedorDAO.VerificarFornecedor(txtFornecedor.getText()) == false) {
 
-            endereco.setPais(txtEndPais.getText());
-            endereco.setCep(txtCep.getText());
-            endereco.setRua(txtEndRua.getText());
-            endereco.setNumero(txtEndNum.getText());
-            endereco.setBairro(txtEndBairro.getText());
-            endereco.setCidade(txtEndCidade.getText());
-            endereco.setEstado(txtEndEstado.getText());
-            endereco.setIdContato(idContato);
+                Fornecedor forn = new Fornecedor();
+                forn.setFornecedor(txtFornecedor.getText());
+                FornecedorDAO.UpdateFornecedor(forn, GetIndiceForn());
+                txtFornecedor.setEditable(false);
 
-            ContatosDAO.UpdateEndereco(idContato, endereco);
-            desabilitarEndereco();
-            CarregaFornecedor();
-            JOptionPane.showMessageDialog(null, "Alterado com sucesso!");
-            String descricaoAudit = "Fornecedor " + forn.getFornecedor() + "teve os dados alterados.";
-            AuditoriaDAO.CadDetAuditoria(descricaoAudit);
-            jBtnSalvarEnd.setVisible(false);
-            jBtnCancelEnde.setVisible(false);
-            jBtnCarregaCep.setVisible(false);
-            jBtnAltEnd.setVisible(true);
+                Endereco endereco = new Endereco();
+
+                endereco.setPais(txtEndPais.getText());
+                endereco.setCep(txtCep.getText());
+                endereco.setRua(txtEndRua.getText());
+                endereco.setNumero(txtEndNum.getText());
+                endereco.setBairro(txtEndBairro.getText());
+                endereco.setCidade(txtEndCidade.getText());
+                endereco.setEstado(txtEndEstado.getText());
+                endereco.setIdContato(idContato);
+
+                ContatosDAO.UpdateEndereco(idContato, endereco);
+                desabilitarEndereco();
+                CarregaFornecedor();
+                JOptionPane.showMessageDialog(null, "Alterado com sucesso!");
+                String descricaoAudit = "Fornecedor " + forn.getFornecedor() + "teve os dados alterados.";
+                AuditoriaDAO.CadDetAuditoria(descricaoAudit);
+                jBtnSalvarEnd.setVisible(false);
+                jBtnCancelEnde.setVisible(false);
+                jBtnCarregaCep.setVisible(false);
+                jBtnAltEnd.setVisible(true);
+
+            } else if (forn == null ? txtFornecedor.getText() == null : forn.equals(txtFornecedor.getText())) {
+
+                Fornecedor forn = new Fornecedor();
+                forn.setFornecedor(txtFornecedor.getText());
+                FornecedorDAO.UpdateFornecedor(forn, GetIndiceForn());
+                txtFornecedor.setEditable(false);
+
+                Endereco endereco = new Endereco();
+
+                endereco.setPais(txtEndPais.getText());
+                endereco.setCep(txtCep.getText());
+                endereco.setRua(txtEndRua.getText());
+                endereco.setNumero(txtEndNum.getText());
+                endereco.setBairro(txtEndBairro.getText());
+                endereco.setCidade(txtEndCidade.getText());
+                endereco.setEstado(txtEndEstado.getText());
+                endereco.setIdContato(idContato);
+
+                ContatosDAO.UpdateEndereco(idContato, endereco);
+                desabilitarEndereco();
+                CarregaFornecedor();
+                JOptionPane.showMessageDialog(null, "Alterado com sucesso!");
+                String descricaoAudit = "Fornecedor " + forn.getFornecedor() + "teve os dados alterados.";
+                AuditoriaDAO.CadDetAuditoria(descricaoAudit);
+                jBtnSalvarEnd.setVisible(false);
+                jBtnCancelEnde.setVisible(false);
+                jBtnCarregaCep.setVisible(false);
+                jBtnAltEnd.setVisible(true);
+
+            } else {
+                JOptionPane.showMessageDialog(null, "Este Fornecedor ja está cadastrado !");
+
+            }
+
         }
     }//GEN-LAST:event_jBtnSalvarEndActionPerformed
 
     private void jBtnCancelEndeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnCancelEndeActionPerformed
-        if (JOptionPane.showConfirmDialog(null, "Cancelar alteração?", "Confirmar Cancelamento", JOptionPane.YES_NO_OPTION) == 0) {            
+        if (JOptionPane.showConfirmDialog(null, "Cancelar alteração?", "Confirmar Cancelamento", JOptionPane.YES_NO_OPTION) == 0) {
             desabilitarEndereco();
             CarregaFornecedor();
             jBtnSalvarEnd.setVisible(false);
@@ -555,6 +605,24 @@ public class DetalharFornecedor extends javax.swing.JFrame {
     private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
         verificaPagina();
     }//GEN-LAST:event_formWindowClosed
+
+    private void txtEndNumKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtEndNumKeyTyped
+        // TODO add your handling code here:
+        String caracteres = "0987654321snSN";
+        String car = txtEndNum.getText().toUpperCase();
+        if (!caracteres.contains(evt.getKeyChar() + "")) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtEndNumKeyTyped
+
+    private void txtEndEstadoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtEndEstadoKeyTyped
+        // TODO add your handling code here:
+        String caracteres = "0987654321";
+
+        if (caracteres.contains(evt.getKeyChar() + "")) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtEndEstadoKeyTyped
 
     private boolean VerificaCamposFornecedor() {
 
@@ -697,37 +765,37 @@ public class DetalharFornecedor extends javax.swing.JFrame {
 
             while (rs.next()) {
                 dados.add(new Object[]{
-                    rs.getObject("id_contato"), 
-                    rs.getObject("idPessoaContatoFornecedor"), 
+                    rs.getObject("id_contato"),
+                    rs.getObject("idPessoaContatoFornecedor"),
                     rs.getObject("contato"),
-                    rs.getObject("telefone"), 
+                    rs.getObject("telefone"),
                     rs.getObject("celular"),
                     rs.getObject("email")});
             }
 
             for (int i = 0; i < 6; i++) {
-                
+
                 ModeloTabela modelo = new ModeloTabela(dados, Colunas);
                 jTableContatos.setModel(modelo);
-                
+
                 TableCellRenderer renderer = new TabelaZebrada();
                 jTableContatos.setDefaultRenderer(Object.class, renderer);
-                
+
                 jTableContatos.getColumnModel().getColumn(0).setMaxWidth(0);
                 jTableContatos.getColumnModel().getColumn(0).setMinWidth(0);
                 jTableContatos.getTableHeader().getColumnModel().getColumn(0).setMaxWidth(0);
                 jTableContatos.getTableHeader().getColumnModel().getColumn(0).setMinWidth(0);
-                
+
                 jTableContatos.getColumnModel().getColumn(1).setMaxWidth(0);
                 jTableContatos.getColumnModel().getColumn(1).setMinWidth(0);
                 jTableContatos.getTableHeader().getColumnModel().getColumn(1).setMaxWidth(0);
                 jTableContatos.getTableHeader().getColumnModel().getColumn(1).setMinWidth(0);
-                
+
                 jTableContatos.getColumnModel().getColumn(2).setPreferredWidth(200);
                 jTableContatos.getColumnModel().getColumn(3).setPreferredWidth(90);
                 jTableContatos.getColumnModel().getColumn(4).setPreferredWidth(90);
                 jTableContatos.getColumnModel().getColumn(5).setPreferredWidth(200);
-                
+
                 jTableContatos.getColumnModel().getColumn(i).setResizable(false);
                 jTableContatos.getTableHeader().setReorderingAllowed(false);
                 jTableContatos.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
@@ -788,7 +856,7 @@ public class DetalharFornecedor extends javax.swing.JFrame {
             telaExibeForn.setVisible(true);
         }
     }
-    
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnVoltar;
     private javax.swing.JButton jBtnAltEnd;
