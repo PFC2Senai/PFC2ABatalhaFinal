@@ -8,6 +8,8 @@ import funcoes.LimitarDigitos;
 import funcoes.ProdutoDAO;
 import funcoes.ServicoDAO;
 import funcoes.TabelaZebrada;
+import java.awt.event.FocusAdapter;
+import java.awt.event.FocusEvent;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -58,6 +60,17 @@ public class AdicionaDetServProduto extends javax.swing.JFrame {
         txtQuantidade.setDocument(new LimitarDigitos(5));
         carregarComboPeca();
         ocultaTabela();
+        
+        uJComboBoxPeca.getEditor().getEditorComponent().addFocusListener(new FocusAdapter() {
+            @Override
+            public void focusLost(FocusEvent e) {
+                if (codProduto == 0 && uJComboBoxPeca.getSelectedIndex() != 0) {
+                    JOptionPane.showMessageDialog(null, "Esse registro não encontra-se cadastrado na base de dados.");
+                    uJComboBoxPeca.getEditor().getEditorComponent().requestFocus();
+                }
+            }
+        });
+        uJComboBoxPeca.setAutocompletar(true);
     }
 
     /**

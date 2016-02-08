@@ -2,17 +2,23 @@ package telas;
 
 import atributos.DetServicoTipoServ;
 import atributos.TipoServico;
+import componentes.UJComboBox;
 import funcoes.Conexao;
 import funcoes.DetServicoTipoDAO;
+import funcoes.TabelaZebrada;
 import funcoes.TipoServicoDAO;
+import java.awt.event.FocusAdapter;
+import java.awt.event.FocusEvent;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableCellRenderer;
 
 /**
  *
@@ -21,26 +27,36 @@ import javax.swing.table.DefaultTableModel;
 public class AdicionarDetServTipoServico extends javax.swing.JFrame {
 
     private PreparedStatement pst;
-    
+
     private int idServico;
     private DetalharServico telaDatalharServico;
-    
+
     private int codTipoServico;
     private String tipoServico;
-    
+
     /**
      * Creates new form AdicionarDetServTipoServico
      */
-    
     public AdicionarDetServTipoServico() {
         initComponents();
     }
- 
+
     public AdicionarDetServTipoServico(int idServ, DetalharServico telaDetalharServ) {
         this.idServico = idServ;
         this.telaDatalharServico = telaDetalharServ;
         initComponents();
-        populaComboBoxTipoServico();
+        ocultaTabela();
+        carregarComboTipoServico();
+        jComboBoxTipoServico1.getEditor().getEditorComponent().addFocusListener(new FocusAdapter() {
+            @Override
+            public void focusLost(FocusEvent e) {
+                if (codTipoServico == 0 && jComboBoxTipoServico1.getSelectedIndex() != 0) {
+                    JOptionPane.showMessageDialog(null, "Esse registro não encontra-se cadastrado na base de dados.");
+                    jComboBoxTipoServico1.getEditor().getEditorComponent().requestFocus();
+                }
+            }
+        });
+        jComboBoxTipoServico1.setAutocompletar(true);
     }
 
     /**
@@ -51,7 +67,9 @@ public class AdicionarDetServTipoServico extends javax.swing.JFrame {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
+        bindingGroup = new org.jdesktop.beansbinding.BindingGroup();
 
+        jBtnSalvarDetServTipoServico = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         jBtnAdicionarTipo = new javax.swing.JButton();
         jBtbNovoTipoServico = new javax.swing.JButton();
@@ -59,13 +77,20 @@ public class AdicionarDetServTipoServico extends javax.swing.JFrame {
         jTableTipodeServico = new javax.swing.JTable();
         jBtnRemoverTipo = new javax.swing.JButton();
         jBtnCadTipoServico = new javax.swing.JButton();
-        jComboBoxTipoServico = new javax.swing.JComboBox();
         jLabel10 = new javax.swing.JLabel();
         jBtnCancelarCadTipoServico = new javax.swing.JButton();
         txtTipoServico = new javax.swing.JTextField();
-        jBtnSalvarDetServTipoServico = new javax.swing.JButton();
+        jComboBoxTipoServico1 = new componentes.UJComboBox();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+
+        jBtnSalvarDetServTipoServico.setText("Salvar");
+        jBtnSalvarDetServTipoServico.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnSalvarDetServTipoServicoActionPerformed(evt);
+            }
+        });
 
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -75,7 +100,7 @@ public class AdicionarDetServTipoServico extends javax.swing.JFrame {
                 jBtnAdicionarTipoActionPerformed(evt);
             }
         });
-        jPanel1.add(jBtnAdicionarTipo, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 190, -1, -1));
+        jPanel1.add(jBtnAdicionarTipo, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 210, -1, -1));
 
         jBtbNovoTipoServico.setText("Novo");
         jBtbNovoTipoServico.addActionListener(new java.awt.event.ActionListener() {
@@ -83,7 +108,7 @@ public class AdicionarDetServTipoServico extends javax.swing.JFrame {
                 jBtbNovoTipoServicoActionPerformed(evt);
             }
         });
-        jPanel1.add(jBtbNovoTipoServico, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 120, -1, -1));
+        jPanel1.add(jBtbNovoTipoServico, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 150, -1, -1));
 
         jTableTipodeServico.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -96,15 +121,19 @@ public class AdicionarDetServTipoServico extends javax.swing.JFrame {
         jTableTipodeServico.getTableHeader().setReorderingAllowed(false);
         jScrollPane6.setViewportView(jTableTipodeServico);
 
-        jPanel1.add(jScrollPane6, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 180, 450, 130));
+        jPanel1.add(jScrollPane6, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 240, 540, 130));
 
         jBtnRemoverTipo.setText("Remover Tipo");
+
+        org.jdesktop.beansbinding.Binding binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, jTableTipodeServico, org.jdesktop.beansbinding.ELProperty.create("${selectedElement != null}"), jBtnRemoverTipo, org.jdesktop.beansbinding.BeanProperty.create("enabled"));
+        bindingGroup.addBinding(binding);
+
         jBtnRemoverTipo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jBtnRemoverTipoActionPerformed(evt);
             }
         });
-        jPanel1.add(jBtnRemoverTipo, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 230, -1, -1));
+        jPanel1.add(jBtnRemoverTipo, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 380, -1, -1));
 
         jBtnCadTipoServico.setText("Salvar");
         jBtnCadTipoServico.addActionListener(new java.awt.event.ActionListener() {
@@ -112,18 +141,10 @@ public class AdicionarDetServTipoServico extends javax.swing.JFrame {
                 jBtnCadTipoServicoActionPerformed(evt);
             }
         });
-        jPanel1.add(jBtnCadTipoServico, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 120, 70, -1));
-
-        jComboBoxTipoServico.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Selecione o Tipo de Serviço" }));
-        jComboBoxTipoServico.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBoxTipoServicoActionPerformed(evt);
-            }
-        });
-        jPanel1.add(jComboBoxTipoServico, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 120, 260, -1));
+        jPanel1.add(jBtnCadTipoServico, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 150, 70, -1));
 
         jLabel10.setText("Tipo:");
-        jPanel1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 120, -1, -1));
+        jPanel1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 150, -1, -1));
 
         jBtnCancelarCadTipoServico.setText("Cancelar");
         jBtnCancelarCadTipoServico.addActionListener(new java.awt.event.ActionListener() {
@@ -131,49 +152,58 @@ public class AdicionarDetServTipoServico extends javax.swing.JFrame {
                 jBtnCancelarCadTipoServicoActionPerformed(evt);
             }
         });
-        jPanel1.add(jBtnCancelarCadTipoServico, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 120, -1, -1));
-        jPanel1.add(txtTipoServico, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 120, 240, -1));
+        jPanel1.add(jBtnCancelarCadTipoServico, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 150, -1, -1));
+        jPanel1.add(txtTipoServico, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 150, 240, -1));
 
-        jBtnSalvarDetServTipoServico.setText("Salvar");
-        jBtnSalvarDetServTipoServico.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jBtnSalvarDetServTipoServicoActionPerformed(evt);
+        jComboBoxTipoServico1.setEditable(true);
+        jComboBoxTipoServico1.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jComboBoxTipoServico1ItemStateChanged(evt);
             }
         });
-        jPanel1.add(jBtnSalvarDetServTipoServico, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 290, -1, -1));
+        jComboBoxTipoServico1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBoxTipoServico1ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jComboBoxTipoServico1, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 150, 260, -1));
+
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/leiaute/img2.png"))); // NOI18N
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 680, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 680, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(469, Short.MAX_VALUE)
+                .addComponent(jBtnSalvarDetServTipoServico)
+                .addGap(148, 148, 148))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 680, Short.MAX_VALUE))
+                .addGroup(layout.createSequentialGroup()
+                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 670, Short.MAX_VALUE)
+                    .addContainerGap()))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 345, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(434, Short.MAX_VALUE)
+                .addComponent(jBtnSalvarDetServTipoServico)
+                .addContainerGap())
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 345, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 0, Short.MAX_VALUE)))
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 468, Short.MAX_VALUE))
         );
+
+        bindingGroup.bind();
 
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jComboBoxTipoServicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxTipoServicoActionPerformed
-        idTipoServicoComboBox();
-        if (jComboBoxTipoServico.getSelectedItem() != null) {
-            tipoServico = jComboBoxTipoServico.getSelectedItem().toString();
-        }
-    }//GEN-LAST:event_jComboBoxTipoServicoActionPerformed
-
     private void jBtbNovoTipoServicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtbNovoTipoServicoActionPerformed
 
         txtTipoServico.setVisible(true);
-        jComboBoxTipoServico.setVisible(false);
+        jComboBoxTipoServico1.setVisible(false);
         jBtbNovoTipoServico.setVisible(false);
         jBtnCadTipoServico.setVisible(true);
         jBtnCancelarCadTipoServico.setVisible(true);
@@ -189,15 +219,15 @@ public class AdicionarDetServTipoServico extends javax.swing.JFrame {
         codTipoServico = TipoServicoDAO.CadTipoServico(tServ);
 
         txtTipoServico.setVisible(false);
-        jComboBoxTipoServico.setVisible(true);
+        jComboBoxTipoServico1.setVisible(true);
 
         jBtnCadTipoServico.setVisible(false);
         jBtnCancelarCadTipoServico.setVisible(false);
         jBtbNovoTipoServico.setVisible(true);
 
-        jComboBoxTipoServico.removeAllItems();
-        populaComboBoxTipoServico();
-        jComboBoxTipoServico.setSelectedItem(tServ.getTipo());
+        jComboBoxTipoServico1.removeAllItems();
+        carregarComboTipoServico();
+        jComboBoxTipoServico1.setSelectedItem(tServ.getTipo());
     }//GEN-LAST:event_jBtnCadTipoServicoActionPerformed
 
     private void jBtnCancelarCadTipoServicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnCancelarCadTipoServicoActionPerformed
@@ -206,7 +236,7 @@ public class AdicionarDetServTipoServico extends javax.swing.JFrame {
 
         jBtbNovoTipoServico.setVisible(true);
         txtTipoServico.setVisible(false);
-        jComboBoxTipoServico.setVisible(true);
+        jComboBoxTipoServico1.setVisible(true);
     }//GEN-LAST:event_jBtnCancelarCadTipoServicoActionPerformed
 
     private void jBtnAdicionarTipoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnAdicionarTipoActionPerformed
@@ -214,79 +244,93 @@ public class AdicionarDetServTipoServico extends javax.swing.JFrame {
     }//GEN-LAST:event_jBtnAdicionarTipoActionPerformed
 
     private void jBtnRemoverTipoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnRemoverTipoActionPerformed
-        
+
         DefaultTableModel dtm = (DefaultTableModel) jTableTipodeServico.getModel();
         int linha = jTableTipodeServico.getSelectedRow();
 
-        if(linha != -1) {
+        if (linha != -1) {
             dtm.removeRow(linha);
         }
     }//GEN-LAST:event_jBtnRemoverTipoActionPerformed
 
     private void jBtnSalvarDetServTipoServicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnSalvarDetServTipoServicoActionPerformed
-        
+
         DetServicoTipoServ ServTipo = new DetServicoTipoServ();
-        
-        for(int j=0; j < jTableTipodeServico.getRowCount(); j++) {
+        for (int j = 0; j < jTableTipodeServico.getRowCount(); j++) {
 
             ServTipo.setCodServico(idServico);
             ServTipo.setCodTipo(Integer.parseInt(jTableTipodeServico.getValueAt(j, 0).toString()));
 
             DetServicoTipoDAO.CadDetServTipoServ(ServTipo);
         }
-        
         telaDatalharServico.TabelaTipoServico();
+        this.dispose();
     }//GEN-LAST:event_jBtnSalvarDetServTipoServicoActionPerformed
 
+    private void jComboBoxTipoServico1ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jComboBoxTipoServico1ItemStateChanged
+        codTipoServico = 0;
+        idTipoServicoComboBox();
+        if (jComboBoxTipoServico1.getSelectedItem() != null) {
+            tipoServico = jComboBoxTipoServico1.getSelectedItem().toString();
+        }
+    }//GEN-LAST:event_jComboBoxTipoServico1ItemStateChanged
+
+    private void jComboBoxTipoServico1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxTipoServico1ActionPerformed
+
+    }//GEN-LAST:event_jComboBoxTipoServico1ActionPerformed
+
     public void TabelaTipoServico() {
-        
-        try { 
-            
+
+        try {
+
             DefaultTableModel dtm = (DefaultTableModel) jTableTipodeServico.getModel();
-                   
-                dtm.addRow(new Object[] {codTipoServico, tipoServico});
-                
+
+            dtm.addRow(new Object[]{codTipoServico, tipoServico});
+
+            TableCellRenderer renderer = new TabelaZebrada();
+            jTableTipodeServico.setDefaultRenderer(Object.class, renderer);
+
         } catch (Exception erro) {
             Logger.getLogger(CadastrarCliente.class.getName()).log(Level.SEVERE, null, erro);
-        }          
-    }
-    
-    private void populaComboBoxTipoServico() {
-        
-        Connection conexao = Conexao.getConnection();
-        ResultSet rs;
-        String sql = "select * from tabtipo_serv";
-        
-        try{
-            pst = conexao.prepareStatement(sql);
-            rs = pst.executeQuery();
-            
-            while(rs.next()) {
-                jComboBoxTipoServico.addItem(rs.getString("Tipo_serv"));
-            }
-            
-        }catch(SQLException ex) {
-            JOptionPane.showMessageDialog(null, ex);
         }
     }
-    
+
+    private void carregarComboTipoServico() {
+
+        // jComboBoxTipoServico.clear();
+        ArrayList<TipoServico> tipoServico = new ArrayList<TipoServico>();
+        tipoServico = TipoServicoDAO.ListarTipoServico();
+
+        jComboBoxTipoServico1.addItem("Selecione um tipo");
+        for (TipoServico tServ : tipoServico) {
+            jComboBoxTipoServico1.addItem(tServ.getTipo(), tServ);
+        }
+    }
+
     private void idTipoServicoComboBox() {
-        
+
         Connection conexao = Conexao.getConnection();
         ResultSet rs;
-        String sql = "select * from tabtipo_serv where Tipo_serv = '" + jComboBoxTipoServico.getSelectedItem()+ "';";
-        
-        try{
+        String sql = "select * from tabtipo_serv where Tipo_serv = '" + jComboBoxTipoServico1.getSelectedItem() + "';";
+
+        try {
             pst = conexao.prepareStatement(sql);
             rs = pst.executeQuery();
-            
-            while(rs.next()) {
+
+            while (rs.next()) {
                 codTipoServico = (rs.getInt("idtabTipo_serv"));
             }
-            
-        }catch(SQLException ex) {
+
+        } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, ex);
         }
+    }
+
+    private void ocultaTabela() {
+        jTableTipodeServico.getColumnModel().getColumn(0).setMaxWidth(0);
+        jTableTipodeServico.getColumnModel().getColumn(0).setMinWidth(0);
+        jTableTipodeServico.getTableHeader().getColumnModel().getColumn(0).setMaxWidth(0);
+        jTableTipodeServico.getTableHeader().getColumnModel().getColumn(0).setMinWidth(0);
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -296,11 +340,13 @@ public class AdicionarDetServTipoServico extends javax.swing.JFrame {
     private javax.swing.JButton jBtnCancelarCadTipoServico;
     private javax.swing.JButton jBtnRemoverTipo;
     private javax.swing.JButton jBtnSalvarDetServTipoServico;
-    private javax.swing.JComboBox jComboBoxTipoServico;
+    private componentes.UJComboBox jComboBoxTipoServico1;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JTable jTableTipodeServico;
     private javax.swing.JTextField txtTipoServico;
+    private org.jdesktop.beansbinding.BindingGroup bindingGroup;
     // End of variables declaration//GEN-END:variables
 }
