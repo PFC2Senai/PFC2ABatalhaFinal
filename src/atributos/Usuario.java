@@ -101,6 +101,6 @@ public class Usuario {
     }
     
     public static int idUsuario(){       
-        return CodUsuario = 2;        
+        return CodUsuario;        
     }
 }
