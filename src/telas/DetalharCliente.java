@@ -1064,7 +1064,7 @@ public class DetalharCliente extends javax.swing.JFrame {
                         .addComponent(jBtnVoltarParaEquipamento)
                         .addGap(581, 581, 581)
                         .addComponent(jBtnIrParaRotina)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(62, Short.MAX_VALUE))
         );
         jPanelLembreteLayout.setVerticalGroup(
             jPanelLembreteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1177,7 +1177,7 @@ public class DetalharCliente extends javax.swing.JFrame {
         jPanelRotinaContatoLayout.setHorizontalGroup(
             jPanelRotinaContatoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelRotinaContatoLayout.createSequentialGroup()
-                .addGap(0, 15, Short.MAX_VALUE)
+                .addGap(0, 30, Short.MAX_VALUE)
                 .addGroup(jPanelRotinaContatoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanelRotinaContatoLayout.createSequentialGroup()
                         .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -1213,7 +1213,7 @@ public class DetalharCliente extends javax.swing.JFrame {
 
         jTabbedPane1.addTab("Rotina de Contato", new javax.swing.ImageIcon(getClass().getResource("/imagens/rotinacont.png")), jPanelRotinaContato); // NOI18N
 
-        getContentPane().add(jTabbedPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 130, 840, 540));
+        getContentPane().add(jTabbedPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 100, 860, 540));
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/leiaute/img3.png"))); // NOI18N
         getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -10, 860, 140));

@@ -63,6 +63,7 @@ public class ExibeFornecedor extends javax.swing.JFrame {
             }
         });
 
+        jPanel1.setBackground(new java.awt.Color(204, 255, 204));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setFont(new java.awt.Font("Raavi", 1, 18)); // NOI18N
@@ -88,7 +89,7 @@ public class ExibeFornecedor extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(jTableListarFornecedores);
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 260, 640, 391));
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 260, 640, 350));
 
         jComboBoxOpcaoPesquisa.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Selecione a opção de pesquisa", "Código", "Fornecedor", "CEP" }));
         jComboBoxOpcaoPesquisa.addActionListener(new java.awt.event.ActionListener() {
@@ -132,7 +133,7 @@ public class ExibeFornecedor extends javax.swing.JFrame {
                 jBtnVoltarActionPerformed(evt);
             }
         });
-        jPanel1.add(jBtnVoltar, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 660, -1, -1));
+        jPanel1.add(jBtnVoltar, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 640, -1, -1));
 
         jBtnDetalhar.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jBtnDetalhar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/fornecedorConsulta.fw.png"))); // NOI18N

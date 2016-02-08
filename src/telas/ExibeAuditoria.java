@@ -77,14 +77,17 @@ public class ExibeAuditoria extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTableListarAuditoria = new javax.swing.JTable();
         jLabel2 = new javax.swing.JLabel();
+        jTextField1 = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setBackground(new java.awt.Color(223, 237, 253));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel1.setText("Auditoria");
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 40, -1, -1));
 
+        jTableListarAuditoria.setBackground(new java.awt.Color(223, 237, 253));
         jTableListarAuditoria.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -95,10 +98,13 @@ public class ExibeAuditoria extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(jTableListarAuditoria);
 
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 140, 600, 400));
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 140, 590, 330));
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/leiaute/img2.png"))); // NOI18N
         getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 670, 110));
+
+        jTextField1.setBackground(new java.awt.Color(204, 255, 204));
+        getContentPane().add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 670, 590));
 
         pack();
         setLocationRelativeTo(null);
@@ -144,5 +150,6 @@ public class ExibeAuditoria extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTableListarAuditoria;
+    private javax.swing.JTextField jTextField1;
     // End of variables declaration//GEN-END:variables
 }

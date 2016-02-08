@@ -254,6 +254,9 @@ public class CadastrarServicoTeste extends javax.swing.JFrame {
         jTabbedPaneServico.setBackground(new java.awt.Color(249, 238, 238));
         jTabbedPaneServico.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
+        jPanelServico.setBackground(new java.awt.Color(223, 237, 253));
+
+        jPanel7.setBackground(new java.awt.Color(223, 237, 253));
         jPanel7.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
         jPanel7.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -393,6 +396,9 @@ public class CadastrarServicoTeste extends javax.swing.JFrame {
 
         jTabbedPaneServico.addTab("Serviço", new javax.swing.ImageIcon(getClass().getResource("/imagens/servicos.png")), jPanelServico); // NOI18N
 
+        jPanelPecas.setBackground(new java.awt.Color(223, 237, 253));
+
+        jPanel14.setBackground(new java.awt.Color(223, 237, 253));
         jPanel14.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
         jPanel14.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -544,6 +550,9 @@ public class CadastrarServicoTeste extends javax.swing.JFrame {
 
         jTabbedPaneServico.addTab("Peças", new javax.swing.ImageIcon(getClass().getResource("/imagens/prod.png")), jPanelPecas); // NOI18N
 
+        jPanelEquipamento.setBackground(new java.awt.Color(223, 237, 253));
+
+        jPanel4.setBackground(new java.awt.Color(223, 237, 253));
         jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
 
         jLabel1.setText("Equipamento:");
@@ -721,6 +730,9 @@ public class CadastrarServicoTeste extends javax.swing.JFrame {
 
         jTabbedPaneServico.addTab("Equipamento", new javax.swing.ImageIcon(getClass().getResource("/imagens/equipamento.png")), jPanelEquipamento); // NOI18N
 
+        jPanelFuncionario.setBackground(new java.awt.Color(223, 237, 253));
+
+        jPanel5.setBackground(new java.awt.Color(223, 237, 253));
         jPanel5.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
 
         jTableFuncionario.setModel(new javax.swing.table.DefaultTableModel(
@@ -851,6 +863,9 @@ public class CadastrarServicoTeste extends javax.swing.JFrame {
 
         jTabbedPaneServico.addTab("Funcionário", new javax.swing.ImageIcon(getClass().getResource("/imagens/funcionario.png")), jPanelFuncionario); // NOI18N
 
+        jPanelValorTotalServico.setBackground(new java.awt.Color(223, 237, 253));
+
+        jPanel8.setBackground(new java.awt.Color(223, 237, 253));
         jPanel8.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
 
         jLabel2.setText("Valor total de peças:");
@@ -949,13 +964,13 @@ public class CadastrarServicoTeste extends javax.swing.JFrame {
         jPanelValorTotalServicoLayout.setVerticalGroup(
             jPanelValorTotalServicoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelValorTotalServicoLayout.createSequentialGroup()
-                .addGap(65, 65, 65)
+                .addGap(53, 53, 53)
                 .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(98, 98, 98)
                 .addGroup(jPanelValorTotalServicoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jBtnCadastrarServico3)
                     .addComponent(jBtnVoltarPainelFuncionario))
-                .addContainerGap(59, Short.MAX_VALUE))
+                .addContainerGap(71, Short.MAX_VALUE))
         );
 
         jTabbedPaneServico.addTab("Valor", new javax.swing.ImageIcon(getClass().getResource("/imagens/dinheiro.png")), jPanelValorTotalServico); // NOI18N
