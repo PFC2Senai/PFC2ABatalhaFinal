@@ -87,7 +87,6 @@ public class AdicionaDetServProduto extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         jLabel35 = new javax.swing.JLabel();
-        jComboBoxModelo = new javax.swing.JComboBox();
         jLabel33 = new javax.swing.JLabel();
         jLabel36 = new javax.swing.JLabel();
         jComboBoxFabricante = new javax.swing.JComboBox();
@@ -104,6 +103,7 @@ public class AdicionaDetServProduto extends javax.swing.JFrame {
         jBtnInserirPeca = new javax.swing.JButton();
         uJComboBoxPeca = new componentes.UJComboBox();
         jBtnCancelar = new javax.swing.JButton();
+        txtModelo = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("ALTERAR PEÇAS");
@@ -126,19 +126,6 @@ public class AdicionaDetServProduto extends javax.swing.JFrame {
 
         jLabel35.setText("Modelo:");
         jPanel1.add(jLabel35, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 130, -1, -1));
-
-        jComboBoxModelo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Selecione o Modelo" }));
-        jComboBoxModelo.addItemListener(new java.awt.event.ItemListener() {
-            public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                jComboBoxModeloItemStateChanged(evt);
-            }
-        });
-        jComboBoxModelo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBoxModeloActionPerformed(evt);
-            }
-        });
-        jPanel1.add(jComboBoxModelo, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 130, 280, -1));
 
         jLabel33.setText("Peça:");
         jPanel1.add(jLabel33, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 130, -1, -1));
@@ -188,6 +175,11 @@ public class AdicionaDetServProduto extends javax.swing.JFrame {
             }
         });
         jTablePecas.getTableHeader().setReorderingAllowed(false);
+        jTablePecas.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                jTablePecasFocusGained(evt);
+            }
+        });
         jScrollPane1.setViewportView(jTablePecas);
 
         jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 250, 780, 130));
@@ -239,6 +231,19 @@ public class AdicionaDetServProduto extends javax.swing.JFrame {
             }
         });
         jPanel1.add(jBtnCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 450, -1, 30));
+
+        txtModelo.setEditable(false);
+        txtModelo.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                txtModeloFocusGained(evt);
+            }
+        });
+        txtModelo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtModeloActionPerformed(evt);
+            }
+        });
+        jPanel1.add(txtModelo, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 130, 280, -1));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 850, 500));
 
@@ -293,29 +298,13 @@ public class AdicionaDetServProduto extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jBtnRemoverPecaActionPerformed
 
-    private void jComboBoxModeloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxModeloActionPerformed
-
-    }//GEN-LAST:event_jComboBoxModeloActionPerformed
-
-    private void jComboBoxModeloItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jComboBoxModeloItemStateChanged
-
-        jComboBoxFabricante.removeAllItems();
-        idModeloComboBox();
-        populaComboBoxFabricante();
-        txtValorUnit.setText("");
-        if (jComboBoxModelo.getSelectedItem() != null) {
-            modelo = jComboBoxModelo.getSelectedItem().toString();
-            CarregaValorUnit();
-        }
-    }//GEN-LAST:event_jComboBoxModeloItemStateChanged
-
     private void jBtbIncluirPecaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtbIncluirPecaActionPerformed
         TabelaProduto();
     }//GEN-LAST:event_jBtbIncluirPecaActionPerformed
 
     private void uJComboBoxPecaItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_uJComboBoxPecaItemStateChanged
 
-        jComboBoxModelo.removeAllItems();
+        txtModelo.setText("");
         jComboBoxFabricante.removeAllItems();
 
         codProduto = 0;
@@ -327,6 +316,8 @@ public class AdicionaDetServProduto extends javax.swing.JFrame {
         valor = 0;
         idProdutoComboBox();
         populaComboBoxModelo();
+        
+        txtModelo.requestFocus();
 
         if (uJComboBoxPeca.getSelectedItem() != null) {
             produto = uJComboBoxPeca.getSelectedItem().toString();
@@ -348,6 +339,28 @@ public class AdicionaDetServProduto extends javax.swing.JFrame {
     private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
         verificaPagina();
     }//GEN-LAST:event_formWindowClosed
+
+    private void txtModeloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtModeloActionPerformed
+        jComboBoxFabricante.removeAllItems();
+        idModeloComboBox();
+        populaComboBoxFabricante();
+        txtValorUnit.setText("");       
+        modelo = txtModelo.getText();
+        CarregaValorUnit();      
+    }//GEN-LAST:event_txtModeloActionPerformed
+
+    private void jTablePecasFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTablePecasFocusGained
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTablePecasFocusGained
+
+    private void txtModeloFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtModeloFocusGained
+        jComboBoxFabricante.removeAllItems();
+        idModeloComboBox();
+        populaComboBoxFabricante();
+        txtValorUnit.setText("");       
+        modelo = txtModelo.getText();
+        CarregaValorUnit(); 
+    }//GEN-LAST:event_txtModeloFocusGained
 
     public void TabelaProduto() {
 
@@ -406,7 +419,7 @@ public class AdicionaDetServProduto extends javax.swing.JFrame {
             rs = pst.executeQuery();
 
             while (rs.next()) {
-                jComboBoxModelo.addItem(rs.getString("modelo"));
+                txtModelo.setText(rs.getString("modelo"));
             }
 
         } catch (SQLException ex) {
@@ -418,7 +431,7 @@ public class AdicionaDetServProduto extends javax.swing.JFrame {
 
         Connection conexao = Conexao.getConnection();
         ResultSet rs;
-        String sql = "select * from tabmodelo where modelo = '" + jComboBoxModelo.getSelectedItem() + "';";
+        String sql = "select * from tabmodelo where modelo = '" + txtModelo.getText() + "';";
 
         try {
             pst = conexao.prepareStatement(sql);
@@ -537,7 +550,6 @@ public class AdicionaDetServProduto extends javax.swing.JFrame {
     private javax.swing.JButton jBtnInserirPeca;
     private javax.swing.JButton jBtnRemoverPeca;
     private javax.swing.JComboBox jComboBoxFabricante;
-    private javax.swing.JComboBox jComboBoxModelo;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -549,6 +561,7 @@ public class AdicionaDetServProduto extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTablePecas;
+    private javax.swing.JTextField txtModelo;
     private javax.swing.JTextField txtQuantidade;
     private javax.swing.JTextField txtTotalPecas;
     private javax.swing.JTextField txtValorUnit;
