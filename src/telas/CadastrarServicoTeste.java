@@ -24,6 +24,7 @@ import funcoes.FuncoesDiversas;
 import funcoes.OrdemServicoDAO;
 import funcoes.ProdutoDAO;
 import funcoes.ServicoDAO;
+import funcoes.TabelaZebrada;
 import funcoes.TipoServicoDAO;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
@@ -36,6 +37,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableCellRenderer;
 
 /**
  *
@@ -519,15 +521,13 @@ public class CadastrarServicoTeste extends javax.swing.JFrame {
         jPanelPecasLayout.setHorizontalGroup(
             jPanelPecasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelPecasLayout.createSequentialGroup()
-                .addGroup(jPanelPecasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGap(40, 40, 40)
+                .addGroup(jPanelPecasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanelPecasLayout.createSequentialGroup()
-                        .addGap(18, 18, 18)
                         .addComponent(jBtnVoltarPainelServico)
-                        .addGap(616, 616, 616)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jBtnAvancarPainelEquipamento))
-                    .addGroup(jPanelPecasLayout.createSequentialGroup()
-                        .addGap(40, 40, 40)
-                        .addComponent(jPanel14, javax.swing.GroupLayout.PREFERRED_SIZE, 765, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(jPanel14, javax.swing.GroupLayout.PREFERRED_SIZE, 765, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(40, Short.MAX_VALUE))
         );
         jPanelPecasLayout.setVerticalGroup(
@@ -535,11 +535,11 @@ public class CadastrarServicoTeste extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelPecasLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel14, javax.swing.GroupLayout.PREFERRED_SIZE, 486, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanelPecasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jBtnVoltarPainelServico)
                     .addComponent(jBtnAvancarPainelEquipamento))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(39, Short.MAX_VALUE))
         );
 
         jTabbedPaneServico.addTab("Peças", new javax.swing.ImageIcon(getClass().getResource("/imagens/prod.png")), jPanelPecas); // NOI18N
@@ -1392,6 +1392,10 @@ public class CadastrarServicoTeste extends javax.swing.JFrame {
                 quantidade,
                 valorUnit,
                 total});
+            
+            TableCellRenderer renderer = new TabelaZebrada();
+            jTablePecas.setDefaultRenderer(Object.class, renderer);
+            
             totalPeca += total;
             txtTotalPecas.setEditable(false);
             txtTotalPecas.setText(String.valueOf(totalPeca));
@@ -1419,6 +1423,9 @@ public class CadastrarServicoTeste extends javax.swing.JFrame {
                 equipamento,
                 modeloEqui,
                 fabricanteEqui});
+            
+            TableCellRenderer renderer = new TabelaZebrada();
+            jTableEquipamento.setDefaultRenderer(Object.class, renderer);
 
         } catch (Exception erro) {
             Logger.getLogger(CadastrarCliente.class
@@ -1434,6 +1441,9 @@ public class CadastrarServicoTeste extends javax.swing.JFrame {
 
             dtm.addRow(new Object[]{codFuncionario, funcionario});
 
+            TableCellRenderer renderer = new TabelaZebrada();
+            jTableFuncionario.setDefaultRenderer(Object.class, renderer);
+            
         } catch (Exception erro) {
             Logger.getLogger(CadastrarCliente.class
                     .getName()).log(Level.SEVERE, null, erro);
@@ -1448,6 +1458,9 @@ public class CadastrarServicoTeste extends javax.swing.JFrame {
 
             dtm.addRow(new Object[]{codTipoServico, tipoServico});
 
+            TableCellRenderer renderer = new TabelaZebrada();
+            jTableTipodeServico.setDefaultRenderer(Object.class, renderer);
+            
         } catch (Exception erro) {
             Logger.getLogger(CadastrarCliente.class
                     .getName()).log(Level.SEVERE, null, erro);

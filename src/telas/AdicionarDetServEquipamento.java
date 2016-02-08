@@ -85,8 +85,14 @@ public class AdicionarDetServEquipamento extends javax.swing.JFrame {
         jBtnInserirDetServEquipamento = new javax.swing.JButton();
         uJComboBoxEquipamento = new componentes.UJComboBox();
         jLabel2 = new javax.swing.JLabel();
+        jBtnCancelar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosed(java.awt.event.WindowEvent evt) {
+                formWindowClosed(evt);
+            }
+        });
 
         jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -176,6 +182,14 @@ public class AdicionarDetServEquipamento extends javax.swing.JFrame {
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/leiaute/img2.png"))); // NOI18N
         jPanel4.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 680, -1));
 
+        jBtnCancelar.setText("Cancelar");
+        jBtnCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnCancelarActionPerformed(evt);
+            }
+        });
+        jPanel4.add(jBtnCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 490, -1, -1));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -235,6 +249,8 @@ public class AdicionarDetServEquipamento extends javax.swing.JFrame {
         }
         
         telaDatalharServico.TabelaEquipamento("SELECT * FROM vw_detservequipamento where idservico = " + idServico +";");
+        verificaPagina();
+        this.dispose();
     }//GEN-LAST:event_jBtnInserirDetServEquipamentoActionPerformed
 
     private void uJComboBoxEquipamentoItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_uJComboBoxEquipamentoItemStateChanged
@@ -257,6 +273,15 @@ public class AdicionarDetServEquipamento extends javax.swing.JFrame {
             equipamento = uJComboBoxEquipamento.getSelectedItem().toString();
         }
     }//GEN-LAST:event_uJComboBoxEquipamentoActionPerformed
+
+    private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
+        verificaPagina();
+    }//GEN-LAST:event_formWindowClosed
+
+    private void jBtnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnCancelarActionPerformed
+        this.dispose();
+        verificaPagina();
+    }//GEN-LAST:event_jBtnCancelarActionPerformed
 
     public void TabelaEquipamento() {
         
@@ -412,8 +437,18 @@ public class AdicionarDetServEquipamento extends javax.swing.JFrame {
         jTableEquipamento.getTableHeader().getColumnModel().getColumn(2).setMinWidth(0);
     }
     
+    private void verificaPagina() {
+
+        if ((this.telaDatalharServico != null)) {
+            this.telaDatalharServico.setEnabled(true);
+            this.telaDatalharServico.toFront();
+            
+        }
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBtbIncluirEquipamento;
+    private javax.swing.JButton jBtnCancelar;
     private javax.swing.JButton jBtnInserirDetServEquipamento;
     private javax.swing.JButton jBtnRemoveEquipamento;
     private javax.swing.JComboBox jComboBoxFabricanteEquip;

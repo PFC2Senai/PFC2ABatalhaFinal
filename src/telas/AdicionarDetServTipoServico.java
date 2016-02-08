@@ -69,9 +69,9 @@ public class AdicionarDetServTipoServico extends javax.swing.JFrame {
     private void initComponents() {
         bindingGroup = new org.jdesktop.beansbinding.BindingGroup();
 
-        jBtnSalvarDetServTipoServico = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         jBtnAdicionarTipo = new javax.swing.JButton();
+        jBtnSalvarDetServTipoServico = new javax.swing.JButton();
         jBtbNovoTipoServico = new javax.swing.JButton();
         jScrollPane6 = new javax.swing.JScrollPane();
         jTableTipodeServico = new javax.swing.JTable();
@@ -82,13 +82,12 @@ public class AdicionarDetServTipoServico extends javax.swing.JFrame {
         txtTipoServico = new javax.swing.JTextField();
         jComboBoxTipoServico1 = new componentes.UJComboBox();
         jLabel1 = new javax.swing.JLabel();
+        jBtnCancelar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-
-        jBtnSalvarDetServTipoServico.setText("Salvar");
-        jBtnSalvarDetServTipoServico.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jBtnSalvarDetServTipoServicoActionPerformed(evt);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosed(java.awt.event.WindowEvent evt) {
+                formWindowClosed(evt);
             }
         });
 
@@ -100,7 +99,15 @@ public class AdicionarDetServTipoServico extends javax.swing.JFrame {
                 jBtnAdicionarTipoActionPerformed(evt);
             }
         });
-        jPanel1.add(jBtnAdicionarTipo, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 210, -1, -1));
+        jPanel1.add(jBtnAdicionarTipo, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 210, -1, -1));
+
+        jBtnSalvarDetServTipoServico.setText("Salvar");
+        jBtnSalvarDetServTipoServico.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnSalvarDetServTipoServicoActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jBtnSalvarDetServTipoServico, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 430, -1, -1));
 
         jBtbNovoTipoServico.setText("Novo");
         jBtbNovoTipoServico.addActionListener(new java.awt.event.ActionListener() {
@@ -121,7 +128,7 @@ public class AdicionarDetServTipoServico extends javax.swing.JFrame {
         jTableTipodeServico.getTableHeader().setReorderingAllowed(false);
         jScrollPane6.setViewportView(jTableTipodeServico);
 
-        jPanel1.add(jScrollPane6, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 240, 540, 130));
+        jPanel1.add(jScrollPane6, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 240, 600, 130));
 
         jBtnRemoverTipo.setText("Remover Tipo");
 
@@ -133,7 +140,7 @@ public class AdicionarDetServTipoServico extends javax.swing.JFrame {
                 jBtnRemoverTipoActionPerformed(evt);
             }
         });
-        jPanel1.add(jBtnRemoverTipo, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 380, -1, -1));
+        jPanel1.add(jBtnRemoverTipo, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 380, -1, -1));
 
         jBtnCadTipoServico.setText("Salvar");
         jBtnCadTipoServico.addActionListener(new java.awt.event.ActionListener() {
@@ -171,25 +178,23 @@ public class AdicionarDetServTipoServico extends javax.swing.JFrame {
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/leiaute/img2.png"))); // NOI18N
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 680, -1));
 
+        jBtnCancelar.setText("Cancelar");
+        jBtnCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnCancelarActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jBtnCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 430, -1, -1));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(469, Short.MAX_VALUE)
-                .addComponent(jBtnSalvarDetServTipoServico)
-                .addGap(148, 148, 148))
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(434, Short.MAX_VALUE)
-                .addComponent(jBtnSalvarDetServTipoServico)
-                .addContainerGap())
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 468, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 468, Short.MAX_VALUE)
         );
 
         bindingGroup.bind();
@@ -262,6 +267,7 @@ public class AdicionarDetServTipoServico extends javax.swing.JFrame {
             DetServicoTipoDAO.CadDetServTipoServ(ServTipo);
         }
         telaDatalharServico.TabelaTipoServico();
+        verificaPagina();
         this.dispose();
     }//GEN-LAST:event_jBtnSalvarDetServTipoServicoActionPerformed
 
@@ -276,6 +282,15 @@ public class AdicionarDetServTipoServico extends javax.swing.JFrame {
     private void jComboBoxTipoServico1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxTipoServico1ActionPerformed
 
     }//GEN-LAST:event_jComboBoxTipoServico1ActionPerformed
+
+    private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
+        verificaPagina();
+    }//GEN-LAST:event_formWindowClosed
+
+    private void jBtnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnCancelarActionPerformed
+        this.dispose();
+        verificaPagina();
+    }//GEN-LAST:event_jBtnCancelarActionPerformed
 
     public void TabelaTipoServico() {
 
@@ -330,11 +345,21 @@ public class AdicionarDetServTipoServico extends javax.swing.JFrame {
         jTableTipodeServico.getTableHeader().getColumnModel().getColumn(0).setMaxWidth(0);
         jTableTipodeServico.getTableHeader().getColumnModel().getColumn(0).setMinWidth(0);
     }
+    
+    private void verificaPagina() {
+
+        if ((this.telaDatalharServico != null)) {
+            this.telaDatalharServico.setEnabled(true);
+            this.telaDatalharServico.toFront();
+            
+        }
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBtbNovoTipoServico;
     private javax.swing.JButton jBtnAdicionarTipo;
     private javax.swing.JButton jBtnCadTipoServico;
+    private javax.swing.JButton jBtnCancelar;
     private javax.swing.JButton jBtnCancelarCadTipoServico;
     private javax.swing.JButton jBtnRemoverTipo;
     private javax.swing.JButton jBtnSalvarDetServTipoServico;

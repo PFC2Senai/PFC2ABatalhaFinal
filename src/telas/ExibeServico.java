@@ -2,6 +2,7 @@ package telas;
 
 import static funcoes.Conexao.getConnection;
 import funcoes.ModeloTabela;
+import funcoes.TabelaZebrada;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -10,6 +11,7 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ListSelectionModel;
+import javax.swing.table.TableCellRenderer;
 
 /**
  *
@@ -201,7 +203,7 @@ public class ExibeServico extends javax.swing.JFrame {
     private void txtBuscarKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBuscarKeyReleased
         
         TabelaServico("SELECT * FROM vw_servico where " + opcaoPesquisa
-                + " like '%" + txtBuscar.getText() + "%';");
+                + " like '%" + txtBuscar.getText().trim() + "%';");
     }//GEN-LAST:event_txtBuscarKeyReleased
 
     public void TabelaServico(String Sql) {
@@ -210,7 +212,7 @@ public class ExibeServico extends javax.swing.JFrame {
 
             stmt = getConnection().createStatement();
             ArrayList dados = new ArrayList();
-            String[] Colunas = {"Código", "Cliente", "Valor", "Data"};
+            String[] Colunas = {"Código", "Cliente", "Data"};
 
             ResultSet rs;
             rs = stmt.executeQuery(Sql);
@@ -220,19 +222,22 @@ public class ExibeServico extends javax.swing.JFrame {
                 dados.add(new Object[] {
                     rs.getObject("idservico"),
                     rs.getObject("empresa"),
-                    rs.getObject("preco"),
                     rs.getObject("dataServico")
                 });
             }
 
-            for (int i = 0; i < 4; i++) {
+            for (int i = 0; i < 3; i++) {
                 
                 ModeloTabela modelo = new ModeloTabela(dados, Colunas);
                 jTableListarServicos.setModel(modelo);
-                jTableListarServicos.getColumnModel().getColumn(i).setPreferredWidth(150);
+                TableCellRenderer renderer = new TabelaZebrada();
+                jTableListarServicos.setDefaultRenderer(Object.class, renderer);
                 jTableListarServicos.getColumnModel().getColumn(i).setResizable(false);
+                jTableListarServicos.getColumnModel().getColumn(0).setPreferredWidth(100);
+                jTableListarServicos.getColumnModel().getColumn(1).setPreferredWidth(300);
+                jTableListarServicos.getColumnModel().getColumn(2).setPreferredWidth(150);
+                
                 jTableListarServicos.getTableHeader().setReorderingAllowed(false);
-                jTableListarServicos.setAutoResizeMode(jTableListarServicos.AUTO_RESIZE_OFF);
                 jTableListarServicos.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
             }
 
