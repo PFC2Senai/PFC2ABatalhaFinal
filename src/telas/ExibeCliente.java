@@ -172,7 +172,7 @@ public final class ExibeCliente extends javax.swing.JFrame {
             }
         });
 
-        jPanel1.setBackground(new java.awt.Color(223, 237, 253));
+        jPanel1.setBackground(new java.awt.Color(204, 255, 204));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jComboBoxOpcaoPesquisa.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Selecione a opção de pesquisa", "Código", "Nome", "CNPJ" }));
@@ -183,6 +183,7 @@ public final class ExibeCliente extends javax.swing.JFrame {
         });
         jPanel1.add(jComboBoxOpcaoPesquisa, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 160, 254, -1));
 
+        jTableListarClientes.setBackground(new java.awt.Color(223, 237, 253));
         jTableListarClientes.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -193,7 +194,7 @@ public final class ExibeCliente extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(jTableListarClientes);
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 210, 670, 425));
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 250, 600, 270));
 
         jBtnCadastrarNovoCliente.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jBtnCadastrarNovoCliente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/cliente2.fw.png"))); // NOI18N
