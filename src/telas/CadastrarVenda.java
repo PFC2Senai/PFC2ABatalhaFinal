@@ -270,49 +270,61 @@ public class CadastrarVenda extends javax.swing.JFrame {
         boolean valida = true;
 
         if (jComboBoxProdutos.getSelectedItem().equals("Selecione")) {
-            JOptionPane.showMessageDialog(null, "Selecione um item!");
+            JOptionPane.showMessageDialog(null, "Selecione a PEÇA!");
+            jComboBoxProdutos.requestFocus();
+            jComboBoxProdutos.setBackground(Color.yellow);
             valida = false;
             return valida;
         }
 
         if (jComboModelo.getSelectedItem().equals("Selecione")) {
-            JOptionPane.showMessageDialog(null, "Selecione um item!");
+            JOptionPane.showMessageDialog(null, "Selecione o MODELO!");
+            jComboModelo.requestFocus();
+            jComboModelo.setBackground(Color.yellow);
             valida = false;
             return valida;
         }
 
         if (jComboFabricante.getSelectedItem().equals("Selecione")) {
-            JOptionPane.showMessageDialog(null, "Selecione um item!");
+            JOptionPane.showMessageDialog(null, "Selecione o FABRICANTE!");
+            jComboFabricante.requestFocus();
+            jComboFabricante.setBackground(Color.yellow);
             valida = false;
             return valida;
         }
 
         if (JDataVenda.getDate() == null) {
-            JOptionPane.showMessageDialog(null, "Campo(s) vazio(s)!");
+            JOptionPane.showMessageDialog(null, "Preencha o campo DATA!");
             valida = false;
             return valida;
         }
+        
+//        if (jTextHora.getText() == null || jTextHora.getText()> "23:59" ) {
+//            JOptionPane.showMessageDialog(null, "Preencha o campo DATA!");
+//            valida = false;
+//            return valida;
+//        }
 
         if (jTextValorUnit.getText().equals("")) {
-            JOptionPane.showMessageDialog(null, "Campo(s) vazio(s)!");
+            JOptionPane.showMessageDialog(null, "Preencha o campo VALOR!");
             valida = false;
             return valida;
         }
 
         if (jTextHora.getText().equals("")) {
-            JOptionPane.showMessageDialog(null, "Campo(s) vazio(s)!");
+            JOptionPane.showMessageDialog(null, "Preencha o campo HORA!");
             valida = false;
             return valida;
         }
 
         if (jTextQuantidadeProduto.getText().equals("")) {
-            JOptionPane.showMessageDialog(null, "Campo(s) vazio(s)!");
+            JOptionPane.showMessageDialog(null, "Preencha o campo QUANTIDADE!");
             valida = false;
             return valida;
         }
 
         if (jTextTotal.getText().equals("")) {
-            JOptionPane.showMessageDialog(null, "Campo(s) vazio(s)!");
+            JOptionPane.showMessageDialog(null, "Preencha o campo TOTAL!");
             valida = false;
             return valida;
         }
