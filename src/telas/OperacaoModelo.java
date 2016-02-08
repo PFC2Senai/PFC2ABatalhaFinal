@@ -111,8 +111,8 @@ public class OperacaoModelo extends javax.swing.JFrame {
         txtBuscar = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         txtModelo = new javax.swing.JTextField();
-        jLabel3 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jButton7 = new javax.swing.JButton();
         jBtnNovoModelo = new javax.swing.JButton();
@@ -162,12 +162,12 @@ public class OperacaoModelo extends javax.swing.JFrame {
         txtModelo.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         getContentPane().add(txtModelo, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 520, 330, -1));
 
-        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/leiaute/img2.png"))); // NOI18N
-        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -9, 680, 120));
-
         jLabel1.setFont(new java.awt.Font("Raavi", 1, 18)); // NOI18N
         jLabel1.setText("MODELOS");
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(35, 41, -1, -1));
+
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/leiaute/img2.png"))); // NOI18N
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -9, 680, 120));
 
         jLabel2.setText("Pesquisar:");
         getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(35, 134, -1, -1));
