@@ -50,6 +50,7 @@ public final class DetalharServico extends javax.swing.JFrame {
     private double total;
     private double valorMaoObra;
     Statement stmt;
+    private ExibeServico telaExibeServico;
     
     /**
      * Creates new form DetalharServico
@@ -62,7 +63,9 @@ public final class DetalharServico extends javax.swing.JFrame {
         return total;
     }
     
-    public DetalharServico(int codServico) {
+    public DetalharServico(int codServico, ExibeServico exibeServ) {
+        
+        this.telaExibeServico = exibeServ;
         this.idServico = codServico;
         initComponents();
         CarregaServico();
@@ -96,8 +99,8 @@ public final class DetalharServico extends javax.swing.JFrame {
     private void initComponents() {
         bindingGroup = new org.jdesktop.beansbinding.BindingGroup();
 
-        jTabbedPane1 = new javax.swing.JTabbedPane();
-        jPanel13 = new javax.swing.JPanel();
+        jTabbedPaneDetalheServico = new javax.swing.JTabbedPane();
+        jPanelServico = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
@@ -117,6 +120,8 @@ public final class DetalharServico extends javax.swing.JFrame {
         jLabel10 = new javax.swing.JLabel();
         jBtnRemoverDetServTipoServico = new javax.swing.JButton();
         jBtnAdicionarDetServTipoServico = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
         jPanelPecaEEquip = new javax.swing.JPanel();
         jPanelPecas = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -146,12 +151,17 @@ public final class DetalharServico extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosed(java.awt.event.WindowEvent evt) {
+                formWindowClosed(evt);
+            }
+        });
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanel13.setPreferredSize(new java.awt.Dimension(860, 800));
-        jPanel13.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        jPanelServico.setPreferredSize(new java.awt.Dimension(860, 800));
+        jPanelServico.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true), "Serviço"));
+        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Serviço"));
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel6.setText("Cliente:");
@@ -214,9 +224,9 @@ public final class DetalharServico extends javax.swing.JFrame {
         });
         jPanel3.add(uJComboBoxClientes, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 30, 340, -1));
 
-        jPanel13.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 10, 800, 210));
+        jPanelServico.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 10, 800, 210));
 
-        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true), "Tipo Serviço"));
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Tipo Serviço"));
 
         jTableTipodeServico.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -269,7 +279,7 @@ public final class DetalharServico extends javax.swing.JFrame {
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 621, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 45, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 43, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jBtnRemoverDetServTipoServico)
                             .addComponent(jBtnAdicionarDetServTipoServico))
@@ -293,9 +303,25 @@ public final class DetalharServico extends javax.swing.JFrame {
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
 
-        jPanel13.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 230, 800, 190));
+        jPanelServico.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 230, 800, 190));
 
-        jTabbedPane1.addTab("Serviço", new javax.swing.ImageIcon(getClass().getResource("/imagens/servicos.png")), jPanel13); // NOI18N
+        jButton1.setText("Voltar");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        jPanelServico.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 440, -1, -1));
+
+        jButton2.setText("Próximo");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+        jPanelServico.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 440, -1, -1));
+
+        jTabbedPaneDetalheServico.addTab("Serviço", new javax.swing.ImageIcon(getClass().getResource("/imagens/servicos.png")), jPanelServico); // NOI18N
 
         jPanelPecas.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Peças"));
 
@@ -440,7 +466,7 @@ public final class DetalharServico extends javax.swing.JFrame {
                 .addContainerGap(70, Short.MAX_VALUE))
         );
 
-        jTabbedPane1.addTab("Peças e Equipamento", jPanelPecaEEquip);
+        jTabbedPaneDetalheServico.addTab("Peças e Equipamento", jPanelPecaEEquip);
 
         jPanelFuncionario.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Valores"));
 
@@ -594,9 +620,9 @@ public final class DetalharServico extends javax.swing.JFrame {
                 .addContainerGap(77, Short.MAX_VALUE))
         );
 
-        jTabbedPane1.addTab("Funionário e Valor", jPanelFuncionarioValor);
+        jTabbedPaneDetalheServico.addTab("Funionário e Valor", jPanelFuncionarioValor);
 
-        getContentPane().add(jTabbedPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 120, -1, 520));
+        getContentPane().add(jTabbedPaneDetalheServico, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 120, -1, 520));
 
         jLabel32.setFont(new java.awt.Font("Raavi", 1, 18)); // NOI18N
         jLabel32.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/servicos.png"))); // NOI18N
@@ -732,6 +758,19 @@ public final class DetalharServico extends javax.swing.JFrame {
         codCliente = 0;
         idClienteComboBox();
     }//GEN-LAST:event_uJComboBoxClientesActionPerformed
+
+    private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
+        verificaPagina();
+    }//GEN-LAST:event_formWindowClosed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        jTabbedPaneDetalheServico.setSelectedComponent(this.jPanelPecas);
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        this.dispose();
+        verificaPagina();
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     public void ocultaCampos() {
         uJComboBoxClientes.setVisible(false);
@@ -971,6 +1010,15 @@ public final class DetalharServico extends javax.swing.JFrame {
     }
 
 
+    private void verificaPagina() {
+
+        if ((this.telaExibeServico != null)) {
+            this.telaExibeServico.setEnabled(true);
+            this.telaExibeServico.toFront();
+            
+        }
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBtnAdicionarDetServTipoServico;
     private javax.swing.JButton jBtnAdicionarEquipamento;
@@ -986,6 +1034,8 @@ public final class DetalharServico extends javax.swing.JFrame {
     private javax.swing.JButton jBtnRemoverEquipamento;
     private javax.swing.JButton jBtnRemoverFuncionario;
     private javax.swing.JButton jBtnSalvarAltServico;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel12;
@@ -995,20 +1045,20 @@ public final class DetalharServico extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel13;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanelEquipamento;
     private javax.swing.JPanel jPanelFuncionario;
     private javax.swing.JPanel jPanelFuncionarioValor;
     private javax.swing.JPanel jPanelPecaEEquip;
     private javax.swing.JPanel jPanelPecas;
+    private javax.swing.JPanel jPanelServico;
     private javax.swing.JPanel jPanelValor;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane6;
-    private javax.swing.JTabbedPane jTabbedPane1;
+    private javax.swing.JTabbedPane jTabbedPaneDetalheServico;
     private javax.swing.JTable jTableEquipamento;
     private javax.swing.JTable jTableFuncionario;
     private javax.swing.JTable jTablePecas;

@@ -57,7 +57,6 @@ public class ExibeServico extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        jPanel1.setBackground(new java.awt.Color(204, 255, 204));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jTableListarServicos.setModel(new javax.swing.table.DefaultTableModel(
@@ -70,7 +69,7 @@ public class ExibeServico extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(jTableListarServicos);
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 220, 752, 320));
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 220, 700, 320));
 
         txtBuscar.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
@@ -94,18 +93,18 @@ public class ExibeServico extends javax.swing.JFrame {
                 jBtnDetalharActionPerformed(evt);
             }
         });
-        jPanel1.add(jBtnDetalhar, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 570, -1, -1));
+        jPanel1.add(jBtnDetalhar, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 220, -1, 40));
 
-        jBtnSair.setText("Sair");
+        jBtnSair.setText("Voltar");
         jBtnSair.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jBtnSairActionPerformed(evt);
             }
         });
-        jPanel1.add(jBtnSair, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 570, -1, -1));
+        jPanel1.add(jBtnSair, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 560, -1, -1));
 
         jLabel2.setText("Pesquisar:");
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 170, -1, -1));
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 160, -1, -1));
 
         jComboBoxOpcaoPesquisa.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Selecione a opção de pesquisa", "Código", "Empresa", "Data Serviço" }));
         jComboBoxOpcaoPesquisa.addActionListener(new java.awt.event.ActionListener() {
@@ -147,7 +146,8 @@ public class ExibeServico extends javax.swing.JFrame {
     private void jBtnDetalharActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnDetalharActionPerformed
         int linha = jTableListarServicos.getSelectedRow();
         codServico = (Integer.parseInt(jTableListarServicos.getValueAt(linha, 0).toString()));
-        new DetalharServico(codServico).setVisible(true);
+        this.setEnabled(false);
+        new DetalharServico(codServico, this).setVisible(true);
     }//GEN-LAST:event_jBtnDetalharActionPerformed
 
     private void jBtnSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnSairActionPerformed

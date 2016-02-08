@@ -1376,6 +1376,7 @@ public class DetalharCliente extends javax.swing.JFrame {
         jBtbCancelDadosP.setVisible(true);
         jBtnAltDadosP.setVisible(true);
 
+        jComboBoxSetores.setSelectedItem(txtSetor.getText());
         cnp = txtCnpj.getText();
 
     }//GEN-LAST:event_jButtonAr1ActionPerformed
