@@ -297,7 +297,7 @@ public final class DetalharServico extends javax.swing.JFrame {
 
         jTabbedPane1.addTab("Serviço", new javax.swing.ImageIcon(getClass().getResource("/imagens/servicos.png")), jPanel13); // NOI18N
 
-        jPanelPecas.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true), "Peças"));
+        jPanelPecas.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Peças"));
 
         jTablePecas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -362,7 +362,7 @@ public final class DetalharServico extends javax.swing.JFrame {
                 .addContainerGap(20, Short.MAX_VALUE))
         );
 
-        jPanelEquipamento.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true), "Equipamentos"));
+        jPanelEquipamento.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Equipamentos"));
 
         jTableEquipamento.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -437,12 +437,12 @@ public final class DetalharServico extends javax.swing.JFrame {
                 .addComponent(jPanelPecas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanelEquipamento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(74, Short.MAX_VALUE))
+                .addContainerGap(70, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Peças e Equipamento", jPanelPecaEEquip);
 
-        jPanelFuncionario.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true), "Funcionários"));
+        jPanelFuncionario.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Valores"));
 
         jTableFuncionario.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -500,7 +500,7 @@ public final class DetalharServico extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        jPanelValor.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true), "Valores"));
+        jPanelValor.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Valores"));
 
         jLabel4.setText("Total serviço:");
 
@@ -591,7 +591,7 @@ public final class DetalharServico extends javax.swing.JFrame {
                 .addComponent(jPanelFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanelValor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(81, Short.MAX_VALUE))
+                .addContainerGap(77, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Funionário e Valor", jPanelFuncionarioValor);

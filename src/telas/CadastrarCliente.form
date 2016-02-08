@@ -41,7 +41,7 @@
     <Container class="javax.swing.JPanel" name="jPanel1">
       <Properties>
         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-          <Color blue="ff" green="ff" red="ff" type="rgb"/>
+          <Color blue="fd" green="ed" red="df" type="rgb"/>
         </Property>
       </Properties>
 
@@ -61,7 +61,7 @@
           </Properties>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="10" y="40" width="210" height="50"/>
+              <AbsoluteConstraints x="30" y="50" width="240" height="50"/>
             </Constraint>
           </Constraints>
         </Component>
@@ -96,7 +96,7 @@
           </Properties>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="30" y="340" width="730" height="280"/>
+              <AbsoluteConstraints x="30" y="340" width="790" height="280"/>
             </Constraint>
           </Constraints>
 
@@ -149,7 +149,7 @@
                               <Group type="103" groupAlignment="1" attributes="0">
                                   <Component id="jScrollPane1" alignment="0" max="32767" attributes="0"/>
                                   <Group type="102" attributes="0">
-                                      <EmptySpace min="0" pref="563" max="32767" attributes="0"/>
+                                      <EmptySpace min="0" pref="620" max="32767" attributes="0"/>
                                       <Group type="103" groupAlignment="1" attributes="0">
                                           <Component id="jBtnRemoverContato" min="-2" max="-2" attributes="0"/>
                                           <Component id="jBtnOutroContato" min="-2" max="-2" attributes="0"/>
@@ -379,7 +379,7 @@
           </Properties>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="30" y="220" width="730" height="120"/>
+              <AbsoluteConstraints x="30" y="220" width="790" height="120"/>
             </Constraint>
           </Constraints>
 
@@ -419,7 +419,7 @@
                           <Component id="txtNumero" min="-2" pref="79" max="-2" attributes="0"/>
                           <Component id="txtBairro" alignment="0" max="32767" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="31" max="32767" attributes="0"/>
+                      <EmptySpace pref="111" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -556,7 +556,7 @@
           </Properties>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="30" y="130" width="730" height="90"/>
+              <AbsoluteConstraints x="30" y="130" width="790" height="90"/>
             </Constraint>
           </Constraints>
 
@@ -570,7 +570,7 @@
                               <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
                               <EmptySpace min="15" pref="15" max="-2" attributes="0"/>
                               <Component id="txtEmpresa" min="-2" pref="229" max="-2" attributes="0"/>
-                              <EmptySpace min="20" pref="20" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="50" max="-2" attributes="0"/>
                               <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
                               <EmptySpace min="30" pref="30" max="-2" attributes="0"/>
                               <Component id="txtCnpj" min="-2" pref="142" max="-2" attributes="0"/>
@@ -584,7 +584,7 @@
                                   <Component id="txtSetor" min="-2" pref="230" max="-2" attributes="0"/>
                                   <Component id="jComboBoxSetores" min="-2" pref="230" max="-2" attributes="0"/>
                               </Group>
-                              <EmptySpace min="20" pref="20" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="53" max="-2" attributes="0"/>
                               <Component id="jBtnNovoSetor" min="-2" max="-2" attributes="0"/>
                               <EmptySpace min="11" pref="11" max="-2" attributes="0"/>
                               <Component id="jBtnCancelarSetor" min="-2" max="-2" attributes="0"/>

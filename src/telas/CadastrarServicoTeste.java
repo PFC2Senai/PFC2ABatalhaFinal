@@ -101,7 +101,7 @@ public class CadastrarServicoTeste extends javax.swing.JFrame {
         uJComboBoxClientes.getEditor().getEditorComponent().addFocusListener(new FocusAdapter() {
             @Override
             public void focusLost(FocusEvent e) {
-                if (codCliente == 0) {
+                if (codCliente == 0 && uJComboBoxClientes.getSelectedIndex() != 0) {
                     Mensangem();
                     uJComboBoxClientes.getEditor().getEditorComponent().requestFocus();
                 }
@@ -113,7 +113,7 @@ public class CadastrarServicoTeste extends javax.swing.JFrame {
         jComboBoxTipoServico.getEditor().getEditorComponent().addFocusListener(new FocusAdapter() {
             @Override
             public void focusLost(FocusEvent e) {
-                if (codTipoServico == 0) {
+                if (codTipoServico == 0 && jComboBoxTipoServico.getSelectedIndex() != 0) {
                     Mensangem();
                     jComboBoxTipoServico.getEditor().getEditorComponent().requestFocus();
                 }
@@ -125,7 +125,7 @@ public class CadastrarServicoTeste extends javax.swing.JFrame {
         uJComboBoxPeca.getEditor().getEditorComponent().addFocusListener(new FocusAdapter() {
             @Override
             public void focusLost(FocusEvent e) {
-                if (codProduto == 0) {
+                if (codProduto == 0 && uJComboBoxPeca.getSelectedIndex() != 0) {
                     Mensangem();
                     uJComboBoxPeca.getEditor().getEditorComponent().requestFocus();
                 }
@@ -137,7 +137,7 @@ public class CadastrarServicoTeste extends javax.swing.JFrame {
         uJComboBoxEquipamento.getEditor().getEditorComponent().addFocusListener(new FocusAdapter() {
             @Override
             public void focusLost(FocusEvent e) {
-                if (codEquipamento == 0) {
+                if (codEquipamento == 0 && uJComboBoxEquipamento.getSelectedIndex() != 0) {
                     Mensangem();
                     uJComboBoxEquipamento.getEditor().getEditorComponent().requestFocus();
                 }
@@ -149,7 +149,7 @@ public class CadastrarServicoTeste extends javax.swing.JFrame {
         uJComboBoxFuncionario.getEditor().getEditorComponent().addFocusListener(new FocusAdapter() {
             @Override
             public void focusLost(FocusEvent e) {
-                if (codFuncionario == 0) {
+                if (codFuncionario == 0 && uJComboBoxFuncionario.getSelectedIndex() != 0) {
                     Mensangem();
                     uJComboBoxFuncionario.getEditor().getEditorComponent().requestFocus();
                 }
@@ -252,7 +252,7 @@ public class CadastrarServicoTeste extends javax.swing.JFrame {
         jTabbedPaneServico.setBackground(new java.awt.Color(249, 238, 238));
         jTabbedPaneServico.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
-        jPanel7.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jPanel7.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
         jPanel7.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel6.setText("Empresa:");
@@ -371,13 +371,13 @@ public class CadastrarServicoTeste extends javax.swing.JFrame {
         jPanelServicoLayout.setHorizontalGroup(
             jPanelServicoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelServicoLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(639, Short.MAX_VALUE)
                 .addComponent(jBtnAvancarPainelPecas)
                 .addGap(133, 133, 133))
             .addGroup(jPanelServicoLayout.createSequentialGroup()
-                .addGap(62, 62, 62)
-                .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, 678, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(105, Short.MAX_VALUE))
+                .addGap(32, 32, 32)
+                .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, 771, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanelServicoLayout.setVerticalGroup(
             jPanelServicoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -391,7 +391,7 @@ public class CadastrarServicoTeste extends javax.swing.JFrame {
 
         jTabbedPaneServico.addTab("Serviço", new javax.swing.ImageIcon(getClass().getResource("/imagens/servicos.png")), jPanelServico); // NOI18N
 
-        jPanel14.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jPanel14.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
         jPanel14.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel33.setText("Peça:");
@@ -404,7 +404,7 @@ public class CadastrarServicoTeste extends javax.swing.JFrame {
                 jBtbIncluirPecaActionPerformed(evt);
             }
         });
-        jPanel14.add(jBtbIncluirPeca, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 380, -1, -1));
+        jPanel14.add(jBtbIncluirPeca, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 160, -1, -1));
 
         jLabel34.setText("Quantidade:");
         jPanel14.add(jLabel34, new org.netbeans.lib.awtextra.AbsoluteConstraints(367, 110, -1, -1));
@@ -519,14 +519,16 @@ public class CadastrarServicoTeste extends javax.swing.JFrame {
         jPanelPecasLayout.setHorizontalGroup(
             jPanelPecasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelPecasLayout.createSequentialGroup()
-                .addGap(18, 18, 18)
                 .addGroup(jPanelPecasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanelPecasLayout.createSequentialGroup()
+                        .addGap(18, 18, 18)
                         .addComponent(jBtnVoltarPainelServico)
                         .addGap(616, 616, 616)
                         .addComponent(jBtnAvancarPainelEquipamento))
-                    .addComponent(jPanel14, javax.swing.GroupLayout.PREFERRED_SIZE, 765, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(62, Short.MAX_VALUE))
+                    .addGroup(jPanelPecasLayout.createSequentialGroup()
+                        .addGap(40, 40, 40)
+                        .addComponent(jPanel14, javax.swing.GroupLayout.PREFERRED_SIZE, 765, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(40, Short.MAX_VALUE))
         );
         jPanelPecasLayout.setVerticalGroup(
             jPanelPecasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -542,7 +544,7 @@ public class CadastrarServicoTeste extends javax.swing.JFrame {
 
         jTabbedPaneServico.addTab("Peças", new javax.swing.ImageIcon(getClass().getResource("/imagens/prod.png")), jPanelPecas); // NOI18N
 
-        jPanel4.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
 
         jLabel1.setText("Equipamento:");
 
@@ -719,7 +721,7 @@ public class CadastrarServicoTeste extends javax.swing.JFrame {
 
         jTabbedPaneServico.addTab("Equipamento", new javax.swing.ImageIcon(getClass().getResource("/imagens/equipamento.png")), jPanelEquipamento); // NOI18N
 
-        jPanel5.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jPanel5.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
 
         jTableFuncionario.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -849,7 +851,7 @@ public class CadastrarServicoTeste extends javax.swing.JFrame {
 
         jTabbedPaneServico.addTab("Funcionário", new javax.swing.ImageIcon(getClass().getResource("/imagens/funcionario.png")), jPanelFuncionario); // NOI18N
 
-        jPanel8.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jPanel8.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
 
         jLabel2.setText("Valor total de peças:");
 
@@ -942,18 +944,18 @@ public class CadastrarServicoTeste extends javax.swing.JFrame {
                         .addGap(536, 536, 536)
                         .addComponent(jBtnCadastrarServico3))
                     .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(83, Short.MAX_VALUE))
+                .addContainerGap(81, Short.MAX_VALUE))
         );
         jPanelValorTotalServicoLayout.setVerticalGroup(
             jPanelValorTotalServicoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelValorTotalServicoLayout.createSequentialGroup()
                 .addGap(65, 65, 65)
                 .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(128, 128, 128)
+                .addGap(98, 98, 98)
                 .addGroup(jPanelValorTotalServicoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jBtnCadastrarServico3)
                     .addComponent(jBtnVoltarPainelFuncionario))
-                .addContainerGap(32, Short.MAX_VALUE))
+                .addContainerGap(59, Short.MAX_VALUE))
         );
 
         jTabbedPaneServico.addTab("Valor", new javax.swing.ImageIcon(getClass().getResource("/imagens/dinheiro.png")), jPanelValorTotalServico); // NOI18N
@@ -1504,6 +1506,7 @@ public class CadastrarServicoTeste extends javax.swing.JFrame {
         ArrayList<Equipamento> equipamentos = new ArrayList<Equipamento>();
         equipamentos = EquipamentoDAO.ListarEquipamentos();
 
+        uJComboBoxEquipamento.addItem("Selecione o equipamento");
         for (Equipamento equi : equipamentos) {
             uJComboBoxEquipamento.addItem(equi.getEquipamento(), equi);
         }
@@ -1515,6 +1518,7 @@ public class CadastrarServicoTeste extends javax.swing.JFrame {
         ArrayList<Funcionario> funcionarios = new ArrayList<Funcionario>();
         funcionarios = FuncionarioDAO.ListarFuncionario();
 
+        uJComboBoxFuncionario.addItem("Selecione o funcionario");
         for (Funcionario func : funcionarios) {
             uJComboBoxFuncionario.addItem(func.getFuncionario(), func);
         }

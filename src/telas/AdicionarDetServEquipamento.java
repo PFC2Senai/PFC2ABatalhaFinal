@@ -1,17 +1,23 @@
 package telas;
 
 import atributos.DetServicoEquipamento;
+import atributos.Equipamento;
 import funcoes.Conexao;
 import funcoes.DetServicoEquipamentoDAO;
 import funcoes.EquipamentoDAO;
+import funcoes.TabelaZebrada;
+import java.awt.event.FocusAdapter;
+import java.awt.event.FocusEvent;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableCellRenderer;
 
 
 public class AdicionarDetServEquipamento extends javax.swing.JFrame {
@@ -42,7 +48,19 @@ public class AdicionarDetServEquipamento extends javax.swing.JFrame {
         this.idServico = idServ;
         this.telaDatalharServico = telaDetalharServ;
         initComponents();
-        populaComboBoxEquipamento();
+        ocultaTabela();
+        carregarComboEquipamento();
+        
+        uJComboBoxEquipamento.getEditor().getEditorComponent().addFocusListener(new FocusAdapter() {
+            @Override
+            public void focusLost(FocusEvent e) {
+                if (codEquipamento == 0 && uJComboBoxEquipamento.getSelectedIndex() != 0) {
+                    JOptionPane.showMessageDialog(null, "Esse registro não encontra-se cadastrado na base de dados.");
+                    uJComboBoxEquipamento.getEditor().getEditorComponent().requestFocus();
+                }
+            }
+        });
+        uJComboBoxEquipamento.setAutocompletar(true);
     }
 
     /**
@@ -55,7 +73,6 @@ public class AdicionarDetServEquipamento extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel4 = new javax.swing.JPanel();
-        jComboBoxEquipamentos = new javax.swing.JComboBox();
         jLabel1 = new javax.swing.JLabel();
         jBtnRemoveEquipamento = new javax.swing.JButton();
         jBtbIncluirEquipamento = new javax.swing.JButton();
@@ -66,27 +83,15 @@ public class AdicionarDetServEquipamento extends javax.swing.JFrame {
         jLabel38 = new javax.swing.JLabel();
         jComboBoxFabricanteEquip = new javax.swing.JComboBox();
         jBtnInserirDetServEquipamento = new javax.swing.JButton();
+        uJComboBoxEquipamento = new componentes.UJComboBox();
+        jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        jPanel4.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jComboBoxEquipamentos.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Selecione o Equipamento" }));
-        jComboBoxEquipamentos.addItemListener(new java.awt.event.ItemListener() {
-            public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                jComboBoxEquipamentosItemStateChanged(evt);
-            }
-        });
-        jComboBoxEquipamentos.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBoxEquipamentosActionPerformed(evt);
-            }
-        });
-        jPanel4.add(jComboBoxEquipamentos, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 130, 261, -1));
-
         jLabel1.setText("Equipamento:");
-        jPanel4.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 140, -1, -1));
+        jPanel4.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 140, -1, -1));
 
         jBtnRemoveEquipamento.setText("Remover");
         jBtnRemoveEquipamento.addActionListener(new java.awt.event.ActionListener() {
@@ -94,7 +99,7 @@ public class AdicionarDetServEquipamento extends javax.swing.JFrame {
                 jBtnRemoveEquipamentoActionPerformed(evt);
             }
         });
-        jPanel4.add(jBtnRemoveEquipamento, new org.netbeans.lib.awtextra.AbsoluteConstraints(243, 264, -1, -1));
+        jPanel4.add(jBtnRemoveEquipamento, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 430, -1, -1));
 
         jBtbIncluirEquipamento.setText("IncluirEquipamento");
         jBtbIncluirEquipamento.addActionListener(new java.awt.event.ActionListener() {
@@ -102,7 +107,7 @@ public class AdicionarDetServEquipamento extends javax.swing.JFrame {
                 jBtbIncluirEquipamentoActionPerformed(evt);
             }
         });
-        jPanel4.add(jBtbIncluirEquipamento, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 264, -1, -1));
+        jPanel4.add(jBtbIncluirEquipamento, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 260, -1, -1));
 
         jTableEquipamento.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -123,10 +128,10 @@ public class AdicionarDetServEquipamento extends javax.swing.JFrame {
         jTableEquipamento.getTableHeader().setReorderingAllowed(false);
         jScrollPane2.setViewportView(jTableEquipamento);
 
-        jPanel4.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 305, 476, 130));
+        jPanel4.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 290, 620, 130));
 
         jLabel37.setText("Modelo:");
-        jPanel4.add(jLabel37, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 170, -1, -1));
+        jPanel4.add(jLabel37, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 180, -1, -1));
 
         jComboBoxModeloEquip.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Selecione o Modelo" }));
         jComboBoxModeloEquip.addItemListener(new java.awt.event.ItemListener() {
@@ -134,10 +139,10 @@ public class AdicionarDetServEquipamento extends javax.swing.JFrame {
                 jComboBoxModeloEquipItemStateChanged(evt);
             }
         });
-        jPanel4.add(jComboBoxModeloEquip, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 170, 264, -1));
+        jPanel4.add(jComboBoxModeloEquip, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 180, 320, -1));
 
         jLabel38.setText("Fabricante:");
-        jPanel4.add(jLabel38, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 210, -1, -1));
+        jPanel4.add(jLabel38, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 220, -1, -1));
 
         jComboBoxFabricanteEquip.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Selecione o Fabricante" }));
         jComboBoxFabricanteEquip.addActionListener(new java.awt.event.ActionListener() {
@@ -145,7 +150,7 @@ public class AdicionarDetServEquipamento extends javax.swing.JFrame {
                 jComboBoxFabricanteEquipActionPerformed(evt);
             }
         });
-        jPanel4.add(jComboBoxFabricanteEquip, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 210, 264, -1));
+        jPanel4.add(jComboBoxFabricanteEquip, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 220, 320, -1));
 
         jBtnInserirDetServEquipamento.setText("Salvar");
         jBtnInserirDetServEquipamento.addActionListener(new java.awt.event.ActionListener() {
@@ -153,7 +158,23 @@ public class AdicionarDetServEquipamento extends javax.swing.JFrame {
                 jBtnInserirDetServEquipamentoActionPerformed(evt);
             }
         });
-        jPanel4.add(jBtnInserirDetServEquipamento, new org.netbeans.lib.awtextra.AbsoluteConstraints(493, 465, -1, -1));
+        jPanel4.add(jBtnInserirDetServEquipamento, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 490, -1, -1));
+
+        uJComboBoxEquipamento.setEditable(true);
+        uJComboBoxEquipamento.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                uJComboBoxEquipamentoItemStateChanged(evt);
+            }
+        });
+        uJComboBoxEquipamento.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                uJComboBoxEquipamentoActionPerformed(evt);
+            }
+        });
+        jPanel4.add(uJComboBoxEquipamento, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 140, 320, -1));
+
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/leiaute/img2.png"))); // NOI18N
+        jPanel4.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 680, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -163,32 +184,14 @@ public class AdicionarDetServEquipamento extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, 517, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, 532, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-
-    private void jComboBoxEquipamentosItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jComboBoxEquipamentosItemStateChanged
-        jComboBoxModeloEquip.removeAllItems();
-        jComboBoxFabricanteEquip.removeAllItems();
-        codModeloEqui = 0;
-        modeloEqui = null;
-        codFabricanteEqui = 0;
-        fabricanteEqui = null;
-        idEquipamentoComboBox();
-        populaComboBoxModeloEqui();
-        equipamento = jComboBoxEquipamentos.getSelectedItem().toString();
-    }//GEN-LAST:event_jComboBoxEquipamentosItemStateChanged
-
-    private void jComboBoxEquipamentosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxEquipamentosActionPerformed
-
-        idEquipamentoComboBox();
-        if (jComboBoxEquipamentos.getSelectedItem() != null) {
-            equipamento = jComboBoxEquipamentos.getSelectedItem().toString();
-        }
-    }//GEN-LAST:event_jComboBoxEquipamentosActionPerformed
 
     private void jBtnRemoveEquipamentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnRemoveEquipamentoActionPerformed
         DefaultTableModel dtm = (DefaultTableModel) jTableEquipamento.getModel();
@@ -234,6 +237,27 @@ public class AdicionarDetServEquipamento extends javax.swing.JFrame {
         telaDatalharServico.TabelaEquipamento("SELECT * FROM vw_detservequipamento where idservico = " + idServico +";");
     }//GEN-LAST:event_jBtnInserirDetServEquipamentoActionPerformed
 
+    private void uJComboBoxEquipamentoItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_uJComboBoxEquipamentoItemStateChanged
+
+        jComboBoxModeloEquip.removeAllItems();
+        jComboBoxFabricanteEquip.removeAllItems();
+        codModeloEqui = 0;
+        modeloEqui = null;
+        codFabricanteEqui = 0;
+        fabricanteEqui = null;
+        codEquipamento = 0;
+        idEquipamentoComboBox();
+        populaComboBoxModeloEqui();
+        equipamento = uJComboBoxEquipamento.getSelectedItem().toString();
+    }//GEN-LAST:event_uJComboBoxEquipamentoItemStateChanged
+
+    private void uJComboBoxEquipamentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_uJComboBoxEquipamentoActionPerformed
+        idEquipamentoComboBox();
+        if (uJComboBoxEquipamento.getSelectedItem() != null) {
+            equipamento = uJComboBoxEquipamento.getSelectedItem().toString();
+        }
+    }//GEN-LAST:event_uJComboBoxEquipamentoActionPerformed
+
     public void TabelaEquipamento() {
         
         codDetEquipamento = EquipamentoDAO.CodigoDetEquipamento(codEquipamento, codModeloEqui, codFabricanteEqui);
@@ -248,28 +272,23 @@ public class AdicionarDetServEquipamento extends javax.swing.JFrame {
                                          equipamento, 
                                          modeloEqui, 
                                          fabricanteEqui});
+                TableCellRenderer renderer = new TabelaZebrada();
+                jTableEquipamento.setDefaultRenderer(Object.class, renderer);
                                                      
         } catch (Exception erro) {
             Logger.getLogger(CadastrarCliente.class.getName()).log(Level.SEVERE, null, erro);
         }          
     }
     
-    private void populaComboBoxEquipamento() {
-        
-        Connection conexao = Conexao.getConnection();
-        ResultSet rs;
-        String sql = "select * from tabequipamento";
-        
-        try{
-            pst = conexao.prepareStatement(sql);
-            rs = pst.executeQuery();
-            
-            while(rs.next()) {
-                jComboBoxEquipamentos.addItem(rs.getString("equipamento"));
-            }
-            
-        }catch(SQLException ex) {
-            JOptionPane.showMessageDialog(null, ex);
+    private void carregarComboEquipamento() {
+
+        //   uJComboBoxEquipamento.clear();
+        ArrayList<Equipamento> equipamentos = new ArrayList<Equipamento>();
+        equipamentos = EquipamentoDAO.ListarEquipamentos();
+
+        uJComboBoxEquipamento.addItem("Selecione o equipamento");
+        for (Equipamento equi : equipamentos) {
+            uJComboBoxEquipamento.addItem(equi.getEquipamento(), equi);
         }
     }
     
@@ -277,7 +296,7 @@ public class AdicionarDetServEquipamento extends javax.swing.JFrame {
         
         Connection conexao = Conexao.getConnection();
         ResultSet rs;
-        String sql = "select * from tabequipamento where equipamento = '" + jComboBoxEquipamentos.getSelectedItem()+ "';";
+        String sql = "select * from tabequipamento where equipamento = '" + uJComboBoxEquipamento.getSelectedItem()+ "';";
         
         try{
             pst = conexao.prepareStatement(sql);
@@ -376,18 +395,36 @@ public class AdicionarDetServEquipamento extends javax.swing.JFrame {
         }
     }
 
+    private void ocultaTabela() {
+        jTableEquipamento.getColumnModel().getColumn(0).setMaxWidth(0);
+        jTableEquipamento.getColumnModel().getColumn(0).setMinWidth(0);
+        jTableEquipamento.getTableHeader().getColumnModel().getColumn(0).setMaxWidth(0);
+        jTableEquipamento.getTableHeader().getColumnModel().getColumn(0).setMinWidth(0);
+        
+        jTableEquipamento.getColumnModel().getColumn(1).setMaxWidth(0);
+        jTableEquipamento.getColumnModel().getColumn(1).setMinWidth(0);
+        jTableEquipamento.getTableHeader().getColumnModel().getColumn(1).setMaxWidth(0);
+        jTableEquipamento.getTableHeader().getColumnModel().getColumn(1).setMinWidth(0);
+        
+        jTableEquipamento.getColumnModel().getColumn(2).setMaxWidth(0);
+        jTableEquipamento.getColumnModel().getColumn(2).setMinWidth(0);
+        jTableEquipamento.getTableHeader().getColumnModel().getColumn(2).setMaxWidth(0);
+        jTableEquipamento.getTableHeader().getColumnModel().getColumn(2).setMinWidth(0);
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBtbIncluirEquipamento;
     private javax.swing.JButton jBtnInserirDetServEquipamento;
     private javax.swing.JButton jBtnRemoveEquipamento;
-    private javax.swing.JComboBox jComboBoxEquipamentos;
     private javax.swing.JComboBox jComboBoxFabricanteEquip;
     private javax.swing.JComboBox jComboBoxModeloEquip;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel37;
     private javax.swing.JLabel jLabel38;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTableEquipamento;
+    private componentes.UJComboBox uJComboBoxEquipamento;
     // End of variables declaration//GEN-END:variables
 }

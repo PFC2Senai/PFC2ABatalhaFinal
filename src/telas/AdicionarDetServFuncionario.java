@@ -1,16 +1,23 @@
 package telas;
 
 import atributos.DetServicoFuncionario;
+import atributos.Funcionario;
 import funcoes.Conexao;
 import funcoes.DetServicoFuncionarioDAO;
+import funcoes.FuncionarioDAO;
+import funcoes.TabelaZebrada;
+import java.awt.event.FocusAdapter;
+import java.awt.event.FocusEvent;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableCellRenderer;
 
 /**
  *
@@ -37,7 +44,18 @@ public class AdicionarDetServFuncionario extends javax.swing.JFrame {
         this.idServico = idServ;
         this.telaDatalharServico = telaDetalharServ;
         initComponents();
-        populaComboBoxFuncionario();
+        carregarComboFuncionario();
+        ocultaTabela();
+        uJComboBoxFuncionario.getEditor().getEditorComponent().addFocusListener(new FocusAdapter() {
+            @Override
+            public void focusLost(FocusEvent e) {
+                if (codFuncionario == 0 && uJComboBoxFuncionario.getSelectedIndex() != 0) {
+                    JOptionPane.showMessageDialog(null, "Esse registro não encontra-se cadastrado na base de dados.");
+                    uJComboBoxFuncionario.getEditor().getEditorComponent().requestFocus();
+                }
+            }
+        });
+        uJComboBoxFuncionario.setAutocompletar(true);       
     }
 
     /**
@@ -52,15 +70,15 @@ public class AdicionarDetServFuncionario extends javax.swing.JFrame {
         jPanel5 = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
         jTableFuncionario = new javax.swing.JTable();
-        jComboBoxFuncionarios = new javax.swing.JComboBox();
         jLabel7 = new javax.swing.JLabel();
         jBtnRemoverFunc = new javax.swing.JButton();
         jBtbIncluirFunc = new javax.swing.JButton();
         jBtnSalvarDetServFuncionario = new javax.swing.JButton();
+        uJComboBoxFuncionario = new componentes.UJComboBox();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        jPanel5.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         jPanel5.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jTableFuncionario.setModel(new javax.swing.table.DefaultTableModel(
@@ -82,18 +100,10 @@ public class AdicionarDetServFuncionario extends javax.swing.JFrame {
         jTableFuncionario.getTableHeader().setReorderingAllowed(false);
         jScrollPane3.setViewportView(jTableFuncionario);
 
-        jPanel5.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 240, 514, 190));
-
-        jComboBoxFuncionarios.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Selecione o Funcionário" }));
-        jComboBoxFuncionarios.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBoxFuncionariosActionPerformed(evt);
-            }
-        });
-        jPanel5.add(jComboBoxFuncionarios, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 140, 274, -1));
+        jPanel5.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 240, 600, 190));
 
         jLabel7.setText("Funcionário:");
-        jPanel5.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 140, -1, -1));
+        jPanel5.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 160, -1, -1));
 
         jBtnRemoverFunc.setText("Remover");
         jBtnRemoverFunc.addActionListener(new java.awt.event.ActionListener() {
@@ -101,7 +111,7 @@ public class AdicionarDetServFuncionario extends javax.swing.JFrame {
                 jBtnRemoverFuncActionPerformed(evt);
             }
         });
-        jPanel5.add(jBtnRemoverFunc, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 190, -1, -1));
+        jPanel5.add(jBtnRemoverFunc, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 440, -1, -1));
 
         jBtbIncluirFunc.setText("Incluir Funcionário");
         jBtbIncluirFunc.addActionListener(new java.awt.event.ActionListener() {
@@ -109,7 +119,7 @@ public class AdicionarDetServFuncionario extends javax.swing.JFrame {
                 jBtbIncluirFuncActionPerformed(evt);
             }
         });
-        jPanel5.add(jBtbIncluirFunc, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 190, -1, -1));
+        jPanel5.add(jBtbIncluirFunc, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 210, -1, -1));
 
         jBtnSalvarDetServFuncionario.setText("Salvar");
         jBtnSalvarDetServFuncionario.addActionListener(new java.awt.event.ActionListener() {
@@ -117,30 +127,33 @@ public class AdicionarDetServFuncionario extends javax.swing.JFrame {
                 jBtnSalvarDetServFuncionarioActionPerformed(evt);
             }
         });
-        jPanel5.add(jBtnSalvarDetServFuncionario, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 450, -1, -1));
+        jPanel5.add(jBtnSalvarDetServFuncionario, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 500, -1, -1));
+
+        uJComboBoxFuncionario.setEditable(true);
+        uJComboBoxFuncionario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                uJComboBoxFuncionarioActionPerformed(evt);
+            }
+        });
+        jPanel5.add(uJComboBoxFuncionario, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 160, 340, -1));
+
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/leiaute/img2.png"))); // NOI18N
+        jPanel5.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 670, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, 501, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, 540, Short.MAX_VALUE)
         );
 
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-
-    private void jComboBoxFuncionariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxFuncionariosActionPerformed
-
-        idFuncionarioComboBox();
-        if (jComboBoxFuncionarios.getSelectedItem() != null) {
-            funcionario = jComboBoxFuncionarios.getSelectedItem().toString();
-        }
-    }//GEN-LAST:event_jComboBoxFuncionariosActionPerformed
 
     private void jBtnRemoverFuncActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnRemoverFuncActionPerformed
         DefaultTableModel dtm = (DefaultTableModel) jTableFuncionario.getModel();
@@ -170,35 +183,36 @@ public class AdicionarDetServFuncionario extends javax.swing.JFrame {
         telaDatalharServico.TabelaFuncionario();
     }//GEN-LAST:event_jBtnSalvarDetServFuncionarioActionPerformed
 
+    private void uJComboBoxFuncionarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_uJComboBoxFuncionarioActionPerformed
+        codFuncionario = 0;
+        idFuncionarioComboBox();
+        if (uJComboBoxFuncionario.getSelectedItem() != null) {
+            funcionario = uJComboBoxFuncionario.getSelectedItem().toString();
+        }
+    }//GEN-LAST:event_uJComboBoxFuncionarioActionPerformed
+
     public void TabelaFuncionario() {
         
-        try { 
-            
+        try {             
             DefaultTableModel dtm = (DefaultTableModel) jTableFuncionario.getModel();
                    
                 dtm.addRow(new Object[] {codFuncionario, funcionario});
-                
+                TableCellRenderer renderer = new TabelaZebrada();
+                jTableFuncionario.setDefaultRenderer(Object.class, renderer);
         } catch (Exception erro) {
             Logger.getLogger(CadastrarCliente.class.getName()).log(Level.SEVERE, null, erro);
         }          
     }
     
-    private void populaComboBoxFuncionario() {
-        
-        Connection conexao = Conexao.getConnection();
-        ResultSet rs;
-        String sql = "select * from tabfuncionario";
-        
-        try{
-            pst = conexao.prepareStatement(sql);
-            rs = pst.executeQuery();
-            
-            while(rs.next()) {
-                jComboBoxFuncionarios.addItem(rs.getString("funcionario"));
-            }
-            
-        }catch(SQLException ex) {
-            JOptionPane.showMessageDialog(null, ex);
+    private void carregarComboFuncionario() {
+
+        //    uJComboBoxFuncionario.clear();
+        ArrayList<Funcionario> funcionarios = new ArrayList<Funcionario>();
+        funcionarios = FuncionarioDAO.ListarFuncionario();
+
+        uJComboBoxFuncionario.addItem("Selecione o funcionario");
+        for (Funcionario func : funcionarios) {
+            uJComboBoxFuncionario.addItem(func.getFuncionario(), func);
         }
     }
     
@@ -206,7 +220,7 @@ public class AdicionarDetServFuncionario extends javax.swing.JFrame {
         
         Connection conexao = Conexao.getConnection();
         ResultSet rs;
-        String sql = "select * from tabfuncionario where funcionario = '" + jComboBoxFuncionarios.getSelectedItem()+ "';";
+        String sql = "select * from tabfuncionario where funcionario = '" + uJComboBoxFuncionario.getSelectedItem()+ "';";
         
         try{
             pst = conexao.prepareStatement(sql);
@@ -221,14 +235,22 @@ public class AdicionarDetServFuncionario extends javax.swing.JFrame {
         }
     }
     
+    private void ocultaTabela() {
+        jTableFuncionario.getColumnModel().getColumn(0).setMaxWidth(0);
+        jTableFuncionario.getColumnModel().getColumn(0).setMinWidth(0);
+        jTableFuncionario.getTableHeader().getColumnModel().getColumn(0).setMaxWidth(0);
+        jTableFuncionario.getTableHeader().getColumnModel().getColumn(0).setMinWidth(0);
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBtbIncluirFunc;
     private javax.swing.JButton jBtnRemoverFunc;
     private javax.swing.JButton jBtnSalvarDetServFuncionario;
-    private javax.swing.JComboBox jComboBoxFuncionarios;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTable jTableFuncionario;
+    private componentes.UJComboBox uJComboBoxFuncionario;
     // End of variables declaration//GEN-END:variables
 }
