@@ -399,6 +399,7 @@ public class CadastrarVenda extends javax.swing.JFrame {
         jTextValorUnit = new javax.swing.JTextField();
         jLabel12 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
+        jTextField1 = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -581,6 +582,14 @@ public class CadastrarVenda extends javax.swing.JFrame {
         jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/leiaute/img2.png"))); // NOI18N
         getContentPane().add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 680, 110));
 
+        jTextField1.setBackground(new java.awt.Color(223, 237, 253));
+        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField1ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(-1, 110, 680, 550));
+
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
@@ -746,6 +755,10 @@ public class CadastrarVenda extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jTextTotalKeyTyped
 
+    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField1ActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private com.toedter.calendar.JDateChooser JDataVenda;
     private javax.swing.JButton jButton1;
@@ -772,6 +785,7 @@ public class CadastrarVenda extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTableProduto;
     private javax.swing.JTextField jTextCodUser;
+    private javax.swing.JTextField jTextField1;
     private javax.swing.JFormattedTextField jTextHora;
     private javax.swing.JTextField jTextQuantidadeProduto;
     private javax.swing.JTextField jTextTotal;

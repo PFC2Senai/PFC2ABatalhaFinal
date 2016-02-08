@@ -79,12 +79,14 @@ public class ExibeAuditoria extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setBackground(new java.awt.Color(223, 237, 253));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel1.setText("Auditoria");
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 40, -1, -1));
 
+        jTableListarAuditoria.setBackground(new java.awt.Color(223, 237, 253));
         jTableListarAuditoria.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
