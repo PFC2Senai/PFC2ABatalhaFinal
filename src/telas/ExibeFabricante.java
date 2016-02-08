@@ -109,7 +109,6 @@ public class ExibeFabricante extends javax.swing.JFrame {
         jTableListarFabricantes = new javax.swing.JTable();
         jLabel2 = new javax.swing.JLabel();
         txtBuscar = new javax.swing.JTextField();
-        jLabel3 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
         jBtnNovoFabricante = new javax.swing.JButton();
@@ -120,6 +119,7 @@ public class ExibeFabricante extends javax.swing.JFrame {
         jBtnCancelarAlterarFabricante = new javax.swing.JButton();
         jBtnAlterarFabricante = new javax.swing.JButton();
         jButton8 = new javax.swing.JButton();
+        jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setResizable(false);
@@ -166,9 +166,7 @@ public class ExibeFabricante extends javax.swing.JFrame {
         });
         getContentPane().add(txtBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 130, 280, 20));
 
-        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/leiaute/img2.png"))); // NOI18N
-        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -260, 670, 620));
-
+        jPanel2.setBackground(new java.awt.Color(204, 255, 204));
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel4.setText("Fabiricante:");
@@ -242,6 +240,9 @@ public class ExibeFabricante extends javax.swing.JFrame {
             }
         });
         jPanel2.add(jButton8, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 570, -1, -1));
+
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/leiaute/img2.png"))); // NOI18N
+        jPanel2.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 670, 110));
 
         getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 670, 620));
 

@@ -83,16 +83,6 @@ public class Menu extends javax.swing.JFrame {
         jMenuItem14 = new javax.swing.JMenuItem();
         jMenuItem7 = new javax.swing.JMenuItem();
         jMenuItem32 = new javax.swing.JMenuItem();
-        jMenu15 = new javax.swing.JMenu();
-        jMenuItem11 = new javax.swing.JMenuItem();
-        jMenuItem25 = new javax.swing.JMenuItem();
-        jMenuItem24 = new javax.swing.JMenuItem();
-        jMenuItem3 = new javax.swing.JMenuItem();
-        jMenu16 = new javax.swing.JMenu();
-        jMenuItem12 = new javax.swing.JMenuItem();
-        jMenuItem28 = new javax.swing.JMenuItem();
-        jMenuItem27 = new javax.swing.JMenuItem();
-        jMenuItem4 = new javax.swing.JMenuItem();
         jMenu6 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -457,50 +447,6 @@ public class Menu extends javax.swing.JFrame {
 
         jMenu4.add(jMenu10);
 
-        jMenu15.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/editar.png"))); // NOI18N
-        jMenu15.setText("Editar");
-        jMenu15.setPreferredSize(new java.awt.Dimension(130, 35));
-
-        jMenuItem11.setText("Cliente");
-        jMenuItem11.setPreferredSize(new java.awt.Dimension(130, 35));
-        jMenu15.add(jMenuItem11);
-
-        jMenuItem25.setText("Estoque");
-        jMenuItem25.setPreferredSize(new java.awt.Dimension(130, 35));
-        jMenu15.add(jMenuItem25);
-
-        jMenuItem24.setText("Funcionário");
-        jMenuItem24.setPreferredSize(new java.awt.Dimension(130, 35));
-        jMenu15.add(jMenuItem24);
-
-        jMenuItem3.setText("Serviços");
-        jMenuItem3.setPreferredSize(new java.awt.Dimension(130, 35));
-        jMenu15.add(jMenuItem3);
-
-        jMenu4.add(jMenu15);
-
-        jMenu16.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/excluir.png"))); // NOI18N
-        jMenu16.setText("Excluir");
-        jMenu16.setPreferredSize(new java.awt.Dimension(130, 35));
-
-        jMenuItem12.setText("Cliente");
-        jMenuItem12.setPreferredSize(new java.awt.Dimension(130, 35));
-        jMenu16.add(jMenuItem12);
-
-        jMenuItem28.setText("Estoque");
-        jMenuItem28.setPreferredSize(new java.awt.Dimension(130, 35));
-        jMenu16.add(jMenuItem28);
-
-        jMenuItem27.setText("Funcionário");
-        jMenuItem27.setPreferredSize(new java.awt.Dimension(130, 35));
-        jMenu16.add(jMenuItem27);
-
-        jMenuItem4.setText("Serviços");
-        jMenuItem4.setPreferredSize(new java.awt.Dimension(130, 35));
-        jMenu16.add(jMenuItem4);
-
-        jMenu4.add(jMenu16);
-
         jMenuBar1.add(jMenu4);
 
         jMenu6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/sair.gif"))); // NOI18N
@@ -541,6 +487,44 @@ public class Menu extends javax.swing.JFrame {
     private void jBtnPropostaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnPropostaActionPerformed
         new Proposta().setVisible(true);
     }//GEN-LAST:event_jBtnPropostaActionPerformed
+
+    private void jMenu6KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jMenu6KeyPressed
+        // TODO add your handling code here:
+        this.dispose();
+    }//GEN-LAST:event_jMenu6KeyPressed
+
+    private void jMenu6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu6ActionPerformed
+        File file = new File("C:/Users/Josy/Desktop/Backup");
+        file.mkdir();
+        String caminho = file.getAbsolutePath();
+        ControleBackup app = new ControleBackup(caminho);
+
+        System.exit(0);
+    }//GEN-LAST:event_jMenu6ActionPerformed
+
+    private void jBtnFazerBackupActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnFazerBackupActionPerformed
+        JFileChooser fc = new JFileChooser();
+        fc.setDialogTitle("Selecione um diretório");
+        fc.setApproveButtonText("Salvar");
+        // restringe a amostra a diretorios apenas
+        fc.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+
+        int res = fc.showOpenDialog(null);
+
+        if (res == JFileChooser.APPROVE_OPTION) {
+
+            File diretorio = fc.getSelectedFile();
+            caminho = diretorio.getAbsolutePath();
+            ControleBackup app = new ControleBackup(caminho);
+
+        } else {
+            JOptionPane.showMessageDialog(null, "Voce nao selecionou nenhum diretorio.");
+        }
+    }//GEN-LAST:event_jBtnFazerBackupActionPerformed
+
+    private void jMenu6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu6MouseClicked
+        Backup();
+    }//GEN-LAST:event_jMenu6MouseClicked
 
     private void jMenuItem32ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem32ActionPerformed
         new ExibeVenda().setVisible(true);
@@ -642,44 +626,6 @@ public class Menu extends javax.swing.JFrame {
         new CadastrarCliente(this).setVisible(true);
     }//GEN-LAST:event_jMenuItem10ActionPerformed
 
-    private void jMenu6KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jMenu6KeyPressed
-        // TODO add your handling code here:
-        this.dispose();
-    }//GEN-LAST:event_jMenu6KeyPressed
-
-    private void jMenu6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu6ActionPerformed
-        File file = new File("C:/Users/Josy/Desktop/Backup");
-        file.mkdir();
-        String caminho = file.getAbsolutePath();
-        ControleBackup app = new ControleBackup(caminho);
-
-        System.exit(0);
-    }//GEN-LAST:event_jMenu6ActionPerformed
-
-    private void jBtnFazerBackupActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnFazerBackupActionPerformed
-        JFileChooser fc = new JFileChooser();
-        fc.setDialogTitle("Selecione um diretório");
-        fc.setApproveButtonText("Salvar");
-        // restringe a amostra a diretorios apenas
-        fc.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
-
-        int res = fc.showOpenDialog(null);
-
-        if (res == JFileChooser.APPROVE_OPTION) {
-
-            File diretorio = fc.getSelectedFile();
-            caminho = diretorio.getAbsolutePath();
-            ControleBackup app = new ControleBackup(caminho);
-
-        } else {
-            JOptionPane.showMessageDialog(null, "Voce nao selecionou nenhum diretorio.");
-        }
-    }//GEN-LAST:event_jBtnFazerBackupActionPerformed
-
-    private void jMenu6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu6MouseClicked
-        Backup();
-    }//GEN-LAST:event_jMenu6MouseClicked
-
     public void Backup() {
 
         TelaEspera telaTeste = new TelaEspera();
@@ -766,15 +712,11 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JMenu jMenu10;
     private javax.swing.JMenu jMenu14;
-    private javax.swing.JMenu jMenu15;
-    private javax.swing.JMenu jMenu16;
     private javax.swing.JMenu jMenu4;
     private javax.swing.JMenu jMenu6;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem10;
-    private javax.swing.JMenuItem jMenuItem11;
-    private javax.swing.JMenuItem jMenuItem12;
     private javax.swing.JMenuItem jMenuItem13;
     private javax.swing.JMenuItem jMenuItem14;
     private javax.swing.JMenuItem jMenuItem15;
@@ -786,17 +728,11 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem21;
     private javax.swing.JMenuItem jMenuItem22;
     private javax.swing.JMenuItem jMenuItem23;
-    private javax.swing.JMenuItem jMenuItem24;
-    private javax.swing.JMenuItem jMenuItem25;
     private javax.swing.JMenuItem jMenuItem26;
-    private javax.swing.JMenuItem jMenuItem27;
-    private javax.swing.JMenuItem jMenuItem28;
     private javax.swing.JMenuItem jMenuItem29;
-    private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem30;
     private javax.swing.JMenuItem jMenuItem31;
     private javax.swing.JMenuItem jMenuItem32;
-    private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JMenuItem jMenuItem6;
     private javax.swing.JMenuItem jMenuItem7;

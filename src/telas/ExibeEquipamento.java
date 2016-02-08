@@ -61,8 +61,10 @@ public class ExibeEquipamento extends javax.swing.JFrame {
         jScrollPane2 = new javax.swing.JScrollPane();
         jTableListarEquipamento = new javax.swing.JTable();
         jLabel4 = new javax.swing.JLabel();
+        jTextField1 = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setBackground(new java.awt.Color(223, 237, 253));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setFont(new java.awt.Font("Raavi", 1, 18)); // NOI18N
@@ -146,6 +148,7 @@ public class ExibeEquipamento extends javax.swing.JFrame {
         });
         getContentPane().add(jComboBoxModelo, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 200, 200, -1));
 
+        jTableListarEquipamento.setBackground(new java.awt.Color(223, 237, 253));
         jTableListarEquipamento.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -161,6 +164,14 @@ public class ExibeEquipamento extends javax.swing.JFrame {
 
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/leiaute/img3.png"))); // NOI18N
         getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 850, -1));
+
+        jTextField1.setBackground(new java.awt.Color(204, 255, 204));
+        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField1ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 850, 660));
 
         bindingGroup.bind();
 
@@ -415,6 +426,10 @@ public class ExibeEquipamento extends javax.swing.JFrame {
                 + "like '%" + txtBuscar.getText() + "%';");
     }//GEN-LAST:event_txtBuscarKeyReleased
 
+    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField1ActionPerformed
+
     private void populaComboBoxFabricante() {
 
         Connection conexao = Conexao.getConnection();
@@ -486,6 +501,7 @@ public class ExibeEquipamento extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTableListarEquipamento;
+    private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField txtBuscar;
     private org.jdesktop.beansbinding.BindingGroup bindingGroup;
     // End of variables declaration//GEN-END:variables
