@@ -51,15 +51,19 @@ public class ExibeDetVenda extends javax.swing.JFrame {
     private int codDetProduto;
     private int codFabricante;
     private int codCliente;
+   // private int idVenda;
 
     private String produto;
     private String fabricante;
     private String modelo;
     private String cliente;
+    private double total;
 
     private double totalPeca = 0;
     private double valor;
     private double valorUnit;
+    
+    private int codDetVendaProduto;
 
     /**
      * Creates new form ExibeDetVenda
@@ -71,12 +75,11 @@ public class ExibeDetVenda extends javax.swing.JFrame {
         telaDetalVenda = this;
         TabelaVendas();
         CarregaVenda();
-        populaComboBoxProdutos();
         desabilitarCampos();
     }
 
     
-    private void CarregaVenda() {
+   public void CarregaVenda() {
         
         OcultaBotoes();
         desabilitarVendas();
@@ -112,7 +115,7 @@ public class ExibeDetVenda extends javax.swing.JFrame {
 
             stmt = getConnection().createStatement();
             ArrayList dados = new ArrayList();
-            String[] Colunas = {"Código do Detalhe da Venda", "Quantidade", "Código do Detalhe do Produto",
+            String[] Colunas = {"Código do Detalhe da Venda", "Quantidade", "Preço Unitário", "Código do Detalhe do Produto",
             "Código do Produto", "Produto", "Modelo", "Fabricante"};
 
             ResultSet rs;
@@ -122,6 +125,7 @@ public class ExibeDetVenda extends javax.swing.JFrame {
                 dados.add(new Object[]{ 
                     rs.getObject("idtabVendas"), 
                     rs.getObject("quant"), 
+                    rs.getObject("precoSaida"),
                     rs.getObject("tabdetproduto_idDetProduto"),
                     rs.getObject("id_prod"),
                     rs.getObject("produto"),
@@ -234,135 +238,10 @@ public class ExibeDetVenda extends javax.swing.JFrame {
         jBtbCancelDadosP.setVisible(false);
         jBtnAltDadosP.setVisible(false);
         jBtbIncluirPeca.setVisible(false);
-        jLabel10.setVisible(false);
-        jLabel11.setVisible(false);
-        jLabel12.setVisible(false);
-        jComboBoxProdutos.setVisible(false);
-        jComboModelo.setVisible(false);
-        jComboFabricante.setVisible(false);
     }
-    
-    
-    private void populaComboBoxProdutos() {
-        Connection conexao = Conexao.getConnection();
-        ResultSet rs;
-        String sql = "select * from tabproduto";
-
-        try {
-            pst = conexao.prepareStatement(sql);
-            rs = pst.executeQuery();
-
-            while (rs.next()) {
-                jComboBoxProdutos.addItem(rs.getString("produto"));
-            }
-
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, ex);
-        }
-    }
-
-    private void idProdutoComboBox() {
-
-        Connection conexao = Conexao.getConnection();
-        ResultSet rs;
-        String sql = "select * from tabproduto inner join tabdetproduto on tabproduto_id_prod = id_prod"
-                + " where produto = '" + jComboBoxProdutos.getSelectedItem() + "';";
-
-        try {
-            pst = conexao.prepareStatement(sql);
-            rs = pst.executeQuery();
-
-            while (rs.next()) {
-                codProduto = (rs.getInt("id_prod"));
-            }
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, ex);
-        }
-    }
-
-    private void populaComboBoxModelo() {
-
-        Connection conexao = Conexao.getConnection();
-        ResultSet rs;
-        String sql = "select modelo "
-                + " from tabdetproduto inner join "
-                + " tabproduto inner join "
-                + " tabmodelo on tabmodelo_idtabModelo = idtabModelo and "
-                + " tabproduto_id_prod = id_prod"
-                + " where id_prod = " + codProduto + " group by modelo;";
-        System.out.println(codProduto);
-
-        try {
-            pst = conexao.prepareStatement(sql);
-            rs = pst.executeQuery();
-
-            while (rs.next()) {
-                jComboModelo.addItem(rs.getString("modelo"));
-            }
-
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, ex);
-        }
-    }
-
-    private void idModeloComboBox() {
-
-        Connection conexao = Conexao.getConnection();
-        ResultSet rs;
-        String sql = "select * from tabmodelo where modelo = '" + jComboModelo.getSelectedItem() + "';";
-
-        try {
-            pst = conexao.prepareStatement(sql);
-            rs = pst.executeQuery();
-
-            while (rs.next()) {
-                codModelo = (rs.getInt("idtabModelo"));
-            }
-
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, ex);
-        }
-    }
-
-    private void populaComboBoxFabricante() {
-
-        Connection conexao = Conexao.getConnection();
-        ResultSet rs;
-        String sql = "SELECT * FROM vw_combofabricanteproduto "
-                + " WHERE id_prod = " + codProduto
-                + " AND tabmodelo_idtabModelo = " + codModelo + " group by fabricante;";
-
-        try {
-            pst = conexao.prepareStatement(sql);
-            rs = pst.executeQuery();
-
-            while (rs.next()) {
-                jComboFabricante.addItem(rs.getString("fabricante"));
-            }
-
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, ex);
-        }
-    }
-
-    private void idFabricanteComboBox() {
-
-        Connection conexao = Conexao.getConnection();
-        ResultSet rs;
-        String sql = "select * from tabfabricante where fabricante = '" + jComboFabricante.getSelectedItem() + "';";
-
-        try {
-            pst = conexao.prepareStatement(sql);
-            rs = pst.executeQuery();
-
-            while (rs.next()) {
-                codFabricante = (rs.getInt("idtabFabricante"));
-            }
-
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, ex);
-        }
-    }
+        
+    private int idServico;
+    private int idCliente;
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -396,16 +275,13 @@ public class ExibeDetVenda extends javax.swing.JFrame {
         jTextDataVenda = new javax.swing.JTextField();
         jTextHoraVenda = new javax.swing.JTextField();
         jTextTotalVenda = new javax.swing.JTextField();
-        jLabel12 = new javax.swing.JLabel();
-        jComboBoxProdutos = new javax.swing.JComboBox();
-        jComboModelo = new javax.swing.JComboBox();
-        jComboFabricante = new javax.swing.JComboBox();
-        jLabel11 = new javax.swing.JLabel();
-        jLabel10 = new javax.swing.JLabel();
         jBtbCancelDadosP = new javax.swing.JButton();
+        jButtonAddnovoProd = new javax.swing.JButton();
         jLabel9 = new javax.swing.JLabel();
+        jBtnRemover = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jButtonAr1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/editar.png"))); // NOI18N
@@ -491,43 +367,6 @@ public class ExibeDetVenda extends javax.swing.JFrame {
 
         jLabel8.setText("Total da Venda:");
 
-        jLabel12.setText("Fabricante:");
-
-        jComboBoxProdutos.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Selecione" }));
-        jComboBoxProdutos.addItemListener(new java.awt.event.ItemListener() {
-            public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                jComboBoxProdutosItemStateChanged(evt);
-            }
-        });
-        jComboBoxProdutos.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBoxProdutosActionPerformed(evt);
-            }
-        });
-
-        jComboModelo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Selecione" }));
-        jComboModelo.addItemListener(new java.awt.event.ItemListener() {
-            public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                jComboModeloItemStateChanged(evt);
-            }
-        });
-        jComboModelo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboModeloActionPerformed(evt);
-            }
-        });
-
-        jComboFabricante.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Selecione" }));
-        jComboFabricante.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboFabricanteActionPerformed(evt);
-            }
-        });
-
-        jLabel11.setText("Modelo:");
-
-        jLabel10.setText("Produto:");
-
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -557,67 +396,30 @@ public class ExibeDetVenda extends javax.swing.JFrame {
                         .addComponent(jLabel3)
                         .addGap(18, 18, 18)
                         .addComponent(jTextCodCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextHoraVenda, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel8)
-                        .addGap(18, 18, 18)
-                        .addComponent(jTextTotalVenda, javax.swing.GroupLayout.DEFAULT_SIZE, 66, Short.MAX_VALUE)
-                        .addGap(189, 189, 189))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(34, 34, 34)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel10)
-                                .addGap(48, 48, 48)
-                                .addComponent(jComboBoxProdutos, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel11)
-                                .addGap(52, 52, 52)
-                                .addComponent(jComboModelo, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel12)
-                                .addGap(45, 45, 45)
-                                .addComponent(jComboFabricante, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jTextHoraVenda, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel8)
+                .addGap(18, 18, 18)
+                .addComponent(jTextTotalVenda, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(144, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(17, 17, 17)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel3)
-                            .addComponent(jTextCodVenda, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextCodCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel4)
-                            .addComponent(jTextCodUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel7)
-                            .addComponent(jTextCodServ, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel10)
-                            .addComponent(jComboBoxProdutos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(20, 20, 20)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(10, 10, 10)
-                                .addComponent(jLabel11))
-                            .addComponent(jComboModelo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(16, 16, 16)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(10, 10, 10)
-                                .addComponent(jLabel12))
-                            .addComponent(jComboFabricante, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(17, 17, 17)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(jLabel3)
+                    .addComponent(jTextCodVenda, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextCodCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4)
+                    .addComponent(jTextCodUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel7)
+                    .addComponent(jTextCodServ, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
                     .addComponent(jLabel6)
@@ -628,7 +430,7 @@ public class ExibeDetVenda extends javax.swing.JFrame {
                 .addGap(21, 21, 21))
         );
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 150, 820, 180));
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 150, 820, 180));
 
         jBtbCancelDadosP.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/cancelar.png"))); // NOI18N
         jBtbCancelDadosP.setText("Cancelar");
@@ -639,10 +441,27 @@ public class ExibeDetVenda extends javax.swing.JFrame {
         });
         getContentPane().add(jBtbCancelDadosP, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 340, -1, -1));
 
+        jButtonAddnovoProd.setText("Adicionar novo Produto");
+        jButtonAddnovoProd.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonAddnovoProdActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButtonAddnovoProd, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 340, -1, -1));
+
         jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/leiaute/img3.png"))); // NOI18N
         getContentPane().add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 860, 140));
 
+        jBtnRemover.setText("Remover Peças");
+        jBtnRemover.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnRemoverActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jBtnRemover, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 370, -1, -1));
+
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
@@ -679,12 +498,6 @@ public class ExibeDetVenda extends javax.swing.JFrame {
         jBtbCancelDadosP.setVisible(true);
         jBtnAltDadosP.setVisible(true);
         jBtbIncluirPeca.setVisible(true);
-        jLabel10.setVisible(true);
-        jLabel11.setVisible(true);
-        jLabel12.setVisible(true);
-        jComboBoxProdutos.setVisible(true);
-        jComboModelo.setVisible(true);
-        jComboFabricante.setVisible(true);
     }//GEN-LAST:event_jButtonAr1ActionPerformed
 
     private void jBtbCancelDadosPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtbCancelDadosPActionPerformed
@@ -717,69 +530,47 @@ public class ExibeDetVenda extends javax.swing.JFrame {
         AuditoriaDAO.CadDetAuditoria(descricaoAudit);
     }//GEN-LAST:event_jBtnAltDadosPActionPerformed
 
-    private void jComboBoxProdutosItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jComboBoxProdutosItemStateChanged
-        jComboModelo.removeAllItems();
-        jComboFabricante.removeAllItems();
-        codProduto = 0;
-        codModelo = 0;
-        modelo = null;
-        codFabricante = 0;
-        fabricante = null;
-        valorUnit = 0;
-        valor = 0;
-        idProdutoComboBox();
-        populaComboBoxModelo();
-        produto = jComboBoxProdutos.getSelectedItem().toString();
-    }//GEN-LAST:event_jComboBoxProdutosItemStateChanged
+    private void jButtonAddnovoProdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAddnovoProdActionPerformed
+        new AdicionaDetVendaProduto(codVenda, this).setVisible(true);
+        total = Double.parseDouble(jTextTotalVenda.getText());
+    }//GEN-LAST:event_jButtonAddnovoProdActionPerformed
 
-    private void jComboBoxProdutosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxProdutosActionPerformed
-        idProdutoComboBox();
-        if (jComboBoxProdutos.getSelectedItem() != null) {
-            produto = jComboBoxProdutos.getSelectedItem().toString();
-        }
-    }//GEN-LAST:event_jComboBoxProdutosActionPerformed
+    private void jBtnRemoverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnRemoverActionPerformed
 
-    private void jComboModeloItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jComboModeloItemStateChanged
-        jComboFabricante.removeAllItems();
-        idModeloComboBox();
-        populaComboBoxFabricante();
-        if (jComboModelo.getSelectedItem() != null) {
-            modelo = jComboModelo.getSelectedItem().toString();
-        }
-    }//GEN-LAST:event_jComboModeloItemStateChanged
+        int linha = jTableListarVendas.getSelectedRow();
 
-    private void jComboModeloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboModeloActionPerformed
-        idModeloComboBox();
-        if (jComboModelo.getSelectedItem() != null) {
-            modelo = jComboModelo.getSelectedItem().toString();
-        }
-    }//GEN-LAST:event_jComboModeloActionPerformed
+        codDetVendaProduto = (Integer.parseInt(jTableListarVendas.getValueAt(linha, 0).toString()));
 
-    private void jComboFabricanteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboFabricanteActionPerformed
-        idFabricanteComboBox();
-        //jTextValorUnit.setText("");
-        if (jComboFabricante.getSelectedItem() != null) {
-            fabricante = jComboFabricante.getSelectedItem().toString();
+        int quant = Integer.parseInt(jTableListarVendas.getValueAt(linha, 1).toString());
+        double precoUnit = Double.parseDouble(jTableListarVendas.getValueAt(linha, 2).toString());
+        double totalPeca = quant * precoUnit;
 
-//            CarregaValorUnit();
-        }
-    }//GEN-LAST:event_jComboFabricanteActionPerformed
+        double totalGeral = Double.parseDouble(jTextTotalVenda.getText());
+        double resultado = totalGeral - totalPeca;
+        
+        VendasDAO.UpdateTotalVenda(codVenda, resultado);
+        VendasDAO.ExcluirDetVendaProduto(codVenda);
+        //  txtTotal.setText(String.valueOf(resultado));
+        CarregaVenda();
+        TabelaVendas();
+    }//GEN-LAST:event_jBtnRemoverActionPerformed
 
+    public double Total() {
+        return total;
+    }
+    
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBtbCancelDadosP;
     private javax.swing.JButton jBtbIncluirPeca;
     private javax.swing.JButton jBtnAltDadosP;
     private javax.swing.JButton jBtnEditarVenda;
+    private javax.swing.JButton jBtnRemover;
     private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButtonAddnovoProd;
     private javax.swing.JButton jButtonAr1;
     private javax.swing.JButton jButtonVoltar;
-    private javax.swing.JComboBox jComboBoxProdutos;
-    private javax.swing.JComboBox jComboFabricante;
-    private javax.swing.JComboBox jComboModelo;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
