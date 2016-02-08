@@ -198,7 +198,6 @@ public class CadastrarServicoTeste extends javax.swing.JFrame {
         jBtbIncluirPeca = new javax.swing.JButton();
         jLabel34 = new javax.swing.JLabel();
         txtQuantidade = new javax.swing.JTextField();
-        jComboBoxModelo = new javax.swing.JComboBox();
         jLabel35 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTablePecas = new javax.swing.JTable();
@@ -208,6 +207,7 @@ public class CadastrarServicoTeste extends javax.swing.JFrame {
         jLabel39 = new javax.swing.JLabel();
         txtValorUnit = new javax.swing.JTextField();
         uJComboBoxPeca = new componentes.UJComboBox();
+        txtModelo = new javax.swing.JTextField();
         jBtnVoltarPainelServico = new javax.swing.JButton();
         jBtnAvancarPainelEquipamento = new javax.swing.JButton();
         jPanelEquipamento = new javax.swing.JPanel();
@@ -429,14 +429,6 @@ public class CadastrarServicoTeste extends javax.swing.JFrame {
         });
         jPanel14.add(txtQuantidade, new org.netbeans.lib.awtextra.AbsoluteConstraints(437, 107, 107, -1));
 
-        jComboBoxModelo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Selecione o Modelo" }));
-        jComboBoxModelo.addItemListener(new java.awt.event.ItemListener() {
-            public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                jComboBoxModeloItemStateChanged(evt);
-            }
-        });
-        jPanel14.add(jComboBoxModelo, new org.netbeans.lib.awtextra.AbsoluteConstraints(82, 107, 261, -1));
-
         jLabel35.setText("Modelo:");
         jPanel14.add(jLabel35, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 110, -1, -1));
 
@@ -507,6 +499,19 @@ public class CadastrarServicoTeste extends javax.swing.JFrame {
             }
         });
         jPanel14.add(uJComboBoxPeca, new org.netbeans.lib.awtextra.AbsoluteConstraints(85, 66, 258, -1));
+
+        txtModelo.setEditable(false);
+        txtModelo.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                txtModeloFocusGained(evt);
+            }
+        });
+        txtModelo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtModeloActionPerformed(evt);
+            }
+        });
+        jPanel14.add(txtModelo, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 110, 250, -1));
 
         jBtnVoltarPainelServico.setText("Voltar");
         jBtnVoltarPainelServico.addActionListener(new java.awt.event.ActionListener() {
@@ -1233,7 +1238,7 @@ public class CadastrarServicoTeste extends javax.swing.JFrame {
 
     private void uJComboBoxPecaItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_uJComboBoxPecaItemStateChanged
 
-        jComboBoxModelo.removeAllItems();
+        txtModelo.setText("");
         jComboBoxFabricante.removeAllItems();
 
         codProduto = 0;
@@ -1246,6 +1251,7 @@ public class CadastrarServicoTeste extends javax.swing.JFrame {
         idProdutoComboBox();
         populaComboBoxModelo();
 
+        txtModelo.requestFocus();
         if (uJComboBoxPeca.getSelectedItem() != null) {
             produto = uJComboBoxPeca.getSelectedItem().toString();
         }
@@ -1267,17 +1273,6 @@ public class CadastrarServicoTeste extends javax.swing.JFrame {
             CarregaValorUnit();
         }
     }//GEN-LAST:event_jComboBoxFabricanteActionPerformed
-
-    private void jComboBoxModeloItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jComboBoxModeloItemStateChanged
-        jComboBoxFabricante.removeAllItems();
-        txtValorUnit.setText("");
-        idModeloComboBox();
-        populaComboBoxFabricante();
-        if (jComboBoxModelo.getSelectedItem() != null) {
-            modelo = jComboBoxModelo.getSelectedItem().toString();
-            CarregaValorUnit();
-        }
-    }//GEN-LAST:event_jComboBoxModeloItemStateChanged
 
     private void uJComboBoxEquipamentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_uJComboBoxEquipamentoActionPerformed
         idEquipamentoComboBox();
@@ -1352,6 +1347,24 @@ public class CadastrarServicoTeste extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_txtTotalGeralKeyTyped
 
+    private void txtModeloFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtModeloFocusGained
+        jComboBoxFabricante.removeAllItems();
+        idModeloComboBox();
+        populaComboBoxFabricante();
+        txtValorUnit.setText("");
+        modelo = txtModelo.getText();
+        CarregaValorUnit();
+    }//GEN-LAST:event_txtModeloFocusGained
+
+    private void txtModeloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtModeloActionPerformed
+        jComboBoxFabricante.removeAllItems();
+        idModeloComboBox();
+        populaComboBoxFabricante();
+        txtValorUnit.setText("");
+        modelo = txtModelo.getText();
+        CarregaValorUnit();
+    }//GEN-LAST:event_txtModeloActionPerformed
+
     private void limparCampos() {
 
         txtDataCadProduto.setDate(null);
@@ -1374,7 +1387,7 @@ public class CadastrarServicoTeste extends javax.swing.JFrame {
         uJComboBoxPeca.setSelectedIndex(0);
         jComboBoxTipoServico.setSelectedIndex(0);
         jComboBoxFabricante.removeAllItems();
-        jComboBoxModelo.removeAllItems();
+        txtModelo.setText("");
         jComboBoxFabricanteEquip.removeAllItems();
         jComboBoxModeloEquip.removeAllItems();
 
@@ -1647,7 +1660,7 @@ public class CadastrarServicoTeste extends javax.swing.JFrame {
             rs = pst.executeQuery();
 
             while (rs.next()) {
-                jComboBoxModelo.addItem(rs.getString("modelo"));
+                txtModelo.setText(rs.getString("modelo"));
             }
 
         } catch (SQLException ex) {
@@ -1659,7 +1672,7 @@ public class CadastrarServicoTeste extends javax.swing.JFrame {
 
         Connection conexao = Conexao.getConnection();
         ResultSet rs;
-        String sql = "select idtabModelo from tabmodelo where modelo = '" + jComboBoxModelo.getSelectedItem() + "';";
+        String sql = "select idtabModelo from tabmodelo where modelo = '" + txtModelo.getText() + "';";
 
         try {
             pst = conexao.prepareStatement(sql);
@@ -1960,7 +1973,6 @@ public class CadastrarServicoTeste extends javax.swing.JFrame {
     private javax.swing.JButton jBtnVoltarPainelServico;
     private javax.swing.JComboBox jComboBoxFabricante;
     private javax.swing.JComboBox jComboBoxFabricanteEquip;
-    private javax.swing.JComboBox jComboBoxModelo;
     private javax.swing.JComboBox jComboBoxModeloEquip;
     private componentes.UJComboBox jComboBoxTipoServico;
     private javax.swing.JLabel jLabel1;
@@ -2004,6 +2016,7 @@ public class CadastrarServicoTeste extends javax.swing.JFrame {
     private com.toedter.calendar.JDateChooser txtDataCadProduto;
     private javax.swing.JTextArea txtDescricao;
     private javax.swing.JTextField txtMaoObra;
+    private javax.swing.JTextField txtModelo;
     private javax.swing.JTextField txtQuantidade;
     private javax.swing.JTextField txtTipoServico;
     private javax.swing.JTextField txtTotalGeral;
