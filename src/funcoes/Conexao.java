@@ -12,8 +12,6 @@ public class Conexao {
         try {
             Class.forName("com.mysql.jdbc.Driver").newInstance();
 
-          //String url = "jdbc:mysql://localhost/pfc1?user=root&password=123456";
-            
             String url = "jdbc:mysql://localhost/pfc1?user=root&password=";
             
             conect = DriverManager.getConnection(url);
