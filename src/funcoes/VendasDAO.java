@@ -20,6 +20,7 @@ import java.util.logging.Logger;
  * @author WilhamJr
  */
 public class VendasDAO {
+    
     public static int CadVenda(Vendas venda){
         
         PreparedStatement stmt;
@@ -66,7 +67,7 @@ public class VendasDAO {
   
                 stmt.setDouble(1, venda.getQuantidade());
                 stmt.setInt(2, venda.getIdtabVendas());
-                stmt.setObject(3, venda.getIdProduto());
+                stmt.setInt(3, venda.getIdProduto());
                               
                 stmt.executeUpdate();
                 
@@ -286,5 +287,40 @@ public class VendasDAO {
             throw new RuntimeException("Erro ao Listar os dados dos Venda: ",ex);
         }
         return vendas;
-    } 
+    }
+    
+    public static void UpdateTotalVenda(int id, double novoTotal) {
+        
+        PreparedStatement stmt;
+        
+        try {   
+            String sql = ("UPDATE tabvendas SET totalVenda = " + novoTotal + 
+                                                 " WHERE idtabVendas = " + id + ";");
+            
+            stmt = Conexao.getConnection().prepareStatement(sql);                             
+            stmt.executeUpdate();
+            stmt.close();
+
+        } catch (SQLException ex) {      
+            Logger.getLogger(VendasDAO.class.getName()).log(Level.SEVERE, null, ex);
+            throw new RuntimeException("Erro ao alterar o total da venda: ",ex);     
+        }
+    }
+    
+    public static void ExcluirDetVendaProduto(int id) {
+        
+        PreparedStatement stmt;
+        
+        try {   
+            String sql = ("delete from tabdetvendas where idtabDetVendas = "+ id + ";");
+            stmt = Conexao.getConnection().prepareStatement(sql);            
+            
+            stmt.execute();
+            stmt.close();
+
+        } catch (SQLException ex) {      
+            Logger.getLogger(VendasDAO.class.getName()).log(Level.SEVERE, null, ex);
+            throw new RuntimeException("Erro ao excluir o detalhe venda produto: ",ex);    
+        }
+    }
 }

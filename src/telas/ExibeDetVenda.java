@@ -7,11 +7,15 @@ package telas;
 
 import atributos.Vendas;
 import funcoes.AuditoriaDAO;
+import funcoes.Conexao;
 import static funcoes.Conexao.getConnection;
 import funcoes.ModeloTabela;
+import funcoes.ProdutoDAO;
 import funcoes.VendasDAO;
 import java.awt.Color;
+import java.sql.Connection;
 import java.sql.Date;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -23,6 +27,7 @@ import javax.swing.JOptionPane;
 import javax.swing.ListSelectionModel;
 import javax.swing.SwingConstants;
 import javax.swing.border.LineBorder;
+import javax.swing.table.DefaultTableModel;
 import static telas.ExibeVenda.GetIndice;
 
 /**
@@ -31,6 +36,7 @@ import static telas.ExibeVenda.GetIndice;
  */
 public class ExibeDetVenda extends javax.swing.JFrame {
 
+    private PreparedStatement pst;
     Statement stmt;
     int idContato;
     int idDetVenda;
@@ -38,6 +44,26 @@ public class ExibeDetVenda extends javax.swing.JFrame {
     private final int codVenda;
     private static int indice;
     private ExibeDetVenda telaDetalVenda;
+
+    private int codOrdemServ;
+    private int codProduto;
+    private int codModelo;
+    private int codDetProduto;
+    private int codFabricante;
+    private int codCliente;
+   // private int idVenda;
+
+    private String produto;
+    private String fabricante;
+    private String modelo;
+    private String cliente;
+    private double total;
+
+    private double totalPeca = 0;
+    private double valor;
+    private double valorUnit;
+    
+    private int codDetVendaProduto;
 
     /**
      * Creates new form ExibeDetVenda
@@ -53,7 +79,7 @@ public class ExibeDetVenda extends javax.swing.JFrame {
     }
 
     
-    private void CarregaVenda() {
+   public void CarregaVenda() {
         
         OcultaBotoes();
         desabilitarVendas();
@@ -89,7 +115,7 @@ public class ExibeDetVenda extends javax.swing.JFrame {
 
             stmt = getConnection().createStatement();
             ArrayList dados = new ArrayList();
-            String[] Colunas = {"Código do Detalhe da Venda", "Quantidade", "Código do Detalhe do Produto",
+            String[] Colunas = {"Código do Detalhe da Venda", "Quantidade", "Preço Unitário", "Código do Detalhe do Produto",
             "Código do Produto", "Produto", "Modelo", "Fabricante"};
 
             ResultSet rs;
@@ -99,6 +125,7 @@ public class ExibeDetVenda extends javax.swing.JFrame {
                 dados.add(new Object[]{ 
                     rs.getObject("idtabVendas"), 
                     rs.getObject("quant"), 
+                    rs.getObject("precoSaida"),
                     rs.getObject("tabdetproduto_idDetProduto"),
                     rs.getObject("id_prod"),
                     rs.getObject("produto"),
@@ -210,7 +237,11 @@ public class ExibeDetVenda extends javax.swing.JFrame {
         //oculta botoes  
         jBtbCancelDadosP.setVisible(false);
         jBtnAltDadosP.setVisible(false);
+        jBtbIncluirPeca.setVisible(false);
     }
+        
+    private int idServico;
+    private int idCliente;
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -220,6 +251,9 @@ public class ExibeDetVenda extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jButtonAr1 = new javax.swing.JButton();
+        jBtbIncluirPeca = new javax.swing.JButton();
+        jBtnAltDadosP = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jButton3 = new javax.swing.JButton();
         jBtnEditarVenda = new javax.swing.JButton();
@@ -241,13 +275,36 @@ public class ExibeDetVenda extends javax.swing.JFrame {
         jTextDataVenda = new javax.swing.JTextField();
         jTextHoraVenda = new javax.swing.JTextField();
         jTextTotalVenda = new javax.swing.JTextField();
-        jButtonAr1 = new javax.swing.JButton();
         jBtbCancelDadosP = new javax.swing.JButton();
-        jBtnAltDadosP = new javax.swing.JButton();
+        jButtonAddnovoProd = new javax.swing.JButton();
         jLabel9 = new javax.swing.JLabel();
+        jBtnRemover = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jButtonAr1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/editar.png"))); // NOI18N
+        jButtonAr1.setText("Editar");
+        jButtonAr1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonAr1ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButtonAr1, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 340, -1, -1));
+
+        jBtbIncluirPeca.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/add.png"))); // NOI18N
+        jBtbIncluirPeca.setText("Incluir Peça");
+        getContentPane().add(jBtbIncluirPeca, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 340, 110, -1));
+
+        jBtnAltDadosP.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/ok.png"))); // NOI18N
+        jBtnAltDadosP.setText("Salvar");
+        jBtnAltDadosP.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnAltDadosPActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jBtnAltDadosP, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 340, 94, -1));
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel1.setText("Detalhe de Vendas");
@@ -259,7 +316,7 @@ public class ExibeDetVenda extends javax.swing.JFrame {
                 jButton3ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 590, -1, -1));
+        getContentPane().add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 620, -1, -1));
 
         jBtnEditarVenda.setText("Editar");
         jBtnEditarVenda.addActionListener(new java.awt.event.ActionListener() {
@@ -267,7 +324,7 @@ public class ExibeDetVenda extends javax.swing.JFrame {
                 jBtnEditarVendaActionPerformed(evt);
             }
         });
-        getContentPane().add(jBtnEditarVenda, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 590, -1, -1));
+        getContentPane().add(jBtnEditarVenda, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 620, -1, -1));
 
         jButtonVoltar.setText("Voltar");
         jButtonVoltar.addActionListener(new java.awt.event.ActionListener() {
@@ -275,7 +332,7 @@ public class ExibeDetVenda extends javax.swing.JFrame {
                 jButtonVoltarActionPerformed(evt);
             }
         });
-        getContentPane().add(jButtonVoltar, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 590, -1, -1));
+        getContentPane().add(jButtonVoltar, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 620, -1, -1));
 
         jTableListarVendas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -291,7 +348,7 @@ public class ExibeDetVenda extends javax.swing.JFrame {
         jTableListarVendas.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
         jScrollPane2.setViewportView(jTableListarVendas);
 
-        getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 380, 820, 200));
+        getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 410, 820, 200));
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Venda", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 2, 18))); // NOI18N
         jPanel1.setName(""); // NOI18N
@@ -316,39 +373,36 @@ public class ExibeDetVenda extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel5)
+                        .addGap(18, 18, 18)
+                        .addComponent(jTextDataVenda, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(jLabel6)
+                        .addGroup(jPanel1Layout.createSequentialGroup()
+                            .addComponent(jLabel4)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addComponent(jTextCodUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(18, 18, 18)
+                            .addComponent(jLabel7)
+                            .addGap(18, 18, 18)
+                            .addComponent(jTextCodServ, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel2)
                         .addGap(18, 18, 18)
                         .addComponent(jTextCodVenda, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(62, 62, 62)
-                        .addComponent(jLabel4)
                         .addGap(18, 18, 18)
-                        .addComponent(jTextCodUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(69, 69, 69)
-                        .addComponent(jLabel3))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel5)
+                        .addComponent(jLabel3)
                         .addGap(18, 18, 18)
-                        .addComponent(jTextDataVenda, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel6)
-                        .addGap(18, 18, 18)
-                        .addComponent(jTextHoraVenda, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jTextCodCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jTextHoraVenda, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jTextCodCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jLabel8)
                 .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel7)
-                        .addGap(18, 18, 18)
-                        .addComponent(jTextCodServ, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(5, 5, 5)
-                        .addComponent(jLabel8)
-                        .addGap(18, 18, 18)
-                        .addComponent(jTextTotalVenda)))
-                .addGap(42, 42, 42))
+                .addComponent(jTextTotalVenda, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(144, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -357,13 +411,15 @@ public class ExibeDetVenda extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(jLabel3)
-                    .addComponent(jLabel4)
                     .addComponent(jTextCodVenda, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextCodCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4)
                     .addComponent(jTextCodUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextCodCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel7)
                     .addComponent(jTextCodServ, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 73, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
                     .addComponent(jLabel6)
@@ -374,16 +430,7 @@ public class ExibeDetVenda extends javax.swing.JFrame {
                 .addGap(21, 21, 21))
         );
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 150, 820, 180));
-
-        jButtonAr1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/editar.png"))); // NOI18N
-        jButtonAr1.setText("Editar");
-        jButtonAr1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonAr1ActionPerformed(evt);
-            }
-        });
-        getContentPane().add(jButtonAr1, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 340, -1, -1));
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 150, 820, 180));
 
         jBtbCancelDadosP.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/cancelar.png"))); // NOI18N
         jBtbCancelDadosP.setText("Cancelar");
@@ -394,19 +441,27 @@ public class ExibeDetVenda extends javax.swing.JFrame {
         });
         getContentPane().add(jBtbCancelDadosP, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 340, -1, -1));
 
-        jBtnAltDadosP.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/ok.png"))); // NOI18N
-        jBtnAltDadosP.setText("Salvar");
-        jBtnAltDadosP.addActionListener(new java.awt.event.ActionListener() {
+        jButtonAddnovoProd.setText("Adicionar novo Produto");
+        jButtonAddnovoProd.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jBtnAltDadosPActionPerformed(evt);
+                jButtonAddnovoProdActionPerformed(evt);
             }
         });
-        getContentPane().add(jBtnAltDadosP, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 340, 94, -1));
+        getContentPane().add(jButtonAddnovoProd, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 340, -1, -1));
 
         jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/leiaute/img3.png"))); // NOI18N
         getContentPane().add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 860, 140));
 
+        jBtnRemover.setText("Remover Peças");
+        jBtnRemover.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnRemoverActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jBtnRemover, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 370, -1, -1));
+
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
@@ -442,6 +497,7 @@ public class ExibeDetVenda extends javax.swing.JFrame {
         jButtonAr1.setVisible(false);
         jBtbCancelDadosP.setVisible(true);
         jBtnAltDadosP.setVisible(true);
+        jBtbIncluirPeca.setVisible(true);
     }//GEN-LAST:event_jButtonAr1ActionPerformed
 
     private void jBtbCancelDadosPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtbCancelDadosPActionPerformed
@@ -474,11 +530,44 @@ public class ExibeDetVenda extends javax.swing.JFrame {
         AuditoriaDAO.CadDetAuditoria(descricaoAudit);
     }//GEN-LAST:event_jBtnAltDadosPActionPerformed
 
+    private void jButtonAddnovoProdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAddnovoProdActionPerformed
+        new AdicionaDetVendaProduto(codVenda, this).setVisible(true);
+        total = Double.parseDouble(jTextTotalVenda.getText());
+    }//GEN-LAST:event_jButtonAddnovoProdActionPerformed
+
+    private void jBtnRemoverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnRemoverActionPerformed
+
+        int linha = jTableListarVendas.getSelectedRow();
+
+        codDetVendaProduto = (Integer.parseInt(jTableListarVendas.getValueAt(linha, 0).toString()));
+
+        int quant = Integer.parseInt(jTableListarVendas.getValueAt(linha, 1).toString());
+        double precoUnit = Double.parseDouble(jTableListarVendas.getValueAt(linha, 2).toString());
+        double totalPeca = quant * precoUnit;
+
+        double totalGeral = Double.parseDouble(jTextTotalVenda.getText());
+        double resultado = totalGeral - totalPeca;
+        
+        VendasDAO.UpdateTotalVenda(codVenda, resultado);
+        VendasDAO.ExcluirDetVendaProduto(codVenda);
+        //  txtTotal.setText(String.valueOf(resultado));
+        CarregaVenda();
+        TabelaVendas();
+    }//GEN-LAST:event_jBtnRemoverActionPerformed
+
+    public double Total() {
+        return total;
+    }
+    
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBtbCancelDadosP;
+    private javax.swing.JButton jBtbIncluirPeca;
     private javax.swing.JButton jBtnAltDadosP;
     private javax.swing.JButton jBtnEditarVenda;
+    private javax.swing.JButton jBtnRemover;
     private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButtonAddnovoProd;
     private javax.swing.JButton jButtonAr1;
     private javax.swing.JButton jButtonVoltar;
     private javax.swing.JLabel jLabel1;

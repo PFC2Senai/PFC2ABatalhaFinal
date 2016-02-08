@@ -5,6 +5,7 @@ import static atributos.Usuario.idUsuario;
 import funcoes.Conexao;
 import funcoes.EquipamentoDAO;
 import funcoes.LimitarDigitos;
+import java.awt.Color;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -206,7 +207,11 @@ public class CadastrarEquipamento extends javax.swing.JFrame {
     }//GEN-LAST:event_jComboBoxEquipamentoActionPerformed
 
     private void jBtnCadEquipamentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnCadEquipamentoActionPerformed
-
+         if (txtEquipamento.getText().trim().equals("")) {
+            JOptionPane.showMessageDialog(null, "Preencha o EQUIPAMENTO!");
+            txtEquipamento.requestFocus();
+            txtEquipamento.setBackground(Color.yellow);
+        } else {
         if (EquipamentoDAO.VerificaEquipamento(txtEquipamento.getText()) == false) {
 
             equi.setTabusuarioIdUsuario(idUsuario());
@@ -226,7 +231,7 @@ public class CadastrarEquipamento extends javax.swing.JFrame {
         populaComboBoxEquipamento();
         jComboBoxEquipamento.setSelectedItem(txtEquipamento.getText());
     }//GEN-LAST:event_jBtnCadEquipamentoActionPerformed
-
+    }
     private void jBtbNovoEquipamentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtbNovoEquipamentoActionPerformed
 
         txtEquipamento.setVisible(true);
