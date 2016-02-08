@@ -10,6 +10,7 @@ import atributos.DetServicoProduto;
 import atributos.DetServicoTipoServ;
 import atributos.OrdemServico;
 import atributos.Produto;
+import atributos.Usuario;
 import atributos.Vendas;
 import funcoes.ClienteDAO;
 import funcoes.Conexao;
@@ -22,6 +23,7 @@ import funcoes.OrdemServicoDAO;
 import funcoes.ProdutoDAO;
 import funcoes.ServicoDAO;
 import funcoes.VendasDAO;
+import java.awt.Color;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 import java.sql.Connection;
@@ -94,8 +96,7 @@ public class CadastrarVenda extends javax.swing.JFrame {
     }
 
     private void limparCampos() {
-//        jTextCodCli.setText("");
-        jTextCodUser.setText("");
+
         jTextHora.setText("");
         JDataVenda.setDate(null);
         jComboBoxProdutos.setSelectedItem("Selecione");
@@ -292,17 +293,6 @@ public class CadastrarVenda extends javax.swing.JFrame {
             return valida;
         }
 
-//        if (jTextCodCli.getText().equals("")) {
-        //          JOptionPane.showMessageDialog(null, "Campo(s) vazio(s)!");
-        //        valida = false;
-        //      return valida;
-        //}
-        if (jTextCodUser.getText().equals("")) {
-            JOptionPane.showMessageDialog(null, "Campo(s) vazio(s)!");
-            valida = false;
-            return valida;
-        }
-
         if (jTextValorUnit.getText().equals("")) {
             JOptionPane.showMessageDialog(null, "Campo(s) vazio(s)!");
             valida = false;
@@ -373,8 +363,6 @@ public class CadastrarVenda extends javax.swing.JFrame {
         uJComboBoxCliente = new componentes.UJComboBox();
         jButton6 = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        jTextCodUser = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         JDataVenda = new com.toedter.calendar.JDateChooser();
@@ -399,7 +387,6 @@ public class CadastrarVenda extends javax.swing.JFrame {
         jTextValorUnit = new javax.swing.JTextField();
         jLabel12 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -432,10 +419,6 @@ public class CadastrarVenda extends javax.swing.JFrame {
 
         jLabel2.setText("Cliente");
         getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 130, -1, 29));
-
-        jLabel3.setText("Cod Usuario");
-        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 140, -1, -1));
-        getContentPane().add(jTextCodUser, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 160, 83, -1));
 
         jLabel4.setText("Produto:");
         getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 190, -1, -1));
@@ -582,14 +565,6 @@ public class CadastrarVenda extends javax.swing.JFrame {
         jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/leiaute/img2.png"))); // NOI18N
         getContentPane().add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 680, 110));
 
-        jTextField1.setBackground(new java.awt.Color(223, 237, 253));
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
-            }
-        });
-        getContentPane().add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(-1, 110, 680, 550));
-
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
@@ -612,7 +587,7 @@ public class CadastrarVenda extends javax.swing.JFrame {
             Vendas v = new Vendas();
 
             vendas.setClienteIdcliente(codCliente);
-            vendas.setTabusuarioIdUsuario(Integer.parseInt(jTextCodUser.getText()));
+            vendas.setTabusuarioIdUsuario(Usuario.idUsuario());
             vendas.setIdOrdemServico(codOrdemS);
             vendas.setDataVenda(FormataData(JDataVenda.getDate()));
             vendas.setHora(FuncoesDiversas.ConverterHora(jTextHora.getText()));
@@ -726,10 +701,15 @@ public class CadastrarVenda extends javax.swing.JFrame {
     }//GEN-LAST:event_jTextValorUnitKeyTyped
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+      if(jTextQuantidadeProduto.getText().trim().equals("")){
+          JOptionPane.showMessageDialog(null, "Preencha a QUANTIDADE!");
+            jTextQuantidadeProduto.requestFocus();
+            jTextQuantidadeProduto.setBackground(Color.yellow);
+        } else {
         double total = totalPeca + Double.parseDouble(jTextQuantidadeProduto.getText());
         jTextTotal.setText(String.valueOf(total));
     }//GEN-LAST:event_jButton6ActionPerformed
-
+}
     private void uJComboBoxClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_uJComboBoxClienteActionPerformed
         codCliente = 0;
         idClienteComboBox();
@@ -755,10 +735,6 @@ public class CadastrarVenda extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jTextTotalKeyTyped
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private com.toedter.calendar.JDateChooser JDataVenda;
     private javax.swing.JButton jButton1;
@@ -775,7 +751,6 @@ public class CadastrarVenda extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
@@ -784,8 +759,6 @@ public class CadastrarVenda extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTableProduto;
-    private javax.swing.JTextField jTextCodUser;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JFormattedTextField jTextHora;
     private javax.swing.JTextField jTextQuantidadeProduto;
     private javax.swing.JTextField jTextTotal;
