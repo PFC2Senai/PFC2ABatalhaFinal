@@ -154,10 +154,10 @@ public class CadastrarFuncionario extends javax.swing.JFrame {
             }
         });
 
-        jPanel5.setBackground(new java.awt.Color(235, 235, 253));
+        jPanel5.setBackground(new java.awt.Color(255, 255, 255));
         jPanel5.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanel2.setBackground(new java.awt.Color(235, 235, 253));
+        jPanel2.setBackground(new java.awt.Color(223, 237, 253));
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Contato", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 2, 11))); // NOI18N
 
         jLabel13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/phone.png"))); // NOI18N
@@ -180,6 +180,12 @@ public class CadastrarFuncionario extends javax.swing.JFrame {
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
+
+        txtTelCel.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtTelCelKeyTyped(evt);
+            }
+        });
 
         jLabelEmail.setFont(new java.awt.Font("Tahoma", 3, 11)); // NOI18N
         jLabelEmail.setForeground(new java.awt.Color(255, 0, 0));
@@ -225,9 +231,9 @@ public class CadastrarFuncionario extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jPanel5.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 280, -1, 179));
+        jPanel5.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 280, 420, 179));
 
-        jPanel4.setBackground(new java.awt.Color(235, 235, 253));
+        jPanel4.setBackground(new java.awt.Color(223, 237, 253));
         jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Dados Gerais", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 2, 11))); // NOI18N
 
         try {
@@ -313,7 +319,7 @@ public class CadastrarFuncionario extends javax.swing.JFrame {
                             .addComponent(txtDataAdmissao, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jTextSalario, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addComponent(labelCpfExistente, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(51, Short.MAX_VALUE))
+                .addContainerGap(47, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -351,7 +357,7 @@ public class CadastrarFuncionario extends javax.swing.JFrame {
                 .addComponent(jLabel9))
         );
 
-        jPanel5.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 130, -1, 150));
+        jPanel5.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 130, 680, 150));
 
         jBtnCadastrarFuncionario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/disk.png"))); // NOI18N
         jBtnCadastrarFuncionario.setText("Cadastrar");
@@ -376,7 +382,7 @@ public class CadastrarFuncionario extends javax.swing.JFrame {
         jLabel1.setText("CADASTRAR FUNCIONÁRIO");
         jPanel5.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 60, -1, -1));
 
-        jPanel1.setBackground(new java.awt.Color(235, 235, 253));
+        jPanel1.setBackground(new java.awt.Color(223, 237, 253));
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Carteira de Trabalho", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Tahoma", 2, 11))); // NOI18N
 
         jLabel20.setText("CTPS:");
@@ -396,6 +402,12 @@ public class CadastrarFuncionario extends javax.swing.JFrame {
         });
 
         jLabel22.setText("Série:");
+
+        jTextSerieCtps.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTextSerieCtpsKeyTyped(evt);
+            }
+        });
 
         jLabel23.setText("UF:");
 
@@ -444,9 +456,9 @@ public class CadastrarFuncionario extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jPanel5.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 280, -1, -1));
+        jPanel5.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 280, 260, -1));
 
-        jPanel3.setBackground(new java.awt.Color(235, 235, 253));
+        jPanel3.setBackground(new java.awt.Color(223, 237, 253));
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Endereço", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 2, 11))); // NOI18N
 
         jLabel16.setText("Rua:");
@@ -563,7 +575,7 @@ public class CadastrarFuncionario extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jPanel5.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 460, 684, -1));
+        jPanel5.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 460, 680, -1));
 
         jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/leiaute/img3.png"))); // NOI18N
         jPanel5.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -10, 850, 140));
@@ -727,6 +739,19 @@ public class CadastrarFuncionario extends javax.swing.JFrame {
         }
 
     }//GEN-LAST:event_jTextCpfFocusLost
+
+    private void jTextSerieCtpsKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextSerieCtpsKeyTyped
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextSerieCtpsKeyTyped
+
+    private void txtTelCelKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTelCelKeyTyped
+        // TODO add your handling code here:
+        
+        String caracteres = "0987654321";
+        if (!caracteres.contains(evt.getKeyChar() + "")) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtTelCelKeyTyped
 
     private boolean VerificaCampos() {
 

@@ -815,10 +815,10 @@ public final class DetalharServico extends javax.swing.JFrame {
                     jTablePecas.getTableHeader().getColumnModel().getColumn(0).setMaxWidth(0);
                     jTablePecas.getTableHeader().getColumnModel().getColumn(0).setMinWidth(0);
                     
+                    jTablePecas.getColumnModel().getColumn(1).setPreferredWidth(200);
                     jTablePecas.getColumnModel().getColumn(2).setPreferredWidth(200);
                     jTablePecas.getColumnModel().getColumn(3).setPreferredWidth(200);
-                    jTablePecas.getColumnModel().getColumn(4).setPreferredWidth(200);
-                    jTablePecas.getColumnModel().getColumn(5).setPreferredWidth(100);
+                    jTablePecas.getColumnModel().getColumn(4).setPreferredWidth(100);
                     jTablePecas.getColumnModel().getColumn(5).setPreferredWidth(100);
                     
                     jTablePecas.getColumnModel().getColumn(i).setResizable(false);
@@ -864,9 +864,9 @@ public final class DetalharServico extends javax.swing.JFrame {
                     jTableEquipamento.getTableHeader().getColumnModel().getColumn(0).setMaxWidth(0);
                     jTableEquipamento.getTableHeader().getColumnModel().getColumn(0).setMinWidth(0);
                     
+                    jTableEquipamento.getColumnModel().getColumn(1).setPreferredWidth(200);
                     jTableEquipamento.getColumnModel().getColumn(2).setPreferredWidth(200);
                     jTableEquipamento.getColumnModel().getColumn(3).setPreferredWidth(200);
-                    jTableEquipamento.getColumnModel().getColumn(4).setPreferredWidth(200);
                     jTableEquipamento.getTableHeader().setReorderingAllowed(false);
                     jTableEquipamento.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
                 }
@@ -927,7 +927,7 @@ public final class DetalharServico extends javax.swing.JFrame {
             }
         
             TableCellRenderer renderer = new TabelaZebrada();
-            jTableTipodeServico.setDefaultRenderer(Object.class, renderer);      
+            jTableFuncionario.setDefaultRenderer(Object.class, renderer);      
             
             jTableFuncionario.getColumnModel().getColumn( 0 ).setMaxWidth( 0 );  
             jTableFuncionario.getColumnModel().getColumn( 0 ).setMinWidth( 0 );  

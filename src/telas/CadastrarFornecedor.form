@@ -40,7 +40,7 @@
     <Container class="javax.swing.JPanel" name="jPanel1">
       <Properties>
         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-          <Color blue="fd" green="ed" red="df" type="rgb"/>
+          <Color blue="ff" green="ff" red="ff" type="rgb"/>
         </Property>
       </Properties>
 
@@ -269,6 +269,9 @@
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="txtEstado">
+              <Events>
+                <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtEstadoKeyTyped"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel12">
               <Properties>
@@ -281,6 +284,9 @@
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="txtFornecedor">
+              <Events>
+                <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtFornecedorKeyTyped"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JTextField" name="txtRua">
             </Component>
@@ -459,6 +465,9 @@
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="txtTelCel">
+              <Events>
+                <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtTelCelKeyTyped"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel9">
               <Properties>

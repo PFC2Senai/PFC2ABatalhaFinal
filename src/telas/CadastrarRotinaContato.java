@@ -104,7 +104,7 @@ public class CadastrarRotinaContato extends javax.swing.JFrame {
         jLabel5.setFont(new java.awt.Font("Raavi", 1, 18)); // NOI18N
         jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/rotinacont.png"))); // NOI18N
         jLabel5.setText("Rotina de Contato");
-        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 40, -1, -1));
+        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 50, -1, -1));
 
         jToggleButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/disk.png"))); // NOI18N
         jToggleButton2.setText("Salvar");

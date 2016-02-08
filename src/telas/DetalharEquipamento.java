@@ -133,6 +133,12 @@ public final class DetalharEquipamento extends javax.swing.JFrame {
 
         jLabel9.setText("Fabricante:");
         jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 210, -1, -1));
+
+        txtFornecedor.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtFornecedorKeyTyped(evt);
+            }
+        });
         jPanel1.add(txtFornecedor, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 180, 220, -1));
 
         jComboBoxFornecedor.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Selecione o fornecedor" }));
@@ -145,6 +151,12 @@ public final class DetalharEquipamento extends javax.swing.JFrame {
 
         jLabel8.setText("Fornecedor:");
         jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 180, -1, -1));
+
+        txtEquipamento.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtEquipamentoKeyTyped(evt);
+            }
+        });
         jPanel1.add(txtEquipamento, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 140, 240, -1));
 
         jLabel2.setText("Equipamento:");
@@ -256,6 +268,22 @@ public final class DetalharEquipamento extends javax.swing.JFrame {
     private void txtFabricanteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtFabricanteActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtFabricanteActionPerformed
+
+    private void txtEquipamentoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtEquipamentoKeyTyped
+        // TODO add your handling code here:
+        String carac = "ç,.!?@:;/^~´`#$%¨&*()-_='+{[]}";
+        if (carac.contains(evt.getKeyChar() + "")) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtEquipamentoKeyTyped
+
+    private void txtFornecedorKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtFornecedorKeyTyped
+        // TODO add your handling code here:
+        String carac = "ç,.!?@:;/^~´`#$%¨&*()-_='+{[]}";
+        if (carac.contains(evt.getKeyChar() + "")) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtFornecedorKeyTyped
 
     private void limparCampos() {
         

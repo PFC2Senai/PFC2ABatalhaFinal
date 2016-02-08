@@ -52,6 +52,8 @@ public class DetalharCliente extends javax.swing.JFrame {
     private DetalharCliente telaDetalCli;
     private ExibeCliente telaExibeCliente;
 
+    public static String cnp;
+
     /**
      * Creates new form CadastrarCliente
      */
@@ -59,7 +61,7 @@ public class DetalharCliente extends javax.swing.JFrame {
         initComponents();
         this.codCliente = GetIndice();
     }
-    
+
     public DetalharCliente(ExibeCliente exibeCli) {
         this.telaExibeCliente = exibeCli;
         this.idContato = ClienteDAO.idContato(GetIndice());
@@ -99,10 +101,10 @@ public class DetalharCliente extends javax.swing.JFrame {
         jBtnVerLembrete.setHorizontalTextPosition(SwingConstants.CENTER);
         jBtnVerRotina.setVerticalTextPosition(SwingConstants.BOTTOM);
         jBtnVerRotina.setHorizontalTextPosition(SwingConstants.CENTER);
-        
+
         jBtnExcluirEquipCli.setVerticalTextPosition(SwingConstants.BOTTOM);
         jBtnExcluirEquipCli.setHorizontalTextPosition(SwingConstants.CENTER);
-        
+
         jBtnAdicionarEquipamento.setVerticalTextPosition(SwingConstants.BOTTOM);
         jBtnAdicionarEquipamento.setHorizontalTextPosition(SwingConstants.CENTER);
 
@@ -524,7 +526,7 @@ public class DetalharCliente extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Cadastrar Cliente");
-        setBackground(new java.awt.Color(238, 162, 162));
+        setBackground(new java.awt.Color(255, 255, 255));
         setExtendedState(6);
         setName("j"); // NOI18N
         setResizable(false);
@@ -554,6 +556,11 @@ public class DetalharCliente extends javax.swing.JFrame {
         jPanel2.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, -1, -1));
 
         txtEmpresa.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        txtEmpresa.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtEmpresaKeyTyped(evt);
+            }
+        });
         jPanel2.add(txtEmpresa, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 30, 260, -1));
 
         jButtonAr1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/editar.png"))); // NOI18N
@@ -651,9 +658,19 @@ public class DetalharCliente extends javax.swing.JFrame {
         jPanel3.add(txtEndCidade, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 60, 260, -1));
 
         txtEndEstado.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        txtEndEstado.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtEndEstadoKeyTyped(evt);
+            }
+        });
         jPanel3.add(txtEndEstado, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 30, 50, -1));
 
         txtEndNum.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        txtEndNum.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtEndNumKeyTyped(evt);
+            }
+        });
         jPanel3.add(txtEndNum, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 90, 69, -1));
 
         try {
@@ -1224,8 +1241,8 @@ public class DetalharCliente extends javax.swing.JFrame {
 
     private void jBtbCancelEnderecoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtbCancelEnderecoActionPerformed
         if (JOptionPane.showConfirmDialog(null, "Cancelar alteração?", "Confirmar Cancelamento", JOptionPane.YES_NO_OPTION) == 1) {
-           
-        }else {
+
+        } else {
             jButtonAr3.setVisible(true);
             jBtbCancelEndereco.setVisible(false);
             jBtnAltEndereco.setVisible(false);
@@ -1262,8 +1279,8 @@ public class DetalharCliente extends javax.swing.JFrame {
 
     private void jBtbCancelDadosPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtbCancelDadosPActionPerformed
         if (JOptionPane.showConfirmDialog(null, "Cancelar alteração?", "Confirmar Cancelamento", JOptionPane.YES_NO_OPTION) == 1) {
-            
-        }else {
+
+        } else {
             CarregaCliente();
             desabilitarDadosPessoais();
             txtSetor.setVisible(true);
@@ -1276,22 +1293,54 @@ public class DetalharCliente extends javax.swing.JFrame {
     private void jBtnAltDadosPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnAltDadosPActionPerformed
 
         if (VerificaCamposEmpresa() == true) {
-            Cliente cli = new Cliente();
-            cli.setEmpresa(txtEmpresa.getText());
-            cli.setCnpj(txtCnpj.getText());
-            cli.setCodSetor(codSetor);
-            cli.setIdContato(idContato);
-            ClienteDAO.UpdateCliente(cli, GetIndice());
-            desabilitarDadosPessoais();
-            txtSetor.setVisible(true);
-            jBtnAltDadosP.setVisible(false);
-            jBtbCancelDadosP.setVisible(false);
-            jButtonAr1.setVisible(true);
-            CarregaCliente();
-            JOptionPane.showMessageDialog(null, "Alterado com sucesso!");
-            String descricaoAudit = "Empresa " + cli.getEmpresa() + " /CNPJ: " + cli.getCnpj() + "teve os dados alterados.";
-            AuditoriaDAO.CadDetAuditoria(descricaoAudit);
+
+//            if (txtCnpj.getText() == cnp) {
+//                JOptionPane.showMessageDialog(null, "Este CNPJ ja está cadastrado !");
+//            }
+            if (ClienteDAO.VerificarCliente(txtCnpj.getText()) == false) {
+
+                Cliente cli = new Cliente();
+                cli.setEmpresa(txtEmpresa.getText());
+                cli.setCnpj(txtCnpj.getText());
+                cli.setCodSetor(codSetor);
+                cli.setIdContato(idContato);
+                ClienteDAO.UpdateCliente(cli, GetIndice());
+                desabilitarDadosPessoais();
+                txtSetor.setVisible(true);
+                jBtnAltDadosP.setVisible(false);
+                jBtbCancelDadosP.setVisible(false);
+                jButtonAr1.setVisible(true);
+                CarregaCliente();
+                JOptionPane.showMessageDialog(null, "Alterado com sucesso!");
+                String descricaoAudit = "Empresa " + cli.getEmpresa() + " /CNPJ: " + cli.getCnpj() + "teve os dados alterados.";
+                AuditoriaDAO.CadDetAuditoria(descricaoAudit);
+                
+            } 
+            else if (txtCnpj.getText() == null ? cnp == null : txtCnpj.getText().equals(cnp)) {
+                
+                Cliente cli = new Cliente();
+                cli.setEmpresa(txtEmpresa.getText());
+                cli.setCnpj(txtCnpj.getText());
+                cli.setCodSetor(codSetor);
+                cli.setIdContato(idContato);
+                ClienteDAO.UpdateCliente(cli, GetIndice());
+                desabilitarDadosPessoais();
+                txtSetor.setVisible(true);
+                jBtnAltDadosP.setVisible(false);
+                jBtbCancelDadosP.setVisible(false);
+                jButtonAr1.setVisible(true);
+                CarregaCliente();
+                JOptionPane.showMessageDialog(null, "Alterado com sucesso!");
+                String descricaoAudit = "Empresa " + cli.getEmpresa() + " /CNPJ: " + cli.getCnpj() + "teve os dados alterados.";
+                AuditoriaDAO.CadDetAuditoria(descricaoAudit);
+
+            } else {
+                JOptionPane.showMessageDialog(null, "Este CNPJ ja está cadastrado !");
+
+            }
+
         }
+
     }//GEN-LAST:event_jBtnAltDadosPActionPerformed
 
     private void jTableLembretesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableLembretesMouseClicked
@@ -1326,6 +1375,9 @@ public class DetalharCliente extends javax.swing.JFrame {
         jButtonAr1.setVisible(false);
         jBtbCancelDadosP.setVisible(true);
         jBtnAltDadosP.setVisible(true);
+
+        cnp = txtCnpj.getText();
+
     }//GEN-LAST:event_jButtonAr1ActionPerformed
 
     private void jTableContatosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableContatosMouseClicked
@@ -1409,14 +1461,12 @@ public class DetalharCliente extends javax.swing.JFrame {
     private void jBtnExcluirContatoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnExcluirContatoActionPerformed
         if (JOptionPane.showConfirmDialog(null, "Deseja excluir o registro?", "Confirmar Exclusão", JOptionPane.YES_NO_OPTION) == 1) {
 
-        } else {
-            if (jTableContatos.getSelectedRow() != -1) {
-                int linha = jTableContatos.getSelectedRow();
-                codContato = (Integer.parseInt(jTableContatos.getValueAt(linha, 0).toString()));
-                codPessoaContato = Integer.parseInt(jTableContatos.getValueAt(linha, 1).toString());
-                ContatosDAO.ExcluirContato(codContato, codPessoaContato);
-                TabelaContatos();
-            }
+        } else if (jTableContatos.getSelectedRow() != -1) {
+            int linha = jTableContatos.getSelectedRow();
+            codContato = (Integer.parseInt(jTableContatos.getValueAt(linha, 0).toString()));
+            codPessoaContato = Integer.parseInt(jTableContatos.getValueAt(linha, 1).toString());
+            ContatosDAO.ExcluirContato(codContato, codPessoaContato);
+            TabelaContatos();
         }
 
     }//GEN-LAST:event_jBtnExcluirContatoActionPerformed
@@ -1456,6 +1506,34 @@ public class DetalharCliente extends javax.swing.JFrame {
     private void jBtnIrParaRotinaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnIrParaRotinaActionPerformed
         jTabbedPane1.setSelectedComponent(this.jPanelRotinaContato);
     }//GEN-LAST:event_jBtnIrParaRotinaActionPerformed
+
+    private void txtEndNumKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtEndNumKeyTyped
+        // TODO add your handling code here:
+        String caracteres = "0987654321snSN";
+        String car = txtEndNum.getText().toUpperCase();
+        if (!caracteres.contains(evt.getKeyChar() + "")) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtEndNumKeyTyped
+
+    private void txtEndEstadoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtEndEstadoKeyTyped
+        // TODO add your handling code here:
+
+        String caracteres = "0987654321";
+
+        if (caracteres.contains(evt.getKeyChar() + "")) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtEndEstadoKeyTyped
+
+    private void txtEmpresaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtEmpresaKeyTyped
+        // TODO add your handling code here:
+
+        String carac = "ç,.!?@:;/^~´`#$%¨&*()-_='+{[]}";
+        if (carac.contains(evt.getKeyChar() + "")) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtEmpresaKeyTyped
 
     private void carregarComboSegmento() {
 
@@ -1605,15 +1683,15 @@ public class DetalharCliente extends javax.swing.JFrame {
         }
         return valida;
     }
-   
+
     private void verificaPagina() {
 
         if ((this.telaExibeCliente != null)) {
             this.telaExibeCliente.setVisible(true);
-         //   this.telaExibeCliente.toFront();
+            //   this.telaExibeCliente.toFront();
         }
     }
-    
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBtbCancelDadosP;
     private javax.swing.JButton jBtbCancelEndereco;

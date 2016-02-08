@@ -119,7 +119,7 @@ public class CadastrarFornecedor extends javax.swing.JFrame {
             }
         });
 
-        jPanel1.setBackground(new java.awt.Color(223, 237, 253));
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setFont(new java.awt.Font("Raavi", 1, 18)); // NOI18N
@@ -176,9 +176,21 @@ public class CadastrarFornecedor extends javax.swing.JFrame {
 
         jLabel15.setText("Estado:");
 
+        txtEstado.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtEstadoKeyTyped(evt);
+            }
+        });
+
         jLabel12.setText("Nº");
 
         jLabel8.setText("Bairro:");
+
+        txtFornecedor.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtFornecedorKeyTyped(evt);
+            }
+        });
 
         jLabel10.setText("País:");
 
@@ -301,6 +313,12 @@ public class CadastrarFornecedor extends javax.swing.JFrame {
 
         jLabel13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/phone.png"))); // NOI18N
         jLabel13.setText("Celular:");
+
+        txtTelCel.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtTelCelKeyTyped(evt);
+            }
+        });
 
         jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/email.png"))); // NOI18N
         jLabel9.setText("Email:");
@@ -557,6 +575,34 @@ public class CadastrarFornecedor extends javax.swing.JFrame {
         }
 
     }//GEN-LAST:event_txtNumeroKeyTyped
+
+    private void txtTelCelKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTelCelKeyTyped
+        // TODO add your handling code here:
+
+        String caracteres = "0987654321";
+        if (!caracteres.contains(evt.getKeyChar() + "")) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtTelCelKeyTyped
+
+    private void txtEstadoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtEstadoKeyTyped
+        // TODO add your handling code here:
+        
+        String caracteres = "0987654321";
+
+        if (caracteres.contains(evt.getKeyChar() + "")) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtEstadoKeyTyped
+
+    private void txtFornecedorKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtFornecedorKeyTyped
+        // TODO add your handling code here:
+        
+        String carac = "ç,.!?@:;/^~´`#$%¨&*()-_='+{[]}";
+        if (carac.contains(evt.getKeyChar() + "")) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtFornecedorKeyTyped
 
     private boolean VerificaCampos() {
 

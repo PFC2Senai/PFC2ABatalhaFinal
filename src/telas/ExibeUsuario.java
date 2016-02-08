@@ -23,6 +23,7 @@ public class ExibeUsuario extends javax.swing.JFrame {
     Usuario usuario = new Usuario();
     private String opcaoPesquisa = "usuario";
     private static int indice;
+    public static String usu;
 
     /**
      * Creates new form CadastroDeFuncionarios
@@ -220,13 +221,15 @@ public class ExibeUsuario extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton6ActionPerformed
 
     private void jBtnEditarUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnEditarUsuarioActionPerformed
-
+        
+        
         if (jTableListarUsuarios.getSelectedRow() != -1) {
             
             this.dispose();
             int linha = jTableListarUsuarios.getSelectedRow();
             indice = (Integer.parseInt(jTableListarUsuarios.getValueAt(linha, 0).toString()));
             new AlterarUsuario().setVisible(true);
+            usu = jTableListarUsuarios.getValueAt(linha, 0).toString();
 
         } else {
             JOptionPane.showMessageDialog(null, "Primeiro selecione um registro.");

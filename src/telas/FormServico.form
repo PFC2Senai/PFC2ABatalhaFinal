@@ -202,6 +202,9 @@
                   <Color blue="84" green="65" red="b" type="rgb"/>
                 </Property>
               </Properties>
+              <Events>
+                <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="descontoKeyTyped"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel1">
               <Properties>
@@ -277,6 +280,9 @@
                   <Color blue="84" green="65" red="b" type="rgb"/>
                 </Property>
               </Properties>
+              <Events>
+                <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="valorKeyTyped"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JComboBox" name="formPag">
               <Properties>

@@ -269,6 +269,12 @@ public class Proposta extends javax.swing.JFrame {
 
         jLabel34.setText("Quantidade:");
 
+        txtQuantidade.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtQuantidadeKeyTyped(evt);
+            }
+        });
+
         jComboBoxModelo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Selecione o Modelo" }));
         jComboBoxModelo.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
@@ -900,6 +906,14 @@ public class Proposta extends javax.swing.JFrame {
         idClienteComboBox();
         populaComboBoxContato();
     }//GEN-LAST:event_jComboBoxClienteItemStateChanged
+
+    private void txtQuantidadeKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtQuantidadeKeyTyped
+        // TODO add your handling code here:
+        String caracteres = "0987654321,.";
+        if (!caracteres.contains(evt.getKeyChar() + "")) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtQuantidadeKeyTyped
 
     public void TabelaProduto() {
 

@@ -17,11 +17,10 @@ public class CadastrarUsuario extends javax.swing.JFrame {
      */
     public CadastrarUsuario() {
         initComponents();
-        
+
 //        jTextNome.setDocument(new LimitarDigitos(45));
 //        jPasswordSenha.setDocument(new LimitarDigitos(10));
 //        jPasswordConfirmaSenha.setDocument(new LimitarDigitos(10));
-        
     }
 
     /**
@@ -48,6 +47,7 @@ public class CadastrarUsuario extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setBackground(new java.awt.Color(255, 255, 255));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setFont(new java.awt.Font("Raavi", 1, 18)); // NOI18N
@@ -100,7 +100,19 @@ public class CadastrarUsuario extends javax.swing.JFrame {
 
         jButton3.setText("Limpar");
         getContentPane().add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 280, -1, -1));
+
+        jPasswordSenha.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jPasswordSenhaKeyTyped(evt);
+            }
+        });
         getContentPane().add(jPasswordSenha, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 150, 216, 20));
+
+        jPasswordConfirmaSenha.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jPasswordConfirmaSenhaKeyTyped(evt);
+            }
+        });
         getContentPane().add(jPasswordConfirmaSenha, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 190, 216, 20));
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/leiaute/img1.png"))); // NOI18N
@@ -111,41 +123,47 @@ public class CadastrarUsuario extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        
+
         String tipoUser = "";
-        
+
         Usuario user = new Usuario();
         user.setNome(jTextNome.getText());
         user.setSenha(jPasswordSenha.getText());
-        
-        switch (jComboTipoUser.getSelectedItem().toString()) {
-            
-            case "Administrador":
-                tipoUser = "A";
-                break;
-            case "Funcionário":
-                tipoUser = "F";
-                break;
-        }
-        
-        user.setTipo(tipoUser);
 
-        if (jPasswordSenha.getText().equals(jPasswordConfirmaSenha.getText())) {
-            if (!jPasswordConfirmaSenha.getText().trim().equals("")) {
-                UsuarioDAO.CadUsuario(user);
+        if (UsuarioDAO.VerificarUsuario(jTextNome.getText()) == false) {
 
-                JOptionPane.showMessageDialog(this, "Cadastrado com Sucesso! Agora você tem permissões para "
-                        + "acessar o sistema!");
-                
-                Menu m = new Menu();
-                //m.setVisible(true);
-                this.dispose();
-                
-            } else {
-                JOptionPane.showMessageDialog(null, "Campo(s) Vazio(s)!");
+            switch (jComboTipoUser.getSelectedItem().toString()) {
+
+                case "Administrador":
+                    tipoUser = "A";
+                    break;
+                case "Funcionário":
+                    tipoUser = "F";
+                    break;
             }
+
+            user.setTipo(tipoUser);
+
+            if (jPasswordSenha.getText().equals(jPasswordConfirmaSenha.getText())) {
+                if (!jPasswordConfirmaSenha.getText().trim().equals("")) {
+                    UsuarioDAO.CadUsuario(user);
+
+                    JOptionPane.showMessageDialog(this, "Cadastrado com Sucesso! Agora você tem permissões para "
+                            + "acessar o sistema!");
+
+                    Menu m = new Menu();
+                    //m.setVisible(true);
+                    this.dispose();
+
+                } else {
+                    JOptionPane.showMessageDialog(null, "Campo(s) Vazio(s)!");
+                }
+            } else {
+                JOptionPane.showMessageDialog(null, "Não foi possivel confirmar a senha!");
+            }
+
         } else {
-            JOptionPane.showMessageDialog(null, "Não foi possivel confirmar a senha!");
+            JOptionPane.showMessageDialog(null, "Usuario ja cadastrado no sistema !");
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -160,6 +178,22 @@ public class CadastrarUsuario extends javax.swing.JFrame {
             evt.consume();
         }
     }//GEN-LAST:event_jTextNomeKeyTyped
+
+    private void jPasswordSenhaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jPasswordSenhaKeyTyped
+        // TODO add your handling code here:
+        String carac = "ç,.!?@:;/^~´`#$%¨&*()-_='+{[]}";
+        if (carac.contains(evt.getKeyChar() + "")) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_jPasswordSenhaKeyTyped
+
+    private void jPasswordConfirmaSenhaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jPasswordConfirmaSenhaKeyTyped
+        // TODO add your handling code here:
+        String carac = "ç,.!?@:;/^~´`#$%¨&*()-_='+{[]}";
+        if (carac.contains(evt.getKeyChar() + "")) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_jPasswordConfirmaSenhaKeyTyped
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

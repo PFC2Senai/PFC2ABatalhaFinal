@@ -186,6 +186,7 @@ public class CadastrarEquipamento extends javax.swing.JFrame {
         jLabel1.setText("Cadastrar Equipamento");
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 50, -1, 23));
 
+        jLabel3.setBackground(new java.awt.Color(255, 255, 255));
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/leiaute/img2.png"))); // NOI18N
         jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, -190, 670, 620));
 
@@ -259,22 +260,22 @@ public class CadastrarEquipamento extends javax.swing.JFrame {
     private void jBtnCadastrarEquipamentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnCadastrarEquipamentoActionPerformed
 
         if (jComboBoxFornecedor.getSelectedIndex() == 0){
-    JOptionPane.showMessageDialog(null, "Selecione um item!");
+    JOptionPane.showMessageDialog(null, "Selecione um Fornecedor!");
     return;
         }  
         
            if (jComboBoxEquipamento.getSelectedIndex() == 0){
-    JOptionPane.showMessageDialog(null, "Selecione um item!");
+    JOptionPane.showMessageDialog(null, "Selecione um Equipamento!");
     return;
         }
            
               if (jComboBoxFabricante.getSelectedIndex() == 0){
-    JOptionPane.showMessageDialog(null, "Selecione um item!");
+    JOptionPane.showMessageDialog(null, "Selecione um Fabricante!");
     return;
         }
               
                  if (jComboBoxModelo.getSelectedIndex() == 0){
-    JOptionPane.showMessageDialog(null, "Selecione um item!");
+    JOptionPane.showMessageDialog(null, "Selecione um Modelo!");
     return;
         } 
                  

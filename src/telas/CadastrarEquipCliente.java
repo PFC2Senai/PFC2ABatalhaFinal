@@ -57,7 +57,7 @@ public class CadastrarEquipCliente extends javax.swing.JFrame {
             public void focusLost(FocusEvent e) {
                 if (codEquipamento == 0 && uJComboBoxEquipamento.getSelectedIndex() != 0) {
                     JOptionPane.showMessageDialog(null, "Esse registro não encontra-se cadastrado na base de dados.");
-                   // uJComboBoxEquipamento.getEditor().getEditorComponent().requestFocus();
+                    // uJComboBoxEquipamento.getEditor().getEditorComponent().requestFocus();
                     uJComboBoxEquipamento.setSelectedIndex(0);
                 }
             }
@@ -101,7 +101,7 @@ public class CadastrarEquipCliente extends javax.swing.JFrame {
         });
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanel5.setBackground(new java.awt.Color(223, 237, 253));
+        jPanel5.setBackground(new java.awt.Color(255, 255, 255));
         jPanel5.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         btnCadEquipCliente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/disk.png"))); // NOI18N
@@ -191,6 +191,11 @@ public class CadastrarEquipCliente extends javax.swing.JFrame {
                 uJComboBoxEquipamentoActionPerformed(evt);
             }
         });
+        uJComboBoxEquipamento.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                uJComboBoxEquipamentoKeyTyped(evt);
+            }
+        });
 
         jBtnNovoEquipamento.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/maquina02.png"))); // NOI18N
         jBtnNovoEquipamento.setText("Novo Equipamento");
@@ -271,6 +276,7 @@ public class CadastrarEquipCliente extends javax.swing.JFrame {
         jPanel5.add(btnCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 550, -1, -1));
 
         jLabel1.setFont(new java.awt.Font("Raavi", 1, 18)); // NOI18N
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/equipamento.png"))); // NOI18N
         jLabel1.setText("Cadastrar Equipamento do Cliente");
         jPanel5.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 70, 300, 23));
 
@@ -287,28 +293,28 @@ public class CadastrarEquipCliente extends javax.swing.JFrame {
 
     private void btnCadEquipClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadEquipClienteActionPerformed
 
-        if(jTableEquipamento.getRowCount()>0){
-        if (VerificaEquipamentoTable() == true) {
-            DetEquipamentoCliente detEqCli = new DetEquipamentoCliente();
+        if (jTableEquipamento.getRowCount() > 0) {
+            if (VerificaEquipamentoTable() == true) {
+                DetEquipamentoCliente detEqCli = new DetEquipamentoCliente();
 
-            for (int j = 0; j < jTableEquipamento.getRowCount(); j++) {
+                for (int j = 0; j < jTableEquipamento.getRowCount(); j++) {
 
-                detEqCli.setCodEquipamento(Integer.parseInt(jTableEquipamento.getValueAt(j, 0).toString()));
-                detEqCli.setCodCliente(codCliente);
+                    detEqCli.setCodEquipamento(Integer.parseInt(jTableEquipamento.getValueAt(j, 0).toString()));
+                    detEqCli.setCodCliente(codCliente);
 
-                DetEquipamentoClienteDAO.CadEquipCliente(detEqCli);
+                    DetEquipamentoClienteDAO.CadEquipCliente(detEqCli);
+                }
+                telaDetCliente.TabelaEquipamentosCli();
+                JOptionPane.showMessageDialog(null, "Cadastrado com sucesso!");
+                this.dispose();
             }
-            telaDetCliente.TabelaEquipamentosCli();
-            JOptionPane.showMessageDialog(null, "Cadastrado com sucesso!");
-            this.dispose();
-        }
-        }else{
+        } else {
             JOptionPane.showMessageDialog(null, "Por favor, insira um registro na tabela!");
         }
     }//GEN-LAST:event_btnCadEquipClienteActionPerformed
 
     private void jBtnRemoveEquipamentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnRemoveEquipamentoActionPerformed
-        if (JOptionPane.showConfirmDialog(null, "Deseja excluir o registro?", "Confirmar Exclusão", JOptionPane.YES_NO_OPTION) == 0 ) {
+        if (JOptionPane.showConfirmDialog(null, "Deseja excluir o registro?", "Confirmar Exclusão", JOptionPane.YES_NO_OPTION) == 0) {
             DefaultTableModel dtm = (DefaultTableModel) jTableEquipamento.getModel();
             int linha = jTableEquipamento.getSelectedRow();
             if (linha != -1) {
@@ -319,20 +325,20 @@ public class CadastrarEquipCliente extends javax.swing.JFrame {
 
     private void jBtbIncluirEquipamentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtbIncluirEquipamentoActionPerformed
 
-         if (uJComboBoxEquipamento.getSelectedIndex() == 0){
-    JOptionPane.showMessageDialog(null, "Selecione um item!");
-    return;
+        if (uJComboBoxEquipamento.getSelectedIndex() == 0) {
+            JOptionPane.showMessageDialog(null, "Selecione um item!");
+            return;
         }
-        if (jComboBoxModeloEquip.getSelectedIndex() == 0){
-    JOptionPane.showMessageDialog(null, "Selecione um item!");
-    return;
+        if (jComboBoxModeloEquip.getSelectedIndex() == 0) {
+            JOptionPane.showMessageDialog(null, "Selecione um item!");
+            return;
         }
-        
-        if (jComboBoxFabricanteEquip.getSelectedIndex() == 0){
-    JOptionPane.showMessageDialog(null, "Selecione um item!");
-    return;
+
+        if (jComboBoxFabricanteEquip.getSelectedIndex() == 0) {
+            JOptionPane.showMessageDialog(null, "Selecione um item!");
+            return;
         }
-        
+
         if (VerificaCampos() == true) {
             TabelaEquipamento();
         }
@@ -389,7 +395,7 @@ public class CadastrarEquipCliente extends javax.swing.JFrame {
     }//GEN-LAST:event_jBtnNovoEquipamentoActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
-        if (JOptionPane.showConfirmDialog(null, "Tem certeza que deseja sair? Os dados não serão salvos.", "Confirmar Cancelamento", JOptionPane.YES_NO_OPTION) == 0 ) {
+        if (JOptionPane.showConfirmDialog(null, "Tem certeza que deseja sair? Os dados não serão salvos.", "Confirmar Cancelamento", JOptionPane.YES_NO_OPTION) == 0) {
             verificaPagina();
             this.dispose();
         }
@@ -398,6 +404,15 @@ public class CadastrarEquipCliente extends javax.swing.JFrame {
     private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
         verificaPagina();
     }//GEN-LAST:event_formWindowClosed
+
+    private void uJComboBoxEquipamentoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_uJComboBoxEquipamentoKeyTyped
+        // TODO add your handling code here:
+
+        String carac = "ç,.!?@:;/^~´`#$%¨&*()-_='+{[]}";
+        if (carac.contains(evt.getKeyChar() + "")) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_uJComboBoxEquipamentoKeyTyped
 
     private boolean VerificaEquipamentoTable() {
 
@@ -410,17 +425,17 @@ public class CadastrarEquipCliente extends javax.swing.JFrame {
         }
         return valida;
     }
-    
+
     private boolean VerificaCampos() {
 
         boolean valida = true;
-       
+
         if (uJComboBoxEquipamento.getSelectedIndex() == 0) {
             JOptionPane.showMessageDialog(null, "Campo(s) vazio(s)!");
             valida = false;
             return valida;
         }
-        
+
         return valida;
     }
 
@@ -564,7 +579,7 @@ public class CadastrarEquipCliente extends javax.swing.JFrame {
         }
     }
 
-    private void ocultaColunaTabelas() {        
+    private void ocultaColunaTabelas() {
         //oculta coluna equipamento
         jTableEquipamento.getColumnModel().getColumn(0).setMaxWidth(0);
         jTableEquipamento.getColumnModel().getColumn(0).setMinWidth(0);
@@ -588,8 +603,8 @@ public class CadastrarEquipCliente extends javax.swing.JFrame {
             this.telaDetCliente.setEnabled(true);
             this.telaDetCliente.toFront();
         }
-    } 
-    
+    }
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCadEquipCliente;
     private javax.swing.JButton btnCancelar;
