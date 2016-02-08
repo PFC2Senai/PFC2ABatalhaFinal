@@ -76,8 +76,14 @@ public class AdicionarDetServFuncionario extends javax.swing.JFrame {
         jBtnSalvarDetServFuncionario = new javax.swing.JButton();
         uJComboBoxFuncionario = new componentes.UJComboBox();
         jLabel1 = new javax.swing.JLabel();
+        jBtnCancelar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosed(java.awt.event.WindowEvent evt) {
+                formWindowClosed(evt);
+            }
+        });
 
         jPanel5.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -140,6 +146,14 @@ public class AdicionarDetServFuncionario extends javax.swing.JFrame {
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/leiaute/img2.png"))); // NOI18N
         jPanel5.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 670, -1));
 
+        jBtnCancelar.setText("Cancelar");
+        jBtnCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnCancelarActionPerformed(evt);
+            }
+        });
+        jPanel5.add(jBtnCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 490, -1, -1));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -181,6 +195,8 @@ public class AdicionarDetServFuncionario extends javax.swing.JFrame {
         }
 
         telaDatalharServico.TabelaFuncionario();
+        verificaPagina();
+        this.dispose();
     }//GEN-LAST:event_jBtnSalvarDetServFuncionarioActionPerformed
 
     private void uJComboBoxFuncionarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_uJComboBoxFuncionarioActionPerformed
@@ -190,6 +206,15 @@ public class AdicionarDetServFuncionario extends javax.swing.JFrame {
             funcionario = uJComboBoxFuncionario.getSelectedItem().toString();
         }
     }//GEN-LAST:event_uJComboBoxFuncionarioActionPerformed
+
+    private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
+        verificaPagina();
+    }//GEN-LAST:event_formWindowClosed
+
+    private void jBtnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnCancelarActionPerformed
+        this.dispose();
+        verificaPagina();
+    }//GEN-LAST:event_jBtnCancelarActionPerformed
 
     public void TabelaFuncionario() {
         
@@ -242,8 +267,18 @@ public class AdicionarDetServFuncionario extends javax.swing.JFrame {
         jTableFuncionario.getTableHeader().getColumnModel().getColumn(0).setMinWidth(0);
     }
     
+    private void verificaPagina() {
+
+        if ((this.telaDatalharServico != null)) {
+            this.telaDatalharServico.setEnabled(true);
+            this.telaDatalharServico.toFront();
+            
+        }
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBtbIncluirFunc;
+    private javax.swing.JButton jBtnCancelar;
     private javax.swing.JButton jBtnRemoverFunc;
     private javax.swing.JButton jBtnSalvarDetServFuncionario;
     private javax.swing.JLabel jLabel1;

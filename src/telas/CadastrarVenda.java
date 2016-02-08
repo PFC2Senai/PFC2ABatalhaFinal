@@ -265,7 +265,20 @@ public class CadastrarVenda extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, ex);
         }
     }
-
+    private boolean ValidaHora() {
+                boolean valide = true;
+		String hora = jTextHora.getText();
+		String[] hm = hora.split(":"); 
+		int horas = Integer.parseInt( hm[0]);
+		int minutos = Integer.parseInt( hm[1]);
+		if( horas > 24 || minutos > 59 ){
+			JOptionPane.showMessageDialog(null, "Digite uma HORA VÁLIDA!");
+                valide = false;
+                return valide;
+		}
+                return valide;
+	}
+    
     private boolean VerificaCampos() {
         boolean valida = true;
 
@@ -299,11 +312,11 @@ public class CadastrarVenda extends javax.swing.JFrame {
             return valida;
         }
         
-//        if (jTextHora.getText() == null || jTextHora.getText()> "23:59" ) {
-//            JOptionPane.showMessageDialog(null, "Preencha o campo DATA!");
-//            valida = false;
-//            return valida;
-//        }
+        if (jTextHora.getText() == null || jTextHora.getText().trim().equals( ":" )) {
+            JOptionPane.showMessageDialog(null, "Preencha o campo DATA!");
+            valida = false;
+            return valida;
+        }
 
         if (jTextValorUnit.getText().equals("")) {
             JOptionPane.showMessageDialog(null, "Preencha o campo VALOR!");
@@ -399,6 +412,7 @@ public class CadastrarVenda extends javax.swing.JFrame {
         jTextValorUnit = new javax.swing.JTextField();
         jLabel12 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
+        jPanel1 = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -577,6 +591,9 @@ public class CadastrarVenda extends javax.swing.JFrame {
         jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/leiaute/img2.png"))); // NOI18N
         getContentPane().add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 680, 110));
 
+        jPanel1.setBackground(new java.awt.Color(223, 237, 253));
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 680, 660));
+
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
@@ -653,7 +670,7 @@ public class CadastrarVenda extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
 
-        if (VerificaCampos() == true) {
+        if (VerificaCampos() && ValidaHora() == true) {
             TabelaProduto();
         }
 
@@ -769,6 +786,7 @@ public class CadastrarVenda extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTableProduto;
     private javax.swing.JFormattedTextField jTextHora;

@@ -2,6 +2,7 @@ package telas;
 
 import static funcoes.Conexao.getConnection;
 import funcoes.ModeloTabela;
+import funcoes.TabelaZebrada;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -10,6 +11,7 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ListSelectionModel;
+import javax.swing.table.TableCellRenderer;
 
 /**
  *
@@ -57,7 +59,6 @@ public class ExibeServico extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        jPanel1.setBackground(new java.awt.Color(204, 255, 204));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jTableListarServicos.setModel(new javax.swing.table.DefaultTableModel(
@@ -70,7 +71,7 @@ public class ExibeServico extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(jTableListarServicos);
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 220, 752, 320));
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 220, 700, 320));
 
         txtBuscar.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
@@ -94,18 +95,18 @@ public class ExibeServico extends javax.swing.JFrame {
                 jBtnDetalharActionPerformed(evt);
             }
         });
-        jPanel1.add(jBtnDetalhar, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 570, -1, -1));
+        jPanel1.add(jBtnDetalhar, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 220, -1, 40));
 
-        jBtnSair.setText("Sair");
+        jBtnSair.setText("Voltar");
         jBtnSair.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jBtnSairActionPerformed(evt);
             }
         });
-        jPanel1.add(jBtnSair, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 570, -1, -1));
+        jPanel1.add(jBtnSair, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 560, -1, -1));
 
         jLabel2.setText("Pesquisar:");
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 170, -1, -1));
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 160, -1, -1));
 
         jComboBoxOpcaoPesquisa.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Selecione a opção de pesquisa", "Código", "Empresa", "Data Serviço" }));
         jComboBoxOpcaoPesquisa.addActionListener(new java.awt.event.ActionListener() {
@@ -125,13 +126,15 @@ public class ExibeServico extends javax.swing.JFrame {
         jPanel1.add(jBtnBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 160, -1, -1));
 
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/leiaute/img3.png"))); // NOI18N
-        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -270, 850, 660));
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 850, 130));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 888, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -147,7 +150,8 @@ public class ExibeServico extends javax.swing.JFrame {
     private void jBtnDetalharActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnDetalharActionPerformed
         int linha = jTableListarServicos.getSelectedRow();
         codServico = (Integer.parseInt(jTableListarServicos.getValueAt(linha, 0).toString()));
-        new DetalharServico(codServico).setVisible(true);
+        this.setEnabled(false);
+        new DetalharServico(codServico, this).setVisible(true);
     }//GEN-LAST:event_jBtnDetalharActionPerformed
 
     private void jBtnSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnSairActionPerformed
@@ -201,7 +205,7 @@ public class ExibeServico extends javax.swing.JFrame {
     private void txtBuscarKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBuscarKeyReleased
         
         TabelaServico("SELECT * FROM vw_servico where " + opcaoPesquisa
-                + " like '%" + txtBuscar.getText() + "%';");
+                + " like '%" + txtBuscar.getText().trim() + "%';");
     }//GEN-LAST:event_txtBuscarKeyReleased
 
     public void TabelaServico(String Sql) {
@@ -210,7 +214,7 @@ public class ExibeServico extends javax.swing.JFrame {
 
             stmt = getConnection().createStatement();
             ArrayList dados = new ArrayList();
-            String[] Colunas = {"Código", "Cliente", "Valor", "Data"};
+            String[] Colunas = {"Código", "Cliente", "Data"};
 
             ResultSet rs;
             rs = stmt.executeQuery(Sql);
@@ -220,19 +224,22 @@ public class ExibeServico extends javax.swing.JFrame {
                 dados.add(new Object[] {
                     rs.getObject("idservico"),
                     rs.getObject("empresa"),
-                    rs.getObject("preco"),
                     rs.getObject("dataServico")
                 });
             }
 
-            for (int i = 0; i < 4; i++) {
+            for (int i = 0; i < 3; i++) {
                 
                 ModeloTabela modelo = new ModeloTabela(dados, Colunas);
                 jTableListarServicos.setModel(modelo);
-                jTableListarServicos.getColumnModel().getColumn(i).setPreferredWidth(150);
+                TableCellRenderer renderer = new TabelaZebrada();
+                jTableListarServicos.setDefaultRenderer(Object.class, renderer);
                 jTableListarServicos.getColumnModel().getColumn(i).setResizable(false);
+                jTableListarServicos.getColumnModel().getColumn(0).setPreferredWidth(100);
+                jTableListarServicos.getColumnModel().getColumn(1).setPreferredWidth(300);
+                jTableListarServicos.getColumnModel().getColumn(2).setPreferredWidth(150);
+                
                 jTableListarServicos.getTableHeader().setReorderingAllowed(false);
-                jTableListarServicos.setAutoResizeMode(jTableListarServicos.AUTO_RESIZE_OFF);
                 jTableListarServicos.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
             }
 
