@@ -161,10 +161,12 @@ public final class DetalharServico extends javax.swing.JFrame {
         });
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        jPanelServico.setBackground(new java.awt.Color(204, 255, 204));
         jPanelServico.setPreferredSize(new java.awt.Dimension(860, 800));
         jPanelServico.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Serviço"));
+        jPanel3.setBackground(new java.awt.Color(204, 255, 204));
+        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder("Serviço"));
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel6.setText("Cliente:");
@@ -229,8 +231,10 @@ public final class DetalharServico extends javax.swing.JFrame {
 
         jPanelServico.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 10, 800, 210));
 
-        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Tipo Serviço"));
+        jPanel1.setBackground(new java.awt.Color(204, 255, 204));
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Tipo Serviço"));
 
+        jTableTipodeServico.setBackground(new java.awt.Color(204, 255, 204));
         jTableTipodeServico.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -326,7 +330,10 @@ public final class DetalharServico extends javax.swing.JFrame {
 
         jTabbedPaneDetalheServico.addTab("Serviço", new javax.swing.ImageIcon(getClass().getResource("/imagens/servicos.png")), jPanelServico); // NOI18N
 
-        jPanelPecas.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Peças"));
+        jPanelPecaEEquip.setBackground(new java.awt.Color(204, 255, 204));
+
+        jPanelPecas.setBackground(new java.awt.Color(204, 255, 204));
+        jPanelPecas.setBorder(javax.swing.BorderFactory.createTitledBorder("Peças"));
 
         jTablePecas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -391,7 +398,8 @@ public final class DetalharServico extends javax.swing.JFrame {
                 .addContainerGap(20, Short.MAX_VALUE))
         );
 
-        jPanelEquipamento.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Equipamentos"));
+        jPanelEquipamento.setBackground(new java.awt.Color(204, 255, 204));
+        jPanelEquipamento.setBorder(javax.swing.BorderFactory.createTitledBorder("Equipamentos"));
 
         jTableEquipamento.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -493,8 +501,12 @@ public final class DetalharServico extends javax.swing.JFrame {
 
         jTabbedPaneDetalheServico.addTab("Peças e Equipamento", jPanelPecaEEquip);
 
-        jPanelFuncionario.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Valores"));
+        jPanelFuncionarioValor.setBackground(new java.awt.Color(204, 255, 204));
 
+        jPanelFuncionario.setBackground(new java.awt.Color(204, 255, 204));
+        jPanelFuncionario.setBorder(javax.swing.BorderFactory.createTitledBorder("Valores"));
+
+        jTableFuncionario.setBackground(new java.awt.Color(204, 255, 204));
         jTableFuncionario.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -551,7 +563,8 @@ public final class DetalharServico extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        jPanelValor.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Valores"));
+        jPanelValor.setBackground(new java.awt.Color(204, 255, 204));
+        jPanelValor.setBorder(javax.swing.BorderFactory.createTitledBorder("Valores"));
 
         jLabel4.setText("Total serviço:");
 
