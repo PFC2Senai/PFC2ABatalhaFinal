@@ -19,7 +19,7 @@ public class ConexaoPermissoes {
     private String driver = "com.mysql.jdbc.Driver";
     private String caminho = "jdbc:mysql://localhost:3306/pfc1";
     private String usuario = "root";
-    private String senha = "dragonballz";
+    private String senha = "";
     public Connection conn;
     
     

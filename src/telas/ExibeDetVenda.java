@@ -345,7 +345,7 @@ public class ExibeDetVenda extends javax.swing.JFrame {
         jButtonAddnovoProd = new javax.swing.JButton();
         jLabel9 = new javax.swing.JLabel();
         jBtnRemover = new javax.swing.JButton();
-        jTextField1 = new javax.swing.JTextField();
+        jPanel2 = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setBackground(new java.awt.Color(223, 237, 253));
@@ -547,8 +547,20 @@ public class ExibeDetVenda extends javax.swing.JFrame {
         });
         getContentPane().add(jBtnRemover, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 370, -1, -1));
 
-        jTextField1.setBackground(new java.awt.Color(204, 255, 204));
-        getContentPane().add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(-1, 0, 860, 680));
+        jPanel2.setBackground(new java.awt.Color(204, 255, 204));
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 860, Short.MAX_VALUE)
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 680, Short.MAX_VALUE)
+        );
+
+        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 860, 680));
 
         pack();
         setLocationRelativeTo(null);
@@ -587,6 +599,7 @@ public class ExibeDetVenda extends javax.swing.JFrame {
         jBtnAltDadosP.setVisible(false);
         jBtbCancelDadosP.setVisible(false);
         jButtonAr1.setVisible(true);
+        JOptionPane.showMessageDialog(null, "Canselado com sucesso!");
 
     }//GEN-LAST:event_jBtbCancelDadosPActionPerformed
 
@@ -604,6 +617,7 @@ public class ExibeDetVenda extends javax.swing.JFrame {
         jBtnAltDadosP.setVisible(false);
         jBtbCancelDadosP.setVisible(false);
         jButtonAr1.setVisible(true);
+            JOptionPane.showMessageDialog(null, "Cadastrado com sucesso!");
         CarregaVenda();
 
         String descricaoAudit = "Venda: " + v.getIdtabVendas() + "teve os dados alterados.";
@@ -672,6 +686,7 @@ public class ExibeDetVenda extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTableListarVendas;
     private javax.swing.JTextField jTextCodCliente;
@@ -679,7 +694,6 @@ public class ExibeDetVenda extends javax.swing.JFrame {
     private javax.swing.JTextField jTextCodUsuario;
     private javax.swing.JTextField jTextCodVenda;
     private javax.swing.JTextField jTextDataVenda;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextHoraVenda;
     private javax.swing.JTextField jTextTotalVenda;
     private componentes.UJComboBox uJComboBoxCliente;
