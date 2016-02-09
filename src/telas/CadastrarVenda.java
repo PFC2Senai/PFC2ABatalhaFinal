@@ -531,6 +531,11 @@ public class CadastrarVenda extends javax.swing.JFrame {
                 "Código", "Produto", "Modelo", "Fabricante", "Quatidade", "Valor Unit", "Total"
             }
         ));
+        jTableProduto.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTableProdutoMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(jTableProduto);
 
         jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 400, 620, 110));
@@ -775,6 +780,10 @@ public class CadastrarVenda extends javax.swing.JFrame {
             evt.consume();
         }
     }//GEN-LAST:event_jTextTotalKeyTyped
+
+    private void jTableProdutoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableProdutoMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTableProdutoMouseClicked
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private com.toedter.calendar.JDateChooser JDataVenda;

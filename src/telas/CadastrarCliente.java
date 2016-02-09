@@ -992,7 +992,7 @@ public class CadastrarCliente extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "Cliente ja cadastrado !");
             }
         }
-        
+       
     }//GEN-LAST:event_btnCadClienteActionPerformed
 
     private void txtEmailFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtEmailFocusLost
