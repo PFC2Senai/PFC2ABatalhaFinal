@@ -171,6 +171,7 @@ public class Proposta extends javax.swing.JFrame {
         jLabel15.setText("PROPOSTA");
         getContentPane().add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 40, -1, -1));
 
+        jPanel3.setBackground(new java.awt.Color(207, 222, 252));
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel10.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
@@ -216,6 +217,7 @@ public class Proposta extends javax.swing.JFrame {
         });
         jPanel3.add(jBtnCancelarCadTipoServico, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 180, -1, -1));
 
+        jTableTipodeServico.setBackground(new java.awt.Color(207, 222, 252));
         jTableTipodeServico.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -249,6 +251,7 @@ public class Proposta extends javax.swing.JFrame {
 
         jTabbedPane1.addTab("Fornecimento", jPanel3);
 
+        jPanel14.setBackground(new java.awt.Color(207, 222, 252));
         jPanel14.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         jComboBoxProduto.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Selecione a Peça" }));
@@ -295,6 +298,7 @@ public class Proposta extends javax.swing.JFrame {
 
         jLabel35.setText("Modelo:");
 
+        jTablePecas.setBackground(new java.awt.Color(207, 222, 252));
         jTablePecas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -433,6 +437,8 @@ public class Proposta extends javax.swing.JFrame {
 
         jTabbedPane1.addTab("Peça", jPanel4);
 
+        jPanel5.setBackground(new java.awt.Color(207, 222, 252));
+
         jLabel12.setText("CONDIÇÕES DE VENDA:");
 
         txtCondicoesDeVenda.setColumns(20);
@@ -473,6 +479,8 @@ public class Proposta extends javax.swing.JFrame {
         );
 
         jTabbedPane1.addTab("Observações", jPanel5);
+
+        jPanel6.setBackground(new java.awt.Color(207, 222, 252));
 
         jLabel17.setText("VALIDADE DA PROPOSTA:");
 
@@ -584,6 +592,8 @@ public class Proposta extends javax.swing.JFrame {
 
         jTabbedPane1.addTab("Outros", jPanel6);
 
+        jPanel1.setBackground(new java.awt.Color(207, 222, 252));
+
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel1.setText("Proposta Comercial");
 
@@ -672,6 +682,8 @@ public class Proposta extends javax.swing.JFrame {
         );
 
         jTabbedPane1.addTab("Dados da Empresa", jPanel1);
+
+        jPanel2.setBackground(new java.awt.Color(207, 222, 252));
 
         jLabel8.setText("Sua Referência:");
 

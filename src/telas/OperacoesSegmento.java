@@ -72,8 +72,10 @@ public class OperacoesSegmento extends javax.swing.JFrame {
             }
         });
 
+        jPanel1.setBackground(new java.awt.Color(207, 222, 252));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        jTableListarSetores.setBackground(new java.awt.Color(207, 222, 252));
         jTableListarSetores.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 

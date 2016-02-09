@@ -84,6 +84,7 @@ public final class AlterarContato extends javax.swing.JFrame {
         jLabelSetorContato = new javax.swing.JLabel();
         jComboBoxSetorContato = new javax.swing.JComboBox();
         jLabel2 = new javax.swing.JLabel();
+        jPanel1 = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("ALTERAR CONTATO");
@@ -168,6 +169,9 @@ public final class AlterarContato extends javax.swing.JFrame {
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/leiaute/img1.png"))); // NOI18N
         getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 670, 100));
+
+        jPanel1.setBackground(new java.awt.Color(255, 204, 204));
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 670, 250));
 
         pack();
         setLocationRelativeTo(null);
@@ -401,6 +405,7 @@ public final class AlterarContato extends javax.swing.JFrame {
     private javax.swing.JLabel jLabelEmail1;
     private javax.swing.JLabel jLabelSetorContato;
     private javax.swing.JLabel jLabelTelefone;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JTextField txtContato;
     private javax.swing.JTextField txtEmail;
     private javax.swing.JFormattedTextField txtTel;
