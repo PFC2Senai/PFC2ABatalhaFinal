@@ -557,6 +557,7 @@ public class CadastrarVenda extends javax.swing.JFrame {
         });
         jPanel1.add(jTextQuantidadeProduto, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 220, 110, -1));
 
+        jButton6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/calculator.png"))); // NOI18N
         jButton6.setText("Calcular");
         jButton6.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
