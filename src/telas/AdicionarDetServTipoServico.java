@@ -91,6 +91,7 @@ public class AdicionarDetServTipoServico extends javax.swing.JFrame {
             }
         });
 
+        jPanel1.setBackground(new java.awt.Color(254, 254, 233));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jBtnAdicionarTipo.setText("Adicionar Tipo");

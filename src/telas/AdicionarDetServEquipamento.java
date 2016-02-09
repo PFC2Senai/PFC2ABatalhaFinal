@@ -94,6 +94,7 @@ public class AdicionarDetServEquipamento extends javax.swing.JFrame {
             }
         });
 
+        jPanel4.setBackground(new java.awt.Color(254, 254, 233));
         jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setText("Equipamento:");
@@ -115,6 +116,7 @@ public class AdicionarDetServEquipamento extends javax.swing.JFrame {
         });
         jPanel4.add(jBtbIncluirEquipamento, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 260, -1, -1));
 
+        jTableEquipamento.setBackground(new java.awt.Color(254, 254, 233));
         jTableEquipamento.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 

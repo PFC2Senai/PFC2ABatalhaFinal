@@ -85,8 +85,10 @@ public class AdicionarDetServFuncionario extends javax.swing.JFrame {
             }
         });
 
+        jPanel5.setBackground(new java.awt.Color(254, 254, 233));
         jPanel5.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        jTableFuncionario.setBackground(new java.awt.Color(254, 254, 233));
         jTableFuncionario.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
