@@ -84,10 +84,12 @@ public class AdicionarDetServEquipamento extends javax.swing.JFrame {
         jComboBoxFabricanteEquip = new javax.swing.JComboBox();
         jBtnInserirDetServEquipamento = new javax.swing.JButton();
         uJComboBoxEquipamento = new componentes.UJComboBox();
+        jLabel3 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jBtnCancelar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("ADICIONAR EQUIPAMENTO");
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosed(java.awt.event.WindowEvent evt) {
                 formWindowClosed(evt);
@@ -100,21 +102,23 @@ public class AdicionarDetServEquipamento extends javax.swing.JFrame {
         jLabel1.setText("Equipamento:");
         jPanel4.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 140, -1, -1));
 
+        jBtnRemoveEquipamento.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/excluir.png"))); // NOI18N
         jBtnRemoveEquipamento.setText("Remover");
         jBtnRemoveEquipamento.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jBtnRemoveEquipamentoActionPerformed(evt);
             }
         });
-        jPanel4.add(jBtnRemoveEquipamento, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 430, -1, -1));
+        jPanel4.add(jBtnRemoveEquipamento, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 430, 100, -1));
 
-        jBtbIncluirEquipamento.setText("IncluirEquipamento");
+        jBtbIncluirEquipamento.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/add.png"))); // NOI18N
+        jBtbIncluirEquipamento.setText("Incluir Equipamento");
         jBtbIncluirEquipamento.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jBtbIncluirEquipamentoActionPerformed(evt);
             }
         });
-        jPanel4.add(jBtbIncluirEquipamento, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 260, -1, -1));
+        jPanel4.add(jBtbIncluirEquipamento, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 260, 150, -1));
 
         jTableEquipamento.setBackground(new java.awt.Color(254, 254, 233));
         jTableEquipamento.setModel(new javax.swing.table.DefaultTableModel(
@@ -160,13 +164,14 @@ public class AdicionarDetServEquipamento extends javax.swing.JFrame {
         });
         jPanel4.add(jComboBoxFabricanteEquip, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 220, 320, -1));
 
+        jBtnInserirDetServEquipamento.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/salvar.png"))); // NOI18N
         jBtnInserirDetServEquipamento.setText("Salvar");
         jBtnInserirDetServEquipamento.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jBtnInserirDetServEquipamentoActionPerformed(evt);
             }
         });
-        jPanel4.add(jBtnInserirDetServEquipamento, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 490, -1, -1));
+        jPanel4.add(jBtnInserirDetServEquipamento, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 490, 90, -1));
 
         uJComboBoxEquipamento.setEditable(true);
         uJComboBoxEquipamento.addItemListener(new java.awt.event.ItemListener() {
@@ -181,9 +186,14 @@ public class AdicionarDetServEquipamento extends javax.swing.JFrame {
         });
         jPanel4.add(uJComboBoxEquipamento, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 140, 320, -1));
 
+        jLabel3.setFont(new java.awt.Font("Microsoft YaHei UI Light", 1, 24)); // NOI18N
+        jLabel3.setText("ADICIONAR EQUIPAMENTO");
+        jPanel4.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 60, -1, -1));
+
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/leiaute/img2.png"))); // NOI18N
         jPanel4.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 680, -1));
 
+        jBtnCancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/cancelar.png"))); // NOI18N
         jBtnCancelar.setText("Cancelar");
         jBtnCancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -457,6 +467,7 @@ public class AdicionarDetServEquipamento extends javax.swing.JFrame {
     private javax.swing.JComboBox jComboBoxModeloEquip;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel37;
     private javax.swing.JLabel jLabel38;
     private javax.swing.JPanel jPanel4;

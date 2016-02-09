@@ -347,10 +347,10 @@ public class CadastrarCliente extends javax.swing.JFrame {
         jPanel1.setBackground(new java.awt.Color(223, 237, 253));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel1.setFont(new java.awt.Font("Raavi", 1, 18)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Microsoft YaHei UI Light", 1, 24)); // NOI18N
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/cliente3.png"))); // NOI18N
         jLabel1.setText("CADASTRAR CLIENTE");
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 50, 240, 50));
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 70, 300, 50));
 
         btnLimpar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/stop2.png"))); // NOI18N
         btnLimpar.setText("Cancelar");
@@ -679,7 +679,7 @@ public class CadastrarCliente extends javax.swing.JFrame {
             }
         });
 
-        jBtnNovoSetor.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/add.png"))); // NOI18N
+        jBtnNovoSetor.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/page.png"))); // NOI18N
         jBtnNovoSetor.setText("Novo Segmento");
         jBtnNovoSetor.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -768,16 +768,17 @@ public class CadastrarCliente extends javax.swing.JFrame {
                 btnCadClienteActionPerformed(evt);
             }
         });
-        jPanel1.add(btnCadCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 630, -1, 30));
+        jPanel1.add(btnCadCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 630, -1, 30));
 
+        jLabel17.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel17.setIcon(new javax.swing.ImageIcon(getClass().getResource("/leiaute/img3.png"))); // NOI18N
-        jPanel1.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 860, 130));
+        jPanel1.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 870, 120));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 851, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -994,7 +995,7 @@ public class CadastrarCliente extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "Cliente ja cadastrado !");
             }
         }
-        //    }//
+       
     }//GEN-LAST:event_btnCadClienteActionPerformed
 
     private void txtEmailFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtEmailFocusLost

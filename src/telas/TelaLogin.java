@@ -115,7 +115,7 @@ public class TelaLogin extends javax.swing.JFrame {
         jLabel4.setFont(new java.awt.Font("Raavi", 1, 28)); // NOI18N
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/LogoIconi.png"))); // NOI18N
         jLabel4.setText("LOGIN");
-        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 30, 120, 30));
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 40, 90, 20));
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/adm.png"))); // NOI18N
         jLabel2.setText("Usuário:");

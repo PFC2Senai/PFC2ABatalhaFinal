@@ -75,10 +75,12 @@ public class AdicionarDetServFuncionario extends javax.swing.JFrame {
         jBtbIncluirFunc = new javax.swing.JButton();
         jBtnSalvarDetServFuncionario = new javax.swing.JButton();
         uJComboBoxFuncionario = new componentes.UJComboBox();
+        jLabel2 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         jBtnCancelar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("ADICIONAR FUNCIONÁRIO");
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosed(java.awt.event.WindowEvent evt) {
                 formWindowClosed(evt);
@@ -113,29 +115,32 @@ public class AdicionarDetServFuncionario extends javax.swing.JFrame {
         jLabel7.setText("Funcionário:");
         jPanel5.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 160, -1, -1));
 
+        jBtnRemoverFunc.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/excluir.png"))); // NOI18N
         jBtnRemoverFunc.setText("Remover");
         jBtnRemoverFunc.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jBtnRemoverFuncActionPerformed(evt);
             }
         });
-        jPanel5.add(jBtnRemoverFunc, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 440, -1, -1));
+        jPanel5.add(jBtnRemoverFunc, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 440, 100, -1));
 
+        jBtbIncluirFunc.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/add.png"))); // NOI18N
         jBtbIncluirFunc.setText("Incluir Funcionário");
         jBtbIncluirFunc.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jBtbIncluirFuncActionPerformed(evt);
             }
         });
-        jPanel5.add(jBtbIncluirFunc, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 210, -1, -1));
+        jPanel5.add(jBtbIncluirFunc, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 210, -1, -1));
 
+        jBtnSalvarDetServFuncionario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/salvar.png"))); // NOI18N
         jBtnSalvarDetServFuncionario.setText("Salvar");
         jBtnSalvarDetServFuncionario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jBtnSalvarDetServFuncionarioActionPerformed(evt);
             }
         });
-        jPanel5.add(jBtnSalvarDetServFuncionario, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 500, -1, -1));
+        jPanel5.add(jBtnSalvarDetServFuncionario, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 490, 90, -1));
 
         uJComboBoxFuncionario.setEditable(true);
         uJComboBoxFuncionario.addActionListener(new java.awt.event.ActionListener() {
@@ -145,9 +150,14 @@ public class AdicionarDetServFuncionario extends javax.swing.JFrame {
         });
         jPanel5.add(uJComboBoxFuncionario, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 160, 340, -1));
 
+        jLabel2.setFont(new java.awt.Font("Microsoft YaHei Light", 1, 24)); // NOI18N
+        jLabel2.setText("ADICIONAR FUNCIONÁRIO");
+        jPanel5.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 60, -1, -1));
+
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/leiaute/img2.png"))); // NOI18N
         jPanel5.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 670, -1));
 
+        jBtnCancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/cancelar.png"))); // NOI18N
         jBtnCancelar.setText("Cancelar");
         jBtnCancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -284,6 +294,7 @@ public class AdicionarDetServFuncionario extends javax.swing.JFrame {
     private javax.swing.JButton jBtnRemoverFunc;
     private javax.swing.JButton jBtnSalvarDetServFuncionario;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JScrollPane jScrollPane3;

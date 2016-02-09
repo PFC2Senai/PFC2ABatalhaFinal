@@ -106,7 +106,7 @@ public class AdicionaDetServProduto extends javax.swing.JFrame {
         txtModelo = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("ALTERAR PEÇAS");
+        setTitle("ADCIONARAR PEÇA");
         setResizable(false);
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosed(java.awt.event.WindowEvent evt) {
@@ -115,9 +115,9 @@ public class AdicionaDetServProduto extends javax.swing.JFrame {
         });
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel1.setFont(new java.awt.Font("Raavi", 1, 18)); // NOI18N
-        jLabel1.setText("PEÇAS DO SERVIÇO");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 50, -1, -1));
+        jLabel1.setFont(new java.awt.Font("Microsoft YaHei UI Light", 1, 24)); // NOI18N
+        jLabel1.setText("ADICIONAR PEÇA");
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 50, 250, -1));
 
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/leiaute/img3.png"))); // NOI18N
         getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -8, 850, 120));
@@ -147,7 +147,7 @@ public class AdicionaDetServProduto extends javax.swing.JFrame {
         jPanel1.add(txtQuantidade, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 170, 100, -1));
 
         jLabel39.setText("Valor Unit.");
-        jPanel1.add(jLabel39, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 170, -1, -1));
+        jPanel1.add(jLabel39, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 170, 50, 20));
         jPanel1.add(txtValorUnit, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 170, 120, -1));
 
         jBtbIncluirPeca.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/add.png"))); // NOI18N
@@ -226,6 +226,7 @@ public class AdicionaDetServProduto extends javax.swing.JFrame {
         });
         jPanel1.add(uJComboBoxPeca, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 130, 280, -1));
 
+        jBtnCancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/cancelar.png"))); // NOI18N
         jBtnCancelar.setText("Cancelar");
         jBtnCancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

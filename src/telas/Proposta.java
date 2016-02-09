@@ -86,6 +86,7 @@ public class Proposta extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jLabel15 = new javax.swing.JLabel();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel3 = new javax.swing.JPanel();
         jLabel10 = new javax.swing.JLabel();
@@ -166,6 +167,11 @@ public class Proposta extends javax.swing.JFrame {
         setTitle("PROPOSTA");
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        jLabel15.setFont(new java.awt.Font("Microsoft YaHei Light", 1, 24)); // NOI18N
+        jLabel15.setText("PROPOSTA");
+        getContentPane().add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 40, -1, -1));
+
+        jPanel3.setBackground(new java.awt.Color(207, 222, 252));
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel10.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
@@ -193,13 +199,14 @@ public class Proposta extends javax.swing.JFrame {
         });
         jPanel3.add(jBtbNovoTipoServico, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 180, -1, -1));
 
+        jBtnCadTipoServico.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/salvar.png"))); // NOI18N
         jBtnCadTipoServico.setText("Salvar");
         jBtnCadTipoServico.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jBtnCadTipoServicoActionPerformed(evt);
             }
         });
-        jPanel3.add(jBtnCadTipoServico, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 420, 90, -1));
+        jPanel3.add(jBtnCadTipoServico, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 420, 90, -1));
 
         jBtnCancelarCadTipoServico.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/cancelar.png"))); // NOI18N
         jBtnCancelarCadTipoServico.setText("Cancelar");
@@ -210,6 +217,7 @@ public class Proposta extends javax.swing.JFrame {
         });
         jPanel3.add(jBtnCancelarCadTipoServico, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 180, -1, -1));
 
+        jTableTipodeServico.setBackground(new java.awt.Color(207, 222, 252));
         jTableTipodeServico.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -243,6 +251,7 @@ public class Proposta extends javax.swing.JFrame {
 
         jTabbedPane1.addTab("Fornecimento", jPanel3);
 
+        jPanel14.setBackground(new java.awt.Color(207, 222, 252));
         jPanel14.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         jComboBoxProduto.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Selecione a Peça" }));
@@ -289,6 +298,7 @@ public class Proposta extends javax.swing.JFrame {
 
         jLabel35.setText("Modelo:");
 
+        jTablePecas.setBackground(new java.awt.Color(207, 222, 252));
         jTablePecas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -338,7 +348,7 @@ public class Proposta extends javax.swing.JFrame {
                 .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel14Layout.createSequentialGroup()
                         .addGap(39, 39, 39)
-                        .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jLabel14)
                             .addComponent(jLabel16))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -361,7 +371,7 @@ public class Proposta extends javax.swing.JFrame {
                         .addComponent(jComboBoxProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 247, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(14, 14, 14)
                         .addComponent(jLabel36)
-                        .addGap(18, 18, 18)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jComboBoxFabricante, javax.swing.GroupLayout.PREFERRED_SIZE, 258, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel14Layout.createSequentialGroup()
                         .addContainerGap()
@@ -371,7 +381,7 @@ public class Proposta extends javax.swing.JFrame {
                                 .addGap(430, 430, 430)
                                 .addComponent(jBtnRemoverPeca))
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 632, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(15, Short.MAX_VALUE))
         );
         jPanel14Layout.setVerticalGroup(
             jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -427,6 +437,8 @@ public class Proposta extends javax.swing.JFrame {
 
         jTabbedPane1.addTab("Peça", jPanel4);
 
+        jPanel5.setBackground(new java.awt.Color(207, 222, 252));
+
         jLabel12.setText("CONDIÇÕES DE VENDA:");
 
         txtCondicoesDeVenda.setColumns(20);
@@ -467,6 +479,8 @@ public class Proposta extends javax.swing.JFrame {
         );
 
         jTabbedPane1.addTab("Observações", jPanel5);
+
+        jPanel6.setBackground(new java.awt.Color(207, 222, 252));
 
         jLabel17.setText("VALIDADE DA PROPOSTA:");
 
@@ -578,6 +592,8 @@ public class Proposta extends javax.swing.JFrame {
 
         jTabbedPane1.addTab("Outros", jPanel6);
 
+        jPanel1.setBackground(new java.awt.Color(207, 222, 252));
+
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel1.setText("Proposta Comercial");
 
@@ -666,6 +682,8 @@ public class Proposta extends javax.swing.JFrame {
         );
 
         jTabbedPane1.addTab("Dados da Empresa", jPanel1);
+
+        jPanel2.setBackground(new java.awt.Color(207, 222, 252));
 
         jLabel8.setText("Sua Referência:");
 
@@ -1300,6 +1318,7 @@ public class Proposta extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;

@@ -167,16 +167,24 @@
     <Component class="javax.swing.JLabel" name="jLabel4">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+<<<<<<< HEAD
           <Font name="Raavi" size="28" style="1"/>
         </Property>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
           <Image iconType="3" name="/imagens/LogoIconi.png"/>
+=======
+          <Font name="Microsoft YaHei UI Light" size="24" style="1"/>
+>>>>>>> origin/master
         </Property>
         <Property name="text" type="java.lang.String" value="LOGIN"/>
       </Properties>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+<<<<<<< HEAD
           <AbsoluteConstraints x="260" y="30" width="120" height="30"/>
+=======
+          <AbsoluteConstraints x="270" y="40" width="90" height="20"/>
+>>>>>>> origin/master
         </Constraint>
       </Constraints>
     </Component>

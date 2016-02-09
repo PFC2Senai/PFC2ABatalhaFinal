@@ -64,6 +64,7 @@ public class OperacoesSegmento extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("SEGMENTO");
         setResizable(false);
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosed(java.awt.event.WindowEvent evt) {
@@ -71,8 +72,10 @@ public class OperacoesSegmento extends javax.swing.JFrame {
             }
         });
 
+        jPanel1.setBackground(new java.awt.Color(207, 222, 252));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        jTableListarSetores.setBackground(new java.awt.Color(207, 222, 252));
         jTableListarSetores.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -102,11 +105,11 @@ public class OperacoesSegmento extends javax.swing.JFrame {
         jLabel3.setText("Segmento:");
         jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 490, -1, -1));
 
-        jLabel1.setFont(new java.awt.Font("Raavi", 1, 18)); // NOI18N
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/setor.png"))); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Microsoft YaHei Light", 1, 24)); // NOI18N
         jLabel1.setText("SEGMENTO");
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 40, -1, -1));
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 40, -1, -1));
 
+        jBtnSair.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/voltar.png"))); // NOI18N
         jBtnSair.setText("Voltar");
         jBtnSair.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -118,6 +121,7 @@ public class OperacoesSegmento extends javax.swing.JFrame {
         txtSetor.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jPanel1.add(txtSetor, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 490, 320, -1));
 
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/pesquisar.gif"))); // NOI18N
         jLabel2.setText("Pesquisar:");
         jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 120, -1, -1));
 
@@ -126,7 +130,7 @@ public class OperacoesSegmento extends javax.swing.JFrame {
                 txtBuscarKeyReleased(evt);
             }
         });
-        jPanel1.add(txtBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 120, 310, -1));
+        jPanel1.add(txtBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 120, 310, -1));
 
         jBtnCancelarCadSegmento.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/cancelar.png"))); // NOI18N
         jBtnCancelarCadSegmento.setText("Cancelar");
@@ -146,6 +150,7 @@ public class OperacoesSegmento extends javax.swing.JFrame {
         });
         jPanel1.add(jBtnCadastrarSegmento, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 490, -1, -1));
 
+        jBtnNovoSegmento.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/page.png"))); // NOI18N
         jBtnNovoSegmento.setText("Novo");
         jBtnNovoSegmento.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -154,6 +159,7 @@ public class OperacoesSegmento extends javax.swing.JFrame {
         });
         jPanel1.add(jBtnNovoSegmento, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 440, -1, -1));
 
+        jBtnEditarSegmento.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/editar.png"))); // NOI18N
         jBtnEditarSegmento.setText("Editar");
 
         org.jdesktop.beansbinding.Binding binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, jTableListarSetores, org.jdesktop.beansbinding.ELProperty.create("${selectedElement != null}"), jBtnEditarSegmento, org.jdesktop.beansbinding.BeanProperty.create("enabled"));
@@ -185,13 +191,15 @@ public class OperacoesSegmento extends javax.swing.JFrame {
         jPanel1.add(jBtnAlterarSegmento, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 490, -1, -1));
 
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/leiaute/img3-5.png"))); // NOI18N
-        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -290, 670, 670));
+        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 670, 100));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 660, Short.MAX_VALUE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
