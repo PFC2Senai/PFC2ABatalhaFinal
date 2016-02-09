@@ -23,7 +23,7 @@ public class ConexaoPermissoes {
     public Connection conn;
     
     
-    public void conexao(){
+    public void conexao() {
         try {
                 Class.forName(driver);
             conn = DriverManager.getConnection(caminho, usuario, senha);
