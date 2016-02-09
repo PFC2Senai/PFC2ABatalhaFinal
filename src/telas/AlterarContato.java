@@ -84,6 +84,7 @@ public final class AlterarContato extends javax.swing.JFrame {
         jLabelSetorContato = new javax.swing.JLabel();
         jComboBoxSetorContato = new javax.swing.JComboBox();
         jLabel2 = new javax.swing.JLabel();
+        jPanel1 = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("ALTERAR CONTATO");
@@ -102,36 +103,36 @@ public final class AlterarContato extends javax.swing.JFrame {
 
         jLabelTelefone.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/telephone.png"))); // NOI18N
         jLabelTelefone.setText("Telefone:");
-        getContentPane().add(jLabelTelefone, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 150, -1, -1));
+        getContentPane().add(jLabelTelefone, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 120, -1, -1));
 
         try {
             txtTel.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("(##)####-####")));
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
-        getContentPane().add(txtTel, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 150, 120, -1));
+        getContentPane().add(txtTel, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 120, 120, -1));
 
         txtTelCel.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txtTelCelKeyTyped(evt);
             }
         });
-        getContentPane().add(txtTelCel, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 180, 120, -1));
+        getContentPane().add(txtTelCel, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 160, 120, -1));
 
         jLabelCelular.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/phone.png"))); // NOI18N
         jLabelCelular.setText("Celular:");
-        getContentPane().add(jLabelCelular, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 180, -1, -1));
+        getContentPane().add(jLabelCelular, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 160, -1, 20));
 
         jLabelEmail.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/email.png"))); // NOI18N
         jLabelEmail.setText("Email:");
-        getContentPane().add(jLabelEmail, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 210, -1, -1));
+        getContentPane().add(jLabelEmail, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 160, -1, -1));
 
         txtEmail.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
                 txtEmailFocusLost(evt);
             }
         });
-        getContentPane().add(txtEmail, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 210, 235, -1));
+        getContentPane().add(txtEmail, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 160, 235, -1));
 
         jBtnAltContato.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/salvar.png"))); // NOI18N
         jBtnAltContato.setText("Salvar");
@@ -140,7 +141,7 @@ public final class AlterarContato extends javax.swing.JFrame {
                 jBtnAltContatoActionPerformed(evt);
             }
         });
-        getContentPane().add(jBtnAltContato, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 300, -1, -1));
+        getContentPane().add(jBtnAltContato, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 200, -1, -1));
 
         jBtbCancelContato.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/cancelar.png"))); // NOI18N
         jBtbCancelContato.setText("Cancelar");
@@ -149,11 +150,11 @@ public final class AlterarContato extends javax.swing.JFrame {
                 jBtbCancelContatoActionPerformed(evt);
             }
         });
-        getContentPane().add(jBtbCancelContato, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 300, -1, -1));
+        getContentPane().add(jBtbCancelContato, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 200, -1, -1));
 
-        jLabel1.setFont(new java.awt.Font("Raavi", 1, 18)); // NOI18N
-        jLabel1.setText("Alterar Contato");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(34, 33, -1, -1));
+        jLabel1.setFont(new java.awt.Font("Microsoft YaHei Light", 1, 24)); // NOI18N
+        jLabel1.setText("ALTERAR CONTATO");
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 50, -1, -1));
 
         jLabelEmail1.setFont(new java.awt.Font("Tahoma", 3, 11)); // NOI18N
         jLabelEmail1.setForeground(new java.awt.Color(255, 0, 0));
@@ -161,13 +162,16 @@ public final class AlterarContato extends javax.swing.JFrame {
 
         jLabelSetorContato.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/setor.png"))); // NOI18N
         jLabelSetorContato.setText("Setor:");
-        getContentPane().add(jLabelSetorContato, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 250, -1, -1));
+        getContentPane().add(jLabelSetorContato, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 200, -1, -1));
 
         jComboBoxSetorContato.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Selecione o setor", "Manutenção", "Compras", "Suprimentos", "Projetos", "Engenharia", "Compras/Suprimentos", "Projetos/Engenharia" }));
-        getContentPane().add(jComboBoxSetorContato, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 250, 235, -1));
+        getContentPane().add(jComboBoxSetorContato, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 200, 235, -1));
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/leiaute/img1.png"))); // NOI18N
         getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 670, 100));
+
+        jPanel1.setBackground(new java.awt.Color(255, 204, 204));
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 670, 250));
 
         pack();
         setLocationRelativeTo(null);
@@ -401,6 +405,7 @@ public final class AlterarContato extends javax.swing.JFrame {
     private javax.swing.JLabel jLabelEmail1;
     private javax.swing.JLabel jLabelSetorContato;
     private javax.swing.JLabel jLabelTelefone;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JTextField txtContato;
     private javax.swing.JTextField txtEmail;
     private javax.swing.JFormattedTextField txtTel;

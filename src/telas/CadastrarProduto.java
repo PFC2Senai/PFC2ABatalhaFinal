@@ -907,7 +907,6 @@ public class CadastrarProduto extends javax.swing.JFrame {
                 + " tabmodelo on tabmodelo_idtabModelo = idtabModelo and "
                 + " tabproduto_id_prod = id_prod"
                 + " where id_prod = " + codProduto + " group by modelo;";
-        System.out.println(codProduto);
 
         try {
             pst = conexao.prepareStatement(sql);
