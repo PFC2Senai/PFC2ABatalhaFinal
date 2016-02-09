@@ -944,7 +944,7 @@ public class DetalharCliente extends javax.swing.JFrame {
                 .addGroup(jPanelEquipamentoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jBtnIrParaLembrete)
                     .addComponent(jBtnVoltarParaDadosCli))
-                .addContainerGap(14, Short.MAX_VALUE))
+                .addContainerGap(54, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Equipamentos do Cliente", new javax.swing.ImageIcon(getClass().getResource("/imagens/maquina02.png")), jPanelEquipamento); // NOI18N
@@ -1085,7 +1085,7 @@ public class DetalharCliente extends javax.swing.JFrame {
                 .addGroup(jPanelLembreteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jBtnVoltarParaEquipamento)
                     .addComponent(jBtnIrParaRotina))
-                .addContainerGap(32, Short.MAX_VALUE))
+                .addContainerGap(72, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Lembrete", new javax.swing.ImageIcon(getClass().getResource("/imagens/lembrete1.png")), jPanelLembrete); // NOI18N
@@ -1208,12 +1208,12 @@ public class DetalharCliente extends javax.swing.JFrame {
                         .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jBtnVoltarParaLembrete)
-                .addContainerGap(36, Short.MAX_VALUE))
+                .addContainerGap(76, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Rotina de Contato", new javax.swing.ImageIcon(getClass().getResource("/imagens/rotinacont.png")), jPanelRotinaContato); // NOI18N
 
-        getContentPane().add(jTabbedPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 100, 860, 540));
+        getContentPane().add(jTabbedPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 100, 860, 580));
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/leiaute/img3.png"))); // NOI18N
         getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -10, 860, 140));

@@ -284,6 +284,11 @@ public class ExibeFabricante extends javax.swing.JFrame {
         jBtnNovoFabricante.setVisible(true);
        // jBtnEditarFabricante.setEnabled(true);
         jTableListarFabricantes.setEnabled(true);
+          if (JOptionPane.showConfirmDialog(null, "Tem certeza que deseja canselar? Os dados não serão salvos.", "Confirmar Cancelamento", JOptionPane.YES_NO_OPTION) == 0) {
+           
+          
+        
+          }
     }//GEN-LAST:event_jBtnCancelarCadFabricanteActionPerformed
 
     private void jBtnCadastrarFabricanteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnCadastrarFabricanteActionPerformed
@@ -304,6 +309,7 @@ public class ExibeFabricante extends javax.swing.JFrame {
             jTableListarFabricantes.setEnabled(true);
             txtFabricante.setText("");
             txtFabricante.setEnabled(false);
+             JOptionPane.showMessageDialog(null, "Cadastrado com sucesso!");
         }
         else
         {
@@ -349,6 +355,7 @@ public class ExibeFabricante extends javax.swing.JFrame {
         jBtnCancelarAlterarFabricante.setVisible(true);
         jBtnAlterarFabricante.setVisible(true);
         jBtnNovoFabricante.setEnabled(false);
+       
     }//GEN-LAST:event_jBtnEditarFabricanteActionPerformed
 
     private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed

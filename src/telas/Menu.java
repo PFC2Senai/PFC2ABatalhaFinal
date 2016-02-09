@@ -73,7 +73,6 @@ public class Menu extends javax.swing.JFrame {
         jMenu10 = new javax.swing.JMenu();
         jMenuItem9 = new javax.swing.JMenuItem();
         jMenuItem30 = new javax.swing.JMenuItem();
-        jMenuItem19 = new javax.swing.JMenuItem();
         jMenuItem23 = new javax.swing.JMenuItem();
         jMenuItem6 = new javax.swing.JMenuItem();
         jMenuItem18 = new javax.swing.JMenuItem();
@@ -350,11 +349,6 @@ public class Menu extends javax.swing.JFrame {
             }
         });
         jMenu10.add(jMenuItem30);
-
-        jMenuItem19.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/estoque2.png"))); // NOI18N
-        jMenuItem19.setText("Estoque");
-        jMenuItem19.setPreferredSize(new java.awt.Dimension(130, 35));
-        jMenu10.add(jMenuItem19);
 
         jMenuItem23.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/fabricante.png"))); // NOI18N
         jMenuItem23.setText("Fabricante");
@@ -725,7 +719,6 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem16;
     private javax.swing.JMenuItem jMenuItem17;
     private javax.swing.JMenuItem jMenuItem18;
-    private javax.swing.JMenuItem jMenuItem19;
     private javax.swing.JMenuItem jMenuItem20;
     private javax.swing.JMenuItem jMenuItem21;
     private javax.swing.JMenuItem jMenuItem22;

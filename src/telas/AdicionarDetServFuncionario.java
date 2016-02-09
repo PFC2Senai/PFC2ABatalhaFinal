@@ -209,6 +209,7 @@ public class AdicionarDetServFuncionario extends javax.swing.JFrame {
         telaDatalharServico.TabelaFuncionario();
         verificaPagina();
         this.dispose();
+        JOptionPane.showMessageDialog(null, "Cadastrado com sucesso!");
     }//GEN-LAST:event_jBtnSalvarDetServFuncionarioActionPerformed
 
     private void uJComboBoxFuncionarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_uJComboBoxFuncionarioActionPerformed
@@ -224,8 +225,11 @@ public class AdicionarDetServFuncionario extends javax.swing.JFrame {
     }//GEN-LAST:event_formWindowClosed
 
     private void jBtnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnCancelarActionPerformed
-        this.dispose();
+      
         verificaPagina();
+          this.dispose();
+         if (JOptionPane.showConfirmDialog(null, "Tem certeza que deseja sair? Os dados não serão salvos.", "Confirmar Cancelamento", JOptionPane.YES_NO_OPTION) == 0) {
+         }
     }//GEN-LAST:event_jBtnCancelarActionPerformed
 
     public void TabelaFuncionario() {

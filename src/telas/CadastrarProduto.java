@@ -608,6 +608,8 @@ public class CadastrarProduto extends javax.swing.JFrame {
         populaComboBoxProduto();
         jBtbNovoProduto.setVisible(true);
         }
+          if (JOptionPane.showConfirmDialog(null, "Deseja continuar cadastrando?", "Confirmar Cadastro", JOptionPane.YES_NO_OPTION) == 1) {
+          }
     }//GEN-LAST:event_jBtnCadastrarProdutoActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
@@ -615,7 +617,10 @@ public class CadastrarProduto extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        this.dispose();
+          if (JOptionPane.showConfirmDialog(null, "Tem certeza que deseja sair? Os dados não serão salvos.", "Confirmar Cancelamento", JOptionPane.YES_NO_OPTION) == 0) {
+           
+            this.dispose();
+          }
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jComboBoxFornecedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxFornecedorActionPerformed

@@ -205,6 +205,7 @@ public class CadastrarLembrete extends javax.swing.JFrame {
                 LembreteDAO.CadLembrete(lembrete);
                 this.dispose();
                 verificaPagina();
+                
                 JOptionPane.showMessageDialog(null, "Cadastrado com sucesso!");
             } catch (Exception e) {
                 JOptionPane.showMessageDialog(null, "Campo data Inválido!");

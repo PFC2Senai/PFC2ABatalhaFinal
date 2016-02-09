@@ -84,14 +84,23 @@ private static int idContato;
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTableListarRotinas = new javax.swing.JTable();
-        jLabel1 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTableListarRotinas = new javax.swing.JTable();
+        jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, -30, -1, -1));
+
+        jPanel2.setBackground(new java.awt.Color(204, 255, 204));
+        jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel1.setText("Rotinas Cadastradas");
+        jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 40, -1, -1));
 
         jTableListarRotinas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -106,15 +115,12 @@ private static int idContato;
         ));
         jScrollPane1.setViewportView(jTableListarRotinas);
 
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 60, 568, 238));
+        jPanel2.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 170, 568, 160));
 
-        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        jLabel1.setText("Rotinas Cadastradas");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(198, 11, -1, -1));
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, -30, -1, -1));
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/leiaute/img1.png"))); // NOI18N
+        jPanel2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 680, 100));
 
-        jPanel2.setBackground(new java.awt.Color(204, 255, 204));
-        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 410, 250));
+        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 360));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -156,6 +162,7 @@ private static int idContato;
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;

@@ -207,8 +207,10 @@ public final class AlterarContato extends javax.swing.JFrame {
                         + " teve dado(s) alterados(s).";
                 AuditoriaDAO.CadDetAuditoria(descricaoAudit);
                 telaDetFornecedor.TabelaContatos();
-            }
+                   }
+                JOptionPane.showMessageDialog(null, "Cadastrado com sucesso!");    
             this.dispose();
+            
 
         } else {
             JOptionPane.showMessageDialog(null, "Campo(s) vazio(s)!");
