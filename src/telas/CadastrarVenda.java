@@ -650,9 +650,16 @@ public class CadastrarVenda extends javax.swing.JFrame {
                 VendasDAO.CadDetVenda(v);
 
             }
-            limparCampos();
+          
+        
+        if (JOptionPane.showConfirmDialog(null, "Deseja continuar cadastrando?", "Confirmar Cadastro", JOptionPane.YES_NO_OPTION) == 1) {           
+           
+            this.dispose();
+              limparCampos();
         } else {
             JOptionPane.showMessageDialog(null, "É necessário inserir um registro na tabela!");
+        }
+        
         }
     }//GEN-LAST:event_jButton4ActionPerformed
 

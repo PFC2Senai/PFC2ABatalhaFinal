@@ -274,6 +274,7 @@ public class AdicionaDetServProduto extends javax.swing.JFrame {
 
         telaDatalharServico.TabelaProduto("SELECT * FROM vw_detservicoproduto where idservico = " + idServico + ";");
         telaDatalharServico.CarregaServico();
+           JOptionPane.showMessageDialog(null, "Cadastrado com sucesso!");
         verificaPagina();
         this.dispose();
     }//GEN-LAST:event_jBtnInserirPecaActionPerformed
@@ -335,8 +336,11 @@ public class AdicionaDetServProduto extends javax.swing.JFrame {
     }//GEN-LAST:event_uJComboBoxPecaActionPerformed
 
     private void jBtnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnCancelarActionPerformed
-        this.dispose();
-        verificaPagina();
+        if (JOptionPane.showConfirmDialog(null, "Tem certeza que deseja canselar? Os dados não serão salvos.", "Confirmar Cancelamento", JOptionPane.YES_NO_OPTION) == 0) {
+            verificaPagina();
+            this.dispose();
+          }
+         
     }//GEN-LAST:event_jBtnCancelarActionPerformed
 
     private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed

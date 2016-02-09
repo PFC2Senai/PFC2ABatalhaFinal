@@ -287,7 +287,7 @@ public class AdicionaDetVendaProduto extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("VENDA DE PEÇAS");
+        setTitle("ADICIONAR PEÇA");
         setResizable(false);
 
         jPanel1.setBackground(new java.awt.Color(254, 254, 233));
@@ -411,6 +411,11 @@ public class AdicionaDetVendaProduto extends javax.swing.JFrame {
 
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/cancelar.png"))); // NOI18N
         jButton1.setText("Cancelar");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
         jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 470, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -525,6 +530,10 @@ public class AdicionaDetVendaProduto extends javax.swing.JFrame {
             produto = uJComboBoxPeca.getSelectedItem().toString();
         }
     }//GEN-LAST:event_uJComboBoxPecaActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBtbIncluirPeca;

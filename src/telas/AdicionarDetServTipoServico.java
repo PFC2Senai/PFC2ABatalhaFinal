@@ -281,7 +281,8 @@ public class AdicionarDetServTipoServico extends javax.swing.JFrame {
         }
         telaDatalharServico.TabelaTipoServico();
         verificaPagina();
-        this.dispose();
+        this.dispose();    
+        JOptionPane.showMessageDialog(null, "Cadastrado com sucesso!");
     }//GEN-LAST:event_jBtnSalvarDetServTipoServicoActionPerformed
 
     private void jComboBoxTipoServico1ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jComboBoxTipoServico1ItemStateChanged
@@ -303,6 +304,8 @@ public class AdicionarDetServTipoServico extends javax.swing.JFrame {
     private void jBtnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnCancelarActionPerformed
         this.dispose();
         verificaPagina();
+         if (JOptionPane.showConfirmDialog(null, "Tem certeza que deseja sair? Os dados não serão salvos.", "Confirmar Cancelamento", JOptionPane.YES_NO_OPTION) == 0) {
+         }
     }//GEN-LAST:event_jBtnCancelarActionPerformed
 
     public void TabelaTipoServico() {

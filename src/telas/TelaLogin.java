@@ -4,7 +4,11 @@ package telas;
 import atributos.Auditoria;
 import atributos.Usuario;
 import funcoes.AuditoriaDAO;
+import funcoes.ConexaoPermissoes;
 import java.awt.Color;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
@@ -13,6 +17,8 @@ import javax.swing.JOptionPane;
  */
 public class TelaLogin extends javax.swing.JFrame {
 
+    ConexaoPermissoes conexao = new ConexaoPermissoes();
+    
     private static int codAuditoria;
     
     /**
@@ -20,9 +26,31 @@ public class TelaLogin extends javax.swing.JFrame {
      */
     public TelaLogin() {
         initComponents();
+        conexao.conexao();
         //setSize(590,397);
         Color minhaCor = new Color(134, 234, 174);
         this.getContentPane().setBackground(minhaCor);
+    }
+    
+    public boolean TipoUser(){
+        boolean valida = true;
+        
+        try {
+            conexao.executaSQL("select * from tabusuario where usuario = '"+login.getText()+"'");
+            conexao.rs.first();
+            
+            if(conexao.rs.getString("tipo_usuario").equals("F")){
+            //jMenu14.setVisible(false);   
+            
+            valida = false;
+            return valida;
+            }
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(Menu.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return valida;
     }
 
     /**
@@ -75,7 +103,7 @@ public class TelaLogin extends javax.swing.JFrame {
         getContentPane().add(txtSenha, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 170, 160, -1));
 
         jComBTipoUser.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jComBTipoUser.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Usuário", "Administrador", "Funcionário" }));
+        jComBTipoUser.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Selecione", "Administrador", "Funcionário" }));
         jComBTipoUser.setToolTipText("");
         getContentPane().add(jComBTipoUser, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 200, 90, 20));
 
@@ -134,7 +162,7 @@ public class TelaLogin extends javax.swing.JFrame {
                 @Override
                 public void run() {
                     registraAuditoria();
-                    new Menu().setVisible(true);
+                    new Menu(login.getText()).setVisible(true);
                 }
             });
             TelaLogin.this.dispose();

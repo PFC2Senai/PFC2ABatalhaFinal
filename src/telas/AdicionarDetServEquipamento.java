@@ -263,6 +263,7 @@ public class AdicionarDetServEquipamento extends javax.swing.JFrame {
         telaDatalharServico.TabelaEquipamento("SELECT * FROM vw_detservequipamento where idservico = " + idServico +";");
         verificaPagina();
         this.dispose();
+        JOptionPane.showMessageDialog(null, "Cadastrado com sucesso!");
     }//GEN-LAST:event_jBtnInserirDetServEquipamentoActionPerformed
 
     private void uJComboBoxEquipamentoItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_uJComboBoxEquipamentoItemStateChanged
@@ -291,8 +292,10 @@ public class AdicionarDetServEquipamento extends javax.swing.JFrame {
     }//GEN-LAST:event_formWindowClosed
 
     private void jBtnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnCancelarActionPerformed
-        this.dispose();
-        verificaPagina();
+        if (JOptionPane.showConfirmDialog(null, "Tem certeza que deseja canselar? Os dados não serão salvos.", "Confirmar Cancelamento", JOptionPane.YES_NO_OPTION) == 0) {
+            verificaPagina();
+            this.dispose();
+          }
     }//GEN-LAST:event_jBtnCancelarActionPerformed
 
     public void TabelaEquipamento() {

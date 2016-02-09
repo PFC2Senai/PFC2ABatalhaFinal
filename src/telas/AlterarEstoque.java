@@ -180,6 +180,11 @@ public final class AlterarEstoque extends javax.swing.JFrame {
 
         jBtnCancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/cancelar.png"))); // NOI18N
         jBtnCancelar.setText("Cancelar");
+        jBtnCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnCancelarActionPerformed(evt);
+            }
+        });
         jPanel2.add(jBtnCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 530, -1, -1));
 
         jLabel1.setFont(new java.awt.Font("Microsoft YaHei Light", 1, 24)); // NOI18N
@@ -500,6 +505,13 @@ if(VerificaCampos() == true){
         }
     }//GEN-LAST:event_txtPercentualKeyTyped
 
+    private void jBtnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnCancelarActionPerformed
+ if (JOptionPane.showConfirmDialog(null, "Tem certeza que deseja sair? Os dados não serão salvos.", "Confirmar Cancelamento", JOptionPane.YES_NO_OPTION) == 0) {
+          
+            this.dispose();
+ }// TODO add your handling code here:
+    }//GEN-LAST:event_jBtnCancelarActionPerformed
+
     public void CarregarDadosProduto() {
 
         Statement stmt;
@@ -530,6 +542,7 @@ if(VerificaCampos() == true){
             throw new RuntimeException("Erro ao carregar os dados do Produto: ", ex);
         }
     }
+    
 
     private void populaComboBoxFornecedor() {
 

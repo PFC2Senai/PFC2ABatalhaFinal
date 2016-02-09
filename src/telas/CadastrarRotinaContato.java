@@ -200,9 +200,10 @@ public class CadastrarRotinaContato extends javax.swing.JFrame {
             rot.setDescricaoRotina(jTextDescricao.getText());
 
             RotinaContatosDAO.CadRotinaContato(rot);
+              JOptionPane.showMessageDialog(null, "Cadastrado com sucesso!");
             this.dispose();
             verificaPagina();
-            JOptionPane.showMessageDialog(null, "Cadastrado com sucesso!");
+          
         }
     }//GEN-LAST:event_jToggleButton2ActionPerformed
 

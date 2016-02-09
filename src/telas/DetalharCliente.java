@@ -9,6 +9,7 @@ import funcoes.CarregaCEP;
 import funcoes.ClienteDAO;
 import funcoes.Conexao;
 import static funcoes.Conexao.getConnection;
+import funcoes.ConexaoPermissoes;
 import funcoes.ContatosDAO;
 import funcoes.DetEquipamentoClienteDAO;
 import funcoes.LembreteDAO;
@@ -39,6 +40,8 @@ import static telas.ExibeCliente.GetIndice;
 
 public class DetalharCliente extends javax.swing.JFrame {
 
+    ConexaoPermissoes conexao = new ConexaoPermissoes();
+    
     int idContato;
     public static int codLembrete;
     public static int codRotina;
@@ -57,9 +60,32 @@ public class DetalharCliente extends javax.swing.JFrame {
     /**
      * Creates new form CadastrarCliente
      */
-    public DetalharCliente() {
+    public DetalharCliente(String user) {
         initComponents();
         this.codCliente = GetIndice();
+        conexao.conexao();
+        jLabelUsuario.setText(user);
+        
+        
+        try {
+            conexao.executaSQL("select * from tabusuario where usuario = '"+jLabelUsuario.getText()+"'");
+            conexao.rs.first();
+            
+            if(conexao.rs.getString("tipo_usuario").equals("F")){
+            jBtnAltDadosP.setVisible(false);  
+            jButtonEditarContato.setVisible(false);
+            jBtnExcluirRotina.setVisible(false);
+            jBtnExcluirContato.setVisible(false);
+            jBtnAltEndereco.setVisible(false);
+            jBtnExcluir.setVisible(false);
+            
+            }
+            
+            else{}
+        } catch (SQLException ex) {
+            Logger.getLogger(Menu.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
     }
 
     public DetalharCliente(ExibeCliente exibeCli) {
@@ -107,7 +133,7 @@ public class DetalharCliente extends javax.swing.JFrame {
 
         jBtnAdicionarEquipamento.setVerticalTextPosition(SwingConstants.BOTTOM);
         jBtnAdicionarEquipamento.setHorizontalTextPosition(SwingConstants.CENTER);
-
+        
     }
 
     private void combobox() {
@@ -523,6 +549,7 @@ public class DetalharCliente extends javax.swing.JFrame {
         jBtnVerRotina = new javax.swing.JButton();
         jBtnVoltarParaLembrete = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
+        jLabelUsuario = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Cadastrar Cliente");
@@ -944,7 +971,7 @@ public class DetalharCliente extends javax.swing.JFrame {
                 .addGroup(jPanelEquipamentoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jBtnIrParaLembrete)
                     .addComponent(jBtnVoltarParaDadosCli))
-                .addContainerGap(14, Short.MAX_VALUE))
+                .addContainerGap(54, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Equipamentos do Cliente", new javax.swing.ImageIcon(getClass().getResource("/imagens/maquina02.png")), jPanelEquipamento); // NOI18N
@@ -1085,7 +1112,7 @@ public class DetalharCliente extends javax.swing.JFrame {
                 .addGroup(jPanelLembreteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jBtnVoltarParaEquipamento)
                     .addComponent(jBtnIrParaRotina))
-                .addContainerGap(32, Short.MAX_VALUE))
+                .addContainerGap(72, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Lembrete", new javax.swing.ImageIcon(getClass().getResource("/imagens/lembrete1.png")), jPanelLembrete); // NOI18N
@@ -1208,15 +1235,19 @@ public class DetalharCliente extends javax.swing.JFrame {
                         .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jBtnVoltarParaLembrete)
-                .addContainerGap(36, Short.MAX_VALUE))
+                .addContainerGap(76, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Rotina de Contato", new javax.swing.ImageIcon(getClass().getResource("/imagens/rotinacont.png")), jPanelRotinaContato); // NOI18N
 
-        getContentPane().add(jTabbedPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 100, 860, 540));
+        getContentPane().add(jTabbedPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 100, 860, 580));
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/leiaute/img3.png"))); // NOI18N
         getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -10, 860, 140));
+
+        jLabelUsuario.setForeground(new java.awt.Color(255, 0, 0));
+        jLabelUsuario.setText("jLabel5");
+        getContentPane().add(jLabelUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 680, -1, -1));
 
         bindingGroup.bind();
 
@@ -1731,6 +1762,7 @@ public class DetalharCliente extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabelUsuario;
     private javax.swing.JPanel jPanel10;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;

@@ -297,6 +297,10 @@ public class OperacaoModelo extends javax.swing.JFrame {
         jBtnNovoModelo.setVisible(true);
         // jBtnEditarFabricante.setEnabled(true);
         jTableListarModelo.setEnabled(true);
+          if (JOptionPane.showConfirmDialog(null, "Tem certeza que deseja canselar? Os dados não serão salvos.", "Confirmar Cancelamento", JOptionPane.YES_NO_OPTION) == 0) {
+            verificaPagina();
+            this.dispose();
+          }
     }//GEN-LAST:event_jBtnCancelarCadModeloActionPerformed
 
     private void jBtnCadastrarModeloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnCadastrarModeloActionPerformed
@@ -352,6 +356,7 @@ public class OperacaoModelo extends javax.swing.JFrame {
         jBtnCancelarAlterarModelo.setVisible(true);
         jBtnAlterarModelo.setVisible(true);
         jBtnNovoModelo.setEnabled(false);
+        
     }//GEN-LAST:event_jBtnEditarModeloActionPerformed
 
     private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed

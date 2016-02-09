@@ -219,6 +219,9 @@ public final class DetalharEquipamento extends javax.swing.JFrame {
         jBtnAlterarEquipamento.setVisible(false);
         jBtnCancelarAltEquipamento.setVisible(false);
         jBtbEditarEquipamento.setVisible(true);
+          if (JOptionPane.showConfirmDialog(null, "Tem certeza que deseja sair? Os dados não serão salvos.", "Confirmar Cancelamento", JOptionPane.YES_NO_OPTION) == 0) {
+            this.dispose();
+        }
     }//GEN-LAST:event_jBtnCancelarAltEquipamentoActionPerformed
 
     private void jBtnAlterarEquipamentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnAlterarEquipamentoActionPerformed
@@ -248,6 +251,8 @@ public final class DetalharEquipamento extends javax.swing.JFrame {
         txtFabricante.setVisible(true);
         txtModelo.setVisible(true);
         this.telaExibeEquipamento.TabelaEquipamento("SELECT * FROM vw_equipamentos; ");
+         JOptionPane.showMessageDialog(null, "Cadastrado com sucesso!");
+               
     }//GEN-LAST:event_jBtnAlterarEquipamentoActionPerformed
 
     private void jComboBoxFornecedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxFornecedorActionPerformed
