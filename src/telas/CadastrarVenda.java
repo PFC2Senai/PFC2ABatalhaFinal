@@ -272,7 +272,6 @@ public class CadastrarVenda extends javax.swing.JFrame {
 		int horas = Integer.parseInt( hm[0]);
 		int minutos = Integer.parseInt( hm[1]);
 		if( horas > 24 || minutos > 59 ){
-			JOptionPane.showMessageDialog(null, "Digite uma HORA VÁLIDA!");
                 valide = false;
                 return valide;
 		}
@@ -308,24 +307,24 @@ public class CadastrarVenda extends javax.swing.JFrame {
 
         if (JDataVenda.getDate() == null) {
             JOptionPane.showMessageDialog(null, "Preencha o campo DATA!");
+            JDataVenda.requestFocus();
+            JDataVenda.setBackground(Color.yellow);
             valida = false;
             return valida;
         }
         
-        if (jTextHora.getText() == null || jTextHora.getText().trim().equals( ":" )) {
-            JOptionPane.showMessageDialog(null, "Preencha o campo DATA!");
+        if (jTextHora.getText() == null || jTextHora.getText().trim().equals( ":" ) || ValidaHora() == false) {
+            JOptionPane.showMessageDialog(null, "Preencha o campo HORA!");
+            jTextHora.requestFocus();
+            jTextHora.setBackground(Color.yellow);
             valida = false;
             return valida;
         }
 
         if (jTextValorUnit.getText().equals("")) {
             JOptionPane.showMessageDialog(null, "Preencha o campo VALOR!");
-            valida = false;
-            return valida;
-        }
-
-        if (jTextHora.getText().equals("")) {
-            JOptionPane.showMessageDialog(null, "Preencha o campo HORA!");
+            jTextValorUnit.requestFocus();
+            jTextValorUnit.setBackground(Color.yellow);
             valida = false;
             return valida;
         }
@@ -384,43 +383,52 @@ public class CadastrarVenda extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
+        jPanel1 = new javax.swing.JPanel();
+        jTextHora = new javax.swing.JFormattedTextField();
+        jLabel6 = new javax.swing.JLabel();
         uJComboBoxCliente = new componentes.UJComboBox();
-        jButton6 = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
+        jComboBoxProdutos = new javax.swing.JComboBox();
+        jLabel7 = new javax.swing.JLabel();
+        jComboModelo = new javax.swing.JComboBox();
+        jLabel8 = new javax.swing.JLabel();
+        jComboFabricante = new javax.swing.JComboBox();
         jLabel5 = new javax.swing.JLabel();
         JDataVenda = new com.toedter.calendar.JDateChooser();
-        jLabel6 = new javax.swing.JLabel();
-        jTextHora = new javax.swing.JFormattedTextField();
+        jLabel12 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
-        jComboBoxProdutos = new javax.swing.JComboBox();
+        jButton3 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTableProduto = new javax.swing.JTable();
-        jButton2 = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
-        jLabel7 = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
-        jComboModelo = new javax.swing.JComboBox();
-        jComboFabricante = new javax.swing.JComboBox();
+        jTextValorUnit = new javax.swing.JTextField();
         jLabel10 = new javax.swing.JLabel();
         jTextQuantidadeProduto = new javax.swing.JTextField();
+        jButton6 = new javax.swing.JButton();
         jLabel11 = new javax.swing.JLabel();
         jTextTotal = new javax.swing.JTextField();
-        jTextValorUnit = new javax.swing.JTextField();
-        jLabel12 = new javax.swing.JLabel();
+        jButton2 = new javax.swing.JButton();
+        jButton5 = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
-        jPanel1 = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("CADASTRAR VENDA");
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel1.setFont(new java.awt.Font("Raavi", 1, 18)); // NOI18N
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/vendas1.gif"))); // NOI18N
-        jLabel1.setText("Cadastrar Venda");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 40, -1, -1));
+        jPanel1.setBackground(new java.awt.Color(223, 237, 253));
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        try {
+            jTextHora.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##:##")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+        jPanel1.add(jTextHora, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 310, 90, -1));
+
+        jLabel6.setText("Hora:");
+        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 310, -1, -1));
 
         uJComboBoxCliente.setEditable(true);
         uJComboBoxCliente.addItemListener(new java.awt.event.ItemListener() {
@@ -433,62 +441,13 @@ public class CadastrarVenda extends javax.swing.JFrame {
                 uJComboBoxClienteActionPerformed(evt);
             }
         });
-        getContentPane().add(uJComboBoxCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 160, -1, -1));
+        jPanel1.add(uJComboBoxCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 150, -1, -1));
 
-        jButton6.setText("Calcular");
-        jButton6.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton6ActionPerformed(evt);
-            }
-        });
-        getContentPane().add(jButton6, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 370, -1, -1));
-
-        jLabel2.setText("Cliente");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 130, -1, 29));
+        jLabel2.setText("Cliente:");
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 150, -1, 20));
 
         jLabel4.setText("Produto:");
-        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 190, -1, -1));
-
-        jLabel5.setText("Data da Venda:");
-        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 340, -1, -1));
-        getContentPane().add(JDataVenda, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 330, 121, -1));
-
-        jLabel6.setText("Hora:");
-        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 330, -1, -1));
-
-        try {
-            jTextHora.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##:##")));
-        } catch (java.text.ParseException ex) {
-            ex.printStackTrace();
-        }
-        getContentPane().add(jTextHora, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 330, 98, -1));
-
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/stop2.png"))); // NOI18N
-        jButton1.setText("Cancelar");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
-        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 470, -1, -1));
-
-        jButton3.setText("Limpar");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
-            }
-        });
-        getContentPane().add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 470, -1, -1));
-
-        jButton4.setFont(new java.awt.Font("Raavi", 1, 14)); // NOI18N
-        jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/disk.png"))); // NOI18N
-        jButton4.setText("Cadastrar");
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
-            }
-        });
-        getContentPane().add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 460, -1, 42));
+        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 190, -1, -1));
 
         jComboBoxProdutos.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Selecione" }));
         jComboBoxProdutos.addItemListener(new java.awt.event.ItemListener() {
@@ -501,41 +460,10 @@ public class CadastrarVenda extends javax.swing.JFrame {
                 jComboBoxProdutosActionPerformed(evt);
             }
         });
-        getContentPane().add(jComboBoxProdutos, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 190, 260, -1));
-
-        jTableProduto.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-                "Código", "Produto", "Modelo", "Fabricante", "Quatidade", "Valor Unit", "Total"
-            }
-        ));
-        jScrollPane1.setViewportView(jTableProduto);
-
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 520, 490, 110));
-
-        jButton2.setText("Adicionar");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
-            }
-        });
-        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 410, -1, -1));
-
-        jButton5.setText("Remover");
-        jButton5.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton5ActionPerformed(evt);
-            }
-        });
-        getContentPane().add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 410, 77, -1));
+        jPanel1.add(jComboBoxProdutos, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 190, 260, -1));
 
         jLabel7.setText("Modelo:");
-        getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 240, -1, -1));
-
-        jLabel8.setText("Fabricante:");
-        getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 280, -1, -1));
+        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 230, -1, -1));
 
         jComboModelo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Selecione" }));
         jComboModelo.addItemListener(new java.awt.event.ItemListener() {
@@ -548,7 +476,10 @@ public class CadastrarVenda extends javax.swing.JFrame {
                 jComboModeloActionPerformed(evt);
             }
         });
-        getContentPane().add(jComboModelo, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 230, 260, -1));
+        jPanel1.add(jComboModelo, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 230, 260, -1));
+
+        jLabel8.setText("Fabricante:");
+        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 270, -1, -1));
 
         jComboFabricante.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Selecione" }));
         jComboFabricante.addActionListener(new java.awt.event.ActionListener() {
@@ -556,50 +487,126 @@ public class CadastrarVenda extends javax.swing.JFrame {
                 jComboFabricanteActionPerformed(evt);
             }
         });
-        getContentPane().add(jComboFabricante, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 270, 260, -1));
+        jPanel1.add(jComboFabricante, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 270, 260, -1));
 
-        jLabel10.setText("Quantidade:");
-        getContentPane().add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 380, -1, -1));
+        jLabel5.setText("Data da Venda:");
+        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 310, -1, 20));
+        jPanel1.add(JDataVenda, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 310, 121, -1));
 
-        jTextQuantidadeProduto.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                jTextQuantidadeProdutoKeyTyped(evt);
+        jLabel12.setText("Valor Unitário:");
+        jPanel1.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 190, -1, -1));
+
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/stop2.png"))); // NOI18N
+        jButton1.setText("Cancelar");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
             }
         });
-        getContentPane().add(jTextQuantidadeProduto, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 370, 98, -1));
+        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 550, -1, 30));
 
-        jLabel11.setText("Total:");
-        getContentPane().add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 410, -1, -1));
-
-        jTextTotal.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                jTextTotalKeyTyped(evt);
+        jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/disk.png"))); // NOI18N
+        jButton4.setText("Cadastrar");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
             }
         });
-        getContentPane().add(jTextTotal, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 410, 79, -1));
+        jPanel1.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 550, -1, 30));
+
+        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/limpar.png"))); // NOI18N
+        jButton3.setText("Limpar");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 370, -1, -1));
+
+        jTableProduto.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Código", "Produto", "Modelo", "Fabricante", "Quatidade", "Valor Unit", "Total"
+            }
+        ));
+        jScrollPane1.setViewportView(jTableProduto);
+
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 400, 620, 110));
 
         jTextValorUnit.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 jTextValorUnitKeyTyped(evt);
             }
         });
-        getContentPane().add(jTextValorUnit, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 370, 97, -1));
+        jPanel1.add(jTextValorUnit, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 190, 110, -1));
 
-        jLabel12.setText("Valor Unitário:");
-        getContentPane().add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 380, -1, -1));
+        jLabel10.setText("Quantidade:");
+        jPanel1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 220, 70, 20));
 
+        jTextQuantidadeProduto.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTextQuantidadeProdutoKeyTyped(evt);
+            }
+        });
+        jPanel1.add(jTextQuantidadeProduto, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 220, 110, -1));
+
+        jButton6.setText("Calcular");
+        jButton6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton6ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButton6, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 250, 110, 30));
+
+        jLabel11.setText("Total:");
+        jPanel1.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 290, -1, 20));
+
+        jTextTotal.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTextTotalKeyTyped(evt);
+            }
+        });
+        jPanel1.add(jTextTotal, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 290, 110, -1));
+
+        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/add.png"))); // NOI18N
+        jButton2.setText("Adicionar");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 370, -1, -1));
+
+        jButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/delete.png"))); // NOI18N
+        jButton5.setText("Remover");
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(547, 370, 100, -1));
+
+        jLabel1.setFont(new java.awt.Font("Microsoft YaHei Light", 1, 18)); // NOI18N
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/vendas1.gif"))); // NOI18N
+        jLabel1.setText("CADASTRAR VENDA");
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 60, -1, -1));
+
+        jLabel9.setFont(new java.awt.Font("Yu Mincho Light", 0, 11)); // NOI18N
         jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/leiaute/img2.png"))); // NOI18N
-        getContentPane().add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 680, 110));
+        jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -10, 680, 110));
 
-        jPanel1.setBackground(new java.awt.Color(223, 237, 253));
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 680, 660));
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 670, 600));
 
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        this.dispose();
+       if (JOptionPane.showConfirmDialog(null, "Tem certeza que deseja sair? Os dados não serão salvos.", "Confirmar Cancelamento", JOptionPane.YES_NO_OPTION) == 0) {
+            this.dispose();
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
@@ -654,6 +661,9 @@ public class CadastrarVenda extends javax.swing.JFrame {
     }//GEN-LAST:event_jComboBoxProdutosActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        
+         if (JOptionPane.showConfirmDialog(null, "Deseja excluir o registro?", "Confirmar Exclusão", JOptionPane.YES_NO_OPTION) == 0) {
+         if (jTableProduto.getRowCount() < 1) {
         DefaultTableModel dtm = (DefaultTableModel) jTableProduto.getModel();
         int linha = jTableProduto.getSelectedRow();
 
@@ -666,11 +676,13 @@ public class CadastrarVenda extends javax.swing.JFrame {
         if (linha != -1) {
             dtm.removeRow(linha);
         }
+       }
+      }  
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
 
-        if (VerificaCampos() && ValidaHora() == true) {
+        if (VerificaCampos()) {
             TabelaProduto();
         }
 

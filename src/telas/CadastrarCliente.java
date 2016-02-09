@@ -766,7 +766,7 @@ public class CadastrarCliente extends javax.swing.JFrame {
                 btnCadClienteActionPerformed(evt);
             }
         });
-        jPanel1.add(btnCadCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 630, -1, 30));
+        jPanel1.add(btnCadCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 630, -1, 30));
 
         jLabel17.setIcon(new javax.swing.ImageIcon(getClass().getResource("/leiaute/img3.png"))); // NOI18N
         jPanel1.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 860, 130));
@@ -992,7 +992,7 @@ public class CadastrarCliente extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "Cliente ja cadastrado !");
             }
         }
-        //    }//
+        
     }//GEN-LAST:event_btnCadClienteActionPerformed
 
     private void txtEmailFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtEmailFocusLost
