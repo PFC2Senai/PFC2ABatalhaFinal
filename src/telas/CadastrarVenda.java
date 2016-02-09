@@ -586,6 +586,7 @@ public class CadastrarVenda extends javax.swing.JFrame {
 
         jButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/delete.png"))); // NOI18N
         jButton5.setText("Remover");
+        jButton5.setEnabled(false);
         jButton5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton5ActionPerformed(evt);
@@ -666,23 +667,14 @@ public class CadastrarVenda extends javax.swing.JFrame {
     }//GEN-LAST:event_jComboBoxProdutosActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-        
-         if (JOptionPane.showConfirmDialog(null, "Deseja excluir o registro?", "Confirmar Exclusão", JOptionPane.YES_NO_OPTION) == 0) {
-         if (jTableProduto.getRowCount() < 1) {
-        DefaultTableModel dtm = (DefaultTableModel) jTableProduto.getModel();
-        int linha = jTableProduto.getSelectedRow();
+       if (JOptionPane.showConfirmDialog(null, "Deseja excluir o Informações?", "Confirmar Exclusão", JOptionPane.YES_NO_OPTION) == 0) {
+            DefaultTableModel dtm = (DefaultTableModel) jTableProduto.getModel();
+            int linha = jTableProduto.getSelectedRow();
 
-        double totalParcial = Double.parseDouble(jTableProduto.getValueAt(linha, 6).toString());
-
-        totalPeca -= totalParcial;
-
-        jTextTotal.setText(String.valueOf(totalPeca));
-
-        if (linha != -1) {
-            dtm.removeRow(linha);
+            if (linha != -1) {
+                dtm.removeRow(linha);
+            }
         }
-       }
-      }  
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -782,7 +774,7 @@ public class CadastrarVenda extends javax.swing.JFrame {
     }//GEN-LAST:event_jTextTotalKeyTyped
 
     private void jTableProdutoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableProdutoMouseClicked
-        // TODO add your handling code here:
+        jButton5.setEnabled(true);
     }//GEN-LAST:event_jTableProdutoMouseClicked
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

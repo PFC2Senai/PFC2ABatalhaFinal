@@ -94,9 +94,9 @@ public class TelaLogin extends javax.swing.JFrame {
         });
         getContentPane().add(jButtonAcesso, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 200, 60, 20));
 
-        jLabel4.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        jLabel4.setFont(new java.awt.Font("Microsoft YaHei UI Light", 1, 24)); // NOI18N
         jLabel4.setText("LOGIN");
-        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 30, 90, 20));
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 40, 90, 20));
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/adm.png"))); // NOI18N
         jLabel2.setText("Usuário:");

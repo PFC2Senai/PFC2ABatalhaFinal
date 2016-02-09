@@ -90,7 +90,7 @@ public class Splash extends javax.swing.JFrame {
         jLabel2.setOpaque(true);
         getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 400, 230));
 
-        setSize(new java.awt.Dimension(397, 241));
+        setSize(new java.awt.Dimension(401, 241));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
