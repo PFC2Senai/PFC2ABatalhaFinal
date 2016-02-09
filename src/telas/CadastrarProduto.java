@@ -200,6 +200,7 @@ public class CadastrarProduto extends javax.swing.JFrame {
         jLabel13 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel1.setBackground(new java.awt.Color(223, 237, 253));
@@ -754,25 +755,28 @@ public class CadastrarProduto extends javax.swing.JFrame {
 
     private void txtPrecoEntradaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPrecoEntradaKeyTyped
         // TODO add your handling code here:
-        String caracteres = "0987654321,.";
+        String caracteres = "0987654321,. ";
         if (!caracteres.contains(evt.getKeyChar() + "")) {
             evt.consume();
+            JOptionPane.showMessageDialog(this, "Não é possivel digitar espaços ou caracteres inválidos !");
         }
     }//GEN-LAST:event_txtPrecoEntradaKeyTyped
 
     private void txtQuantidadeKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtQuantidadeKeyTyped
         // TODO add your handling code here:
-        String caracteres = "0987654321,.";
+        String caracteres = "0987654321, .";
         if (!caracteres.contains(evt.getKeyChar() + "")) {
             evt.consume();
+            JOptionPane.showMessageDialog(this, "Não é possivel digitar espaços ou caracteres inválidos !");
         }
     }//GEN-LAST:event_txtQuantidadeKeyTyped
 
     private void txtQuantMinimaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtQuantMinimaKeyTyped
         // TODO add your handling code here:
-        String caracteres = "0987654321,.";
+        String caracteres = "0987654321,. ";
         if (!caracteres.contains(evt.getKeyChar() + "")) {
             evt.consume();
+            JOptionPane.showMessageDialog(this, "Não é possivel digitar espaços ou caracteres inválidos !");
         }
     }//GEN-LAST:event_txtQuantMinimaKeyTyped
 
@@ -781,14 +785,16 @@ public class CadastrarProduto extends javax.swing.JFrame {
         String caracteres = "0987654321,.%";
         if (!caracteres.contains(evt.getKeyChar() + "")) {
             evt.consume();
+            JOptionPane.showMessageDialog(this, "Não é possivel digitar espaços ou caracteres inválidos !");
         }
     }//GEN-LAST:event_txtPercentualKeyTyped
 
     private void txtPrecoSaidaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPrecoSaidaKeyTyped
         // TODO add your handling code here:
-        String caracteres = "0987654321,.";
+        String caracteres = "0987654321,. ";
         if (!caracteres.contains(evt.getKeyChar() + "")) {
             evt.consume();
+            JOptionPane.showMessageDialog(this, "Não é possivel digitar espaços ou caracteres inválidos !");
         }
     }//GEN-LAST:event_txtPrecoSaidaKeyTyped
 

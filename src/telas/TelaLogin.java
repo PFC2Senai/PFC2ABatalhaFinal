@@ -1,10 +1,10 @@
 package telas;
 
-
 import atributos.Auditoria;
 import atributos.Usuario;
 import funcoes.AuditoriaDAO;
 import java.awt.Color;
+import java.awt.Toolkit;
 import javax.swing.JOptionPane;
 
 /**
@@ -14,7 +14,7 @@ import javax.swing.JOptionPane;
 public class TelaLogin extends javax.swing.JFrame {
 
     private static int codAuditoria;
-    
+
     /**
      * Creates new form Acesso
      */
@@ -23,6 +23,13 @@ public class TelaLogin extends javax.swing.JFrame {
         //setSize(590,397);
         Color minhaCor = new Color(134, 234, 174);
         this.getContentPane().setBackground(minhaCor);
+        
+        //setIcon();
+
+
+//        JFrame janela = new JFrame();
+//        janela.setSize(400, 300);
+//        janela.setTitle("Construindo Interface gráfica no JAVA");
     }
 
     /**
@@ -52,6 +59,7 @@ public class TelaLogin extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("LOGIN");
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/sair.gif"))); // NOI18N
@@ -71,15 +79,25 @@ public class TelaLogin extends javax.swing.JFrame {
         login.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         login.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, null, new java.awt.Color(0, 204, 153), null, null));
         login.setSelectionColor(new java.awt.Color(0, 0, 0));
+        login.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                loginKeyTyped(evt);
+            }
+        });
         getContentPane().add(login, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 120, 160, 20));
 
         txtSenha.setToolTipText("");
         txtSenha.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, null, new java.awt.Color(0, 204, 153), null, null));
         txtSenha.setSelectionColor(new java.awt.Color(0, 0, 0));
+        txtSenha.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtSenhaKeyTyped(evt);
+            }
+        });
         getContentPane().add(txtSenha, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 170, 160, -1));
 
         jComBTipoUser.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jComBTipoUser.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Usuário", "Administrador", "Funcionário" }));
+        jComBTipoUser.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "...", "Administrador", "Funcionário" }));
         jComBTipoUser.setToolTipText("");
         getContentPane().add(jComBTipoUser, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 200, 90, 20));
 
@@ -94,9 +112,10 @@ public class TelaLogin extends javax.swing.JFrame {
         });
         getContentPane().add(jButtonAcesso, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 200, 60, 20));
 
-        jLabel4.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        jLabel4.setFont(new java.awt.Font("Raavi", 1, 28)); // NOI18N
+        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/LogoIconi.png"))); // NOI18N
         jLabel4.setText("LOGIN");
-        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 30, 90, 20));
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 30, 120, 30));
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/adm.png"))); // NOI18N
         jLabel2.setText("Usuário:");
@@ -120,12 +139,12 @@ public class TelaLogin extends javax.swing.JFrame {
     private void jButtonAcessoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAcessoActionPerformed
 
         Usuario user = new Usuario();
-  
+
         user.setNome(login.getText());
         user.setSenha(txtSenha.getText());
         String comboTipo = jComBTipoUser.getSelectedItem().toString();
         String tipo = null;
-        
+
         switch (comboTipo) {
             case "Administrador":
                 tipo = "A";
@@ -135,7 +154,7 @@ public class TelaLogin extends javax.swing.JFrame {
                 break;
         }
         user.setTipo((tipo));
-       
+
         if (user.validaSenha(user)) {
             java.awt.EventQueue.invokeLater(new Runnable() {
                 @Override
@@ -145,11 +164,11 @@ public class TelaLogin extends javax.swing.JFrame {
                 }
             });
             TelaLogin.this.dispose();
-        }else{
+        } else {
             JOptionPane.showMessageDialog(null, "Usuário ou Senha inválidos!");
         }
-        
-       
+
+
     }//GEN-LAST:event_jButtonAcessoActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -157,19 +176,36 @@ public class TelaLogin extends javax.swing.JFrame {
             this.dispose();
         }
     }//GEN-LAST:event_jButton1ActionPerformed
-    
+
+    private void loginKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_loginKeyTyped
+        // TODO add your handling code here:
+        String carac = "ç,.!?@:;/^~´`#$%¨&*()-_='+{[]} ";
+        if (carac.contains(evt.getKeyChar() + "")) {
+            evt.consume();
+            JOptionPane.showMessageDialog(this, "Não é possivel digitar espaços ou caracteres inválidos !");
+        }
+    }//GEN-LAST:event_loginKeyTyped
+
+    private void txtSenhaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSenhaKeyTyped
+        // TODO add your handling code here:
+        String carac = "ç,.!?@:;/^~´`#$%¨&*()-_='+{[]} ";
+        if (carac.contains(evt.getKeyChar() + "")) {
+            evt.consume();
+            JOptionPane.showMessageDialog(this, "Você digitou espaço ou caracteres inválidos !");
+        }
+    }//GEN-LAST:event_txtSenhaKeyTyped
 
     private void registraAuditoria() {
-        
+
         Auditoria audt = new Auditoria();
         audt.setCodUsuario(Usuario.idUsuario());
-        codAuditoria = AuditoriaDAO.CadAuditoria(audt);        
+        codAuditoria = AuditoriaDAO.CadAuditoria(audt);
     }
-    
+
     public static int idAuditoria() {
-        return codAuditoria = 1;          
+        return codAuditoria = 1;
     }
-    
+
 //    public static void main(String args[]) {
 //        /* Set the Nimbus look and feel */
 //        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -217,4 +253,8 @@ public class TelaLogin extends javax.swing.JFrame {
     private javax.swing.JTextField login;
     private javax.swing.JPasswordField txtSenha;
     // End of variables declaration//GEN-END:variables
+
+    private void setIcon() {
+        setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("LogoIconi.png")));
+    }
 }

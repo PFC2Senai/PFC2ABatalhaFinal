@@ -177,15 +177,16 @@ public class CadastrarUsuario extends javax.swing.JFrame {
 
     private void jTextNomeKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextNomeKeyTyped
         // TODO add your handling code here:
-        String carac = "ç,.!?@:;/^~´`#$%¨&*()-_='+{[]}";
+        String carac = "ç,.!?@:;/^~´`#$%¨&*()-_='+{[]} ";
         if (carac.contains(evt.getKeyChar() + "")) {
             evt.consume();
+            JOptionPane.showMessageDialog(this, "Não é possivel digitar espaços ou caracteres inválidos !");
         }
     }//GEN-LAST:event_jTextNomeKeyTyped
 
     private void jPasswordSenhaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jPasswordSenhaKeyTyped
         // TODO add your handling code here:
-        String carac = "ç,.!?@:;/^~´`#$%¨&*()-_='+{[]}";
+        String carac = "ç,.!?@:;/^~´`#$%¨&*()-_='+{[]} ";
         if (carac.contains(evt.getKeyChar() + "")) {
             evt.consume();
         }
@@ -193,7 +194,7 @@ public class CadastrarUsuario extends javax.swing.JFrame {
 
     private void jPasswordConfirmaSenhaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jPasswordConfirmaSenhaKeyTyped
         // TODO add your handling code here:
-        String carac = "ç,.!?@:;/^~´`#$%¨&*()-_='+{[]}";
+        String carac = "ç,.!?@:;/^~´`#$%¨&*()-_='+{[]} ";
         if (carac.contains(evt.getKeyChar() + "")) {
             evt.consume();
         }

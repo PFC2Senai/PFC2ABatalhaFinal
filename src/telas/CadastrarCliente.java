@@ -15,6 +15,7 @@ import funcoes.LimitarDigitos;
 import funcoes.PessoaContatoDAO;
 import funcoes.SetorDAO;
 import java.awt.Color;
+import java.awt.Toolkit;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 import java.io.IOException;
@@ -25,6 +26,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -38,7 +40,7 @@ public class CadastrarCliente extends javax.swing.JFrame {
     private ExibeCliente telaExibeCliente;
 
     public CadastrarCliente() {
-        initComponents();
+        initComponents();        
     }
 
     public CadastrarCliente(Menu menu) {
