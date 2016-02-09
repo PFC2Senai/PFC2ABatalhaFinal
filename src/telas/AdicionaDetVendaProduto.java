@@ -280,18 +280,21 @@ public class AdicionaDetVendaProduto extends javax.swing.JFrame {
         jBtnRemoverPeca = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         txtTotalPecas = new javax.swing.JTextField();
+        jLabel1 = new javax.swing.JLabel();
         jBtnInserirPeca = new javax.swing.JButton();
         uJComboBoxPeca = new componentes.UJComboBox();
         jLabel3 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("VENDA DE PEÇAS");
         setResizable(false);
 
         jPanel1.setBackground(new java.awt.Color(254, 254, 233));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel35.setText("Modelo:");
-        jPanel1.add(jLabel35, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 130, -1, -1));
+        jPanel1.add(jLabel35, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 130, -1, -1));
 
         jComboBoxModelo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Selecione o Modelo" }));
         jComboBoxModelo.addItemListener(new java.awt.event.ItemListener() {
@@ -304,7 +307,7 @@ public class AdicionaDetVendaProduto extends javax.swing.JFrame {
                 jComboBoxModeloActionPerformed(evt);
             }
         });
-        jPanel1.add(jComboBoxModelo, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 130, 280, -1));
+        jPanel1.add(jComboBoxModelo, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 130, 310, -1));
 
         jLabel33.setText("Peça:");
         jPanel1.add(jLabel33, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 130, -1, -1));
@@ -321,12 +324,12 @@ public class AdicionaDetVendaProduto extends javax.swing.JFrame {
         jPanel1.add(jComboBoxFabricante, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 170, 280, -1));
 
         jLabel34.setText("Quant.:");
-        jPanel1.add(jLabel34, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 170, -1, -1));
-        jPanel1.add(txtQuantidade, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 170, 100, -1));
+        jPanel1.add(jLabel34, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 170, -1, -1));
+        jPanel1.add(txtQuantidade, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 170, 100, -1));
 
         jLabel39.setText("Valor Unit.");
-        jPanel1.add(jLabel39, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 170, -1, -1));
-        jPanel1.add(txtValorUnit, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 170, 120, -1));
+        jPanel1.add(jLabel39, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 170, 50, 20));
+        jPanel1.add(txtValorUnit, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 170, 120, -1));
 
         jBtbIncluirPeca.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/add.png"))); // NOI18N
         jBtbIncluirPeca.setText("Incluir Peça");
@@ -370,12 +373,16 @@ public class AdicionaDetVendaProduto extends javax.swing.JFrame {
                 jBtnRemoverPecaActionPerformed(evt);
             }
         });
-        jPanel1.add(jBtnRemoverPeca, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 380, -1, -1));
+        jPanel1.add(jBtnRemoverPeca, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 390, 100, -1));
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/money.png"))); // NOI18N
         jLabel2.setText("Valor total de peças:");
         jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 400, -1, -1));
         jPanel1.add(txtTotalPecas, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 400, 172, -1));
+
+        jLabel1.setFont(new java.awt.Font("Microsoft YaHei UI Light", 1, 24)); // NOI18N
+        jLabel1.setText("VENDA DE PEÇAS");
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 60, -1, -1));
 
         jBtnInserirPeca.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/disk.png"))); // NOI18N
         jBtnInserirPeca.setText("Salvar");
@@ -384,7 +391,7 @@ public class AdicionaDetVendaProduto extends javax.swing.JFrame {
                 jBtnInserirPecaActionPerformed(evt);
             }
         });
-        jPanel1.add(jBtnInserirPeca, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 450, -1, 30));
+        jPanel1.add(jBtnInserirPeca, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 450, -1, 30));
 
         uJComboBoxPeca.setEditable(true);
         uJComboBoxPeca.addItemListener(new java.awt.event.ItemListener() {
@@ -401,6 +408,10 @@ public class AdicionaDetVendaProduto extends javax.swing.JFrame {
 
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/leiaute/img3.png"))); // NOI18N
         jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -10, 850, 120));
+
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/cancelar.png"))); // NOI18N
+        jButton1.setText("Cancelar");
+        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 470, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -519,8 +530,10 @@ public class AdicionaDetVendaProduto extends javax.swing.JFrame {
     private javax.swing.JButton jBtbIncluirPeca;
     private javax.swing.JButton jBtnInserirPeca;
     private javax.swing.JButton jBtnRemoverPeca;
+    private javax.swing.JButton jButton1;
     private javax.swing.JComboBox jComboBoxFabricante;
     private javax.swing.JComboBox jComboBoxModelo;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel33;
