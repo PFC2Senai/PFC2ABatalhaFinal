@@ -156,6 +156,7 @@ public class CadastrarServicoTeste extends javax.swing.JFrame {
         });
         uJComboBoxPeca.setAutocompletar(true);
 
+
         //Combobox equipamento
         uJComboBoxEquipamento.getEditor().getEditorComponent().addFocusListener(new FocusAdapter() {
             @Override
@@ -577,7 +578,7 @@ public class CadastrarServicoTeste extends javax.swing.JFrame {
                 .addGroup(jPanelPecasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jBtnVoltarPainelServico)
                     .addComponent(jBtnAvancarPainelEquipamento))
-                .addContainerGap(39, Short.MAX_VALUE))
+                .addContainerGap(49, Short.MAX_VALUE))
         );
 
         jTabbedPaneServico.addTab("Peças", new javax.swing.ImageIcon(getClass().getResource("/imagens/prod.png")), jPanelPecas); // NOI18N
@@ -1002,12 +1003,12 @@ public class CadastrarServicoTeste extends javax.swing.JFrame {
                 .addGroup(jPanelValorTotalServicoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jBtnCadastrarServico3)
                     .addComponent(jBtnVoltarPainelFuncionario))
-                .addContainerGap(71, Short.MAX_VALUE))
+                .addContainerGap(81, Short.MAX_VALUE))
         );
 
         jTabbedPaneServico.addTab("Valor", new javax.swing.ImageIcon(getClass().getResource("/imagens/dinheiro.png")), jPanelValorTotalServico); // NOI18N
 
-        jPanel6.add(jTabbedPaneServico, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 100, 850, 600));
+        jPanel6.add(jTabbedPaneServico, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 100, 850, 610));
 
         jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/leiaute/img3.png"))); // NOI18N
         jPanel6.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -400, 850, 940));
@@ -1278,7 +1279,13 @@ public class CadastrarServicoTeste extends javax.swing.JFrame {
         idProdutoComboBox();
         populaComboBoxModelo();
 
-        txtModelo.requestFocus();
+        jComboBoxFabricante.removeAllItems();
+        idModeloComboBox();
+        populaComboBoxFabricante();
+        txtValorUnit.setText("");
+        modelo = txtModelo.getText();
+        CarregaValorUnit();
+       // txtModelo.requestFocus();
         if (uJComboBoxPeca.getSelectedItem() != null) {
             produto = uJComboBoxPeca.getSelectedItem().toString();
         }
@@ -1375,12 +1382,7 @@ public class CadastrarServicoTeste extends javax.swing.JFrame {
     }//GEN-LAST:event_txtTotalGeralKeyTyped
 
     private void txtModeloFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtModeloFocusGained
-        jComboBoxFabricante.removeAllItems();
-        idModeloComboBox();
-        populaComboBoxFabricante();
-        txtValorUnit.setText("");
-        modelo = txtModelo.getText();
-        CarregaValorUnit();
+        
     }//GEN-LAST:event_txtModeloFocusGained
 
     private void txtModeloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtModeloActionPerformed
@@ -1684,7 +1686,6 @@ public class CadastrarServicoTeste extends javax.swing.JFrame {
                 + " tabmodelo on tabmodelo_idtabModelo = idtabModelo and "
                 + " tabproduto_id_prod = id_prod"
                 + " where id_prod = " + codProduto + " group by modelo;";
-        System.out.println(codProduto);
 
         try {
             pst = conexao.prepareStatement(sql);

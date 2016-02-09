@@ -15,8 +15,10 @@ import java.util.logging.Logger;
  * @author WilhamJr
  */
 public class ModeloDAO {
-    public static void CadModelo(Modelo model){
+    
+    public static int CadModelo(Modelo model){
         
+        int id = 0;
         PreparedStatement stmt;
         try {   
             String sql = ("INSERT INTO tabmodelo(modelo) VALUES(?)");
@@ -25,12 +27,17 @@ public class ModeloDAO {
                 stmt.setString(1, model.getModelo());
                               
                 stmt.executeUpdate();
+                ResultSet rs = stmt.getGeneratedKeys();
+                    if (rs.next()) {
+                        id = rs.getInt(1);
+                    } 
                 stmt.close();  
 
             } catch (SQLException ex) {      
                 Logger.getLogger(ModeloDAO.class.getName()).log(Level.SEVERE, null, ex);
                 throw new RuntimeException("Erro ao Cadastrar Modelo: ",ex);       
             }
+        return id;
     }
     
      public static ArrayList CarregaModelo(int id) {

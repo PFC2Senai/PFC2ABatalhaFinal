@@ -16,8 +16,9 @@ import java.util.logging.Logger;
  */
 public class FabricanteDAO {
     
-    public static void CadFabricante(Fabricante fab){
+    public static int CadFabricante(Fabricante fab){
         
+        int id = 0;
         PreparedStatement stmt;
         try {   
             String sql = ("INSERT INTO tabfabricante(fabricante) VALUES(?)");
@@ -26,12 +27,17 @@ public class FabricanteDAO {
                 stmt.setString(1, fab.getFabricante());
                               
                 stmt.executeUpdate();
+                ResultSet rs = stmt.getGeneratedKeys();
+                    if (rs.next()) {
+                        id = rs.getInt(1);
+                    } 
                 stmt.close();  
 
             } catch (SQLException ex) {      
                 Logger.getLogger(FabricanteDAO.class.getName()).log(Level.SEVERE, null, ex);
                 throw new RuntimeException("Erro ao Cadastrar Fabricante: ",ex);       
             }
+        return id;
     }
     
      public static ArrayList CarregaFabricante(int id) {
