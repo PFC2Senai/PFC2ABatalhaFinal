@@ -9,7 +9,7 @@ import funcoes.CarregaCEP;
 import funcoes.ClienteDAO;
 import funcoes.Conexao;
 import static funcoes.Conexao.getConnection;
-import funcoes.ConexaoPermissoes;
+import funcoes.Conexao;
 import funcoes.ContatosDAO;
 import funcoes.DetEquipamentoClienteDAO;
 import funcoes.LembreteDAO;
