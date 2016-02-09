@@ -443,10 +443,9 @@ public class AlterarFuncionario extends javax.swing.JFrame {
         jPanel5.setBackground(new java.awt.Color(235, 235, 253));
         jPanel5.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel9.setFont(new java.awt.Font("Raavi", 1, 18)); // NOI18N
-        jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/funcionario.png"))); // NOI18N
+        jLabel9.setFont(new java.awt.Font("Microsoft YaHei UI Light", 1, 24)); // NOI18N
         jLabel9.setText("EDITAR FUNCIONÁRIO");
-        jPanel5.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 60, -1, -1));
+        jPanel5.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 100, -1, -1));
 
         jPanel3.setBackground(new java.awt.Color(235, 235, 253));
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Contato", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 2, 11))); // NOI18N
