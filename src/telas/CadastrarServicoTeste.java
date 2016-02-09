@@ -73,12 +73,33 @@ public class CadastrarServicoTeste extends javax.swing.JFrame {
     private String fabricante;
     private String fabricanteEqui;
     private String tipoServico;
+    private Menu telaMenu;
 
     /**
      * Creates new form CadastrarServicoTeste
      */
     public CadastrarServicoTeste() {
 
+        this.codCliente = 0;
+
+        initComponents();
+
+        combobox();
+        carregarComboClientes();
+        carregarComboTipoServico();
+        carregarComboPeca();
+        carregarComboEquipamento();
+        carregarComboFuncionario();
+
+        jBtnCadTipoServico.setVisible(false);
+        jBtnCancelarCadTipoServico.setVisible(false);
+
+        ocultaColunaTabelas();
+        txtTipoServico.setVisible(false);
+    }
+    
+    public CadastrarServicoTeste(Menu menu) {
+        this.telaMenu = menu;
         this.codCliente = 0;
 
         initComponents();
@@ -248,6 +269,11 @@ public class CadastrarServicoTeste extends javax.swing.JFrame {
         jLabel8 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosed(java.awt.event.WindowEvent evt) {
+                formWindowClosed(evt);
+            }
+        });
 
         jPanel6.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -375,23 +401,24 @@ public class CadastrarServicoTeste extends javax.swing.JFrame {
         jPanelServico.setLayout(jPanelServicoLayout);
         jPanelServicoLayout.setHorizontalGroup(
             jPanelServicoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelServicoLayout.createSequentialGroup()
-                .addContainerGap(639, Short.MAX_VALUE)
-                .addComponent(jBtnAvancarPainelPecas)
-                .addGap(133, 133, 133))
             .addGroup(jPanelServicoLayout.createSequentialGroup()
                 .addGap(32, 32, 32)
-                .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, 771, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(jPanelServicoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanelServicoLayout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jBtnAvancarPainelPecas)
+                        .addGap(133, 133, 133))
+                    .addGroup(jPanelServicoLayout.createSequentialGroup()
+                        .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, 771, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(42, Short.MAX_VALUE))))
         );
         jPanelServicoLayout.setVerticalGroup(
             jPanelServicoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelServicoLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, 500, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jBtnAvancarPainelPecas)
-                .addContainerGap())
+                .addGap(18, 18, 18)
+                .addComponent(jBtnAvancarPainelPecas))
         );
 
         jTabbedPaneServico.addTab("Serviço", new javax.swing.ImageIcon(getClass().getResource("/imagens/servicos.png")), jPanelServico); // NOI18N
@@ -1365,6 +1392,10 @@ public class CadastrarServicoTeste extends javax.swing.JFrame {
         CarregaValorUnit();
     }//GEN-LAST:event_txtModeloActionPerformed
 
+    private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
+        verificaPagina();
+    }//GEN-LAST:event_formWindowClosed
+
     private void limparCampos() {
 
         txtDataCadProduto.setDate(null);
@@ -1879,75 +1910,14 @@ public class CadastrarServicoTeste extends javax.swing.JFrame {
         JOptionPane.showMessageDialog(null, "Esse registro não encontra-se cadastrado na base de dados.");
     }
    
-    
-//     public static void main(String args[]) {
-//        /* Set the Nimbus look and feel */
-//        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-//        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-//         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-//         */
-//        try {
-//            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-//                if ("Windows".equals(info.getName())) {
-//                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-//                    break;
-//                }
-//            }
-//        } catch (ClassNotFoundException ex) {
-//            java.util.logging.Logger.getLogger(Menu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        } catch (InstantiationException ex) {
-//            java.util.logging.Logger.getLogger(Menu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        } catch (IllegalAccessException ex) {
-//            java.util.logging.Logger.getLogger(Menu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-//            java.util.logging.Logger.getLogger(Menu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        }
-//        //</editor-fold>
-//        /* Create and display the form */
-//        java.awt.EventQueue.invokeLater(new Runnable() {
-//            @Override
-//            public void run() {
-//                new CadastrarServicoTeste().setVisible(true);
-////                Agendamentos a = new Agendamentos(); 
-////                a.terceiraTarefa(21);
-//            }
-//        });   
-//    }
-    
-//     public static void main(String args[]) {
-//        /* Set the Nimbus look and feel */
-//        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-//        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-//         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-//         */
-//        try {
-//            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-//                if ("Windows".equals(info.getName())) {
-//                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-//                    break;
-//                }
-//            }
-//        } catch (ClassNotFoundException ex) {
-//            java.util.logging.Logger.getLogger(Menu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        } catch (InstantiationException ex) {
-//            java.util.logging.Logger.getLogger(Menu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        } catch (IllegalAccessException ex) {
-//            java.util.logging.Logger.getLogger(Menu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-//            java.util.logging.Logger.getLogger(Menu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        }
-//        //</editor-fold>
-//        /* Create and display the form */
-//        java.awt.EventQueue.invokeLater(new Runnable() {
-//            @Override
-//            public void run() {
-//                new CadastrarServicoTeste().setVisible(true);
-////                Agendamentos a = new Agendamentos(); 
-////                a.terceiraTarefa(21);
-//            }
-//        });   
-//    }
-    
+   
+    private void verificaPagina() {
+
+        if ((this.telaMenu != null)) {
+            this.telaMenu.setVisible(true);
+            // this.telaMenu.toFront();
+        } 
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBtbIncluirEquipamento;

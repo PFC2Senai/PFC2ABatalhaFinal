@@ -23,11 +23,20 @@ public class ExibeServico extends javax.swing.JFrame {
     private int codServico;
     private int dataPesquisa;
     String opcaoPesquisa = "empresa";
+    private Menu telaMenu;
 
     /**
      * Creates new form ExibeServico
      */
     public ExibeServico() {
+        initComponents();
+        TabelaServico("SELECT * FROM vw_servico;");
+        txtDatapesquisa.setVisible(false);
+        jBtnBuscar.setVisible(false);
+    }
+    
+    public ExibeServico(Menu menu) {
+        this.telaMenu = menu;
         initComponents();
         TabelaServico("SELECT * FROM vw_servico;");
         txtDatapesquisa.setVisible(false);
@@ -58,6 +67,11 @@ public class ExibeServico extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosed(java.awt.event.WindowEvent evt) {
+                formWindowClosed(evt);
+            }
+        });
 
         jPanel1.setBackground(new java.awt.Color(204, 255, 204));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -116,7 +130,7 @@ public class ExibeServico extends javax.swing.JFrame {
             }
         });
         jPanel1.add(jComboBoxOpcaoPesquisa, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 160, 211, -1));
-        jPanel1.add(txtDatapesquisa, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 160, 120, -1));
+        jPanel1.add(txtDatapesquisa, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 160, 120, -1));
 
         jBtnBuscar.setText("Buscar");
         jBtnBuscar.addActionListener(new java.awt.event.ActionListener() {
@@ -124,7 +138,7 @@ public class ExibeServico extends javax.swing.JFrame {
                 jBtnBuscarActionPerformed(evt);
             }
         });
-        jPanel1.add(jBtnBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 160, -1, -1));
+        jPanel1.add(jBtnBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 160, -1, -1));
 
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/leiaute/img3.png"))); // NOI18N
         jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 850, 130));
@@ -157,6 +171,7 @@ public class ExibeServico extends javax.swing.JFrame {
 
     private void jBtnSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnSairActionPerformed
         this.dispose();
+        verificaPagina();
     }//GEN-LAST:event_jBtnSairActionPerformed
 
     private void jComboBoxOpcaoPesquisaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxOpcaoPesquisaActionPerformed
@@ -209,6 +224,10 @@ public class ExibeServico extends javax.swing.JFrame {
                 + " like '%" + txtBuscar.getText().trim() + "%';");
     }//GEN-LAST:event_txtBuscarKeyReleased
 
+    private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
+        verificaPagina();
+    }//GEN-LAST:event_formWindowClosed
+
     public void TabelaServico(String Sql) {
 
         try {
@@ -252,7 +271,14 @@ public class ExibeServico extends javax.swing.JFrame {
         }
     }
 
+    private void verificaPagina() {
 
+        if ((this.telaMenu != null)) {
+            this.telaMenu.setVisible(true);
+            // this.telaMenu.toFront();
+        } 
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBtnBuscar;
     private javax.swing.JButton jBtnDetalhar;
