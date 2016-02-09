@@ -80,6 +80,7 @@ public class AdicionarDetServFuncionario extends javax.swing.JFrame {
         jBtnCancelar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("ADICIONAR FUNCIONÁRIO");
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosed(java.awt.event.WindowEvent evt) {
                 formWindowClosed(evt);
@@ -150,7 +151,7 @@ public class AdicionarDetServFuncionario extends javax.swing.JFrame {
         jPanel5.add(uJComboBoxFuncionario, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 160, 340, -1));
 
         jLabel2.setFont(new java.awt.Font("Microsoft YaHei Light", 1, 24)); // NOI18N
-        jLabel2.setText("ADCIONAR FUNCIONÁRIO");
+        jLabel2.setText("ADICIONAR FUNCIONÁRIO");
         jPanel5.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 60, -1, -1));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/leiaute/img2.png"))); // NOI18N

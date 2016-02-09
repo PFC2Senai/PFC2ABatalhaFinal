@@ -106,7 +106,7 @@ public class AdicionaDetServProduto extends javax.swing.JFrame {
         txtModelo = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("ALTERAR PEÇAS");
+        setTitle("ADCIONARAR PEÇA");
         setResizable(false);
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosed(java.awt.event.WindowEvent evt) {
@@ -116,7 +116,7 @@ public class AdicionaDetServProduto extends javax.swing.JFrame {
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setFont(new java.awt.Font("Microsoft YaHei UI Light", 1, 24)); // NOI18N
-        jLabel1.setText("PEÇAS DO SERVIÇO");
+        jLabel1.setText("ADICIONAR PEÇA");
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 50, 250, -1));
 
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/leiaute/img3.png"))); // NOI18N

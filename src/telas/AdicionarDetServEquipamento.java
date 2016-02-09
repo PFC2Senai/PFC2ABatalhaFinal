@@ -89,7 +89,7 @@ public class AdicionarDetServEquipamento extends javax.swing.JFrame {
         jBtnCancelar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("ADCIONAR EQUIPAMENTO");
+        setTitle("ADICIONAR EQUIPAMENTO");
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosed(java.awt.event.WindowEvent evt) {
                 formWindowClosed(evt);
@@ -187,7 +187,7 @@ public class AdicionarDetServEquipamento extends javax.swing.JFrame {
         jPanel4.add(uJComboBoxEquipamento, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 140, 320, -1));
 
         jLabel3.setFont(new java.awt.Font("Microsoft YaHei UI Light", 1, 24)); // NOI18N
-        jLabel3.setText("ADCIONAR EQUIPAMENTO");
+        jLabel3.setText("ADICIONAR EQUIPAMENTO");
         jPanel4.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 60, -1, -1));
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/leiaute/img2.png"))); // NOI18N

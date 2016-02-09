@@ -3,7 +3,7 @@
 <Form version="1.5" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
   <Properties>
     <Property name="defaultCloseOperation" type="int" value="2"/>
-    <Property name="title" type="java.lang.String" value="ALTERAR PE&#xc7;AS"/>
+    <Property name="title" type="java.lang.String" value="ADCIONARAR PE&#xc7;A"/>
     <Property name="resizable" type="boolean" value="false"/>
   </Properties>
   <SyntheticProperties>
@@ -35,7 +35,7 @@
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Microsoft YaHei UI Light" size="24" style="1"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="PE&#xc7;AS DO SERVI&#xc7;O"/>
+        <Property name="text" type="java.lang.String" value="ADICIONAR PE&#xc7;A"/>
       </Properties>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
