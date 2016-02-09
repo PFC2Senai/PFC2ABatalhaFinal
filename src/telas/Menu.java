@@ -1,7 +1,9 @@
 package telas;
 
+import funcoes.ConexaoPermissoes;
 import funcoes.ControleBackup;
 import java.io.File;
+import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFileChooser;
@@ -14,14 +16,19 @@ import javax.swing.SwingConstants;
  */
 public class Menu extends javax.swing.JFrame {
 
+    ConexaoPermissoes conexao = new ConexaoPermissoes();
+    
     private String caminho;
     private Menu telaMenu;
+    
 
     /**
      * Creates new form Menu
      */
-    public Menu() {
+    public Menu(String user) {
         initComponents();
+        conexao.conexao();
+        jLabelUsuario.setText(user);
         telaMenu = this;
         jBtnRotinaContato.setVerticalTextPosition(SwingConstants.BOTTOM);
         jBtnRotinaContato.setHorizontalTextPosition(SwingConstants.CENTER);
@@ -31,7 +38,23 @@ public class Menu extends javax.swing.JFrame {
         jBtnProposta.setHorizontalTextPosition(SwingConstants.CENTER);
         jBtnFazerBackup.setVerticalTextPosition(SwingConstants.BOTTOM);
         jBtnFazerBackup.setHorizontalTextPosition(SwingConstants.CENTER);
+        
+    try {
+            conexao.executaSQL("select * from tabusuario where usuario = '"+jLabelUsuario.getText()+"'");
+            conexao.rs.first();
+            
+            if(conexao.rs.getString("tipo_usuario").equals("F")){
+            //jMenu14.setVisible(false);   
+            
+            }
+            
+            else{}
+        } catch (SQLException ex) {
+            Logger.getLogger(Menu.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    
     }
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -55,6 +78,8 @@ public class Menu extends javax.swing.JFrame {
         jTextArea2 = new javax.swing.JTextArea();
         jBtnFazerBackup = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabelUsuario = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu4 = new javax.swing.JMenu();
         jMenu14 = new javax.swing.JMenu();
@@ -174,7 +199,7 @@ public class Menu extends javax.swing.JFrame {
         jTextArea1.setText("Lista mineração:\n\n- cliente mais atendido\n- tipo de serviço mais realizado\n(tipo definido, ex: troca de placa e \ntipo serviço ex: venda aluguel, ou manutenção)\n- peça com mais saída\n- peça com menos saída\n- periodo do ano com mais movimento\n- periodo do ano com menos mevimento\n- qual o período do ano que \ndeterminado setor está em alta\n- qual funcionário realizou mais serviços");
         jScrollPane1.setViewportView(jTextArea1);
 
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 370, 270, 100));
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 360, 270, 100));
 
         jTextArea2.setColumns(20);
         jTextArea2.setFont(new java.awt.Font("Monospaced", 1, 13)); // NOI18N
@@ -198,12 +223,29 @@ public class Menu extends javax.swing.JFrame {
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/leiaute/img3.png"))); // NOI18N
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -10, 850, 140));
 
+        jLabel2.setText("Usuário:");
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 480, -1, -1));
+
+        jLabelUsuario.setForeground(new java.awt.Color(255, 0, 0));
+        jLabelUsuario.setText("jLabel3");
+        getContentPane().add(jLabelUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 480, -1, -1));
+
         jMenuBar1.setPreferredSize(new java.awt.Dimension(106, 35));
 
         jMenu4.setBackground(new java.awt.Color(204, 153, 255));
         jMenu4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/menu.png"))); // NOI18N
         jMenu4.setText("Menu");
         jMenu4.setPreferredSize(new java.awt.Dimension(70, 25));
+        jMenu4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenu4ActionPerformed(evt);
+            }
+        });
+        jMenu4.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jMenu4KeyPressed(evt);
+            }
+        });
 
         jMenu14.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/add.png"))); // NOI18N
         jMenu14.setText("Cadastrar");
@@ -618,9 +660,16 @@ public class Menu extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem29ActionPerformed
 
     private void jMenuItem10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem10ActionPerformed
-        this.setVisible(false);
-        new CadastrarCliente(this).setVisible(true);
+       new CadastrarCliente().setVisible(true);
     }//GEN-LAST:event_jMenuItem10ActionPerformed
+
+    private void jMenu4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu4ActionPerformed
+        
+    }//GEN-LAST:event_jMenu4ActionPerformed
+
+    private void jMenu4KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jMenu4KeyPressed
+      
+    }//GEN-LAST:event_jMenu4KeyPressed
 
     public void Backup() {
 
@@ -706,6 +755,8 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JButton jBtnProposta;
     private javax.swing.JButton jBtnRotinaContato;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabelUsuario;
     private javax.swing.JMenu jMenu10;
     private javax.swing.JMenu jMenu14;
     private javax.swing.JMenu jMenu4;
