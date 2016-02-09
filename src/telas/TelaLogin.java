@@ -1,6 +1,5 @@
 package telas;
 
-
 import atributos.Auditoria;
 import atributos.Usuario;
 import funcoes.AuditoriaDAO;
@@ -18,9 +17,10 @@ import javax.swing.JOptionPane;
 public class TelaLogin extends javax.swing.JFrame {
 
     ConexaoPermissoes conexao = new ConexaoPermissoes();
-    
+
     private static int codAuditoria;
-    
+    private static boolean valida = true;
+
     /**
      * Creates new form Acesso
      */
@@ -31,26 +31,30 @@ public class TelaLogin extends javax.swing.JFrame {
         Color minhaCor = new Color(134, 234, 174);
         this.getContentPane().setBackground(minhaCor);
     }
-    
-    public boolean TipoUser(){
-        boolean valida = true;
-        
+
+    public static boolean TipoUsuario() {
+        return valida;
+    }
+
+    public void TipoUser() {
+        //valida = true;
+
         try {
-            conexao.executaSQL("select * from tabusuario where usuario = '"+login.getText()+"'");
+            conexao.executaSQL("select * from tabusuario where usuario = '" + login.getText() + "'");
             conexao.rs.first();
-            
-            if(conexao.rs.getString("tipo_usuario").equals("F")){
+
+            if (conexao.rs.getString("tipo_usuario").equals("F")) {
             //jMenu14.setVisible(false);   
-            
-            valida = false;
-            return valida;
+
+                valida = false;
+                //return valida;
             }
-            
+
         } catch (SQLException ex) {
             Logger.getLogger(Menu.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-        return valida;
+
+        // return valida;
     }
 
     /**
@@ -141,12 +145,12 @@ public class TelaLogin extends javax.swing.JFrame {
     private void jButtonAcessoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAcessoActionPerformed
 
         Usuario user = new Usuario();
-  
+
         user.setNome(login.getText());
         user.setSenha(txtSenha.getText());
         String comboTipo = jComBTipoUser.getSelectedItem().toString();
         String tipo = null;
-        
+
         switch (comboTipo) {
             case "Administrador":
                 tipo = "A";
@@ -156,21 +160,20 @@ public class TelaLogin extends javax.swing.JFrame {
                 break;
         }
         user.setTipo((tipo));
-       
+
         if (user.validaSenha(user)) {
             java.awt.EventQueue.invokeLater(new Runnable() {
                 @Override
                 public void run() {
+                    TipoUser();
                     registraAuditoria();
                     new Menu(login.getText()).setVisible(true);
                 }
             });
             TelaLogin.this.dispose();
-        }else{
+        } else {
             JOptionPane.showMessageDialog(null, "Usuário ou Senha inválidos!");
         }
-        
-       
     }//GEN-LAST:event_jButtonAcessoActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -178,19 +181,18 @@ public class TelaLogin extends javax.swing.JFrame {
             this.dispose();
         }
     }//GEN-LAST:event_jButton1ActionPerformed
-    
 
     private void registraAuditoria() {
-        
+
         Auditoria audt = new Auditoria();
         audt.setCodUsuario(Usuario.idUsuario());
-        codAuditoria = AuditoriaDAO.CadAuditoria(audt);        
+        codAuditoria = AuditoriaDAO.CadAuditoria(audt);
     }
-    
+
     public static int idAuditoria() {
-        return codAuditoria = 1;          
+        return codAuditoria = 1;
     }
-    
+
 //    public static void main(String args[]) {
 //        /* Set the Nimbus look and feel */
 //        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">

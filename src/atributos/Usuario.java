@@ -4,6 +4,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import static funcoes.Conexao.getConnection;
+import javax.swing.JOptionPane;
 
 
 public class Usuario {
@@ -13,6 +14,7 @@ public class Usuario {
     private String tipo;
     private String senha;
     private static int CodUsuario;
+    private static String tipoUsuario;
 
     /**
      * @return the idUser
@@ -87,8 +89,8 @@ public class Usuario {
                     CodUsuario = rs.getInt("id_usuario");
                     user = rs.getString("USUARIO");
                     senhaUser = rs.getString("SENHA");
-                    tipoUser = rs.getString("TIPO_USUARIO");
-                        if (user.equals(usuario.getNome()) && senhaUser.equals(usuario.getSenha()) && tipoUser.equals(usuario.getTipo())){
+                    tipoUsuario = rs.getString("TIPO_USUARIO");
+                        if (user.equals(usuario.getNome()) && senhaUser.equals(usuario.getSenha()) && tipoUsuario.equals(usuario.getTipo())){
                             return true;
                         }
                 }
@@ -100,7 +102,12 @@ public class Usuario {
         return false;
     }
     
-    public static int idUsuario(){       
+    public static int idUsuario() {       
         return CodUsuario;        
+    }
+    
+    public static String TipoUsuario() { 
+        JOptionPane.showMessageDialog(null, "Tipo usuario:" +tipoUsuario);
+        return tipoUsuario;        
     }
 }

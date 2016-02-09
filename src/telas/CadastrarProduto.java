@@ -47,6 +47,7 @@ public class CadastrarProduto extends javax.swing.JFrame {
         ocultaCampos();
         combobox();
         LimitarCampos();
+        JOptionPane.showMessageDialog(null, TelaLogin.TipoUsuario());
     }
 
     private void combobox() {

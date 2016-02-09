@@ -39,19 +39,19 @@ public class Menu extends javax.swing.JFrame {
         jBtnFazerBackup.setVerticalTextPosition(SwingConstants.BOTTOM);
         jBtnFazerBackup.setHorizontalTextPosition(SwingConstants.CENTER);
         
-    try {
-            conexao.executaSQL("select * from tabusuario where usuario = '"+jLabelUsuario.getText()+"'");
-            conexao.rs.first();
-            
-            if(conexao.rs.getString("tipo_usuario").equals("F")){
-            //jMenu14.setVisible(false);   
-            
-            }
-            
-            else{}
-        } catch (SQLException ex) {
-            Logger.getLogger(Menu.class.getName()).log(Level.SEVERE, null, ex);
-        }
+//    try {
+//            conexao.executaSQL("select * from tabusuario where usuario = '"+jLabelUsuario.getText()+"'");
+//            conexao.rs.first();
+//            
+//            if(conexao.rs.getString("tipo_usuario").equals("F")){
+//            //jMenu14.setVisible(false);   
+//            
+//            }
+//            
+//            else{}
+//        } catch (SQLException ex) {
+//            Logger.getLogger(Menu.class.getName()).log(Level.SEVERE, null, ex);
+//        }
     
     }
 

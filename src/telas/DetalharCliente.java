@@ -40,7 +40,7 @@ import static telas.ExibeCliente.GetIndice;
 
 public class DetalharCliente extends javax.swing.JFrame {
 
-    ConexaoPermissoes conexao = new ConexaoPermissoes();
+   // ConexaoPermissoes conexao = new ConexaoPermissoes();
     
     int idContato;
     public static int codLembrete;
@@ -63,15 +63,15 @@ public class DetalharCliente extends javax.swing.JFrame {
     public DetalharCliente(String user) {
         initComponents();
         this.codCliente = GetIndice();
-        conexao.conexao();
-        jLabelUsuario.setText(user);
+//        conexao.conexao();
+//        jLabelUsuario.setText(user);
         
         
-        try {
-            conexao.executaSQL("select * from tabusuario where usuario = '"+jLabelUsuario.getText()+"'");
-            conexao.rs.first();
-            
-            if(conexao.rs.getString("tipo_usuario").equals("F")){
+       // try {
+//            conexao.executaSQL("select * from tabusuario where usuario = '"+jLabelUsuario.getText()+"'");
+//            conexao.rs.first();
+//            
+//            if(conexao.rs.getString("tipo_usuario").equals("F")){
             jBtnAltDadosP.setVisible(false);  
             jButtonEditarContato.setVisible(false);
             jBtnExcluirRotina.setVisible(false);
@@ -79,12 +79,12 @@ public class DetalharCliente extends javax.swing.JFrame {
             jBtnAltEndereco.setVisible(false);
             jBtnExcluir.setVisible(false);
             
-            }
+         //   }
             
-            else{}
-        } catch (SQLException ex) {
-            Logger.getLogger(Menu.class.getName()).log(Level.SEVERE, null, ex);
-        }
+          //  else{}
+//        } catch (SQLException ex) {
+//            Logger.getLogger(Menu.class.getName()).log(Level.SEVERE, null, ex);
+//        }
 
     }
 
