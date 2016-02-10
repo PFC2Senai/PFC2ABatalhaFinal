@@ -16,21 +16,17 @@ public class Conexao {
     private String usuario = "root";
     private String senha = "123456";
     public Connection conn;
-    
+
     public static Connection getConnection() {
 
         Connection conect = null;
         try {
             Class.forName("com.mysql.jdbc.Driver").newInstance();
 
-
-         String url = "jdbc:mysql://localhost/pfc1?user=root&password=123456";
+            String url = "jdbc:mysql://localhost/pfc1?user=root&password=123456";
 
       //   String url = "jdbc:mysql://localhost/pfc1?user=root&password=";
-
-            
          //   String url = "jdbc:mysql://localhost/pfc1?user=root&password=";
-            
             conect = DriverManager.getConnection(url);
             System.out.println("Conexão Estabelecida!");
 
@@ -43,31 +39,30 @@ public class Conexao {
         }
         return conect;
     }
-    
-    
+
     public void conexao() {
         try {
-                Class.forName(driver);
+            Class.forName(driver);
             conn = DriverManager.getConnection(caminho, usuario, senha);
             System.out.println("Conectado!");
         } catch (SQLException ex) {
-             System.out.println("Não Conectado!");
+            System.out.println("Não Conectado!");
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(Conexao.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
-    
-    public void desconecta(){
+
+    public void desconecta() {
         try {
             conn.close();
         } catch (SQLException ex) {
             Logger.getLogger(Conexao.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    public void executaSQL(String sql){
+
+    public void executaSQL(String sql) {
         try {
-            stm = conn.createStatement(rs.TYPE_SCROLL_INSENSITIVE,rs.CONCUR_READ_ONLY);
+            stm = conn.createStatement(rs.TYPE_SCROLL_INSENSITIVE, rs.CONCUR_READ_ONLY);
             rs = stm.executeQuery(sql);
         } catch (SQLException ex) {
             System.out.println("erro do ExecutaSQL!");

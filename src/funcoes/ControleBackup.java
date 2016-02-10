@@ -9,18 +9,19 @@ public class ControleBackup {
 
     private static String VERSION = "4.0.3";
     private static String SEPARATOR = File.separator;
-    private static String MYSQL_PATH
-            = "C:" + SEPARATOR
-            + "Program Files" + SEPARATOR
-            + "MySQL" + SEPARATOR
-            + "MySQL Server 5.1" + SEPARATOR
-            + "bin" + SEPARATOR;
-//     private static String MYSQL_PATH
+//    private static String MYSQL_PATH
 //            = "C:" + SEPARATOR
-//            + "Program Files (x86)" + SEPARATOR
+//            + "Program Files" + SEPARATOR
 //            + "MySQL" + SEPARATOR
 //            + "MySQL Server 5.1" + SEPARATOR
 //            + "bin" + SEPARATOR;
+    
+    private static String MYSQL_PATH
+            = "C:" + SEPARATOR
+            + "Program Files (x86)" + SEPARATOR
+            + "MySQL" + SEPARATOR
+            + "MySQL Server 5.1" + SEPARATOR
+            + "bin" + SEPARATOR;
      
     //C:/xampp/mysql/bin/mysqldump.exe
     private static String PRESENTATION

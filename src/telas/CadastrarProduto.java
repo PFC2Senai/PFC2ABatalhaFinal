@@ -424,16 +424,12 @@ public class CadastrarProduto extends javax.swing.JFrame {
 
         jPanel2.setBackground(new java.awt.Color(223, 237, 253));
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
-        jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel6.setText("Fabricante:");
-        jPanel2.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 100, -1, -1));
 
         jLabel5.setText("Modelo:");
-        jPanel2.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 60, -1, -1));
 
         jLabel10.setText("Peça:");
-        jPanel2.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 23, -1, -1));
 
         jBtnNovoFabricante.setText("Novo Fabricante");
         jBtnNovoFabricante.addActionListener(new java.awt.event.ActionListener() {
@@ -441,7 +437,6 @@ public class CadastrarProduto extends javax.swing.JFrame {
                 jBtnNovoFabricanteActionPerformed(evt);
             }
         });
-        jPanel2.add(jBtnNovoFabricante, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 100, -1, -1));
 
         jBtnSalvarFabricante.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/salvar.png"))); // NOI18N
         jBtnSalvarFabricante.setText("Salvar");
@@ -450,7 +445,6 @@ public class CadastrarProduto extends javax.swing.JFrame {
                 jBtnSalvarFabricanteActionPerformed(evt);
             }
         });
-        jPanel2.add(jBtnSalvarFabricante, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 100, -1, -1));
 
         jBtnCancelarFabricante.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/cancelar.png"))); // NOI18N
         jBtnCancelarFabricante.setText("Cancelar");
@@ -459,7 +453,6 @@ public class CadastrarProduto extends javax.swing.JFrame {
                 jBtnCancelarFabricanteActionPerformed(evt);
             }
         });
-        jPanel2.add(jBtnCancelarFabricante, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 100, -1, -1));
 
         jBtnNovoModelo.setText("Novo Modelo");
         jBtnNovoModelo.addActionListener(new java.awt.event.ActionListener() {
@@ -467,7 +460,6 @@ public class CadastrarProduto extends javax.swing.JFrame {
                 jBtnNovoModeloActionPerformed(evt);
             }
         });
-        jPanel2.add(jBtnNovoModelo, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 60, -1, -1));
 
         jBtnSalvarModelo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/salvar.png"))); // NOI18N
         jBtnSalvarModelo.setText("Salvar");
@@ -476,7 +468,6 @@ public class CadastrarProduto extends javax.swing.JFrame {
                 jBtnSalvarModeloActionPerformed(evt);
             }
         });
-        jPanel2.add(jBtnSalvarModelo, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 60, -1, -1));
 
         jBtnCancelarModelo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/cancelar.png"))); // NOI18N
         jBtnCancelarModelo.setText("Cancelar");
@@ -485,7 +476,6 @@ public class CadastrarProduto extends javax.swing.JFrame {
                 jBtnCancelarModeloActionPerformed(evt);
             }
         });
-        jPanel2.add(jBtnCancelarModelo, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 60, -1, -1));
 
         uJComboBoxPeca.setEditable(true);
         uJComboBoxPeca.addItemListener(new java.awt.event.ItemListener() {
@@ -498,17 +488,12 @@ public class CadastrarProduto extends javax.swing.JFrame {
                 uJComboBoxPecaActionPerformed(evt);
             }
         });
-        jPanel2.add(uJComboBoxPeca, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 19, 390, -1));
-        jPanel2.add(txtModeloNovo, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 60, 390, -1));
-        jPanel2.add(txtFabricante, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 100, 390, -1));
 
         jComboBoxFabricante.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jComboBoxFabricanteActionPerformed(evt);
             }
         });
-        jPanel2.add(jComboBoxFabricante, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 100, 390, -1));
-        jPanel2.add(txtProduto, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 20, 385, -1));
 
         jBtbNovoProduto.setText("Nova Peça");
         jBtbNovoProduto.addActionListener(new java.awt.event.ActionListener() {
@@ -516,7 +501,6 @@ public class CadastrarProduto extends javax.swing.JFrame {
                 jBtbNovoProdutoActionPerformed(evt);
             }
         });
-        jPanel2.add(jBtbNovoProduto, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 20, -1, -1));
 
         jBtnCadProduto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/salvar.png"))); // NOI18N
         jBtnCadProduto.setText("Salvar");
@@ -525,7 +509,6 @@ public class CadastrarProduto extends javax.swing.JFrame {
                 jBtnCadProdutoActionPerformed(evt);
             }
         });
-        jPanel2.add(jBtnCadProduto, new org.netbeans.lib.awtextra.AbsoluteConstraints(678, 19, -1, -1));
 
         jBtnCancelarCadProduto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/cancelar.png"))); // NOI18N
         jBtnCancelarCadProduto.setText("Cancelar");
@@ -534,17 +517,95 @@ public class CadastrarProduto extends javax.swing.JFrame {
                 jBtnCancelarCadProdutoActionPerformed(evt);
             }
         });
-        jPanel2.add(jBtnCancelarCadProduto, new org.netbeans.lib.awtextra.AbsoluteConstraints(573, 19, -1, -1));
 
         txtModeloFixo.setEditable(false);
-        jPanel2.add(txtModeloFixo, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 60, 390, -1));
 
         jComboBoxModelo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jComboBoxModeloActionPerformed(evt);
             }
         });
-        jPanel2.add(jComboBoxModelo, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 60, 390, -1));
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(10, 10, 10)
+                .addComponent(jLabel10)
+                .addGap(41, 41, 41)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txtProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 385, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(uJComboBoxPeca, javax.swing.GroupLayout.PREFERRED_SIZE, 390, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(10, 10, 10)
+                .addComponent(jBtbNovoProduto)
+                .addGap(10, 10, 10)
+                .addComponent(jBtnCancelarCadProduto)
+                .addGap(10, 10, 10)
+                .addComponent(jBtnCadProduto))
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(8, 8, 8)
+                .addComponent(jLabel5)
+                .addGap(32, 32, 32)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jComboBoxModelo, javax.swing.GroupLayout.PREFERRED_SIZE, 390, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtModeloNovo, javax.swing.GroupLayout.PREFERRED_SIZE, 390, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtModeloFixo, javax.swing.GroupLayout.PREFERRED_SIZE, 390, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(10, 10, 10)
+                .addComponent(jBtnNovoModelo)
+                .addGap(5, 5, 5)
+                .addComponent(jBtnCancelarModelo)
+                .addGap(5, 5, 5)
+                .addComponent(jBtnSalvarModelo))
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(18, 18, 18)
+                .addComponent(jLabel6)
+                .addGap(5, 5, 5)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jComboBoxFabricante, javax.swing.GroupLayout.PREFERRED_SIZE, 390, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtFabricante, javax.swing.GroupLayout.PREFERRED_SIZE, 390, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(10, 10, 10)
+                .addComponent(jBtnNovoFabricante)
+                .addGap(9, 9, 9)
+                .addComponent(jBtnCancelarFabricante)
+                .addGap(5, 5, 5)
+                .addComponent(jBtnSalvarFabricante))
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(17, 17, 17)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(4, 4, 4)
+                        .addComponent(jLabel10))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(1, 1, 1)
+                        .addComponent(txtProduto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(uJComboBoxPeca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(1, 1, 1)
+                        .addComponent(jBtbNovoProduto))
+                    .addComponent(jBtnCancelarCadProduto)
+                    .addComponent(jBtnCadProduto))
+                .addGap(16, 16, 16)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel5)
+                    .addComponent(jComboBoxModelo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtModeloNovo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtModeloFixo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jBtnNovoModelo)
+                    .addComponent(jBtnCancelarModelo)
+                    .addComponent(jBtnSalvarModelo))
+                .addGap(15, 15, 15)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel6)
+                    .addComponent(jComboBoxFabricante, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtFabricante, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jBtnNovoFabricante)
+                    .addComponent(jBtnCancelarFabricante)
+                    .addComponent(jBtnSalvarFabricante)))
+        );
 
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 150, 800, 140));
 
@@ -559,6 +620,7 @@ public class CadastrarProduto extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jBtnNovoFornecedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnNovoFornecedorActionPerformed
+        this.setEnabled(false);
         new CadastrarFornecedor(this).setVisible(true);
     }//GEN-LAST:event_jBtnNovoFornecedorActionPerformed
 

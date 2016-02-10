@@ -804,6 +804,7 @@ public class CadastrarFornecedor extends javax.swing.JFrame {
             this.telaMenu.setVisible(true);
         } else if (telaCadastrarProduto != null) {
             telaCadastrarProduto.setEnabled(true);
+            telaCadastrarProduto.toFront();
             telaCadastrarProduto.populaComboBoxFornecedor();
         } else if (telaExibeForn != null) {
             telaExibeForn.setVisible(true);
