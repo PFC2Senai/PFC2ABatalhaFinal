@@ -237,6 +237,7 @@ public class ExibeEquipamento extends javax.swing.JFrame {
 
         EquipamentoDAO.ExcluirEquipamento(indice);
         TabelaEquipamento("SELECT * FROM vw_equipamentos; ");
+               JOptionPane.showMessageDialog(null, "Excluido com sucesso!");
     }//GEN-LAST:event_jBtnExcluirEquipamentoActionPerformed
 
     private void jBtnSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnSairActionPerformed

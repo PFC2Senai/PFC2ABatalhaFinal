@@ -3,8 +3,8 @@ package telas;
 import atributos.Auditoria;
 import atributos.Usuario;
 import funcoes.AuditoriaDAO;
+import funcoes.Conexao;
 import static funcoes.Conexao.getConnection;
-import funcoes.ConexaoPermissoes;
 import java.awt.Color;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -19,7 +19,7 @@ import javax.swing.JOptionPane;
  */
 public class TelaLogin extends javax.swing.JFrame {
 
-    ConexaoPermissoes conexao = new ConexaoPermissoes();
+    Conexao conexao = new Conexao();
 
     private static int codAuditoria;
     private static boolean valida = true;
@@ -38,48 +38,18 @@ public class TelaLogin extends javax.swing.JFrame {
     public static boolean TipoUsuario() {
         return valida;
     }
-
-//    public void TipoUser() {
-//        //valida = true;
-//
-//        try {
-//            conexao.executaSQL("select * from tabusuario where usuario = '" + login.getText() + "'");
-//            conexao.rs.first();
-//
-//            if (conexao.rs.getString("tipo_usuario").equals("F")) {
-//            //jMenu14.setVisible(false);   
-//
-//                valida = false;
-//                //return valida;
-//            }
-//
-//        } catch (SQLException ex) {
-//            Logger.getLogger(Menu.class.getName()).log(Level.SEVERE, null, ex);
-//        }
-//
-//        // return valida;
-//    }
-    
     public void TipoUser() {
         //valida = true;
-        ResultSet rs; 
-        String tipoUser;
+
         try {
-            String sql = "select * from tabusuario where usuario = '"+login.getText()+"';";
-            Statement s = getConnection().createStatement();
-            s.executeQuery (sql);
-            rs = s.getResultSet();
+            conexao.executaSQL("select * from tabusuario where usuario = '" + login.getText() + "'");
+            conexao.rs.first();
 
-            while (rs.next ()){
-                tipoUser = rs.getString("tipo_usuario");
-                
-                if (tipoUser.equalsIgnoreCase("F")) {
-                //jMenu14.setVisible(false);   
+            if (conexao.rs.getString("tipo_usuario").equals("F")) {
+            //jMenu14.setVisible(false);   
 
-                    valida = false;
-                    break;
-                    //return valida;
-                }
+                valida = false;
+                //return valida;
             }
 
         } catch (SQLException ex) {
@@ -88,6 +58,36 @@ public class TelaLogin extends javax.swing.JFrame {
 
         // return valida;
     }
+
+    
+//    public void TipoUser() {
+//        //valida = true;
+//        ResultSet rs; 
+//        String tipoUser;
+//        try {
+//            String sql = "select * from tabusuario where usuario = '"+login.getText()+"';";
+//            Statement s = getConnection().createStatement();
+//            s.executeQuery (sql);
+//            rs = s.getResultSet();
+//
+//            while (rs.next ()){
+//                tipoUser = rs.getString("tipo_usuario");
+//                
+//                if (tipoUser.equalsIgnoreCase("F")) {
+//                //jMenu14.setVisible(false);   
+//
+//                    valida = false;
+//                    break;
+//                    //return valida;
+//                }
+//            }
+//
+//        } catch (SQLException ex) {
+//            Logger.getLogger(Menu.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+//
+//        // return valida;
+//    }
 
     /**
      * This method is called from within the constructor to initialize the form.

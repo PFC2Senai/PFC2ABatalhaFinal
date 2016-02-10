@@ -1,6 +1,6 @@
 package telas;
 
-import funcoes.ConexaoPermissoes;
+import funcoes.Conexao;
 import funcoes.ControleBackup;
 import java.io.File;
 import java.sql.SQLException;
@@ -16,7 +16,7 @@ import javax.swing.SwingConstants;
  */
 public class Menu extends javax.swing.JFrame {
 
-    ConexaoPermissoes conexao = new ConexaoPermissoes();
+    Conexao conexao = new Conexao();
     
     private String caminho;
     private Menu telaMenu;

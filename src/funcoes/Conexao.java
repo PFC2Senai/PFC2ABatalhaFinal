@@ -3,9 +3,20 @@ package funcoes;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.sql.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class Conexao {
 
+    public Statement stm;
+    public ResultSet rs;
+    private String driver = "com.mysql.jdbc.Driver";
+    private String caminho = "jdbc:mysql://localhost:3306/pfc1";
+    private String usuario = "root";
+    private String senha = "2810";
+    public Connection conn;
+    
     public static Connection getConnection() {
 
         Connection conect = null;
@@ -31,5 +42,35 @@ public class Conexao {
             System.out.println(e.getMessage());
         }
         return conect;
+    }
+    
+    
+    public void conexao() {
+        try {
+                Class.forName(driver);
+            conn = DriverManager.getConnection(caminho, usuario, senha);
+            System.out.println("Conectado!");
+        } catch (SQLException ex) {
+             System.out.println("Não Conectado!");
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(Conexao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    
+    public void desconecta(){
+        try {
+            conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(Conexao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    public void executaSQL(String sql){
+        try {
+            stm = conn.createStatement(rs.TYPE_SCROLL_INSENSITIVE,rs.CONCUR_READ_ONLY);
+            rs = stm.executeQuery(sql);
+        } catch (SQLException ex) {
+            System.out.println("erro do ExecutaSQL!");
+        }
     }
 }

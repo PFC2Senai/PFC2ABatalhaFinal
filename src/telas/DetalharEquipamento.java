@@ -219,8 +219,8 @@ public final class DetalharEquipamento extends javax.swing.JFrame {
         jBtnAlterarEquipamento.setVisible(false);
         jBtnCancelarAltEquipamento.setVisible(false);
         jBtbEditarEquipamento.setVisible(true);
-          if (JOptionPane.showConfirmDialog(null, "Tem certeza que deseja sair? Os dados não serão salvos.", "Confirmar Cancelamento", JOptionPane.YES_NO_OPTION) == 0) {
-            this.dispose();
+          if (JOptionPane.showConfirmDialog(null, "Tem certeza que deseja canselar? Os dados não serão salvos.", "Confirmar Cancelamento", JOptionPane.YES_NO_OPTION) == 0) {
+            
         }
     }//GEN-LAST:event_jBtnCancelarAltEquipamentoActionPerformed
 
