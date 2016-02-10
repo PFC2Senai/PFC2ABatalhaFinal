@@ -25,6 +25,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.InputMap;
+import javax.swing.JComponent;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -884,7 +886,7 @@ public class CadastrarCliente extends javax.swing.JFrame {
         String carac = ",.!?@:;/#$%¨&*()-_='+{[]}";
         if (carac.contains(evt.getKeyChar() + "")) {
             evt.consume();
-            JOptionPane.showMessageDialog(this, "Não é possivel digitar espaços ou caracteres inválidos !");
+            //JOptionPane.showMessageDialog(this, "Não é possivel digitar espaços ou caracteres inválidos !");
         }
     }//GEN-LAST:event_txtEmpresaKeyTyped
 
@@ -919,7 +921,7 @@ public class CadastrarCliente extends javax.swing.JFrame {
         String car = txtNumero.getText().toUpperCase();
         if (!caracteres.contains(evt.getKeyChar() + "")) {
             evt.consume();
-            JOptionPane.showMessageDialog(this, "Não é possivel digitar espaços ou caracteres inválidos !");
+            //JOptionPane.showMessageDialog(this, "Não é possivel digitar espaços ou caracteres inválidos !");
         }
     }//GEN-LAST:event_txtNumeroKeyTyped
 
@@ -943,11 +945,11 @@ public class CadastrarCliente extends javax.swing.JFrame {
     }//GEN-LAST:event_jBtnRemoverContatoActionPerformed
 
     private void txtTelCelKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTelCelKeyTyped
-
+        
         String caracteres = "0987654321";
         if (!caracteres.contains(evt.getKeyChar() + "")) {
             evt.consume();
-            JOptionPane.showMessageDialog(this, "Digite apenas números !");
+            //JOptionPane.showMessageDialog(this, "Digite apenas números !");
         }
     }//GEN-LAST:event_txtTelCelKeyTyped
 
@@ -1101,7 +1103,7 @@ public class CadastrarCliente extends javax.swing.JFrame {
         String caracteres = "qwertyuiopasdfghjklçzxcvbnm";
         if (!caracteres.contains(evt.getKeyChar() + "")) {
             evt.consume();
-            JOptionPane.showMessageDialog(this, "Digite apenas números !");
+           // JOptionPane.showMessageDialog(this, "Digite apenas números !");
         }
     }//GEN-LAST:event_txtContatoKeyTyped
 

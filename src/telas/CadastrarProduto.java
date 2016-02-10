@@ -715,50 +715,85 @@ public class CadastrarProduto extends javax.swing.JFrame {
                 prod.setIdUsuario(idUsuario());
                 prod.setProduto(txtProduto.getText());
                 codProduto = ProdutoDAO.Cadroduto(prod);
+
+                //=====
+                HistoricoProduto histProduto = new HistoricoProduto();
+                prod.setCodModelo(codModelo);
+                prod.setCodFabricante(codFabricante);
+                prod.setDataCadProduto(FormataData(txtDataCadProduto.getDate()));
+                prod.setQuantidade(Integer.parseInt(txtQuantidade.getText()));
+                prod.setPrecoEntrada(Double.parseDouble(txtPrecoEntrada.getText()));
+                prod.setPrecoSaida(Double.parseDouble(txtPrecoSaida.getText()));
+                prod.setCodProduto(codProduto);
+                prod.setQuantidadeMinima(Integer.parseInt(txtQuantMinima.getText()));
+
+                int codDet = ProdutoDAO.CadDetProduto(prod);
+
+                histProduto.setCodDetProduto(codDet);
+                histProduto.setQuantidade(Integer.parseInt(txtQuantidade.getText()));
+                histProduto.setValor(Double.parseDouble(txtPrecoEntrada.getText()));
+                histProduto.setDataCadProduto(FormataData(txtDataCadProduto.getDate()));
+                histProduto.setCodFornecedor(codFornecedor);
+                HistoricoProdutoDAO.CadHistoricoProd(histProduto);
+
+                txtProduto.setVisible(false);
+                uJComboBoxPeca.setVisible(true);
+
+                limparCampos();
+                uJComboBoxPeca.removeAllItems();
+                carregarComboPeca();
+                jBtbNovoProduto.setVisible(true);
+                txtProduto.setEditable(true);
+                txtModeloFixo.setVisible(true);
+                jComboBoxModelo.setVisible(false);
+                verificaPagina();
+                JOptionPane.showMessageDialog(null, "Cadastrado com sucesso!");
+
+            } else if (ProdutoDAO.ExisteProdutoComFabricante(uJComboBoxPeca.getSelectedItem().toString(), jComboBoxFabricante.getSelectedItem().toString())) {
+
+                HistoricoProduto histProduto = new HistoricoProduto();
+                prod.setCodModelo(codModelo);
+                prod.setCodFabricante(codFabricante);
+                prod.setDataCadProduto(FormataData(txtDataCadProduto.getDate()));
+                prod.setQuantidade(Integer.parseInt(txtQuantidade.getText()));
+                prod.setPrecoEntrada(Double.parseDouble(txtPrecoEntrada.getText()));
+                prod.setPrecoSaida(Double.parseDouble(txtPrecoSaida.getText()));
+                prod.setCodProduto(codProduto);
+                prod.setQuantidadeMinima(Integer.parseInt(txtQuantMinima.getText()));
+
+                int codDet = ProdutoDAO.CadDetProduto(prod);
+
+                histProduto.setCodDetProduto(codDet);
+                histProduto.setQuantidade(Integer.parseInt(txtQuantidade.getText()));
+                histProduto.setValor(Double.parseDouble(txtPrecoEntrada.getText()));
+                histProduto.setDataCadProduto(FormataData(txtDataCadProduto.getDate()));
+                histProduto.setCodFornecedor(codFornecedor);
+                HistoricoProdutoDAO.CadHistoricoProd(histProduto);
+
+                txtProduto.setVisible(false);
+                uJComboBoxPeca.setVisible(true);
+
+                limparCampos();
+                uJComboBoxPeca.removeAllItems();
+                carregarComboPeca();
+                jBtbNovoProduto.setVisible(true);
+                txtProduto.setEditable(true);
+                txtModeloFixo.setVisible(true);
+                jComboBoxModelo.setVisible(false);
+                verificaPagina();
+                JOptionPane.showMessageDialog(null, "Cadastrado com sucesso!");
             }
-            HistoricoProduto histProduto = new HistoricoProduto();
-            prod.setCodModelo(codModelo);
-            prod.setCodFabricante(codFabricante);
-            prod.setDataCadProduto(FormataData(txtDataCadProduto.getDate()));
-            prod.setQuantidade(Integer.parseInt(txtQuantidade.getText()));
-            prod.setPrecoEntrada(Double.parseDouble(txtPrecoEntrada.getText()));
-            prod.setPrecoSaida(Double.parseDouble(txtPrecoSaida.getText()));
-            prod.setCodProduto(codProduto);
-            prod.setQuantidadeMinima(Integer.parseInt(txtQuantMinima.getText()));
 
-            int codDet = ProdutoDAO.CadDetProduto(prod);
-
-            histProduto.setCodDetProduto(codDet);
-            histProduto.setQuantidade(Integer.parseInt(txtQuantidade.getText()));
-            histProduto.setValor(Double.parseDouble(txtPrecoEntrada.getText()));
-            histProduto.setDataCadProduto(FormataData(txtDataCadProduto.getDate()));
-            histProduto.setCodFornecedor(codFornecedor);
-            HistoricoProdutoDAO.CadHistoricoProd(histProduto);
-
-            txtProduto.setVisible(false);
-            uJComboBoxPeca.setVisible(true);
-
-            limparCampos();
-            uJComboBoxPeca.removeAllItems();
-            carregarComboPeca();
-            jBtbNovoProduto.setVisible(true);
-            txtProduto.setEditable(true);
-            txtModeloFixo.setVisible(true);
-            jComboBoxModelo.setVisible(false);
-            verificaPagina();
-            JOptionPane.showMessageDialog(null, "Cadastrado com sucesso!");
-        
-
-        if (JOptionPane.showConfirmDialog(null, "Deseja continuar cadastrando?", "Confirmar Cadastro", JOptionPane.YES_NO_OPTION) == 1) {
-            verificaPagina();
-            if (telaExibeProduto != null) {
-                this.telaExibeProduto.TabelaProduto("SELECT * FROM tabproduto;");
+            if (JOptionPane.showConfirmDialog(null, "Deseja continuar cadastrando?", "Confirmar Cadastro", JOptionPane.YES_NO_OPTION) == 1) {
+                verificaPagina();
+                if (telaExibeProduto != null) {
+                    this.telaExibeProduto.TabelaProduto("SELECT * FROM tabproduto;");
+                }
+                this.dispose();
+            } else {
+                uJComboBoxPeca.requestFocus();
             }
-            this.dispose();
-        } else {
-            uJComboBoxPeca.requestFocus();
         }
-    }
     }//GEN-LAST:event_jBtnCadastrarProdutoActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed

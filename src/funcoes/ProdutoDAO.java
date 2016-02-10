@@ -333,7 +333,7 @@ public class ProdutoDAO {
         return achou;
     }
 
-    public static boolean ExisteProdutoComFabricante(int idProduto2, int idFabricante2) {
+    public static boolean ExisteProdutoComFabricante(String idProduto2, String idFabricante2) {
 
         Statement stmt;
         int produto = 0;
@@ -343,7 +343,7 @@ public class ProdutoDAO {
 
         try {
             String Sql = "SELECT * FROM vw_produtomodelofabricante "
-                    + " WHERE id_prod = " + idProduto2
+                    + " WHERE  = " + idProduto2
                     //+ " AND tabmodelo_idtabModelo = " + idModelo2
                     + " AND idtabFabricante = " + idFabricante2 + ";";
 
@@ -356,9 +356,9 @@ public class ProdutoDAO {
                 //modelo = rs.getInt("tabfabricante_idtabFabricante");
                 fabricante = rs.getInt("tabmodelo_idtabModelo");
 
-                codDetProd2 = rs.getInt("idDetProduto");
+                codDetProd2 = rs.getInt("produto");
                 //codDetModelo = rs.getInt("tabmodelo_idtabModelo");
-                codDetFabricante = rs.getInt("tabfabricante_idtabFabricante");
+                codDetFabricante = rs.getInt("fabricante");
                 
                 if (codDetProd2 == 0) {
                     achou = true;
