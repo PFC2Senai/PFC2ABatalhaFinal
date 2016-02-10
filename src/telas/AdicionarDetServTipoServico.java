@@ -81,40 +81,35 @@ public class AdicionarDetServTipoServico extends javax.swing.JFrame {
         jBtnCancelarCadTipoServico = new javax.swing.JButton();
         txtTipoServico = new javax.swing.JTextField();
         jComboBoxTipoServico1 = new componentes.UJComboBox();
-        jLabel2 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         jBtnCancelar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("ADCIONAR SERVIÇO");
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosed(java.awt.event.WindowEvent evt) {
                 formWindowClosed(evt);
             }
         });
 
-        jPanel1.setBackground(new java.awt.Color(254, 254, 233));
+        jPanel1.setBackground(new java.awt.Color(223, 237, 253));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jBtnAdicionarTipo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/add.png"))); // NOI18N
         jBtnAdicionarTipo.setText("Adicionar Tipo");
         jBtnAdicionarTipo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jBtnAdicionarTipoActionPerformed(evt);
             }
         });
-        jPanel1.add(jBtnAdicionarTipo, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 210, 130, -1));
+        jPanel1.add(jBtnAdicionarTipo, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 210, -1, -1));
 
-        jBtnSalvarDetServTipoServico.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/salvar.png"))); // NOI18N
         jBtnSalvarDetServTipoServico.setText("Salvar");
         jBtnSalvarDetServTipoServico.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jBtnSalvarDetServTipoServicoActionPerformed(evt);
             }
         });
-        jPanel1.add(jBtnSalvarDetServTipoServico, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 430, 90, -1));
+        jPanel1.add(jBtnSalvarDetServTipoServico, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 430, -1, -1));
 
-        jBtbNovoTipoServico.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/page.png"))); // NOI18N
         jBtbNovoTipoServico.setText("Novo");
         jBtbNovoTipoServico.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -136,7 +131,6 @@ public class AdicionarDetServTipoServico extends javax.swing.JFrame {
 
         jPanel1.add(jScrollPane6, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 240, 600, 130));
 
-        jBtnRemoverTipo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/excluir.png"))); // NOI18N
         jBtnRemoverTipo.setText("Remover Tipo");
 
         org.jdesktop.beansbinding.Binding binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, jTableTipodeServico, org.jdesktop.beansbinding.ELProperty.create("${selectedElement != null}"), jBtnRemoverTipo, org.jdesktop.beansbinding.BeanProperty.create("enabled"));
@@ -147,7 +141,7 @@ public class AdicionarDetServTipoServico extends javax.swing.JFrame {
                 jBtnRemoverTipoActionPerformed(evt);
             }
         });
-        jPanel1.add(jBtnRemoverTipo, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 380, -1, -1));
+        jPanel1.add(jBtnRemoverTipo, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 380, -1, -1));
 
         jBtnCadTipoServico.setText("Salvar");
         jBtnCadTipoServico.addActionListener(new java.awt.event.ActionListener() {
@@ -160,7 +154,6 @@ public class AdicionarDetServTipoServico extends javax.swing.JFrame {
         jLabel10.setText("Tipo:");
         jPanel1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 150, -1, -1));
 
-        jBtnCancelarCadTipoServico.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/cancelar.png"))); // NOI18N
         jBtnCancelarCadTipoServico.setText("Cancelar");
         jBtnCancelarCadTipoServico.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -183,14 +176,9 @@ public class AdicionarDetServTipoServico extends javax.swing.JFrame {
         });
         jPanel1.add(jComboBoxTipoServico1, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 150, 260, -1));
 
-        jLabel2.setFont(new java.awt.Font("Microsoft YaHei UI Light", 1, 24)); // NOI18N
-        jLabel2.setText("ADCIONAR SERVIÇO");
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 60, -1, -1));
-
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/leiaute/img2.png"))); // NOI18N
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 680, -1));
 
-        jBtnCancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/cancelar.png"))); // NOI18N
         jBtnCancelar.setText("Cancelar");
         jBtnCancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -382,7 +370,6 @@ public class AdicionarDetServTipoServico extends javax.swing.JFrame {
     private componentes.UJComboBox jComboBoxTipoServico1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JTable jTableTipodeServico;

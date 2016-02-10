@@ -122,7 +122,7 @@ public class AdicionaDetServProduto extends javax.swing.JFrame {
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/leiaute/img3.png"))); // NOI18N
         getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -8, 850, 120));
 
-        jPanel1.setBackground(new java.awt.Color(254, 254, 233));
+        jPanel1.setBackground(new java.awt.Color(223, 237, 253));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel35.setText("Modelo:");

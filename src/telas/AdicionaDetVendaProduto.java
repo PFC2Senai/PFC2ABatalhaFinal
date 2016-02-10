@@ -290,7 +290,7 @@ public class AdicionaDetVendaProduto extends javax.swing.JFrame {
         setTitle("ADICIONAR PEÇA");
         setResizable(false);
 
-        jPanel1.setBackground(new java.awt.Color(254, 254, 233));
+        jPanel1.setBackground(new java.awt.Color(223, 237, 253));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel35.setText("Modelo:");
