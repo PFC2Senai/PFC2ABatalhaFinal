@@ -268,7 +268,8 @@ public class CadastrarRotinaContato extends javax.swing.JFrame {
             this.telaExibeCliente.setEnabled(true);
             this.telaExibeCliente.toFront();
         }else if ((this.telaMenu != null)) {
-            this.telaMenu.setVisible(true);
+            this.telaMenu.setEnabled(true);
+            this.telaMenu.toFront();
         }
     }
 
