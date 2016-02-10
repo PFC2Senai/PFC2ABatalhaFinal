@@ -440,14 +440,14 @@ public class AlterarFuncionario extends javax.swing.JFrame {
             }
         });
 
-        jPanel5.setBackground(new java.awt.Color(255, 204, 204));
+        jPanel5.setBackground(new java.awt.Color(223, 237, 253));
         jPanel5.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel9.setFont(new java.awt.Font("Microsoft YaHei UI Light", 1, 24)); // NOI18N
         jLabel9.setText("EDITAR FUNCIONÁRIO");
         jPanel5.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 100, -1, -1));
 
-        jPanel3.setBackground(new java.awt.Color(255, 204, 204));
+        jPanel3.setBackground(new java.awt.Color(223, 237, 253));
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Contato", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 2, 11))); // NOI18N
 
         jLabel12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/email.png"))); // NOI18N
@@ -561,7 +561,7 @@ public class AlterarFuncionario extends javax.swing.JFrame {
 
         jPanel5.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 300, -1, -1));
 
-        jPanel4.setBackground(new java.awt.Color(255, 204, 204));
+        jPanel4.setBackground(new java.awt.Color(223, 237, 253));
         jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Endereço", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 2, 11))); // NOI18N
 
         txtEndNum.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
@@ -739,7 +739,7 @@ public class AlterarFuncionario extends javax.swing.JFrame {
 
         jPanel5.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 475, 808, 140));
 
-        jPanel2.setBackground(new java.awt.Color(255, 204, 204));
+        jPanel2.setBackground(new java.awt.Color(223, 237, 253));
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Funcionário", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 2, 11))); // NOI18N
 
         jTextNome.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
@@ -893,7 +893,7 @@ public class AlterarFuncionario extends javax.swing.JFrame {
         id.setText("jLabel10");
         jPanel5.add(id, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 130, 125, -1));
 
-        jPanel1.setBackground(new java.awt.Color(255, 204, 204));
+        jPanel1.setBackground(new java.awt.Color(223, 237, 253));
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Carteira de Trabalho", javax.swing.border.TitledBorder.LEFT, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 2, 11))); // NOI18N
 
         jLabel22.setText("CTPS:");

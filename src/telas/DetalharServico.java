@@ -161,11 +161,11 @@ public final class DetalharServico extends javax.swing.JFrame {
         });
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanelServico.setBackground(new java.awt.Color(204, 255, 204));
+        jPanelServico.setBackground(new java.awt.Color(223, 237, 253));
         jPanelServico.setPreferredSize(new java.awt.Dimension(860, 800));
         jPanelServico.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanel3.setBackground(new java.awt.Color(204, 255, 204));
+        jPanel3.setBackground(new java.awt.Color(223, 237, 253));
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder("Serviço"));
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -231,7 +231,7 @@ public final class DetalharServico extends javax.swing.JFrame {
 
         jPanelServico.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 10, 800, 210));
 
-        jPanel1.setBackground(new java.awt.Color(204, 255, 204));
+        jPanel1.setBackground(new java.awt.Color(223, 237, 253));
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Tipo Serviço"));
 
         jTableTipodeServico.setBackground(new java.awt.Color(204, 255, 204));
@@ -330,9 +330,9 @@ public final class DetalharServico extends javax.swing.JFrame {
 
         jTabbedPaneDetalheServico.addTab("Serviço", new javax.swing.ImageIcon(getClass().getResource("/imagens/servicos.png")), jPanelServico); // NOI18N
 
-        jPanelPecaEEquip.setBackground(new java.awt.Color(204, 255, 204));
+        jPanelPecaEEquip.setBackground(new java.awt.Color(223, 237, 253));
 
-        jPanelPecas.setBackground(new java.awt.Color(204, 255, 204));
+        jPanelPecas.setBackground(new java.awt.Color(223, 237, 253));
         jPanelPecas.setBorder(javax.swing.BorderFactory.createTitledBorder("Peças"));
 
         jTablePecas.setModel(new javax.swing.table.DefaultTableModel(
@@ -398,7 +398,7 @@ public final class DetalharServico extends javax.swing.JFrame {
                 .addContainerGap(20, Short.MAX_VALUE))
         );
 
-        jPanelEquipamento.setBackground(new java.awt.Color(204, 255, 204));
+        jPanelEquipamento.setBackground(new java.awt.Color(223, 237, 253));
         jPanelEquipamento.setBorder(javax.swing.BorderFactory.createTitledBorder("Equipamentos"));
 
         jTableEquipamento.setModel(new javax.swing.table.DefaultTableModel(
@@ -501,9 +501,9 @@ public final class DetalharServico extends javax.swing.JFrame {
 
         jTabbedPaneDetalheServico.addTab("Peças e Equipamento", jPanelPecaEEquip);
 
-        jPanelFuncionarioValor.setBackground(new java.awt.Color(204, 255, 204));
+        jPanelFuncionarioValor.setBackground(new java.awt.Color(223, 237, 253));
 
-        jPanelFuncionario.setBackground(new java.awt.Color(204, 255, 204));
+        jPanelFuncionario.setBackground(new java.awt.Color(223, 237, 253));
         jPanelFuncionario.setBorder(javax.swing.BorderFactory.createTitledBorder("Valores"));
 
         jTableFuncionario.setBackground(new java.awt.Color(204, 255, 204));
@@ -563,7 +563,7 @@ public final class DetalharServico extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        jPanelValor.setBackground(new java.awt.Color(204, 255, 204));
+        jPanelValor.setBackground(new java.awt.Color(223, 237, 253));
         jPanelValor.setBorder(javax.swing.BorderFactory.createTitledBorder("Valores"));
 
         jLabel4.setText("Total serviço:");
@@ -608,7 +608,7 @@ public final class DetalharServico extends javax.swing.JFrame {
                         .addComponent(jLabel4)
                         .addGap(18, 18, 18)
                         .addComponent(txtTotal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 404, Short.MAX_VALUE)
                 .addGroup(jPanelValorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jBtnEditarValor)
                     .addComponent(jBtnAlterarMaoObra)

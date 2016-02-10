@@ -113,7 +113,7 @@ public class DetalharFornecedor extends javax.swing.JFrame {
             }
         });
 
-        jPanel1.setBackground(new java.awt.Color(204, 255, 204));
+        jPanel1.setBackground(new java.awt.Color(223, 237, 253));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setFont(new java.awt.Font("Raavi", 1, 18)); // NOI18N
@@ -130,7 +130,7 @@ public class DetalharFornecedor extends javax.swing.JFrame {
         jPanel1.add(btnVoltar, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 540, -1, -1));
         jPanel1.add(lblCodigo, new org.netbeans.lib.awtextra.AbsoluteConstraints(138, 20, 102, 22));
 
-        jPanel2.setBackground(new java.awt.Color(204, 255, 204));
+        jPanel2.setBackground(new java.awt.Color(223, 237, 253));
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Dados Gerais"));
 
         txtFornecedor.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
@@ -315,9 +315,10 @@ public class DetalharFornecedor extends javax.swing.JFrame {
 
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 150, -1, -1));
 
-        jPanel3.setBackground(new java.awt.Color(204, 255, 204));
+        jPanel3.setBackground(new java.awt.Color(223, 237, 253));
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder("Contatos"));
 
+        jTableContatos.setBackground(new java.awt.Color(223, 237, 253));
         jTableContatos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 

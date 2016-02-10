@@ -809,7 +809,7 @@ public class DetalharCliente extends javax.swing.JFrame {
 
         jTabbedPane1.addTab("Lembrete", new javax.swing.ImageIcon(getClass().getResource("/imagens/lembrete1.png")), jPanelLembrete); // NOI18N
 
-        jPanelDadosCliente.setBackground(new java.awt.Color(204, 255, 204));
+        jPanelDadosCliente.setBackground(new java.awt.Color(223, 237, 253));
         jPanelDadosCliente.setName("jFrame"); // NOI18N
         jPanelDadosCliente.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -817,7 +817,7 @@ public class DetalharCliente extends javax.swing.JFrame {
         jLabel1.setText("Cliente");
         jPanelDadosCliente.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(38, 22, -1, -1));
 
-        jPanel2.setBackground(new java.awt.Color(204, 255, 204));
+        jPanel2.setBackground(new java.awt.Color(223, 237, 253));
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Endereço", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 2, 11))); // NOI18N
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -894,7 +894,7 @@ public class DetalharCliente extends javax.swing.JFrame {
 
         jPanelDadosCliente.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 10, 840, 110));
 
-        jPanel3.setBackground(new java.awt.Color(204, 255, 204));
+        jPanel3.setBackground(new java.awt.Color(223, 237, 253));
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Endereço", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 2, 11))); // NOI18N
         jPanel3.setNextFocusableComponent(txtEmpresa);
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -1009,6 +1009,7 @@ public class DetalharCliente extends javax.swing.JFrame {
         jPanel4.setBackground(new java.awt.Color(223, 237, 253));
         jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Contatos", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 2, 11))); // NOI18N
 
+        jTableContatos.setBackground(new java.awt.Color(223, 237, 253));
         jTableContatos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
