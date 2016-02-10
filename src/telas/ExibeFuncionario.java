@@ -132,7 +132,7 @@ public class ExibeFuncionario extends javax.swing.JFrame {
             }
         });
 
-        jPanel1.setBackground(new java.awt.Color(204, 255, 204));
+        jPanel1.setBackground(new java.awt.Color(223, 237, 253));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jBtnNovoFuncionario.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
