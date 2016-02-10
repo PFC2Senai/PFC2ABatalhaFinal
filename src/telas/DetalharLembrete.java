@@ -13,6 +13,7 @@ import java.util.Date;
 import javax.swing.JOptionPane;
 import static telas.DetalharCliente.GetIdLembrete;
 import static telas.ExibeCliente.GetIndice;
+import static telas.TelaLogin.TipoUsuario;
 
 public class DetalharLembrete extends javax.swing.JFrame {
 
@@ -35,6 +36,7 @@ public class DetalharLembrete extends javax.swing.JFrame {
         this.detalharCliente = detalharCliente;
         codCli = GetIndice(); //GetIndice está no form exibecliente, retorna o id do cliente selecionado na tabela
         DadosEmpresa();
+        verificaUsuario();
     }
 
     private void DesabilitarCampos() {
@@ -333,6 +335,13 @@ public class DetalharLembrete extends javax.swing.JFrame {
         return valida;
     }
 
+    public void verificaUsuario(){
+        
+        if(TipoUsuario() == false){
+            jBtnEditarLembrete.setVisible(false);
+            jBtnExcluir.setVisible(false);
+        }
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBtnAlterarLembrete;
     private javax.swing.JButton jBtnCancel;

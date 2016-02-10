@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import static telas.DetalharCliente.GetIdRotina;
 import static telas.ExibeCliente.GetIndice;
+import static telas.TelaLogin.TipoUsuario;
 
 /**
  *
@@ -36,6 +37,7 @@ public class DetalharRotina extends javax.swing.JFrame {
         this.detalharCliente = detalharCliente; 
         codCli = GetIndice();
         DadosEmpresa();
+        verificaUsuario();
         
       //  verificaPagina();
     }
@@ -208,6 +210,13 @@ public class DetalharRotina extends javax.swing.JFrame {
         if ((this.detalharCliente != null)) {
             this.detalharCliente.setEnabled(true);
             this.detalharCliente.toFront();            
+        }
+    }
+    
+    public void verificaUsuario(){
+        
+        if(TipoUsuario() == false){
+            jBtnExcluirRotinaContato.setVisible(false);
         }
     }
     

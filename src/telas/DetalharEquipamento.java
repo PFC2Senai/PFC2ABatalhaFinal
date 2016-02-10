@@ -11,6 +11,7 @@ import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import static telas.TelaLogin.TipoUsuario;
 
 /**
  *
@@ -45,6 +46,7 @@ public final class DetalharEquipamento extends javax.swing.JFrame {
         populaComboBoxModelo();
         CarregarDadosEquipamanto();
         ocultaCampos();
+        verificaUsuario();
     }
 
     /**
@@ -447,6 +449,13 @@ public final class DetalharEquipamento extends javax.swing.JFrame {
         } catch (SQLException ex) {      
             Logger.getLogger(ExibeProdutosDetalhe.class.getName()).log(Level.SEVERE, null, ex);
             throw new RuntimeException("Erro ao carregar os dados do Produto: ", ex);    
+        }
+    }
+        
+        public void verificaUsuario(){
+            
+        if(TipoUsuario() == false){
+            jBtbEditarEquipamento.setVisible(false);
         }
     }
 

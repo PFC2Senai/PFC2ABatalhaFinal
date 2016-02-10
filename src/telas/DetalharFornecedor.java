@@ -22,6 +22,7 @@ import javax.swing.ListSelectionModel;
 import javax.swing.border.LineBorder;
 import javax.swing.table.TableCellRenderer;
 import static telas.ExibeFornecedor.GetIndiceForn;
+import static telas.TelaLogin.TipoUsuario;
 
 public class DetalharFornecedor extends javax.swing.JFrame {
 
@@ -54,6 +55,7 @@ public class DetalharFornecedor extends javax.swing.JFrame {
         initComponents();
         CarregaFornecedor();
         TabelaContatos();
+        verificaUsuario();
     }
 
     private void OcultaBotoes() {
@@ -855,6 +857,14 @@ public class DetalharFornecedor extends javax.swing.JFrame {
         if (telaExibeForn != null) {
             telaExibeForn.setVisible(true);
         }
+    }
+    
+    public void verificaUsuario(){        
+        if(TipoUsuario() == false){
+            jBtnAltEnd.setVisible(false);
+            jButtonEditarContato.setVisible(false);
+            jBtnExcluirContato.setVisible(false);
+        }    
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

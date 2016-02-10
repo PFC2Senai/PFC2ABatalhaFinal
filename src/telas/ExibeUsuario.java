@@ -12,6 +12,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.ListSelectionModel;
+import static telas.TelaLogin.TipoUsuario;
 
 /**
  *
@@ -31,6 +32,7 @@ public class ExibeUsuario extends javax.swing.JFrame {
     public ExibeUsuario() {
         initComponents();
         TabelaUsuario("select * from tabUsuario;");
+        verificaUsuario();
     }
 
     public static int GetIndice() {
@@ -290,6 +292,13 @@ public class ExibeUsuario extends javax.swing.JFrame {
 
             TabelaUsuario("select  * from tabusuario where " + opcaoPesquisa
                 + " like '%" + txtBuscar.getText() + "%' ;");
+        }
+    }
+        
+        public void verificaUsuario(){
+            if(TipoUsuario() == false){
+            jBtnEditarUsuario.setVisible(false);
+            jButton6.setVisible(false);
         }
     }//GEN-LAST:event_jComboBoxTipoUserActionPerformed
 
