@@ -15,7 +15,6 @@ import funcoes.LimitarDigitos;
 import funcoes.PessoaContatoDAO;
 import funcoes.SetorDAO;
 import java.awt.Color;
-import java.awt.Toolkit;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 import java.io.IOException;
@@ -26,7 +25,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -40,7 +38,17 @@ public class CadastrarCliente extends javax.swing.JFrame {
     private ExibeCliente telaExibeCliente;
 
     public CadastrarCliente() {
-        initComponents();        
+        initComponents();
+        telaCliente = this;
+        carregarComboSegmento();
+        txtSetor.setVisible(false);
+        jBtnSalvarSetor.setVisible(false);
+        jBtnCancelarSetor.setVisible(false);
+        combobox();
+
+        txtEstado.setDocument(new LimitarDigitos(4));
+        txtNumero.setDocument(new LimitarDigitos(6));
+        txtTelCel.setDocument(new LimitarDigitos(12));
     }
 
     public CadastrarCliente(Menu menu) {
@@ -84,7 +92,7 @@ public class CadastrarCliente extends javax.swing.JFrame {
             txtEmpresa.setBackground(Color.yellow);
             valida = false;
             return valida;
-        }else{
+        } else {
             txtEmpresa.setBackground(Color.white);
         }
 
@@ -94,44 +102,44 @@ public class CadastrarCliente extends javax.swing.JFrame {
             txtCnpj.setBackground(Color.yellow);
             valida = false;
             return valida;
-        }else{
+        } else {
             txtCnpj.setBackground(Color.white);
         }
-        
+
         if (jComboBoxSetores.getSelectedIndex() == 0) {
             JOptionPane.showMessageDialog(null, "Preencha o campo SEGMENTO!");
             jComboBoxSetores.requestFocus();
             valida = false;
             return valida;
         }
-                
+
         if (txtPais.getText().trim().equals("")) {
             JOptionPane.showMessageDialog(null, "Preencha o campo PAÍS!");
             txtPais.requestFocus();
             txtPais.setBackground(Color.yellow);
             valida = false;
             return valida;
-        }else{
+        } else {
             txtPais.setBackground(Color.white);
         }
-        
+
         if (txtCep.getText().trim().equals("-")) {
             JOptionPane.showMessageDialog(null, "Preencha o campo CEP!");
             txtCep.requestFocus();
             txtCep.setBackground(Color.yellow);
             valida = false;
             return valida;
-        }else{
+        } else {
             txtCep.setBackground(Color.white);
         }
-        
+
         if (txtCidade.getText().trim().equals("")) {
             JOptionPane.showMessageDialog(null, "Preencha o campo CIDADE!");
             txtCidade.requestFocus();
             txtCidade.setBackground(Color.yellow);
             valida = false;
             return valida;
-        }else{
+        } else {
             txtCidade.setBackground(Color.white);
         }
 
@@ -141,7 +149,7 @@ public class CadastrarCliente extends javax.swing.JFrame {
             txtRua.setBackground(Color.yellow);
             valida = false;
             return valida;
-        }else{
+        } else {
             txtRua.setBackground(Color.white);
         }
 
@@ -151,7 +159,7 @@ public class CadastrarCliente extends javax.swing.JFrame {
             txtEstado.setBackground(Color.yellow);
             valida = false;
             return valida;
-        }else{
+        } else {
             txtEstado.setBackground(Color.white);
         }
 
@@ -161,7 +169,7 @@ public class CadastrarCliente extends javax.swing.JFrame {
             txtBairro.setBackground(Color.yellow);
             valida = false;
             return valida;
-        }else{
+        } else {
             txtBairro.setBackground(Color.white);
         }
 
@@ -172,7 +180,7 @@ public class CadastrarCliente extends javax.swing.JFrame {
             txtNumero.setBackground(Color.yellow);
             valida = false;
             return valida;
-        }else{
+        } else {
             txtNumero.setBackground(Color.white);
         }
 
@@ -183,7 +191,7 @@ public class CadastrarCliente extends javax.swing.JFrame {
         }
         return valida;
     }
-    
+
     private boolean VerificaItensContato() {
 
         boolean validar = true;
@@ -196,22 +204,22 @@ public class CadastrarCliente extends javax.swing.JFrame {
             return validar;
         }
 
-       if (txtTel01.getText().trim().length() != 13) {
+        if (txtTel01.getText().trim().length() != 13) {
             JOptionPane.showMessageDialog(null, "Preencha o campo TELEFONE!");
             txtTel01.requestFocus();
             txtTel01.setBackground(Color.yellow);
             validar = false;
             return validar;
         }
-       
-       if (txtTelCel.getText().trim().equals("")) {
+
+        if (txtTelCel.getText().trim().equals("")) {
             JOptionPane.showMessageDialog(null, "Preencha o campo CELULAR!");
             txtTelCel.requestFocus();
             txtTelCel.setBackground(Color.yellow);
             validar = false;
             return validar;
         }
-       
+
         if (txtEmail.getText().trim().equals("")) {
             JOptionPane.showMessageDialog(null, "Preencha o campo EMAIL");
             txtEmail.requestFocus();
@@ -347,7 +355,7 @@ public class CadastrarCliente extends javax.swing.JFrame {
         jPanel1.setBackground(new java.awt.Color(223, 237, 253));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel1.setFont(new java.awt.Font("Microsoft YaHei UI Light", 1, 24)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Raavi", 1, 24)); // NOI18N
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/cliente3.png"))); // NOI18N
         jLabel1.setText("CADASTRAR CLIENTE");
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 70, 300, 50));
@@ -679,6 +687,12 @@ public class CadastrarCliente extends javax.swing.JFrame {
             }
         });
 
+        txtSetor.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtSetorKeyTyped(evt);
+            }
+        });
+
         jBtnNovoSetor.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/page.png"))); // NOI18N
         jBtnNovoSetor.setText("Novo Segmento");
         jBtnNovoSetor.addActionListener(new java.awt.event.ActionListener() {
@@ -796,7 +810,7 @@ public class CadastrarCliente extends javax.swing.JFrame {
             txtSetor.setBackground(Color.white);
             jBtnSalvarSetor.setVisible(false);
             jBtnCancelarSetor.setVisible(false);
-            jBtnNovoSetor.setVisible(true);
+            jBtnNovoSetor.setVisible(true);///////////
             txtSetor.setVisible(false);
             txtSetor.setText("");
             jComboBoxSetores.setVisible(true);
@@ -844,6 +858,7 @@ public class CadastrarCliente extends javax.swing.JFrame {
         String carac = "ç,.!?@:;/^~´`#$%¨&*()-_='+{[]}";
         if (carac.contains(evt.getKeyChar() + "")) {
             evt.consume();
+            JOptionPane.showMessageDialog(this, "Não é possivel digitar espaços ou caracteres inválidos !");
         }
     }//GEN-LAST:event_txtEmpresaKeyTyped
 
@@ -878,11 +893,16 @@ public class CadastrarCliente extends javax.swing.JFrame {
         String car = txtNumero.getText().toUpperCase();
         if (!caracteres.contains(evt.getKeyChar() + "")) {
             evt.consume();
+            JOptionPane.showMessageDialog(this, "Não é possivel digitar espaços ou caracteres inválidos !");
         }
     }//GEN-LAST:event_txtNumeroKeyTyped
 
     private void txtCepActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCepActionPerformed
-        CarregaCep();
+        if (txtCep.getText().trim().equals("-")) {
+            JOptionPane.showMessageDialog(null, "Primeiro preencha o campo CEP!");
+        } else {
+            CarregaCep();
+        }
     }//GEN-LAST:event_txtCepActionPerformed
 
     private void jBtnRemoverContatoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnRemoverContatoActionPerformed
@@ -901,6 +921,7 @@ public class CadastrarCliente extends javax.swing.JFrame {
         String caracteres = "0987654321";
         if (!caracteres.contains(evt.getKeyChar() + "")) {
             evt.consume();
+            JOptionPane.showMessageDialog(this, "Digite apenas números !");
         }
     }//GEN-LAST:event_txtTelCelKeyTyped
 
@@ -995,7 +1016,7 @@ public class CadastrarCliente extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "Cliente ja cadastrado !");
             }
         }
-       
+
     }//GEN-LAST:event_btnCadClienteActionPerformed
 
     private void txtEmailFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtEmailFocusLost
@@ -1034,6 +1055,11 @@ public class CadastrarCliente extends javax.swing.JFrame {
             evt.consume();
         }
     }//GEN-LAST:event_txtEmailKeyTyped
+
+    private void txtSetorKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSetorKeyTyped
+        // TODO add your handling code here:
+        //JOptionPane.showMessageDialog(this, "Não é possivel digitar espaços ou caracteres inválidos !");
+    }//GEN-LAST:event_txtSetorKeyTyped
 
     private void carregarComboSegmento() {
 
@@ -1177,7 +1203,7 @@ public class CadastrarCliente extends javax.swing.JFrame {
                     txtEstado.setText(cep.getUF(ceptxt));
 
                 } catch (IOException ex) {
-                    JOptionPane.showMessageDialog(null, "CEP não encontrado.");
+                    JOptionPane.showMessageDialog(null, ex);
                 }
             }
         });
