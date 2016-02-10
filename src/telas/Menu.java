@@ -511,15 +511,18 @@ public class Menu extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jBtnRotinaContatoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnRotinaContatoActionPerformed
-        new CadastrarRotinaContato().setVisible(true);
+        this.setEnabled(false);
+        new CadastrarRotinaContato(this).setVisible(true);
     }//GEN-LAST:event_jBtnRotinaContatoActionPerformed
 
     private void jBtnCadastrarLembreteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnCadastrarLembreteActionPerformed
-        new CadastrarLembrete().setVisible(true);
+        this.setEnabled(false);
+        new CadastrarLembrete(this).setVisible(true);
     }//GEN-LAST:event_jBtnCadastrarLembreteActionPerformed
 
     private void jBtnPropostaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnPropostaActionPerformed
-        new Proposta().setVisible(true);
+        this.setEnabled(false);
+        new Proposta(this).setVisible(true);
     }//GEN-LAST:event_jBtnPropostaActionPerformed
 
     private void jBtnFazerBackupActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnFazerBackupActionPerformed

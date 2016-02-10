@@ -377,7 +377,8 @@ public class CadastrarEquipamento extends javax.swing.JFrame {
             pst = conexao.prepareStatement(sql);
             rs = pst.executeQuery();
 
-            while (rs.next()) {
+            jComboBoxEquipamento.addItem("Selecione o equipemento");
+            while (rs.next()) { 
                 jComboBoxEquipamento.addItem(rs.getString("equipamento"));
             }
         } catch (SQLException ex) {

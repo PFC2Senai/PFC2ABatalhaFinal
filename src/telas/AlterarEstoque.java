@@ -179,7 +179,7 @@ public final class AlterarEstoque extends javax.swing.JFrame {
             }
         });
 
-        jPanel2.setBackground(new java.awt.Color(255, 204, 204));
+        jPanel2.setBackground(new java.awt.Color(223, 237, 253));
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jBtnCancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/cancelar.png"))); // NOI18N
@@ -213,7 +213,7 @@ public final class AlterarEstoque extends javax.swing.JFrame {
         });
         jPanel2.add(jBtnAdicionar, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 530, -1, -1));
 
-        jPanel1.setBackground(new java.awt.Color(255, 204, 204));
+        jPanel1.setBackground(new java.awt.Color(223, 237, 253));
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
 
         txtModelo.setText("modelo");
@@ -290,7 +290,7 @@ public final class AlterarEstoque extends javax.swing.JFrame {
 
         jPanel2.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 190, 790, -1));
 
-        jPanel3.setBackground(new java.awt.Color(255, 204, 204));
+        jPanel3.setBackground(new java.awt.Color(223, 237, 253));
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
 
         txtPrecoEntrada.setEnabled(false);
