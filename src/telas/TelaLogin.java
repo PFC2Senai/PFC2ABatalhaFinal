@@ -3,7 +3,7 @@ package telas;
 import atributos.Auditoria;
 import atributos.Usuario;
 import funcoes.AuditoriaDAO;
-import funcoes.ConexaoPermissoes;
+import funcoes.Conexao;
 import java.awt.Color;
 import java.sql.SQLException;
 import java.util.logging.Level;
@@ -16,7 +16,7 @@ import javax.swing.JOptionPane;
  */
 public class TelaLogin extends javax.swing.JFrame {
 
-    ConexaoPermissoes conexao = new ConexaoPermissoes();
+    Conexao conexao = new Conexao();
 
     private static int codAuditoria;
     private static boolean valida = true;

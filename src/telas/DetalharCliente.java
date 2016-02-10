@@ -9,7 +9,7 @@ import funcoes.CarregaCEP;
 import funcoes.ClienteDAO;
 import funcoes.Conexao;
 import static funcoes.Conexao.getConnection;
-import funcoes.ConexaoPermissoes;
+import funcoes.Conexao;
 import funcoes.ContatosDAO;
 import funcoes.DetEquipamentoClienteDAO;
 import funcoes.LembreteDAO;
@@ -37,6 +37,7 @@ import javax.swing.border.LineBorder;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableCellRenderer;
 import static telas.ExibeCliente.GetIndice;
+import static telas.TelaLogin.TipoUsuario;
 
 public class DetalharCliente extends javax.swing.JFrame {
 
@@ -63,29 +64,6 @@ public class DetalharCliente extends javax.swing.JFrame {
     public DetalharCliente(String user) {
         initComponents();
         this.codCliente = GetIndice();
-//        conexao.conexao();
-//        jLabelUsuario.setText(user);
-        
-        
-       // try {
-//            conexao.executaSQL("select * from tabusuario where usuario = '"+jLabelUsuario.getText()+"'");
-//            conexao.rs.first();
-//            
-//            if(conexao.rs.getString("tipo_usuario").equals("F")){
-            jBtnAltDadosP.setVisible(false);  
-            jButtonEditarContato.setVisible(false);
-            jBtnExcluirRotina.setVisible(false);
-            jBtnExcluirContato.setVisible(false);
-            jBtnAltEndereco.setVisible(false);
-            jBtnExcluir.setVisible(false);
-            
-         //   }
-            
-          //  else{}
-//        } catch (SQLException ex) {
-//            Logger.getLogger(Menu.class.getName()).log(Level.SEVERE, null, ex);
-//        }
-
     }
 
     public DetalharCliente(ExibeCliente exibeCli) {
@@ -104,6 +82,17 @@ public class DetalharCliente extends javax.swing.JFrame {
         TabelaContatos();
         combobox();
         botoes();
+        
+        if(TipoUsuario() == true){
+            jBtnAltDadosP.setVisible(false);  
+            jButtonEditarContato.setVisible(false);
+            jBtnExcluirRotina.setVisible(false);
+            jBtnExcluirContato.setVisible(false);
+            jBtnAltEndereco.setVisible(false);
+            jBtnExcluir.setVisible(false);
+            jBtnExcluirEquipCli.setVisible(false);
+            
+          }
 
         //txtEmpresa.setDocument(new LimitarDigitos(45));
         //txtSetor.setDocument(new LimitarDigitos(50));
