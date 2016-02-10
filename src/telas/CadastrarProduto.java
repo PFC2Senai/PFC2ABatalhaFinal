@@ -19,6 +19,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
@@ -668,8 +669,9 @@ public class CadastrarProduto extends javax.swing.JFrame {
         if (txtPrecoEntrada.getText().trim().equals("") || txtPercentual.getText().trim().equals("")) {
         } else {
             float percentual = Float.parseFloat(txtPercentual.getText());
-            double precoEntrada = Double.parseDouble(txtPrecoEntrada.getText());
-            double resultado = (precoEntrada * percentual) / 100;
+            float precoEntrada = Float.parseFloat(txtPrecoEntrada.getText().replace(".", ","));
+            float resultado = (precoEntrada * percentual) / 100;
+            
             txtPrecoSaida.setText(String.valueOf(precoEntrada + resultado));
         }
     }//GEN-LAST:event_jBtnCalcularPercentualActionPerformed

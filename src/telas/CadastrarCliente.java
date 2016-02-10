@@ -340,6 +340,7 @@ public class CadastrarCliente extends javax.swing.JFrame {
         jBtnSalvarSetor = new javax.swing.JButton();
         jBtnCancelarSetor = new javax.swing.JButton();
         jLabelCnpjExistente = new javax.swing.JLabel();
+        jLabelCnpjExistente1 = new javax.swing.JLabel();
         btnCadCliente = new javax.swing.JButton();
         jLabel17 = new javax.swing.JLabel();
 
@@ -374,6 +375,12 @@ public class CadastrarCliente extends javax.swing.JFrame {
 
         jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/funcionario.png"))); // NOI18N
         jLabel5.setText("Contato:");
+
+        txtContato.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtContatoKeyTyped(evt);
+            }
+        });
 
         jBtnOutroContato.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/add.png"))); // NOI18N
         jBtnOutroContato.setText("Adicionar contato");
@@ -659,6 +666,11 @@ public class CadastrarCliente extends javax.swing.JFrame {
 
         jLabel3.setText("Empresa:");
 
+        txtEmpresa.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtEmpresaFocusLost(evt);
+            }
+        });
         txtEmpresa.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txtEmpresaKeyTyped(evt);
@@ -719,6 +731,8 @@ public class CadastrarCliente extends javax.swing.JFrame {
 
         jLabelCnpjExistente.setForeground(new java.awt.Color(255, 0, 0));
 
+        jLabelCnpjExistente1.setForeground(new java.awt.Color(255, 0, 0));
+
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
@@ -750,6 +764,11 @@ public class CadastrarCliente extends javax.swing.JFrame {
                         .addComponent(jBtnCancelarSetor)
                         .addGap(5, 5, 5)
                         .addComponent(jBtnSalvarSetor))))
+            .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel4Layout.createSequentialGroup()
+                    .addGap(584, 584, 584)
+                    .addComponent(jLabelCnpjExistente1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGap(90, 90, 90)))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -773,6 +792,11 @@ public class CadastrarCliente extends javax.swing.JFrame {
                     .addComponent(jBtnNovoSetor)
                     .addComponent(jBtnCancelarSetor)
                     .addComponent(jBtnSalvarSetor)))
+            .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel4Layout.createSequentialGroup()
+                    .addGap(21, 21, 21)
+                    .addComponent(jLabelCnpjExistente1, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(29, Short.MAX_VALUE)))
         );
 
         jPanel1.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 130, 790, 90));
@@ -950,7 +974,7 @@ public class CadastrarCliente extends javax.swing.JFrame {
 
         if (VerificaCampos() == true) {
 
-            if (ClienteDAO.VerificarCliente(txtCnpj.getText()) == false) {
+            if (ClienteDAO.VerificarCliente(txtCnpj.getText()) && ClienteDAO.VerificarClienteNome(txtEmpresa.getText()) == false) {
 
                 Cliente cli = new Cliente();
                 Telefone tel = new Telefone();
@@ -1062,6 +1086,24 @@ public class CadastrarCliente extends javax.swing.JFrame {
         // TODO add your handling code here:
         //JOptionPane.showMessageDialog(this, "Não é possivel digitar espaços ou caracteres inválidos !");
     }//GEN-LAST:event_txtSetorKeyTyped
+
+    private void txtEmpresaFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtEmpresaFocusLost
+        // TODO add your handling code here:
+        if (ClienteDAO.VerificarClienteNome(txtEmpresa.getText()) == true) {
+            jLabelCnpjExistente.setText("Este nome ja está cadastrado no sistema");
+        } else {
+            jLabelCnpjExistente.setText("");
+        }
+    }//GEN-LAST:event_txtEmpresaFocusLost
+
+    private void txtContatoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtContatoKeyTyped
+        // TODO add your handling code here:
+        String caracteres = "qwertyuiopasdfghjklçzxcvbnm";
+        if (!caracteres.contains(evt.getKeyChar() + "")) {
+            evt.consume();
+            JOptionPane.showMessageDialog(this, "Digite apenas números !");
+        }
+    }//GEN-LAST:event_txtContatoKeyTyped
 
     private void carregarComboSegmento() {
 
@@ -1234,11 +1276,43 @@ public class CadastrarCliente extends javax.swing.JFrame {
             // this.telaExibeCliente.toFront();
         }
     }
-    
-    
-        /**
+
+    /**
      * @param args the command line arguments
      */
+    public static void main(String args[]) {
+        /* Set the Nimbus look and feel */
+        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         */
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Windows".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (ClassNotFoundException ex) {
+            java.util.logging.Logger.getLogger(Menu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(Menu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(Menu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(Menu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+        //</editor-fold>
+        /* Create and display the form */
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                new CadastrarCliente().setVisible(true);
+//                Agendamentos a = new Agendamentos(); 
+//                a.terceiraTarefa(21);
+            }
+        });
+    }
 //    public static void main(String args[]) {
 //        /* Set the Nimbus look and feel */
 //        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -1302,6 +1376,7 @@ public class CadastrarCliente extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JLabel jLabelCnpjExistente;
+    private javax.swing.JLabel jLabelCnpjExistente1;
     private javax.swing.JLabel jLabelEmail;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
