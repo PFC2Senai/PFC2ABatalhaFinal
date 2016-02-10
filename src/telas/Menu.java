@@ -9,6 +9,7 @@ import java.util.logging.Logger;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
+import static telas.TelaLogin.TipoUsuario;
 
 /**
  *
@@ -32,6 +33,7 @@ public class Menu extends javax.swing.JFrame {
     public Menu(String user) {
         initComponents();
         conexao.conexao();
+        verificaUsuario();
         jLabelUsuario.setText(user);
         telaMenu = this;
         jBtnRotinaContato.setVerticalTextPosition(SwingConstants.BOTTOM);
@@ -716,6 +718,14 @@ public class Menu extends javax.swing.JFrame {
     
         //
         
+    }
+    
+    
+    public void verificaUsuario(){
+        if(TipoUsuario() == false){
+            jMenuItem8.setVisible(false);
+            
+          }
     }
     
 //    /**
