@@ -289,6 +289,11 @@ public class AdicionaDetVendaProduto extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("ADICIONAR PEÇA");
         setResizable(false);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosed(java.awt.event.WindowEvent evt) {
+                formWindowClosed(evt);
+            }
+        });
 
         jPanel1.setBackground(new java.awt.Color(223, 237, 253));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -532,9 +537,21 @@ public class AdicionaDetVendaProduto extends javax.swing.JFrame {
     }//GEN-LAST:event_uJComboBoxPecaActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
+        verificaPagina();
+        this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
+        verificaPagina();
+    }//GEN-LAST:event_formWindowClosed
+
+    private void verificaPagina() {
+
+        if ((this.telaExibeDetVenda != null)) {
+            this.telaExibeDetVenda.setVisible(true);
+        }
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBtbIncluirPeca;
     private javax.swing.JButton jBtnInserirPeca;

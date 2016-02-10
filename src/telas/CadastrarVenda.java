@@ -57,6 +57,7 @@ public class CadastrarVenda extends javax.swing.JFrame {
     private double valor;
     private double valorUnit;
     private Menu telaMenu;
+    private ExibeVenda telaExibeVenda;
 
     /**
      * Creates new form CadastrarVenda
@@ -72,6 +73,16 @@ public class CadastrarVenda extends javax.swing.JFrame {
     
     public CadastrarVenda(Menu menu) {
         telaMenu = menu;
+        initComponents();
+        combobox();
+        carregarComboPeca();
+        carregarComboClientes();
+        ocultaColunaTabelas();
+        jButton6.setVisible(false);
+    }
+    
+    public CadastrarVenda(ExibeVenda exibeVenda) {
+        this.telaExibeVenda = exibeVenda;
         initComponents();
         combobox();
         carregarComboPeca();
@@ -869,6 +880,8 @@ public class CadastrarVenda extends javax.swing.JFrame {
 
         if ((this.telaMenu != null)) {
             this.telaMenu.setVisible(true);
+        }else if ((this.telaExibeVenda != null)) {
+            this.telaExibeVenda.setVisible(true);
         }
     }
     

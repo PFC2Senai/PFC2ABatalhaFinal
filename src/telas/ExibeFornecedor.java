@@ -77,7 +77,7 @@ public class ExibeFornecedor extends javax.swing.JFrame {
                 jComboUfActionPerformed(evt);
             }
         });
-        jPanel1.add(jComboUf, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 220, 270, -1));
+        jPanel1.add(jComboUf, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 190, 270, -1));
 
         jTableListarFornecedores.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -89,7 +89,7 @@ public class ExibeFornecedor extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(jTableListarFornecedores);
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 260, 640, 350));
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 230, 660, 400));
 
         jComboBoxOpcaoPesquisa.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Selecione a opção de pesquisa", "Código", "Fornecedor", "CEP" }));
         jComboBoxOpcaoPesquisa.addActionListener(new java.awt.event.ActionListener() {
@@ -97,7 +97,7 @@ public class ExibeFornecedor extends javax.swing.JFrame {
                 jComboBoxOpcaoPesquisaActionPerformed(evt);
             }
         });
-        jPanel1.add(jComboBoxOpcaoPesquisa, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 170, 250, -1));
+        jPanel1.add(jComboBoxOpcaoPesquisa, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 150, 270, -1));
 
         txtBuscar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -109,11 +109,11 @@ public class ExibeFornecedor extends javax.swing.JFrame {
                 txtBuscarKeyReleased(evt);
             }
         });
-        jPanel1.add(txtBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 170, 255, -1));
+        jPanel1.add(txtBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 150, 255, -1));
 
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/find.png"))); // NOI18N
         jLabel3.setText("Filtrar:");
-        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 220, -1, -1));
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 190, -1, 20));
 
         jBtnNovoFornecedor.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jBtnNovoFornecedor.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/fornecedoradd2.fw.png"))); // NOI18N
@@ -123,11 +123,11 @@ public class ExibeFornecedor extends javax.swing.JFrame {
                 jBtnNovoFornecedorActionPerformed(evt);
             }
         });
-        jPanel1.add(jBtnNovoFornecedor, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 230, 133, -1));
+        jPanel1.add(jBtnNovoFornecedor, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 230, 133, -1));
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/pesquisar.gif"))); // NOI18N
         jLabel2.setText("Pesquisar por:");
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 180, -1, -1));
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 150, -1, 20));
 
         jBtnVoltar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/voltar.png"))); // NOI18N
         jBtnVoltar.setText("Voltar");
@@ -136,7 +136,7 @@ public class ExibeFornecedor extends javax.swing.JFrame {
                 jBtnVoltarActionPerformed(evt);
             }
         });
-        jPanel1.add(jBtnVoltar, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 630, -1, -1));
+        jPanel1.add(jBtnVoltar, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 650, -1, -1));
 
         jBtnDetalhar.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jBtnDetalhar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/fornecedorConsulta.fw.png"))); // NOI18N
@@ -150,7 +150,7 @@ public class ExibeFornecedor extends javax.swing.JFrame {
                 jBtnDetalharActionPerformed(evt);
             }
         });
-        jPanel1.add(jBtnDetalhar, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 350, -1, -1));
+        jPanel1.add(jBtnDetalhar, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 320, -1, -1));
 
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/leiaute/img3.png"))); // NOI18N
         jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -10, 860, 140));
@@ -163,7 +163,7 @@ public class ExibeFornecedor extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 692, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         bindingGroup.bind();

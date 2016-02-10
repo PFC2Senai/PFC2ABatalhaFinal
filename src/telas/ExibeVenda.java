@@ -80,9 +80,9 @@ public class ExibeVenda extends javax.swing.JFrame {
                 TableCellRenderer renderer = new TabelaZebrada();
                 jTableListarVendas.setDefaultRenderer(Object.class, renderer);
                 
-                jTableListarVendas.getColumnModel().getColumn(0).setPreferredWidth(100);
+                jTableListarVendas.getColumnModel().getColumn(0).setPreferredWidth(150);
                 jTableListarVendas.getColumnModel().getColumn(1).setPreferredWidth(300);
-                jTableListarVendas.getColumnModel().getColumn(2).setPreferredWidth(100);
+                jTableListarVendas.getColumnModel().getColumn(2).setPreferredWidth(150);
                 jTableListarVendas.getColumnModel().getColumn(3).setPreferredWidth(100);
                 
                 jTableListarVendas.getColumnModel().getColumn(i).setResizable(false);
@@ -127,7 +127,6 @@ public class ExibeVenda extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         jButton1 = new javax.swing.JButton();
-        jButton7 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jBtnVoltar = new javax.swing.JButton();
 
@@ -175,15 +174,6 @@ public class ExibeVenda extends javax.swing.JFrame {
         });
         jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 230, 90, 32));
 
-        jButton7.setFont(new java.awt.Font("Raavi", 1, 12)); // NOI18N
-        jButton7.setText("Voltar");
-        jButton7.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton7ActionPerformed(evt);
-            }
-        });
-        jPanel1.add(jButton7, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 290, 90, 30));
-
         jButton3.setFont(new java.awt.Font("Raavi", 1, 12)); // NOI18N
         jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/add.png"))); // NOI18N
         jButton3.setText("Novo");
@@ -210,17 +200,14 @@ public class ExibeVenda extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        new CadastrarVenda().setVisible(true);
+        this.setVisible(false);
+        new CadastrarVenda(this).setVisible(true);
     }//GEN-LAST:event_jButton3ActionPerformed
-
-    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
-        this.dispose();
-    }//GEN-LAST:event_jButton7ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         if (CodigoVenda()) {
-            this.dispose();
-            new ExibeDetVenda().setVisible(true);
+            this.setVisible(false);           
+            new ExibeDetVenda(this).setVisible(true);
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -244,7 +231,6 @@ public class ExibeVenda extends javax.swing.JFrame {
     private javax.swing.JButton jBtnVoltar;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton7;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;

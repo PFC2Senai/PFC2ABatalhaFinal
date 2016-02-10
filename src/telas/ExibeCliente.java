@@ -175,7 +175,7 @@ public final class ExibeCliente extends javax.swing.JFrame {
         jPanel1.setBackground(new java.awt.Color(223, 237, 253));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jComboBoxOpcaoPesquisa.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Selecione a opção de pesquisa", "Código", "Nome", "CNPJ" }));
+        jComboBoxOpcaoPesquisa.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Detalhe de Cliente", "Código", "Nome", "CNPJ" }));
         jComboBoxOpcaoPesquisa.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jComboBoxOpcaoPesquisaActionPerformed(evt);
@@ -194,7 +194,7 @@ public final class ExibeCliente extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(jTableListarClientes);
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 250, 600, 270));
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 250, 650, 370));
 
         jBtnCadastrarNovoCliente.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jBtnCadastrarNovoCliente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/cliente2.fw.png"))); // NOI18N
@@ -204,7 +204,7 @@ public final class ExibeCliente extends javax.swing.JFrame {
                 jBtnCadastrarNovoClienteActionPerformed(evt);
             }
         });
-        jPanel1.add(jBtnCadastrarNovoCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 230, 140, -1));
+        jPanel1.add(jBtnCadastrarNovoCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 250, 140, -1));
 
         jBtnRotinaContato.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jBtnRotinaContato.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/1452414361_kontact_1.png"))); // NOI18N
@@ -218,7 +218,7 @@ public final class ExibeCliente extends javax.swing.JFrame {
                 jBtnRotinaContatoActionPerformed(evt);
             }
         });
-        jPanel1.add(jBtnRotinaContato, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 550, 140, -1));
+        jPanel1.add(jBtnRotinaContato, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 560, 140, -1));
 
         jLabel5.setText("Estado:");
         jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 210, -1, -1));
@@ -245,7 +245,7 @@ public final class ExibeCliente extends javax.swing.JFrame {
         jLabel2.setText("Pesquisar:");
         jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 160, -1, -1));
 
-        jLabel4.setText("Filtrar:");
+        jLabel4.setText("Segmento:");
         jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 210, -1, -1));
 
         jComboBoxSetores.addActionListener(new java.awt.event.ActionListener() {
@@ -262,7 +262,7 @@ public final class ExibeCliente extends javax.swing.JFrame {
                 jBtnVoltarMenuActionPerformed(evt);
             }
         });
-        jPanel1.add(jBtnVoltarMenu, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 600, -1, -1));
+        jPanel1.add(jBtnVoltarMenu, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 630, -1, -1));
 
         jComboUf.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Selecione", "AC", "AL", "AP", "AM", "BA", "CE", "DF", "ES", "GO", "MA", "MT", "MS", "MG", "PA", "PB", "PR", "PE", "PI", "RJ", "RN", "RS", "RO", "RR", "SC", "SP", "SE", "TO" }));
         jComboUf.addActionListener(new java.awt.event.ActionListener() {
@@ -289,7 +289,7 @@ public final class ExibeCliente extends javax.swing.JFrame {
                 jBtnLembreteActionPerformed(evt);
             }
         });
-        jPanel1.add(jBtnLembrete, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 470, 140, -1));
+        jPanel1.add(jBtnLembrete, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 450, 140, -1));
 
         jBtnEditar.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jBtnEditar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/cliente3.fw.png"))); // NOI18N
@@ -303,7 +303,7 @@ public final class ExibeCliente extends javax.swing.JFrame {
                 jBtnEditarActionPerformed(evt);
             }
         });
-        jPanel1.add(jBtnEditar, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 340, 140, -1));
+        jPanel1.add(jBtnEditar, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 350, 140, -1));
 
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/leiaute/img3.png"))); // NOI18N
         jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 850, 130));
