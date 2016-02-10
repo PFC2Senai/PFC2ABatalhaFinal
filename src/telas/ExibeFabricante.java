@@ -6,6 +6,7 @@ import static funcoes.Conexao.getConnection;
 import funcoes.FabricanteDAO;
 import funcoes.ModeloTabela;
 import funcoes.TabelaZebrada;
+import java.awt.Color;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -166,7 +167,7 @@ public class ExibeFabricante extends javax.swing.JFrame {
         });
         getContentPane().add(txtBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 130, 280, 20));
 
-        jPanel2.setBackground(new java.awt.Color(204, 255, 204));
+        jPanel2.setBackground(new java.awt.Color(223, 237, 253));
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel4.setText("Fabiricante:");
@@ -233,6 +234,7 @@ public class ExibeFabricante extends javax.swing.JFrame {
         });
         jPanel2.add(jBtnAlterarFabricante, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 510, -1, -1));
 
+        jButton8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/voltar.png"))); // NOI18N
         jButton8.setText("Voltar");
         jButton8.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -276,6 +278,7 @@ public class ExibeFabricante extends javax.swing.JFrame {
 
     private void jBtnCancelarCadFabricanteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnCancelarCadFabricanteActionPerformed
 
+        txtFabricante.setBackground(Color.white);
         txtFabricante.setText("");
         txtFabricante.setEnabled(false);
         limparCampos();
@@ -293,6 +296,13 @@ public class ExibeFabricante extends javax.swing.JFrame {
 
     private void jBtnCadastrarFabricanteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnCadastrarFabricanteActionPerformed
 
+        if (txtFabricante.getText().trim().equals("")) {
+            JOptionPane.showMessageDialog(null, "Preencha o FABRICANTE!");
+            txtFabricante.requestFocus();
+            txtFabricante.setBackground(Color.yellow);
+        }
+        else
+        
         if (FabricanteDAO.VerificarFabricante(txtFabricante.getText()) == false) {
 
             Fabricante fab = new Fabricante();

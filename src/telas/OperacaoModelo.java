@@ -117,8 +117,8 @@ public class OperacaoModelo extends javax.swing.JFrame {
         jBtnCadastrarModelo = new javax.swing.JButton();
         jBtnAlterarModelo = new javax.swing.JButton();
         jBtnCancelarAlterarModelo = new javax.swing.JButton();
-        jBtnEditarModelo = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
+        jBtnEditarModelo = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setResizable(false);
@@ -169,6 +169,7 @@ public class OperacaoModelo extends javax.swing.JFrame {
         jLabel2.setText("Pesquisar:");
         getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(35, 134, -1, -1));
 
+        jButton7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/voltar.png"))); // NOI18N
         jButton7.setText("Voltar");
         jButton7.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -177,13 +178,14 @@ public class OperacaoModelo extends javax.swing.JFrame {
         });
         getContentPane().add(jButton7, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 580, -1, -1));
 
+        jBtnNovoModelo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/add.png"))); // NOI18N
         jBtnNovoModelo.setText("Novo");
         jBtnNovoModelo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jBtnNovoModeloActionPerformed(evt);
             }
         });
-        getContentPane().add(jBtnNovoModelo, new org.netbeans.lib.awtextra.AbsoluteConstraints(35, 480, -1, -1));
+        getContentPane().add(jBtnNovoModelo, new org.netbeans.lib.awtextra.AbsoluteConstraints(35, 480, 80, -1));
 
         jBtnCancelarCadModelo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/cancelar.png"))); // NOI18N
         jBtnCancelarCadModelo.setText("Cancelar");
@@ -221,6 +223,9 @@ public class OperacaoModelo extends javax.swing.JFrame {
         });
         getContentPane().add(jBtnCancelarAlterarModelo, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 520, -1, -1));
 
+        jPanel1.setBackground(new java.awt.Color(207, 222, 252));
+
+        jBtnEditarModelo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/editar.png"))); // NOI18N
         jBtnEditarModelo.setText("Editar");
 
         org.jdesktop.beansbinding.Binding binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, jTableListarModelo, org.jdesktop.beansbinding.ELProperty.create("${selectedElement  !=null}"), jBtnEditarModelo, org.jdesktop.beansbinding.BeanProperty.create("enabled"));
@@ -231,19 +236,22 @@ public class OperacaoModelo extends javax.swing.JFrame {
                 jBtnEditarModeloActionPerformed(evt);
             }
         });
-        getContentPane().add(jBtnEditarModelo, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 480, -1, -1));
-
-        jPanel1.setBackground(new java.awt.Color(207, 222, 252));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 680, Short.MAX_VALUE)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(121, 121, 121)
+                .addComponent(jBtnEditarModelo)
+                .addContainerGap(478, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 630, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(481, Short.MAX_VALUE)
+                .addComponent(jBtnEditarModelo)
+                .addGap(124, 124, 124))
         );
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 680, 630));
@@ -295,7 +303,7 @@ public class OperacaoModelo extends javax.swing.JFrame {
         // jBtnEditarFabricante.setEnabled(true);
         jTableListarModelo.setEnabled(true);
         if (JOptionPane.showConfirmDialog(null, "Tem certeza que deseja cancelar? Os dados não serão salvos.", "Confirmar Cancelamento", JOptionPane.YES_NO_OPTION) == 0) {
-            verificaPagina();
+            //verificaPagina();
             //this.dispose();
         }
     }//GEN-LAST:event_jBtnCancelarCadModeloActionPerformed

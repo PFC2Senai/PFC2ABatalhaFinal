@@ -60,7 +60,7 @@ public class AdicionaDetServProduto extends javax.swing.JFrame {
         txtQuantidade.setDocument(new LimitarDigitos(5));
         carregarComboPeca();
         ocultaTabela();
-        
+
         uJComboBoxPeca.getEditor().getEditorComponent().addFocusListener(new FocusAdapter() {
             @Override
             public void focusLost(FocusEvent e) {
@@ -115,9 +115,10 @@ public class AdicionaDetServProduto extends javax.swing.JFrame {
         });
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel1.setFont(new java.awt.Font("Microsoft YaHei UI Light", 1, 24)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Raavi", 1, 24)); // NOI18N
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/prod.png"))); // NOI18N
         jLabel1.setText("ADICIONAR PEÇA");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 50, 250, -1));
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 50, 250, -1));
 
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/leiaute/img3.png"))); // NOI18N
         getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -8, 850, 120));
@@ -144,10 +145,22 @@ public class AdicionaDetServProduto extends javax.swing.JFrame {
 
         jLabel34.setText("Quant.:");
         jPanel1.add(jLabel34, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 170, -1, -1));
+
+        txtQuantidade.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtQuantidadeKeyTyped(evt);
+            }
+        });
         jPanel1.add(txtQuantidade, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 170, 100, -1));
 
         jLabel39.setText("Valor Unit.");
         jPanel1.add(jLabel39, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 170, 50, 20));
+
+        txtValorUnit.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtValorUnitKeyTyped(evt);
+            }
+        });
         jPanel1.add(txtValorUnit, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 170, 120, -1));
 
         jBtbIncluirPeca.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/add.png"))); // NOI18N
@@ -202,6 +215,12 @@ public class AdicionaDetServProduto extends javax.swing.JFrame {
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/money.png"))); // NOI18N
         jLabel2.setText("Valor total de peças:");
         jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 410, -1, -1));
+
+        txtTotalPecas.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtTotalPecasKeyTyped(evt);
+            }
+        });
         jPanel1.add(txtTotalPecas, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 410, 172, -1));
 
         jBtnInserirPeca.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/disk.png"))); // NOI18N
@@ -274,7 +293,7 @@ public class AdicionaDetServProduto extends javax.swing.JFrame {
 
         telaDatalharServico.TabelaProduto("SELECT * FROM vw_detservicoproduto where idservico = " + idServico + ";");
         telaDatalharServico.CarregaServico();
-           JOptionPane.showMessageDialog(null, "Cadastrado com sucesso!");
+        JOptionPane.showMessageDialog(null, "Cadastrado com sucesso!");
         verificaPagina();
         this.dispose();
     }//GEN-LAST:event_jBtnInserirPecaActionPerformed
@@ -320,7 +339,7 @@ public class AdicionaDetServProduto extends javax.swing.JFrame {
         valor = 0;
         idProdutoComboBox();
         populaComboBoxModelo();
-        
+
         txtModelo.requestFocus();
 
         if (uJComboBoxPeca.getSelectedItem() != null) {
@@ -339,8 +358,8 @@ public class AdicionaDetServProduto extends javax.swing.JFrame {
         if (JOptionPane.showConfirmDialog(null, "Tem certeza que deseja canselar? Os dados não serão salvos.", "Confirmar Cancelamento", JOptionPane.YES_NO_OPTION) == 0) {
             verificaPagina();
             this.dispose();
-          }
-         
+        }
+
     }//GEN-LAST:event_jBtnCancelarActionPerformed
 
     private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
@@ -351,9 +370,9 @@ public class AdicionaDetServProduto extends javax.swing.JFrame {
         jComboBoxFabricante.removeAllItems();
         idModeloComboBox();
         populaComboBoxFabricante();
-        txtValorUnit.setText("");       
+        txtValorUnit.setText("");
         modelo = txtModelo.getText();
-        CarregaValorUnit();      
+        CarregaValorUnit();
     }//GEN-LAST:event_txtModeloActionPerformed
 
     private void jTablePecasFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTablePecasFocusGained
@@ -364,10 +383,37 @@ public class AdicionaDetServProduto extends javax.swing.JFrame {
         jComboBoxFabricante.removeAllItems();
         idModeloComboBox();
         populaComboBoxFabricante();
-        txtValorUnit.setText("");       
+        txtValorUnit.setText("");
         modelo = txtModelo.getText();
-        CarregaValorUnit(); 
+        CarregaValorUnit();
     }//GEN-LAST:event_txtModeloFocusGained
+
+    private void txtQuantidadeKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtQuantidadeKeyTyped
+        // TODO add your handling code here:
+        String caracteres = "0987654321";
+        if (!caracteres.contains(evt.getKeyChar() + "")) {
+            evt.consume();
+            JOptionPane.showMessageDialog(this, "Digite apenas números !");
+        }
+    }//GEN-LAST:event_txtQuantidadeKeyTyped
+
+    private void txtValorUnitKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtValorUnitKeyTyped
+        // TODO add your handling code here:
+        String caracteres = "0987654321,.";
+        if (!caracteres.contains(evt.getKeyChar() + "")) {
+            evt.consume();
+            JOptionPane.showMessageDialog(this, "Digite apenas números !");
+        }
+    }//GEN-LAST:event_txtValorUnitKeyTyped
+
+    private void txtTotalPecasKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTotalPecasKeyTyped
+        // TODO add your handling code here:
+        String caracteres = "0987654321";
+        if (!caracteres.contains(evt.getKeyChar() + "")) {
+            evt.consume();
+            JOptionPane.showMessageDialog(this, "Digite apenas números !");
+        }
+    }//GEN-LAST:event_txtTotalPecasKeyTyped
 
     public void TabelaProduto() {
 
@@ -525,29 +571,29 @@ public class AdicionaDetServProduto extends javax.swing.JFrame {
     }
 
     private void ocultaTabela() {
-        
+
         jTablePecas.getColumnModel().getColumn(0).setMaxWidth(0);
         jTablePecas.getColumnModel().getColumn(0).setMinWidth(0);
         jTablePecas.getTableHeader().getColumnModel().getColumn(0).setMaxWidth(0);
         jTablePecas.getTableHeader().getColumnModel().getColumn(0).setMinWidth(0);
-        
+
         jTablePecas.getColumnModel().getColumn(1).setMaxWidth(0);
         jTablePecas.getColumnModel().getColumn(1).setMinWidth(0);
         jTablePecas.getTableHeader().getColumnModel().getColumn(1).setMaxWidth(0);
         jTablePecas.getTableHeader().getColumnModel().getColumn(1).setMinWidth(0);
-        
+
         jTablePecas.getColumnModel().getColumn(2).setMaxWidth(0);
         jTablePecas.getColumnModel().getColumn(2).setMinWidth(0);
         jTablePecas.getTableHeader().getColumnModel().getColumn(2).setMaxWidth(0);
         jTablePecas.getTableHeader().getColumnModel().getColumn(2).setMinWidth(0);
     }
-    
+
     private void verificaPagina() {
 
         if ((this.telaDatalharServico != null)) {
             this.telaDatalharServico.setEnabled(true);
             this.telaDatalharServico.toFront();
-            
+
         }
     }
 
