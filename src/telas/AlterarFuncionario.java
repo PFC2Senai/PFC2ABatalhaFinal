@@ -36,13 +36,13 @@ public class AlterarFuncionario extends javax.swing.JFrame {
      */
     private void limitarDigitos() {
 
-        //    jTextSalario.setDocument(new LimitarDigitos(15));
-        //    jTextCtps.setDocument(new LimitarDigitos(14));
-        //    jTextNumCtps.setDocument(new LimitarDigitos(7));
-        //    jTextSerieCtps.setDocument(new LimitarDigitos(4));
-        //    txtTelCel.setDocument(new LimitarDigitos(12));
-        //    txtEndNum.setDocument(new LimitarDigitos(7));
-        //    txtEndEstado.setDocument(new LimitarDigitos(2));
+        jTextSalario.setDocument(new LimitarDigitos(15));
+        jTextCtps.setDocument(new LimitarDigitos(14));
+        jTextNumCtps.setDocument(new LimitarDigitos(7));
+        jTextSerieCtps.setDocument(new LimitarDigitos(4));
+        txtTelCel.setDocument(new LimitarDigitos(12));
+        //txtNumero.setDocument(new LimitarDigitos(7));
+       // txtEstado.setDocument(new LimitarDigitos(2));
     }
 
     public AlterarFuncionario() {
@@ -445,9 +445,10 @@ public class AlterarFuncionario extends javax.swing.JFrame {
         jPanel5.setBackground(new java.awt.Color(223, 237, 253));
         jPanel5.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel9.setFont(new java.awt.Font("Microsoft YaHei UI Light", 1, 24)); // NOI18N
+        jLabel9.setFont(new java.awt.Font("Raavi", 1, 24)); // NOI18N
+        jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/funcionario.png"))); // NOI18N
         jLabel9.setText("EDITAR FUNCIONÁRIO");
-        jPanel5.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 100, -1, -1));
+        jPanel5.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 70, -1, -1));
 
         jPanel3.setBackground(new java.awt.Color(223, 237, 253));
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Contato", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 2, 11))); // NOI18N
@@ -1049,7 +1050,7 @@ public class AlterarFuncionario extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jBtnSalvarFuncionarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnSalvarFuncionarioActionPerformed
-        
+
         if (VerificaCamposFunc()) {
 
             if (FuncionarioDAO.VerificarFuncionario(jTextCpf.getText()) == false) {
@@ -1067,7 +1068,7 @@ public class AlterarFuncionario extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "Alterado com sucesso!");
                 String descricaoAudit = "Funcionário(a) " + func.getFuncionario() + " /CPF: " + func.getCpf() + "teve dado(s) alterado(s).";
                 AuditoriaDAO.CadDetAuditoria(descricaoAudit);
-                
+
             } else if (jTextCpf.getText() == null ? fun == null : jTextCpf.getText().equals(fun)) {
 
                 Funcionario func = new Funcionario();
@@ -1220,6 +1221,7 @@ public class AlterarFuncionario extends javax.swing.JFrame {
 
         if (!caracteres.contains(evt.getKeyChar() + "")) {
             evt.consume();
+            JOptionPane.showMessageDialog(this, "Digite apenas números");
         }
 
     }//GEN-LAST:event_jTextSalarioKeyTyped
@@ -1488,9 +1490,9 @@ public class AlterarFuncionario extends javax.swing.JFrame {
             telaExibeFunc.TabelaFuncionario("select * from tabfuncionario;");
         }
     }
-    
-    public void verificaUsuario(){
-        if(TipoUsuario() == false){
+
+    public void verificaUsuario() {
+        if (TipoUsuario() == false) {
             jBtnEditarCarteira.setVisible(false);
             jBtnEditarContato.setVisible(false);
             jBtnEditarEndereco.setVisible(false);

@@ -138,7 +138,7 @@ public class CadastrarEquipamento extends javax.swing.JFrame {
         });
         jPanel1.add(jComboBoxFabricante, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 250, 260, -1));
 
-        jLabel1.setFont(new java.awt.Font("Raavi", 1, 18)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Raavi", 1, 24)); // NOI18N
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/maquina02.png"))); // NOI18N
         jLabel1.setText("Cadastrar Equipamento");
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 50, -1, 23));
@@ -150,6 +150,7 @@ public class CadastrarEquipamento extends javax.swing.JFrame {
         jPanel2.setBackground(new java.awt.Color(223, 237, 253));
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        jBtbNovoEquipamento.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/add (2).png"))); // NOI18N
         jBtbNovoEquipamento.setText("Novo");
         jBtbNovoEquipamento.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -158,13 +159,14 @@ public class CadastrarEquipamento extends javax.swing.JFrame {
         });
         jPanel2.add(jBtbNovoEquipamento, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 150, -1, -1));
 
+        jBtnCadEquipamento.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/salvar.png"))); // NOI18N
         jBtnCadEquipamento.setText("Salvar");
         jBtnCadEquipamento.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jBtnCadEquipamentoActionPerformed(evt);
             }
         });
-        jPanel2.add(jBtnCadEquipamento, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 150, -1, -1));
+        jPanel2.add(jBtnCadEquipamento, new org.netbeans.lib.awtextra.AbsoluteConstraints(463, 150, 90, -1));
 
         jLabel2.setText("Equipamento:");
         jPanel2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 150, -1, -1));
@@ -178,13 +180,14 @@ public class CadastrarEquipamento extends javax.swing.JFrame {
         jPanel2.add(jComboBoxEquipamento, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 150, 260, -1));
         jPanel2.add(txtEquipamento, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 150, 260, -1));
 
+        jBtnCancelarCadEquipamento.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/cancelar.png"))); // NOI18N
         jBtnCancelarCadEquipamento.setText("Cancelar");
         jBtnCancelarCadEquipamento.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jBtnCancelarCadEquipamentoActionPerformed(evt);
             }
         });
-        jPanel2.add(jBtnCancelarCadEquipamento, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 150, -1, -1));
+        jPanel2.add(jBtnCancelarCadEquipamento, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 150, 100, -1));
 
         jLabel8.setText("Fornecedor:");
         jPanel2.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 200, -1, -1));

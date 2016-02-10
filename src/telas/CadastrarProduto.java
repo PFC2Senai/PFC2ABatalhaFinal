@@ -19,6 +19,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
@@ -275,7 +276,7 @@ public class CadastrarProduto extends javax.swing.JFrame {
         });
         jPanel1.add(jBtnCadastrarProduto, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 490, -1, -1));
 
-        jLabel1.setFont(new java.awt.Font("Raavi", 1, 18)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Raavi", 1, 24)); // NOI18N
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/prod.png"))); // NOI18N
         jLabel1.setText("Cadastrar Peça");
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 50, -1, -1));
@@ -297,6 +298,7 @@ public class CadastrarProduto extends javax.swing.JFrame {
             }
         });
 
+        jBtnCalcularPercentual.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/calculator.png"))); // NOI18N
         jBtnCalcularPercentual.setText("Calcular");
         jBtnCalcularPercentual.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -340,6 +342,7 @@ public class CadastrarProduto extends javax.swing.JFrame {
 
         jLabel11.setText("Quantidade Mínima:");
 
+        jBtnNovoFornecedor.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/add (2).png"))); // NOI18N
         jBtnNovoFornecedor.setText("Novo Fornecedor");
         jBtnNovoFornecedor.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -417,7 +420,7 @@ public class CadastrarProduto extends javax.swing.JFrame {
                         .addComponent(jLabel11)
                         .addComponent(jLabel12))
                     .addComponent(txtDataCadProduto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(23, Short.MAX_VALUE))
+                .addContainerGap(19, Short.MAX_VALUE))
         );
 
         jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 300, 800, 170));
@@ -431,6 +434,7 @@ public class CadastrarProduto extends javax.swing.JFrame {
 
         jLabel10.setText("Peça:");
 
+        jBtnNovoFabricante.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/add (2).png"))); // NOI18N
         jBtnNovoFabricante.setText("Novo Fabricante");
         jBtnNovoFabricante.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -454,6 +458,7 @@ public class CadastrarProduto extends javax.swing.JFrame {
             }
         });
 
+        jBtnNovoModelo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/add (2).png"))); // NOI18N
         jBtnNovoModelo.setText("Novo Modelo");
         jBtnNovoModelo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -495,6 +500,7 @@ public class CadastrarProduto extends javax.swing.JFrame {
             }
         });
 
+        jBtbNovoProduto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/add (2).png"))); // NOI18N
         jBtbNovoProduto.setText("Nova Peça");
         jBtbNovoProduto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -668,8 +674,9 @@ public class CadastrarProduto extends javax.swing.JFrame {
         if (txtPrecoEntrada.getText().trim().equals("") || txtPercentual.getText().trim().equals("")) {
         } else {
             float percentual = Float.parseFloat(txtPercentual.getText());
-            double precoEntrada = Double.parseDouble(txtPrecoEntrada.getText());
-            double resultado = (precoEntrada * percentual) / 100;
+            float precoEntrada = Float.parseFloat(txtPrecoEntrada.getText().replace(".", ","));
+            float resultado = (precoEntrada * percentual) / 100;
+            
             txtPrecoSaida.setText(String.valueOf(precoEntrada + resultado));
         }
     }//GEN-LAST:event_jBtnCalcularPercentualActionPerformed

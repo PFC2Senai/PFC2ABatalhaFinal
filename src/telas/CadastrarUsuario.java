@@ -1,6 +1,7 @@
 package telas;
 
 import atributos.Usuario;
+import funcoes.ClienteDAO;
 import funcoes.UsuarioDAO;
 import funcoes.ContatosDAO;
 import funcoes.LimitarDigitos;
@@ -46,17 +47,19 @@ public class CadastrarUsuario extends javax.swing.JFrame {
         jPasswordConfirmaSenha = new javax.swing.JPasswordField();
         jLabel2 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
+        jLabelSenhaExistente = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
+        setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel1.setFont(new java.awt.Font("Raavi", 1, 18)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Raavi", 1, 24)); // NOI18N
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/user.gif"))); // NOI18N
         jLabel1.setText("Cadastro de usuário");
         jLabel1.setBorder(javax.swing.BorderFactory.createCompoundBorder());
         jLabel1.setPreferredSize(new java.awt.Dimension(170, 40));
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 50, 190, 30));
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 50, 230, 30));
 
         jLabel3.setText("Nome:");
         getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 120, -1, 20));
@@ -99,8 +102,9 @@ public class CadastrarUsuario extends javax.swing.JFrame {
         });
         getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 280, -1, -1));
 
+        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/limpar.png"))); // NOI18N
         jButton3.setText("Limpar");
-        getContentPane().add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 280, -1, -1));
+        getContentPane().add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(123, 280, 100, -1));
 
         jPasswordSenha.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
@@ -109,6 +113,11 @@ public class CadastrarUsuario extends javax.swing.JFrame {
         });
         getContentPane().add(jPasswordSenha, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 150, 216, 20));
 
+        jPasswordConfirmaSenha.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                jPasswordConfirmaSenhaFocusLost(evt);
+            }
+        });
         jPasswordConfirmaSenha.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 jPasswordConfirmaSenhaKeyTyped(evt);
@@ -120,6 +129,11 @@ public class CadastrarUsuario extends javax.swing.JFrame {
         getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 680, 100));
 
         jPanel1.setBackground(new java.awt.Color(223, 237, 253));
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabelSenhaExistente.setForeground(new java.awt.Color(255, 0, 0));
+        jPanel1.add(jLabelSenhaExistente, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 190, 120, 20));
+
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 680, 360));
 
         pack();
@@ -173,8 +187,8 @@ public class CadastrarUsuario extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         if (JOptionPane.showConfirmDialog(null, "Tem certeza que deseja sair? Os dados não serão salvos.", "Confirmar Cancelamento", JOptionPane.YES_NO_OPTION) == 0) {
-           
-            this.dispose(); 
+
+            this.dispose();
         }
     }//GEN-LAST:event_jButton2ActionPerformed
 
@@ -203,6 +217,15 @@ public class CadastrarUsuario extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jPasswordConfirmaSenhaKeyTyped
 
+    private void jPasswordConfirmaSenhaFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jPasswordConfirmaSenhaFocusLost
+        // TODO add your handling code here:
+        if (jPasswordConfirmaSenha.getText().length() == jPasswordSenha.getText().length()) {
+            jLabelSenhaExistente.setText("");
+        } else {
+            jLabelSenhaExistente.setText("As senhas não conferem");
+        }
+    }//GEN-LAST:event_jPasswordConfirmaSenhaFocusLost
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
@@ -215,6 +238,7 @@ public class CadastrarUsuario extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabelSenhaExistente;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPasswordField jPasswordConfirmaSenha;
     private javax.swing.JPasswordField jPasswordSenha;
