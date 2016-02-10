@@ -83,9 +83,10 @@ public class Menu extends javax.swing.JFrame {
         jScrollPane2 = new javax.swing.JScrollPane();
         jTextArea2 = new javax.swing.JTextArea();
         jBtnFazerBackup = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
         jLabelUsuario = new javax.swing.JLabel();
+        jBtnLogout = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu4 = new javax.swing.JMenu();
         jMenu14 = new javax.swing.JMenu();
@@ -113,7 +114,6 @@ public class Menu extends javax.swing.JFrame {
         jMenuItem14 = new javax.swing.JMenuItem();
         jMenuItem7 = new javax.swing.JMenuItem();
         jMenuItem32 = new javax.swing.JMenuItem();
-        jMenu6 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Menu");
@@ -226,15 +226,28 @@ public class Menu extends javax.swing.JFrame {
         });
         getContentPane().add(jBtnFazerBackup, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 360, 150, -1));
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/leiaute/img3.png"))); // NOI18N
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -10, 850, 140));
-
         jLabel2.setText("Usuário:");
         getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 480, -1, -1));
+
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/leiaute/img3.png"))); // NOI18N
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -10, 850, 140));
 
         jLabelUsuario.setForeground(new java.awt.Color(255, 0, 0));
         jLabelUsuario.setText("jLabel3");
         getContentPane().add(jLabelUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 480, -1, -1));
+
+        jBtnLogout.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/sair.gif"))); // NOI18N
+        jBtnLogout.setText("Sair");
+        jBtnLogout.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        jBtnLogout.setContentAreaFilled(false);
+        jBtnLogout.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        jBtnLogout.setSelected(true);
+        jBtnLogout.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnLogoutActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jBtnLogout, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 460, -1, -1));
 
         jMenuBar1.setPreferredSize(new java.awt.Dimension(106, 35));
 
@@ -491,27 +504,6 @@ public class Menu extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenu4);
 
-        jMenu6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/sair.gif"))); // NOI18N
-        jMenu6.setText("Sair");
-        jMenu6.setActionCommand("System.exit();");
-        jMenu6.setPreferredSize(new java.awt.Dimension(55, 25));
-        jMenu6.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jMenu6MouseClicked(evt);
-            }
-        });
-        jMenu6.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenu6ActionPerformed(evt);
-            }
-        });
-        jMenu6.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                jMenu6KeyPressed(evt);
-            }
-        });
-        jMenuBar1.add(jMenu6);
-
         setJMenuBar(jMenuBar1);
 
         pack();
@@ -529,20 +521,6 @@ public class Menu extends javax.swing.JFrame {
     private void jBtnPropostaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnPropostaActionPerformed
         new Proposta().setVisible(true);
     }//GEN-LAST:event_jBtnPropostaActionPerformed
-
-    private void jMenu6KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jMenu6KeyPressed
-        // TODO add your handling code here:
-        this.dispose();
-    }//GEN-LAST:event_jMenu6KeyPressed
-
-    private void jMenu6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu6ActionPerformed
-        File file = new File("C:/Users/Josy/Desktop/Backup");
-        file.mkdir();
-        String caminho = file.getAbsolutePath();
-        ControleBackup app = new ControleBackup(caminho);
-
-        System.exit(0);
-    }//GEN-LAST:event_jMenu6ActionPerformed
 
     private void jBtnFazerBackupActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnFazerBackupActionPerformed
         JFileChooser fc = new JFileChooser();
@@ -563,10 +541,6 @@ public class Menu extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Voce nao selecionou nenhum diretorio.");
         }
     }//GEN-LAST:event_jBtnFazerBackupActionPerformed
-
-    private void jMenu6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu6MouseClicked
-        Backup();
-    }//GEN-LAST:event_jMenu6MouseClicked
 
     private void jMenuItem32ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem32ActionPerformed
         new ExibeVenda().setVisible(true);
@@ -679,6 +653,15 @@ public class Menu extends javax.swing.JFrame {
       
     }//GEN-LAST:event_jMenu4KeyPressed
 
+    private void jBtnLogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnLogoutActionPerformed
+        if (JOptionPane.showConfirmDialog(null, "Tem certeza que deseja sair?", "Confirmar Cancelamento", JOptionPane.YES_NO_OPTION) == 0) {
+            File file = new File("C:/Users/EdceaAraújo/Desktop");
+            file.mkdir();
+            String caminho = file.getAbsolutePath();
+            ControleBackup app = new ControleBackup(caminho);
+        }
+    }//GEN-LAST:event_jBtnLogoutActionPerformed
+
     public void Backup() {
 
         TelaEspera telaTeste = new TelaEspera();
@@ -768,6 +751,7 @@ public class Menu extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBtnCadastrarLembrete;
     private javax.swing.JButton jBtnFazerBackup;
+    private javax.swing.JButton jBtnLogout;
     private javax.swing.JButton jBtnProposta;
     private javax.swing.JButton jBtnRotinaContato;
     private javax.swing.JLabel jLabel1;
@@ -776,7 +760,6 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu10;
     private javax.swing.JMenu jMenu14;
     private javax.swing.JMenu jMenu4;
-    private javax.swing.JMenu jMenu6;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem10;
