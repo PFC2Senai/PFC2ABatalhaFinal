@@ -725,6 +725,7 @@ public class CadastrarFuncionario extends javax.swing.JFrame {
         String car = txtNumero.getText().toUpperCase();
         if (!caracteres.contains(evt.getKeyChar() + "")) {
             evt.consume();
+            JOptionPane.showMessageDialog(this, "Caracteres não permitidos !");
         }
     }//GEN-LAST:event_txtNumeroKeyTyped
 
@@ -749,6 +750,11 @@ public class CadastrarFuncionario extends javax.swing.JFrame {
 
     private void jTextSerieCtpsKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextSerieCtpsKeyTyped
         // TODO add your handling code here:
+        String caracteres = "0987654321.,-";
+        if (!caracteres.contains(evt.getKeyChar() + "")) {
+            evt.consume();
+            JOptionPane.showMessageDialog(this, "Digite apenas números");
+        }
     }//GEN-LAST:event_jTextSerieCtpsKeyTyped
 
     private void txtTelCelKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTelCelKeyTyped
@@ -766,7 +772,7 @@ public class CadastrarFuncionario extends javax.swing.JFrame {
         String caracteres = "0987654321/";
         if (!caracteres.contains(evt.getKeyChar() + "")) {
             evt.consume();
-            JOptionPane.showMessageDialog(this, "Digite apenas números");
+            JOptionPane.showMessageDialog(this, "Digite um formato de data");
         }
     }//GEN-LAST:event_txtDataAdmissaoKeyTyped
 
