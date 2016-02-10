@@ -41,8 +41,7 @@ import static telas.TelaLogin.TipoUsuario;
 
 public class DetalharCliente extends javax.swing.JFrame {
 
-   // ConexaoPermissoes conexao = new ConexaoPermissoes();
-    
+    // ConexaoPermissoes conexao = new ConexaoPermissoes();
     int idContato;
     public static int codLembrete;
     public static int codRotina;
@@ -112,7 +111,7 @@ public class DetalharCliente extends javax.swing.JFrame {
 
         jBtnAdicionarEquipamento.setVerticalTextPosition(SwingConstants.BOTTOM);
         jBtnAdicionarEquipamento.setHorizontalTextPosition(SwingConstants.CENTER);
-        
+
     }
 
     private void combobox() {
@@ -1305,9 +1304,6 @@ public class DetalharCliente extends javax.swing.JFrame {
 
         if (VerificaCamposEmpresa() == true) {
 
-//            if (txtCnpj.getText() == cnp) {
-//                JOptionPane.showMessageDialog(null, "Este CNPJ ja está cadastrado !");
-//            }
             if (ClienteDAO.VerificarCliente(txtCnpj.getText()) == false) {
 
                 Cliente cli = new Cliente();
@@ -1325,10 +1321,9 @@ public class DetalharCliente extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "Alterado com sucesso!");
                 String descricaoAudit = "Empresa " + cli.getEmpresa() + " /CNPJ: " + cli.getCnpj() + "teve os dados alterados.";
                 AuditoriaDAO.CadDetAuditoria(descricaoAudit);
-                
-            } 
-            else if (txtCnpj.getText() == null ? cnp == null : txtCnpj.getText().equals(cnp)) {
-                
+
+            } else if (txtCnpj.getText() == null ? cnp == null : txtCnpj.getText().equals(cnp)) {
+
                 Cliente cli = new Cliente();
                 cli.setEmpresa(txtEmpresa.getText());
                 cli.setCnpj(txtCnpj.getText());
@@ -1703,10 +1698,10 @@ public class DetalharCliente extends javax.swing.JFrame {
             //   this.telaExibeCliente.toFront();
         }
     }
-    
-    public void verificaUsuario(){
-        if(TipoUsuario() == false){
-            jBtnAltDadosP.setVisible(false);  
+
+    public void verificaUsuario() {
+        if (TipoUsuario() == false) {
+            jBtnAltDadosP.setVisible(false);
             jButtonEditarContato.setVisible(false);
             jBtnExcluirRotina.setVisible(false);
             jBtnExcluirContato.setVisible(false);
@@ -1715,8 +1710,8 @@ public class DetalharCliente extends javax.swing.JFrame {
             jBtnExcluirEquipCli.setVisible(false);
             jButtonAr1.setVisible(false);
             jButtonAr3.setVisible(false);
-            
-          }
+
+        }
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
