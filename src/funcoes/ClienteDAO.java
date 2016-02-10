@@ -306,14 +306,14 @@ public class ClienteDAO {
         return achou;
     }
     
-        public static boolean VerificarClienteNome(String cliente) {
+        public static boolean VerificarClienteNome(String cliente2) {
 
         Statement stmt;
         boolean achou = true;
         int cli = 0;
 
         //"SELECT * FROM tabcliente WHERE empresa IN (SELECT E.equipamento FROM tabequipamento E GROUP BY E.equipamento HAVING COUNT(*) > 1) ORDER BY equipamento";
-        String Sql = "SELECT COUNT(0), empresa FROM tabcliente WHERE empresa = '" + cliente + "';";
+        String Sql = "SELECT COUNT(0), empresa, cnpj FROM tabcliente WHERE empresa = '" + cliente2 + "';";
 
         try {
 

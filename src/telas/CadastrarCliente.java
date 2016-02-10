@@ -945,7 +945,7 @@ public class CadastrarCliente extends javax.swing.JFrame {
     }//GEN-LAST:event_jBtnRemoverContatoActionPerformed
 
     private void txtTelCelKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTelCelKeyTyped
-        
+
         String caracteres = "0987654321";
         if (!caracteres.contains(evt.getKeyChar() + "")) {
             evt.consume();
@@ -976,7 +976,8 @@ public class CadastrarCliente extends javax.swing.JFrame {
 
         if (VerificaCampos() == true) {
 
-            if (ClienteDAO.VerificarCliente(txtCnpj.getText()) && ClienteDAO.VerificarClienteNome(txtEmpresa.getText()) == false) {
+            if (ClienteDAO.VerificarCliente(txtCnpj.getText()) == false) {
+                //&& ClienteDAO.VerificarClienteNome(txtEmpresa.getText()
 
                 Cliente cli = new Cliente();
                 Telefone tel = new Telefone();
@@ -1103,7 +1104,7 @@ public class CadastrarCliente extends javax.swing.JFrame {
         String caracteres = "qwertyuiopasdfghjklçzxcvbnm";
         if (!caracteres.contains(evt.getKeyChar() + "")) {
             evt.consume();
-           // JOptionPane.showMessageDialog(this, "Digite apenas números !");
+            // JOptionPane.showMessageDialog(this, "Digite apenas números !");
         }
     }//GEN-LAST:event_txtContatoKeyTyped
 
