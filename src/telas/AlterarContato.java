@@ -99,6 +99,12 @@ public final class AlterarContato extends javax.swing.JFrame {
         jLabelContato.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/funcionario.png"))); // NOI18N
         jLabelContato.setText("Contato:");
         getContentPane().add(jLabelContato, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 120, -1, -1));
+
+        txtContato.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtContatoKeyTyped(evt);
+            }
+        });
         getContentPane().add(txtContato, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 120, 235, -1));
 
         jLabelTelefone.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/telephone.png"))); // NOI18N
@@ -152,9 +158,10 @@ public final class AlterarContato extends javax.swing.JFrame {
         });
         getContentPane().add(jBtbCancelContato, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 200, -1, -1));
 
-        jLabel1.setFont(new java.awt.Font("Microsoft YaHei Light", 1, 24)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Raavi", 1, 24)); // NOI18N
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/user_edit.png"))); // NOI18N
         jLabel1.setText("ALTERAR CONTATO");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 50, -1, -1));
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 50, 250, -1));
 
         jLabelEmail1.setFont(new java.awt.Font("Tahoma", 3, 11)); // NOI18N
         jLabelEmail1.setForeground(new java.awt.Color(255, 0, 0));
@@ -207,10 +214,9 @@ public final class AlterarContato extends javax.swing.JFrame {
                         + " teve dado(s) alterados(s).";
                 AuditoriaDAO.CadDetAuditoria(descricaoAudit);
                 telaDetFornecedor.TabelaContatos();
-                   }
-                JOptionPane.showMessageDialog(null, "Cadastrado com sucesso!");    
+            }
+            JOptionPane.showMessageDialog(null, "Cadastrado com sucesso!");
             this.dispose();
-            
 
         } else {
             JOptionPane.showMessageDialog(null, "Campo(s) vazio(s)!");
@@ -238,8 +244,18 @@ public final class AlterarContato extends javax.swing.JFrame {
         String caracteres = "0987654321";
         if (!caracteres.contains(evt.getKeyChar() + "")) {
             evt.consume();
+            JOptionPane.showMessageDialog(this, "Caracteres inválidos");
         }
     }//GEN-LAST:event_txtTelCelKeyTyped
+
+    private void txtContatoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtContatoKeyTyped
+        // TODO add your handling code here:
+        String caracteres = "0987654321";
+        if (caracteres.contains(evt.getKeyChar() + "")) {
+            evt.consume();
+            JOptionPane.showMessageDialog(this, "Caracteres inválidos");
+        }
+    }//GEN-LAST:event_txtContatoKeyTyped
 
     private boolean VerificaCamposContatoCli() {
 
