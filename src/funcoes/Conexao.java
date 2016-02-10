@@ -14,7 +14,7 @@ public class Conexao {
     private String driver = "com.mysql.jdbc.Driver";
     private String caminho = "jdbc:mysql://localhost:3306/pfc1";
     private String usuario = "root";
-    private String senha = "2810";
+    private String senha = "dragonballz";
     public Connection conn;
     
     public static Connection getConnection() {
@@ -24,7 +24,7 @@ public class Conexao {
             Class.forName("com.mysql.jdbc.Driver").newInstance();
 
 
-         String url = "jdbc:mysql://localhost/pfc1?user=root&password=2810";
+         String url = "jdbc:mysql://localhost/pfc1?user=root&password=dragonballz";
 
       //   String url = "jdbc:mysql://localhost/pfc1?user=root&password=";
 
