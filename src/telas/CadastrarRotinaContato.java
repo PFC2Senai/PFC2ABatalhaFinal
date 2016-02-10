@@ -102,10 +102,10 @@ public class CadastrarRotinaContato extends javax.swing.JFrame {
         jPanel1.setBackground(new java.awt.Color(223, 237, 253));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel5.setFont(new java.awt.Font("Raavi", 1, 18)); // NOI18N
+        jLabel5.setFont(new java.awt.Font("Raavi", 1, 24)); // NOI18N
         jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/rotinacont.png"))); // NOI18N
         jLabel5.setText("Rotina de Contato");
-        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 50, -1, -1));
+        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 50, -1, -1));
 
         jToggleButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/disk.png"))); // NOI18N
         jToggleButton2.setText("Salvar");
@@ -129,7 +129,8 @@ public class CadastrarRotinaContato extends javax.swing.JFrame {
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 170, -1, -1));
 
         jTextDescricao.setColumns(20);
-        jTextDescricao.setRows(5);
+        jTextDescricao.setLineWrap(true);
+        jTextDescricao.setRows(1);
         jScrollPane1.setViewportView(jTextDescricao);
 
         jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 250, 340, 90));

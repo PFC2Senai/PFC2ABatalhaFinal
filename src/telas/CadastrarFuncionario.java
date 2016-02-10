@@ -383,7 +383,7 @@ public class CadastrarFuncionario extends javax.swing.JFrame {
         });
         jPanel5.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 630, -1, 32));
 
-        jLabel1.setFont(new java.awt.Font("Raavi", 1, 18)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Raavi", 1, 24)); // NOI18N
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/funcionario.png"))); // NOI18N
         jLabel1.setText("CADASTRAR FUNCIONÁRIO");
         jPanel5.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 60, -1, -1));
