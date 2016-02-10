@@ -24,7 +24,7 @@ public class Conexao {
             Class.forName("com.mysql.jdbc.Driver").newInstance();
 
 
-         String url = "jdbc:mysql://localhost/pfc1?user=root&password=";
+         String url = "jdbc:mysql://localhost/pfc1?user=root&password=dragonballz";
 
       //   String url = "jdbc:mysql://localhost/pfc1?user=root&password=";
 
