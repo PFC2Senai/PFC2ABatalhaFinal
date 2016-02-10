@@ -68,8 +68,8 @@ public class ExibeProduto extends javax.swing.JFrame {
                 TableCellRenderer renderer = new TabelaZebrada();
                 jTableListarProdutos.setDefaultRenderer(Object.class, renderer);
                 
-                jTableListarProdutos.getColumnModel().getColumn(0).setPreferredWidth(150);
-                jTableListarProdutos.getColumnModel().getColumn(1).setPreferredWidth(300);
+                jTableListarProdutos.getColumnModel().getColumn(0).setPreferredWidth(100);
+                jTableListarProdutos.getColumnModel().getColumn(1).setPreferredWidth(400);
                 jTableListarProdutos.getColumnModel().getColumn(i).setResizable(false);
                 jTableListarProdutos.getTableHeader().setReorderingAllowed(false);
                 jTableListarProdutos.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
@@ -91,15 +91,15 @@ public class ExibeProduto extends javax.swing.JFrame {
         bindingGroup = new org.jdesktop.beansbinding.BindingGroup();
 
         jLabel1 = new javax.swing.JLabel();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        jTableListarProdutos = new javax.swing.JTable();
-        jLabel3 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         jButton3 = new javax.swing.JButton();
         jBtnDetalharProduto = new javax.swing.JButton();
         jButton7 = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         txtBuscar = new javax.swing.JTextField();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTableListarProdutos = new javax.swing.JTable();
+        jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -114,21 +114,6 @@ public class ExibeProduto extends javax.swing.JFrame {
         jLabel1.setText("Produtos");
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 40, -1, -1));
 
-        jTableListarProdutos.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-
-            }
-        ));
-        jScrollPane2.setViewportView(jTableListarProdutos);
-
-        getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 190, 710, 380));
-
-        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/leiaute/img3.png"))); // NOI18N
-        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 850, 130));
-
         jPanel1.setBackground(new java.awt.Color(204, 255, 204));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -138,7 +123,7 @@ public class ExibeProduto extends javax.swing.JFrame {
                 jButton3ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 180, 80, 50));
+        jPanel1.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 180, 80, 50));
 
         jBtnDetalharProduto.setText("Detalhar");
 
@@ -150,7 +135,7 @@ public class ExibeProduto extends javax.swing.JFrame {
                 jBtnDetalharProdutoActionPerformed(evt);
             }
         });
-        jPanel1.add(jBtnDetalharProduto, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 270, 80, 50));
+        jPanel1.add(jBtnDetalharProduto, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 270, 80, 50));
 
         jButton7.setText("Voltar");
         jButton7.addActionListener(new java.awt.event.ActionListener() {
@@ -158,20 +143,40 @@ public class ExibeProduto extends javax.swing.JFrame {
                 jButton7ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton7, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 570, 70, 30));
+        jPanel1.add(jButton7, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 580, 70, 30));
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/pesquisar.gif"))); // NOI18N
         jLabel2.setText("Pesquisar Produto:");
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 140, -1, -1));
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 140, -1, -1));
 
+        txtBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtBuscarActionPerformed(evt);
+            }
+        });
         txtBuscar.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 txtBuscarKeyReleased(evt);
             }
         });
-        jPanel1.add(txtBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 140, 485, -1));
+        jPanel1.add(txtBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 140, 320, 20));
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 10, 850, 620));
+        jTableListarProdutos.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+
+            }
+        ));
+        jScrollPane2.setViewportView(jTableListarProdutos);
+
+        jPanel1.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 180, 510, 380));
+
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/leiaute/img2.png"))); // NOI18N
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -20, 850, 130));
+
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 670, 630));
 
         bindingGroup.bind();
 
@@ -205,6 +210,10 @@ public class ExibeProduto extends javax.swing.JFrame {
     private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
         verificaPagina();
     }//GEN-LAST:event_formWindowClosed
+
+    private void txtBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtBuscarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtBuscarActionPerformed
 
     private void verificaPagina() {       
         if ((this.telaMenu != null)) {
