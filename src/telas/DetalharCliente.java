@@ -61,7 +61,7 @@ public class DetalharCliente extends javax.swing.JFrame {
     /**
      * Creates new form CadastrarCliente
      */
-    public DetalharCliente(String user) {
+    public DetalharCliente() {
         initComponents();
         this.codCliente = GetIndice();
     }
@@ -82,17 +82,7 @@ public class DetalharCliente extends javax.swing.JFrame {
         TabelaContatos();
         combobox();
         botoes();
-        
-        if(TipoUsuario() == true){
-            jBtnAltDadosP.setVisible(false);  
-            jButtonEditarContato.setVisible(false);
-            jBtnExcluirRotina.setVisible(false);
-            jBtnExcluirContato.setVisible(false);
-            jBtnAltEndereco.setVisible(false);
-            jBtnExcluir.setVisible(false);
-            jBtnExcluirEquipCli.setVisible(false);
-            
-          }
+        verificaUsuario();
 
         //txtEmpresa.setDocument(new LimitarDigitos(45));
         //txtSetor.setDocument(new LimitarDigitos(50));
@@ -1712,6 +1702,21 @@ public class DetalharCliente extends javax.swing.JFrame {
             this.telaExibeCliente.setVisible(true);
             //   this.telaExibeCliente.toFront();
         }
+    }
+    
+    public void verificaUsuario(){
+        if(TipoUsuario() == false){
+            jBtnAltDadosP.setVisible(false);  
+            jButtonEditarContato.setVisible(false);
+            jBtnExcluirRotina.setVisible(false);
+            jBtnExcluirContato.setVisible(false);
+            jBtnAltEndereco.setVisible(false);
+            jBtnExcluir.setVisible(false);
+            jBtnExcluirEquipCli.setVisible(false);
+            jButtonAr1.setVisible(false);
+            jButtonAr3.setVisible(false);
+            
+          }
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
