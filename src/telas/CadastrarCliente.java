@@ -857,7 +857,7 @@ public class CadastrarCliente extends javax.swing.JFrame {
 
     private void txtEmpresaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtEmpresaKeyTyped
 
-        String carac = "ç,.!?@:;/^~´`#$%¨&*()-_='+{[]}";
+        String carac = ",.!?@:;/#$%¨&*()-_='+{[]}";
         if (carac.contains(evt.getKeyChar() + "")) {
             evt.consume();
             JOptionPane.showMessageDialog(this, "Não é possivel digitar espaços ou caracteres inválidos !");
