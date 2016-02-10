@@ -296,14 +296,14 @@ public class ProdutoDAO {
         return valor;
     }
     
-      public static boolean VerificarProduto(String cliente) {
+      public static boolean VerificarProduto(String produto) {
 
         Statement stmt;
         boolean achou = true;
         int cli = 0;
 
         //"SELECT * FROM tabcliente WHERE empresa IN (SELECT E.equipamento FROM tabequipamento E GROUP BY E.equipamento HAVING COUNT(*) > 1) ORDER BY equipamento";
-        String Sql = "SELECT COUNT(0), empresa, cnpj FROM tabcliente WHERE cnpj = '" + cliente + "';";
+        String Sql = "SELECT COUNT(0), produto FROM tabproduto WHERE produto = '" + produto + "';";
 
         try {
 

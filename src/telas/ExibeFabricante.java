@@ -131,10 +131,10 @@ public class ExibeFabricante extends javax.swing.JFrame {
         });
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel1.setFont(new java.awt.Font("Raavi", 1, 18)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Raavi", 1, 24)); // NOI18N
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/fabricante.png"))); // NOI18N
         jLabel1.setText("Fabricantes");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 40, -1, 20));
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 50, -1, 30));
 
         jTableListarFabricantes.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {

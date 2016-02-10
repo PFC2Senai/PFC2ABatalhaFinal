@@ -41,7 +41,7 @@ public class CadastrarFornecedor extends javax.swing.JFrame {
 //        txtNumero.setDocument(new LimitarDigitos(10));
 //        
 //        txtContato.setDocument(new LimitarDigitos(45));
-        txtTelCel.setDocument(new LimitarDigitos(20));
+        txtTelCel.setDocument(new LimitarDigitos(15));
     }
 
     public CadastrarFornecedor(CadastrarProduto telaCadProduto) {
@@ -122,10 +122,10 @@ public class CadastrarFornecedor extends javax.swing.JFrame {
         jPanel1.setBackground(new java.awt.Color(223, 237, 253));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel1.setFont(new java.awt.Font("Raavi", 1, 18)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Raavi", 1, 24)); // NOI18N
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/fornecedor.png"))); // NOI18N
         jLabel1.setText("Cadastrar fornecedor");
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 40, -1, -1));
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 70, -1, -1));
 
         btnCadFornecedor.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/disk.png"))); // NOI18N
         btnCadFornecedor.setText("Cadastrar");
@@ -293,6 +293,12 @@ public class CadastrarFornecedor extends javax.swing.JFrame {
 
         jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/funcionario.png"))); // NOI18N
         jLabel5.setText("Contato:");
+
+        txtContato.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtContatoKeyTyped(evt);
+            }
+        });
 
         jBtnOutroContato.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/add.png"))); // NOI18N
         jBtnOutroContato.setText("Adicionar contato");
@@ -587,7 +593,7 @@ public class CadastrarFornecedor extends javax.swing.JFrame {
 
     private void txtEstadoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtEstadoKeyTyped
         // TODO add your handling code here:
-        
+
         String caracteres = "0987654321";
 
         if (caracteres.contains(evt.getKeyChar() + "")) {
@@ -597,12 +603,20 @@ public class CadastrarFornecedor extends javax.swing.JFrame {
 
     private void txtFornecedorKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtFornecedorKeyTyped
         // TODO add your handling code here:
-        
+
         String carac = "ç,.!?@:;/^~´`#$%¨&*()-_='+{[]}";
         if (carac.contains(evt.getKeyChar() + "")) {
             evt.consume();
         }
     }//GEN-LAST:event_txtFornecedorKeyTyped
+
+    private void txtContatoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtContatoKeyTyped
+        // TODO add your handling code here:
+        String carac = "1234567890";
+        if (carac.contains(evt.getKeyChar() + "")) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtContatoKeyTyped
 
     private boolean VerificaCampos() {
 

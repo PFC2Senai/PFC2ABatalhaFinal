@@ -76,10 +76,10 @@ public class ExibeProdutosDetalhe extends javax.swing.JFrame {
         jPanel1.setBackground(new java.awt.Color(223, 237, 253));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel1.setFont(new java.awt.Font("Raavi", 1, 18)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Raavi", 1, 24)); // NOI18N
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/prod.png"))); // NOI18N
         jLabel1.setText("Produto");
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 50, 100, -1));
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 50, 130, -1));
 
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/stop2.png"))); // NOI18N
         jButton1.setText("Sair");
@@ -108,6 +108,7 @@ public class ExibeProdutosDetalhe extends javax.swing.JFrame {
         jPanel1.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 200, 810, 270));
 
         jButton2.setBackground(new java.awt.Color(230, 226, 226));
+        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/estoque2.png"))); // NOI18N
         jButton2.setText("Estoque");
 
         org.jdesktop.beansbinding.Binding binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, jTableListarProdutos, org.jdesktop.beansbinding.ELProperty.create("${selectedElement != null}"), jButton2, org.jdesktop.beansbinding.BeanProperty.create("enabled"));
@@ -118,7 +119,7 @@ public class ExibeProdutosDetalhe extends javax.swing.JFrame {
                 jButton2ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 160, 81, -1));
+        jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(731, 160, 100, -1));
 
         jComboBoxFabricante.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Selecione o fabricante" }));
         jComboBoxFabricante.addActionListener(new java.awt.event.ActionListener() {

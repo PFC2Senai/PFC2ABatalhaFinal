@@ -191,9 +191,10 @@ public final class AlterarEstoque extends javax.swing.JFrame {
         });
         jPanel2.add(jBtnCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 530, -1, -1));
 
-        jLabel1.setFont(new java.awt.Font("Microsoft YaHei Light", 1, 24)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Raavi", 1, 24)); // NOI18N
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/estoque2.png"))); // NOI18N
         jLabel1.setText("ALTERAR ESTOQUE");
-        jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, -1, -1));
+        jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 60, -1, -1));
 
         jComboBoxTipoAlteracao.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Selecione o tipo de alteração", "Entrada", "Saída" }));
         jComboBoxTipoAlteracao.addActionListener(new java.awt.event.ActionListener() {
