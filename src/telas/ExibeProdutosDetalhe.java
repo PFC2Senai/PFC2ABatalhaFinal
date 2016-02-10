@@ -3,6 +3,7 @@ package telas;
 import funcoes.Conexao;
 import static funcoes.Conexao.getConnection;
 import funcoes.ModeloTabela;
+import funcoes.TabelaZebrada;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -13,6 +14,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.ListSelectionModel;
+import javax.swing.table.TableCellRenderer;
 import static telas.ExibeProduto.GetIndiceProduto;
 
 /**
@@ -62,8 +64,6 @@ public class ExibeProdutosDetalhe extends javax.swing.JFrame {
         jScrollPane2 = new javax.swing.JScrollPane();
         jTableListarProdutos = new javax.swing.JTable();
         jButton2 = new javax.swing.JButton();
-        jLabel13 = new javax.swing.JLabel();
-        codigoProdutoTabela = new javax.swing.JLabel();
         jComboBoxFabricante = new javax.swing.JComboBox();
         jComboBoxModelo = new javax.swing.JComboBox();
         jLabel2 = new javax.swing.JLabel();
@@ -92,7 +92,7 @@ public class ExibeProdutosDetalhe extends javax.swing.JFrame {
                 jButton1ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 480, -1, -1));
+        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 480, -1, -1));
 
         jTableListarProdutos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -109,10 +109,10 @@ public class ExibeProdutosDetalhe extends javax.swing.JFrame {
         });
         jScrollPane2.setViewportView(jTableListarProdutos);
 
-        jPanel1.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 217, 715, 240));
+        jPanel1.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 200, 810, 270));
 
         jButton2.setBackground(new java.awt.Color(230, 226, 226));
-        jButton2.setText("Alterar");
+        jButton2.setText("Estoque");
 
         org.jdesktop.beansbinding.Binding binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, jTableListarProdutos, org.jdesktop.beansbinding.ELProperty.create("${selectedElement != null}"), jButton2, org.jdesktop.beansbinding.BeanProperty.create("enabled"));
         bindingGroup.addBinding(binding);
@@ -122,13 +122,7 @@ public class ExibeProdutosDetalhe extends javax.swing.JFrame {
                 jButton2ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 170, 81, -1));
-
-        jLabel13.setText("Código:");
-        jPanel1.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 130, -1, -1));
-
-        codigoProdutoTabela.setText("codigo");
-        jPanel1.add(codigoProdutoTabela, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 130, 159, -1));
+        jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 160, 81, -1));
 
         jComboBoxFabricante.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Selecione o fabricante" }));
         jComboBoxFabricante.addActionListener(new java.awt.event.ActionListener() {
@@ -136,7 +130,7 @@ public class ExibeProdutosDetalhe extends javax.swing.JFrame {
                 jComboBoxFabricanteActionPerformed(evt);
             }
         });
-        jPanel1.add(jComboBoxFabricante, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 180, 238, -1));
+        jPanel1.add(jComboBoxFabricante, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 160, 238, -1));
 
         jComboBoxModelo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Selecione o modelo" }));
         jComboBoxModelo.addActionListener(new java.awt.event.ActionListener() {
@@ -144,15 +138,15 @@ public class ExibeProdutosDetalhe extends javax.swing.JFrame {
                 jComboBoxModeloActionPerformed(evt);
             }
         });
-        jPanel1.add(jComboBoxModelo, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 180, 222, -1));
+        jPanel1.add(jComboBoxModelo, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 160, 222, -1));
 
         jLabel2.setText("Filtros:");
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 190, -1, -1));
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 160, -1, -1));
 
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/leiaute/img3.png"))); // NOI18N
-        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -10, 840, 140));
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -10, 850, 140));
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 840, 520));
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 850, 520));
 
         bindingGroup.bind();
 
@@ -262,10 +256,23 @@ public class ExibeProdutosDetalhe extends javax.swing.JFrame {
             for (int i = 0; i < 7; i++) {
                 ModeloTabela modelo = new ModeloTabela(dados, Colunas);
                 jTableListarProdutos.setModel(modelo);
-                jTableListarProdutos.getColumnModel().getColumn(i).setPreferredWidth(150);
+                TableCellRenderer renderer = new TabelaZebrada();
+                jTableListarProdutos.setDefaultRenderer(Object.class, renderer);
+                
+                jTableListarProdutos.getColumnModel().getColumn(0).setMaxWidth(0);
+                jTableListarProdutos.getColumnModel().getColumn(0).setMinWidth(0);
+                jTableListarProdutos.getTableHeader().getColumnModel().getColumn(0).setMaxWidth(0);
+                jTableListarProdutos.getTableHeader().getColumnModel().getColumn(0).setMinWidth(0);
+                
+                jTableListarProdutos.getColumnModel().getColumn(1).setPreferredWidth(300);
+                jTableListarProdutos.getColumnModel().getColumn(2).setPreferredWidth(200);
+                jTableListarProdutos.getColumnModel().getColumn(3).setPreferredWidth(200);
+                jTableListarProdutos.getColumnModel().getColumn(4).setPreferredWidth(100);
+                jTableListarProdutos.getColumnModel().getColumn(5).setPreferredWidth(100);
+                jTableListarProdutos.getColumnModel().getColumn(6).setPreferredWidth(80);
+                
                 jTableListarProdutos.getColumnModel().getColumn(i).setResizable(false);
                 jTableListarProdutos.getTableHeader().setReorderingAllowed(false);
-                jTableListarProdutos.setAutoResizeMode(jTableListarProdutos.AUTO_RESIZE_OFF);
                 jTableListarProdutos.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
             }
 
@@ -328,13 +335,11 @@ public class ExibeProdutosDetalhe extends javax.swing.JFrame {
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel codigoProdutoTabela;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JComboBox jComboBoxFabricante;
     private javax.swing.JComboBox jComboBoxModelo;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
