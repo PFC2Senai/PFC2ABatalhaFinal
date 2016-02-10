@@ -5,6 +5,7 @@ import static funcoes.Conexao.getConnection;
 import funcoes.ModeloDAO;
 import funcoes.ModeloTabela;
 import funcoes.TabelaZebrada;
+import java.awt.Color;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -21,19 +22,17 @@ import javax.swing.table.TableCellRenderer;
  */
 public class OperacaoModelo extends javax.swing.JFrame {
 
-    
     Statement stmt;
     Modelo modelo = new Modelo();
     private static int indice;
     private Menu telaMenu;
-    
-    
+
     public OperacaoModelo() {
         initComponents();
         TabelaModelo("select * from tabmodelo;");
         ocultaCampos();
     }
-    
+
     public OperacaoModelo(Menu menu) {
         this.telaMenu = menu;
         initComponents();
@@ -41,11 +40,10 @@ public class OperacaoModelo extends javax.swing.JFrame {
         ocultaCampos();
     }
 
-    
     public static int GetIndice() {
         return indice;
     }
-    
+
     private void ocultaCampos() {
         jBtnCadastrarModelo.setVisible(false);
         jBtnAlterarModelo.setVisible(false);
@@ -53,11 +51,11 @@ public class OperacaoModelo extends javax.swing.JFrame {
         jBtnCancelarAlterarModelo.setVisible(false);
         txtModelo.setEnabled(false);
     }
-    
+
     public void TabelaModelo(String Sql) {
 
         try {
-            
+
             stmt = getConnection().createStatement();
             ArrayList dados = new ArrayList();
             String[] Colunas = {"Código", "Modelo"};
@@ -67,24 +65,24 @@ public class OperacaoModelo extends javax.swing.JFrame {
 
             while (rs.next()) {
                 dados.add(new Object[]{
-                    rs.getObject("idtabModelo"), 
+                    rs.getObject("idtabModelo"),
                     rs.getObject("modelo")});
             }
 
             for (int i = 0; i < 2; i++) {
-                
+
                 ModeloTabela modelo = new ModeloTabela(dados, Colunas);
                 jTableListarModelo.setModel(modelo);
                 TableCellRenderer renderer = new TabelaZebrada();
                 jTableListarModelo.setDefaultRenderer(Object.class, renderer);
-                
+
                 jTableListarModelo.getColumnModel().getColumn(0).setMaxWidth(0);
                 jTableListarModelo.getColumnModel().getColumn(0).setMinWidth(0);
                 jTableListarModelo.getTableHeader().getColumnModel().getColumn(0).setMaxWidth(0);
                 jTableListarModelo.getTableHeader().getColumnModel().getColumn(0).setMinWidth(0);
-                
+
                 jTableListarModelo.getColumnModel().getColumn(1).setPreferredWidth(200);
-                
+
                 jTableListarModelo.getColumnModel().getColumn(i).setResizable(false);
                 jTableListarModelo.getTableHeader().setReorderingAllowed(false);
                 jTableListarModelo.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
@@ -95,7 +93,6 @@ public class OperacaoModelo extends javax.swing.JFrame {
         }
     }
 
-    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -267,7 +264,7 @@ public class OperacaoModelo extends javax.swing.JFrame {
 
     private void txtBuscarKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBuscarKeyReleased
         TabelaModelo("select  * from tabmodelo where modelo "
-            + "like '%" + txtBuscar.getText().trim() + "%';");
+                + "like '%" + txtBuscar.getText().trim() + "%';");
     }//GEN-LAST:event_txtBuscarKeyReleased
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
@@ -297,15 +294,19 @@ public class OperacaoModelo extends javax.swing.JFrame {
         jBtnNovoModelo.setVisible(true);
         // jBtnEditarFabricante.setEnabled(true);
         jTableListarModelo.setEnabled(true);
-          if (JOptionPane.showConfirmDialog(null, "Tem certeza que deseja canselar? Os dados não serão salvos.", "Confirmar Cancelamento", JOptionPane.YES_NO_OPTION) == 0) {
+        if (JOptionPane.showConfirmDialog(null, "Tem certeza que deseja cancelar? Os dados não serão salvos.", "Confirmar Cancelamento", JOptionPane.YES_NO_OPTION) == 0) {
             verificaPagina();
-            this.dispose();
-          }
+            //this.dispose();
+        }
     }//GEN-LAST:event_jBtnCancelarCadModeloActionPerformed
 
     private void jBtnCadastrarModeloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnCadastrarModeloActionPerformed
 
-        if (ModeloDAO.VerificarModelo(txtModelo.getText()) == false) {
+        if (txtModelo.getText().trim().equals("")) {
+            JOptionPane.showMessageDialog(null, "Preencha o MODELO!");
+            txtModelo.requestFocus();
+            txtModelo.setBackground(Color.yellow);
+        } else if (ModeloDAO.VerificarModelo(txtModelo.getText()) == false) {
             Modelo model = new Modelo();
 
             model.setModelo(txtModelo.getText());
@@ -314,7 +315,7 @@ public class OperacaoModelo extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Cadastrado com sucesso");
             limparCampos();
             TabelaModelo("select * from tabmodelo;");
-            
+
             jBtnCadastrarModelo.setVisible(false);
             jBtnCancelarCadModelo.setVisible(false);
             jBtnNovoModelo.setVisible(true);
@@ -329,7 +330,7 @@ public class OperacaoModelo extends javax.swing.JFrame {
     private void jBtnAlterarModeloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnAlterarModeloActionPerformed
         Modelo model = new Modelo();
         model.setModelo(txtModelo.getText());
-        ModeloDAO.UpdateModelo(model, GetIndice());        
+        ModeloDAO.UpdateModelo(model, GetIndice());
         jBtnAlterarModelo.setVisible(false);
         jBtnCancelarAlterarModelo.setVisible(false);
         jBtnEditarModelo.setVisible(true);
@@ -347,7 +348,7 @@ public class OperacaoModelo extends javax.swing.JFrame {
         jBtnAlterarModelo.setVisible(false);
         jBtnCancelarAlterarModelo.setVisible(false);
         jBtnEditarModelo.setVisible(true);
-        jBtnNovoModelo.setEnabled(true);       
+        jBtnNovoModelo.setEnabled(true);
     }//GEN-LAST:event_jBtnCancelarAlterarModeloActionPerformed
 
     private void jBtnEditarModeloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnEditarModeloActionPerformed
@@ -356,7 +357,7 @@ public class OperacaoModelo extends javax.swing.JFrame {
         jBtnCancelarAlterarModelo.setVisible(true);
         jBtnAlterarModelo.setVisible(true);
         jBtnNovoModelo.setEnabled(false);
-        
+
     }//GEN-LAST:event_jBtnEditarModeloActionPerformed
 
     private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
