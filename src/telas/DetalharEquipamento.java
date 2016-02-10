@@ -83,6 +83,7 @@ public final class DetalharEquipamento extends javax.swing.JFrame {
         jPanel1.setBackground(new java.awt.Color(223, 237, 253));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        jBtnCancelarAltEquipamento.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/cancelar.png"))); // NOI18N
         jBtnCancelarAltEquipamento.setText("Cancelar");
         jBtnCancelarAltEquipamento.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -91,6 +92,7 @@ public final class DetalharEquipamento extends javax.swing.JFrame {
         });
         jPanel1.add(jBtnCancelarAltEquipamento, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 240, -1, -1));
 
+        jBtnAlterarEquipamento.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/salvar.png"))); // NOI18N
         jBtnAlterarEquipamento.setText("Salvar");
         jBtnAlterarEquipamento.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -99,6 +101,7 @@ public final class DetalharEquipamento extends javax.swing.JFrame {
         });
         jPanel1.add(jBtnAlterarEquipamento, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 190, -1, -1));
 
+        jBtbEditarEquipamento.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/editar.png"))); // NOI18N
         jBtbEditarEquipamento.setText("Editar Equipamento");
         jBtbEditarEquipamento.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -165,7 +168,7 @@ public final class DetalharEquipamento extends javax.swing.JFrame {
         jLabel2.setText("Equipamento:");
         jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 140, -1, -1));
 
-        jLabel1.setFont(new java.awt.Font("Raavi", 1, 18)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Raavi", 1, 24)); // NOI18N
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/equipamento.png"))); // NOI18N
         jLabel1.setText("Equipamento");
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 50, -1, 23));
