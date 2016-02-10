@@ -58,6 +58,7 @@ public class Proposta extends javax.swing.JFrame {
     private String tipoServico;
 
     private String emailCliente;
+    private Menu telaMenu;
 
     /**
      * Creates new form Proposta
@@ -73,7 +74,21 @@ public class Proposta extends javax.swing.JFrame {
 
         //  ocultaColunaTabelas();
         txtTipoServico.setVisible(false);
-        jBtnCadTipoServico.setVisible(false);
+        jBtnCancelarCadTipoServico.setVisible(false);
+    }
+    
+    public Proposta(Menu menu) {
+        telaMenu = menu;
+        initComponents();
+
+        populaComboBoxProduto();
+        populaComboBoxCliente();
+        populaComboBoxFuncionario();
+
+        populaComboBoxTipoServico();
+
+        //  ocultaColunaTabelas();
+        txtTipoServico.setVisible(false);
         jBtnCancelarCadTipoServico.setVisible(false);
     }
 
@@ -94,7 +109,6 @@ public class Proposta extends javax.swing.JFrame {
         jLabel11 = new javax.swing.JLabel();
         jComboBoxTipoServico = new javax.swing.JComboBox();
         jBtbNovoTipoServico = new javax.swing.JButton();
-        jBtnCadTipoServico = new javax.swing.JButton();
         jBtnCancelarCadTipoServico = new javax.swing.JButton();
         jScrollPane6 = new javax.swing.JScrollPane();
         jTableTipodeServico = new javax.swing.JTable();
@@ -125,6 +139,23 @@ public class Proposta extends javax.swing.JFrame {
         jLabel13 = new javax.swing.JLabel();
         jScrollPane4 = new javax.swing.JScrollPane();
         txtObservacaoImportante = new javax.swing.JTextArea();
+        jPanel1 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jComboBoxCliente = new javax.swing.JComboBox();
+        jLabel3 = new javax.swing.JLabel();
+        jComboBoxContato = new javax.swing.JComboBox();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        jComboBoxFuncionarios = new javax.swing.JComboBox();
+        jPanel2 = new javax.swing.JPanel();
+        jLabel8 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        txtMensagem = new javax.swing.JTextArea();
+        txtReferencia = new javax.swing.JTextField();
         jPanel6 = new javax.swing.JPanel();
         jLabel17 = new javax.swing.JLabel();
         txtValidadeProposta = new javax.swing.JTextField();
@@ -144,23 +175,6 @@ public class Proposta extends javax.swing.JFrame {
         jScrollPane5 = new javax.swing.JScrollPane();
         txtGarantias = new javax.swing.JTextArea();
         jButton1 = new javax.swing.JButton();
-        jPanel1 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jComboBoxCliente = new javax.swing.JComboBox();
-        jLabel3 = new javax.swing.JLabel();
-        jComboBoxContato = new javax.swing.JComboBox();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
-        jComboBoxFuncionarios = new javax.swing.JComboBox();
-        jPanel2 = new javax.swing.JPanel();
-        jLabel8 = new javax.swing.JLabel();
-        jLabel9 = new javax.swing.JLabel();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        txtMensagem = new javax.swing.JTextArea();
-        txtReferencia = new javax.swing.JTextField();
         jLabel25 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -198,15 +212,6 @@ public class Proposta extends javax.swing.JFrame {
             }
         });
         jPanel3.add(jBtbNovoTipoServico, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 180, -1, -1));
-
-        jBtnCadTipoServico.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/salvar.png"))); // NOI18N
-        jBtnCadTipoServico.setText("Salvar");
-        jBtnCadTipoServico.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jBtnCadTipoServicoActionPerformed(evt);
-            }
-        });
-        jPanel3.add(jBtnCadTipoServico, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 420, 90, -1));
 
         jBtnCancelarCadTipoServico.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/cancelar.png"))); // NOI18N
         jBtnCancelarCadTipoServico.setText("Cancelar");
@@ -412,7 +417,7 @@ public class Proposta extends javax.swing.JFrame {
                 .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel16)
                     .addComponent(txtTotalGeral, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(45, Short.MAX_VALUE))
+                .addContainerGap(92, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
@@ -428,7 +433,7 @@ public class Proposta extends javax.swing.JFrame {
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 462, Short.MAX_VALUE)
+            .addGap(0, 509, Short.MAX_VALUE)
             .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
                     .addContainerGap()
@@ -462,7 +467,7 @@ public class Proposta extends javax.swing.JFrame {
                     .addComponent(jLabel12)
                     .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 612, Short.MAX_VALUE)
                     .addComponent(jScrollPane4))
-                .addContainerGap(38, Short.MAX_VALUE))
+                .addContainerGap(42, Short.MAX_VALUE))
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -475,10 +480,140 @@ public class Proposta extends javax.swing.JFrame {
                 .addComponent(jLabel13)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(13, Short.MAX_VALUE))
+                .addContainerGap(60, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Observações", jPanel5);
+
+        jPanel1.setBackground(new java.awt.Color(207, 222, 252));
+
+        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel1.setText("Proposta Comercial");
+
+        jLabel2.setText("Empresa:");
+
+        jComboBoxCliente.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jComboBoxClienteItemStateChanged(evt);
+            }
+        });
+        jComboBoxCliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBoxClienteActionPerformed(evt);
+            }
+        });
+
+        jLabel3.setText("Contato:");
+
+        jComboBoxContato.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBoxContatoActionPerformed(evt);
+            }
+        });
+
+        jLabel5.setText("Selecione a empresa e o contato");
+
+        jLabel6.setText("Funcionario que fez o contato");
+
+        jLabel7.setText("Funcionario:");
+
+        jComboBoxFuncionarios.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBoxFuncionariosActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabel6)
+                    .addComponent(jLabel1)
+                    .addComponent(jLabel4)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel2))
+                        .addGap(32, 32, 32)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jComboBoxCliente, 0, 387, Short.MAX_VALUE)
+                            .addComponent(jComboBoxContato, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel7)
+                        .addGap(18, 18, 18)
+                        .addComponent(jComboBoxFuncionarios, 0, 387, Short.MAX_VALUE))
+                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 241, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(197, Short.MAX_VALUE))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(32, 32, 32)
+                .addComponent(jLabel1)
+                .addGap(33, 33, 33)
+                .addComponent(jLabel5)
+                .addGap(26, 26, 26)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(jComboBoxCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(51, 51, 51)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(jComboBoxContato, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel4)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel6)
+                .addGap(28, 28, 28)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel7)
+                    .addComponent(jComboBoxFuncionarios, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(212, Short.MAX_VALUE))
+        );
+
+        jTabbedPane1.addTab("Dados da Empresa", jPanel1);
+
+        jPanel2.setBackground(new java.awt.Color(207, 222, 252));
+
+        jLabel8.setText("Sua Referência:");
+
+        jLabel9.setText("Sua Mensagem:");
+
+        txtMensagem.setColumns(20);
+        txtMensagem.setRows(5);
+        jScrollPane2.setViewportView(txtMensagem);
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(26, 26, 26)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabel9)
+                    .addComponent(jLabel8)
+                    .addComponent(txtReferencia)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 577, Short.MAX_VALUE))
+                .addContainerGap(76, Short.MAX_VALUE))
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(40, 40, 40)
+                .addComponent(jLabel8)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(txtReferencia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(26, 26, 26)
+                .addComponent(jLabel9)
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 310, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(61, Short.MAX_VALUE))
+        );
+
+        jTabbedPane1.addTab("Descrição", jPanel2);
 
         jPanel6.setBackground(new java.awt.Color(207, 222, 252));
 
@@ -548,7 +683,7 @@ public class Proposta extends javax.swing.JFrame {
                             .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                 .addComponent(txtValidadeProposta, javax.swing.GroupLayout.DEFAULT_SIZE, 477, Short.MAX_VALUE)
                                 .addComponent(txtReajuste)))))
-                .addContainerGap(36, Short.MAX_VALUE))
+                .addContainerGap(40, Short.MAX_VALUE))
         );
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -592,136 +727,6 @@ public class Proposta extends javax.swing.JFrame {
 
         jTabbedPane1.addTab("Outros", jPanel6);
 
-        jPanel1.setBackground(new java.awt.Color(207, 222, 252));
-
-        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel1.setText("Proposta Comercial");
-
-        jLabel2.setText("Empresa:");
-
-        jComboBoxCliente.addItemListener(new java.awt.event.ItemListener() {
-            public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                jComboBoxClienteItemStateChanged(evt);
-            }
-        });
-        jComboBoxCliente.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBoxClienteActionPerformed(evt);
-            }
-        });
-
-        jLabel3.setText("Contato:");
-
-        jComboBoxContato.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBoxContatoActionPerformed(evt);
-            }
-        });
-
-        jLabel5.setText("Selecione a empresa e o contato");
-
-        jLabel6.setText("Funcionario que fez o contato");
-
-        jLabel7.setText("Funcionario:");
-
-        jComboBoxFuncionarios.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBoxFuncionariosActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel6)
-                    .addComponent(jLabel1)
-                    .addComponent(jLabel4)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel2))
-                        .addGap(32, 32, 32)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jComboBoxCliente, 0, 387, Short.MAX_VALUE)
-                            .addComponent(jComboBoxContato, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel7)
-                        .addGap(18, 18, 18)
-                        .addComponent(jComboBoxFuncionarios, 0, 387, Short.MAX_VALUE))
-                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 241, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(193, Short.MAX_VALUE))
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(32, 32, 32)
-                .addComponent(jLabel1)
-                .addGap(33, 33, 33)
-                .addComponent(jLabel5)
-                .addGap(26, 26, 26)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(jComboBoxCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(51, 51, 51)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(jComboBoxContato, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel4)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel6)
-                .addGap(28, 28, 28)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel7)
-                    .addComponent(jComboBoxFuncionarios, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(165, Short.MAX_VALUE))
-        );
-
-        jTabbedPane1.addTab("Dados da Empresa", jPanel1);
-
-        jPanel2.setBackground(new java.awt.Color(207, 222, 252));
-
-        jLabel8.setText("Sua Referência:");
-
-        jLabel9.setText("Sua Mensagem:");
-
-        txtMensagem.setColumns(20);
-        txtMensagem.setRows(5);
-        jScrollPane2.setViewportView(txtMensagem);
-
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(26, 26, 26)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel9)
-                    .addComponent(jLabel8)
-                    .addComponent(txtReferencia)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 577, Short.MAX_VALUE))
-                .addContainerGap(72, Short.MAX_VALUE))
-        );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(40, 40, 40)
-                .addComponent(jLabel8)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtReferencia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(26, 26, 26)
-                .addComponent(jLabel9)
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 310, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(14, Short.MAX_VALUE))
-        );
-
-        jTabbedPane1.addTab("Descrição", jPanel2);
-
         getContentPane().add(jTabbedPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 80, 680, 490));
 
         jLabel25.setIcon(new javax.swing.ImageIcon(getClass().getResource("/leiaute/img3-5.png"))); // NOI18N
@@ -757,34 +762,12 @@ public class Proposta extends javax.swing.JFrame {
         txtTipoServico.setVisible(true);
         jComboBoxTipoServico.setVisible(false);
         jBtbNovoTipoServico.setVisible(false);
-        jBtnCadTipoServico.setVisible(true);
         jBtnCancelarCadTipoServico.setVisible(true);
         jBtbIncluirPeca.setVisible(false);
         txtTipoServico.setEnabled(true);
     }//GEN-LAST:event_jBtbNovoTipoServicoActionPerformed
 
-    private void jBtnCadTipoServicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnCadTipoServicoActionPerformed
-
-        TipoServico tServ = new TipoServico();
-
-        tServ.setTipo(txtTipoServico.getText());
-
-        codTipoServico = TipoServicoDAO.CadTipoServico(tServ);
-
-        txtTipoServico.setVisible(false);
-        jComboBoxTipoServico.setVisible(true);
-
-        jBtnCadTipoServico.setVisible(false);
-        jBtnCancelarCadTipoServico.setVisible(false);
-        jBtbNovoTipoServico.setVisible(true);
-
-        jComboBoxTipoServico.removeAllItems();
-        populaComboBoxTipoServico();
-        jComboBoxTipoServico.setSelectedItem(tServ.getTipo());
-    }//GEN-LAST:event_jBtnCadTipoServicoActionPerformed
-
     private void jBtnCancelarCadTipoServicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnCancelarCadTipoServicoActionPerformed
-        jBtnCadTipoServico.setVisible(false);
         jBtnCancelarCadTipoServico.setVisible(false);
 
         jBtbNovoTipoServico.setVisible(true);
@@ -1295,12 +1278,20 @@ public class Proposta extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, ex);
         }
     }
+    
+    private void verificaPagina() {
+
+        if ((this.telaMenu != null)) {
+            this.telaMenu.setEnabled(true);
+            this.telaMenu.toFront();
+        }
+    }
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBtbIncluirPeca;
     private javax.swing.JButton jBtbNovoTipoServico;
     private javax.swing.JButton jBtnAdicionarTipo;
-    private javax.swing.JButton jBtnCadTipoServico;
     private javax.swing.JButton jBtnCancelarCadTipoServico;
     private javax.swing.JButton jBtnRemoverPeca;
     private javax.swing.JButton jBtnRemoverTipo;

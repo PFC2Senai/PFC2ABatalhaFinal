@@ -91,7 +91,7 @@ public class ExibeFornecedor extends javax.swing.JFrame {
 
         jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 230, 660, 400));
 
-        jComboBoxOpcaoPesquisa.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Selecione a opção de pesquisa", "Código", "Fornecedor", "CEP" }));
+        jComboBoxOpcaoPesquisa.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Detalhe de Fornecedor", "Código", "Fornecedor", "CEP" }));
         jComboBoxOpcaoPesquisa.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jComboBoxOpcaoPesquisaActionPerformed(evt);
@@ -112,7 +112,7 @@ public class ExibeFornecedor extends javax.swing.JFrame {
         jPanel1.add(txtBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 150, 255, -1));
 
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/find.png"))); // NOI18N
-        jLabel3.setText("Filtrar:");
+        jLabel3.setText("Estado:");
         jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 190, -1, 20));
 
         jBtnNovoFornecedor.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N

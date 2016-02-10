@@ -28,11 +28,22 @@ public class CadastrarLembrete extends javax.swing.JFrame {
     private int codCli;
     private DetalharCliente detalharCliente;
     private ExibeCliente telaExibeCliente;
+    private Menu telaMenu;
 
     /**
      * Creates new form CadastrarLembrete
      */
     public CadastrarLembrete() {
+        initComponents();
+        jLabCodigo.setVisible(false);
+        jLabEmpresa.setVisible(false);
+        jLabNCodigo.setVisible(false);
+        carregarComboClientes();
+        combobox();
+    }
+    
+    public CadastrarLembrete(Menu menu) {
+        telaMenu = menu;
         initComponents();
         jLabCodigo.setVisible(false);
         jLabEmpresa.setVisible(false);
@@ -115,10 +126,10 @@ public class CadastrarLembrete extends javax.swing.JFrame {
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 40, -1, -1));
 
         jLabNCodigo.setText("Código:");
-        jPanel1.add(jLabNCodigo, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 110, -1, -1));
+        jPanel1.add(jLabNCodigo, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 110, -1, -1));
 
         jLabCodigo.setText("codigo");
-        jPanel1.add(jLabCodigo, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 110, -1, -1));
+        jPanel1.add(jLabCodigo, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 110, 100, -1));
 
         jLabNomeEmpresa.setText("Empresa:");
         jPanel1.add(jLabNomeEmpresa, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 130, -1, 20));
@@ -239,6 +250,9 @@ public class CadastrarLembrete extends javax.swing.JFrame {
         }else if ((this.telaExibeCliente != null)) {
             this.telaExibeCliente.setEnabled(true);
             this.telaExibeCliente.toFront();
+        }else if ((this.telaMenu != null)) {
+            this.telaMenu.setEnabled(true);
+            this.telaMenu.toFront();
         }
     }
 

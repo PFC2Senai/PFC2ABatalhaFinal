@@ -13,6 +13,7 @@ import funcoes.Conexao;
 import static funcoes.Conexao.getConnection;
 import funcoes.ModeloTabela;
 import funcoes.ProdutoDAO;
+import funcoes.TabelaZebrada;
 import funcoes.VendasDAO;
 import java.awt.Color;
 import java.awt.event.FocusAdapter;
@@ -32,6 +33,7 @@ import javax.swing.ListSelectionModel;
 import javax.swing.SwingConstants;
 import javax.swing.border.LineBorder;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableCellRenderer;
 import static telas.ExibeVenda.GetIndice;
 
 /**
@@ -167,30 +169,32 @@ public class ExibeDetVenda extends javax.swing.JFrame {
 
             stmt = getConnection().createStatement();
             ArrayList dados = new ArrayList();
-            String[] Colunas = {"Código do Detalhe da Venda", "Quantidade", "Preço Unitário", "Código do Detalhe do Produto",
-            "Código do Produto", "Produto", "Modelo", "Fabricante"};
+            String[] Colunas = {"Produto",  "Modelo", "Fabricante", "Quantidade" ,"Preço Unitário"};
 
             ResultSet rs;
             rs = stmt.executeQuery(Sql);
 
             while (rs.next()) {
                 dados.add(new Object[]{ 
-                    rs.getObject("idtabVendas"), 
-                    rs.getObject("quant"), 
-                    rs.getObject("precoSaida"),
-                    rs.getObject("tabdetproduto_idDetProduto"),
-                    rs.getObject("id_prod"),
                     rs.getObject("produto"),
                     rs.getObject("modelo"),
-                    rs.getObject("fabricante")});
+                    rs.getObject("fabricante"),                    
+                    rs.getObject("quant"), 
+                    rs.getObject("precoSaida")});
             }
 
-            for (int i = 0; i < 7; i++) {
+            for (int i = 0; i < 5; i++) {
                 ModeloTabela modelo = new ModeloTabela(dados, Colunas);
                 jTableListarVendas.setModel(modelo);
-                jTableListarVendas.getColumnModel().getColumn(0).setPreferredWidth(200);
+                
+                TableCellRenderer renderer = new TabelaZebrada();
+                jTableListarVendas.setDefaultRenderer(Object.class, renderer);
+                
+                jTableListarVendas.getColumnModel().getColumn(0).setPreferredWidth(100);
                 jTableListarVendas.getColumnModel().getColumn(1).setPreferredWidth(200);
                 jTableListarVendas.getColumnModel().getColumn(2).setPreferredWidth(200);
+                jTableListarVendas.getColumnModel().getColumn(3).setPreferredWidth(100);
+                jTableListarVendas.getColumnModel().getColumn(4).setPreferredWidth(100);
                 jTableListarVendas.getColumnModel().getColumn(i).setResizable(false);
                 jTableListarVendas.getTableHeader().setReorderingAllowed(false);
                 jTableListarVendas.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
@@ -321,6 +325,7 @@ public class ExibeDetVenda extends javax.swing.JFrame {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
+        bindingGroup = new org.jdesktop.beansbinding.BindingGroup();
 
         jLabel1 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
@@ -362,7 +367,7 @@ public class ExibeDetVenda extends javax.swing.JFrame {
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel1.setText("Detalhe de Vendas");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 60, -1, -1));
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 50, -1, -1));
 
         jTableListarVendas.setBackground(new java.awt.Color(223, 237, 253));
         jTableListarVendas.setModel(new javax.swing.table.DefaultTableModel(
@@ -476,7 +481,7 @@ public class ExibeDetVenda extends javax.swing.JFrame {
                         .addComponent(uJComboBoxCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 335, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jTextCodCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 37, Short.MAX_VALUE))
+                        .addGap(0, 47, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jTextHoraVenda, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -542,6 +547,10 @@ public class ExibeDetVenda extends javax.swing.JFrame {
         });
 
         jBtnRemover.setText("Remover Peças");
+
+        org.jdesktop.beansbinding.Binding binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, jTableListarVendas, org.jdesktop.beansbinding.ELProperty.create("${selectedElement != null}"), jBtnRemover, org.jdesktop.beansbinding.BeanProperty.create("enabled"));
+        bindingGroup.addBinding(binding);
+
         jBtnRemover.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jBtnRemoverActionPerformed(evt);
@@ -553,13 +562,16 @@ public class ExibeDetVenda extends javax.swing.JFrame {
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(20, 20, 20)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jButtonAddnovoProd)
                     .addComponent(jBtnRemover)
                     .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jButtonVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(jPanel2Layout.createSequentialGroup()
+                            .addGap(20, 20, 20)
+                            .addComponent(jButtonVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(jPanel2Layout.createSequentialGroup()
+                            .addContainerGap()
+                            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(jButtonAddnovoProd))
                 .addContainerGap(29, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
@@ -567,16 +579,18 @@ public class ExibeDetVenda extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(145, 145, 145)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(40, 40, 40)
-                .addComponent(jBtnRemover)
-                .addGap(25, 25, 25)
+                .addGap(37, 37, 37)
                 .addComponent(jButtonAddnovoProd)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 177, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addComponent(jBtnRemover)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 187, Short.MAX_VALUE)
                 .addComponent(jButtonVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(22, 22, 22))
         );
 
         getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 860, 700));
+
+        bindingGroup.bind();
 
         pack();
         setLocationRelativeTo(null);
@@ -642,8 +656,20 @@ public class ExibeDetVenda extends javax.swing.JFrame {
         total = Double.parseDouble(jTextTotalVenda.getText());
     }//GEN-LAST:event_jButtonAddnovoProdActionPerformed
 
-    private void jBtnRemoverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnRemoverActionPerformed
+    private void uJComboBoxClienteItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_uJComboBoxClienteItemStateChanged
 
+    }//GEN-LAST:event_uJComboBoxClienteItemStateChanged
+
+    private void uJComboBoxClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_uJComboBoxClienteActionPerformed
+        codCliente = 0;
+        idClienteComboBox();
+    }//GEN-LAST:event_uJComboBoxClienteActionPerformed
+
+    private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
+        verificaPagina();
+    }//GEN-LAST:event_formWindowClosed
+
+    private void jBtnRemoverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnRemoverActionPerformed
         int linha = jTableListarVendas.getSelectedRow();
 
         codDetVendaProduto = (Integer.parseInt(jTableListarVendas.getValueAt(linha, 0).toString()));
@@ -661,19 +687,6 @@ public class ExibeDetVenda extends javax.swing.JFrame {
         CarregaVenda();
         TabelaVendas();
     }//GEN-LAST:event_jBtnRemoverActionPerformed
-
-    private void uJComboBoxClienteItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_uJComboBoxClienteItemStateChanged
-
-    }//GEN-LAST:event_uJComboBoxClienteItemStateChanged
-
-    private void uJComboBoxClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_uJComboBoxClienteActionPerformed
-        codCliente = 0;
-        idClienteComboBox();
-    }//GEN-LAST:event_uJComboBoxClienteActionPerformed
-
-    private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
-        verificaPagina();
-    }//GEN-LAST:event_formWindowClosed
 
     public double Total() {
         return total;
@@ -713,5 +726,6 @@ public class ExibeDetVenda extends javax.swing.JFrame {
     private javax.swing.JTextField jTextHoraVenda;
     private javax.swing.JTextField jTextTotalVenda;
     private componentes.UJComboBox uJComboBoxCliente;
+    private org.jdesktop.beansbinding.BindingGroup bindingGroup;
     // End of variables declaration//GEN-END:variables
 }

@@ -625,7 +625,7 @@ public class CadastrarProduto extends javax.swing.JFrame {
                     .addComponent(jBtnSalvarFabricante)))
         );
 
-        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 150, 800, 140));
+        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 150, 810, 140));
 
         jLabel13.setBackground(new java.awt.Color(223, 237, 253));
         jLabel13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/leiaute/img3.png"))); // NOI18N

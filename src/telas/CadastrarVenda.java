@@ -146,7 +146,7 @@ public class CadastrarVenda extends javax.swing.JFrame {
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
-        jPanel1.add(jTextHora, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 170, 90, -1));
+        jPanel1.add(jTextHora, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 170, 60, -1));
 
         jLabel6.setText("Hora:");
         jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 170, -1, -1));
@@ -413,11 +413,11 @@ public class CadastrarVenda extends javax.swing.JFrame {
 
             JOptionPane.showMessageDialog(null, "Cadastrado com sucesso!");
             if (JOptionPane.showConfirmDialog(null, "Deseja continuar cadastrando?", "Confirmar Cadastro", JOptionPane.YES_NO_OPTION) == 1) {
-
+                verificaPagina();
                 this.dispose();
-                limparCampos();
+                limparCampos();               
             } else {
-                //JOptionPane.showMessageDialog(null, "É necessário inserir um registro na tabela!");
+                uJComboBoxCliente.requestFocus();
             }
 
         }

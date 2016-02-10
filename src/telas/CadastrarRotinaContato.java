@@ -26,8 +26,19 @@ public class CadastrarRotinaContato extends javax.swing.JFrame {
     private int codCli;
     private DetalharCliente detalharCliente;
     private ExibeCliente telaExibeCliente;
+     private Menu telaMenu;
 
     public CadastrarRotinaContato() {
+        initComponents();
+        this.carregarComboClientes();
+        combobox();
+        jLabCodigo.setVisible(false);
+        jLabEmpresa.setVisible(false);
+        jLabNCodigo.setVisible(false);
+    }
+    
+    public CadastrarRotinaContato(Menu menu) {
+        telaMenu = menu;
         initComponents();
         this.carregarComboClientes();
         combobox();
@@ -256,6 +267,8 @@ public class CadastrarRotinaContato extends javax.swing.JFrame {
         }else if ((this.telaExibeCliente != null)) {
             this.telaExibeCliente.setEnabled(true);
             this.telaExibeCliente.toFront();
+        }else if ((this.telaMenu != null)) {
+            this.telaMenu.setVisible(true);
         }
     }
 
