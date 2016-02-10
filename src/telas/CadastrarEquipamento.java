@@ -27,18 +27,24 @@ public class CadastrarEquipamento extends javax.swing.JFrame {
     private int codFornecedor;
     private int codFabricante;
     private int codModelo;
-    private String fabricante;
     private CadastrarEquipCliente telaCadEquipCliente;
-    private String equipamento;
-    private String modelo;
-    
-     private Menu telaMenu;
+
+    private Menu telaMenu;
 
     /**
      * Creates new form CadastrarEquipamento
      */
     public CadastrarEquipamento() {
-        initComponents();       
+        initComponents();
+        populaComboBoxFornecedor();
+        populaComboBoxFabricante();
+        populaComboBoxModelo();
+        carregarComboEquipamento();
+        txtEquipamento.setVisible(false);
+        jBtnCadEquipamento.setVisible(false);
+        jBtnCancelarCadEquipamento.setVisible(false);
+        txtEquipamento.setDocument(new LimitarDigitos(45));
+        combobox();
     }
 
     public CadastrarEquipamento(Menu menu) {
@@ -52,9 +58,9 @@ public class CadastrarEquipamento extends javax.swing.JFrame {
         jBtnCadEquipamento.setVisible(false);
         jBtnCancelarCadEquipamento.setVisible(false);
         txtEquipamento.setDocument(new LimitarDigitos(45));
-        combobox();       
+        combobox();
     }
-    
+
     public CadastrarEquipamento(CadastrarEquipCliente telaCadEquipCli) {
         telaCadEquipCliente = telaCadEquipCli;
         initComponents();
@@ -82,7 +88,7 @@ public class CadastrarEquipamento extends javax.swing.JFrame {
         });
         uJComboBoxEquipamento.setAutocompletar(true);
     }
-    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -93,10 +99,6 @@ public class CadastrarEquipamento extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jBtnCadEquipamento = new javax.swing.JButton();
-        jBtnCancelarCadEquipamento = new javax.swing.JButton();
-        jLabel8 = new javax.swing.JLabel();
-        jComboBoxFornecedor = new javax.swing.JComboBox();
         jLabel9 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         uJComboBoxEquipamento = new componentes.UJComboBox();
@@ -105,11 +107,15 @@ public class CadastrarEquipamento extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jBtbNovoEquipamento = new javax.swing.JButton();
-        jComboBoxFabricante = new javax.swing.JComboBox();
         jLabel10 = new javax.swing.JLabel();
         jComboBoxModelo = new javax.swing.JComboBox();
         jBtnSair = new javax.swing.JButton();
         jBtnCadastrarEquipamento = new javax.swing.JButton();
+        jComboBoxFabricante = new javax.swing.JComboBox<>();
+        jLabel8 = new javax.swing.JLabel();
+        jComboBoxFornecedor = new javax.swing.JComboBox();
+        jBtnCadEquipamento = new javax.swing.JButton();
+        jBtnCancelarCadEquipamento = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setResizable(false);
@@ -121,33 +127,6 @@ public class CadastrarEquipamento extends javax.swing.JFrame {
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jBtnCadEquipamento.setText("Salvar");
-        jBtnCadEquipamento.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jBtnCadEquipamentoActionPerformed(evt);
-            }
-        });
-        jPanel1.add(jBtnCadEquipamento, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 170, -1, -1));
-
-        jBtnCancelarCadEquipamento.setText("Cancelar");
-        jBtnCancelarCadEquipamento.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jBtnCancelarCadEquipamentoActionPerformed(evt);
-            }
-        });
-        jPanel1.add(jBtnCancelarCadEquipamento, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 170, -1, -1));
-
-        jLabel8.setText("Fornecedor:");
-        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 210, -1, -1));
-
-        jComboBoxFornecedor.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Selecione o fornecedor" }));
-        jComboBoxFornecedor.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBoxFornecedorActionPerformed(evt);
-            }
-        });
-        jPanel1.add(jComboBoxFornecedor, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 210, 260, -1));
 
         jLabel9.setText("Fabricante:");
         jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 260, -1, -1));
@@ -187,18 +166,10 @@ public class CadastrarEquipamento extends javax.swing.JFrame {
                 jBtbNovoEquipamentoActionPerformed(evt);
             }
         });
-        jPanel2.add(jBtbNovoEquipamento, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 170, -1, -1));
-
-        jComboBoxFabricante.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Selecione o fabricante" }));
-        jComboBoxFabricante.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBoxFabricanteActionPerformed(evt);
-            }
-        });
-        jPanel2.add(jComboBoxFabricante, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 260, 260, -1));
+        jPanel2.add(jBtbNovoEquipamento, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 170, -1, -1));
 
         jLabel10.setText("Modelo:");
-        jPanel2.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 310, -1, -1));
+        jPanel2.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 210, -1, -1));
 
         jComboBoxModelo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Selecione o modelo" }));
         jComboBoxModelo.addActionListener(new java.awt.event.ActionListener() {
@@ -206,7 +177,7 @@ public class CadastrarEquipamento extends javax.swing.JFrame {
                 jComboBoxModeloActionPerformed(evt);
             }
         });
-        jPanel2.add(jComboBoxModelo, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 310, 260, -1));
+        jPanel2.add(jComboBoxModelo, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 210, 260, -1));
 
         jBtnSair.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/stop2.png"))); // NOI18N
         jBtnSair.setText("Cancelar");
@@ -227,6 +198,40 @@ public class CadastrarEquipamento extends javax.swing.JFrame {
         });
         jPanel2.add(jBtnCadastrarEquipamento, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 360, -1, -1));
 
+        jComboBoxFabricante.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBoxFabricanteActionPerformed(evt);
+            }
+        });
+        jPanel2.add(jComboBoxFabricante, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 260, 260, -1));
+
+        jLabel8.setText("Fornecedor:");
+        jPanel2.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 310, -1, -1));
+
+        jComboBoxFornecedor.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Selecione o fornecedor" }));
+        jComboBoxFornecedor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBoxFornecedorActionPerformed(evt);
+            }
+        });
+        jPanel2.add(jComboBoxFornecedor, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 310, 260, -1));
+
+        jBtnCadEquipamento.setText("Salvar");
+        jBtnCadEquipamento.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnCadEquipamentoActionPerformed(evt);
+            }
+        });
+        jPanel2.add(jBtnCadEquipamento, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 170, -1, -1));
+
+        jBtnCancelarCadEquipamento.setText("Cancelar");
+        jBtnCancelarCadEquipamento.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnCancelarCadEquipamentoActionPerformed(evt);
+            }
+        });
+        jPanel2.add(jBtnCancelarCadEquipamento, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 170, -1, -1));
+
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 670, 410));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 410));
@@ -243,29 +248,29 @@ public class CadastrarEquipamento extends javax.swing.JFrame {
     }//GEN-LAST:event_jBtnSairActionPerformed
 
     private void jBtnCadEquipamentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnCadEquipamentoActionPerformed
-         if (txtEquipamento.getText().trim().equals("")) {
+        if (txtEquipamento.getText().trim().equals("")) {
             JOptionPane.showMessageDialog(null, "Preencha o EQUIPAMENTO!");
             txtEquipamento.requestFocus();
             txtEquipamento.setBackground(Color.yellow);
         } else {
-        if (EquipamentoDAO.VerificaEquipamento(txtEquipamento.getText()) == false) {
+            if (EquipamentoDAO.VerificaEquipamento(txtEquipamento.getText()) == false) {
 
-            equi.setTabusuarioIdUsuario(idUsuario());
-            equi.setEquipamento(txtEquipamento.getText());
-            codEquipamento = EquipamentoDAO.CadEquipamento(equi);
+                equi.setTabusuarioIdUsuario(idUsuario());
+                equi.setEquipamento(txtEquipamento.getText());
+                codEquipamento = EquipamentoDAO.CadEquipamento(equi);
 
-        } else {
-            JOptionPane.showMessageDialog(this, "Registro ja cadastrado");
-        }
+            } else {
+                JOptionPane.showMessageDialog(this, "Registro ja cadastrado");
+            }
 
-        jBtnCadEquipamento.setVisible(false);
-        jBtnCancelarCadEquipamento.setVisible(false);
-        jBtbNovoEquipamento.setVisible(true);
-        txtEquipamento.setVisible(false);
-        uJComboBoxEquipamento.setVisible(true);
-        uJComboBoxEquipamento.removeAllItems();
-        carregarComboEquipamento();
-        uJComboBoxEquipamento.setSelectedItem(txtEquipamento.getText());
+            jBtnCadEquipamento.setVisible(false);
+            jBtnCancelarCadEquipamento.setVisible(false);
+            jBtbNovoEquipamento.setVisible(true);
+            txtEquipamento.setVisible(false);
+            uJComboBoxEquipamento.setVisible(true);
+            uJComboBoxEquipamento.removeAllItems();
+            carregarComboEquipamento();
+            uJComboBoxEquipamento.setSelectedItem(txtEquipamento.getText());
     }//GEN-LAST:event_jBtnCadEquipamentoActionPerformed
     }
     private void jBtbNovoEquipamentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtbNovoEquipamentoActionPerformed
@@ -290,36 +295,32 @@ public class CadastrarEquipamento extends javax.swing.JFrame {
         uJComboBoxEquipamento.setVisible(true);
     }//GEN-LAST:event_jBtnCancelarCadEquipamentoActionPerformed
 
-    private void jComboBoxFabricanteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxFabricanteActionPerformed
-        idFabricanteComboBox();
-    }//GEN-LAST:event_jComboBoxFabricanteActionPerformed
-
     private void jComboBoxModeloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxModeloActionPerformed
         idModeloComboBox();
     }//GEN-LAST:event_jComboBoxModeloActionPerformed
 
     private void jBtnCadastrarEquipamentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnCadastrarEquipamentoActionPerformed
 
-        if (jComboBoxFornecedor.getSelectedIndex() == 0){
-    JOptionPane.showMessageDialog(null, "Selecione um Fornecedor!");
-    return;
-        }  
-        
-           if (uJComboBoxEquipamento.getSelectedIndex() == 0){
-    JOptionPane.showMessageDialog(null, "Selecione um Equipamento!");
-    return;
+        if (jComboBoxFornecedor.getSelectedIndex() == 0) {
+            JOptionPane.showMessageDialog(null, "Selecione um Fornecedor!");
+            return;
         }
-           
-              if (jComboBoxFabricante.getSelectedIndex() == 0){
-    JOptionPane.showMessageDialog(null, "Selecione um Fabricante!");
-    return;
+
+        if (uJComboBoxEquipamento.getSelectedIndex() == 0) {
+            JOptionPane.showMessageDialog(null, "Selecione um Equipamento!");
+            return;
         }
-              
-                 if (jComboBoxModelo.getSelectedIndex() == 0){
-    JOptionPane.showMessageDialog(null, "Selecione um Modelo!");
-    return;
-        } 
-                 
+
+        if (jComboBoxFabricante.getSelectedIndex() == 0) {
+            JOptionPane.showMessageDialog(null, "Selecione um Fabricante!");
+            return;
+        }
+
+        if (jComboBoxModelo.getSelectedIndex() == 0) {
+            JOptionPane.showMessageDialog(null, "Selecione um Modelo!");
+            return;
+        }
+
         equi.setTabusuarioIdUsuario(idUsuario());
         equi.setCodFornecedor(codFornecedor);
         equi.setCodModelo(codModelo);
@@ -338,13 +339,13 @@ public class CadastrarEquipamento extends javax.swing.JFrame {
         jBtbNovoEquipamento.setVisible(true);
         verificaPagina();
         JOptionPane.showMessageDialog(null, "Cadastrado com sucesso!");
-        
-        if (JOptionPane.showConfirmDialog(null, "Deseja continuar cadastrando?", "Confirmar Cadastro", JOptionPane.YES_NO_OPTION) == 1) {           
+
+        if (JOptionPane.showConfirmDialog(null, "Deseja continuar cadastrando?", "Confirmar Cadastro", JOptionPane.YES_NO_OPTION) == 1) {
             verificaPagina();
             this.dispose();
         } else {
             uJComboBoxEquipamento.requestFocus();
-        }        
+        }
     }//GEN-LAST:event_jBtnCadastrarEquipamentoActionPerformed
 
     private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
@@ -356,21 +357,19 @@ public class CadastrarEquipamento extends javax.swing.JFrame {
         jComboBoxModelo.removeAllItems();
         jComboBoxFabricante.removeAllItems();
         codModelo = 0;
-        modelo = null;
         codFabricante = 0;
-        fabricante = null;
         codEquipamento = 0;
         idEquipamentoComboBox();
         populaComboBoxModelo();
-        equipamento = uJComboBoxEquipamento.getSelectedItem().toString();
     }//GEN-LAST:event_uJComboBoxEquipamentoItemStateChanged
 
     private void uJComboBoxEquipamentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_uJComboBoxEquipamentoActionPerformed
         idEquipamentoComboBox();
-        if (uJComboBoxEquipamento.getSelectedItem() != null) {
-            equipamento = uJComboBoxEquipamento.getSelectedItem().toString();
-        }
     }//GEN-LAST:event_uJComboBoxEquipamentoActionPerformed
+
+    private void jComboBoxFabricanteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxFabricanteActionPerformed
+        idFabricanteComboBox();
+    }//GEN-LAST:event_jComboBoxFabricanteActionPerformed
 
     private void limparCampos() {
         jComboBoxFabricante.setSelectedIndex(0);
@@ -389,7 +388,7 @@ public class CadastrarEquipamento extends javax.swing.JFrame {
             uJComboBoxEquipamento.addItem(equi.getEquipamento(), equi);
         }
     }
-    
+
     private void idEquipamentoComboBox() {
 
         Connection conexao = Conexao.getConnection();
@@ -456,6 +455,7 @@ public class CadastrarEquipamento extends javax.swing.JFrame {
             pst = conexao.prepareStatement(sql);
             rs = pst.executeQuery();
 
+            jComboBoxFabricante.addItem("Selecione o fabricante");
             while (rs.next()) {
                 jComboBoxFabricante.addItem(rs.getString("fabricante"));
             }
@@ -529,11 +529,44 @@ public class CadastrarEquipamento extends javax.swing.JFrame {
             this.telaCadEquipCliente.ComboEquipamento(uJComboBoxEquipamento.getSelectedItem().toString());
             this.telaCadEquipCliente.setEnabled(true);
             this.telaCadEquipCliente.toFront();
-        }else if ((this.telaMenu != null)) {
+        } else if ((this.telaMenu != null)) {
             this.telaMenu.setVisible(true);
             // this.telaMenu.toFront();
-        } 
-    }    
+        }
+    }
+
+        public static void main(String args[]) {
+        /* Set the Nimbus look and feel */
+        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         */
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Windows".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (ClassNotFoundException ex) {
+            java.util.logging.Logger.getLogger(Menu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(Menu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(Menu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(Menu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+        //</editor-fold>
+
+        /* Create and display the form */
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                new CadastrarEquipamento().setVisible(true);
+            }
+        });
+    }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBtbNovoEquipamento;
@@ -541,7 +574,7 @@ public class CadastrarEquipamento extends javax.swing.JFrame {
     private javax.swing.JButton jBtnCadastrarEquipamento;
     private javax.swing.JButton jBtnCancelarCadEquipamento;
     private javax.swing.JButton jBtnSair;
-    private javax.swing.JComboBox jComboBoxFabricante;
+    private javax.swing.JComboBox<String> jComboBoxFabricante;
     private javax.swing.JComboBox jComboBoxFornecedor;
     private javax.swing.JComboBox jComboBoxModelo;
     private javax.swing.JLabel jLabel1;

@@ -52,7 +52,7 @@
         <Component class="javax.swing.JLabel" name="jLabel1">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Microsoft YaHei UI Light" size="24" style="1"/>
+              <Font name="Raavi" size="24" style="1"/>
             </Property>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
               <Image iconType="3" name="/imagens/cliente3.png"/>
@@ -666,6 +666,9 @@
               </Events>
             </Component>
             <Component class="javax.swing.JTextField" name="txtSetor">
+              <Events>
+                <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtSetorKeyTyped"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JButton" name="jBtnNovoSetor">
               <Properties>

@@ -586,7 +586,8 @@ public class Menu extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem23ActionPerformed
 
     private void jMenuItem30ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem30ActionPerformed
-        new ExibeEquipamento().setVisible(true);
+        this.setVisible(false);
+        new ExibeEquipamento(this).setVisible(true);
     }//GEN-LAST:event_jMenuItem30ActionPerformed
 
     private void jMenuItem9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem9ActionPerformed
@@ -638,7 +639,8 @@ public class Menu extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem26ActionPerformed
 
     private void jMenuItem29ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem29ActionPerformed
-        new CadastrarEquipamento().setVisible(true);
+        this.setVisible(false);
+        new CadastrarEquipamento(this).setVisible(true);
     }//GEN-LAST:event_jMenuItem29ActionPerformed
 
     private void jMenuItem10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem10ActionPerformed
@@ -659,6 +661,7 @@ public class Menu extends javax.swing.JFrame {
             file.mkdir();
             String caminho = file.getAbsolutePath();
             ControleBackup app = new ControleBackup(caminho);
+            this.dispose();
         }
     }//GEN-LAST:event_jBtnLogoutActionPerformed
 

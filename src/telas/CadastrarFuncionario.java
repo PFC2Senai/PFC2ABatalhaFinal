@@ -277,6 +277,12 @@ public class CadastrarFuncionario extends javax.swing.JFrame {
 
         jLabel5.setText("Cargo:");
 
+        txtDataAdmissao.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtDataAdmissaoKeyTyped(evt);
+            }
+        });
+
         labelCpfExistente.setForeground(new java.awt.Color(255, 0, 0));
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
@@ -701,6 +707,7 @@ public class CadastrarFuncionario extends javax.swing.JFrame {
 
         if (!caracteres.contains(evt.getKeyChar() + "")) {
             evt.consume();
+            JOptionPane.showMessageDialog(this, "Digite apenas números");
         }
     }//GEN-LAST:event_jTextSalarioKeyTyped
 
@@ -746,12 +753,22 @@ public class CadastrarFuncionario extends javax.swing.JFrame {
 
     private void txtTelCelKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTelCelKeyTyped
         // TODO add your handling code here:
-        
+
         String caracteres = "0987654321";
         if (!caracteres.contains(evt.getKeyChar() + "")) {
             evt.consume();
+            JOptionPane.showMessageDialog(this, "Digite apenas números");
         }
     }//GEN-LAST:event_txtTelCelKeyTyped
+
+    private void txtDataAdmissaoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtDataAdmissaoKeyTyped
+        // TODO add your handling code here:
+        String caracteres = "0987654321/";
+        if (!caracteres.contains(evt.getKeyChar() + "")) {
+            evt.consume();
+            JOptionPane.showMessageDialog(this, "Digite apenas números");
+        }
+    }//GEN-LAST:event_txtDataAdmissaoKeyTyped
 
     private boolean VerificaCampos() {
 
@@ -942,7 +959,6 @@ public class CadastrarFuncionario extends javax.swing.JFrame {
             @Override
             public void run() {
                 try {
-                    //cria a tela de espera e mostra ela
                     t1.join();//fica esperando a primeira thread acabar
                     telaFunc.setEnabled(true);  // quando acabar fecha a janela de espera, podes fazer outras coisas aqui
                     telaTeste.dispose();
