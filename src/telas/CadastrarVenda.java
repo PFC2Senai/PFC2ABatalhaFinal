@@ -6,22 +6,17 @@
 package telas;
 
 import atributos.Cliente;
-import atributos.DetServicoProduto;
-import atributos.DetServicoTipoServ;
 import atributos.OrdemServico;
 import atributos.Produto;
 import atributos.Usuario;
 import atributos.Vendas;
 import funcoes.ClienteDAO;
 import funcoes.Conexao;
-import static funcoes.Conexao.getConnection;
-import funcoes.DetServicoProdutoDAO;
 import funcoes.FuncoesDiversas;
 import static funcoes.FuncoesDiversas.FormataData;
-import funcoes.ModeloTabela;
 import funcoes.OrdemServicoDAO;
 import funcoes.ProdutoDAO;
-import funcoes.ServicoDAO;
+import funcoes.TabelaZebrada;
 import funcoes.VendasDAO;
 import java.awt.Color;
 import java.awt.event.FocusAdapter;
@@ -32,17 +27,15 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
-import javax.swing.JTextField;
-import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableCellRenderer;
 
 /**
  *
- * @author WilhamJr
+ * @author EdceaAraújo
  */
 public class CadastrarVenda extends javax.swing.JFrame {
 
@@ -69,314 +62,11 @@ public class CadastrarVenda extends javax.swing.JFrame {
      */
     public CadastrarVenda() {
         initComponents();
-        //TabelaVendas("select * from tabvendas;");
-        carregarComboPeca();
-        jTextTotal.setEditable(false);
-        carregarComboClientes();
-       
         combobox();
-    }
-
-    private void combobox() {
-
-        //Combobox clientes
-        uJComboBoxCliente.getEditor().getEditorComponent().addFocusListener(new FocusAdapter() {
-            @Override
-            public void focusLost(FocusEvent e) {
-                if (codCliente == 0) {
-                    Mensangem();
-                    uJComboBoxCliente.getEditor().getEditorComponent().requestFocus();
-                }
-            }
-        });
-        uJComboBoxCliente.setAutocompletar(true);
-        jComboBoxProdutos.getEditor().getEditorComponent().addFocusListener(new FocusAdapter() {
-            @Override
-            public void focusLost(FocusEvent e) {
-                if (codProduto == 0 && jComboBoxProdutos.getSelectedIndex() != 0) {
-                    Mensangem();
-                    jComboBoxProdutos.getEditor().getEditorComponent().requestFocus();
-                }
-            }
-        });
-         jComboBoxProdutos.setAutocompletar(true);
-    }
-
-    private void Mensangem() {
-        JOptionPane.showMessageDialog(null, "Esse registro não encontra-se cadastrado na base de dados.");
-    }
-
-    private void limparCampos() {
-
-        jTextHora.setText("");
-        JDataVenda.setDate(null);
-        jComboBoxProdutos.setSelectedItem("Selecione");
-        jComboFabricante.setSelectedItem("Selecione");
-        txtModelo.setText("");
-        jTextValorUnit.setText("");
-        jTextTotal.setText("");
-        jTextQuantidadeProduto.setText("");
-        ((DefaultTableModel) jTableProduto.getModel()).setNumRows(0);
-        jTableProduto.updateUI();
-    }
-
-    private void carregarComboPeca() {
-
-        // uJComboBoxPeca.clear();
-        ArrayList<Produto> pecas = new ArrayList<Produto>();
-        pecas = ProdutoDAO.ListarProdutos();
-
-        jComboBoxProdutos.addItem("Selecione a Peça");
-        for (Produto prod : pecas) {
-            jComboBoxProdutos.addItem(prod.getProduto(), prod);
-        }
-    }
-    
-    private void idProdutoComboBox() {
-
-        Connection conexao = Conexao.getConnection();
-        ResultSet rs;
-        String sql = "select * from tabproduto inner join tabdetproduto on tabproduto_id_prod = id_prod"
-                + " where produto = '" + jComboBoxProdutos.getSelectedItem() + "';";
-
-        try {
-            pst = conexao.prepareStatement(sql);
-            rs = pst.executeQuery();
-
-            while (rs.next()) {
-                codProduto = (rs.getInt("id_prod"));
-            }
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, ex);
-        }
-    }
-
-    public void CarregaValorUnit() {
-
-        valor = ProdutoDAO.ExisteProduto(codProduto, codModelo, codFabricante);
-
-        if (valor != 0) {
-            jTextValorUnit.setText(String.valueOf(valor));
-        }
-    }
-
-    public void TabelaProduto() {
-
-        //CarregaValorUnit();  
-        codDetProduto = ProdutoDAO.codDetProduto();
-        int quantidade = Integer.parseInt(jTextQuantidadeProduto.getText());
-        valorUnit = Double.parseDouble(jTextValorUnit.getText());
-        double total = valorUnit * quantidade;
-
-        try {
-
-            DefaultTableModel dtm = (DefaultTableModel) jTableProduto.getModel();
-
-            dtm.addRow(new Object[]{codDetProduto, produto, modelo, fabricante, quantidade,
-                valorUnit,
-                total});
-
-            totalPeca += total;
-            jTextTotal.setEditable(false);
-            jTextTotal.setText(String.valueOf(totalPeca));
-
-            jTextQuantidadeProduto.setText("");
-
-        } catch (Exception erro) {
-            Logger.getLogger(CadastrarCliente.class.getName()).log(Level.SEVERE, null, erro);
-        }
-    }
-
-    private void populaComboBoxModelo() {
-
-        Connection conexao = Conexao.getConnection();
-        ResultSet rs;
-        String sql = "select modelo "
-                + " from tabdetproduto inner join "
-                + " tabproduto inner join "
-                + " tabmodelo on tabmodelo_idtabModelo = idtabModelo and "
-                + " tabproduto_id_prod = id_prod"
-                + " where id_prod = " + codProduto + " group by modelo;";
-        System.out.println(codProduto);
-
-        try {
-            pst = conexao.prepareStatement(sql);
-            rs = pst.executeQuery();
-
-            while (rs.next()) {
-                txtModelo.setText(rs.getString("modelo"));
-            }
-
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, ex);
-        }
-    }
-
-    private void idModeloComboBox() {
-
-        Connection conexao = Conexao.getConnection();
-        ResultSet rs;
-        String sql = "select * from tabmodelo where modelo = '" + txtModelo.getText() + "';";
-
-        try {
-            pst = conexao.prepareStatement(sql);
-            rs = pst.executeQuery();
-
-            while (rs.next()) {
-                codModelo = (rs.getInt("idtabModelo"));
-            }
-
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, ex);
-        }
-    }
-
-    private void populaComboBoxFabricante() {
-
-        Connection conexao = Conexao.getConnection();
-        ResultSet rs;
-        String sql = "SELECT * FROM vw_combofabricanteproduto "
-                + " WHERE id_prod = " + codProduto
-                + " AND tabmodelo_idtabModelo = " + codModelo + " group by fabricante;";
-
-        try {
-            pst = conexao.prepareStatement(sql);
-            rs = pst.executeQuery();
-
-            while (rs.next()) {
-                jComboFabricante.addItem(rs.getString("fabricante"));
-            }
-
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, ex);
-        }
-    }
-
-    private void idFabricanteComboBox() {
-
-        Connection conexao = Conexao.getConnection();
-        ResultSet rs;
-        String sql = "select * from tabfabricante where fabricante = '" + jComboFabricante.getSelectedItem() + "';";
-
-        try {
-            pst = conexao.prepareStatement(sql);
-            rs = pst.executeQuery();
-
-            while (rs.next()) {
-                codFabricante = (rs.getInt("idtabFabricante"));
-            }
-
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, ex);
-        }
-    }
-    private boolean ValidaHora() {
-                boolean valide = true;
-		String hora = jTextHora.getText();
-		String[] hm = hora.split(":"); 
-		int horas = Integer.parseInt( hm[0]);
-		int minutos = Integer.parseInt( hm[1]);
-		if( horas > 24 || minutos > 59 ){
-                valide = false;
-                return valide;
-		}
-                return valide;
-	}
-    
-    private boolean VerificaCampos() {
-        boolean valida = true;
-
-        if (jComboBoxProdutos.getSelectedItem().equals("Selecione")) {
-            JOptionPane.showMessageDialog(null, "Selecione a PEÇA!");
-            jComboBoxProdutos.requestFocus();
-            jComboBoxProdutos.setBackground(Color.yellow);
-            valida = false;
-            return valida;
-        }
-
-        if (txtModelo.getText().equals("")) {
-            JOptionPane.showMessageDialog(null, "Selecione o MODELO!");
-            txtModelo.requestFocus();
-            txtModelo.setBackground(Color.yellow);
-            valida = false;
-            return valida;
-        }
-
-        if (jComboFabricante.getSelectedItem().equals("Selecione")) {
-            JOptionPane.showMessageDialog(null, "Selecione o FABRICANTE!");
-            jComboFabricante.requestFocus();
-            jComboFabricante.setBackground(Color.yellow);
-            valida = false;
-            return valida;
-        }
-
-        if (JDataVenda.getDate() == null) {
-            JOptionPane.showMessageDialog(null, "Preencha o campo DATA!");
-            JDataVenda.requestFocus();
-            JDataVenda.setBackground(Color.yellow);
-            valida = false;
-            return valida;
-        }
-        
-        if (jTextHora.getText() == null || jTextHora.getText().trim().equals( ":" ) || ValidaHora() == false) {
-            JOptionPane.showMessageDialog(null, "Preencha o campo HORA!");
-            jTextHora.requestFocus();
-            jTextHora.setBackground(Color.yellow);
-            valida = false;
-            return valida;
-        }
-
-        if (jTextValorUnit.getText().equals("")) {
-            JOptionPane.showMessageDialog(null, "Preencha o campo VALOR!");
-            jTextValorUnit.requestFocus();
-            jTextValorUnit.setBackground(Color.yellow);
-            valida = false;
-            return valida;
-        }
-
-        if (jTextQuantidadeProduto.getText().equals("")) {
-            JOptionPane.showMessageDialog(null, "Preencha o campo QUANTIDADE!");
-            valida = false;
-            return valida;
-        }
-
-        if (jTextTotal.getText().equals("")) {
-            JOptionPane.showMessageDialog(null, "Preencha o campo TOTAL!");
-            valida = false;
-            return valida;
-        }
-        return valida;
-    }
-
-    private void idClienteComboBox() {
-
-        Connection conexao = Conexao.getConnection();
-        ResultSet rs;
-        String sql = "select idcliente from tabcliente where empresa = '" + uJComboBoxCliente.getSelectedItem() + "';";
-
-        try {
-            pst = conexao.prepareStatement(sql);
-            rs = pst.executeQuery();
-
-            while (rs.next()) {
-                codCliente = (rs.getInt("idcliente"));
-            }
-
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, ex);
-        }
-    }
-
-    private void carregarComboClientes() {
-
-        uJComboBoxCliente.clear();
-
-        ArrayList<Cliente> cliente = new ArrayList<Cliente>();
-        cliente = ClienteDAO.ComboCliente();
-
-        for (Cliente cli : cliente) {
-            uJComboBoxCliente.addItem(cli.getEmpresa(), cli);
-        }
+        carregarComboPeca();
+        carregarComboClientes();
+        ocultaColunaTabelas();
+        jButton6.setVisible(false);
     }
 
     /**
@@ -419,8 +109,7 @@ public class CadastrarVenda extends javax.swing.JFrame {
         txtModelo = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("CADASTRAR VENDA");
-        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        setResizable(false);
 
         jPanel1.setBackground(new java.awt.Color(223, 237, 253));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -446,9 +135,9 @@ public class CadastrarVenda extends javax.swing.JFrame {
                 uJComboBoxClienteActionPerformed(evt);
             }
         });
-        jPanel1.add(uJComboBoxCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 130, 320, -1));
+        jPanel1.add(uJComboBoxCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 130, 320, -1));
 
-        jLabel2.setText("Cliente:");
+        jLabel2.setText("Empresa:");
         jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 130, -1, 20));
 
         jLabel4.setText("Produto:");
@@ -468,9 +157,9 @@ public class CadastrarVenda extends javax.swing.JFrame {
         });
         jPanel1.add(jComboFabricante, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 300, 320, -1));
 
-        jLabel5.setText("Data da Venda:");
+        jLabel5.setText("Data:");
         jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 170, -1, 20));
-        jPanel1.add(JDataVenda, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 170, 121, -1));
+        jPanel1.add(JDataVenda, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 170, 121, -1));
 
         jLabel12.setText("Valor Unitário:");
         jPanel1.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 220, -1, -1));
@@ -609,20 +298,58 @@ public class CadastrarVenda extends javax.swing.JFrame {
         });
         jPanel1.add(txtModelo, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 260, 320, -1));
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 670, 600));
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 670, Short.MAX_VALUE)
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 670, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 0, Short.MAX_VALUE)))
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 600, Short.MAX_VALUE)
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 600, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 0, Short.MAX_VALUE)))
+        );
 
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
+    private void uJComboBoxClienteItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_uJComboBoxClienteItemStateChanged
+
+    }//GEN-LAST:event_uJComboBoxClienteItemStateChanged
+
+    private void uJComboBoxClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_uJComboBoxClienteActionPerformed
+        codCliente = 0;
+        idClienteComboBox();
+    }//GEN-LAST:event_uJComboBoxClienteActionPerformed
+
+    private void jComboFabricanteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboFabricanteActionPerformed
+        idFabricanteComboBox();
+        jTextValorUnit.setText("");
+        if (jComboFabricante.getSelectedItem() != null) {
+            fabricante = jComboFabricante.getSelectedItem().toString();
+
+            CarregaValorUnit();
+        }
+    }//GEN-LAST:event_jComboFabricanteActionPerformed
+
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-       if (JOptionPane.showConfirmDialog(null, "Tem certeza que deseja sair? Os dados não serão salvos.", "Confirmar Cancelamento", JOptionPane.YES_NO_OPTION) == 0) {
+        if (JOptionPane.showConfirmDialog(null, "Tem certeza que deseja sair? Os dados não serão salvos.", "Confirmar Cancelamento", JOptionPane.YES_NO_OPTION) == 0) {
             this.dispose();
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        if (jTableProduto.getRowCount() > 0) {
+        if (VerificaCampos()) {
             OrdemServico oS = new OrdemServico();
             //  Produto p = new Produto();
 
@@ -655,16 +382,16 @@ public class CadastrarVenda extends javax.swing.JFrame {
                 VendasDAO.CadDetVenda(v);
 
             }
-          
-        
-        if (JOptionPane.showConfirmDialog(null, "Deseja continuar cadastrando?", "Confirmar Cadastro", JOptionPane.YES_NO_OPTION) == 1) {           
-           
-            this.dispose();
-              limparCampos();
-        } else {
-            JOptionPane.showMessageDialog(null, "É necessário inserir um registro na tabela!");
-        }
-        
+
+            JOptionPane.showMessageDialog(null, "Cadastrado com sucesso!");
+            if (JOptionPane.showConfirmDialog(null, "Deseja continuar cadastrando?", "Confirmar Cadastro", JOptionPane.YES_NO_OPTION) == 1) {
+
+                this.dispose();
+                limparCampos();
+            } else {
+                //JOptionPane.showMessageDialog(null, "É necessário inserir um registro na tabela!");
+            }
+
         }
     }//GEN-LAST:event_jButton4ActionPerformed
 
@@ -672,37 +399,9 @@ public class CadastrarVenda extends javax.swing.JFrame {
         limparCampos();
     }//GEN-LAST:event_jButton3ActionPerformed
 
-    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-       if (JOptionPane.showConfirmDialog(null, "Deseja excluir o Informações?", "Confirmar Exclusão", JOptionPane.YES_NO_OPTION) == 0) {
-            DefaultTableModel dtm = (DefaultTableModel) jTableProduto.getModel();
-            int linha = jTableProduto.getSelectedRow();
-
-            if (linha != -1) {
-                dtm.removeRow(linha);
-            }
-        }
-    }//GEN-LAST:event_jButton5ActionPerformed
-
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-
-        if (VerificaCampos()) {
-            TabelaProduto();
-        }
-
-        CarregaValorUnit();
-
-//        jTextValorUnit.setText(String.valueOf(total));
-    }//GEN-LAST:event_jButton2ActionPerformed
-
-    private void jComboFabricanteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboFabricanteActionPerformed
-        idFabricanteComboBox();
-        jTextValorUnit.setText("");
-        if (jComboFabricante.getSelectedItem() != null) {
-            fabricante = jComboFabricante.getSelectedItem().toString();
-
-            CarregaValorUnit();
-        }
-    }//GEN-LAST:event_jComboFabricanteActionPerformed
+    private void jTableProdutoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableProdutoMouseClicked
+        jButton5.setEnabled(true);
+    }//GEN-LAST:event_jTableProdutoMouseClicked
 
     private void jTextValorUnitKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextValorUnitKeyTyped
         // TODO add your handling code here:
@@ -712,25 +411,6 @@ public class CadastrarVenda extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jTextValorUnitKeyTyped
 
-    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
-      if(jTextQuantidadeProduto.getText().trim().equals("")){
-          JOptionPane.showMessageDialog(null, "Preencha a QUANTIDADE!");
-            jTextQuantidadeProduto.requestFocus();
-            jTextQuantidadeProduto.setBackground(Color.yellow);
-        } else {
-        double total = totalPeca + Double.parseDouble(jTextQuantidadeProduto.getText());
-        jTextTotal.setText(String.valueOf(total));
-    }//GEN-LAST:event_jButton6ActionPerformed
-}
-    private void uJComboBoxClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_uJComboBoxClienteActionPerformed
-        codCliente = 0;
-        idClienteComboBox();
-    }//GEN-LAST:event_uJComboBoxClienteActionPerformed
-
-    private void uJComboBoxClienteItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_uJComboBoxClienteItemStateChanged
-
-    }//GEN-LAST:event_uJComboBoxClienteItemStateChanged
-
     private void jTextQuantidadeProdutoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextQuantidadeProdutoKeyTyped
         // TODO add your handling code here:
         String caracteres = "0987654321,.";
@@ -738,6 +418,17 @@ public class CadastrarVenda extends javax.swing.JFrame {
             evt.consume();
         }
     }//GEN-LAST:event_jTextQuantidadeProdutoKeyTyped
+
+    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+        if (jTextQuantidadeProduto.getText().trim().equals("")) {
+            JOptionPane.showMessageDialog(null, "Preencha a QUANTIDADE!");
+            jTextQuantidadeProduto.requestFocus();
+            jTextQuantidadeProduto.setBackground(Color.yellow);
+        } else {
+            double total = totalPeca + Double.parseDouble(jTextQuantidadeProduto.getText());
+            jTextTotal.setText(String.valueOf(total));
+        }
+    }//GEN-LAST:event_jButton6ActionPerformed
 
     private void jTextTotalKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextTotalKeyTyped
         // TODO add your handling code here:
@@ -747,9 +438,27 @@ public class CadastrarVenda extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jTextTotalKeyTyped
 
-    private void jTableProdutoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableProdutoMouseClicked
-        jButton5.setEnabled(true);
-    }//GEN-LAST:event_jTableProdutoMouseClicked
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+
+        if (VerificaCamposTabela()) {
+            TabelaProduto();
+        }
+
+        CarregaValorUnit();
+
+        //        jTextValorUnit.setText(String.valueOf(total));
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        if (JOptionPane.showConfirmDialog(null, "Deseja excluir o Informações?", "Confirmar Exclusão", JOptionPane.YES_NO_OPTION) == 0) {
+            DefaultTableModel dtm = (DefaultTableModel) jTableProduto.getModel();
+            int linha = jTableProduto.getSelectedRow();
+
+            if (linha != -1) {
+                dtm.removeRow(linha);
+            }
+        }
+    }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jComboBoxProdutosItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jComboBoxProdutosItemStateChanged
 
@@ -772,11 +481,11 @@ public class CadastrarVenda extends javax.swing.JFrame {
         jTextValorUnit.setText("");
         modelo = txtModelo.getText();
         CarregaValorUnit();
-       // txtModelo.requestFocus();
+        // txtModelo.requestFocus();
         if (jComboFabricante.getSelectedItem() != null) {
             produto = jComboFabricante.getSelectedItem().toString();
         }
-        
+
     }//GEN-LAST:event_jComboBoxProdutosItemStateChanged
 
     private void jComboBoxProdutosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxProdutosActionPerformed
@@ -799,8 +508,342 @@ public class CadastrarVenda extends javax.swing.JFrame {
         CarregaValorUnit();
     }//GEN-LAST:event_txtModeloActionPerformed
 
-    
-    
+    private void combobox() {
+
+        //Combobox clientes
+        uJComboBoxCliente.getEditor().getEditorComponent().addFocusListener(new FocusAdapter() {
+            @Override
+            public void focusLost(FocusEvent e) {
+                if (codCliente == 0 && uJComboBoxCliente.getSelectedIndex() != 0) {
+                    Mensangem();
+                    uJComboBoxCliente.getEditor().getEditorComponent().requestFocus();
+                }
+            }
+        });
+        uJComboBoxCliente.setAutocompletar(true);
+        jComboBoxProdutos.getEditor().getEditorComponent().addFocusListener(new FocusAdapter() {
+            @Override
+            public void focusLost(FocusEvent e) {
+                if (codProduto == 0 && jComboBoxProdutos.getSelectedIndex() != 0) {
+                    Mensangem();
+                    jComboBoxProdutos.getEditor().getEditorComponent().requestFocus();
+                }
+            }
+        });
+        jComboBoxProdutos.setAutocompletar(true);
+    }
+
+    private void Mensangem() {
+        JOptionPane.showMessageDialog(null, "Esse registro não encontra-se cadastrado na base de dados.");
+    }
+
+    private void limparCampos() {
+
+        jTextHora.setText("");
+        JDataVenda.setDate(null);
+        jComboBoxProdutos.setSelectedItem("Selecione");
+        uJComboBoxCliente.setSelectedIndex(0);
+        jComboFabricante.setSelectedItem("Selecione");
+        txtModelo.setText("");
+        jTextValorUnit.setText("");
+        jTextTotal.setText("");
+        jTextQuantidadeProduto.setText("");
+        ((DefaultTableModel) jTableProduto.getModel()).setNumRows(0);
+        jTableProduto.updateUI();
+    }
+
+    private void carregarComboPeca() {
+
+        // uJComboBoxPeca.clear();
+        ArrayList<Produto> pecas = new ArrayList<Produto>();
+        pecas = ProdutoDAO.ListarProdutos();
+
+        jComboBoxProdutos.addItem("Selecione a Peça");
+        for (Produto prod : pecas) {
+            jComboBoxProdutos.addItem(prod.getProduto(), prod);
+        }
+    }
+
+    private void idProdutoComboBox() {
+
+        Connection conexao = Conexao.getConnection();
+        ResultSet rs;
+        String sql = "select * from tabproduto inner join tabdetproduto on tabproduto_id_prod = id_prod"
+                + " where produto = '" + jComboBoxProdutos.getSelectedItem() + "';";
+
+        try {
+            pst = conexao.prepareStatement(sql);
+            rs = pst.executeQuery();
+
+            while (rs.next()) {
+                codProduto = (rs.getInt("id_prod"));
+            }
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, ex);
+        }
+    }
+
+    public void CarregaValorUnit() {
+
+        valor = ProdutoDAO.ExisteProduto(codProduto, codModelo, codFabricante);
+
+        if (valor != 0) {
+            jTextValorUnit.setText(String.valueOf(valor));
+        }
+    }
+
+    public void TabelaProduto() {
+
+        //CarregaValorUnit();  
+        codDetProduto = ProdutoDAO.codDetProduto();
+        int quantidade = Integer.parseInt(jTextQuantidadeProduto.getText());
+        valorUnit = Double.parseDouble(jTextValorUnit.getText());
+        double total = valorUnit * quantidade;
+
+        try {
+
+            DefaultTableModel dtm = (DefaultTableModel) jTableProduto.getModel();
+
+            dtm.addRow(new Object[]{codDetProduto, produto, modelo, fabricante, quantidade,
+                valorUnit,
+                total});
+
+            TableCellRenderer renderer = new TabelaZebrada();
+            jTableProduto.setDefaultRenderer(Object.class, renderer);
+
+            totalPeca += total;
+            jTextTotal.setEditable(false);
+            jTextTotal.setText(String.valueOf(totalPeca));
+
+            jTextQuantidadeProduto.setText("");
+
+        } catch (Exception erro) {
+            Logger.getLogger(CadastrarCliente.class.getName()).log(Level.SEVERE, null, erro);
+        }
+    }
+
+    private void populaComboBoxModelo() {
+
+        Connection conexao = Conexao.getConnection();
+        ResultSet rs;
+        String sql = "select modelo "
+                + " from tabdetproduto inner join "
+                + " tabproduto inner join "
+                + " tabmodelo on tabmodelo_idtabModelo = idtabModelo and "
+                + " tabproduto_id_prod = id_prod"
+                + " where id_prod = " + codProduto + " group by modelo;";
+        System.out.println(codProduto);
+
+        try {
+            pst = conexao.prepareStatement(sql);
+            rs = pst.executeQuery();
+
+            while (rs.next()) {
+                txtModelo.setText(rs.getString("modelo"));
+            }
+
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, ex);
+        }
+    }
+
+    private void idModeloComboBox() {
+
+        Connection conexao = Conexao.getConnection();
+        ResultSet rs;
+        String sql = "select * from tabmodelo where modelo = '" + txtModelo.getText() + "';";
+
+        try {
+            pst = conexao.prepareStatement(sql);
+            rs = pst.executeQuery();
+
+            while (rs.next()) {
+                codModelo = (rs.getInt("idtabModelo"));
+            }
+
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, ex);
+        }
+    }
+
+    private void populaComboBoxFabricante() {
+
+        Connection conexao = Conexao.getConnection();
+        ResultSet rs;
+        String sql = "SELECT * FROM vw_combofabricanteproduto "
+                + " WHERE id_prod = " + codProduto
+                + " AND tabmodelo_idtabModelo = " + codModelo + " group by fabricante;";
+
+        try {
+            pst = conexao.prepareStatement(sql);
+            rs = pst.executeQuery();
+
+            while (rs.next()) {
+                jComboFabricante.addItem(rs.getString("fabricante"));
+            }
+
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, ex);
+        }
+    }
+
+    private void idFabricanteComboBox() {
+
+        Connection conexao = Conexao.getConnection();
+        ResultSet rs;
+        String sql = "select * from tabfabricante where fabricante = '" + jComboFabricante.getSelectedItem() + "';";
+
+        try {
+            pst = conexao.prepareStatement(sql);
+            rs = pst.executeQuery();
+
+            while (rs.next()) {
+                codFabricante = (rs.getInt("idtabFabricante"));
+            }
+
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, ex);
+        }
+    }
+
+    private boolean ValidaHora() {
+        boolean valide = true;
+        String hora = jTextHora.getText();
+        String[] hm = hora.split(":");
+        int horas = Integer.parseInt(hm[0]);
+        int minutos = Integer.parseInt(hm[1]);
+        if (horas > 24 || minutos > 59) {
+            valide = false;
+            return valide;
+        }
+        return valide;
+    }
+
+    private boolean VerificaCampos() {
+
+        boolean valida = true;
+
+        if (JDataVenda.getDate() == null) {
+            JOptionPane.showMessageDialog(null, "Preencha o campo DATA!");
+            JDataVenda.requestFocus();
+            JDataVenda.setBackground(Color.yellow);
+            valida = false;
+            return valida;
+        }
+
+        if (jTextHora.getText() == null || jTextHora.getText().trim().equals(":") || ValidaHora() == false) {
+            JOptionPane.showMessageDialog(null, "Preencha o campo HORA!");
+            jTextHora.requestFocus();
+            jTextHora.setBackground(Color.yellow);
+            valida = false;
+            return valida;
+        }
+
+        if (uJComboBoxCliente.getSelectedIndex() == 0) {
+            JOptionPane.showMessageDialog(null, "Selecione a EMPRESA!");
+            jTextValorUnit.requestFocus();
+            jTextValorUnit.setBackground(Color.yellow);
+            valida = false;
+            return valida;
+        }
+
+        if (jTextTotal.getText().equals("")) {
+            JOptionPane.showMessageDialog(null, "Preencha o campo TOTAL!");
+            valida = false;
+            return valida;
+        }
+
+        if (jTableProduto.getRowCount() > 1) {
+            JOptionPane.showMessageDialog(null, "É necessário inserir um registro na tabela!");
+            valida = false;
+            return valida;
+        }
+        return valida;
+    }
+
+    private boolean VerificaCamposTabela() {
+        boolean valida = true;
+
+        if (jComboBoxProdutos.getSelectedItem().equals("Selecione")) {
+            JOptionPane.showMessageDialog(null, "Selecione a PEÇA!");
+            jComboBoxProdutos.requestFocus();
+            jComboBoxProdutos.setBackground(Color.yellow);
+            valida = false;
+            return valida;
+        }
+
+        if (txtModelo.getText().equals("")) {
+            JOptionPane.showMessageDialog(null, "Selecione o MODELO!");
+            txtModelo.requestFocus();
+            txtModelo.setBackground(Color.yellow);
+            valida = false;
+            return valida;
+        }
+
+        if (jComboFabricante.getSelectedItem().equals("Selecione")) {
+            JOptionPane.showMessageDialog(null, "Selecione o FABRICANTE!");
+            jComboFabricante.requestFocus();
+            jComboFabricante.setBackground(Color.yellow);
+            valida = false;
+            return valida;
+        }
+
+        if (jTextValorUnit.getText().equals("")) {
+            JOptionPane.showMessageDialog(null, "Preencha o campo VALOR!");
+            jTextValorUnit.requestFocus();
+            jTextValorUnit.setBackground(Color.yellow);
+            valida = false;
+            return valida;
+        }
+
+        if (jTextQuantidadeProduto.getText().equals("")) {
+            JOptionPane.showMessageDialog(null, "Preencha o campo QUANTIDADE!");
+            valida = false;
+            return valida;
+        }
+        return valida;
+    }
+
+    private void idClienteComboBox() {
+
+        Connection conexao = Conexao.getConnection();
+        ResultSet rs;
+        String sql = "select idcliente from tabcliente where empresa = '" + uJComboBoxCliente.getSelectedItem() + "';";
+
+        try {
+            pst = conexao.prepareStatement(sql);
+            rs = pst.executeQuery();
+
+            while (rs.next()) {
+                codCliente = (rs.getInt("idcliente"));
+            }
+
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, ex);
+        }
+    }
+
+    private void carregarComboClientes() {
+
+        uJComboBoxCliente.clear();
+
+        ArrayList<Cliente> cliente = new ArrayList<Cliente>();
+        cliente = ClienteDAO.ComboCliente();
+
+        uJComboBoxCliente.addItem("Selecione a empresa");
+        for (Cliente cli : cliente) {
+            uJComboBoxCliente.addItem(cli.getEmpresa(), cli);
+        }
+    }
+
+    private void ocultaColunaTabelas() {
+        // tabela produto
+        jTableProduto.getColumnModel().getColumn(0).setMaxWidth(0);
+        jTableProduto.getColumnModel().getColumn(0).setMinWidth(0);
+        jTableProduto.getTableHeader().getColumnModel().getColumn(0).setMaxWidth(0);
+        jTableProduto.getTableHeader().getColumnModel().getColumn(0).setMinWidth(0);
+    }
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private com.toedter.calendar.JDateChooser JDataVenda;
     private javax.swing.JButton jButton1;
