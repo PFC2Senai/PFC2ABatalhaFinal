@@ -56,11 +56,22 @@ public class CadastrarVenda extends javax.swing.JFrame {
     private double totalPeca = 0;
     private double valor;
     private double valorUnit;
+    private Menu telaMenu;
 
     /**
      * Creates new form CadastrarVenda
      */
     public CadastrarVenda() {
+        initComponents();
+        combobox();
+        carregarComboPeca();
+        carregarComboClientes();
+        ocultaColunaTabelas();
+        jButton6.setVisible(false);
+    }
+    
+    public CadastrarVenda(Menu menu) {
+        telaMenu = menu;
         initComponents();
         combobox();
         carregarComboPeca();
@@ -110,6 +121,11 @@ public class CadastrarVenda extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setResizable(false);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosed(java.awt.event.WindowEvent evt) {
+                formWindowClosed(evt);
+            }
+        });
 
         jPanel1.setBackground(new java.awt.Color(223, 237, 253));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -344,6 +360,7 @@ public class CadastrarVenda extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         if (JOptionPane.showConfirmDialog(null, "Tem certeza que deseja sair? Os dados não serão salvos.", "Confirmar Cancelamento", JOptionPane.YES_NO_OPTION) == 0) {
+            verificaPagina();
             this.dispose();
         }
     }//GEN-LAST:event_jButton1ActionPerformed
@@ -507,6 +524,10 @@ public class CadastrarVenda extends javax.swing.JFrame {
         modelo = txtModelo.getText();
         CarregaValorUnit();
     }//GEN-LAST:event_txtModeloActionPerformed
+
+    private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
+        verificaPagina();
+    }//GEN-LAST:event_formWindowClosed
 
     private void combobox() {
 
@@ -844,6 +865,13 @@ public class CadastrarVenda extends javax.swing.JFrame {
         jTableProduto.getTableHeader().getColumnModel().getColumn(0).setMinWidth(0);
     }
 
+    private void verificaPagina() {
+
+        if ((this.telaMenu != null)) {
+            this.telaMenu.setVisible(true);
+        }
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private com.toedter.calendar.JDateChooser JDataVenda;
     private javax.swing.JButton jButton1;

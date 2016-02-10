@@ -360,9 +360,9 @@
                       <Component id="jBtnSalvarModelo" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" attributes="0">
-                      <EmptySpace min="18" pref="18" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
                       <Component id="jLabel6" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="5" pref="5" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="13" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="jComboBoxFabricante" min="-2" pref="390" max="-2" attributes="0"/>
                           <Component id="txtFabricante" min="-2" pref="390" max="-2" attributes="0"/>
@@ -409,9 +409,11 @@
                       </Group>
                       <EmptySpace min="15" pref="15" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="jLabel6" min="-2" max="-2" attributes="0"/>
                           <Component id="jComboBoxFabricante" min="-2" max="-2" attributes="0"/>
-                          <Component id="txtFabricante" min="-2" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="txtFabricante" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="jLabel6" alignment="3" min="-2" max="-2" attributes="0"/>
+                          </Group>
                           <Component id="jBtnNovoFabricante" min="-2" max="-2" attributes="0"/>
                           <Component id="jBtnCancelarFabricante" min="-2" max="-2" attributes="0"/>
                           <Component id="jBtnSalvarFabricante" min="-2" max="-2" attributes="0"/>
