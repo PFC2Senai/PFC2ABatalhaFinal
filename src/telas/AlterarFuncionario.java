@@ -20,6 +20,7 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.border.LineBorder;
 import static telas.ExibeFuncionario.GetIndice;
+import static telas.TelaLogin.TipoUsuario;
 
 public class AlterarFuncionario extends javax.swing.JFrame {
 
@@ -62,6 +63,7 @@ public class AlterarFuncionario extends javax.swing.JFrame {
         initComponents();
         CarregaFuncionario();
         limitarDigitos();
+        verificaUsuario();
     }
 
     private void CarregaFuncionario() {
@@ -1484,6 +1486,15 @@ public class AlterarFuncionario extends javax.swing.JFrame {
         if ((this.telaExibeFunc != null)) {
             this.telaExibeFunc.setVisible(true);
             telaExibeFunc.TabelaFuncionario("select * from tabfuncionario;");
+        }
+    }
+    
+    public void verificaUsuario(){
+        if(TipoUsuario() == false){
+            jBtnEditarCarteira.setVisible(false);
+            jBtnEditarContato.setVisible(false);
+            jBtnEditarEndereco.setVisible(false);
+            jBtnEditarFuncionairo.setVisible(false);
         }
     }
 

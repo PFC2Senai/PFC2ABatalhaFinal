@@ -42,9 +42,9 @@ public class CadastrarProduto extends javax.swing.JFrame {
      * Creates new form CadastroUsuario
      */
     public CadastrarProduto() {
-        initComponents();      
+        initComponents();
     }
-    
+
     public CadastrarProduto(Menu menu) {
         this.telaMenu = menu;
         initComponents();
@@ -53,9 +53,9 @@ public class CadastrarProduto extends javax.swing.JFrame {
         carregarComboPeca();
         ocultaCampos();
         combobox();
-        LimitarCampos();       
+        LimitarCampos();
     }
-    
+
     public CadastrarProduto(ExibeProduto exibeProd) {
         this.telaExibeProduto = exibeProd;
         initComponents();
@@ -64,7 +64,7 @@ public class CadastrarProduto extends javax.swing.JFrame {
         carregarComboPeca();
         ocultaCampos();
         combobox();
-        LimitarCampos();       
+        LimitarCampos();
     }
 
     private void combobox() {
@@ -134,13 +134,13 @@ public class CadastrarProduto extends javax.swing.JFrame {
             valida = false;
             return valida;
         }
-        
+
         if (jComboBoxModelo.getSelectedIndex() == 0 && txtModeloFixo.getText().trim().equals("")) {
             JOptionPane.showMessageDialog(null, "Selecione um Modelo!");
             valida = false;
             return valida;
         }
-        
+
         if (jComboBoxFabricante.getSelectedIndex() == 0) {
             JOptionPane.showMessageDialog(null, "Selecione um Fabricante!");
             valida = false;
@@ -158,19 +158,19 @@ public class CadastrarProduto extends javax.swing.JFrame {
             valida = false;
             return valida;
         }
-        
+
         if (txtPercentual.getText().equals("")) {
             JOptionPane.showMessageDialog(null, "Preencha o campo Percentual!");
             valida = false;
             return valida;
         }
-        
+
         if (txtPrecoSaida.getText().equals("")) {
             JOptionPane.showMessageDialog(null, "Preencha o campo Valor de Saída!");
             valida = false;
             return valida;
         }
-              
+
         if (txtQuantidade.getText().equals("")) {
             JOptionPane.showMessageDialog(null, "Preencha o campo Quantidade!");
             valida = false;
@@ -183,7 +183,7 @@ public class CadastrarProduto extends javax.swing.JFrame {
             return valida;
         }
 
-         if (txtDataCadProduto.getDate() == null) {
+        if (txtDataCadProduto.getDate() == null) {
             JOptionPane.showMessageDialog(null, "Preencha o campo Data!");
             valida = false;
             return valida;
@@ -589,22 +589,22 @@ public class CadastrarProduto extends javax.swing.JFrame {
 
     private void jBtnCalcularPercentualActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnCalcularPercentualActionPerformed
         if (txtPrecoEntrada.getText().trim().equals("")) {
-                JOptionPane.showMessageDialog(null, "Preencha o VALOR DE ENTRADA!");
-                txtPrecoEntrada.requestFocus();
-                txtPrecoEntrada.setBackground(Color.yellow);
-            } else {
-                txtPrecoEntrada.setBackground(Color.white);         
-            }
+            JOptionPane.showMessageDialog(null, "Preencha o VALOR DE ENTRADA!");
+            txtPrecoEntrada.requestFocus();
+            txtPrecoEntrada.setBackground(Color.yellow);
+        } else {
+            txtPrecoEntrada.setBackground(Color.white);
+        }
 
-            if (txtPercentual.getText().trim().equals("")) {
-                JOptionPane.showMessageDialog(null, "Preencha o PERCENTUAL!");
-                txtPercentual.requestFocus();
-                txtPercentual.setBackground(Color.yellow);
-            } else {
-                txtPercentual.setBackground(Color.white);                
-            }
-        if (txtPrecoEntrada.getText().trim().equals("") || txtPercentual.getText().trim().equals("")) {         
-        }else {
+        if (txtPercentual.getText().trim().equals("")) {
+            JOptionPane.showMessageDialog(null, "Preencha o PERCENTUAL!");
+            txtPercentual.requestFocus();
+            txtPercentual.setBackground(Color.yellow);
+        } else {
+            txtPercentual.setBackground(Color.white);
+        }
+        if (txtPrecoEntrada.getText().trim().equals("") || txtPercentual.getText().trim().equals("")) {
+        } else {
             float percentual = Float.parseFloat(txtPercentual.getText());
             double precoEntrada = Double.parseDouble(txtPrecoEntrada.getText());
             double resultado = (precoEntrada * percentual) / 100;
@@ -665,12 +665,25 @@ public class CadastrarProduto extends javax.swing.JFrame {
             txtModeloFixo.setVisible(true);
             jComboBoxModelo.setVisible(false);
             verificaPagina();
+            JOptionPane.showMessageDialog(null, "Cadastrado com sucesso!");
+
+            if (JOptionPane.showConfirmDialog(null, "Deseja continuar cadastrando?", "Confirmar Cadastro", JOptionPane.YES_NO_OPTION) == 1) {
+                verificaPagina();
+                    if (telaExibeProduto != null) {
+                        this.telaExibeProduto.TabelaProduto("SELECT * FROM tabproduto;");
+                    }
+                    this.dispose();
+            } else {
+                uJComboBoxPeca.requestFocus();
+            }
         }
     }//GEN-LAST:event_jBtnCadastrarProdutoActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        this.dispose();
-        verificaPagina();
+        if (JOptionPane.showConfirmDialog(null, "Tem certeza que deseja sair? Os dados não serão salvos.", "Confirmar Cancelamento", JOptionPane.YES_NO_OPTION) == 0) {
+            verificaPagina();
+            this.dispose();
+        }
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jBtnCancelarCadProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnCancelarCadProdutoActionPerformed
@@ -796,7 +809,7 @@ public class CadastrarProduto extends javax.swing.JFrame {
         if (txtProduto.getText().trim().equals("")) {
             JOptionPane.showMessageDialog(null, "Preencha o campo Peça!");
             txtProduto.requestFocus();
-        }else {        
+        } else {
             confirmaCadNovoProduto = true;
             populaTextFildModelo();
             jBtnCadProduto.setVisible(false);
@@ -1008,17 +1021,16 @@ public class CadastrarProduto extends javax.swing.JFrame {
         }
     }
 
-    
     private void verificaPagina() {
-        
+
         if ((this.telaMenu != null)) {
             this.telaMenu.setVisible(true);
             // this.telaMenu.toFront();
-        }else if (this.telaExibeProduto != null) {
+        } else if (this.telaExibeProduto != null) {
             this.telaExibeProduto.setVisible(true);
         }
     }
-    
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBtbNovoProduto;
     private javax.swing.JButton jBtnCadProduto;

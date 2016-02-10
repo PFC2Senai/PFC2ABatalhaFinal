@@ -31,6 +31,7 @@ import javax.swing.JOptionPane;
 import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableCellRenderer;
+import static telas.TelaLogin.TipoUsuario;
 
 /**
  *
@@ -75,6 +76,7 @@ public final class DetalharServico extends javax.swing.JFrame {
         TabelaFuncionario();
         ocultaCampos();  
         ocultaCamposValor();
+        verificaUsuario();
         
         //Combobox clientes
         uJComboBoxClientes.getEditor().getEditorComponent().addFocusListener(new FocusAdapter() {
@@ -87,6 +89,8 @@ public final class DetalharServico extends javax.swing.JFrame {
             }
         });
         uJComboBoxClientes.setAutocompletar(true);
+        
+        
     }
 
     /**
@@ -1083,6 +1087,17 @@ public final class DetalharServico extends javax.swing.JFrame {
         }
     }
     
+    public void verificaUsuario(){
+        if(TipoUsuario() == false){
+            jBtnAlterarMaoObra.setVisible(false);
+            jBtnEditarServico.setVisible(false);
+            jBtnEditarValor.setVisible(false);
+            jBtnRemover.setVisible(false);
+            jBtnRemoverDetServTipoServico.setVisible(false);
+            jBtnRemoverEquipamento.setVisible(false);
+            jBtnRemoverFuncionario.setVisible(false);
+        }
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBtnAdicionarDetServTipoServico;
     private javax.swing.JButton jBtnAdicionarEquipamento;
