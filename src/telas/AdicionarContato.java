@@ -82,7 +82,7 @@ public class AdicionarContato extends javax.swing.JFrame {
             }
         });
 
-        jPanel2.setBackground(new java.awt.Color(254, 254, 233));
+        jPanel2.setBackground(new java.awt.Color(223, 237, 253));
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel1.setBackground(new java.awt.Color(254, 254, 233));

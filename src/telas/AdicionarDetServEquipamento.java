@@ -96,7 +96,7 @@ public class AdicionarDetServEquipamento extends javax.swing.JFrame {
             }
         });
 
-        jPanel4.setBackground(new java.awt.Color(254, 254, 233));
+        jPanel4.setBackground(new java.awt.Color(223, 237, 253));
         jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setText("Equipamento:");

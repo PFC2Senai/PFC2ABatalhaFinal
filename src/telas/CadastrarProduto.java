@@ -642,11 +642,18 @@ public class CadastrarProduto extends javax.swing.JFrame {
             txtProduto.setEditable(true);
             txtModeloFixo.setVisible(true);
             jComboBoxModelo.setVisible(false);
+             JOptionPane.showMessageDialog(null, "Cadastrado com sucesso!");
+
+                if (JOptionPane.showConfirmDialog(null, "Deseja continuar cadastrando?", "Confirmar Cadastro", JOptionPane.YES_NO_OPTION) == 1) {
+                }
         }
     }//GEN-LAST:event_jBtnCadastrarProdutoActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        this.dispose();
+  if (JOptionPane.showConfirmDialog(null, "Tem certeza que deseja sair? Os dados não serão salvos.", "Confirmar Cancelamento", JOptionPane.YES_NO_OPTION) == 0) {
+           
+            this.dispose();
+        }       
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jBtnCancelarCadProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnCancelarCadProdutoActionPerformed
