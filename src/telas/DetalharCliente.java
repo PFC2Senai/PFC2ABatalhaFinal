@@ -37,6 +37,7 @@ import javax.swing.border.LineBorder;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableCellRenderer;
 import static telas.ExibeCliente.GetIndice;
+import static telas.TelaLogin.TipoUsuario;
 
 public class DetalharCliente extends javax.swing.JFrame {
 
@@ -63,29 +64,6 @@ public class DetalharCliente extends javax.swing.JFrame {
     public DetalharCliente(String user) {
         initComponents();
         this.codCliente = GetIndice();
-//        conexao.conexao();
-//        jLabelUsuario.setText(user);
-        
-        
-       // try {
-//            conexao.executaSQL("select * from tabusuario where usuario = '"+jLabelUsuario.getText()+"'");
-//            conexao.rs.first();
-//            
-//            if(conexao.rs.getString("tipo_usuario").equals("F")){
-            jBtnAltDadosP.setVisible(false);  
-            jButtonEditarContato.setVisible(false);
-            jBtnExcluirRotina.setVisible(false);
-            jBtnExcluirContato.setVisible(false);
-            jBtnAltEndereco.setVisible(false);
-            jBtnExcluir.setVisible(false);
-            
-         //   }
-            
-          //  else{}
-//        } catch (SQLException ex) {
-//            Logger.getLogger(Menu.class.getName()).log(Level.SEVERE, null, ex);
-//        }
-
     }
 
     public DetalharCliente(ExibeCliente exibeCli) {
@@ -104,6 +82,17 @@ public class DetalharCliente extends javax.swing.JFrame {
         TabelaContatos();
         combobox();
         botoes();
+        
+        if(TipoUsuario() == true){
+            jBtnAltDadosP.setVisible(false);  
+            jButtonEditarContato.setVisible(false);
+            jBtnExcluirRotina.setVisible(false);
+            jBtnExcluirContato.setVisible(false);
+            jBtnAltEndereco.setVisible(false);
+            jBtnExcluir.setVisible(false);
+            jBtnExcluirEquipCli.setVisible(false);
+            
+          }
 
         //txtEmpresa.setDocument(new LimitarDigitos(45));
         //txtSetor.setDocument(new LimitarDigitos(50));
@@ -484,6 +473,23 @@ public class DetalharCliente extends javax.swing.JFrame {
         bindingGroup = new org.jdesktop.beansbinding.BindingGroup();
 
         jTabbedPane1 = new javax.swing.JTabbedPane();
+        jPanelEquipamento = new javax.swing.JPanel();
+        jPanel8 = new javax.swing.JPanel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTableEquipCliente = new javax.swing.JTable();
+        jBtnExcluirEquipCli = new javax.swing.JButton();
+        jBtnAdicionarEquipamento = new javax.swing.JButton();
+        jBtnIrParaLembrete = new javax.swing.JButton();
+        jBtnVoltarParaDadosCli = new javax.swing.JButton();
+        jPanelLembrete = new javax.swing.JPanel();
+        jPanel10 = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTableLembretes = new javax.swing.JTable();
+        jBtnNovoLembrete = new javax.swing.JButton();
+        jBtnExcluir = new javax.swing.JButton();
+        jBtnVerLembrete = new javax.swing.JButton();
+        jBtnVoltarParaEquipamento = new javax.swing.JButton();
+        jBtnIrParaRotina = new javax.swing.JButton();
         jPanelDadosCliente = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
@@ -523,23 +529,6 @@ public class DetalharCliente extends javax.swing.JFrame {
         jBtnNovoContato = new javax.swing.JButton();
         jBtnExcluirContato = new javax.swing.JButton();
         jBtnIrParaEquipamento = new javax.swing.JButton();
-        jPanelEquipamento = new javax.swing.JPanel();
-        jPanel8 = new javax.swing.JPanel();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        jTableEquipCliente = new javax.swing.JTable();
-        jBtnExcluirEquipCli = new javax.swing.JButton();
-        jBtnAdicionarEquipamento = new javax.swing.JButton();
-        jBtnIrParaLembrete = new javax.swing.JButton();
-        jBtnVoltarParaDadosCli = new javax.swing.JButton();
-        jPanelLembrete = new javax.swing.JPanel();
-        jPanel10 = new javax.swing.JPanel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTableLembretes = new javax.swing.JTable();
-        jBtnNovoLembrete = new javax.swing.JButton();
-        jBtnExcluir = new javax.swing.JButton();
-        jBtnVerLembrete = new javax.swing.JButton();
-        jBtnVoltarParaEquipamento = new javax.swing.JButton();
-        jBtnIrParaRotina = new javax.swing.JButton();
         jPanelRotinaContato = new javax.swing.JPanel();
         jBtnCadastrarRotinaContato = new javax.swing.JButton();
         jPanel9 = new javax.swing.JPanel();
@@ -565,6 +554,260 @@ public class DetalharCliente extends javax.swing.JFrame {
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jTabbedPane1.setBackground(new java.awt.Color(223, 237, 253));
+
+        jPanelEquipamento.setBackground(new java.awt.Color(223, 237, 253));
+
+        jPanel8.setBackground(new java.awt.Color(223, 237, 253));
+        jPanel8.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Equipamentos", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 2, 11))); // NOI18N
+
+        jTableEquipCliente.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+
+            }
+        ));
+        jTableEquipCliente.getTableHeader().setReorderingAllowed(false);
+        jTableEquipCliente.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTableEquipClienteMouseClicked(evt);
+            }
+        });
+        jScrollPane2.setViewportView(jTableEquipCliente);
+
+        jBtnExcluirEquipCli.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jBtnExcluirEquipCli.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/maquina07remove.fw.png"))); // NOI18N
+        jBtnExcluirEquipCli.setText("Excluir Equipamento");
+
+        org.jdesktop.beansbinding.Binding binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, jTableEquipCliente, org.jdesktop.beansbinding.ELProperty.create("${selectedElement  != null}"), jBtnExcluirEquipCli, org.jdesktop.beansbinding.BeanProperty.create("enabled"));
+        bindingGroup.addBinding(binding);
+
+        jBtnExcluirEquipCli.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnExcluirEquipCliActionPerformed(evt);
+            }
+        });
+
+        jBtnAdicionarEquipamento.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jBtnAdicionarEquipamento.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/maquinaAdiciona.fw.png"))); // NOI18N
+        jBtnAdicionarEquipamento.setText("Equipamento");
+        jBtnAdicionarEquipamento.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnAdicionarEquipamentoActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
+        jPanel8.setLayout(jPanel8Layout);
+        jPanel8Layout.setHorizontalGroup(
+            jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel8Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 538, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 117, Short.MAX_VALUE)
+                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jBtnAdicionarEquipamento, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jBtnExcluirEquipCli, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap())
+        );
+        jPanel8Layout.setVerticalGroup(
+            jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel8Layout.createSequentialGroup()
+                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel8Layout.createSequentialGroup()
+                        .addGap(47, 47, 47)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 249, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel8Layout.createSequentialGroup()
+                        .addGap(65, 65, 65)
+                        .addComponent(jBtnAdicionarEquipamento)
+                        .addGap(45, 45, 45)
+                        .addComponent(jBtnExcluirEquipCli)))
+                .addContainerGap(39, Short.MAX_VALUE))
+        );
+
+        jBtnIrParaLembrete.setText("Próximo");
+        jBtnIrParaLembrete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnIrParaLembreteActionPerformed(evt);
+            }
+        });
+
+        jBtnVoltarParaDadosCli.setText("Voltar");
+        jBtnVoltarParaDadosCli.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnVoltarParaDadosCliActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanelEquipamentoLayout = new javax.swing.GroupLayout(jPanelEquipamento);
+        jPanelEquipamento.setLayout(jPanelEquipamentoLayout);
+        jPanelEquipamentoLayout.setHorizontalGroup(
+            jPanelEquipamentoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelEquipamentoLayout.createSequentialGroup()
+                .addGap(30, 30, 30)
+                .addGroup(jPanelEquipamentoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanelEquipamentoLayout.createSequentialGroup()
+                        .addComponent(jBtnVoltarParaDadosCli)
+                        .addGap(579, 579, 579)
+                        .addComponent(jBtnIrParaLembrete))
+                    .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(0, 0, Short.MAX_VALUE))
+        );
+        jPanelEquipamentoLayout.setVerticalGroup(
+            jPanelEquipamentoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelEquipamentoLayout.createSequentialGroup()
+                .addGap(97, 97, 97)
+                .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(jPanelEquipamentoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jBtnIrParaLembrete)
+                    .addComponent(jBtnVoltarParaDadosCli))
+                .addContainerGap(84, Short.MAX_VALUE))
+        );
+
+        jTabbedPane1.addTab("Equipamentos do Cliente", new javax.swing.ImageIcon(getClass().getResource("/imagens/maquina02.png")), jPanelEquipamento); // NOI18N
+
+        jPanelLembrete.setBackground(new java.awt.Color(223, 237, 253));
+
+        jPanel10.setBackground(new java.awt.Color(223, 237, 253));
+        jPanel10.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Lembretes", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 2, 11))); // NOI18N
+
+        jTableLembretes.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Código", "Descrição"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jTableLembretes.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jTableLembretes.getTableHeader().setReorderingAllowed(false);
+        jTableLembretes.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTableLembretesMouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(jTableLembretes);
+
+        javax.swing.GroupLayout jPanel10Layout = new javax.swing.GroupLayout(jPanel10);
+        jPanel10.setLayout(jPanel10Layout);
+        jPanel10Layout.setHorizontalGroup(
+            jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel10Layout.createSequentialGroup()
+                .addGap(20, 20, 20)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 592, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel10Layout.setVerticalGroup(
+            jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel10Layout.createSequentialGroup()
+                .addGap(42, 42, 42)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 299, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        jBtnNovoLembrete.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jBtnNovoLembrete.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/CadastrarLembrete.png"))); // NOI18N
+        jBtnNovoLembrete.setText("Novo Lembrete");
+        jBtnNovoLembrete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnNovoLembreteActionPerformed(evt);
+            }
+        });
+
+        jBtnExcluir.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jBtnExcluir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/excluiLemb.fw.png"))); // NOI18N
+        jBtnExcluir.setText("Excluir Lembrete");
+
+        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, jTableLembretes, org.jdesktop.beansbinding.ELProperty.create("${selectedElement != null}"), jBtnExcluir, org.jdesktop.beansbinding.BeanProperty.create("enabled"));
+        bindingGroup.addBinding(binding);
+
+        jBtnExcluir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnExcluirActionPerformed(evt);
+            }
+        });
+
+        jBtnVerLembrete.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jBtnVerLembrete.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/verLembrete.fw.png"))); // NOI18N
+        jBtnVerLembrete.setText("Ver Lembrete");
+
+        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, jTableLembretes, org.jdesktop.beansbinding.ELProperty.create("${selectedElement != null}"), jBtnVerLembrete, org.jdesktop.beansbinding.BeanProperty.create("enabled"));
+        bindingGroup.addBinding(binding);
+
+        jBtnVerLembrete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnVerLembreteActionPerformed(evt);
+            }
+        });
+
+        jBtnVoltarParaEquipamento.setText("Voltar");
+        jBtnVoltarParaEquipamento.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnVoltarParaEquipamentoActionPerformed(evt);
+            }
+        });
+
+        jBtnIrParaRotina.setText("Próximo");
+        jBtnIrParaRotina.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnIrParaRotinaActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanelLembreteLayout = new javax.swing.GroupLayout(jPanelLembrete);
+        jPanelLembrete.setLayout(jPanelLembreteLayout);
+        jPanelLembreteLayout.setHorizontalGroup(
+            jPanelLembreteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelLembreteLayout.createSequentialGroup()
+                .addGroup(jPanelLembreteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanelLembreteLayout.createSequentialGroup()
+                        .addGap(30, 30, 30)
+                        .addComponent(jPanel10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanelLembreteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jBtnVerLembrete, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jBtnNovoLembrete, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jBtnExcluir, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanelLembreteLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jBtnVoltarParaEquipamento)
+                        .addGap(581, 581, 581)
+                        .addComponent(jBtnIrParaRotina)))
+                .addContainerGap(62, Short.MAX_VALUE))
+        );
+        jPanelLembreteLayout.setVerticalGroup(
+            jPanelLembreteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelLembreteLayout.createSequentialGroup()
+                .addGroup(jPanelLembreteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanelLembreteLayout.createSequentialGroup()
+                        .addGap(110, 110, 110)
+                        .addComponent(jBtnNovoLembrete)
+                        .addGap(45, 45, 45)
+                        .addComponent(jBtnVerLembrete)
+                        .addGap(45, 45, 45)
+                        .addComponent(jBtnExcluir)
+                        .addGap(84, 84, 84))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelLembreteLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jPanel10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
+                .addGroup(jPanelLembreteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jBtnVoltarParaEquipamento)
+                    .addComponent(jBtnIrParaRotina))
+                .addContainerGap(102, Short.MAX_VALUE))
+        );
+
+        jTabbedPane1.addTab("Lembrete", new javax.swing.ImageIcon(getClass().getResource("/imagens/lembrete1.png")), jPanelLembrete); // NOI18N
 
         jPanelDadosCliente.setBackground(new java.awt.Color(204, 255, 204));
         jPanelDadosCliente.setName("jFrame"); // NOI18N
@@ -793,7 +1036,7 @@ public class DetalharCliente extends javax.swing.JFrame {
         jButtonEditarContato.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/page_edit.png"))); // NOI18N
         jButtonEditarContato.setText("Editar");
 
-        org.jdesktop.beansbinding.Binding binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, jTableContatos, org.jdesktop.beansbinding.ELProperty.create("${selectedElement != null}"), jButtonEditarContato, org.jdesktop.beansbinding.BeanProperty.create("enabled"));
+        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, jTableContatos, org.jdesktop.beansbinding.ELProperty.create("${selectedElement != null}"), jButtonEditarContato, org.jdesktop.beansbinding.BeanProperty.create("enabled"));
         bindingGroup.addBinding(binding);
 
         jButtonEditarContato.addActionListener(new java.awt.event.ActionListener() {
@@ -862,260 +1105,6 @@ public class DetalharCliente extends javax.swing.JFrame {
         jPanelDadosCliente.add(jBtnIrParaEquipamento, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 470, -1, -1));
 
         jTabbedPane1.addTab("Dados do Cliente", new javax.swing.ImageIcon(getClass().getResource("/imagens/cliente3.png")), jPanelDadosCliente); // NOI18N
-
-        jPanelEquipamento.setBackground(new java.awt.Color(223, 237, 253));
-
-        jPanel8.setBackground(new java.awt.Color(223, 237, 253));
-        jPanel8.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Equipamentos", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 2, 11))); // NOI18N
-
-        jTableEquipCliente.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-
-            }
-        ));
-        jTableEquipCliente.getTableHeader().setReorderingAllowed(false);
-        jTableEquipCliente.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jTableEquipClienteMouseClicked(evt);
-            }
-        });
-        jScrollPane2.setViewportView(jTableEquipCliente);
-
-        jBtnExcluirEquipCli.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jBtnExcluirEquipCli.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/maquina07remove.fw.png"))); // NOI18N
-        jBtnExcluirEquipCli.setText("Excluir Equipamento");
-
-        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, jTableEquipCliente, org.jdesktop.beansbinding.ELProperty.create("${selectedElement  != null}"), jBtnExcluirEquipCli, org.jdesktop.beansbinding.BeanProperty.create("enabled"));
-        bindingGroup.addBinding(binding);
-
-        jBtnExcluirEquipCli.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jBtnExcluirEquipCliActionPerformed(evt);
-            }
-        });
-
-        jBtnAdicionarEquipamento.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jBtnAdicionarEquipamento.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/maquinaAdiciona.fw.png"))); // NOI18N
-        jBtnAdicionarEquipamento.setText("Equipamento");
-        jBtnAdicionarEquipamento.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jBtnAdicionarEquipamentoActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
-        jPanel8.setLayout(jPanel8Layout);
-        jPanel8Layout.setHorizontalGroup(
-            jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel8Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 538, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 117, Short.MAX_VALUE)
-                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jBtnAdicionarEquipamento, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jBtnExcluirEquipCli, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap())
-        );
-        jPanel8Layout.setVerticalGroup(
-            jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel8Layout.createSequentialGroup()
-                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel8Layout.createSequentialGroup()
-                        .addGap(47, 47, 47)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 249, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel8Layout.createSequentialGroup()
-                        .addGap(65, 65, 65)
-                        .addComponent(jBtnAdicionarEquipamento)
-                        .addGap(45, 45, 45)
-                        .addComponent(jBtnExcluirEquipCli)))
-                .addContainerGap(39, Short.MAX_VALUE))
-        );
-
-        jBtnIrParaLembrete.setText("Próximo");
-        jBtnIrParaLembrete.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jBtnIrParaLembreteActionPerformed(evt);
-            }
-        });
-
-        jBtnVoltarParaDadosCli.setText("Voltar");
-        jBtnVoltarParaDadosCli.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jBtnVoltarParaDadosCliActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout jPanelEquipamentoLayout = new javax.swing.GroupLayout(jPanelEquipamento);
-        jPanelEquipamento.setLayout(jPanelEquipamentoLayout);
-        jPanelEquipamentoLayout.setHorizontalGroup(
-            jPanelEquipamentoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanelEquipamentoLayout.createSequentialGroup()
-                .addGap(30, 30, 30)
-                .addGroup(jPanelEquipamentoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanelEquipamentoLayout.createSequentialGroup()
-                        .addComponent(jBtnVoltarParaDadosCli)
-                        .addGap(579, 579, 579)
-                        .addComponent(jBtnIrParaLembrete))
-                    .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(0, 0, Short.MAX_VALUE))
-        );
-        jPanelEquipamentoLayout.setVerticalGroup(
-            jPanelEquipamentoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanelEquipamentoLayout.createSequentialGroup()
-                .addGap(97, 97, 97)
-                .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addGroup(jPanelEquipamentoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jBtnIrParaLembrete)
-                    .addComponent(jBtnVoltarParaDadosCli))
-                .addContainerGap(54, Short.MAX_VALUE))
-        );
-
-        jTabbedPane1.addTab("Equipamentos do Cliente", new javax.swing.ImageIcon(getClass().getResource("/imagens/maquina02.png")), jPanelEquipamento); // NOI18N
-
-        jPanelLembrete.setBackground(new java.awt.Color(223, 237, 253));
-
-        jPanel10.setBackground(new java.awt.Color(223, 237, 253));
-        jPanel10.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Lembretes", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 2, 11))); // NOI18N
-
-        jTableLembretes.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-                "Código", "Descrição"
-            }
-        ) {
-            boolean[] canEdit = new boolean [] {
-                false, false
-            };
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
-        jTableLembretes.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jTableLembretes.getTableHeader().setReorderingAllowed(false);
-        jTableLembretes.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jTableLembretesMouseClicked(evt);
-            }
-        });
-        jScrollPane1.setViewportView(jTableLembretes);
-
-        javax.swing.GroupLayout jPanel10Layout = new javax.swing.GroupLayout(jPanel10);
-        jPanel10.setLayout(jPanel10Layout);
-        jPanel10Layout.setHorizontalGroup(
-            jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel10Layout.createSequentialGroup()
-                .addGap(20, 20, 20)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 592, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        jPanel10Layout.setVerticalGroup(
-            jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel10Layout.createSequentialGroup()
-                .addGap(42, 42, 42)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 299, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-
-        jBtnNovoLembrete.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jBtnNovoLembrete.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/CadastrarLembrete.png"))); // NOI18N
-        jBtnNovoLembrete.setText("Novo Lembrete");
-        jBtnNovoLembrete.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jBtnNovoLembreteActionPerformed(evt);
-            }
-        });
-
-        jBtnExcluir.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jBtnExcluir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/excluiLemb.fw.png"))); // NOI18N
-        jBtnExcluir.setText("Excluir Lembrete");
-
-        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, jTableLembretes, org.jdesktop.beansbinding.ELProperty.create("${selectedElement != null}"), jBtnExcluir, org.jdesktop.beansbinding.BeanProperty.create("enabled"));
-        bindingGroup.addBinding(binding);
-
-        jBtnExcluir.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jBtnExcluirActionPerformed(evt);
-            }
-        });
-
-        jBtnVerLembrete.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jBtnVerLembrete.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/verLembrete.fw.png"))); // NOI18N
-        jBtnVerLembrete.setText("Ver Lembrete");
-
-        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, jTableLembretes, org.jdesktop.beansbinding.ELProperty.create("${selectedElement != null}"), jBtnVerLembrete, org.jdesktop.beansbinding.BeanProperty.create("enabled"));
-        bindingGroup.addBinding(binding);
-
-        jBtnVerLembrete.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jBtnVerLembreteActionPerformed(evt);
-            }
-        });
-
-        jBtnVoltarParaEquipamento.setText("Voltar");
-        jBtnVoltarParaEquipamento.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jBtnVoltarParaEquipamentoActionPerformed(evt);
-            }
-        });
-
-        jBtnIrParaRotina.setText("Próximo");
-        jBtnIrParaRotina.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jBtnIrParaRotinaActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout jPanelLembreteLayout = new javax.swing.GroupLayout(jPanelLembrete);
-        jPanelLembrete.setLayout(jPanelLembreteLayout);
-        jPanelLembreteLayout.setHorizontalGroup(
-            jPanelLembreteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanelLembreteLayout.createSequentialGroup()
-                .addGroup(jPanelLembreteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanelLembreteLayout.createSequentialGroup()
-                        .addGap(30, 30, 30)
-                        .addComponent(jPanel10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanelLembreteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jBtnVerLembrete, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jBtnNovoLembrete, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jBtnExcluir, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(jPanelLembreteLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jBtnVoltarParaEquipamento)
-                        .addGap(581, 581, 581)
-                        .addComponent(jBtnIrParaRotina)))
-                .addContainerGap(62, Short.MAX_VALUE))
-        );
-        jPanelLembreteLayout.setVerticalGroup(
-            jPanelLembreteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanelLembreteLayout.createSequentialGroup()
-                .addGroup(jPanelLembreteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanelLembreteLayout.createSequentialGroup()
-                        .addGap(110, 110, 110)
-                        .addComponent(jBtnNovoLembrete)
-                        .addGap(45, 45, 45)
-                        .addComponent(jBtnVerLembrete)
-                        .addGap(45, 45, 45)
-                        .addComponent(jBtnExcluir)
-                        .addGap(84, 84, 84))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelLembreteLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jPanel10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
-                .addGroup(jPanelLembreteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jBtnVoltarParaEquipamento)
-                    .addComponent(jBtnIrParaRotina))
-                .addContainerGap(72, Short.MAX_VALUE))
-        );
-
-        jTabbedPane1.addTab("Lembrete", new javax.swing.ImageIcon(getClass().getResource("/imagens/lembrete1.png")), jPanelLembrete); // NOI18N
 
         jPanelRotinaContato.setBackground(new java.awt.Color(223, 237, 253));
 
@@ -1235,12 +1224,12 @@ public class DetalharCliente extends javax.swing.JFrame {
                         .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jBtnVoltarParaLembrete)
-                .addContainerGap(76, Short.MAX_VALUE))
+                .addContainerGap(106, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Rotina de Contato", new javax.swing.ImageIcon(getClass().getResource("/imagens/rotinacont.png")), jPanelRotinaContato); // NOI18N
 
-        getContentPane().add(jTabbedPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 100, 860, 580));
+        getContentPane().add(jTabbedPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 100, 860, 610));
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/leiaute/img3.png"))); // NOI18N
         getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -10, 860, 140));
