@@ -3,9 +3,12 @@ package telas;
 import atributos.Auditoria;
 import atributos.Usuario;
 import funcoes.AuditoriaDAO;
+import static funcoes.Conexao.getConnection;
 import funcoes.ConexaoPermissoes;
 import java.awt.Color;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -36,18 +39,47 @@ public class TelaLogin extends javax.swing.JFrame {
         return valida;
     }
 
+//    public void TipoUser() {
+//        //valida = true;
+//
+//        try {
+//            conexao.executaSQL("select * from tabusuario where usuario = '" + login.getText() + "'");
+//            conexao.rs.first();
+//
+//            if (conexao.rs.getString("tipo_usuario").equals("F")) {
+//            //jMenu14.setVisible(false);   
+//
+//                valida = false;
+//                //return valida;
+//            }
+//
+//        } catch (SQLException ex) {
+//            Logger.getLogger(Menu.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+//
+//        // return valida;
+//    }
+    
     public void TipoUser() {
         //valida = true;
-
+        ResultSet rs; 
+        String tipoUser;
         try {
-            conexao.executaSQL("select * from tabusuario where usuario = '" + login.getText() + "'");
-            conexao.rs.first();
+            String sql = "select * from tabusuario where usuario = '"+login.getText()+"';";
+            Statement s = getConnection().createStatement();
+            s.executeQuery (sql);
+            rs = s.getResultSet();
 
-            if (conexao.rs.getString("tipo_usuario").equals("F")) {
-            //jMenu14.setVisible(false);   
+            while (rs.next ()){
+                tipoUser = rs.getString("tipo_usuario");
+                
+                if (tipoUser.equalsIgnoreCase("F")) {
+                //jMenu14.setVisible(false);   
 
-                valida = false;
-                //return valida;
+                    valida = false;
+                    break;
+                    //return valida;
+                }
             }
 
         } catch (SQLException ex) {
