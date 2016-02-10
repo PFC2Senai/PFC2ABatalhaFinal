@@ -36,11 +36,17 @@ public class CadastrarProduto extends javax.swing.JFrame {
     private int codModelo;
     private boolean confirmaCadNovoProduto;
     private Menu telaMenu;
+    private ExibeProduto telaExibeProduto;
 
     /**
      * Creates new form CadastroUsuario
      */
     public CadastrarProduto() {
+        initComponents();      
+    }
+    
+    public CadastrarProduto(Menu menu) {
+        this.telaMenu = menu;
         initComponents();
         populaComboBoxFornecedor();
         populaComboBoxFabricante();
@@ -50,8 +56,8 @@ public class CadastrarProduto extends javax.swing.JFrame {
         LimitarCampos();       
     }
     
-    public CadastrarProduto(Menu menu) {
-        this.telaMenu = menu;
+    public CadastrarProduto(ExibeProduto exibeProd) {
+        this.telaExibeProduto = exibeProd;
         initComponents();
         populaComboBoxFornecedor();
         populaComboBoxFabricante();
@@ -1008,6 +1014,8 @@ public class CadastrarProduto extends javax.swing.JFrame {
         if ((this.telaMenu != null)) {
             this.telaMenu.setVisible(true);
             // this.telaMenu.toFront();
+        }else if (this.telaExibeProduto != null) {
+            this.telaExibeProduto.setVisible(true);
         }
     }
     

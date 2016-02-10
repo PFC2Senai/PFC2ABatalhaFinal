@@ -581,7 +581,8 @@ public class Menu extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     private void jMenuItem20ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem20ActionPerformed
-        new ExibeProduto().setVisible(true);
+        this.setVisible(false);
+        new ExibeProduto(this).setVisible(true);
     }//GEN-LAST:event_jMenuItem20ActionPerformed
 
     private void jMenuItem16ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem16ActionPerformed
@@ -632,7 +633,8 @@ public class Menu extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItemCadastrarServicoActionPerformed
 
     private void jMenuItem17ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem17ActionPerformed
-        new CadastrarProduto().setVisible(true);
+        this.setVisible(false);
+        new CadastrarProduto(this).setVisible(true);
     }//GEN-LAST:event_jMenuItem17ActionPerformed
 
     private void jMenuItem15ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem15ActionPerformed

@@ -25,12 +25,21 @@ public class ExibeProdutosDetalhe extends javax.swing.JFrame {
     private int codProduto = GetIndiceProduto();
     private int codDetProd;
     private PreparedStatement pst;
+    private ExibeProduto telaExibeProduto;
 
     /**
      * Creates new form ExibeProdutos
      */
     public ExibeProdutosDetalhe() {
 
+        initComponents();
+        TabelaProduto("SELECT * FROM vw_produtos WHERE id_prod = " + codProduto + ";");
+        populaComboBoxFabricante();
+        populaComboBoxModelo();
+    }
+    
+    public ExibeProdutosDetalhe(ExibeProduto exibeProd) {
+        this.telaExibeProduto = exibeProd;
         initComponents();
         TabelaProduto("SELECT * FROM vw_produtos WHERE id_prod = " + codProduto + ";");
         populaComboBoxFabricante();
@@ -61,6 +70,11 @@ public class ExibeProdutosDetalhe extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosed(java.awt.event.WindowEvent evt) {
+                formWindowClosed(evt);
+            }
+        });
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel1.setBackground(new java.awt.Color(204, 255, 204));
@@ -78,7 +92,7 @@ public class ExibeProdutosDetalhe extends javax.swing.JFrame {
                 jButton1ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 460, -1, -1));
+        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 480, -1, -1));
 
         jTableListarProdutos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -138,7 +152,7 @@ public class ExibeProdutosDetalhe extends javax.swing.JFrame {
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/leiaute/img3.png"))); // NOI18N
         jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -10, 840, 140));
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 840, 490));
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 840, 520));
 
         bindingGroup.bind();
 
@@ -159,6 +173,7 @@ public class ExibeProdutosDetalhe extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         this.dispose();
+        verificaPagina();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jComboBoxFabricanteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxFabricanteActionPerformed
@@ -214,6 +229,10 @@ public class ExibeProdutosDetalhe extends javax.swing.JFrame {
             TabelaProduto("select  * from vw_produtos ;");
         }
     }//GEN-LAST:event_jComboBoxModeloActionPerformed
+
+    private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
+        verificaPagina();
+    }//GEN-LAST:event_formWindowClosed
 
     public void TabelaProduto(String Sql) {
 
@@ -301,6 +320,13 @@ public class ExibeProdutosDetalhe extends javax.swing.JFrame {
         }
     }
 
+    private void verificaPagina() {
+        
+        if (this.telaExibeProduto != null) {
+            this.telaExibeProduto.setVisible(true);
+        }
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel codigoProdutoTabela;
     private javax.swing.JButton jButton1;
