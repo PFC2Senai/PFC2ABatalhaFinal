@@ -35,6 +35,7 @@ public class CadastrarProduto extends javax.swing.JFrame {
     private int codFabricante;
     private int codModelo;
     private boolean confirmaCadNovoProduto;
+    private Menu telaMenu;
 
     /**
      * Creates new form CadastroUsuario
@@ -46,10 +47,18 @@ public class CadastrarProduto extends javax.swing.JFrame {
         carregarComboPeca();
         ocultaCampos();
         combobox();
-        LimitarCampos();
-        if (TelaLogin.TipoUsuario() == true) {
-           jBtnNovoFornecedor.setVisible(false);
-        }
+        LimitarCampos();       
+    }
+    
+    public CadastrarProduto(Menu menu) {
+        this.telaMenu = menu;
+        initComponents();
+        populaComboBoxFornecedor();
+        populaComboBoxFabricante();
+        carregarComboPeca();
+        ocultaCampos();
+        combobox();
+        LimitarCampos();       
     }
 
     private void combobox() {
@@ -230,6 +239,11 @@ public class CadastrarProduto extends javax.swing.JFrame {
         jLabel13 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosed(java.awt.event.WindowEvent evt) {
+                formWindowClosed(evt);
+            }
+        });
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel1.setBackground(new java.awt.Color(223, 237, 253));
@@ -644,11 +658,13 @@ public class CadastrarProduto extends javax.swing.JFrame {
             txtProduto.setEditable(true);
             txtModeloFixo.setVisible(true);
             jComboBoxModelo.setVisible(false);
+            verificaPagina();
         }
     }//GEN-LAST:event_jBtnCadastrarProdutoActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         this.dispose();
+        verificaPagina();
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jBtnCancelarCadProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnCancelarCadProdutoActionPerformed
@@ -789,6 +805,10 @@ public class CadastrarProduto extends javax.swing.JFrame {
     private void jComboBoxModeloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxModeloActionPerformed
         idModeloComboBox();
     }//GEN-LAST:event_jComboBoxModeloActionPerformed
+
+    private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
+        verificaPagina();
+    }//GEN-LAST:event_formWindowClosed
 
     private void carregarComboPeca() {
 
@@ -982,6 +1002,15 @@ public class CadastrarProduto extends javax.swing.JFrame {
         }
     }
 
+    
+    private void verificaPagina() {
+        
+        if ((this.telaMenu != null)) {
+            this.telaMenu.setVisible(true);
+            // this.telaMenu.toFront();
+        }
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBtbNovoProduto;
     private javax.swing.JButton jBtnCadProduto;
