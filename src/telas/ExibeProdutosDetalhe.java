@@ -33,11 +33,7 @@ public class ExibeProdutosDetalhe extends javax.swing.JFrame {
      * Creates new form ExibeProdutos
      */
     public ExibeProdutosDetalhe() {
-
         initComponents();
-        TabelaProduto("SELECT * FROM vw_produtos WHERE id_prod = " + codProduto + ";");
-        populaComboBoxFabricante();
-        populaComboBoxModelo();
     }
     
     public ExibeProdutosDetalhe(ExibeProduto exibeProd) {
@@ -155,6 +151,7 @@ public class ExibeProdutosDetalhe extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        this.setEnabled(false);
         new AlterarEstoque(codDetProd, this).setVisible(true);
     }//GEN-LAST:event_jButton2ActionPerformed
 
