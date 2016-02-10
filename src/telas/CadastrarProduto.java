@@ -330,6 +330,17 @@ public class CadastrarProduto extends javax.swing.JFrame {
             }
         });
 
+        txtDataCadProduto.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtDataCadProdutoFocusLost(evt);
+            }
+        });
+        txtDataCadProduto.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtDataCadProdutoKeyTyped(evt);
+            }
+        });
+
         jLabel2.setText("Fornecedor:");
 
         jComboBoxFornecedor.addActionListener(new java.awt.event.ActionListener() {
@@ -676,7 +687,7 @@ public class CadastrarProduto extends javax.swing.JFrame {
             float percentual = Float.parseFloat(txtPercentual.getText());
             float precoEntrada = Float.parseFloat(txtPrecoEntrada.getText().replace(".", ","));
             float resultado = (precoEntrada * percentual) / 100;
-            
+
             txtPrecoSaida.setText(String.valueOf(precoEntrada + resultado));
         }
     }//GEN-LAST:event_jBtnCalcularPercentualActionPerformed
@@ -738,10 +749,10 @@ public class CadastrarProduto extends javax.swing.JFrame {
 
             if (JOptionPane.showConfirmDialog(null, "Deseja continuar cadastrando?", "Confirmar Cadastro", JOptionPane.YES_NO_OPTION) == 1) {
                 verificaPagina();
-                    if (telaExibeProduto != null) {
-                        this.telaExibeProduto.TabelaProduto("SELECT * FROM tabproduto;");
-                    }
-                    this.dispose();
+                if (telaExibeProduto != null) {
+                    this.telaExibeProduto.TabelaProduto("SELECT * FROM tabproduto;");
+                }
+                this.dispose();
             } else {
                 uJComboBoxPeca.requestFocus();
             }
@@ -770,6 +781,9 @@ public class CadastrarProduto extends javax.swing.JFrame {
     }//GEN-LAST:event_jBtnCancelarCadProdutoActionPerformed
 
     private void jBtbNovoProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtbNovoProdutoActionPerformed
+
+        //if(ProdutoDAO.VerificarProduto(produto))
+            
         jBtnNovoModelo.setVisible(true);
         confirmaCadNovoProduto = true;
         txtModeloFixo.setVisible(false);
@@ -897,6 +911,18 @@ public class CadastrarProduto extends javax.swing.JFrame {
     private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
         verificaPagina();
     }//GEN-LAST:event_formWindowClosed
+
+    private void txtDataCadProdutoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtDataCadProdutoKeyTyped
+        // TODO add your handling code here:
+        String caracteres = "0987654321/";
+        if (!caracteres.contains(evt.getKeyChar() + "")) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtDataCadProdutoKeyTyped
+
+    private void txtDataCadProdutoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtDataCadProdutoFocusLost
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtDataCadProdutoFocusLost
 
     private void carregarComboPeca() {
 
