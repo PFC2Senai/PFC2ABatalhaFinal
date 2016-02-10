@@ -746,17 +746,18 @@ public class CadastrarProduto extends javax.swing.JFrame {
             jComboBoxModelo.setVisible(false);
             verificaPagina();
             JOptionPane.showMessageDialog(null, "Cadastrado com sucesso!");
+        
 
-            if (JOptionPane.showConfirmDialog(null, "Deseja continuar cadastrando?", "Confirmar Cadastro", JOptionPane.YES_NO_OPTION) == 1) {
-                verificaPagina();
-                if (telaExibeProduto != null) {
-                    this.telaExibeProduto.TabelaProduto("SELECT * FROM tabproduto;");
-                }
-                this.dispose();
-            } else {
-                uJComboBoxPeca.requestFocus();
+        if (JOptionPane.showConfirmDialog(null, "Deseja continuar cadastrando?", "Confirmar Cadastro", JOptionPane.YES_NO_OPTION) == 1) {
+            verificaPagina();
+            if (telaExibeProduto != null) {
+                this.telaExibeProduto.TabelaProduto("SELECT * FROM tabproduto;");
             }
+            this.dispose();
+        } else {
+            uJComboBoxPeca.requestFocus();
         }
+    }
     }//GEN-LAST:event_jBtnCadastrarProdutoActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -782,8 +783,6 @@ public class CadastrarProduto extends javax.swing.JFrame {
 
     private void jBtbNovoProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtbNovoProdutoActionPerformed
 
-        //if(ProdutoDAO.VerificarProduto(produto))
-            
         jBtnNovoModelo.setVisible(true);
         confirmaCadNovoProduto = true;
         txtModeloFixo.setVisible(false);
@@ -892,7 +891,8 @@ public class CadastrarProduto extends javax.swing.JFrame {
         if (txtProduto.getText().trim().equals("")) {
             JOptionPane.showMessageDialog(null, "Preencha o campo Peça!");
             txtProduto.requestFocus();
-        } else {
+        } else if (ProdutoDAO.VerificarProduto(txtProduto.getText()) == false) {
+
             confirmaCadNovoProduto = true;
             populaTextFildModelo();
             jBtnCadProduto.setVisible(false);
@@ -901,6 +901,10 @@ public class CadastrarProduto extends javax.swing.JFrame {
             carregarComboPeca();
             jBtnNovoModelo.setVisible(false);
             txtProduto.setEditable(false);
+            JOptionPane.showMessageDialog(this, "Cadastrado com sucesso");
+        } else {
+            confirmaCadNovoProduto = false;
+            JOptionPane.showMessageDialog(this, "Peça já está cadastrada !");
         }
     }//GEN-LAST:event_jBtnCadProdutoActionPerformed
 
