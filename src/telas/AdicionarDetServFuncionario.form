@@ -95,6 +95,9 @@
             </Property>
             <Property name="text" type="java.lang.String" value="Remover"/>
           </Properties>
+          <BindingProperties>
+            <BindingProperty name="enabled" source="jTableFuncionario" sourcePath="${selectedElement != null}" target="jBtnRemoverFunc" targetPath="enabled" updateStrategy="0" immediately="false"/>
+          </BindingProperties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jBtnRemoverFuncActionPerformed"/>
           </Events>

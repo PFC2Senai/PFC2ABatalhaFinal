@@ -66,6 +66,7 @@ public class AdicionarDetServFuncionario extends javax.swing.JFrame {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
+        bindingGroup = new org.jdesktop.beansbinding.BindingGroup();
 
         jPanel5 = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
@@ -117,6 +118,10 @@ public class AdicionarDetServFuncionario extends javax.swing.JFrame {
 
         jBtnRemoverFunc.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/excluir.png"))); // NOI18N
         jBtnRemoverFunc.setText("Remover");
+
+        org.jdesktop.beansbinding.Binding binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, jTableFuncionario, org.jdesktop.beansbinding.ELProperty.create("${selectedElement != null}"), jBtnRemoverFunc, org.jdesktop.beansbinding.BeanProperty.create("enabled"));
+        bindingGroup.addBinding(binding);
+
         jBtnRemoverFunc.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jBtnRemoverFuncActionPerformed(evt);
@@ -177,6 +182,8 @@ public class AdicionarDetServFuncionario extends javax.swing.JFrame {
             .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, 540, Short.MAX_VALUE)
         );
 
+        bindingGroup.bind();
+
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
@@ -191,7 +198,11 @@ public class AdicionarDetServFuncionario extends javax.swing.JFrame {
     }//GEN-LAST:event_jBtnRemoverFuncActionPerformed
 
     private void jBtbIncluirFuncActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtbIncluirFuncActionPerformed
-        TabelaFuncionario();
+        if(uJComboBoxFuncionario.getSelectedIndex() == 0) {
+            JOptionPane.showMessageDialog(null, "Selecione um Funcionário");
+        }else {
+            TabelaFuncionario();
+        }
     }//GEN-LAST:event_jBtbIncluirFuncActionPerformed
 
     private void jBtnSalvarDetServFuncionarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnSalvarDetServFuncionarioActionPerformed
@@ -304,5 +315,6 @@ public class AdicionarDetServFuncionario extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTable jTableFuncionario;
     private componentes.UJComboBox uJComboBoxFuncionario;
+    private org.jdesktop.beansbinding.BindingGroup bindingGroup;
     // End of variables declaration//GEN-END:variables
 }

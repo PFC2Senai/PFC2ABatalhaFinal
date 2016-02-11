@@ -1097,7 +1097,7 @@ public class CadastrarServicoTeste extends javax.swing.JFrame {
 
     private void jBtbIncluirFuncActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtbIncluirFuncActionPerformed
         if (uJComboBoxFuncionario.getSelectedIndex() == 0) {
-            JOptionPane.showMessageDialog(null, "Selecione o Tipo de Serviço!");
+            JOptionPane.showMessageDialog(null, "Selecione um Funcionario!");
         } else {
             TabelaFuncionario();
         }
@@ -1872,23 +1872,6 @@ public class CadastrarServicoTeste extends javax.swing.JFrame {
             uJComboBoxPeca.setBackground(Color.white);
         }
 
-        if (txtModelo.getText().trim().equals("")) {
-            JOptionPane.showMessageDialog(null, "Preencha o campo Modelo!");
-            txtModelo.requestFocus();
-            txtModelo.setBackground(Color.yellow);
-            valida = false;
-            return valida;
-        } else {
-            txtModelo.setBackground(Color.white);
-        }
-
-        if (jComboBoxFabricante.getSelectedIndex() == 0) {
-            JOptionPane.showMessageDialog(null, "Preencha o campo Fabricante!");
-            jComboBoxFabricante.requestFocus();
-            valida = false;
-            return valida;
-        }
-
         if (txtQuantidade.getText().trim().equals("")) {
             JOptionPane.showMessageDialog(null, "Preencha o campo Quantidade!");
             txtQuantidade.requestFocus();
@@ -1936,7 +1919,7 @@ public class CadastrarServicoTeste extends javax.swing.JFrame {
         }
 
         if (txtMaoObra.getText().trim().equals("")) {
-            JOptionPane.showMessageDialog(null, "Preencha o campo Quantidade!");
+            JOptionPane.showMessageDialog(null, "Preencha o campo Mão de obra!");
             txtMaoObra.requestFocus();
             txtMaoObra.setBackground(Color.yellow);
             valida = false;
@@ -1946,7 +1929,7 @@ public class CadastrarServicoTeste extends javax.swing.JFrame {
         }
 
         if (txtTotalGeral.getText().trim().equals("-")) {
-            JOptionPane.showMessageDialog(null, "Preencha o campo CEP!");
+            JOptionPane.showMessageDialog(null, "Preencha o campo Total Geral!");
             txtTotalGeral.requestFocus();
             txtTotalGeral.setBackground(Color.yellow);
             valida = false;
@@ -1969,23 +1952,6 @@ public class CadastrarServicoTeste extends javax.swing.JFrame {
             return valida;
         } else {
             uJComboBoxEquipamento.setBackground(Color.white);
-        }
-
-        if (jComboBoxModeloEquip.getSelectedIndex() == 0) {
-            JOptionPane.showMessageDialog(null, "Selecione o campo Modelo!");
-            jComboBoxModeloEquip.requestFocus();
-            jComboBoxModeloEquip.setBackground(Color.yellow);
-            valida = false;
-            return valida;
-        } else {
-            jComboBoxModeloEquip.setBackground(Color.white);
-        }
-
-        if (jComboBoxFabricanteEquip.getSelectedIndex() == 0) {
-            JOptionPane.showMessageDialog(null, "Preencha o campo Fabricante!");
-            jComboBoxFabricanteEquip.requestFocus();
-            valida = false;
-            return valida;
         }
         return valida;
     }

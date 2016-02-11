@@ -104,6 +104,7 @@ public class TelaLogin extends javax.swing.JFrame {
         txtSenha = new javax.swing.JPasswordField();
         jComBTipoUser = new javax.swing.JComboBox();
         jButtonAcesso = new javax.swing.JButton();
+        jLabel5 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -154,14 +155,19 @@ public class TelaLogin extends javax.swing.JFrame {
         });
         getContentPane().add(jButtonAcesso, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 200, 60, 20));
 
+        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/logo02.png"))); // NOI18N
+        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 140, 110, 120));
+
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jLabel4.setText("LOGIN");
         getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 30, 90, 20));
 
+        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/adm.png"))); // NOI18N
         jLabel2.setText("Usuário:");
         getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 100, -1, -1));
 
+        jLabel3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/key (2).png"))); // NOI18N
         jLabel3.setText("Senha:");
         getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 150, -1, -1));
@@ -266,6 +272,7 @@ public class TelaLogin extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JTextField login;
     private javax.swing.JPasswordField txtSenha;
