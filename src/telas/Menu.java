@@ -28,6 +28,7 @@ public class Menu extends javax.swing.JFrame {
      */
     public Menu() {
         initComponents();
+        this.setExtendedState(MAXIMIZED_BOTH);
     }
     
     public Menu(String user) {
@@ -73,20 +74,16 @@ public class Menu extends javax.swing.JFrame {
 
         jBtnRotinaContato = new javax.swing.JButton();
         jBtnCadastrarLembrete = new javax.swing.JButton();
+        jBtnProposta = new javax.swing.JButton();
+        jBtnFazerBackup = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         labelAlerta1 = new javax.swing.JLabel();
         jScrollPane3 = new javax.swing.JScrollPane();
         jTableEstoque = new javax.swing.JTable();
-        jBtnProposta = new javax.swing.JButton();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        jTextArea2 = new javax.swing.JTextArea();
-        jBtnFazerBackup = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
         jLabelUsuario = new javax.swing.JLabel();
         jBtnLogout = new javax.swing.JButton();
+        jLabel3 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu4 = new javax.swing.JMenu();
         jMenu14 = new javax.swing.JMenu();
@@ -141,6 +138,27 @@ public class Menu extends javax.swing.JFrame {
         });
         getContentPane().add(jBtnCadastrarLembrete, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 170, 150, -1));
 
+        jBtnProposta.setBackground(new java.awt.Color(153, 255, 0));
+        jBtnProposta.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jBtnProposta.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/1452415489_icon-57.fw_1.png"))); // NOI18N
+        jBtnProposta.setText("Proposta");
+        jBtnProposta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnPropostaActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jBtnProposta, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 270, 150, -1));
+
+        jBtnFazerBackup.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jBtnFazerBackup.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/backup (2).png"))); // NOI18N
+        jBtnFazerBackup.setText("Fazer Backup");
+        jBtnFazerBackup.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnFazerBackupActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jBtnFazerBackup, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 360, 150, -1));
+
         jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
         labelAlerta1.setFont(new java.awt.Font("Raavi", 1, 14)); // NOI18N
@@ -188,49 +206,10 @@ public class Menu extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 150, 180, 160));
-
-        jBtnProposta.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jBtnProposta.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/1452415489_icon-57.fw_1.png"))); // NOI18N
-        jBtnProposta.setText("Proposta");
-        jBtnProposta.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jBtnPropostaActionPerformed(evt);
-            }
-        });
-        getContentPane().add(jBtnProposta, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 270, 150, -1));
-
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jTextArea1.setText("Lista mineração:\n\n- cliente mais atendido\n- tipo de serviço mais realizado\n(tipo definido, ex: troca de placa e \ntipo serviço ex: venda aluguel, ou manutenção)\n- peça com mais saída\n- peça com menos saída\n- periodo do ano com mais movimento\n- periodo do ano com menos mevimento\n- qual o período do ano que \ndeterminado setor está em alta\n- qual funcionário realizou mais serviços");
-        jScrollPane1.setViewportView(jTextArea1);
-
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 360, 270, 100));
-
-        jTextArea2.setColumns(20);
-        jTextArea2.setFont(new java.awt.Font("Monospaced", 1, 13)); // NOI18N
-        jTextArea2.setForeground(new java.awt.Color(204, 0, 0));
-        jTextArea2.setRows(5);
-        jTextArea2.setText("Pendências do sistema:\n\n- tela de mineração\n- formatação dos campos(caracteres)\n- verificar campos para evitar dados duplicados\n- Aviso de estoque baixo\n- gerenciamento de telas\n- permissões dos usuários\n- campos que recebem números decimais \naceitar apenas ponto e não vírgula\n- não deixar cadastrar lembrete em data que já passou\n- cadastrar em auditoria tudo que for feito no sistema\n- mensagens para confirmar ações dos usuários : \n\"Deseja excluir?\" \"Cadastrado com sucesso\" algo assim \n- Formato da data\n- testar o sistema e corrigir bugs");
-        jScrollPane2.setViewportView(jTextArea2);
-
-        getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 330, 270, 130));
-
-        jBtnFazerBackup.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jBtnFazerBackup.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/backup (2).png"))); // NOI18N
-        jBtnFazerBackup.setText("Fazer Backup");
-        jBtnFazerBackup.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jBtnFazerBackupActionPerformed(evt);
-            }
-        });
-        getContentPane().add(jBtnFazerBackup, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 360, 150, -1));
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 10, 180, 160));
 
         jLabel2.setText("Usuário:");
         getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 480, -1, -1));
-
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/leiaute/img3.png"))); // NOI18N
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -10, 850, 140));
 
         jLabelUsuario.setForeground(new java.awt.Color(255, 0, 0));
         jLabelUsuario.setText("jLabel3");
@@ -248,6 +227,9 @@ public class Menu extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jBtnLogout, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 460, -1, -1));
+
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/logopronta.png"))); // NOI18N
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 0, 1010, 570));
 
         jMenuBar1.setPreferredSize(new java.awt.Dimension(106, 35));
 
@@ -762,8 +744,8 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JButton jBtnLogout;
     private javax.swing.JButton jBtnProposta;
     private javax.swing.JButton jBtnRotinaContato;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabelUsuario;
     private javax.swing.JMenu jMenu10;
     private javax.swing.JMenu jMenu14;
@@ -793,12 +775,8 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem9;
     private javax.swing.JMenuItem jMenuItemCadastrarServico;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTable jTableEstoque;
-    private javax.swing.JTextArea jTextArea1;
-    private javax.swing.JTextArea jTextArea2;
     private javax.swing.JLabel labelAlerta1;
     // End of variables declaration//GEN-END:variables
 
