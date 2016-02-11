@@ -673,6 +673,11 @@ public class CadastrarCliente extends javax.swing.JFrame {
                 txtEmpresaFocusLost(evt);
             }
         });
+        txtEmpresa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtEmpresaActionPerformed(evt);
+            }
+        });
         txtEmpresa.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txtEmpresaKeyTyped(evt);
@@ -1093,7 +1098,10 @@ public class CadastrarCliente extends javax.swing.JFrame {
     private void txtEmpresaFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtEmpresaFocusLost
         // TODO add your handling code here:
         if (ClienteDAO.VerificarClienteNome(txtEmpresa.getText()) == true) {
-            jLabelCnpjExistente.setText("Este nome ja está cadastrado no sistema");
+            JOptionPane.showMessageDialog(null, "Este nome ja está cadastrado no sistema");
+            txtEmpresa.requestFocus();
+            txtEmpresa.setBackground(Color.yellow);
+            txtEmpresa.setText(null);
         } else {
             jLabelCnpjExistente.setText("");
         }
@@ -1101,12 +1109,17 @@ public class CadastrarCliente extends javax.swing.JFrame {
 
     private void txtContatoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtContatoKeyTyped
         // TODO add your handling code here:
-        String caracteres = "qwertyuiopasdfghjklçzxcvbnm";
+        String caracteres = "qwertyuiopasdfghjklçzxcvbnmáéíóú"
+                + "ABCDEFGHIJLMNOPQRSTUVXZYWK";
         if (!caracteres.contains(evt.getKeyChar() + "")) {
             evt.consume();
             // JOptionPane.showMessageDialog(this, "Digite apenas números !");
         }
     }//GEN-LAST:event_txtContatoKeyTyped
+
+    private void txtEmpresaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtEmpresaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtEmpresaActionPerformed
 
     private void carregarComboSegmento() {
 
