@@ -76,10 +76,6 @@ public class Menu extends javax.swing.JFrame {
         jBtnCadastrarLembrete = new javax.swing.JButton();
         jBtnProposta = new javax.swing.JButton();
         jBtnFazerBackup = new javax.swing.JButton();
-        jPanel1 = new javax.swing.JPanel();
-        labelAlerta1 = new javax.swing.JLabel();
-        jScrollPane3 = new javax.swing.JScrollPane();
-        jTableEstoque = new javax.swing.JTable();
         jLabel2 = new javax.swing.JLabel();
         jLabelUsuario = new javax.swing.JLabel();
         jBtnLogout = new javax.swing.JButton();
@@ -126,7 +122,7 @@ public class Menu extends javax.swing.JFrame {
                 jBtnRotinaContatoActionPerformed(evt);
             }
         });
-        getContentPane().add(jBtnRotinaContato, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, 150, -1));
+        getContentPane().add(jBtnRotinaContato, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, 190, -1));
 
         jBtnCadastrarLembrete.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jBtnCadastrarLembrete.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/CadastrarLembrete.png"))); // NOI18N
@@ -147,7 +143,7 @@ public class Menu extends javax.swing.JFrame {
                 jBtnPropostaActionPerformed(evt);
             }
         });
-        getContentPane().add(jBtnProposta, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 270, 150, -1));
+        getContentPane().add(jBtnProposta, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 170, 150, -1));
 
         jBtnFazerBackup.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jBtnFazerBackup.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/backup (2).png"))); // NOI18N
@@ -157,63 +153,14 @@ public class Menu extends javax.swing.JFrame {
                 jBtnFazerBackupActionPerformed(evt);
             }
         });
-        getContentPane().add(jBtnFazerBackup, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 360, 150, -1));
-
-        jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-
-        labelAlerta1.setFont(new java.awt.Font("Raavi", 1, 14)); // NOI18N
-        labelAlerta1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/basket_delete.png"))); // NOI18N
-        labelAlerta1.setText("Estoque baixo:");
-
-        jTableEstoque.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-                "Produto", "Quantidade"
-            }
-        ) {
-            boolean[] canEdit = new boolean [] {
-                true, false
-            };
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
-        jScrollPane3.setViewportView(jTableEstoque);
-
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(labelAlerta1, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 36, Short.MAX_VALUE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)))
-                .addContainerGap())
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addComponent(labelAlerta1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 113, Short.MAX_VALUE)
-                .addContainerGap())
-        );
-
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 10, 180, 160));
+        getContentPane().add(jBtnFazerBackup, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 80, 190, -1));
 
         jLabel2.setText("Usuário:");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 480, -1, -1));
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 540, 40, 20));
 
         jLabelUsuario.setForeground(new java.awt.Color(255, 0, 0));
         jLabelUsuario.setText("jLabel3");
-        getContentPane().add(jLabelUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 480, -1, -1));
+        getContentPane().add(jLabelUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 540, 190, 20));
 
         jBtnLogout.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/sair.gif"))); // NOI18N
         jBtnLogout.setText("Sair");
@@ -226,10 +173,11 @@ public class Menu extends javax.swing.JFrame {
                 jBtnLogoutActionPerformed(evt);
             }
         });
-        getContentPane().add(jBtnLogout, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 460, -1, -1));
+        getContentPane().add(jBtnLogout, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 540, -1, -1));
 
+        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/logopronta.png"))); // NOI18N
-        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 0, 1010, 570));
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 780, 570));
 
         jMenuBar1.setPreferredSize(new java.awt.Dimension(106, 35));
 
@@ -774,10 +722,6 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem8;
     private javax.swing.JMenuItem jMenuItem9;
     private javax.swing.JMenuItem jMenuItemCadastrarServico;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JTable jTableEstoque;
-    private javax.swing.JLabel labelAlerta1;
     // End of variables declaration//GEN-END:variables
 
 }
