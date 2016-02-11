@@ -85,7 +85,6 @@ public class Menu extends javax.swing.JFrame {
         jMenu14 = new javax.swing.JMenu();
         jMenuItem10 = new javax.swing.JMenuItem();
         jMenuItem29 = new javax.swing.JMenuItem();
-        jMenuItem22 = new javax.swing.JMenuItem();
         jMenuItem26 = new javax.swing.JMenuItem();
         jMenuItem5 = new javax.swing.JMenuItem();
         jMenuItem21 = new javax.swing.JMenuItem();
@@ -122,7 +121,7 @@ public class Menu extends javax.swing.JFrame {
                 jBtnRotinaContatoActionPerformed(evt);
             }
         });
-        getContentPane().add(jBtnRotinaContato, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, 190, -1));
+        getContentPane().add(jBtnRotinaContato, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, 190, -1));
 
         jBtnCadastrarLembrete.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jBtnCadastrarLembrete.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/CadastrarLembrete.png"))); // NOI18N
@@ -132,7 +131,7 @@ public class Menu extends javax.swing.JFrame {
                 jBtnCadastrarLembreteActionPerformed(evt);
             }
         });
-        getContentPane().add(jBtnCadastrarLembrete, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 170, 150, -1));
+        getContentPane().add(jBtnCadastrarLembrete, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 20, 150, -1));
 
         jBtnProposta.setBackground(new java.awt.Color(153, 255, 0));
         jBtnProposta.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
@@ -143,7 +142,7 @@ public class Menu extends javax.swing.JFrame {
                 jBtnPropostaActionPerformed(evt);
             }
         });
-        getContentPane().add(jBtnProposta, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 170, 150, -1));
+        getContentPane().add(jBtnProposta, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 20, 150, -1));
 
         jBtnFazerBackup.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jBtnFazerBackup.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/backup (2).png"))); // NOI18N
@@ -153,7 +152,7 @@ public class Menu extends javax.swing.JFrame {
                 jBtnFazerBackupActionPerformed(evt);
             }
         });
-        getContentPane().add(jBtnFazerBackup, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 80, 190, -1));
+        getContentPane().add(jBtnFazerBackup, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 20, 190, -1));
 
         jLabel2.setText("Usuário:");
         getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 540, 40, 20));
@@ -163,7 +162,7 @@ public class Menu extends javax.swing.JFrame {
         getContentPane().add(jLabelUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 540, 190, 20));
 
         jBtnLogout.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/sair.gif"))); // NOI18N
-        jBtnLogout.setText("Sair");
+        jBtnLogout.setText("Desconectar");
         jBtnLogout.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         jBtnLogout.setContentAreaFilled(false);
         jBtnLogout.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
@@ -173,7 +172,7 @@ public class Menu extends javax.swing.JFrame {
                 jBtnLogoutActionPerformed(evt);
             }
         });
-        getContentPane().add(jBtnLogout, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 540, -1, -1));
+        getContentPane().add(jBtnLogout, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 540, -1, -1));
 
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/logopronta.png"))); // NOI18N
@@ -211,7 +210,7 @@ public class Menu extends javax.swing.JFrame {
         });
         jMenu14.add(jMenuItem10);
 
-        jMenuItem29.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/equipamento.png"))); // NOI18N
+        jMenuItem29.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/maquina02.png"))); // NOI18N
         jMenuItem29.setText("Equipamento");
         jMenuItem29.setPreferredSize(new java.awt.Dimension(130, 35));
         jMenuItem29.addActionListener(new java.awt.event.ActionListener() {
@@ -220,11 +219,6 @@ public class Menu extends javax.swing.JFrame {
             }
         });
         jMenu14.add(jMenuItem29);
-
-        jMenuItem22.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/estoque2.png"))); // NOI18N
-        jMenuItem22.setText("Estoque");
-        jMenuItem22.setPreferredSize(new java.awt.Dimension(130, 35));
-        jMenu14.add(jMenuItem22);
 
         jMenuItem26.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/fabricante.png"))); // NOI18N
         jMenuItem26.setText("Fabricante");
@@ -256,6 +250,7 @@ public class Menu extends javax.swing.JFrame {
         });
         jMenu14.add(jMenuItem21);
 
+        jMenuItem15.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/brick.png"))); // NOI18N
         jMenuItem15.setText("Modelo");
         jMenuItem15.setPreferredSize(new java.awt.Dimension(130, 35));
         jMenuItem15.addActionListener(new java.awt.event.ActionListener() {
@@ -709,7 +704,6 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem18;
     private javax.swing.JMenuItem jMenuItem20;
     private javax.swing.JMenuItem jMenuItem21;
-    private javax.swing.JMenuItem jMenuItem22;
     private javax.swing.JMenuItem jMenuItem23;
     private javax.swing.JMenuItem jMenuItem26;
     private javax.swing.JMenuItem jMenuItem29;

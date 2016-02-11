@@ -1020,14 +1020,14 @@ public class AlterarFuncionario extends javax.swing.JFrame {
         jLabel6.setText("Código do funcionário:");
         jPanel5.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 130, -1, -1));
 
-        jBtnVoltar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/resultset_previous.png"))); // NOI18N
+        jBtnVoltar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/voltar.png"))); // NOI18N
         jBtnVoltar.setText("Voltar");
         jBtnVoltar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jBtnVoltarActionPerformed(evt);
             }
         });
-        jPanel5.add(jBtnVoltar, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 620, -1, -1));
+        jPanel5.add(jBtnVoltar, new org.netbeans.lib.awtextra.AbsoluteConstraints(21, 620, 90, -1));
 
         jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/leiaute/img3.png"))); // NOI18N
         jPanel5.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 850, -1));

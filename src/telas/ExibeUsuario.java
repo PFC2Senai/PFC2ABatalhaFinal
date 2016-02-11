@@ -90,7 +90,6 @@ public class ExibeUsuario extends javax.swing.JFrame {
         jTableListarUsuarios = new javax.swing.JTable();
         jButton3 = new javax.swing.JButton();
         jBtnEditarUsuario = new javax.swing.JButton();
-        jButton6 = new javax.swing.JButton();
         jButton7 = new javax.swing.JButton();
         jComboBoxOpcaoPesquisa = new javax.swing.JComboBox();
         txtBuscar = new javax.swing.JTextField();
@@ -121,9 +120,9 @@ public class ExibeUsuario extends javax.swing.JFrame {
         ));
         jScrollPane2.setViewportView(jTableListarUsuarios);
 
-        getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 230, 564, 250));
+        getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 230, 580, 250));
 
-        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/add.png"))); // NOI18N
+        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/page.png"))); // NOI18N
         jButton3.setText("Novo");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -144,15 +143,6 @@ public class ExibeUsuario extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jBtnEditarUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 500, -1, -1));
-
-        jButton6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/excluir.png"))); // NOI18N
-        jButton6.setText("Excluir");
-        jButton6.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton6ActionPerformed(evt);
-            }
-        });
-        getContentPane().add(jButton6, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 500, -1, -1));
 
         jButton7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/voltar.png"))); // NOI18N
         jButton7.setText("Voltar");
@@ -211,23 +201,6 @@ public class ExibeUsuario extends javax.swing.JFrame {
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
         this.dispose();
     }//GEN-LAST:event_jButton7ActionPerformed
-
-    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
-
-        if (jTableListarUsuarios.getSelectedRow() != -1) {
-
-            int linha = jTableListarUsuarios.getSelectedRow();
-            usuario.setIdUser(Integer.parseInt(jTableListarUsuarios.getValueAt(linha, 0).toString()));
-
-            int cod = UsuarioDAO.idUsuario(usuario.getIdUser());
-            UsuarioDAO.ExcluirUsuario(cod);
-
-        } else {
-            JOptionPane.showMessageDialog(null, "Primeiro selecione um registro.");
-        }
-        
-        TabelaUsuario("select * from tabUsuario;");
-    }//GEN-LAST:event_jButton6ActionPerformed
 
     private void jBtnEditarUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnEditarUsuarioActionPerformed
         
@@ -301,7 +274,7 @@ public class ExibeUsuario extends javax.swing.JFrame {
         public void verificaUsuario(){
             if(TipoUsuario() == false){
             jBtnEditarUsuario.setVisible(false);
-            jButton6.setVisible(false);
+           // jButton6.setVisible(false);
         }
     }//GEN-LAST:event_jComboBoxTipoUserActionPerformed
 
@@ -309,7 +282,6 @@ public class ExibeUsuario extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBtnEditarUsuario;
     private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton7;
     private javax.swing.JComboBox jComboBoxOpcaoPesquisa;
     private javax.swing.JComboBox jComboBoxTipoUser;

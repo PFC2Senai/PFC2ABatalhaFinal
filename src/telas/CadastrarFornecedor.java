@@ -136,8 +136,8 @@ public class CadastrarFornecedor extends javax.swing.JFrame {
         });
         jPanel1.add(btnCadFornecedor, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 650, -1, 30));
 
-        btnCancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/stop2.png"))); // NOI18N
-        btnCancelar.setText("Cancelar");
+        btnCancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/voltar.png"))); // NOI18N
+        btnCancelar.setText("Voltar");
         btnCancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCancelarActionPerformed(evt);
