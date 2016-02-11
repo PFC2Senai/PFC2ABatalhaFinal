@@ -8,6 +8,7 @@ import funcoes.LimitarDigitos;
 import funcoes.ProdutoDAO;
 import funcoes.ServicoDAO;
 import funcoes.TabelaZebrada;
+import java.awt.Color;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 import java.sql.Connection;
@@ -322,7 +323,9 @@ public class AdicionaDetServProduto extends javax.swing.JFrame {
     }//GEN-LAST:event_jBtnRemoverPecaActionPerformed
 
     private void jBtbIncluirPecaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtbIncluirPecaActionPerformed
-        TabelaProduto();
+        if (VerificaCamposPecas() == true) {
+            TabelaProduto();
+        }
     }//GEN-LAST:event_jBtbIncluirPecaActionPerformed
 
     private void uJComboBoxPecaItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_uJComboBoxPecaItemStateChanged
@@ -597,6 +600,42 @@ public class AdicionaDetServProduto extends javax.swing.JFrame {
         }
     }
 
+    private boolean VerificaCamposPecas() {
+
+        boolean valida = true;
+
+        if (uJComboBoxPeca.getSelectedIndex() == 0) {
+            JOptionPane.showMessageDialog(null, "Selecione a peça!");
+            uJComboBoxPeca.requestFocus();
+            uJComboBoxPeca.setBackground(Color.yellow);
+            valida = false;
+            return valida;
+        } else {
+            uJComboBoxPeca.setBackground(Color.white);
+        }
+
+        if (txtQuantidade.getText().trim().equals("")) {
+            JOptionPane.showMessageDialog(null, "Preencha o campo Quantidade!");
+            txtQuantidade.requestFocus();
+            txtQuantidade.setBackground(Color.yellow);
+            valida = false;
+            return valida;
+        } else {
+            txtQuantidade.setBackground(Color.white);
+        }
+
+        if (txtValorUnit.getText().trim().equals("")) {
+            JOptionPane.showMessageDialog(null, "Preencha o campo Valor unitario!");
+            txtValorUnit.requestFocus();
+            txtValorUnit.setBackground(Color.yellow);
+            valida = false;
+            return valida;
+        } else {
+            txtValorUnit.setBackground(Color.white);
+        }
+        return valida;
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBtbIncluirPeca;
     private javax.swing.JButton jBtnCancelar;
