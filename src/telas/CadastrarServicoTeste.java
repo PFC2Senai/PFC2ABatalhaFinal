@@ -26,6 +26,7 @@ import funcoes.ProdutoDAO;
 import funcoes.ServicoDAO;
 import funcoes.TabelaZebrada;
 import funcoes.TipoServicoDAO;
+import java.awt.Color;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 import java.sql.Connection;
@@ -97,7 +98,7 @@ public class CadastrarServicoTeste extends javax.swing.JFrame {
         ocultaColunaTabelas();
         txtTipoServico.setVisible(false);
     }
-    
+
     public CadastrarServicoTeste(Menu menu) {
         this.telaMenu = menu;
         this.codCliente = 0;
@@ -155,7 +156,6 @@ public class CadastrarServicoTeste extends javax.swing.JFrame {
             }
         });
         uJComboBoxPeca.setAutocompletar(true);
-
 
         //Combobox equipamento
         uJComboBoxEquipamento.getEditor().getEditorComponent().addFocusListener(new FocusAdapter() {
@@ -245,7 +245,7 @@ public class CadastrarServicoTeste extends javax.swing.JFrame {
         jComboBoxFabricanteEquip = new javax.swing.JComboBox();
         uJComboBoxEquipamento = new componentes.UJComboBox();
         jBtnAvancarPainelFuncionario = new javax.swing.JButton();
-        jBtnVoltarPainelPecas = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
         jPanelFuncionario = new javax.swing.JPanel();
         jPanel5 = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
@@ -254,8 +254,8 @@ public class CadastrarServicoTeste extends javax.swing.JFrame {
         jBtnRemoverFunc = new javax.swing.JButton();
         jBtbIncluirFunc = new javax.swing.JButton();
         uJComboBoxFuncionario = new componentes.UJComboBox();
-        jBtnVoltarPainelEquipamento = new javax.swing.JButton();
         jBtnAvancarPainelValorTotal = new javax.swing.JButton();
+        jBtnVoltarPainelEquipamento = new javax.swing.JButton();
         jPanelValorTotalServico = new javax.swing.JPanel();
         jPanel8 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
@@ -288,15 +288,15 @@ public class CadastrarServicoTeste extends javax.swing.JFrame {
         jPanel7.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel6.setText("Empresa:");
-        jPanel7.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 60, -1, 20));
-        jPanel7.add(txtTipoServico, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 270, 240, -1));
+        jPanel7.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 30, -1, 20));
+        jPanel7.add(txtTipoServico, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 230, 240, -1));
 
         jLabel10.setText("Tipo:");
-        jPanel7.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 250, -1, -1));
+        jPanel7.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 210, -1, -1));
 
         jLabel12.setText("Data:");
-        jPanel7.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 60, 30, 20));
-        jPanel7.add(txtDataCadProduto, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 60, 120, -1));
+        jPanel7.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 30, 30, 20));
+        jPanel7.add(txtDataCadProduto, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 30, 120, -1));
 
         jBtbNovoTipoServico.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/ferramenta.png"))); // NOI18N
         jBtbNovoTipoServico.setText("Novo");
@@ -305,7 +305,7 @@ public class CadastrarServicoTeste extends javax.swing.JFrame {
                 jBtbNovoTipoServicoActionPerformed(evt);
             }
         });
-        jPanel7.add(jBtbNovoTipoServico, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 270, -1, -1));
+        jPanel7.add(jBtbNovoTipoServico, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 230, -1, -1));
 
         jBtnCadTipoServico.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/ok.png"))); // NOI18N
         jBtnCadTipoServico.setText("Salvar");
@@ -314,7 +314,7 @@ public class CadastrarServicoTeste extends javax.swing.JFrame {
                 jBtnCadTipoServicoActionPerformed(evt);
             }
         });
-        jPanel7.add(jBtnCadTipoServico, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 270, 90, -1));
+        jPanel7.add(jBtnCadTipoServico, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 230, 90, -1));
 
         jBtnCancelarCadTipoServico.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/cancelar.png"))); // NOI18N
         jBtnCancelarCadTipoServico.setText("Cancelar");
@@ -323,7 +323,7 @@ public class CadastrarServicoTeste extends javax.swing.JFrame {
                 jBtnCancelarCadTipoServicoActionPerformed(evt);
             }
         });
-        jPanel7.add(jBtnCancelarCadTipoServico, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 270, -1, -1));
+        jPanel7.add(jBtnCancelarCadTipoServico, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 230, -1, -1));
 
         jBtnAdicionarTipo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/add.png"))); // NOI18N
         jBtnAdicionarTipo.setText("Inserir Tipo");
@@ -332,17 +332,17 @@ public class CadastrarServicoTeste extends javax.swing.JFrame {
                 jBtnAdicionarTipoActionPerformed(evt);
             }
         });
-        jPanel7.add(jBtnAdicionarTipo, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 270, -1, -1));
+        jPanel7.add(jBtnAdicionarTipo, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 230, -1, -1));
 
         jLabel5.setText("Descrição:");
-        jPanel7.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 100, -1, 20));
+        jPanel7.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 70, -1, 20));
 
         txtDescricao.setColumns(20);
         txtDescricao.setLineWrap(true);
         txtDescricao.setRows(5);
         jScrollPane4.setViewportView(txtDescricao);
 
-        jPanel7.add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 130, 610, 100));
+        jPanel7.add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 90, 610, 100));
 
         jTableTipodeServico.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -355,7 +355,7 @@ public class CadastrarServicoTeste extends javax.swing.JFrame {
         jTableTipodeServico.getTableHeader().setReorderingAllowed(false);
         jScrollPane6.setViewportView(jTableTipodeServico);
 
-        jPanel7.add(jScrollPane6, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 310, 610, 140));
+        jPanel7.add(jScrollPane6, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 270, 610, 140));
 
         jBtnRemoverTipo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/excluir.png"))); // NOI18N
         jBtnRemoverTipo.setText("Remover Tipo");
@@ -368,7 +368,7 @@ public class CadastrarServicoTeste extends javax.swing.JFrame {
                 jBtnRemoverTipoActionPerformed(evt);
             }
         });
-        jPanel7.add(jBtnRemoverTipo, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 460, -1, -1));
+        jPanel7.add(jBtnRemoverTipo, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 420, -1, -1));
 
         uJComboBoxClientes.setEditable(true);
         uJComboBoxClientes.addActionListener(new java.awt.event.ActionListener() {
@@ -376,7 +376,7 @@ public class CadastrarServicoTeste extends javax.swing.JFrame {
                 uJComboBoxClientesActionPerformed(evt);
             }
         });
-        jPanel7.add(uJComboBoxClientes, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 60, 340, -1));
+        jPanel7.add(uJComboBoxClientes, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 30, 340, -1));
 
         jComboBoxTipoServico.setEditable(true);
         jComboBoxTipoServico.addItemListener(new java.awt.event.ItemListener() {
@@ -389,7 +389,7 @@ public class CadastrarServicoTeste extends javax.swing.JFrame {
                 jComboBoxTipoServicoActionPerformed(evt);
             }
         });
-        jPanel7.add(jComboBoxTipoServico, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 270, 260, -1));
+        jPanel7.add(jComboBoxTipoServico, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 230, 260, -1));
 
         jBtnAvancarPainelPecas.setText("Avançar");
         jBtnAvancarPainelPecas.addActionListener(new java.awt.event.ActionListener() {
@@ -403,23 +403,20 @@ public class CadastrarServicoTeste extends javax.swing.JFrame {
         jPanelServicoLayout.setHorizontalGroup(
             jPanelServicoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelServicoLayout.createSequentialGroup()
-                .addGap(32, 32, 32)
-                .addGroup(jPanelServicoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanelServicoLayout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jBtnAvancarPainelPecas)
-                        .addGap(133, 133, 133))
-                    .addGroup(jPanelServicoLayout.createSequentialGroup()
-                        .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, 771, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(42, Short.MAX_VALUE))))
+                .addGap(35, 35, 35)
+                .addGroup(jPanelServicoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jBtnAvancarPainelPecas)
+                    .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, 771, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(39, Short.MAX_VALUE))
         );
         jPanelServicoLayout.setVerticalGroup(
             jPanelServicoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelServicoLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, 500, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jBtnAvancarPainelPecas))
+                .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, 465, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jBtnAvancarPainelPecas)
+                .addContainerGap())
         );
 
         jTabbedPaneServico.addTab("Serviço", new javax.swing.ImageIcon(getClass().getResource("/imagens/servicos.png")), jPanelServico); // NOI18N
@@ -431,7 +428,7 @@ public class CadastrarServicoTeste extends javax.swing.JFrame {
         jPanel14.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel33.setText("Peça:");
-        jPanel14.add(jLabel33, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 69, -1, -1));
+        jPanel14.add(jLabel33, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 50, -1, -1));
 
         jBtbIncluirPeca.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/add.png"))); // NOI18N
         jBtbIncluirPeca.setText("Incluir Peça");
@@ -440,10 +437,10 @@ public class CadastrarServicoTeste extends javax.swing.JFrame {
                 jBtbIncluirPecaActionPerformed(evt);
             }
         });
-        jPanel14.add(jBtbIncluirPeca, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 160, -1, -1));
+        jPanel14.add(jBtbIncluirPeca, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 140, -1, -1));
 
         jLabel34.setText("Quantidade:");
-        jPanel14.add(jLabel34, new org.netbeans.lib.awtextra.AbsoluteConstraints(367, 110, -1, -1));
+        jPanel14.add(jLabel34, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 90, -1, -1));
 
         txtQuantidade.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -455,10 +452,10 @@ public class CadastrarServicoTeste extends javax.swing.JFrame {
                 txtQuantidadeKeyTyped(evt);
             }
         });
-        jPanel14.add(txtQuantidade, new org.netbeans.lib.awtextra.AbsoluteConstraints(437, 107, 107, -1));
+        jPanel14.add(txtQuantidade, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 90, 107, -1));
 
         jLabel35.setText("Modelo:");
-        jPanel14.add(jLabel35, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 110, -1, -1));
+        jPanel14.add(jLabel35, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 90, -1, -1));
 
         jTablePecas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -479,7 +476,7 @@ public class CadastrarServicoTeste extends javax.swing.JFrame {
         jTablePecas.getTableHeader().setReorderingAllowed(false);
         jScrollPane1.setViewportView(jTablePecas);
 
-        jPanel14.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 202, 682, 162));
+        jPanel14.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 180, 682, 150));
 
         jBtnRemoverPeca.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/excluir.png"))); // NOI18N
         jBtnRemoverPeca.setText("Remover");
@@ -492,10 +489,10 @@ public class CadastrarServicoTeste extends javax.swing.JFrame {
                 jBtnRemoverPecaActionPerformed(evt);
             }
         });
-        jPanel14.add(jBtnRemoverPeca, new org.netbeans.lib.awtextra.AbsoluteConstraints(627, 382, -1, -1));
+        jPanel14.add(jBtnRemoverPeca, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 340, -1, -1));
 
         jLabel36.setText("Fabricante:");
-        jPanel14.add(jLabel36, new org.netbeans.lib.awtextra.AbsoluteConstraints(367, 69, -1, -1));
+        jPanel14.add(jLabel36, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 50, -1, -1));
 
         jComboBoxFabricante.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Selecione o Fabricante" }));
         jComboBoxFabricante.addActionListener(new java.awt.event.ActionListener() {
@@ -503,17 +500,17 @@ public class CadastrarServicoTeste extends javax.swing.JFrame {
                 jComboBoxFabricanteActionPerformed(evt);
             }
         });
-        jPanel14.add(jComboBoxFabricante, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 66, 282, -1));
+        jPanel14.add(jComboBoxFabricante, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 50, 282, -1));
 
         jLabel39.setText("Valor Unit.");
-        jPanel14.add(jLabel39, new org.netbeans.lib.awtextra.AbsoluteConstraints(554, 110, -1, -1));
+        jPanel14.add(jLabel39, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 90, -1, -1));
 
         txtValorUnit.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txtValorUnitKeyTyped(evt);
             }
         });
-        jPanel14.add(txtValorUnit, new org.netbeans.lib.awtextra.AbsoluteConstraints(614, 107, 108, -1));
+        jPanel14.add(txtValorUnit, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 90, 108, -1));
 
         uJComboBoxPeca.setEditable(true);
         uJComboBoxPeca.addItemListener(new java.awt.event.ItemListener() {
@@ -526,7 +523,7 @@ public class CadastrarServicoTeste extends javax.swing.JFrame {
                 uJComboBoxPecaActionPerformed(evt);
             }
         });
-        jPanel14.add(uJComboBoxPeca, new org.netbeans.lib.awtextra.AbsoluteConstraints(85, 66, 258, -1));
+        jPanel14.add(uJComboBoxPeca, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 50, 258, -1));
 
         txtModelo.setEditable(false);
         txtModelo.addFocusListener(new java.awt.event.FocusAdapter() {
@@ -539,7 +536,7 @@ public class CadastrarServicoTeste extends javax.swing.JFrame {
                 txtModeloActionPerformed(evt);
             }
         });
-        jPanel14.add(txtModelo, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 110, 250, -1));
+        jPanel14.add(txtModelo, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 90, 250, -1));
 
         jBtnVoltarPainelServico.setText("Voltar");
         jBtnVoltarPainelServico.addActionListener(new java.awt.event.ActionListener() {
@@ -573,22 +570,25 @@ public class CadastrarServicoTeste extends javax.swing.JFrame {
             jPanelPecasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelPecasLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel14, javax.swing.GroupLayout.PREFERRED_SIZE, 486, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jPanel14, javax.swing.GroupLayout.PREFERRED_SIZE, 427, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(32, 32, 32)
                 .addGroup(jPanelPecasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jBtnVoltarPainelServico)
                     .addComponent(jBtnAvancarPainelEquipamento))
-                .addContainerGap(49, Short.MAX_VALUE))
+                .addContainerGap(37, Short.MAX_VALUE))
         );
 
         jTabbedPaneServico.addTab("Peças", new javax.swing.ImageIcon(getClass().getResource("/imagens/prod.png")), jPanelPecas); // NOI18N
 
         jPanelEquipamento.setBackground(new java.awt.Color(223, 237, 253));
+        jPanelEquipamento.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel4.setBackground(new java.awt.Color(223, 237, 253));
         jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
+        jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setText("Equipamento:");
+        jPanel4.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 80, -1, -1));
 
         jBtnRemoveEquipamento.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/excluir.png"))); // NOI18N
         jBtnRemoveEquipamento.setText("Remover");
@@ -601,6 +601,7 @@ public class CadastrarServicoTeste extends javax.swing.JFrame {
                 jBtnRemoveEquipamentoActionPerformed(evt);
             }
         });
+        jPanel4.add(jBtnRemoveEquipamento, new org.netbeans.lib.awtextra.AbsoluteConstraints(561, 379, -1, -1));
 
         jBtbIncluirEquipamento.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/add.png"))); // NOI18N
         jBtbIncluirEquipamento.setText("IncluirEquipamento");
@@ -609,6 +610,7 @@ public class CadastrarServicoTeste extends javax.swing.JFrame {
                 jBtbIncluirEquipamentoActionPerformed(evt);
             }
         });
+        jPanel4.add(jBtbIncluirEquipamento, new org.netbeans.lib.awtextra.AbsoluteConstraints(513, 199, -1, -1));
 
         jTableEquipamento.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -629,7 +631,10 @@ public class CadastrarServicoTeste extends javax.swing.JFrame {
         jTableEquipamento.getTableHeader().setReorderingAllowed(false);
         jScrollPane2.setViewportView(jTableEquipamento);
 
+        jPanel4.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(83, 242, 573, 126));
+
         jLabel37.setText("Modelo:");
+        jPanel4.add(jLabel37, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 130, -1, -1));
 
         jComboBoxModeloEquip.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Selecione o Modelo" }));
         jComboBoxModeloEquip.addItemListener(new java.awt.event.ItemListener() {
@@ -642,8 +647,10 @@ public class CadastrarServicoTeste extends javax.swing.JFrame {
                 jComboBoxModeloEquipActionPerformed(evt);
             }
         });
+        jPanel4.add(jComboBoxModeloEquip, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 130, 264, -1));
 
         jLabel38.setText("Fabricante:");
+        jPanel4.add(jLabel38, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 170, -1, -1));
 
         jComboBoxFabricanteEquip.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Selecione o Fabricante" }));
         jComboBoxFabricanteEquip.addActionListener(new java.awt.event.ActionListener() {
@@ -651,6 +658,7 @@ public class CadastrarServicoTeste extends javax.swing.JFrame {
                 jComboBoxFabricanteEquipActionPerformed(evt);
             }
         });
+        jPanel4.add(jComboBoxFabricanteEquip, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 170, 264, -1));
 
         uJComboBoxEquipamento.setEditable(true);
         uJComboBoxEquipamento.addItemListener(new java.awt.event.ItemListener() {
@@ -663,61 +671,9 @@ public class CadastrarServicoTeste extends javax.swing.JFrame {
                 uJComboBoxEquipamentoActionPerformed(evt);
             }
         });
+        jPanel4.add(uJComboBoxEquipamento, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 80, 261, -1));
 
-        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
-        jPanel4.setLayout(jPanel4Layout);
-        jPanel4Layout.setHorizontalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel4Layout.createSequentialGroup()
-                .addGap(79, 79, 79)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
-                        .addComponent(jLabel38)
-                        .addGap(18, 18, 18)
-                        .addComponent(jComboBoxFabricanteEquip, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1)
-                            .addComponent(jLabel37))
-                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
-                                .addGap(7, 7, 7)
-                                .addComponent(jComboBoxModeloEquip, javax.swing.GroupLayout.PREFERRED_SIZE, 264, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel4Layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(uJComboBoxEquipamento, javax.swing.GroupLayout.PREFERRED_SIZE, 261, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(jPanel4Layout.createSequentialGroup()
-                .addContainerGap(88, Short.MAX_VALUE)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jBtnRemoveEquipamento)
-                    .addComponent(jBtbIncluirEquipamento)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 573, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(89, Short.MAX_VALUE))
-        );
-        jPanel4Layout.setVerticalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel4Layout.createSequentialGroup()
-                .addGap(95, 95, 95)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(uJComboBoxEquipamento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel37)
-                    .addComponent(jComboBoxModeloEquip, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel38)
-                    .addComponent(jComboBoxFabricanteEquip, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
-                .addComponent(jBtbIncluirEquipamento)
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jBtnRemoveEquipamento)
-                .addGap(58, 58, 58))
-        );
+        jPanelEquipamento.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(41, 31, 740, 420));
 
         jBtnAvancarPainelFuncionario.setText("Avançar");
         jBtnAvancarPainelFuncionario.addActionListener(new java.awt.event.ActionListener() {
@@ -725,41 +681,15 @@ public class CadastrarServicoTeste extends javax.swing.JFrame {
                 jBtnAvancarPainelFuncionarioActionPerformed(evt);
             }
         });
+        jPanelEquipamento.add(jBtnAvancarPainelFuncionario, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 470, -1, -1));
 
-        jBtnVoltarPainelPecas.setText("Voltar");
-        jBtnVoltarPainelPecas.addActionListener(new java.awt.event.ActionListener() {
+        jButton1.setText("Voltar");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jBtnVoltarPainelPecasActionPerformed(evt);
+                jButton1ActionPerformed(evt);
             }
         });
-
-        javax.swing.GroupLayout jPanelEquipamentoLayout = new javax.swing.GroupLayout(jPanelEquipamento);
-        jPanelEquipamento.setLayout(jPanelEquipamentoLayout);
-        jPanelEquipamentoLayout.setHorizontalGroup(
-            jPanelEquipamentoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanelEquipamentoLayout.createSequentialGroup()
-                .addGroup(jPanelEquipamentoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanelEquipamentoLayout.createSequentialGroup()
-                        .addGap(50, 50, 50)
-                        .addComponent(jBtnVoltarPainelPecas)
-                        .addGap(618, 618, 618)
-                        .addComponent(jBtnAvancarPainelFuncionario))
-                    .addGroup(jPanelEquipamentoLayout.createSequentialGroup()
-                        .addGap(27, 27, 27)
-                        .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(43, Short.MAX_VALUE))
-        );
-        jPanelEquipamentoLayout.setVerticalGroup(
-            jPanelEquipamentoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanelEquipamentoLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanelEquipamentoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jBtnVoltarPainelPecas)
-                    .addComponent(jBtnAvancarPainelFuncionario))
-                .addGap(30, 30, 30))
-        );
+        jPanelEquipamento.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 470, -1, -1));
 
         jTabbedPaneServico.addTab("Equipamento", new javax.swing.ImageIcon(getClass().getResource("/imagens/equipamento.png")), jPanelEquipamento); // NOI18N
 
@@ -849,15 +779,8 @@ public class CadastrarServicoTeste extends javax.swing.JFrame {
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jBtnRemoverFunc)
-                .addContainerGap(47, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
-
-        jBtnVoltarPainelEquipamento.setText("Voltar");
-        jBtnVoltarPainelEquipamento.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jBtnVoltarPainelEquipamentoActionPerformed(evt);
-            }
-        });
 
         jBtnAvancarPainelValorTotal.setText("Avançar");
         jBtnAvancarPainelValorTotal.addActionListener(new java.awt.event.ActionListener() {
@@ -866,32 +789,39 @@ public class CadastrarServicoTeste extends javax.swing.JFrame {
             }
         });
 
+        jBtnVoltarPainelEquipamento.setText("Voltar");
+        jBtnVoltarPainelEquipamento.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnVoltarPainelEquipamentoActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanelFuncionarioLayout = new javax.swing.GroupLayout(jPanelFuncionario);
         jPanelFuncionario.setLayout(jPanelFuncionarioLayout);
         jPanelFuncionarioLayout.setHorizontalGroup(
             jPanelFuncionarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelFuncionarioLayout.createSequentialGroup()
+                .addGap(40, 40, 40)
                 .addGroup(jPanelFuncionarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanelFuncionarioLayout.createSequentialGroup()
-                        .addGap(55, 55, 55)
                         .addComponent(jBtnVoltarPainelEquipamento)
-                        .addGap(608, 608, 608)
-                        .addComponent(jBtnAvancarPainelValorTotal))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jBtnAvancarPainelValorTotal)
+                        .addGap(92, 92, 92))
                     .addGroup(jPanelFuncionarioLayout.createSequentialGroup()
-                        .addGap(27, 27, 27)
-                        .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(48, Short.MAX_VALUE))
+                        .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(41, Short.MAX_VALUE))))
         );
         jPanelFuncionarioLayout.setVerticalGroup(
             jPanelFuncionarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelFuncionarioLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(41, 41, 41)
+                .addGap(42, 42, 42)
                 .addGroup(jPanelFuncionarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jBtnVoltarPainelEquipamento)
                     .addComponent(jBtnAvancarPainelValorTotal))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(21, Short.MAX_VALUE))
         );
 
         jTabbedPaneServico.addTab("Funcionário", new javax.swing.ImageIcon(getClass().getResource("/imagens/funcionario.png")), jPanelFuncionario); // NOI18N
@@ -921,6 +851,7 @@ public class CadastrarServicoTeste extends javax.swing.JFrame {
             }
         });
 
+        jBtnCalcularTotalServico.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/calculator.png"))); // NOI18N
         jBtnCalcularTotalServico.setText("Calcular Total");
         jBtnCalcularTotalServico.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -933,7 +864,7 @@ public class CadastrarServicoTeste extends javax.swing.JFrame {
         jPanel8Layout.setHorizontalGroup(
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel8Layout.createSequentialGroup()
-                .addGap(72, 72, 72)
+                .addGap(66, 66, 66)
                 .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel2)
                     .addComponent(jLabel3)
@@ -943,14 +874,14 @@ public class CadastrarServicoTeste extends javax.swing.JFrame {
                     .addComponent(txtTotalPecas)
                     .addComponent(txtMaoObra)
                     .addComponent(txtTotalGeral, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jBtnCalcularTotalServico)
-                .addContainerGap(260, Short.MAX_VALUE))
+                .addContainerGap(258, Short.MAX_VALUE))
         );
         jPanel8Layout.setVerticalGroup(
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel8Layout.createSequentialGroup()
-                .addGap(165, 165, 165)
+                .addGap(62, 62, 62)
                 .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(txtTotalPecas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -963,7 +894,7 @@ public class CadastrarServicoTeste extends javax.swing.JFrame {
                 .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
                     .addComponent(txtTotalGeral, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(49, Short.MAX_VALUE))
+                .addContainerGap(150, Short.MAX_VALUE))
         );
 
         jBtnCadastrarServico3.setText("Finalizar Serviço");
@@ -1003,12 +934,12 @@ public class CadastrarServicoTeste extends javax.swing.JFrame {
                 .addGroup(jPanelValorTotalServicoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jBtnCadastrarServico3)
                     .addComponent(jBtnVoltarPainelFuncionario))
-                .addContainerGap(81, Short.MAX_VALUE))
+                .addContainerGap(31, Short.MAX_VALUE))
         );
 
         jTabbedPaneServico.addTab("Valor", new javax.swing.ImageIcon(getClass().getResource("/imagens/dinheiro.png")), jPanelValorTotalServico); // NOI18N
 
-        jPanel6.add(jTabbedPaneServico, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 100, 850, 610));
+        jPanel6.add(jTabbedPaneServico, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 100, 850, 560));
 
         jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/leiaute/img3.png"))); // NOI18N
         jPanel6.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -400, 850, 940));
@@ -1021,17 +952,21 @@ public class CadastrarServicoTeste extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, 766, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, 935, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         bindingGroup.bind();
 
-        setSize(new java.awt.Dimension(866, 743));
+        setSize(new java.awt.Dimension(866, 695));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jBtnAdicionarTipoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnAdicionarTipoActionPerformed
-        TabelaTipoServico();
+        if (jComboBoxTipoServico.getSelectedIndex() == 0) {
+            JOptionPane.showMessageDialog(null, "Selecione o Tipo de Serviço!");
+        } else {
+            TabelaTipoServico();
+        }
     }//GEN-LAST:event_jBtnAdicionarTipoActionPerformed
 
     private void jBtnRemoverTipoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnRemoverTipoActionPerformed
@@ -1088,7 +1023,9 @@ public class CadastrarServicoTeste extends javax.swing.JFrame {
     }//GEN-LAST:event_jBtbNovoTipoServicoActionPerformed
 
     private void jBtbIncluirPecaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtbIncluirPecaActionPerformed
-        TabelaProduto();
+        if (VerificaCamposPecas() == true) {
+            TabelaProduto();
+        }
     }//GEN-LAST:event_jBtbIncluirPecaActionPerformed
 
     private void jBtnRemoverPecaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnRemoverPecaActionPerformed
@@ -1125,7 +1062,9 @@ public class CadastrarServicoTeste extends javax.swing.JFrame {
     }//GEN-LAST:event_jBtnRemoveEquipamentoActionPerformed
 
     private void jBtbIncluirEquipamentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtbIncluirEquipamentoActionPerformed
-        TabelaEquipamento();
+        if (VerificaCamposEquipamento() == true) {
+            TabelaEquipamento();
+        }
     }//GEN-LAST:event_jBtbIncluirEquipamentoActionPerformed
 
     private void jComboBoxModeloEquipItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jComboBoxModeloEquipItemStateChanged
@@ -1157,74 +1096,82 @@ public class CadastrarServicoTeste extends javax.swing.JFrame {
     }//GEN-LAST:event_jBtnRemoverFuncActionPerformed
 
     private void jBtbIncluirFuncActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtbIncluirFuncActionPerformed
-        TabelaFuncionario();
+        if (uJComboBoxFuncionario.getSelectedIndex() == 0) {
+            JOptionPane.showMessageDialog(null, "Selecione um Funcionario!");
+        } else {
+            TabelaFuncionario();
+        }
     }//GEN-LAST:event_jBtbIncluirFuncActionPerformed
 
     private void jBtnCalcularTotalServicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnCalcularTotalServicoActionPerformed
-        double total = totalPeca + Double.parseDouble(txtMaoObra.getText());
-        txtTotalGeral.setText(String.valueOf(total));
+        if (txtMaoObra.getText().trim().equals("")) {
+            JOptionPane.showMessageDialog(null, "Preencha o campo Mão de Obra!");
+        } else {
+            double total = totalPeca + Double.parseDouble(txtMaoObra.getText());
+            txtTotalGeral.setText(String.valueOf(total));
+        }
     }//GEN-LAST:event_jBtnCalcularTotalServicoActionPerformed
 
     private void jBtnCadastrarServico3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnCadastrarServico3ActionPerformed
+        if (VerificaCamposGeral()) {
+            OrdemServico oS = new OrdemServico();
+            DetServicoProduto dtServ = new DetServicoProduto();
+            DetServicoEquipamento dtServEqui = new DetServicoEquipamento();
+            DetServicoFuncionario dtServFunc = new DetServicoFuncionario();
+            DetServicoTipoServ ServTipo = new DetServicoTipoServ();
 
-        OrdemServico oS = new OrdemServico();
-        DetServicoProduto dtServ = new DetServicoProduto();
-        DetServicoEquipamento dtServEqui = new DetServicoEquipamento();
-        DetServicoFuncionario dtServFunc = new DetServicoFuncionario();
-        DetServicoTipoServ ServTipo = new DetServicoTipoServ();
+            double preco = totalPeca + Double.parseDouble(txtMaoObra.getText());
 
-        double preco = totalPeca + Double.parseDouble(txtMaoObra.getText());
+            servico.setCodUsuario(Usuario.idUsuario());
+            servico.setCodCliente(codCliente);
+            servico.setPreco(preco);
+            servico.setDataServico(FuncoesDiversas.FormataData(txtDataCadProduto.getDate()));
+            servico.setDescricaoServico(txtDescricao.getText());
+            servico.setMaoDeObra(Double.parseDouble(txtMaoObra.getText()));
 
-        servico.setCodUsuario(Usuario.idUsuario());
-        servico.setCodCliente(codCliente);
-        servico.setPreco(preco);
-        servico.setDataServico(FuncoesDiversas.FormataData(txtDataCadProduto.getDate()));
-        servico.setDescricaoServico(txtDescricao.getText());
-        servico.setMaoDeObra(Double.parseDouble(txtMaoObra.getText()));
+            oS.setTipo("Manutenção");
 
-        oS.setTipo("Manutenção");
+            int codOrdemS = OrdemServicoDAO.CadOrdemServico(oS);
 
-        int codOrdemS = OrdemServicoDAO.CadOrdemServico(oS);
+            servico.setCodOrdemServico(codOrdemS);
 
-        servico.setCodOrdemServico(codOrdemS);
+            int codServico = ServicoDAO.CadServico(servico);
 
-        int codServico = ServicoDAO.CadServico(servico);
+            for (int j = 0; j < jTablePecas.getRowCount(); j++) {
 
-        for (int j = 0; j < jTablePecas.getRowCount(); j++) {
+                dtServ.setCodServico(codServico);
+                dtServ.setCodDetProduto(Integer.parseInt(jTablePecas.getValueAt(j, 0).toString()));
+                dtServ.setQuantidade(Integer.parseInt(jTablePecas.getValueAt(j, 6).toString()));
+                DetServicoProdutoDAO.CadDetServProduto(dtServ);
+            }
 
-            dtServ.setCodServico(codServico);
-            dtServ.setCodDetProduto(Integer.parseInt(jTablePecas.getValueAt(j, 0).toString()));
-            dtServ.setQuantidade(Integer.parseInt(jTablePecas.getValueAt(j, 6).toString()));
-            DetServicoProdutoDAO.CadDetServProduto(dtServ);
+            for (int j = 0; j < jTableEquipamento.getRowCount(); j++) {
+
+                dtServEqui.setCodServico(codServico);
+                dtServEqui.setCodDetEquipamento(Integer.parseInt(jTableEquipamento.getValueAt(j, 0).toString()));
+
+                DetServicoEquipamentoDAO.CadDetServEquipamento(dtServEqui);
+            }
+
+            for (int j = 0; j < jTableFuncionario.getRowCount(); j++) {
+
+                dtServFunc.setCodServico(codServico);
+                dtServFunc.setCodFuncionario(Integer.parseInt(jTableFuncionario.getValueAt(j, 0).toString()));
+
+                DetServicoFuncionarioDAO.CadDetServFuncionario(dtServFunc);
+            }
+
+            for (int j = 0; j < jTableTipodeServico.getRowCount(); j++) {
+
+                ServTipo.setCodServico(codServico);
+                ServTipo.setCodTipo(Integer.parseInt(jTableTipodeServico.getValueAt(j, 0).toString()));
+
+                DetServicoTipoDAO.CadDetServTipoServ(ServTipo);
+            }
+
+            JOptionPane.showMessageDialog(null, "Serviço finalizado com sucesso!");
+            limparCampos();
         }
-
-        for (int j = 0; j < jTableEquipamento.getRowCount(); j++) {
-
-            dtServEqui.setCodServico(codServico);
-            dtServEqui.setCodDetEquipamento(Integer.parseInt(jTableEquipamento.getValueAt(j, 0).toString()));
-
-            DetServicoEquipamentoDAO.CadDetServEquipamento(dtServEqui);
-        }
-
-        for (int j = 0; j < jTableFuncionario.getRowCount(); j++) {
-
-            dtServFunc.setCodServico(codServico);
-            dtServFunc.setCodFuncionario(Integer.parseInt(jTableFuncionario.getValueAt(j, 0).toString()));
-
-            DetServicoFuncionarioDAO.CadDetServFuncionario(dtServFunc);
-        }
-
-        for (int j = 0; j < jTableTipodeServico.getRowCount(); j++) {
-
-            ServTipo.setCodServico(codServico);
-            ServTipo.setCodTipo(Integer.parseInt(jTableTipodeServico.getValueAt(j, 0).toString()));
-
-            DetServicoTipoDAO.CadDetServTipoServ(ServTipo);
-        }
-
-        JOptionPane.showMessageDialog(null, "Serviço finalizado com sucesso!");
-        limparCampos();
-
     }//GEN-LAST:event_jBtnCadastrarServico3ActionPerformed
 
     private void jComboBoxModeloEquipActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxModeloEquipActionPerformed
@@ -1238,10 +1185,6 @@ public class CadastrarServicoTeste extends javax.swing.JFrame {
     private void jBtnAvancarPainelFuncionarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnAvancarPainelFuncionarioActionPerformed
         jTabbedPaneServico.setSelectedComponent(this.jPanelFuncionario);
     }//GEN-LAST:event_jBtnAvancarPainelFuncionarioActionPerformed
-
-    private void jBtnVoltarPainelPecasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnVoltarPainelPecasActionPerformed
-        jTabbedPaneServico.setSelectedComponent(this.jPanelPecas);
-    }//GEN-LAST:event_jBtnVoltarPainelPecasActionPerformed
 
     private void jBtnVoltarPainelEquipamentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnVoltarPainelEquipamentoActionPerformed
         jTabbedPaneServico.setSelectedComponent(this.jPanelEquipamento);
@@ -1285,7 +1228,7 @@ public class CadastrarServicoTeste extends javax.swing.JFrame {
         txtValorUnit.setText("");
         modelo = txtModelo.getText();
         CarregaValorUnit();
-       // txtModelo.requestFocus();
+        // txtModelo.requestFocus();
         if (uJComboBoxPeca.getSelectedItem() != null) {
             produto = uJComboBoxPeca.getSelectedItem().toString();
         }
@@ -1382,7 +1325,7 @@ public class CadastrarServicoTeste extends javax.swing.JFrame {
     }//GEN-LAST:event_txtTotalGeralKeyTyped
 
     private void txtModeloFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtModeloFocusGained
-        
+
     }//GEN-LAST:event_txtModeloFocusGained
 
     private void txtModeloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtModeloActionPerformed
@@ -1397,6 +1340,10 @@ public class CadastrarServicoTeste extends javax.swing.JFrame {
     private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
         verificaPagina();
     }//GEN-LAST:event_formWindowClosed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        jTabbedPaneServico.setSelectedComponent(this.jPanelPecas);
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     private void limparCampos() {
 
@@ -1453,10 +1400,10 @@ public class CadastrarServicoTeste extends javax.swing.JFrame {
                 quantidade,
                 valorUnit,
                 total});
-            
+
             TableCellRenderer renderer = new TabelaZebrada();
             jTablePecas.setDefaultRenderer(Object.class, renderer);
-            
+
             totalPeca += total;
             txtTotalPecas.setEditable(false);
             txtTotalPecas.setText(String.valueOf(totalPeca));
@@ -1484,7 +1431,7 @@ public class CadastrarServicoTeste extends javax.swing.JFrame {
                 equipamento,
                 modeloEqui,
                 fabricanteEqui});
-            
+
             TableCellRenderer renderer = new TabelaZebrada();
             jTableEquipamento.setDefaultRenderer(Object.class, renderer);
 
@@ -1504,7 +1451,7 @@ public class CadastrarServicoTeste extends javax.swing.JFrame {
 
             TableCellRenderer renderer = new TabelaZebrada();
             jTableFuncionario.setDefaultRenderer(Object.class, renderer);
-            
+
         } catch (Exception erro) {
             Logger.getLogger(CadastrarCliente.class
                     .getName()).log(Level.SEVERE, null, erro);
@@ -1521,7 +1468,7 @@ public class CadastrarServicoTeste extends javax.swing.JFrame {
 
             TableCellRenderer renderer = new TabelaZebrada();
             jTableTipodeServico.setDefaultRenderer(Object.class, renderer);
-            
+
         } catch (Exception erro) {
             Logger.getLogger(CadastrarCliente.class
                     .getName()).log(Level.SEVERE, null, erro);
@@ -1910,14 +1857,111 @@ public class CadastrarServicoTeste extends javax.swing.JFrame {
     private void Mensangem() {
         JOptionPane.showMessageDialog(null, "Esse registro não encontra-se cadastrado na base de dados.");
     }
-   
-   
+
+    private boolean VerificaCamposPecas() {
+
+        boolean valida = true;
+
+        if (uJComboBoxPeca.getSelectedIndex() == 0) {
+            JOptionPane.showMessageDialog(null, "Selecione a peça!");
+            uJComboBoxPeca.requestFocus();
+            uJComboBoxPeca.setBackground(Color.yellow);
+            valida = false;
+            return valida;
+        } else {
+            uJComboBoxPeca.setBackground(Color.white);
+        }
+
+        if (txtQuantidade.getText().trim().equals("")) {
+            JOptionPane.showMessageDialog(null, "Preencha o campo Quantidade!");
+            txtQuantidade.requestFocus();
+            txtQuantidade.setBackground(Color.yellow);
+            valida = false;
+            return valida;
+        } else {
+            txtQuantidade.setBackground(Color.white);
+        }
+
+        if (txtValorUnit.getText().trim().equals("")) {
+            JOptionPane.showMessageDialog(null, "Preencha o campo Valor unitario!");
+            txtValorUnit.requestFocus();
+            txtValorUnit.setBackground(Color.yellow);
+            valida = false;
+            return valida;
+        } else {
+            txtValorUnit.setBackground(Color.white);
+        }
+        return valida;
+    }
+
+    private boolean VerificaCamposGeral() {
+
+        boolean valida = true;
+
+        if (uJComboBoxClientes.getSelectedIndex() == 0) {
+            JOptionPane.showMessageDialog(null, "Selecione a Empresa!");
+            uJComboBoxClientes.requestFocus();
+            uJComboBoxClientes.setBackground(Color.yellow);
+            valida = false;
+            return valida;
+        } else {
+            uJComboBoxClientes.setBackground(Color.white);
+        }
+
+        if (txtDataCadProduto.getDate() == null) {
+            JOptionPane.showMessageDialog(null, "Preencha o campo Data!");
+            txtDataCadProduto.requestFocus();
+            txtDataCadProduto.setBackground(Color.yellow);
+            valida = false;
+            return valida;
+        } else {
+            txtDataCadProduto.setBackground(Color.white);
+        }
+
+        if (txtMaoObra.getText().trim().equals("")) {
+            JOptionPane.showMessageDialog(null, "Preencha o campo Mão de obra!");
+            txtMaoObra.requestFocus();
+            txtMaoObra.setBackground(Color.yellow);
+            valida = false;
+            return valida;
+        } else {
+            txtMaoObra.setBackground(Color.white);
+        }
+
+        if (txtTotalGeral.getText().trim().equals("-")) {
+            JOptionPane.showMessageDialog(null, "Preencha o campo Total Geral!");
+            txtTotalGeral.requestFocus();
+            txtTotalGeral.setBackground(Color.yellow);
+            valida = false;
+            return valida;
+        } else {
+            txtTotalGeral.setBackground(Color.white);
+        }
+        return valida;
+    }
+
+    private boolean VerificaCamposEquipamento() {
+
+        boolean valida = true;
+
+        if (uJComboBoxEquipamento.getSelectedIndex() == 0) {
+            JOptionPane.showMessageDialog(null, "Selecione o Equipamento!");
+            uJComboBoxEquipamento.requestFocus();
+            uJComboBoxEquipamento.setBackground(Color.yellow);
+            valida = false;
+            return valida;
+        } else {
+            uJComboBoxEquipamento.setBackground(Color.white);
+        }
+        return valida;
+    }
+
     private void verificaPagina() {
 
         if ((this.telaMenu != null)) {
             this.telaMenu.setVisible(true);
             // this.telaMenu.toFront();
-        } 
+        }
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -1940,8 +1984,8 @@ public class CadastrarServicoTeste extends javax.swing.JFrame {
     private javax.swing.JButton jBtnRemoverTipo;
     private javax.swing.JButton jBtnVoltarPainelEquipamento;
     private javax.swing.JButton jBtnVoltarPainelFuncionario;
-    private javax.swing.JButton jBtnVoltarPainelPecas;
     private javax.swing.JButton jBtnVoltarPainelServico;
+    private javax.swing.JButton jButton1;
     private javax.swing.JComboBox jComboBoxFabricante;
     private javax.swing.JComboBox jComboBoxFabricanteEquip;
     private javax.swing.JComboBox jComboBoxModeloEquip;

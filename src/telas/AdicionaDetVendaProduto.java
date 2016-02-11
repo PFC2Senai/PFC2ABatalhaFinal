@@ -12,6 +12,7 @@ import funcoes.LimitarDigitos;
 import funcoes.ProdutoDAO;
 import funcoes.TabelaZebrada;
 import funcoes.VendasDAO;
+import java.awt.Color;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -122,7 +123,7 @@ public class AdicionaDetVendaProduto extends javax.swing.JFrame {
             rs = pst.executeQuery();
 
             while (rs.next()) {
-                jComboBoxModelo.addItem(rs.getString("modelo"));
+                txtModelo.setText(rs.getString("modelo"));
             }
 
         } catch (SQLException ex) {
@@ -134,7 +135,7 @@ public class AdicionaDetVendaProduto extends javax.swing.JFrame {
 
         Connection conexao = Conexao.getConnection();
         ResultSet rs;
-        String sql = "select * from tabmodelo where modelo = '" + jComboBoxModelo.getSelectedItem() + "';";
+        String sql = "select * from tabmodelo where modelo = '" + txtModelo.getText() + "';";
 
         try {
             pst = conexao.prepareStatement(sql);
@@ -195,6 +196,7 @@ public class AdicionaDetVendaProduto extends javax.swing.JFrame {
         ArrayList<Produto> pecas = new ArrayList<Produto>();
         pecas = ProdutoDAO.ListarProdutos();
 
+        uJComboBoxPeca.addItem("Selecione uma peça");
         for (Produto prod : pecas) {
             uJComboBoxPeca.addItem(prod.getProduto(), prod);
         }
@@ -266,7 +268,6 @@ public class AdicionaDetVendaProduto extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jLabel35 = new javax.swing.JLabel();
-        jComboBoxModelo = new javax.swing.JComboBox();
         jLabel33 = new javax.swing.JLabel();
         jLabel36 = new javax.swing.JLabel();
         jComboBoxFabricante = new javax.swing.JComboBox();
@@ -283,8 +284,9 @@ public class AdicionaDetVendaProduto extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jBtnInserirPeca = new javax.swing.JButton();
         uJComboBoxPeca = new componentes.UJComboBox();
-        jLabel3 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
+        txtModelo = new javax.swing.JTextField();
+        jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("ADICIONAR PEÇA");
@@ -300,19 +302,6 @@ public class AdicionaDetVendaProduto extends javax.swing.JFrame {
 
         jLabel35.setText("Modelo:");
         jPanel1.add(jLabel35, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 130, -1, -1));
-
-        jComboBoxModelo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Selecione o Modelo" }));
-        jComboBoxModelo.addItemListener(new java.awt.event.ItemListener() {
-            public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                jComboBoxModeloItemStateChanged(evt);
-            }
-        });
-        jComboBoxModelo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBoxModeloActionPerformed(evt);
-            }
-        });
-        jPanel1.add(jComboBoxModelo, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 130, 310, -1));
 
         jLabel33.setText("Peça:");
         jPanel1.add(jLabel33, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 130, -1, -1));
@@ -411,9 +400,6 @@ public class AdicionaDetVendaProduto extends javax.swing.JFrame {
         });
         jPanel1.add(uJComboBoxPeca, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 130, 280, -1));
 
-        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/leiaute/img3.png"))); // NOI18N
-        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -10, 850, 120));
-
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/cancelar.png"))); // NOI18N
         jButton1.setText("Cancelar");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -422,6 +408,22 @@ public class AdicionaDetVendaProduto extends javax.swing.JFrame {
             }
         });
         jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 470, -1, -1));
+
+        txtModelo.setEditable(false);
+        txtModelo.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                txtModeloFocusGained(evt);
+            }
+        });
+        txtModelo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtModeloActionPerformed(evt);
+            }
+        });
+        jPanel1.add(txtModelo, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 130, 250, -1));
+
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/leiaute/img3.png"))); // NOI18N
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -10, 850, 120));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -444,22 +446,6 @@ public class AdicionaDetVendaProduto extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jComboBoxModeloItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jComboBoxModeloItemStateChanged
-
-        jComboBoxFabricante.removeAllItems();
-        idModeloComboBox();
-        populaComboBoxFabricante();
-        txtValorUnit.setText("");
-        if (jComboBoxModelo.getSelectedItem() != null) {
-            modelo = jComboBoxModelo.getSelectedItem().toString();
-            CarregaValorUnit();
-        }
-    }//GEN-LAST:event_jComboBoxModeloItemStateChanged
-
-    private void jComboBoxModeloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxModeloActionPerformed
-
-    }//GEN-LAST:event_jComboBoxModeloActionPerformed
-
     private void jComboBoxFabricanteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxFabricanteActionPerformed
         idFabricanteComboBox();
         if (jComboBoxFabricante.getSelectedItem() != null) {
@@ -469,7 +455,9 @@ public class AdicionaDetVendaProduto extends javax.swing.JFrame {
     }//GEN-LAST:event_jComboBoxFabricanteActionPerformed
 
     private void jBtbIncluirPecaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtbIncluirPecaActionPerformed
-        TabelaProduto();
+        if (VerificaCamposPecas() == true) {
+            TabelaProduto();
+        }
     }//GEN-LAST:event_jBtbIncluirPecaActionPerformed
 
     private void jBtnRemoverPecaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnRemoverPecaActionPerformed
@@ -511,7 +499,7 @@ public class AdicionaDetVendaProduto extends javax.swing.JFrame {
 
     private void uJComboBoxPecaItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_uJComboBoxPecaItemStateChanged
 
-        jComboBoxModelo.removeAllItems();
+        txtModelo.setText("");
         jComboBoxFabricante.removeAllItems();
 
         codProduto = 0;
@@ -524,6 +512,13 @@ public class AdicionaDetVendaProduto extends javax.swing.JFrame {
         idProdutoComboBox();
         populaComboBoxModelo();
 
+        jComboBoxFabricante.removeAllItems();
+        idModeloComboBox();
+        populaComboBoxFabricante();
+        txtValorUnit.setText("");
+        modelo = txtModelo.getText();
+        CarregaValorUnit();
+        // txtModelo.requestFocus();
         if (uJComboBoxPeca.getSelectedItem() != null) {
             produto = uJComboBoxPeca.getSelectedItem().toString();
         }
@@ -545,6 +540,19 @@ public class AdicionaDetVendaProduto extends javax.swing.JFrame {
         verificaPagina();
     }//GEN-LAST:event_formWindowClosed
 
+    private void txtModeloFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtModeloFocusGained
+
+    }//GEN-LAST:event_txtModeloFocusGained
+
+    private void txtModeloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtModeloActionPerformed
+        jComboBoxFabricante.removeAllItems();
+        idModeloComboBox();
+        populaComboBoxFabricante();
+        txtValorUnit.setText("");
+        modelo = txtModelo.getText();
+        CarregaValorUnit();
+    }//GEN-LAST:event_txtModeloActionPerformed
+
     private void verificaPagina() {
 
         if ((this.telaExibeDetVenda != null)) {
@@ -552,13 +560,48 @@ public class AdicionaDetVendaProduto extends javax.swing.JFrame {
         }
     }
     
+    
+    private boolean VerificaCamposPecas() {
+
+        boolean valida = true;
+
+        if (uJComboBoxPeca.getSelectedIndex() == 0) {
+            JOptionPane.showMessageDialog(null, "Selecione a peça!");
+            uJComboBoxPeca.requestFocus();
+            uJComboBoxPeca.setBackground(Color.yellow);
+            valida = false;
+            return valida;
+        } else {
+            uJComboBoxPeca.setBackground(Color.white);
+        }
+
+        if (txtQuantidade.getText().trim().equals("")) {
+            JOptionPane.showMessageDialog(null, "Preencha o campo Quantidade!");
+            txtQuantidade.requestFocus();
+            txtQuantidade.setBackground(Color.yellow);
+            valida = false;
+            return valida;
+        } else {
+            txtQuantidade.setBackground(Color.white);
+        }
+
+        if (txtValorUnit.getText().trim().equals("")) {
+            JOptionPane.showMessageDialog(null, "Preencha o campo Valor unitario!");
+            txtValorUnit.requestFocus();
+            txtValorUnit.setBackground(Color.yellow);
+            valida = false;
+            return valida;
+        } else {
+            txtValorUnit.setBackground(Color.white);
+        }
+        return valida;
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBtbIncluirPeca;
     private javax.swing.JButton jBtnInserirPeca;
     private javax.swing.JButton jBtnRemoverPeca;
     private javax.swing.JButton jButton1;
     private javax.swing.JComboBox jComboBoxFabricante;
-    private javax.swing.JComboBox jComboBoxModelo;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -570,6 +613,7 @@ public class AdicionaDetVendaProduto extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTablePecas;
+    private javax.swing.JTextField txtModelo;
     private javax.swing.JTextField txtQuantidade;
     private javax.swing.JTextField txtTotalPecas;
     private javax.swing.JTextField txtValorUnit;
