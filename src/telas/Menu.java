@@ -3,7 +3,6 @@ package telas;
 import funcoes.Conexao;
 import funcoes.ControleBackup;
 import java.io.File;
-import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFileChooser;
@@ -326,7 +325,7 @@ public class Menu extends javax.swing.JFrame {
         });
         jMenu10.add(jMenuItem9);
 
-        jMenuItem30.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/equipamento.png"))); // NOI18N
+        jMenuItem30.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/maquina02.png"))); // NOI18N
         jMenuItem30.setText("Equipamento");
         jMenuItem30.setPreferredSize(new java.awt.Dimension(130, 35));
         jMenuItem30.addActionListener(new java.awt.event.ActionListener() {
@@ -366,6 +365,7 @@ public class Menu extends javax.swing.JFrame {
         });
         jMenu10.add(jMenuItem18);
 
+        jMenuItem16.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/brick.png"))); // NOI18N
         jMenuItem16.setText("Modelo");
         jMenuItem16.setPreferredSize(new java.awt.Dimension(130, 35));
         jMenuItem16.addActionListener(new java.awt.event.ActionListener() {
